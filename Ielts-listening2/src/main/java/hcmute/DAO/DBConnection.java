@@ -19,6 +19,7 @@ public class DBConnection {
 	
 	public static Connection getConnection() throws IOException{
 		con = null ;
+		//nguyen tan lam
 		try {
 			//driver register-- test 
 			DriverManager.registerDriver(new Driver());
