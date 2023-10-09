@@ -20,7 +20,7 @@ public class DBConnection {
 	public static Connection getConnection() throws IOException{
 		con = null ;
 		try {
-			//driver register
+			//driver register-- test 
 			DriverManager.registerDriver(new Driver());
 			con = (Connection) DriverManager.getConnection(DB_URL,USER_NAME,PASSWORD);
 		} catch (SQLException ex) {
