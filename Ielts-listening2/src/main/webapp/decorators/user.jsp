@@ -10,7 +10,7 @@
 <body>
 	<%@ include file="/common/user/Header.jsp" %>
 	<decorator:body>
-	
+	<h1>test chinh sua</h1>
 	</decorator:body>
 	<%@ include file="/common/user/Footer.jsp" %>
 </body>
