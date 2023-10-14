@@ -17,7 +17,7 @@
 		</span>
 	</div>
 	<span> 
-		<a href="<c:url value='/addcate' />">Add Category</a>
+		<a href="<c:url value='/addcate' />">Add Category fdsfsd</a>
 	</span>
 	<table border="1" style="width: 100px">
 		<tr>
