@@ -125,7 +125,7 @@ public class CatetoryControllers extends HttpServlet{
 		rd.forward(req, resp);
 		
 		
-		
+		//Luong Bui da toi
 		// test TCM
 		
 	}
