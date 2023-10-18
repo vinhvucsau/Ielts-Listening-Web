@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="/common/user/Header.jsp" %>
+	<%@ include file="/common/user/Header.jsp"%>
 	<decorator:body>
-	<h1>test chinh sua</h1>
+		<h1>test chinh sua</h1>
 	</decorator:body>
-	<%@ include file="/common/user/Footer.jsp" %>
+	<%@ include file="/common/user/Footer.jsp"%>
 </body>
 </html>
