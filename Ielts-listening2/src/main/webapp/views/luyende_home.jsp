@@ -17,9 +17,12 @@
 	<style>
 		.container {
 			background-color: rgb(247, 247, 247);
+			padding: 0px;
+			margin: 0px;
 		}
 		
 		.advertisement {
+			margin: 0px;
 			background-color: #DDE4FB;
 			height: 450px;
 		}
