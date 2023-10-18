@@ -24,14 +24,18 @@
 			height: 450px;
 		}
 		.btn-1{
-		background-color: rgb(240, 247, 255); 
-		color:rgb(0, 74, 185);
-		transition: 0.3s ease-out;
+			background-color: rgb(240, 247, 255); 
+			color:rgb(0, 74, 185);
+			transition: 0.3s ease-out;
 		}
 		.btn-1:hover{
 			color: white;
 			background-color: rgb(0, 74, 185);
 			
+		}
+		
+		.nav-link{
+			color: black;
 		}
 	</style>
 	<div class="container">
@@ -41,7 +45,7 @@
 				<p class="fs-4 fw-bold" style="color: rgb(0, 74, 185)">Tiếp tục
 					làm bài</p>
 				<p class="fs-3 fw-bold">IELTS Essential Guide</p>
-				<p class="fs-4 fw-bold">Cam 18 - Test 2</p>
+				<p class="fs-4 fw-bold" style="color: rgb(113,113,113)">Cam 18 - Test 2</p>
 				<button class="btn-1 btn hover-effect d-flex flex-row justify-content-center w-100 h-25 mb-3 mt-4 p-3 fs-5 fw-bold">
 					Tiếp tục làm bài
 					<svg class="mx-3 my-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
@@ -51,8 +55,21 @@
 					</svg> 
 				</button>
 			</div>
-
+			<p class="fs-3 fw-bold my-5">Hôm nay bạn muốn luyện</p>
+			<ul class="nav fs-4 fw-bold justify-content-between w-50">
+			  <li class="nav-item bg-white rounded-2">
+			    <a class="nav-link active" aria-current="page" href="#">Tất cả bộ đề</a>
+			  </li>
+			  <li class="nav-item rounded-2">
+			    <a class="nav-link" href="#">Bộ đề Dự đoán</a>
+			  </li>
+			  <li class="nav-item rounded-2">
+			    <a class="nav-link" href="#">Bộ đề HOT</a>
+			  </li>
+			</ul>
 		</div>
+		
+		
 	</div>
 
 </body>
