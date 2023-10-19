@@ -10,7 +10,15 @@
 <body>
 	<%@ include file="/common/user/Header.jsp"%>
 	<decorator:body>
+<<<<<<< Updated upstream
 		<h1>test chinh sua</h1>
+=======
+<<<<<<< Updated upstream
+	<h1>test chinh sua</h1>
+=======
+		
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 	</decorator:body>
 	<%@ include file="/common/user/Footer.jsp"%>
 </body>
