@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import hcmute.models.ProductModel;
 import hcmute.services.IProductService;
 import hcmute.services.ProductServiceImpl;
-@WebServlet(urlPatterns = {"/listProduct","/find"})
+@WebServlet(urlPatterns = {"/admin/listProduct","/find"})
 public class ProductControllers extends HttpServlet{
 
 	private static final long serialVersionUID = 9138593353882158248L;

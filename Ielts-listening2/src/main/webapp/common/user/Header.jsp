@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+	rel="stylesheet">
 <style>
 .header-item::after {
 	content: '';
@@ -37,7 +39,7 @@
 
 .dropdown:hover .dropdown-container {
 	display: flex;
-	top:40px;
+	top: 40px;
 }
 
 .dropdown-item:hover {
@@ -132,6 +134,7 @@
 				<h3>Khóa học của tôi</h3>
 			</li>
 		</ul>
+		<%-- 
 		<div class="relative dropdown">
 			<img alt="" src="https://prep.vn/_nuxt/default-avatar.28543647.jpg"
 				class="w-12 h-12 rounded-full">
@@ -162,6 +165,11 @@
 				</ul>
 			</div>
 		</div>
+		--%>
+		<a href="/Ielts-listening2/authentication/login"
+			class="rounded-xl bg-blue-500 text-white py-2 px-3 font-semibold text-sm">
+			<span>Bắt đầu học </span> <i class="fa fa-solid fa-arrow-right"></i>
+		</a>
 	</div>
 </body>
 </html>
