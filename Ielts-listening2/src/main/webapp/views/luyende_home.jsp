@@ -7,15 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<link
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-		rel="stylesheet">
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	
 	<style>
-		.container {
+		.luyende {
 			background-color: rgb(247, 247, 247);
 			padding: 0px;
 			margin: 0px;
@@ -46,7 +40,7 @@
 		color: rgb(0, 74, 185);
 		}
 	</style>
-	<div class="container">
+	<div class="luyende">
 		<div class="w-100 advertisement"></div>
 		<div class="px-40 py-20">
 			<div class="bg-white px-4 py-4 rounded-4">
