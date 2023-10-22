@@ -4,8 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< Updated upstream
 <!-- <link rel="stylesheet"
 	href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" /> -->
+=======
+<!--<link rel="stylesheet"	href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />-->
+>>>>>>> Stashed changes
 </head>
 <body>
 	<div class="flex flex-col px-3 py-10 border-t border-t-[1px]">
