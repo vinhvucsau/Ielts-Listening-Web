@@ -4,12 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<c:url value="../assets/fonts/themify-icons/themify-icons.css"></c:url>">
+    <link rel="stylesheet" href="<c:url value="../assets/css/styleLuyenDeTest.css"></c:url>">
+	<title>Insert title here</title>
 </head>
 <body>
 	<%@ include file="/common/user/Header.jsp"%>
