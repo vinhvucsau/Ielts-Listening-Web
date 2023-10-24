@@ -13,7 +13,7 @@
 </head>
 <body >
 	<%@ include file="/common/user/Header.jsp"%>
-	<div class="container-xxl">
+	<div >
 		<decorator:body>		
 		</decorator:body>
 	</div>
