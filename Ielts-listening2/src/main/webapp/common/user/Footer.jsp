@@ -4,8 +4,6 @@
 <head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
 </head>
 <body>
 	<div style="padding-bottom: 50px; max-width: 1440px" class="d-flex flex-column container-fluid">
