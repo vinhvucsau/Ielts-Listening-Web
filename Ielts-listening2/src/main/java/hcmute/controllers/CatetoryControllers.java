@@ -1,7 +1,6 @@
 package hcmute.controllers;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -118,10 +117,6 @@ public class CatetoryControllers extends HttpServlet {
 		RequestDispatcher rd = req.getRequestDispatcher("/views/listCategory.jsp");
 		rd.forward(req, resp);
 
-		// Luong Bui da toi
-		// test lần 2
-		// test TCM
 
-	}
-	//asd	
+	}	
 }
