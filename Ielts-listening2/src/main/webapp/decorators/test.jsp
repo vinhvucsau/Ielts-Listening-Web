@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -12,13 +12,11 @@
 	<title>Insert title here</title>
 </head>
 <body >
-	<%@ include file="/common/user/Header.jsp"%>
-	<div class="container-xxl">
+	<div class="container-fluid">
 		<decorator:body>		
 		</decorator:body>
 	</div>
 		
-	<%@ include file="/common/user/Footer.jsp"%>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

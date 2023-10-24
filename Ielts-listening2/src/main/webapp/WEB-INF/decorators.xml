@@ -6,6 +6,9 @@
 	<decorator name="authentication" page="authentication.jsp">
 		<pattern>/authentication*</pattern>
 	</decorator>
+	<decorator name="kiemtra" page="kiemtra.jsp">
+		<pattern>/kiemtra*</pattern>
+	</decorator>
 	<decorator name="user" page="user.jsp">
 		<pattern>/*</pattern>
 	</decorator>
