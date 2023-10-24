@@ -1,0 +1,77 @@
+package hcmute.entity;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import hcmute.utils.Constants;
+
+@Entity
+@Table(name = Constants.TOPIC_TEST_RELATION)
+public class TopicTest implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String topicId;
+	
+	@Column(columnDefinition = "varchar(10000)")
+	private String description;
+	
+	
+	@Column(columnDefinition = "varchar(255)")
+	private String image;
+	
+	@OneToMany(mappedBy = Constants.TOPIC_TEST_RELATION, fetch = FetchType.EAGER)
+	private List<MockTest> mockTests;
+
+	public TopicTest(String topicId, String description, String image, List<MockTest> mockTests) {
+		super();
+		this.topicId = topicId;
+		this.description = description;
+		this.image = image;
+		this.mockTests = mockTests;
+	}
+
+	public String getTopicId() {
+		return topicId;
+	}
+
+	public void setTopicId(String topicId) {
+		this.topicId = topicId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public List<MockTest> getMockTests() {
+		return mockTests;
+	}
+
+	public void setMockTests(List<MockTest> mockTests) {
+		this.mockTests = mockTests;
+	}
+
+}
