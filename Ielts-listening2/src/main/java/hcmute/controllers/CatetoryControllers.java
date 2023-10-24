@@ -123,7 +123,5 @@ public class CatetoryControllers extends HttpServlet {
 		// test TCM
 
 	}
-	
-	//quoc huy 123123
-	
+	//asd	
 }
