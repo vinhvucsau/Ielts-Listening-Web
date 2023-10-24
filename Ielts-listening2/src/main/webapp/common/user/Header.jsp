@@ -1,59 +1,177 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="/common/taglib.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
+
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- <link rel="stylesheet"
-	href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" /> -->
-<link
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-		rel="stylesheet">
-	
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-	rel="stylesheet">
-<style>
-.header-item::after {
-	content: '';
-	display: block;
-	width: 0;
-	height: 2px;
-	background: #1479f4;
-	transition: width .4s ease-in;
-	content: '';
-}
+        <title>Insert title here</title>
 
-.header-item: {
-	cursor: pointer;
-}
+        <style>
+            .header-item{
+                color :black !important;
+            }
+            .header-item:hover {
+                color: #1479f4 !important;
+            }
 
-.header-item:hover {
-	color: #1479f4;
-}
+            .dropdown:hover > .dropdown-menu {
+                display: block;
+            }
 
-.header-item:hover::after {
-	width: 100%;
-}
+            .header-item::after {
+                content: "";
+                display: block;
+                width: 0;
+                height: 2px;
+                background: #1479f4;
+                transition: width 0.4s ease-in;
+                content: "";
+            }
 
-.dropdown-container {
-	display: none;
-}
+            .header-item:hover::after {
+                width: 100%;
+            }
 
-.dropdown:hover .dropdown-container {
-	display: flex;
-	top: 40px;
-}
+            .dropdown:hover .header-item {
+                color: #1479f4;
+            }
 
-.dropdown-item:hover {
-	cursor: pointer;
-	background-color: #eff6ff;
-}
+            .dropdown:hover .header-item::after {
+                width: 100%;
+            }
+            .dropdown-item:hover{
+                background-color: rgb(239 ,246 ,255)!important;
+            }
+            .dropdown-item{
+                border-radius: 5px;
+                min-width: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav style="height: 80px;" class="navbar navbar-expand-lg navbar-light border-bottom">
+            <div style="max-width: 1440px" class="container-fluid  d-flex justify-content-between">
+                <a class="navbar-brand" href="#">
+                    <img src="https://prep.vn/imgs/logo-n.svg" alt="Logo" />
+                </a>
+                <ul class="navbar-nav fw-bolder">
+                    <li class="nav-item">
+                        <a class="nav-link header-item" href="#">Trang chủ</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <button
+                            class="nav-link header-item"
+                            type="button"
+                            id="navbarDropdownCourse"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Khóa học <i class="fas fa-caret-down"></i>
+                        </button>
+                        <div
+                            class="dropdown-menu p-3 "
+                            aria-labelledby="navbarDropdownCourse"
+                        >
+                            <a class="dropdown-item p-2" href="#"
+                                >Luyện thi IELTS</a
+                            >
+                            <a class="dropdown-item p-2" href="#"
+                                >Luyện thi Toeic</a
+                            >
+                            <a class="dropdown-item p-2" href="#">Luyện thi THPT</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link header-item" href="#"
+                            >Kiểm tra đầu vào</a
+                        >
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link header-item"
+                            href="#"
+                            id="navbarDropdownPractice"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Luyện đề <i class="fas fa-caret-down"></i>
+                        </a>
 
-.dropdown:hover .header-item {
-	color: #1479f4;
-}
+                        <div
+                            class="dropdown-menu p-3"
+                            aria-labelledby="navbarDropdownPractice"
+                        >
+                            <a class="dropdown-item p-2" href="#">Luyện đề IELTS</a>
+                            <a class="dropdown-item p-2" href="#">Luyện đề Toeic</a>
+                            <a class="dropdown-item p-2" href="#">Luyện đề THPT</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link header-item"
+                            href="#"
+                            id="navbarDropdownBlog"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Blog <i class="fas fa-caret-down"></i>
+                        </a>
+                        <div
+                            class="dropdown-menu p-3"
+                            aria-labelledby="navbarDropdownBlog"
+                        >
+                            <a class="dropdown-item p-2" href="#">Học Tiếng Anh</a>
+                            <a class="dropdown-item p-2" href="#"
+                                >Học Tiếng Trung</a
+                            >
+                            <a class="dropdown-item p-2" href="#">Học Tiếng Nhật</a>
+                            <a class="dropdown-item p-2" href="#">Học Tiếng Hàn</a>
+                            <a class="dropdown-item p-2" href="#">Sự Kiện</a>
+                            <a class="dropdown-item p-2" href="#"
+                                >Vinh Danh Học Viên Điểm Cao</a
+                            >
+                        </div>
+                    </li>
+                </ul>
+                <!--
+			
+				<li class="nav-item "><a class="nav-link header-item" href="#">Khóa
+						học của tôi</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://prep.vn/_nuxt/default-avatar.28543647.jpg" alt="Profile Image" class="rounded-circle" width="40" height="40">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="https://prep.vn/_nuxt/default-avatar.28543647.jpg" alt="Profile Image" class="rounded-circle" width="40" height="40">
+                            <div class="flex-column">
+                                <span>Trần Dương Thiệu</span>
+                                <span>thieu098dm3@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item p-2" href="#">Khóa học của tôi</a>
+                        <a class="dropdown-item p-2" href="#">Trao đổi về bài chấm chữa</a>
+                        <a class="dropdown-item p-2" href="#">Hồ sơ học tập</a>
+                        <a class="dropdown-item p-2" href="#">Cài đặt</a>
+                        <a class="dropdown-item p-2 text-danger" href="#">Đăng xuất</a>
+                    </div>
+                </li>
+                -->
+                <a href="authentication/login" class="btn btn-primary">
+                    Bắt đầu học <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </nav>
+    </body>
+</html>
 
 .dropdown:hover .header-item:after {
 	width: 100%;
@@ -175,9 +293,5 @@
 			<span>Bắt đầu học </span> <i class="fa fa-solid fa-arrow-right"></i>
 		</a>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

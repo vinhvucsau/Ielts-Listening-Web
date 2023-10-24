@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="<c:url value="../assets/css/styleLuyenDeTest.css"></c:url>">
 	<title>Insert title here</title>
 </head>
-<body>
+<body >
 	<%@ include file="/common/user/Header.jsp"%>
+<<<<<<< HEAD
 	<decorator:body>
 <<<<<<< Updated upstream
 
@@ -19,6 +20,13 @@
 		
 >>>>>>> Stashed changes
 	</decorator:body>
+=======
+	<div  style="height: 400px">
+		<decorator:body>
+			<h1>test chinh sua</h1>
+		</decorator:body>
+	</div>
+>>>>>>> thiu
 	<%@ include file="/common/user/Footer.jsp"%>
 	<script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
