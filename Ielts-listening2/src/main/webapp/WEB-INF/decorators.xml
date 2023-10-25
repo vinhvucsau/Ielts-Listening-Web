@@ -6,6 +6,9 @@
 	<decorator name="authentication" page="authentication.jsp">
 		<pattern>/authentication*</pattern>
 	</decorator>
+	<decorator name="test" page="test.jsp">
+		<pattern>/test*</pattern>
+	</decorator>
 	<decorator name="user" page="user.jsp">
 		<pattern>/*</pattern>
 	</decorator>
