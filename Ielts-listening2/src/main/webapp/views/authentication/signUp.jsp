@@ -64,7 +64,7 @@
 						</button> -->
 
 						<button class="btn btn-primary"
-						formaction="<c:url value="/authentication/signup"/>"
+						formaction="<c:url value="/authentication/login"/>"
 						type="submit">
 
 						Dang Ky <i class="fa fa-plus"></i>

@@ -14,13 +14,7 @@ public class AccountDAOImpl implements IAccountDAO{
 		EntityTransaction trans = enma.getTransaction();
 		try {
 			trans.begin();
-			
-			Account mergedAccount = enma.merge(account);
-
-			// Persist the managed entity
-			enma.persist(mergedAccount);
-			
-			//enma.persist(account);
+		    enma.merge(account);
 			trans.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
