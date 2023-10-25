@@ -29,6 +29,7 @@ public class AnswerQuiz implements Serializable{
 	@Column(columnDefinition = "int")
 	private int number;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "quizId")
 	private Quiz quizs;
@@ -41,6 +42,10 @@ public class AnswerQuiz implements Serializable{
 		this.quizs = quizs;
 	}
 
+	public AnswerQuiz() {
+		super();
+	}
+	
 	public String getAnswerId() {
 		return answerId;
 	}

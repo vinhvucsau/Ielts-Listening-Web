@@ -39,10 +39,10 @@ public class MockTest implements Serializable{
 	@JoinColumn(name = "topicId")
 	private TopicTest topicTests;
 	
-	@OneToMany(mappedBy = Constants.MOCK_TEST_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mockTests", fetch = FetchType.LAZY)
 	private List<ListeningPart> listeningParts;
 	
-	@OneToMany(mappedBy = Constants.MOCK_TEST_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mockTests", fetch = FetchType.LAZY)
 	private List<EnrrolTest> enrrolTests;
 
 	public MockTest(String testId, String testName, String description, int cost, TopicTest topicTests,
@@ -57,6 +57,10 @@ public class MockTest implements Serializable{
 		this.enrrolTests = enrrolTests;
 	}
 
+	public MockTest() {
+		super();
+	}
+	
 	public String getTestId() {
 		return testId;
 	}

@@ -26,6 +26,7 @@ public class AnswerLesson implements Serializable{
 	@Column(columnDefinition = "int")
 	private int number;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "lessonId")
 	private Lesson lessons;
@@ -38,6 +39,10 @@ public class AnswerLesson implements Serializable{
 		this.lessons = lessons;
 	}
 
+	public AnswerLesson() {
+		super();
+	}
+	
 	public String getAnswerId() {
 		return answerId;
 	}

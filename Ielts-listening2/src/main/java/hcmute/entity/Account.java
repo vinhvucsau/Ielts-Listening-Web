@@ -28,7 +28,7 @@ public class Account implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String role;
 	
-	@OneToMany(mappedBy = Constants.ACCOUNT_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "accounts", fetch = FetchType.EAGER)
 	private List<User> users;
 	
 

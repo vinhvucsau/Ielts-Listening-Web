@@ -31,7 +31,7 @@ public class TopicTest implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String image;
 	
-	@OneToMany(mappedBy = Constants.TOPIC_TEST_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "topicTests", fetch = FetchType.EAGER)
 	private List<MockTest> mockTests;
 
 	public TopicTest(String topicId, String description, String image, List<MockTest> mockTests) {
@@ -42,6 +42,10 @@ public class TopicTest implements Serializable{
 		this.mockTests = mockTests;
 	}
 
+	public TopicTest() {
+		super();
+	}
+	
 	public String getTopicId() {
 		return topicId;
 	}

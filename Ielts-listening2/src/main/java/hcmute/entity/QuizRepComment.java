@@ -42,6 +42,10 @@ public class QuizRepComment implements Serializable{
 		this.users = users;
 		this.quizComments = quizComments;
 	}
+	
+	public QuizRepComment() {
+		super();
+	}
 
 	public String getRepCommentId() {
 		return repCommentId;

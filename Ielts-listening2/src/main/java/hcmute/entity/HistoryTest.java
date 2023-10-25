@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -12,9 +13,20 @@ import hcmute.utils.Constants;
 
 @Entity
 @Table(name = Constants.HISTORY_TEST_RELATION)
+//@IdClass(CompositeHistoryTestId.class) // Sử dụng lớp ID
+
 public class HistoryTest implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private String partId;
+	 * 
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private String enrrolId;
+	 */
 	
 	@Column(columnDefinition = "varchar(255)")
 	private String answerOfUser;
@@ -22,6 +34,7 @@ public class HistoryTest implements Serializable{
 	@Column(columnDefinition = "int")
 	private int number;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "partId")
 	private ListeningPart listeningParts;
@@ -36,6 +49,10 @@ public class HistoryTest implements Serializable{
 		this.number = number;
 		this.listeningParts = listeningParts;
 		this.enrrolTests = enrrolTests;
+	}
+	
+	public HistoryTest() {
+		super();
 	}
 
 	public String getAnswerOfUser() {

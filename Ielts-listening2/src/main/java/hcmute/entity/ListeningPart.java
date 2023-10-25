@@ -37,10 +37,11 @@ public class ListeningPart implements Serializable{
 	@Column(columnDefinition = "varchar(10000)")
 	private String answerSheet;
 	
-	@OneToMany(mappedBy = Constants.LISTENING_PART_RELATION, fetch = FetchType.EAGER)
+	
+	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.LAZY)
 	private List<AnswerTest> answerTests;
 	
-	@OneToMany(mappedBy = Constants.LISTENING_PART_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.LAZY)
 	private List<HistoryTest> historyTests;
 	
 	@ManyToOne
@@ -58,6 +59,10 @@ public class ListeningPart implements Serializable{
 		this.answerTests = answerTests;
 		this.historyTests = historyTests;
 		this.mockTests = mockTests;
+	}
+	
+	public ListeningPart() {
+		super();
 	}
 
 	public String getPartId() {

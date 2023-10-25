@@ -44,10 +44,10 @@ public class Lesson implements Serializable{
 	@Column(columnDefinition = "varchar(10000)")
 	private String answerSheet;
 	
-	@OneToMany(mappedBy = Constants.LESSON_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
 	private List<Score> scores;
 	
-	@OneToMany(mappedBy = Constants.LESSON_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
 	private List<AnswerLesson> answerQuestions;
 	
 	@ManyToOne
@@ -68,6 +68,10 @@ public class Lesson implements Serializable{
 		this.scores = scores;
 		this.answerQuestions = answerQuestions;
 		this.courses = courses;
+	}
+	
+	public Lesson() {
+		super();
 	}
 
 	public String getLessonId() {

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,12 +36,13 @@ public class QAndA implements Serializable{
 	
 	@Column(columnDefinition = "varchar(255)")
 	private String image;
+
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User users;
 	
-	@OneToMany(mappedBy = Constants.Q_AND_A_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "qAndAs")
 	private List<QAndAComment> qAndAComments;
 
 	public QAndA(String qAndAId, String createdDate, String content, String title, String image, User users,
@@ -55,6 +55,10 @@ public class QAndA implements Serializable{
 		this.image = image;
 		this.users = users;
 		this.qAndAComments = qAndAComments;
+	}
+	
+	public QAndA() {
+		super();
 	}
 
 	public String getqAndAId() {

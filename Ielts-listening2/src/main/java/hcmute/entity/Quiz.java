@@ -45,10 +45,10 @@ public class Quiz implements Serializable {
 	@JoinColumn(name = "userId")
 	private User users;
 	
-	@OneToMany(mappedBy = Constants.QUIZ_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "quizs", fetch = FetchType.LAZY)
 	private List<AnswerQuiz> answerQuizs;
 	
-	@OneToMany(mappedBy = Constants.QUIZ_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "quizs", fetch = FetchType.LAZY)
 	private List<QuizComment> quizComments;
 
 	public Quiz(String quizId, String question, String video, String image, String createdDate, String title,
@@ -65,6 +65,10 @@ public class Quiz implements Serializable {
 		this.quizComments = quizComments;
 	}
 
+	public Quiz() {
+		super();
+	}
+	
 	public String getQuizId() {
 		return quizId;
 	}

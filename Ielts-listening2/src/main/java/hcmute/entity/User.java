@@ -29,10 +29,6 @@ public class User implements Serializable{
 	private String userId;
 	
 	@Column(columnDefinition = "varchar(255)")
-	private String userName;
-	
-	
-	@Column(columnDefinition = "varchar(255)")
 	private String name;
 	
 	@Column(columnDefinition = "varchar(255)")
@@ -59,47 +55,49 @@ public class User implements Serializable{
 	@Column(columnDefinition = "int")
 	private int contributeScore;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Score> scores;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<EnrrolCourse> enrrolCourses;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Course> courses;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Quiz> quizs;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QuizRepComment> quizRepComments;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QuizComment> quizComments;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<EnrrolTest> enrrolTests;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Blog> blogs;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QAndA> qAndAs;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QAndAComment> qAndAComments;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QAndARepComment> qAndARepComments;
 	
-	@OneToMany(mappedBy = Constants.USER_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<ReadNotify> readNotifys;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "userName")
 	private Account accounts;
 
-	public User(String userId, String userName, String name, String sex, String dateOfBirth, String email,
+	public User(String userId,String name, String sex, String dateOfBirth, String email,
 			String phoneNumber, String address, String image, String networth, int contributeScore,
 			List<Score> scores, List<EnrrolCourse> enrrolCourses, List<Quiz> quizs,
 			List<QuizRepComment> quizRepComments, List<QuizComment> quizComments, List<EnrrolTest> enrrolTests,
@@ -107,7 +105,6 @@ public class User implements Serializable{
 			List<QAndARepComment> qAndARepComments, List<ReadNotify> readNotifys,List<Course> courses,Account accounts) {
 		super();
 		this.userId = userId;
-		this.userName = userName;
 		this.name = name;
 		this.sex = sex;
 		this.dateOfBirth = dateOfBirth;
@@ -142,14 +139,6 @@ public class User implements Serializable{
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getName() {
