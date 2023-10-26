@@ -51,6 +51,7 @@ public class AuthenticationControllers extends HttpServlet {
 			account.setRole("user");
 			String res =  accountService.SignUp(account);
 			System.out.println(res);
+			resp.sendRedirect(req.getContextPath() + "/authentication/login");
 //			resp.sendRedirect(req.getContextPath() + "/authentication/login");
 //			req.setAttribute("message", "Đã thêm thành công");
 

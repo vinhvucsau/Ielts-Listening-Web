@@ -38,6 +38,9 @@ public class Lesson implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String image;
 	
+	@Column(columnDefinition = "varchar(255)")
+	private String audio;
+	
 	@Column(columnDefinition = "date")
 	private String createdDate;
 	

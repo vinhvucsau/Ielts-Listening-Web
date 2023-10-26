@@ -53,8 +53,8 @@ public class User implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String networth;
 	
-	@Column(columnDefinition = "int")
-	private int contributeScore;
+	@Column(name = "contributeScore")
+	private Integer contributeScore;
 	
 	
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
