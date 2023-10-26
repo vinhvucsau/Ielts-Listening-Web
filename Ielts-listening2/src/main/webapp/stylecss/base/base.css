@@ -1,12 +1,8 @@
 @charset "UTF-8";
 
 html {
-  
-  line-height: 1.6rem;
-}
-
-body {
-  font-family: "Inter", sans-serif !important;
+	
+  	line-height: 1.6rem;
 }
 
 a {
