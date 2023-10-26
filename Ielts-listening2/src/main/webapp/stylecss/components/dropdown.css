@@ -1,5 +1,14 @@
 @charset "UTF-8";
-.danhsachbode .accordion {
+
+.admin-taobode-btn {
+  margin-bottom: 1.6rem;
+  display: block;
+  width: 164px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+}
+.admin-taobode .bodethi .accordion {
   cursor: pointer;
   padding: 2rem;
   width: 100%;
@@ -7,28 +16,28 @@
   outline: none;
   transition: 2s ease-in;
 }
-.danhsachbode .panel {
+.admin-taobode .bodethi .panel {
   display: none;
   background-color: white;
   overflow: hidden;
   transition: 0.5s ease-in;
   margin-top: 16px;
 }
-.danhsachbode .panel .list .item {
+.admin-taobode .bodethi .panel .list .item {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.danhsachbode .panel .list .item-link {
+.admin-taobode .bodethi .panel .list .item-link {
   flex: 1;
   padding: 16px 8px 16px 20px;
 }
-.danhsachbode .panel .list .item-icon {
+.admin-taobode .bodethi .panel .list .item-icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-right: 20px;
 }
-.danhsachbode .panel .list .item-icon .i {
+.admin-taobode .bodethi .panel .list .item-icon .i {
   font-size: 1.4rem;
 }
