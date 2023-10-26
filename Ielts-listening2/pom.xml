@@ -94,12 +94,6 @@
 			<version>2.4.2</version>
 		</dependency>
 
-
-		<dependency>
-			<groupId>hcmute</groupId>
-			<artifactId>BanHangST4</artifactId>
-			<version>1.0</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
