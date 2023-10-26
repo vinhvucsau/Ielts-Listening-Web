@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.text--title {
+  font-size: 4.8rem;
+  font-weight: 700;
+}
+.text--description {
+  font-size: 1.6rem;
+  font-weight: 300;
+}
+.text--h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.text--h4 {
+  font-size: 1.6rem;
+  font-weight: 500;
+}

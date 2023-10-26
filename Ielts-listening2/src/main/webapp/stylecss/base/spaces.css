@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.rounder-2 {
+  border-radius: 2px !important;
+}
+.rounder-4 {
+  border-radius: 4px !important;
+}
+.rounder-8 {
+  border-radius: 8px !important;
+}
+.rounder-12 {
+  border-radius: 12px !important;
+}
+.rounder-16 {
+  border-radius: 16px !important;
+}
