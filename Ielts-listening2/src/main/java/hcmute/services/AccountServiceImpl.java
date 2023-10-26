@@ -9,7 +9,7 @@ public class AccountServiceImpl implements IAccountServices{
 	IAccountDAO accountDAO = new AccountDAOImpl();
 	
 	@Override
-	public void SignUp(Account account) {
-		accountDAO.SignUp(account);	
+	public String SignUp(Account account) {
+		return accountDAO.SignUp(account);	
 	}
 }

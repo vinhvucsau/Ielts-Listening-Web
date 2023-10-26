@@ -28,8 +28,8 @@
 							Username <span class="text-danger">*</span>
 						</label>
 						<div class="input-group">
-							<input id="username" name="userName" class="form-control" type="text"
-								placeholder="Nhập username">
+							<input id="username" name="userName" class="form-control"
+								type="text" placeholder="Nhập username">
 						</div>
 					</div>
 					<div class="mb-4">
@@ -37,8 +37,8 @@
 							Mật khẩu <span class="text-danger">*</span>
 						</label>
 						<div class="input-group">
-							<input id="pwd" name="passWord" class="form-control" type="password"
-								placeholder="Nhập mật khẩu">
+							<input id="pwd" name="passWord" class="form-control"
+								type="password" placeholder="Nhập mật khẩu">
 							<button class="btn btn-outline-secondary" type="button">
 								<i class="far fa-eye"></i>
 							</button>
@@ -57,19 +57,10 @@
 						</div>
 					</div>
 					<div class="my-4">
-						<!-- <button class="btn btn-primary fw-bold w-100 " 
-						type="submit"> 
-						
-						 Đăng ký
-						</button> -->
-
-						<button class="btn btn-primary"
-						formaction="<c:url value="/authentication/login"/>"
-						type="submit">
-
-						Dang Ky <i class="fa fa-plus"></i>
-
-					</button>
+						<form method="post">
+							<button class="btn btn-primary fw-bold w-100 " type="submit">
+								Đăng ký</button>
+						</form>
 					</div>
 					<span class="text-primary"> Đã có tài khoản? <a
 						class="text-decoration-underline" href="login"><strong>Đăng
@@ -83,5 +74,58 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+	<script>
+		document
+				.addEventListener(
+						"DOMContentLoaded",
+						function() {
+							// Lấy các trường input
+							const userName = document
+									.getElementById("username");
+							const passwordInput = document
+									.getElementById("pwd");
+							const confirmPasswordInput = document
+									.getElementById("pwd-confirm");
+
+							// Lấy form và thêm sự kiện submit
+							const form = document.querySelector("form");
+							form
+									.addEventListener(
+											"submit",
+											function(event) {
+												if (userName.value.trim() === "") {
+													event.preventDefault(); // Ngăn chặn form submit
+													showToast("Chưa nhập Username kìa");
+												} else if (passwordInput.value !== confirmPasswordInput.value) {
+													event.preventDefault(); // Ngăn chặn form submit
+													showToast("Mật khẩu và xác nhận mật khẩu không khớp!");
+												}
+											});
+						});
+
+		function showToast(message) {
+			// Tạo một toast message
+			const toast = document.createElement("div");
+			toast.classList.add("toast", "show", "bg-danger", "position-fixed",
+					"top-0", "end-0");
+			toast.setAttribute("role", "alert");
+			toast.setAttribute("aria-live", "assertive");
+			toast.setAttribute("aria-atomic", "true");
+
+			// Tạo nội dung toast
+			const toastBody = document.createElement("div");
+			toastBody.classList.add("toast-body");
+			toastBody.innerText = message;
+
+			// Thêm nội dung vào toast và toast vào trang
+			toast.appendChild(toastBody);
+			document.body.appendChild(toast);
+
+			// Hiển thị toast
+			const bootstrapToast = new bootstrap.Toast(toast);
+			bootstrapToast.show();
+		}
+	</script>
+
 </body>
 </html>

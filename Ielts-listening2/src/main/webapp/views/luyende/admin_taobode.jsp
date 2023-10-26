@@ -13,156 +13,191 @@
 	rel="stylesheet">
 </head>
 <body>
-	<div style="height:60px; background-color:red" class="header-admin">HEADER ADMIN</div>
-	
+	<div style="height: 60px; background-color: red" class="header-admin">HEADER
+		ADMIN</div>
+
 	<div class="admin-taobode container-fluid p-0 m-0">
-                        <div class="row g-4">
-                           <div class="col col-8 admin-taobode-left position-relative text-center">
-                                <h1 class="text--title color-blue--primary">IELTS Essential Guide</h1>
-                                <p class="text--description lh-sm">Bộ đề Cam kinh điển đầy đủ giái thích đáp án chi tiết. Luyện đề IELTS Essential Guide mới nhất với đầy đủ 4 kỹ năng, giúp thí sinh tự tin khi va chạm với mọi dạng đề.</p>
-                                <a class="admin-taobode-btn bg-color-green--medium color-white text--h4 rounder-8 align-middle mx-auto" href="#" role="button">Tạo bộ đề</a>
+		<div class="row g-4">
+			<div
+				class="col col-8 admin-taobode-left position-relative text-center">
+				<h1 class="text--title color-blue--primary">IELTS Essential
+					Guide</h1>
+				<p class="text--description lh-sm">Bộ đề Cam kinh điển đầy đủ
+					giái thích đáp án chi tiết. Luyện đề IELTS Essential Guide mới nhất
+					với đầy đủ 4 kỹ năng, giúp thí sinh tự tin khi va chạm với mọi dạng
+					đề.</p>
+				<a
+					class="admin-taobode-btn bg-color-green--medium color-white text--h4 rounder-8 align-middle mx-auto"
+					href="#" role="button">Tạo bộ đề</a>
 
-                                <div class="row g-4 danhsachbode">
-                                    <div class="bodethi">
-                                        <button class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
-                                            <span class="accordion-order">01</span>
-                                            <span class="accordion-title ms-4">Bộ đề Listening</span>
-                                            <div class="icon-list d-flex ">
-                                               <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-white"></i> </a>
-                                               <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-white"></i> </a>
-                                            </div>
-                                        </button>
-                                        <div class="panel">
-                                          <ul class = "list p-0">
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
+				<div class="row g-4 danhsachbode">
+					<div class="bodethi">
+						<button
+							class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
+							<span class="accordion-order">01</span> <span
+								class="accordion-title ms-4">Bộ đề Listening</span>
+							<div class="icon-list d-flex ">
+								<a href="#" class="icon-link icon-update"> <i
+									class="fa-solid fa-pen me-4 color-white"></i>
+								</a> <a href="#" class="icon-link icon-delete"> <i
+									class="fa-solid fa-trash color-white"></i>
+								</a>
+							</div>
+						</button>
+						<div class="panel">
+							<ul class="list p-0">
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
 
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
 
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
-                                            
-                                          </ul>
-                                        </div>
-                                        
-                                        
-                                       
-                                    </div>
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
 
-                                    <div class="bodethi">
-                                        <button class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
-                                            <span class="accordion-order">01</span>
-                                            <span class="accordion-title ms-4">Bộ đề Listening</span>
-                                            <div class="icon-list d-flex ">
-                                               <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-white"></i> </a>
-                                               <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-white"></i> </a>
-                                            </div>
-                                        </button>
-                                        <div class="panel">
-                                          <ul class = "list p-0">
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
+							</ul>
+						</div>
 
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
 
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
-                                            
-                                          </ul>
-                                        </div>
-                                        
-                                        
-                                       
-                                    </div>
 
-                                    <div class="bodethi">
-                                        <button class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
-                                            <span class="accordion-order">01</span>
-                                            <span class="accordion-title ms-4">Bộ đề Listening</span>
-                                            <div class="icon-list d-flex ">
-                                               <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-white"></i> </a>
-                                               <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-white"></i> </a>
-                                            </div>
-                                        </button>
-                                        <div class="panel">
-                                          <ul class = "list p-0">
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
+					</div>
 
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
+					<div class="bodethi">
+						<button
+							class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
+							<span class="accordion-order">01</span> <span
+								class="accordion-title ms-4">Bộ đề Listening</span>
+							<div class="icon-list d-flex ">
+								<a href="#" class="icon-link icon-update"> <i
+									class="fa-solid fa-pen me-4 color-white"></i>
+								</a> <a href="#" class="icon-link icon-delete"> <i
+									class="fa-solid fa-trash color-white"></i>
+								</a>
+							</div>
+						</button>
+						<div class="panel">
+							<ul class="list p-0">
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
 
-                                            <li class = "item bg-color-blue--light mb-4 text--h3">
-                                                <a class = "item-link text-start" href="">Listening 01</a>
-                                                <div class="item-icon">
-                                                    <a href="#" class = "icon-link icon-update"> <i class="fa-solid fa-pen me-4 color-blue--primary"></i> </a>
-                                                    <a href="#" class = "icon-link icon-delete"> <i class="fa-solid fa-trash color-red--medium"></i> </a>
-                                                 </div>
-                                            </li>
-                                            
-                                          </ul>
-                                        </div>
-                                        
-                                        
-                                       
-                                    </div>
-                           </div>
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
 
-                           <div class="col col-4 admin-taobode-right">
-                                
-                           </div>
-                        </div>
-                    </div>
-                   
-                    </div>
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
+
+							</ul>
+						</div>
+
+
+
+					</div>
+
+					<div class="bodethi">
+						<button
+							class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
+							<span class="accordion-order">01</span> <span
+								class="accordion-title ms-4">Bộ đề Listening</span>
+							<div class="icon-list d-flex ">
+								<a href="#" class="icon-link icon-update"> <i
+									class="fa-solid fa-pen me-4 color-white"></i>
+								</a> <a href="#" class="icon-link icon-delete"> <i
+									class="fa-solid fa-trash color-white"></i>
+								</a>
+							</div>
+						</button>
+						<div class="panel">
+							<ul class="list p-0">
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
+
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
+
+								<li class="item bg-color-blue--light mb-4 text--h3"><a
+									class="item-link text-start" href="">Listening 01</a>
+									<div class="item-icon">
+										<a href="#" class="icon-link icon-update"> <i
+											class="fa-solid fa-pen me-4 color-blue--primary"></i>
+										</a> <a href="#" class="icon-link icon-delete"> <i
+											class="fa-solid fa-trash color-red--medium"></i>
+										</a>
+									</div></li>
+
+							</ul>
+						</div>
+
+
+
+					</div>
+				</div>
+
+				<div class="col col-4 admin-taobode-right"></div>
+			</div>
+		</div>
+
+	</div>
 
 	<script>
-		var acc = document.getElementsByClassName("accordion");
-		var i;
+		const acc = document.getElementsByClassName("accordion");
 
-		for (i = 0; i < acc.length; i++) {
+		for (let i = 0; i < acc.length; i++) {
 			acc[i].addEventListener("click", function() {
 				this.classList.toggle("active");
 				var panel = this.nextElementSibling;

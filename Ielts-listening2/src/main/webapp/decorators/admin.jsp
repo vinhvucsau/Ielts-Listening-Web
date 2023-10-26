@@ -27,11 +27,11 @@
 
 </head>
 <body>
-	<div class="admin container-fluid">
-		<div class="row g-4">
-			<div class="admin-left col col-xxl-3 fixed-left">
+	<div style="font-size: 16px;" class="admin container-fluid ">
+		<div class="d-flex ">
+			<div class=" fixed-left ">
 				<%@ include file="/common/admin/Left.jsp"%></div>
-			<div class="admin-right col col-xxl-9">
+			<div class="t ">
 				<decorator:body>
 				</decorator:body>
 			</div>
