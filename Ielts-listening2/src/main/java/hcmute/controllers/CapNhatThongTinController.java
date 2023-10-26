@@ -9,15 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/admin/luyende" })
-public class LuyenDeController extends HttpServlet{
+@WebServlet(urlPatterns = {"/user/capnhattaikhoan", "/user/capnhatmatkhau" })
+public class CapNhatThongTinController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
-		if (url.contains("luyende")) {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/luyende/admin_taobode.jsp");
+		if (url.contains("capnhattaikhoan")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
+			rd.forward(req, resp);
+		}else if (url.contains("capnhatmatkhau")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhatmatkhau.jsp");
 			rd.forward(req, resp);
 		}
 	}
