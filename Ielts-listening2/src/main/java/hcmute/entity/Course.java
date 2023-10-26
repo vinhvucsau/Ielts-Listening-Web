@@ -41,10 +41,10 @@ public class Course implements Serializable{
 	@Column(columnDefinition = "date")
 	private String enrrolmentDate;
 	
-	@OneToMany(mappedBy = Constants.COURSE_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
 	private List<EnrrolCourse> enrrolCourses;
 	
-	@OneToMany(mappedBy = Constants.COURSE_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
 	private List<Lesson> lessons;
 	
 	@ManyToOne

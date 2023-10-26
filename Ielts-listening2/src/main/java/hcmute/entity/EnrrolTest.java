@@ -32,6 +32,7 @@ public class EnrrolTest implements Serializable{
 	@Column(columnDefinition = "double")
 	private double score;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User users;
@@ -40,6 +41,6 @@ public class EnrrolTest implements Serializable{
 	@JoinColumn(name = "testId")
 	private MockTest mockTests;
 	
-	@OneToMany(mappedBy = Constants.ENRROL_TEST_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "enrrolTests", fetch = FetchType.EAGER)
 	private List<HistoryTest> historyTests;
 }

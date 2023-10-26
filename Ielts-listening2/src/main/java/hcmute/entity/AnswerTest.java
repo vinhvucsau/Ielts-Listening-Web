@@ -45,6 +45,10 @@ public class AnswerTest implements Serializable{
 		this.listeningParts = listeningParts;
 		this.users = users;
 	}
+	
+	public AnswerTest() {
+		super();
+	}
 
 	public String getAnswerId() {
 		return answerId;

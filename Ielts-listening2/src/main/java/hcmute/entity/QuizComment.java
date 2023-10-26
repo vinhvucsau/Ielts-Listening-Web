@@ -30,7 +30,7 @@ public class QuizComment implements Serializable{
 	@Column(columnDefinition = "varchar(10000)")
 	private String comment;
 	
-	@OneToMany(mappedBy = Constants.QUIZ_COMMENT_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "quizComments", fetch = FetchType.EAGER)
 	private List<QuizRepComment> quizRepComments;
 	
 	@ManyToOne
@@ -48,6 +48,10 @@ public class QuizComment implements Serializable{
 		this.quizRepComments = quizRepComments;
 		this.users = users;
 		this.quizs = quizs;
+	}
+	
+	public QuizComment() {
+		super();
 	}
 
 	public String getCommentId() {

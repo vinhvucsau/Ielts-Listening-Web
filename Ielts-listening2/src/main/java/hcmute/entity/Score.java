@@ -42,6 +42,10 @@ public class Score implements Serializable{
 		this.lessons = lessons;
 	}
 
+	public Score() {
+		super();
+	}
+	
 	public String getScoreId() {
 		return scoreId;
 	}

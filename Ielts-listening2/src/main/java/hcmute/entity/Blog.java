@@ -36,8 +36,9 @@ public class Blog implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String image;
 	
+	
 	@ManyToOne
-	@JoinColumn(name = "creatorId")
+	@JoinColumn(name = "userId") //tham chieu den truong creatorId trog Blog
 	private User users;
 
 	public Blog(String blogId, String createdDate, String content, String title, String image, User users) {
@@ -50,6 +51,11 @@ public class Blog implements Serializable{
 		this.users = users;
 	}
 
+	
+	public Blog() {
+		super();
+	}
+	
 	public String getBlogId() {
 		return blogId;
 	}

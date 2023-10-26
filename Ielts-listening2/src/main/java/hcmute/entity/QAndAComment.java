@@ -37,7 +37,7 @@ public class QAndAComment implements Serializable{
 	@JoinColumn(name = "qAndAId")
 	private QAndA qAndAs;
 
-	@OneToMany(mappedBy = Constants.Q_AND_A_COMMENT_RELATION, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "qAndAComments", fetch = FetchType.EAGER)
 	private List<QAndARepComment> qAndARepComments;
 
 	public QAndAComment(String commentId, String comment, User users, QAndA qAndAs,
@@ -50,6 +50,10 @@ public class QAndAComment implements Serializable{
 		this.qAndARepComments = qAndARepComments;
 	}
 
+	public QAndAComment() {
+		super();
+	}
+	
 	public String getCommentId() {
 		return commentId;
 	}

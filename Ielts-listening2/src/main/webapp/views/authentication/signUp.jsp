@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +22,13 @@
 				<div class="text-center">
 					<p class="fw-bold fs-5">Đăng Ký</p>
 				</div>
-				<form class="p-4" action="login">
+				<form class="p-4" action="signup" method="post">
 					<div class="mb-4">
 						<label for="username" class="form-label mb-2 text-secondary">
 							Username <span class="text-danger">*</span>
 						</label>
 						<div class="input-group">
-							<input id="username" class="form-control" type="text"
+							<input id="username" name="userName" class="form-control" type="text"
 								placeholder="Nhập username">
 						</div>
 					</div>
@@ -35,7 +37,7 @@
 							Mật khẩu <span class="text-danger">*</span>
 						</label>
 						<div class="input-group">
-							<input id="pwd" class="form-control" type="password"
+							<input id="pwd" name="passWord" class="form-control" type="password"
 								placeholder="Nhập mật khẩu">
 							<button class="btn btn-outline-secondary" type="button">
 								<i class="far fa-eye"></i>
@@ -55,8 +57,19 @@
 						</div>
 					</div>
 					<div class="my-4">
-						<button class="btn btn-primary fw-bold w-100" type="submit">Đăng
-							ký</button>
+						<!-- <button class="btn btn-primary fw-bold w-100 " 
+						type="submit"> 
+						
+						 Đăng ký
+						</button> -->
+
+						<button class="btn btn-primary"
+						formaction="<c:url value="/authentication/login"/>"
+						type="submit">
+
+						Dang Ky <i class="fa fa-plus"></i>
+
+					</button>
 					</div>
 					<span class="text-primary"> Đã có tài khoản? <a
 						class="text-decoration-underline" href="login"><strong>Đăng

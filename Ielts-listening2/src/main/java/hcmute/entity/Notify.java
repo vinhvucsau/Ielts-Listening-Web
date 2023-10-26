@@ -38,6 +38,10 @@ public class Notify implements Serializable{
 		this.image = image;
 	}
 
+	public Notify() {
+		super();
+	}
+	
 	public String getNotifyId() {
 		return notifyId;
 	}

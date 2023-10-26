@@ -4,13 +4,17 @@ import hcmute.utils.Constants;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +23,6 @@ public class Account implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String userName;
 	
 	@Column(columnDefinition = "varchar(255)")
@@ -28,12 +31,18 @@ public class Account implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String role;
 	
-	@OneToMany(mappedBy = Constants.ACCOUNT_RELATION, fetch = FetchType.EAGER)
-	private List<User> users;
+	/*
+	 * @OneToMany(mappedBy = "accounts", fetch = FetchType.EAGER) private List<User>
+	 * users;
+	 */
+	
+	
+	 @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	    private User users;
+	 
 	
 
-	public Account(String userName, String passWord, String role, List<User> users) {
-		super();
+	public Account(String userName, String passWord, String role, User users) {
 		this.userName = userName;
 		this.passWord = passWord;
 		this.role = role;
@@ -68,11 +77,11 @@ public class Account implements Serializable{
 		this.role = role;
 	}
 
-	public List<User> getUsers() {
+	public User getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<User> users) {
+	public void setUsers(User users) {
 		this.users = users;
 	}
 	
