@@ -33,11 +33,13 @@
 					href="#" role="button">Tạo bộ đề</a>
 
 				<div class="row g-4 danhsachbode">
+				<!-- loop -->
+				<c:forEach var="c" items="${listCourse }">
 					<div class="bodethi">
 						<button
 							class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
 							<span class="accordion-order">01</span> <span
-								class="accordion-title ms-4">Bộ đề Listening</span>
+								class="accordion-title ms-4">${listCourse.courseName}</span>
 							<div class="icon-list d-flex ">
 								<a href="#" class="icon-link icon-update"> <i
 									class="fa-solid fa-pen me-4 color-white"></i>
@@ -46,46 +48,34 @@
 								</a>
 							</div>
 						</button>
-						
-						<div class="panel">
-							<ul class="list p-0">
-								<li class="item bg-color-blue--light mb-4 text--h3"><a
-									class="item-link text-start" href="">Listening 01</a>
-									<div class="item-icon">
-										<a href="#" class="icon-link icon-update"> <i
-											class="fa-solid fa-pen me-4 color-blue--primary"></i>
-										</a> <a href="#" class="icon-link icon-delete"> <i
-											class="fa-solid fa-trash color-red--medium"></i>
-										</a>
-									</div></li>
+						<!-- loop inner -->
+						<c:forEach var = "l" items="${listLesson }">
+							<div class="panel">
+								<ul class="list p-0">
+									<c:choose>
+										<c:when test="${c.courseId == l.courses.courseId}">					
+											<li class="item bg-color-blue--light mb-4 text--h3"><a
+												class="item-link text-start" href="">${l.lessonName }</a>
+												<div class="item-icon">
+													<a href="#" class="icon-link icon-update"> <i
+														class="fa-solid fa-pen me-4 color-blue--primary"></i>
+													</a> <a href="#" class="icon-link icon-delete"> <i
+														class="fa-solid fa-trash color-red--medium"></i>
+													</a>
+												</div>
+											</li>
+										</c:when>	
+									</c:choose>
+								</ul>
+							</div>
 
-								<li class="item bg-color-blue--light mb-4 text--h3"><a
-									class="item-link text-start" href="">Listening 01</a>
-									<div class="item-icon">
-										<a href="#" class="icon-link icon-update"> <i
-											class="fa-solid fa-pen me-4 color-blue--primary"></i>
-										</a> <a href="#" class="icon-link icon-delete"> <i
-											class="fa-solid fa-trash color-red--medium"></i>
-										</a>
-									</div></li>
-
-								<li class="item bg-color-blue--light mb-4 text--h3"><a
-									class="item-link text-start" href="">Listening 01</a>
-									<div class="item-icon">
-										<a href="#" class="icon-link icon-update"> <i
-											class="fa-solid fa-pen me-4 color-blue--primary"></i>
-										</a> <a href="#" class="icon-link icon-delete"> <i
-											class="fa-solid fa-trash color-red--medium"></i>
-										</a>
-									</div></li>
-
-							</ul>
-						</div>
-
+						</c:forEach>
+				</c:forEach>
 
 
 					</div>
-
+					
+					
 				</div>
 
 				<div class="col col-4 admin-taobode-right"></div>

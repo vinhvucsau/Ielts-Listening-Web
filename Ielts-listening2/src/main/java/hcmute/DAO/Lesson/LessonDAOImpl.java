@@ -14,8 +14,8 @@ public class LessonDAOImpl implements ILessonDAO {
 	@Override
 	public List<Lesson> getAllLesson() {
 		EntityManager enma = JPAConfig.getEntityManager();
-		TypedQuery<Lesson> q = enma.createNamedQuery("SELECT l FROM LESSON l", Lesson.class);
-		enma.close();
+		String jpql = "Select l from Lesson l";
+		TypedQuery<Lesson> q = enma.createQuery(jpql, Lesson.class);
 		return q.getResultList();
 	}
 
