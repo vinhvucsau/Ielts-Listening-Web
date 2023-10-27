@@ -9,6 +9,7 @@
 	<!-- chua duong dan cac file le rieng  -->
     <link href="<c:url value='/views/luyende/css/styleLuyenDeTest.css' />" rel="stylesheet" type="text/css"> 
     <link href='<c:url value="/assets/fonts/themify-icons/themify-icons.css" />' rel="stylesheet" type="text/css">
+    <link href="<c:url value='/stylecss/base/colorstyle.css'/>" rel="stylesheet" type="text/css"/>
 	<title>Insert title here</title>
 </head>
 <body >
