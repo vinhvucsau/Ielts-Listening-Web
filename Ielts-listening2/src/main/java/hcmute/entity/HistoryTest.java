@@ -13,32 +13,25 @@ import hcmute.utils.Constants;
 
 @Entity
 @Table(name = Constants.HISTORY_TEST_RELATION)
-//@IdClass(CompositeHistoryTestId.class) // Sử dụng lớp ID
 
-public class HistoryTest implements Serializable{
+public class HistoryTest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	/*
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private String partId;
-	 * 
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private String enrrolId;
-	 */
-	
+
+
+	@Id
+	private String historyId;
+
 	@Column(columnDefinition = "varchar(255)")
 	private String answerOfUser;
-	
+
 	@Column(columnDefinition = "int")
 	private int number;
-	
-	@Id
+
 	@ManyToOne
 	@JoinColumn(name = "partId")
 	private ListeningPart listeningParts;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "enrrolId")
 	private EnrrolTest enrrolTests;
@@ -50,7 +43,7 @@ public class HistoryTest implements Serializable{
 		this.listeningParts = listeningParts;
 		this.enrrolTests = enrrolTests;
 	}
-	
+
 	public HistoryTest() {
 		super();
 	}
