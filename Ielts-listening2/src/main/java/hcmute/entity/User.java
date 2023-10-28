@@ -50,10 +50,18 @@ public class User implements Serializable {
 
 	@Column(columnDefinition = "varchar(255)")
 	private String networth;
+<<<<<<< HEAD
 
 	@Column(name = "contributeScore")
 	private Integer contributeScore;
 
+=======
+	
+	@Column(name = "contributeScore")
+	private Integer contributeScore;
+	
+	
+>>>>>>> thiu
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Score> scores;
 

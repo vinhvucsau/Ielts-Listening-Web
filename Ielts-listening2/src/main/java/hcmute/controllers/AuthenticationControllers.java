@@ -54,6 +54,7 @@ public class AuthenticationControllers extends HttpServlet {
 			account.setRole("user");
 			String res = accountService.SignUp(account);
 			System.out.println(res);
+<<<<<<< HEAD
 			if (res == "Success") {
 				resp.sendRedirect(req.getContextPath() + "/authentication/login");
 				req.setAttribute("message", "Đã thêm thành công");
@@ -62,6 +63,11 @@ public class AuthenticationControllers extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
 				rd.forward(req, resp);
 			}
+=======
+			resp.sendRedirect(req.getContextPath() + "/authentication/login");
+//			resp.sendRedirect(req.getContextPath() + "/authentication/login");
+//			req.setAttribute("message", "Đã thêm thành công");
+>>>>>>> thiu
 
 		} catch (Exception e) {
 			e.printStackTrace();
