@@ -5,6 +5,7 @@ import javax.persistence.EntityTransaction;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.Account;
+import hcmute.entity.User;
 
 public class AccountDAOImpl implements IAccountDAO {
 
@@ -30,5 +31,15 @@ public class AccountDAOImpl implements IAccountDAO {
 		} finally {
 			enma.close();
 		}
+	}
+
+	@Override
+	public User Login(Account account) {
+		// TODO Auto-generated method stub
+		EntityManager enma = JPAConfig.getEntityManager();
+		EntityTransaction trans = enma.getTransaction();
+		String userName = account.getUserName();
+		Account acc = enma.find(Account.class, userName);
+		return acc;
 	}
 }

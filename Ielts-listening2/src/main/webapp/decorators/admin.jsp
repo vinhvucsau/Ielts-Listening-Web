@@ -31,7 +31,7 @@
 		<div class="d-flex ">
 			<div class=" fixed-left ">
 				<%@ include file="/common/admin/Left.jsp"%></div>
-			<div class="t ">
+			<div class=" ">
 				<decorator:body>
 				</decorator:body>
 			</div>
