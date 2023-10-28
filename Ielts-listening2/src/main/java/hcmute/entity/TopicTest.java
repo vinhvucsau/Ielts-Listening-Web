@@ -24,6 +24,9 @@ public class TopicTest implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String topicId;
 	
+	@Column(columnDefinition = "varchar(255)")
+	private String topicName;
+	
 	@Column(columnDefinition = "varchar(10000)")
 	private String description;
 	

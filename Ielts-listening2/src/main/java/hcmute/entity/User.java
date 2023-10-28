@@ -1,4 +1,5 @@
 package hcmute.entity;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,87 +16,91 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import hcmute.utils.Constants;
- 
 
 @Entity
 @Table(name = Constants.USER_RELATION)
-public class User implements Serializable{
-	
-	
+public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String userId;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String name;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String sex;
-	
+
 	@Column(columnDefinition = "date")
 	private String dateOfBirth;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String email;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String phoneNumber;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String address;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String image;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String networth;
+<<<<<<< HEAD
+
+	@Column(name = "contributeScore")
+	private Integer contributeScore;
+
+=======
 	
-	@Column(columnDefinition = "int")
-	private int contributeScore;
+	@Column(name = "contributeScore")
+	private Integer contributeScore;
 	
 	
+>>>>>>> thiu
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Score> scores;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<EnrrolCourse> enrrolCourses;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Course> courses;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Quiz> quizs;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QuizRepComment> quizRepComments;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QuizComment> quizComments;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<EnrrolTest> enrrolTests;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Blog> blogs;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QAndA> qAndAs;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QAndAComment> qAndAComments;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<QAndARepComment> qAndARepComments;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<ReadNotify> readNotifys;
-	
+
 	@OneToOne
-    @JoinColumn(name = "userName")
-    private Account account;
+	@JoinColumn(name = "userName")
+	private Account account;
 
 	public String getUserId() {
 		return userId;
@@ -315,9 +320,5 @@ public class User implements Serializable{
 	public User() {
 		super();
 	}
-	
-	
-	
-	
 
 }

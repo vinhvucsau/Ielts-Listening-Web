@@ -1,7 +1,9 @@
 package hcmute.services;
 
 import hcmute.entity.Account;
+import hcmute.entity.User;
 
 public interface IAccountServices {
-	void SignUp(Account account);
+	String SignUp(Account account);
+	User Login(Account account);
 }
