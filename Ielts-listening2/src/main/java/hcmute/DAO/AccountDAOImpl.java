@@ -15,10 +15,8 @@ public class AccountDAOImpl implements IAccountDAO {
 		EntityTransaction trans = enma.getTransaction();
 		String userName = account.getUserName();
 		Account existingAccount = enma.find(Account.class, userName);
-		System.out.print(existingAccount);
 		if (existingAccount != null) {
 			trans.rollback();
-			System.out.print("Tai khoan ton tai");
 			return "Existed Account";
 		}
 		try {
