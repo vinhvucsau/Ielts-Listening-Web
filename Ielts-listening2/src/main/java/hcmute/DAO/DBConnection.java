@@ -12,13 +12,15 @@ import java.sql.Statement;
 import com.mysql.cj.jdbc.Driver;
 
 public class DBConnection {
-	private static String DB_URL ="jdbc:mysql://localhost:3306/banhang3";
+	private static String DB_URL ="jdbc:mysql://localhost:3306/ieltsweb";
 	private static String USER_NAME ="root";
 	private static String PASSWORD = "1234567890";
 	private static Connection con ;
 	
 	public static Connection getConnection() throws IOException{
 		con = null ;
+		//nguyen tan lam lan 4
+		//vinh lan 1
 		try {
 			//driver register-- test 
 			DriverManager.registerDriver(new Driver());
