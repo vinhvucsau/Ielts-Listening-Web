@@ -5,12 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -41,6 +35,7 @@
 							</div>
 						</div>
 					</form>
+					
 				</div>
 			</div>
 		</div>

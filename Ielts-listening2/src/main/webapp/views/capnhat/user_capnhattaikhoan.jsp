@@ -5,12 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -83,16 +77,45 @@
 							<input type="text" class="form-control mt-2" id="inputNetworth" placeholder="Số dư" disabled>
 						</div>
 						<div class="col-6 mt-3 mb-5 pe-3">
-							<button type="submit" class="btn bg-color-blue--primary text--description color-white text--description px-3 py-2 float-end">Nạp tiền</button>
+							<button type="button" class="btn bg-color-blue--primary text--description color-white text--description px-3 py-2 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">Nạp tiền</button>
 						</div>
 						<div class="col-6 mt-3 mb-5 ps-3">
 							<button type="submit" class="btn bg-color-blue--primary text--description color-white text--description px-3 py-2">Cập nhật</button>
 						</div>
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered">
+						    <div class="modal-content">
+						      <div class="modal-header bg-color-blue--primary color-white align-items-center">
+						        <h1 class="modal-title fs-5 text--title ps-2" id="exampleModalLabel">Nạp tiền</h1>
+						        <button type="button" class="btn" data-bs-dismiss="modal">
+						        	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  										<path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+  										<path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+									</svg>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						      	<div class="col-12 mb-3 px-2">
+									<lable for="inputName" class="form-lable text--h4">Số tiền cần nạp</lable>
+									<input type="text" class="form-control mt-2" id="inputName" placeholder="Số tiền">
+								</div>
+								<div class="d-flex flex-column align-items-center">
+									<div class="px-2">
+										<div class="card rounder-12 border-secondary mb-3" style="height:250px; width:250px"></div>
+							      	</div>
+							      	<p class="text--description m-0">Quét mã QR để nạp tiền</p>
+								</div>
+								</div>
+						      <div class="modal-footer justify-content-center">
+						        <button type="submit" class="btn text--description color-white bg-color-blue--primary">Hoàn tất</button>
+						      </div>
+						  	</div>
+							</div>
+						</div>
 					</form>
-			</div>
+				</div>
 			</div>
 		</div>
-			
 	</div>
 </body>
 </html>
