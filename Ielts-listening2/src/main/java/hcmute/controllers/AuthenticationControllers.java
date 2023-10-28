@@ -64,11 +64,6 @@ public class AuthenticationControllers extends HttpServlet {
 				rd.forward(req, resp);
 			}
 
-			resp.sendRedirect(req.getContextPath() + "/authentication/login");
-//			resp.sendRedirect(req.getContextPath() + "/authentication/login");
-//			req.setAttribute("message", "Đã thêm thành công");
-
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("error", "Eror: " + e.getMessage());
