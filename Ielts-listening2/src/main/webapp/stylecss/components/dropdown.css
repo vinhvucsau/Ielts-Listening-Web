@@ -1,5 +1,21 @@
 @charset "UTF-8";
-.danhsachbode .accordion {
+
+
+.admin-taobode {
+  counter-set: my-counter 0;
+}
+.admin-taobode-btn {
+  margin-bottom: 1.6rem;
+  display: block;
+  width: 164px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+}
+.admin-taobode .bodethi {
+  padding: 0 20px;
+}
+.admin-taobode .bodethi .accordion {
   cursor: pointer;
   padding: 2rem;
   width: 100%;
@@ -7,7 +23,11 @@
   outline: none;
   transition: 2s ease-in;
 }
-.danhsachbode .panel {
+.admin-taobode .bodethi .accordion-order::before {
+  counter-increment: my-counter 1;
+  content: "0" counter(my-counter);
+}
+.admin-taobode .bodethi .panel {
   display: none;
   background-color: white;
   overflow: hidden;
@@ -18,6 +38,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 8px;
 }
 .danhsachbode .panel .list .item-link {
   flex: 1;
@@ -31,4 +52,46 @@
 }
 .danhsachbode .panel .list .item-icon .i {
   font-size: 1.4rem;
+}
+
+
+/*CARD*/
+.card-cover {
+  padding: 20px;
+  border-radius: 8px !important;
+  height: 100%;
+}
+.card-cover .card__img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 4px;
+  margin-top: 16px;
+}
+.card-cover .card-body {
+  margin: 24px 0 20px;
+}
+.card-cover .card-body__title {
+  margin-bottom: 12px;
+}
+.card-cover .card-body__text {
+  line-height: 18px;
+  letter-spacing: 0.2px;
+}
+.card-cover .card-list {
+  margin-bottom: 3px;
+}
+.card-cover .card-list__group {
+  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.card-cover .card-list__group .group__icon {
+  margin-right: 8px;
+  font-size: 14px;
+}
+.card-cover .card-list__group .group__content {
+  color: #333;
+  text-align: end;
 }
