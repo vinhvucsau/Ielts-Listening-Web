@@ -34,23 +34,23 @@
   transition: 0.5s ease-in;
   margin-top: 16px;
 }
-.admin-taobode .bodethi .panel .list .item {
+.danhsachbode .panel .list .item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
 }
-.admin-taobode .bodethi .panel .list .item-link {
+.danhsachbode .panel .list .item-link {
   flex: 1;
   padding: 16px 8px 16px 20px;
 }
-.admin-taobode .bodethi .panel .list .item-icon {
+.danhsachbode .panel .list .item-icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-right: 20px;
 }
-.admin-taobode .bodethi .panel .list .item-icon .i {
+.danhsachbode .panel .list .item-icon .i {
   font-size: 1.4rem;
 }
 

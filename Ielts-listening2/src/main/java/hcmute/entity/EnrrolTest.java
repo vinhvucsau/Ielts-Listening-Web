@@ -29,6 +29,9 @@ public class EnrrolTest implements Serializable{
 	@Column(columnDefinition = "date")
 	private String enrollmentDate;
 	
+	@Column(columnDefinition = "int")
+	private Integer timeTest;
+	
 	@Column(columnDefinition = "double")
 	private double score;
 	
@@ -43,4 +46,76 @@ public class EnrrolTest implements Serializable{
 	
 	@OneToMany(mappedBy = "enrrolTests", fetch = FetchType.EAGER)
 	private List<HistoryTest> historyTests;
+
+	public String getEnrrolId() {
+		return enrrolId;
+	}
+
+	public void setEnrrolId(String enrrolId) {
+		this.enrrolId = enrrolId;
+	}
+
+	public String getEnrollmentDate() {
+		return enrollmentDate;
+	}
+
+	public void setEnrollmentDate(String enrollmentDate) {
+		this.enrollmentDate = enrollmentDate;
+	}
+
+	public Integer getTimeTest() {
+		return timeTest;
+	}
+
+	public void setTimeTest(Integer timeTest) {
+		this.timeTest = timeTest;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+	public User getUsers() {
+		return users;
+	}
+
+	public void setUsers(User users) {
+		this.users = users;
+	}
+
+	public MockTest getMockTests() {
+		return mockTests;
+	}
+
+	public void setMockTests(MockTest mockTests) {
+		this.mockTests = mockTests;
+	}
+
+	public List<HistoryTest> getHistoryTests() {
+		return historyTests;
+	}
+
+	public void setHistoryTests(List<HistoryTest> historyTests) {
+		this.historyTests = historyTests;
+	}
+
+	public EnrrolTest(String enrrolId, String enrollmentDate, Integer timeTest, double score, User users,
+			MockTest mockTests, List<HistoryTest> historyTests) {
+		super();
+		this.enrrolId = enrrolId;
+		this.enrollmentDate = enrollmentDate;
+		this.timeTest = timeTest;
+		this.score = score;
+		this.users = users;
+		this.mockTests = mockTests;
+		this.historyTests = historyTests;
+	}
+	
+	public EnrrolTest() {
+		super();
+	}
 }

@@ -9,6 +9,11 @@
 <!-- Add Bootstrap CSS Link -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/font-awesome.css" />
+
+<style>
+</style>
 </head>
 <body>
 	<div class="container-fluid  bg-light">
@@ -50,8 +55,13 @@
 									<div class="input-group">
 										<input id="pwd" class="form-control" type="password"
 											placeholder="Nhập mật khẩu">
-										<button class="btn btn-outline-secondary" type="button">
-											<i class="far fa-eye"></i>
+										<button onclick="handleToggleShowPassword()"
+											class="bg-white border" type="button">
+											<div style="width: 35px">
+												<i id="icon__show" class="far fa-eye"></i> <i
+													style="display: none" id="icon__hide"
+													class="far fa-eye-slash"></i>
+											</div>
 										</button>
 									</div>
 								</div>
@@ -63,11 +73,11 @@
 						</div>
 						<div class="d-flex justify-content-between align-items-center">
 							<a href="signup"
-								class=" text-primaryfw-bold text-decoration-underline">
-								Quên mật khẩu ?
-								</a> <span class="text-primary">Chưa có tài khoản? <a
-								href="signup" class="fw-bold text-decoration-underline">Đăng
-									ký</a></span>
+								class=" text-primaryfw-bold text-decoration-underline"> Quên
+								mật khẩu ? </a> <span class="text-primary">Chưa có tài khoản?
+								<a href="signup" class="fw-bold text-decoration-underline">Đăng
+									ký</a>
+							</span>
 						</div>
 					</div>
 				</div>
@@ -79,6 +89,22 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
-		
+	<script>
+		function handleToggleShowPassword() {
+			const passwordInput = document.getElementById("pwd");
+			const showBtn = document.getElementById("icon__show");
+			const hideBtn = document.getElementById("icon__hide");
+			if (passwordInput.type === "password") {
+				passwordInput.type = "text"; // Change the input type to text to reveal the password
+				showBtn.style.display = "none"; // Hide the show button
+				hideBtn.style.display = "block"; // Show the hide button
+
+			} else {
+				passwordInput.type = "password"; // Change it back to password to hide the password
+				showBtn.style.display = "block"; // Show the show button
+				hideBtn.style.display = "none"; // Hide the hide button
+			}
+		}
+	</script>
 </body>
 </html>

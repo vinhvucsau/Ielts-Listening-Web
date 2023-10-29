@@ -1,46 +1,24 @@
 @charset "UTF-8";
 
-:root {
-	--color-blue-light: #EFF6FF;
-	--color-blue-medium: #0071F9;
-
-	--color-red-medium: #F33F51;
-	--color-red-light: #FEECEE;
-
-	--color-orange-medium: #F59E0B;
-	--color-orange-light: #FFFBEB;
-
-	--color-green-medium: #00B135;
-	--color-green-light: #e5ffed;
-
-	--color-black: #333;
-	--color-white: #fff;
-	--color-grey: #f4f4f4;
-}
-
 html {
-	font-size: 62.5%;
-	/*<==>font-size: 10px ==> dễ điều chỉnh các font-size khác*/
-	line-height: 1.6rem;
+  font-size: 62.5%; /*<==>font-size: 10px ==> dễ điều chỉnh các font-size khác*/
+  line-height: 1.6rem;
 }
 
 body {
-	font-family: "Inter", sans-serif !important;
+  font-family: "Inter", sans-serif !important;
 }
 
 a {
-	text-decoration: none !important;
+  text-decoration: none !important;
 }
 
-/*TEXT STYLE*/
 .text--title {
   font-size: 4.8rem;
-  line-height: 4.8rem;
   font-weight: 700;
 }
 .text--description {
   font-size: 1.6rem;
-  line-height: 1.6rem;
   font-weight: 300;
 }
 .text--h2 {
@@ -50,17 +28,14 @@ a {
 }
 .text--h3 {
   font-size: 1.6rem;
-  line-height: 1.6rem;
   font-weight: 700;
 }
 .text--h4 {
   font-size: 1.6rem;
-  line-height: 1.6rem;
   font-weight: 500;
 }
 
-
-/*COLOR STYLE*/
+/*COLOR*/
 .color-blue--primary {
   color: #0071f9 !important;
 }
@@ -95,7 +70,6 @@ a {
   color: #f4f4f4 !important;
 }
 
-/*BACKGROUND COLOR*/
 .bg-color-blue--primary {
   background-color: #0071f9 !important;
 }
@@ -130,7 +104,6 @@ a {
   background-color: #f4f4f4 !important;
 }
 
-/*BORDER RADIUS*/
 .rounder-2 {
 	border-radius: 2px !important;
 }
@@ -150,3 +123,5 @@ a {
 .rounder-16 {
 	border-radius: 16px !important;
 }
+
+
