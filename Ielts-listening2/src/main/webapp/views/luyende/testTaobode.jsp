@@ -20,14 +20,14 @@
 			<td>Products</td>
 			<td>Quantity</td>
 		</tr>
-		<c:forEach var="i" items="${listLesson}">
+		<c:forEach var="i" items="${listMocktest}">
 			<tr>
-				<td>${i.lessonId}</td>
-				<td>${i.lessonName}</td>
-				<td>${i.description}</td>
-                <td><a href="<c:url value='/update?id=${i.lessonId}'/>">Update</a></td>
-				<td><a href="<c:url value='/delete?id=${i.lessonId}'/>">Delete</a></td>
-				<td><a href="<c:url value='/productOfCategory?id=${i.lessonId}'/>">View</a></td>
+				<td>${i.testId}</td>
+				<td>${i.testName}</td>
+				<td>${i.topicTests.topicId}</td>
+                <td><a href="<c:url value='/update?id=${i.testId}'/>">Update</a></td>
+				<td><a href="<c:url value='/delete?id=${i.testId}'/>">Delete</a></td>
+				<td><a href="<c:url value='/productOfCategory?id=${i.testId}'/>">View</a></td>
 			</tr>
 		</c:forEach>
 	</table>

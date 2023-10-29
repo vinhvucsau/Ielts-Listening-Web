@@ -34,102 +34,100 @@ a {
 
 /*TEXT STYLE*/
 .text--title {
-	font-size: 4.8rem;
-	line-height: 4.8rem;
-	font-weight: 700;
+  font-size: 4.8rem;
+  line-height: 4.8rem;
+  font-weight: 700;
 }
-
 .text--description {
-	font-size: 1.6rem;
-	line-height: 1.6rem;
-	font-weight: 300;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  font-weight: 300;
 }
-
+.text--h2 {
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 700;
+}
 .text--h3 {
-	font-size: 1.6rem;
-	line-height: 1.6rem;
-	font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  font-weight: 700;
 }
-
 .text--h4 {
-	font-size: 1.6rem;
-	line-height: 1.6rem;
-	font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  font-weight: 500;
 }
 
 
 /*COLOR STYLE*/
 .color-blue--primary {
-	color: #0071F9 !important;
+  color: #0071f9 !important;
 }
-
 .color-blue--light {
-	color: #EFF6FF !important;
+  color: #eff6ff !important;
 }
-
 .color-red--medium {
-	color: #F33F51 !important;
+  color: #f33f51 !important;
 }
-
 .color-red--light {
-	color: #FEECEE !important;
+  color: #feecee !important;
 }
-
 .color-orange--medium {
-	color: #F59E0B !important;
+  color: #f59e0b !important;
 }
-
 .color-orange--light {
-	color: #FFFBEB !important;
+  color: #fffbeb !important;
 }
-
 .color-green--medium {
-	color: #00B135 !important;
+  color: #00b135 !important;
 }
-
 .color-green--light {
-	color: #e5ffed !important;
+  color: #e5ffed !important;
 }
-
 .color-white {
-	color: #fff !important;
+  color: #fff !important;
+}
+.color-black {
+  color: #333 !important;
+}
+.color-grey {
+  color: #f4f4f4 !important;
 }
 
 /*BACKGROUND COLOR*/
 .bg-color-blue--primary {
-	background-color: #0071F9 !important;
+  background-color: #0071f9 !important;
 }
-
 .bg-color-blue--light {
-	background-color: #EFF6FF !important;
+  background-color: #eff6ff !important;
 }
-
 .bg-color-red--medium {
-	background-color: #F33F51 !important;
+  background-color: #f33f51 !important;
 }
-
 .bg-color-red--light {
-	background-color: #FEECEE !important;
+  background-color: #feecee !important;
 }
-
 .bg-color-orange--medium {
-	background-color: #F59E0B !important;
+  background-color: #f59e0b !important;
 }
-
 .bg-color-orange--light {
-	background-color: #FFFBEB !important;
+  background-color: #fffbeb !important;
 }
-
 .bg-color-green--medium {
-	background-color: #00B135 !important;
+  background-color: #00b135 !important;
 }
-
 .bg-color-green--light {
-	background-color: #e5ffed !important;
+  background-color: #e5ffed !important;
 }
-
 .bg-color-white {
-	background-color: white !important;
+  background-color: #fff !important;
+}
+.bg-color-black {
+  background-color: #333 !important;
+}
+.bg-color-grey {
+  background-color: #f4f4f4 !important;
 }
 
 /*BORDER RADIUS*/

@@ -10,30 +10,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hcmute.DAO.ITopicTestDAO;
 import hcmute.entity.Course;
 import hcmute.entity.Lesson;
-import hcmute.services.Course.CourseServiceImpl;
-import hcmute.services.Course.ICourseService;
-import hcmute.services.Lesson.ILessonService;
-import hcmute.services.Lesson.LessonServiceImpl;
+import hcmute.entity.MockTest;
+import hcmute.entity.TopicTest;
+
+import hcmute.services.IMockTestService;
+import hcmute.services.ITopicTestService;
+
+import hcmute.services.MockTestServiceImpl;
+import hcmute.services.TopicTestServiceImpl;
 
 @WebServlet(urlPatterns = {"/admin/taobode"})
 public class AdminAddCourseController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
-	ICourseService courseService = new CourseServiceImpl();
-	ILessonService lessService = new LessonServiceImpl();
+	ITopicTestService topicService = new TopicTestServiceImpl();
+	IMockTestService mockService = new MockTestServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		if (url.contains("taobode")) {
-			//List<Course> listCourse = courseService.getAllCourses();
-			//req.setAttribute("listCourse", listCourse);
+			List<MockTest> listMocktest = mockService.getAllMockTest();
+			req.setAttribute("listMocktest", listMocktest);
 			
-			List<Lesson> listLesson = lessService.getAllLesson();
-			req.setAttribute("listLesson", listLesson);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/luyende/testTaobode.jsp");
+			List<TopicTest> topicList = topicService.getAllTopicTest();
+			req.setAttribute("topicList", topicList);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/luyende/admin_taobode.jsp");
 			rd.forward(req, resp);
 		}
 	}
