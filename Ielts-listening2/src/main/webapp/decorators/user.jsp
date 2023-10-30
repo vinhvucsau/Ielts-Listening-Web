@@ -31,10 +31,10 @@
 >>>>>>> dev
 	</decorator:body>
 =======
-	<div >
+	<%-- <div >
 		<decorator:body>		
 		</decorator:body>
-	</div>
+	</div> --%>
 		
 >>>>>>> dev
 	<%@ include file="/common/user/Footer.jsp"%>
