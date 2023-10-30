@@ -1,22 +1,14 @@
 package hcmute.DAO;
 
 import java.util.List;
-<<<<<<< HEAD
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-=======
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
->>>>>>> dev
 import JPAConfig.JPAConfig;
 import hcmute.entity.TopicTest;
 
 public class TopicTestDAOImpl implements ITopicTestDAO {
-
 	@Override
-<<<<<<< HEAD
 	public List<TopicTest> findAll(String searchStr) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M WHERE (LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0)";
@@ -32,13 +24,11 @@ public class TopicTestDAOImpl implements ITopicTestDAO {
 		query.setFirstResult(page * pagesize);
 		query.setMaxResults(pagesize);
 		return query.getResultList();
-=======
+	}
 	public List<TopicTest> getAllTopicTest() {
 		EntityManager en = JPAConfig.getEntityManager();
 		String jpql = "Select t From TopicTest t";
 		TypedQuery<TopicTest> q = en.createQuery(jpql, TopicTest.class);
 		return q.getResultList();
->>>>>>> dev
 	}
-
 }

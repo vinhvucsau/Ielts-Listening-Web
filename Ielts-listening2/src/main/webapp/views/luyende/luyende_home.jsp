@@ -55,8 +55,8 @@
 				<p class="fs-5 fw-bold mb-0" style="color: rgb(113,113,113)">Cam 18 - Test 2</p>
 				<button class="btn d-flex flex-row justify-content-center w-100 h-25 mb-3 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light">
 					Tiếp tục làm bài
-					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-						fill="currentColor" class="bi bi-arrow-right ms-3 mt-1" viewBox="0 0 20 20">
+					<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
+						fill="currentColor" class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
   						<path fill-rule="evenodd"
 						d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
 					</svg> 
@@ -128,8 +128,8 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 					</div>
 					<button class="btn d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold bg-color-blue--light color-blue--primary">
 						Xem thêm ${topicTest.mockTests.size() - i} đề
-						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-							fill="currentColor" class="bi bi-arrow-right ms-3 mt-1" viewBox="0 0 20 20">
+						<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
+							fill="currentColor" class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
 	  						<path fill-rule="evenodd"
 							d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
 						</svg> 
@@ -140,18 +140,18 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 			<c:if test="${topicTests.size() > 0}">
 				<div class="position-relative w-100 border-top">
 					<div class="d-flex flex-row justify-content-center mx-auto" style="width:500px">
-						<button class="btn__page--previous d-flex flex-row justify-content-center mt-4 mx-auto py-2 px-3 fs-5 fw-bold  border-0 rounded-3" style="width: 220px" ${ param.page == null || param.page == "1" ? "disabled":""}>
-							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-								fill="currentColor" class="bi bi-arrow-left me-3 mt-1" viewBox="0 0 20 20">
+						<button class="btn__page--previous d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold  border-0 rounded-3" style="width: 220px; padding: 0 30px 0 30px;" ${ param.page == null || param.page == "1" ? "disabled":""}>
+							<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
+								fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
 		  						<path fill-rule="evenodd" 
 		  						d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
 							</svg>
 							Trang Trước
 						</button>
-						<button class="btn__page--next d-flex flex-row justify-content-center mt-4 mx-auto py-2 px-3 fs-5 fw-bold border-0 rounded-3" style="width: 220px" ${ param.page == pageNum || (param.page == null && pageNum == "1") ? "disabled":""}>
+						<button class="btn__page--next d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold border-0 rounded-3" style="width: 220px; padding: 0 30px 0 30px;" ${ param.page == pageNum || (param.page == null && pageNum == "1") ? "disabled":""}>
 							Trang Sau
-							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-								fill="currentColor" class="bi bi-arrow-right ms-3 mt-1" viewBox="0 0 20 20">
+							<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
+								fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
 		  						<path fill-rule="evenodd"
 								d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
 							</svg> 
