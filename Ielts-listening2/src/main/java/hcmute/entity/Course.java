@@ -37,7 +37,7 @@ public class Course implements Serializable{
 	@Column(columnDefinition = "int")
 	private int cost;
 	
-	@Column(columnDefinition = "date")
+	@Column(name = "enrrollmentDate")
 	private String enrrolmentDate;
 	
 	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
