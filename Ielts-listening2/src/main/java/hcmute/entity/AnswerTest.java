@@ -20,7 +20,6 @@ public class AnswerTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String answerId;
 	
 	@Column(columnDefinition = "varchar(255)")

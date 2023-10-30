@@ -21,7 +21,6 @@ public class TopicTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String topicId;
 	
 	@Column(columnDefinition = "varchar(255)")

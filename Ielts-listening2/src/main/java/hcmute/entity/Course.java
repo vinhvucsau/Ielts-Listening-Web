@@ -23,7 +23,6 @@ public class Course implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String courseId;
 	
 	@Column(columnDefinition = "varchar(1000)")

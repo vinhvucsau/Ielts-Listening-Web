@@ -20,7 +20,6 @@ public class Score implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String scoreId;
 	
 	@Column(columnDefinition = "double")

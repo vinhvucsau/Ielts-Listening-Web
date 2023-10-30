@@ -24,7 +24,6 @@ public class QuizComment implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String commentId;
 	
 	@Column(columnDefinition = "varchar(10000)")
