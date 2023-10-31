@@ -24,7 +24,7 @@
 			var item = {
 				topicId : "${item.topicId}",
 				topicName : "${item.description}",
-				img : "${item.image}"
+				image : "${item.image}"
 			};
 			arrTopic.push(item);
 		</c:forEach>
@@ -53,7 +53,7 @@
 					đề.</p>
 				<a
 					class="admin-taobode-btn bg-color-green--medium color-white text--h4 rounder-8 align-middle mx-auto"
-					href="#" role="button">Tạo bộ đề</a>
+					href="#" role="button" id="btn-addTopic">Tạo bộ đề</a>
 
 				<div class="row g-4 danhsachbode">
 					<!-- loop -->
@@ -66,7 +66,8 @@
 								<div class="icon-list d-flex ">
 									<a href="#" class="icon-link icon-update"> <i
 										class="fa-solid fa-pen me-4 color-white"></i>
-									</a> <a href="#" class="icon-link icon-delete"> <i
+									</a> 
+									<a href="#" class="icon-link icon-delete"> <i
 										class="fa-solid fa-trash color-white"></i>
 									</a>
 								</div>
@@ -100,7 +101,7 @@
 				<div class="card-cover border-0 bg-color-grey">
 					<span class="card__text text--description">Chi tiết</span> <img
 						class="card__img shadow-black"
-						src="https://th.bing.com/th/id/OIP.KXNDM6f7fY5XyPVZdNBWMgHaEo?pid=ImgDet&rs=1"
+						src="/main/webapp/assets/topicIMG/1698681165584.jpg"
 						alt="hinh anh bo de">
 					<div class="card-body p-0">
 						<h2 class="card-body__title text--h2 color-black">Bộ đề
@@ -129,9 +130,32 @@
 			</div>
 		</div>
 	</div>
-
-	</div>
-
+	<c:if test="${not empty messSuccess }">${messSuccess}</c:if>
+	<c:if test="${not empty messError }">${messError}</c:if>
+	<!-- popup -->
+	<div class="popup" id="popup-add-bo-de">
+        <div class="popup-group d-flex justify-content-between align-items-center">
+            <span class="title">Title</span>
+            <i class="fa-solid fa-xmark" id="btn-close"></i>
+        </div>
+        
+        <form action="addTopic" method = "POST" class="form-popup" enctype = "multipart/form-data">
+            <div class="popup-upload d-flex justify-content-between align-items-center">
+                <span class="popup-upload__text">upload</span>
+                <input type="file" name="image" id="" accept="image/png, image/jpeg">
+            </div>
+            <div class="popup-title d-flex justify-content-between align-items-center">
+                <span class="popup-title__text">ten</span>
+                <input type="text" name="topicName" id="" class="popup-title__input">
+            </div>
+            <div class="popup-descript d-flex justify-content-between align-items-center">
+                <span class="popup-descript__text">mo ta</span>
+                <input type="text" name="description" id="" class="popup-descript__input">
+            </div>
+            <input type="submit" value="hoan thanh">
+        </form>
+    </div>
+	
 	<script>
 		var acc = document.getElementsByClassName("accordion");
 		var i;
@@ -159,25 +183,39 @@
 	            {
 	                document.querySelector(".card-cover .card-body__title").innerHTML = i.topicId;
 	                document.querySelector(".card-cover .card-body__text").innerHTML = i.topicName;
-	                document.querySelector(".card-cover .card__img").innerHTML = i.img;	   
+	                var fileImg = "assets/topicIMG/" + String(i.image);
+	                console.log(fileImg);
+	                document.querySelector(".card-cover .card__img").setAttribute("src", fileImg);	   
 	                document.querySelector(".card-cover .group__content").innerHTML = countMockByTopic(id) + " đề" ;	
 	                console.log(countMockByTopic(id));
+	                console.log(document.querySelector(".card-cover .card__img").getAttribute("src"));
 	                return;
 	            }
 			}
 			}
 		
 		function countMockByTopic(id){
-			console.log(id);
             var count = 0;
             for(var i of arrMock) {
-            	console.log(i);
                 if(id === i.topic) {
                 	console.log("ok");
                     ++count;
                 }
             }
             return count;
+        }
+		
+		//
+		var btn = document.getElementById("btn-addTopic");
+        var modal = document.getElementById("popup-add-bo-de");
+        var close = document.getElementById("btn-close");
+
+        btn.onclick = function(){
+            modal.style.display = "block";
+        }
+
+        close.onclick = function(){
+            modal.style.display = "none";
         }
 	</script>
 

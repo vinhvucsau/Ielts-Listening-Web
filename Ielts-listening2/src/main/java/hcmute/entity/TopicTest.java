@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import hcmute.utils.Constants;
 
 @Entity
@@ -21,7 +23,7 @@ public class TopicTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(columnDefinition = "varchar(255)")
 	private String topicId;
 	
 	@Column(columnDefinition = "varchar(255)")

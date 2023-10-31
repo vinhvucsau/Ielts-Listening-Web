@@ -6,5 +6,5 @@ import hcmute.entity.TopicTest;
 
 public interface ITopicTestService {
 	List<TopicTest> getAllTopicTest();
-
+	void addTopic(TopicTest topic);
 }

@@ -24,5 +24,5 @@ public class Constants {
 	public static final String ENRROL_TEST_RELATION = "ENRROL_TEST";
 	public static final String NOTIFY_RELATION = "NOTIFY";
 	public static final String READ_NOTIFY_RELATION = "READ_NOTIFY";
-
+	public static final String DIR  = "C:\\Workspace\\Ielts-Listening-Web\\Ielts-listening2\\src\\main\\webapp\\assets"; 
 }
