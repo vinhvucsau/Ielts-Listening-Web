@@ -49,8 +49,9 @@ public class TopicTest implements Serializable{
 		this.image = image;
 		this.mockTests = mockTests;
 	}
-
 	public TopicTest() {
+		
+		
 		super();
 	}
 
