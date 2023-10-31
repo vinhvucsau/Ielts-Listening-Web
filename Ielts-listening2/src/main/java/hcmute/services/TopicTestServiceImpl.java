@@ -13,5 +13,9 @@ public class TopicTestServiceImpl implements ITopicTestService{
 	public List<TopicTest> getAllTopicTest() {
 		return topicDAO.getAllTopicTest();
 	}
+	@Override
+	public void addTopic(TopicTest topic) {
+		topicDAO.addTopic(topic);
+	}
 
 }
