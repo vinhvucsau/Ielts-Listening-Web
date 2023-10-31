@@ -56,7 +56,7 @@ public class TopicTest implements Serializable{
 	public void setTopicId(String topicId) {
 		this.topicId = topicId;
 	}
-
+	
 	public String getTopicName() {
 		return topicName;
 	}
@@ -88,6 +88,5 @@ public class TopicTest implements Serializable{
 	public void setMockTests(List<MockTest> mockTests) {
 		this.mockTests = mockTests;
 	}
-	
 	
 }

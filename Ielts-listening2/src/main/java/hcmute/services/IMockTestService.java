@@ -6,5 +6,5 @@ import hcmute.entity.MockTest;
 
 public interface IMockTestService {
 	List <MockTest> getAllMockTest();
-
 }
+
