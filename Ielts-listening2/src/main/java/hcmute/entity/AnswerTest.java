@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import hcmute.utils.Constants;
 
 @Entity
@@ -30,21 +32,17 @@ public class AnswerTest implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "partId")
+	@JsonIgnore
 	private ListeningPart listeningParts;
-	
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User users;
 
-	public AnswerTest(String answerId, String answerKey, int number, ListeningPart listeningParts, User users) {
+	public AnswerTest(String answerId, String answerKey, int number, ListeningPart listeningParts) {
 		super();
 		this.answerId = answerId;
 		this.answerKey = answerKey;
 		this.number = number;
 		this.listeningParts = listeningParts;
-		this.users = users;
 	}
-	
+
 	public AnswerTest() {
 		super();
 	}
@@ -79,14 +77,6 @@ public class AnswerTest implements Serializable{
 
 	public void setListeningParts(ListeningPart listeningParts) {
 		this.listeningParts = listeningParts;
-	}
-
-	public User getUsers() {
-		return users;
-	}
-
-	public void setUsers(User users) {
-		this.users = users;
 	}
 	
 }

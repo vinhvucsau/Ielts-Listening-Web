@@ -1,6 +1,7 @@
 package hcmute.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -26,14 +27,13 @@ public class EnrrolTest implements Serializable{
 	private String enrrolId;
 	
 	@Column(columnDefinition = "date")
-	private String enrollmentDate;
+	private Date enrrollmentDate;
 	
 	@Column(columnDefinition = "int")
 	private Integer timeTest;
 	
 	@Column(columnDefinition = "double")
 	private double score;
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
@@ -46,6 +46,22 @@ public class EnrrolTest implements Serializable{
 	@OneToMany(mappedBy = "enrrolTests", fetch = FetchType.EAGER)
 	private List<HistoryTest> historyTests;
 
+	public EnrrolTest(String enrrolId, Date enrrollmentDate, Integer timeTest, double score, User users,
+			MockTest mockTests, List<HistoryTest> historyTests) {
+		super();
+		this.enrrolId = enrrolId;
+		this.enrrollmentDate = enrrollmentDate;
+		this.timeTest = timeTest;
+		this.score = score;
+		this.users = users;
+		this.mockTests = mockTests;
+		this.historyTests = historyTests;
+	}
+
+	public EnrrolTest() {
+		super();
+	}
+
 	public String getEnrrolId() {
 		return enrrolId;
 	}
@@ -54,12 +70,12 @@ public class EnrrolTest implements Serializable{
 		this.enrrolId = enrrolId;
 	}
 
-	public String getEnrollmentDate() {
-		return enrollmentDate;
+	public Date getEnrrollmentDate() {
+		return enrrollmentDate;
 	}
 
-	public void setEnrollmentDate(String enrollmentDate) {
-		this.enrollmentDate = enrollmentDate;
+	public void setEnrrollmentDate(Date enrrollmentDate) {
+		this.enrrollmentDate = enrrollmentDate;
 	}
 
 	public Integer getTimeTest() {
@@ -102,19 +118,10 @@ public class EnrrolTest implements Serializable{
 		this.historyTests = historyTests;
 	}
 
-	public EnrrolTest(String enrrolId, String enrollmentDate, Integer timeTest, double score, User users,
-			MockTest mockTests, List<HistoryTest> historyTests) {
-		super();
-		this.enrrolId = enrrolId;
-		this.enrollmentDate = enrollmentDate;
-		this.timeTest = timeTest;
-		this.score = score;
-		this.users = users;
-		this.mockTests = mockTests;
-		this.historyTests = historyTests;
-	}
-	
-	public EnrrolTest() {
-		super();
+	@Override
+	public String toString() {
+		return "EnrrolTest [enrrolId=" + enrrolId + ", enrrollmentDate=" + enrrollmentDate + ", timeTest=" + timeTest
+				+ ", score=" + score + ", users=" + users + ", mockTests=" + mockTests + ", historyTests="
+				+ historyTests + "]";
 	}
 }
