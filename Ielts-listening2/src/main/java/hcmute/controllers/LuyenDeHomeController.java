@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hcmute.entity.EnrrolTest;
+import hcmute.entity.MockTest;
 import hcmute.entity.TopicTest;
 import hcmute.services.ITopicTestService;
 import hcmute.services.TopicTestServiceImpl;
@@ -39,7 +41,6 @@ public class LuyenDeHomeController extends HttpServlet {
 		request.setAttribute("topicTests", topicTestList);
 		request.setAttribute("pagesize", pagesize);
 		request.setAttribute("pageNum", pageNum);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/views/luyende/luyende_home.jsp");
 		rd.forward(request, response);
 	}

@@ -41,7 +41,7 @@ public class TopicTest implements Serializable{
 	@Override
 	public String toString() {
 		return "TopicTest [topicId=" + topicId + ", topicName=" + topicName + ", description=" + description
-				+ ", createTime=" + createTime + ", image=" + image + ", mockTests=" + mockTests + "]";
+				+ ", createTime=" + createTime + ", image=" + image + ", mockTests=" + mockTests.toString() + "]";
 	}
 	public TopicTest(String topicId, String topicName, String description, Date createTime, String image,
 			List<MockTest> mockTests) {
