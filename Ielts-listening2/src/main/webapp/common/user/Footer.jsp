@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div style="padding-bottom: 50px; max-width: 1440px" class="d-flex flex-column container-fluid">
-		<div class="row pb-5 border-bottom">
+		<div class="row py-5 border-bottom">
 			<div class="col d-flex flex-column gap-2">
 				<img src="https://prep.vn/imgs/logo-n.svg" width="130"
 					alt="https://prep.vn" />
