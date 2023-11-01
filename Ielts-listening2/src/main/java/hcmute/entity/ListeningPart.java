@@ -30,7 +30,7 @@ public class ListeningPart implements Serializable{
 	private String image;
 	
 	@Column(columnDefinition = "int")
-	private String number;
+	private Integer number;
 	
 	@Column(columnDefinition = "varchar(255)")
 	private String audio;
@@ -51,9 +51,9 @@ public class ListeningPart implements Serializable{
 	@JsonIgnore
 	private MockTest mockTests;
 
-	public ListeningPart(String partId, String image, String number, String audio, String answerSheet,
+	public ListeningPart(String partId, String image, Integer number, String audio, String answerSheet,
 			List<AnswerTest> answerTests, List<HistoryTest> historyTests, MockTest mockTests) {
-		super();
+		
 		this.partId = partId;
 		this.image = image;
 		this.number = number;
@@ -62,17 +62,6 @@ public class ListeningPart implements Serializable{
 		this.answerTests = answerTests;
 		this.historyTests = historyTests;
 		this.mockTests = mockTests;
-	}
-	
-	@Override
-	public String toString() {
-		return "ListeningPart [partId=" + partId + ", image=" + image + ", number=" + number + ", audio=" + audio
-				+ ", answerSheet=" + answerSheet + ", answerTests=" + answerTests + ", historyTests=" + historyTests
-				+ ", mockTests=" + mockTests + "]";
-	}
-
-	public ListeningPart() {
-		super();
 	}
 
 	public String getPartId() {
@@ -91,11 +80,11 @@ public class ListeningPart implements Serializable{
 		this.image = image;
 	}
 
-	public String getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
@@ -137,6 +126,10 @@ public class ListeningPart implements Serializable{
 
 	public void setMockTests(MockTest mockTests) {
 		this.mockTests = mockTests;
+	}
+
+	public ListeningPart() {
+		super();
 	}
 	
 }
