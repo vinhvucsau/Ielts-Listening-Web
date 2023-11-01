@@ -63,7 +63,7 @@
 			<div class="luyende-testset-cong-cu " style="padding: 50px 0;">
 				<div class="row  d-flex" style="display: flex; align-items: center;">
 					<div class="col-5  text--h3">
-						<h2>Danh sách đề</h2>
+						<h2><b>Danh sách đề</b></h2>
 					</div>
 					
 					<div class="col-7 luyende-testset-cong-cu-loc">
@@ -101,7 +101,7 @@
 				<div class="luyende-testset-list-de-left col-6">
 					<div class="card" style="border: 0;">
 						<div class="card-body">
-							<div class="card-title text--h4 ">Cam 18 - Test 1</div>
+							<div class="card-title text--h3 ">Cam 18 - Test 1</div>
 							<div class="p-3 border bg-white d-flex flex-row rounded-3">
 								<div
 									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
@@ -127,7 +127,7 @@
 				<div class="luyende-testset-list-de-right col-6">
 					<div class="card" style="border: 0;">
 						<div class="card-body">
-							<div class="card-title text--h4 ">Cam 18 - Test 1</div>
+							<div class="card-title text--h3 ">Cam 18 - Test 1</div>
 							<div class="p-3 border bg-white d-flex flex-row rounded-3">
 								<div
 									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
