@@ -49,8 +49,8 @@ public class User implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String image;
 	
-	@Column(columnDefinition = "varchar(255)")
-	private String networth;
+	@Column(columnDefinition = "int")
+	private int networth;
 	
 	@Column(name = "contributeScore")
 	private Integer contributeScore;
@@ -160,11 +160,11 @@ public class User implements Serializable{
 		this.image = image;
 	}
 
-	public String getNetworth() {
+	public int getNetworth() {
 		return networth;
 	}
 
-	public void setNetworth(String networth) {
+	public void setNetworth(int networth) {
 		this.networth = networth;
 	}
 
