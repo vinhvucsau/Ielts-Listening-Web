@@ -7,13 +7,8 @@ import hcmute.DAO.MockTestDAOImpl;
 import hcmute.entity.MockTest;
 
 public class MockTestServiceImpl implements IMockTestService {
-<<<<<<< HEAD
-	IMockTestDAO mockTestDAO = new MockTestDAOImpl();
-	IMockTestDAO mockDAO = new MockTestDAOImpl();
-=======
 
-	MockTestDAOImpl mockDao = new MockTestDAOImpl();
->>>>>>> 41776508915ab1dce67ded308bce77a02a0286ce
+	IMockTestDAO mockDao = new MockTestDAOImpl();
 	@Override
 	public List<MockTest> getAllMockTest() {
 		return mockDao.getAllMockTest();
