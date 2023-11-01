@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import hcmute.utils.Constants;
 @Entity
 @Table(name = Constants.LISTENING_PART_RELATION)
@@ -38,14 +40,16 @@ public class ListeningPart implements Serializable{
 	private String answerSheet;
 	
 	
-	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.EAGER)
 	private List<AnswerTest> answerTests;
 	
 	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<HistoryTest> historyTests;
 	
 	@ManyToOne
 	@JoinColumn(name = "testId")
+	@JsonIgnore
 	private MockTest mockTests;
 
 	public ListeningPart(String partId, String image, String number, String audio, String answerSheet,
@@ -61,6 +65,13 @@ public class ListeningPart implements Serializable{
 		this.mockTests = mockTests;
 	}
 	
+	@Override
+	public String toString() {
+		return "ListeningPart [partId=" + partId + ", image=" + image + ", number=" + number + ", audio=" + audio
+				+ ", answerSheet=" + answerSheet + ", answerTests=" + answerTests + ", historyTests=" + historyTests
+				+ ", mockTests=" + mockTests + "]";
+	}
+
 	public ListeningPart() {
 		super();
 	}
