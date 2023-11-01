@@ -31,9 +31,10 @@ public class LuyenDeHomeController extends HttpServlet {
 			throws ServletException, IOException {
 		int page = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 		String searchStr = request.getParameter("search") == null ? "" : request.getParameter("search");
+		int tab = Integer.parseInt(request.getParameter("tab") == null ? "1" : request.getParameter("tab"));
 		int pagesize = 6;
-		List<TopicTest> allTopicTestList = topicTestService.findAll(searchStr);
-		List<TopicTest> topicTestList = topicTestService.findAll(page - 1, pagesize, searchStr);
+		List<TopicTest> allTopicTestList = topicTestService.findAll(searchStr, tab);
+		List<TopicTest> topicTestList = topicTestService.findAll(page - 1, pagesize, searchStr, tab);
 		int pageNum =  (int)(allTopicTestList.size() / pagesize) + (allTopicTestList.size() % pagesize == 0 ? 0 : 1);
 		request.setAttribute("topicTests", topicTestList);
 		request.setAttribute("pagesize", pagesize);

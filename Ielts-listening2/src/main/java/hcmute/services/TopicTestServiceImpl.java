@@ -10,12 +10,12 @@ public class TopicTestServiceImpl implements ITopicTestService{
 	ITopicTestDAO topicTestDAO = new TopicTestDAOImpl();
 	IMockTestService mockTestService = new MockTestServiceImpl();
 	@Override
-	public List<TopicTest> findAll(String searchStr) {
-		return topicTestDAO.findAll(searchStr);
+	public List<TopicTest> findAll(String searchStr, int tab) {
+		return topicTestDAO.findAll(searchStr, tab);
 	}
 	@Override
-	public List<TopicTest> findAll(int page, int pagesize, String searchStr) {
-		return topicTestDAO.findAll(page, pagesize, searchStr);
+	public List<TopicTest> findAll(int page, int pagesize, String searchStr, int tab) {
+		return topicTestDAO.findAll(page, pagesize, searchStr, tab);
 	}
 	ITopicTestDAO topicDAO = new TopicTestDAOImpl();
 	@Override

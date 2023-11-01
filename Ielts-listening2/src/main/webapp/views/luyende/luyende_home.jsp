@@ -40,6 +40,9 @@
 			padding-top: 6rem !important;
 			padding-bottom: 6rem ! important;
 		}
+		.div__tab{
+			cursor: pointer;
+		}
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {
 		  -webkit-appearance: none;
@@ -53,7 +56,7 @@
 				<p class="fs-5 fw-bold mb-0 color-blue--primary">Tiếp tục làm bài</p>
 				<p class="fs-4 fw-bold mb-0">IELTS Essential Guide</p>
 				<p class="fs-5 fw-bold mb-0" style="color: rgb(113,113,113)">Cam 18 - Test 2</p>
-				<button class="btn d-flex flex-row justify-content-center w-100 h-25 mb-3 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light">
+				<button class="btn d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light">
 					Tiếp tục làm bài
 					<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
 						fill="currentColor" class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
@@ -66,13 +69,13 @@
 			<div class="d-flex flex-row justify-content-between">
 				<ul class="ul__test nav fs-5 fw-bold justify-content-between" style="width:500px">
 				  <li class="nav-item  ">
-				    <a class="nav-link rounded-3 active color-blue--primary" href="#">Tất cả bộ đề</a>
+				    <div class="div__tab div__tab--1 nav-link rounded-3 color-blue--primary ${param.tab == null || param.tab == '1' ? 'active' : ''}">Tất cả bộ đề</div>
 				  </li>
 				  <li class="nav-item ">
-				    <a class="nav-link rounded-3 color-blue--primary" href="#">Bộ đề Mới nhất</a>
+				    <div class="div__tab div__tab--2 nav-link rounded-3 color-blue--primary ${param.tab == '2' ? 'active' : ''}" href="#">Bộ đề Mới nhất</div>
 				  </li>
 				  <li class="nav-item ">
-				    <a class="nav-link rounded-3 color-blue--primary" href="#">Bộ đề HOT</a>
+				    <div class="div__tab div__tab--3 nav-link rounded-3 color-blue--primary ${param.tab == '3' ? 'active' : ''}" href="#">Bộ đề HOT</div>
 				  </li>
 				</ul>
 				<div class="input-group" style="width: 400px;">
@@ -89,7 +92,7 @@
 					<div>
 						<img class="mx-auto d-block my-3" src='<c:url value="/assets/images/bee-find.svg"/>' width="150px"/>
 						<p class="fs-4 fw-bold mb-0 text-center">Không tìm thấy kết quả phù hợp</p>
-						<p class="text-center" style="color: rgb(123,137,155); font-size: 18px; width: 700px;">Hiện tại, kho đề của Prep chưa có bộ đề nào phù hợp với yêu cầu của bạn rồi !
+						<p class="text-center" style="color: rgb(123,137,155); font-size: 18px; width: 680px;">Hiện tại, kho đề của Prep chưa có bộ đề nào phù hợp với yêu cầu của bạn rồi !
 Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 					</div>
 				</div>
@@ -111,7 +114,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 					  <div class="row gy-4">
 						  	<c:forEach var="mockTest" items='${topicTest.mockTests}'>
 						  		<c:if test="${i < 6}">
-							  		<div class="col-6">
+							  		<div class="col-6" style="cursor:pointer">
 								      <div class="p-3 border bg-white d-flex flex-row rounded-3">
 								      	<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: rgb(240, 247, 255); color:rgb(0, 74, 185); width: 50px; height: 50px;">
 								      		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
@@ -180,22 +183,29 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 		</div>
 	</div>
 	<script>
-		li_List = document.querySelectorAll(".ul__test li a");
-		currLi = document.querySelectorAll(".ul__test li a")[0];
+		const params = new URLSearchParams(document.location.search);
+		let page = params.get("page") ? params.get("page"):'1';
+		
+		const li_List = document.querySelectorAll(".div__tab");
+		let currLi = document.querySelectorAll(".div__tab")[0];
 		if (li_List) {
-			li_List.forEach((li) => {
+			li_List.forEach((li, i) => {
 				li.addEventListener("click", (e) => {
 					currLi.classList.remove("active");
 					currLi = li;
 					currLi.classList.add("active");
+					params.delete("page"); 
+					if (i === 0) {
+						params.delete("tab");
+					}
+					else params.set("tab", i + 1);
+					const isQuestionMark = params.toString() === "" ? "" : "?";
+					window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 				})
 			})
 		}
-		prePageBtn = document.querySelector(".btn__page--previous");
-		nextPageBtn = document.querySelector(".btn__page--next");
-		params = new URLSearchParams(document.location.search);
-		page = params.get("page") ? params.get("page"):'1';
-		
+		const prePageBtn = document.querySelector(".btn__page--previous");
+		const nextPageBtn = document.querySelector(".btn__page--next");
 		if (prePageBtn) {
 			if (prePageBtn.disabled === false) {
 				prePageBtn.classList.add("bg-color-blue--primary");
@@ -206,12 +216,12 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 				page = Number(page) - 1;
 				if (page == 1){
 					params.delete("page"); 
-					isQuestionMark = params.toString() === "" ? "" : "?";
+					const isQuestionMark = params.toString() === "" ? "" : "?";
 					window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 				}
 				else {
 					params.set("page", page);
-					isQuestionMark = params.toString() === "" ? "" : "?";
+					const isQuestionMark = params.toString() === "" ? "" : "?";
 					window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 				}
 				
@@ -227,12 +237,12 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 				e.preventDefault();
 				page = Number(page) + 1;
 				params.set("page", page);
-				isQuestionMark = params.toString() === "" ? "" : "?";
+				const isQuestionMark = params.toString() === "" ? "" : "?";
 				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 			}) 
 		} 
 		
-		inputPageNum = document.querySelector(".input__pageNum");
+		const inputPageNum = document.querySelector(".input__pageNum");
 		if (inputPageNum) {
 			inputPageNum.addEventListener("change", (e) => {
 				e.preventDefault();
@@ -245,12 +255,12 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 				}
 				
 				params.set("page", page);
-				isQuestionMark = params.toString() === "" ? "" : "?";
+				const isQuestionMark = params.toString() === "" ? "" : "?";
 				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 			})
 		}
-		minPageBtn = document.querySelector(".btn__page--min");
-		maxPageBtn = document.querySelector(".btn__page--max");
+		const minPageBtn = document.querySelector(".btn__page--min");
+		const maxPageBtn = document.querySelector(".btn__page--max");
 		if (minPageBtn) {
 			if (page === "1") {
 				minPageBtn.disabled = true;
@@ -259,7 +269,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 			minPageBtn.addEventListener("click", (e) => {
 				e.preventDefault();
 				params.delete("page"); 
-				isQuestionMark = params.toString() === "" ? "" : "?";
+				const isQuestionMark = params.toString() === "" ? "" : "?";
 				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 			})
 		}
@@ -271,11 +281,11 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 			maxPageBtn.addEventListener("click", (e) => {
 				e.preventDefault();
 				params.set("page", ${pageNum});
-				isQuestionMark = params.toString() === "" ? "" : "?";
+				const isQuestionMark = params.toString() === "" ? "" : "?";
 				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 			})
 		}
-		searchBtn = document.querySelector(".btn__search");
+		const searchBtn = document.querySelector(".btn__search");
 		if (searchBtn) {
 			searchBtn.addEventListener("keypress", (e) => {
 				if (e.key ==="Enter") {
@@ -284,7 +294,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 					if (e.target.value !== "")
 						params.set("search", e.target.value);
 					else params.delete("search");
-					isQuestionMark = params.toString() === "" ? "" : "?";
+					const isQuestionMark = params.toString() === "" ? "" : "?";
 					window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 				}
 			})
