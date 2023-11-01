@@ -38,6 +38,7 @@ public class AuthenticationControllers extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
+		System.out.print(url);
 		if (url.contains("signup")) {
 			SignUp(req, resp);
 		}
@@ -85,7 +86,7 @@ public class AuthenticationControllers extends HttpServlet {
 			account.setUserName(userName);
 			account.setPassWord(passWord);
 			System.out.println(userName + " " + passWord);
-			if (userName != "admin" && passWord != "admin")
+			if (userName != "admin" && passWord != PasswordEncryptor.encryptPassword("admin"))
 				account.setRole("user");
 			else
 				account.setRole("admin");

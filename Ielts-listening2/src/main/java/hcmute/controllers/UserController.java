@@ -44,7 +44,7 @@ public class UserController extends HttpServlet {
 			}
 			if (currentUserID != null) {
 				user = findUserByID(currentUserID);
-				System.out.println(user.getUserId());
+				System.out.println("userId " + user.getUserId());
 			}
 			req.setAttribute("currentUser", user);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Home.jsp");
