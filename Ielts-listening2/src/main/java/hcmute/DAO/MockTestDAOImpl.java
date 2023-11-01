@@ -8,7 +8,11 @@ import javax.persistence.TypedQuery;
 import JPAConfig.JPAConfig;
 import hcmute.entity.MockTest;
 
-public class MockTestDAOImpl implements IMockTestDAO {
+public class MockTestDAOImpl extends AbstractDao<MockTest> implements IMockTestDAO {
+
+	public MockTestDAOImpl() {
+		super(MockTest.class);
+	}
 
 	@Override
 	public List<MockTest> getAllMockTest() {
@@ -17,5 +21,4 @@ public class MockTestDAOImpl implements IMockTestDAO {
 		TypedQuery<MockTest> q = en.createQuery(jpql, MockTest.class);
 		return q.getResultList();
 	}
-
 }
