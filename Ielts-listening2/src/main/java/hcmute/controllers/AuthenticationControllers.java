@@ -15,6 +15,7 @@ import hcmute.entity.Account;
 import hcmute.entity.User;
 import hcmute.services.AccountServiceImpl;
 import hcmute.services.IAccountServices;
+import hcmute.utils.compositeId.PasswordEncryptor;
 
 @WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup" })
 public class AuthenticationControllers extends HttpServlet {
@@ -51,7 +52,7 @@ public class AuthenticationControllers extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 			Account account = new Account();
 			String userName = req.getParameter("userName");
-			String passWord = req.getParameter("passWord");
+			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord")) ;
 			account.setUserName(userName);
 			account.setPassWord(passWord);
 			account.setRole("user");
@@ -80,7 +81,7 @@ public class AuthenticationControllers extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 			Account account = new Account();
 			String userName = req.getParameter("userName");
-			String passWord = req.getParameter("passWord");
+			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord")) ;
 			account.setUserName(userName);
 			account.setPassWord(passWord);
 			System.out.println(userName + " " + passWord);
