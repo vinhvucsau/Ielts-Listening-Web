@@ -46,8 +46,9 @@ public class ListeningPart implements Serializable{
 	@JoinColumn(name = "testId")
 	private MockTest mockTests;
 
-	public ListeningPart(String partId, String image, String number, String audio, String answerSheet,
+	public ListeningPart(String partId, String image, Integer number, String audio, String answerSheet,
 			List<AnswerTest> answerTests, MockTest mockTests) {
+		
 		this.partId = partId;
 		this.image = image;
 		this.number = number;
@@ -115,6 +116,9 @@ public class ListeningPart implements Serializable{
 
 	public ListeningPart() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
+	
+	
 	
 }
