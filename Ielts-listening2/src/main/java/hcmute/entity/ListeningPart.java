@@ -42,25 +42,18 @@ public class ListeningPart implements Serializable{
 	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.EAGER)
 	private List<AnswerTest> answerTests;
 	
-	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<HistoryTest> historyTests;
-	
 	@ManyToOne
 	@JoinColumn(name = "testId")
-	@JsonIgnore
 	private MockTest mockTests;
 
-	public ListeningPart(String partId, String image, Integer number, String audio, String answerSheet,
-			List<AnswerTest> answerTests, List<HistoryTest> historyTests, MockTest mockTests) {
-		
+	public ListeningPart(String partId, String image, String number, String audio, String answerSheet,
+			List<AnswerTest> answerTests, MockTest mockTests) {
 		this.partId = partId;
 		this.image = image;
 		this.number = number;
 		this.audio = audio;
 		this.answerSheet = answerSheet;
 		this.answerTests = answerTests;
-		this.historyTests = historyTests;
 		this.mockTests = mockTests;
 	}
 
@@ -110,14 +103,6 @@ public class ListeningPart implements Serializable{
 
 	public void setAnswerTests(List<AnswerTest> answerTests) {
 		this.answerTests = answerTests;
-	}
-
-	public List<HistoryTest> getHistoryTests() {
-		return historyTests;
-	}
-
-	public void setHistoryTests(List<HistoryTest> historyTests) {
-		this.historyTests = historyTests;
 	}
 
 	public MockTest getMockTests() {

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import antlr.StringUtils;
+import hcmute.DAO.AnswerTestDao;
 import hcmute.entity.AnswerTest;
 import hcmute.entity.EnrrolTest;
 import hcmute.entity.ListeningPart;
@@ -25,22 +27,29 @@ public class TestControllers extends HttpServlet{
 	
 	private IListeningPartService listeningPartService = new ListeningPartServiceImpl();
 	private IEnrollTestService enrollTestService = new EnrollTestServiceImpl();
+	
+	//xóa sau
+	private AnswerTestDao answerTestDao = new AnswerTestDao();
+	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		if (url.contains("test/luyende_test")) {
 			String enrollTestId = "EnTest1037";
-			int currentPart = 1; //sau này lấy ra part hiện tại
+			String  currentPartId = "PartId1056"; //sau này lấy ra part hiện tại
 			
 			EnrrolTest enrollTest = enrollTestService.findById(enrollTestId);
 			req.setAttribute("enrollTest", enrollTest);
-			req.setAttribute("currentPart", currentPart);
-			for(ListeningPart part: enrollTest.getMockTests().getListeningParts()) {
-				for(AnswerTest an: part.getAnswerTests()) {
-					System.out.println(an.getNumber());
-				}
-				
-			}
+			req.setAttribute("currentPartId", currentPartId);
+			
+			
+			/*
+			 * AnswerTest answerTest = answerTestDao.findById("AnsTest1060"); EnrrolTest
+			 * enrrolTest = enrollTestService.findById("EnTest1037");
+			 * System.out.println(enrrolTest.getAnswerUsers().stream().anyMatch(a ->
+			 * a.getAnswerTest().getAnswerId().equals(answerTest.getAnswerId())));
+			 */
 			
 			req.getRequestDispatcher("/views/luyende/luyende_test.jsp").forward(req, resp);
 		}

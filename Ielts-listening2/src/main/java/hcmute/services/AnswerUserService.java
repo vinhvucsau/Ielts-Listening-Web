@@ -1,0 +1,25 @@
+package hcmute.services;
+
+import java.util.List;
+
+import hcmute.DAO.AnswerUserDao;
+import hcmute.entity.AnswerUser;
+
+public class AnswerUserService {
+	private AnswerUserDao answerUserDao = new AnswerUserDao();
+	public void insert(AnswerUser answerUser) {
+		answerUserDao.insert(answerUser);
+	}
+	public void update(AnswerUser answerUser) {
+		answerUserDao.update(answerUser);
+	}
+	public void delete(AnswerUser answerUser) {
+		answerUserDao.delete(answerUser);
+	}
+	public Long countAll() {
+		return answerUserDao.countAll();
+	}
+	public List<AnswerUser> findAll() {
+		return answerUserDao.findAll();
+	}
+}
