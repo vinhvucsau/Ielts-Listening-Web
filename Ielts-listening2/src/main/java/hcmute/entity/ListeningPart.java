@@ -43,17 +43,12 @@ public class ListeningPart implements Serializable{
 	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.EAGER)
 	private List<AnswerTest> answerTests;
 	
-	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<HistoryTest> historyTests;
-	
 	@ManyToOne
 	@JoinColumn(name = "testId")
-	@JsonIgnore
 	private MockTest mockTests;
 
 	public ListeningPart(String partId, String image, String number, String audio, String answerSheet,
-			List<AnswerTest> answerTests, List<HistoryTest> historyTests, MockTest mockTests) {
+			List<AnswerTest> answerTests, MockTest mockTests) {
 		super();
 		this.partId = partId;
 		this.image = image;
@@ -61,15 +56,7 @@ public class ListeningPart implements Serializable{
 		this.audio = audio;
 		this.answerSheet = answerSheet;
 		this.answerTests = answerTests;
-		this.historyTests = historyTests;
 		this.mockTests = mockTests;
-	}
-	
-	@Override
-	public String toString() {
-		return "ListeningPart [partId=" + partId + ", image=" + image + ", number=" + number + ", audio=" + audio
-				+ ", answerSheet=" + answerSheet + ", answerTests=" + answerTests + ", historyTests=" + historyTests
-				+ ", mockTests=" + mockTests + "]";
 	}
 
 	public ListeningPart() {
@@ -122,14 +109,6 @@ public class ListeningPart implements Serializable{
 
 	public void setAnswerTests(List<AnswerTest> answerTests) {
 		this.answerTests = answerTests;
-	}
-
-	public List<HistoryTest> getHistoryTests() {
-		return historyTests;
-	}
-
-	public void setHistoryTests(List<HistoryTest> historyTests) {
-		this.historyTests = historyTests;
 	}
 
 	public MockTest getMockTests() {
