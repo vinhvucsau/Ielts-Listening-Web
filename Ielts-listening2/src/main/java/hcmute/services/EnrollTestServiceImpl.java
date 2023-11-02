@@ -2,7 +2,7 @@ package hcmute.services;
 
 import java.util.List;
 
-import hcmute.DAO.EnrollTestDao;
+import hcmute.DAO.EnrollTestDaoImpl;
 import hcmute.DAO.ListeningPartDao;
 import hcmute.DAO.MockTestDAOImpl;
 import hcmute.entity.EnrrolTest;
@@ -12,7 +12,7 @@ import hcmute.entity.User;
 
 public class EnrollTestServiceImpl implements IEnrollTestService{
 
-	private EnrollTestDao enrollTestDao = new EnrollTestDao();
+	private EnrollTestDaoImpl enrollTestDao = new EnrollTestDaoImpl();
 	@Override
 	public void insert(EnrrolTest enrollTest) {
 		enrollTestDao.insert(enrollTest);
@@ -32,6 +32,8 @@ public class EnrollTestServiceImpl implements IEnrollTestService{
 	public EnrrolTest findById(String enrollTestId) {
 		return enrollTestDao.findById(enrollTestId);
 	}
+
+	
 
 	@Override
 	public Long countAll() {

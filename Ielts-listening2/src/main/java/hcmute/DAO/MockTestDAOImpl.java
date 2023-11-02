@@ -21,4 +21,11 @@ public class MockTestDAOImpl extends AbstractDao<MockTest> implements IMockTestD
 		TypedQuery<MockTest> q = en.createQuery(jpql, MockTest.class);
 		return q.getResultList();
 	}
+	public List<MockTest> getMockTestByTopicId(String topicId) {
+		EntityManager en = JPAConfig.getEntityManager();
+        String jpql = "select m from MockTest m WHERE m.topicTests.topicId = :topicId";
+        TypedQuery<MockTest> q = en.createQuery(jpql, MockTest.class);
+        q.setParameter("topicId", topicId);
+        return q.getResultList();
+    }
 }

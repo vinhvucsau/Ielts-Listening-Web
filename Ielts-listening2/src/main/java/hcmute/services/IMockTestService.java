@@ -6,6 +6,7 @@ import hcmute.entity.MockTest;
 
 public interface IMockTestService {
 	List <MockTest> getAllMockTest();
+	List <MockTest> getMockTestByTopicId(String id);
 	void insert(MockTest mockTest);
 	void update(MockTest mockTest);
 	void delete(MockTest mockTest);

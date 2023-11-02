@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 
 <body>
-	<style>
+<style>
 .luyende-testset-info-de {
 	background: var(--color-light-grey, #F3F3F3);
 	display: flex;
@@ -35,6 +36,7 @@
 	display: flex;
 	align-items: center;
 }
+
 </style>
 	<div class="luyende-testset">
 		<div class="luyende-testset-link-paper container-xxl"></div>
@@ -63,11 +65,13 @@
 			<div class="luyende-testset-cong-cu " style="padding: 50px 0;">
 				<div class="row  d-flex" style="display: flex; align-items: center;">
 					<div class="col-5  text--h3">
-						<h2><b>Danh sách đề</b></h2>
+						<h2>
+							<b>Danh sách đề</b>
+						</h2>
 					</div>
-					
+
 					<div class="col-7 luyende-testset-cong-cu-loc">
-					
+
 						<div style="font-size: 20px;" class="col-2">Lọc theo</div>
 
 						<select class="form-select" aria-label="Default select example"
@@ -97,159 +101,52 @@
 				</div>
 			</div>
 			<div class="luyende-testset-list-de row">
-
-				<div class="luyende-testset-list-de-left col-6">
-					<div class="card" style="border: 0;">
-						<div class="card-body">
-							<div class="card-title text--h3 ">Cam 18 - Test 1</div>
-							<div class="p-3 border bg-white d-flex flex-row rounded-3">
-								<div
-									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-									style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-										fill="currentColor" class="bi bi-headphones fw-bold"
-										viewBox="0 0 16 16">
-  								<path
-											d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
-							</svg>
-								</div>
-								<p
-									class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">Listening</p>
-							</div>
-
-						</div>
-
-					</div>
-
-
-				</div>
-
-				<div class="luyende-testset-list-de-right col-6">
-					<div class="card" style="border: 0;">
-						<div class="card-body">
-							<div class="card-title text--h3 ">Cam 18 - Test 1</div>
-							<div class="p-3 border bg-white d-flex flex-row rounded-3">
-								<div
-									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-									style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-										fill="currentColor" class="bi bi-headphones fw-bold"
-										viewBox="0 0 16 16">
-  								<path
-											d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
-							</svg>
-								</div>
-								<p
-									class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">Listening</p>
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-
-				<div class="luyende-testset-list-de-left col-6">
-					<div class="card" style="border: 0;">
-						<div class="card-body">
-							<div class="card-title text--h4 ">Cam 18 - Test 1</div>
-							<div class="p-3 border bg-white d-flex flex-row rounded-3">
-								<div
-									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-									style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-										fill="currentColor" class="bi bi-headphones fw-bold"
-										viewBox="0 0 16 16">
-  								<path
-											d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
-							</svg>
-								</div>
-								<p
-									class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">Listening</p>
-							</div>
-
-						</div>
-
-					</div>
-
-
-				</div>
-
-				<div class="luyende-testset-list-de-right col-6">
-					<div class="card" style="border: 0;">
-						<div class="card-body">
-							<div class="card-title text--h4 ">Cam 18 - Test 1</div>
-							<div class="p-3 border bg-white d-flex flex-row rounded-3">
-								<div
-									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-									style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-										fill="currentColor" class="bi bi-headphones fw-bold"
-										viewBox="0 0 16 16">
-  								<path
-											d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
-							</svg>
-								</div>
-								<p
-									class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">Listening</p>
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-				<div class="luyende-testset-list-de-left col-6">
-					<div class="card" style="border: 0;">
-						<div class="card-body">
-							<div class="card-title text--h4 ">Cam 18 - Test 1</div>
-							<div class="p-3 border bg-white d-flex flex-row rounded-3">
-								<div
-									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-									style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-										fill="currentColor" class="bi bi-headphones fw-bold"
-										viewBox="0 0 16 16">
-  								<path
-											d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
-							</svg>
-								</div>
-								<p
-									class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">Listening</p>
-							</div>
-
-						</div>
-
-					</div>
-
-
-				</div>
-
-				<div class="luyende-testset-list-de-right col-6">
-					<div class="card" style="border: 0;">
-						<div class="card-body">
-							<div class="card-title text--h4 ">Cam 18 - Test 1</div>
-							<div class="p-3 border bg-white d-flex flex-row rounded-3">
-								<div
-									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-									style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-										fill="currentColor" class="bi bi-headphones fw-bold"
-										viewBox="0 0 16 16">
-  								<path
-											d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
-							</svg>
-								</div>
-								<p
-									class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">Listening</p>
-							</div>
-
-						</div>
-
-					</div>
-				</div>
+			<c:forEach var="i" items="${listMocktest}">
 				
-				
+			
+				<div class="luyende-testset-list-de-left col-6">
+					<div class="card" style="border: 0;">
+						<div class="card-body">
+							<div class="card-title text--h3 ">${i.testName}</div>
+							<div class="p-3 border bg-white d-flex flex-row rounded-3">
+								<div
+									class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
+									style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
+									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+										fill="currentColor" class="bi bi-headphones fw-bold"
+										viewBox="0 0 16 16">
+  								<path
+											d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
+							</svg>
+								</div>
+								<p
+									class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.topicTests.topicId}</p>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				</c:forEach>
 			</div>
+
+
 		</div>
+	</div>
+		<table border="1" style="width: 100%">
+		<tr>
+			<td>ID</td>
+			<td>name</td>
+			<td>topicId</td>
+			
+		</tr>
+			<c:forEach var="i" items="${listMocktest}">
+				<tr>
+					<td>${i.testId}</td>
+					<td>${i.testName}</td>
+					<td>${i.topicTests.topicId}</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
 </body>
 </html>
