@@ -24,12 +24,12 @@
 			color: #9ca3af;
 			background-color: #e5e7eb;
 		}
-		.ul__test li{
+		.ul__test li div{
 			transition: 0.6s ease-in-out;
 		}
-		.ul__test .active, .ul__test li:hover{
+		.ul__test .active, .ul__test li div:hover{
 			background-color: white;
-			color: rgb(0, 74, 185);
+			color: #0071F9 !important;
 			border-radius: 0.5rem;
 		}
 		.px-7 {
@@ -69,13 +69,13 @@
 			<div class="d-flex flex-row justify-content-between">
 				<ul class="ul__test nav fs-5 fw-bold justify-content-between" style="width:500px">
 				  <li class="nav-item  ">
-				    <div class="div__tab div__tab--1 nav-link rounded-3 color-blue--primary ${param.tab == null || param.tab == '1' ? 'active' : ''}">Tất cả bộ đề</div>
+				    <div class="div__tab div__tab--1 nav-link rounded-3 text-black ${param.tab == null || param.tab == '1' ? 'active' : ''}">Tất cả bộ đề</div>
 				  </li>
 				  <li class="nav-item ">
-				    <div class="div__tab div__tab--2 nav-link rounded-3 color-blue--primary ${param.tab == '2' ? 'active' : ''}" href="#">Bộ đề Mới nhất</div>
+				    <div class="div__tab div__tab--2 nav-link rounded-3 text-black ${param.tab == '2' ? 'active' : ''}" href="#">Bộ đề Mới nhất</div>
 				  </li>
 				  <li class="nav-item ">
-				    <div class="div__tab div__tab--3 nav-link rounded-3 color-blue--primary ${param.tab == '3' ? 'active' : ''}" href="#">Bộ đề HOT</div>
+				    <div class="div__tab div__tab--3 nav-link rounded-3 text-black ${param.tab == '3' ? 'active' : ''}" href="#">Bộ đề HOT</div>
 				  </li>
 				</ul>
 				<div class="input-group" style="width: 400px;">
@@ -107,9 +107,15 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 						</div>
 						<c:set var="count" value="0"></c:set>
 						<c:forEach var="mockTest" items='${topicTest.mockTests}'>
-							<c:if test="${mockTest.enrrolTests.size() > 0}">
-								<c:set var="count" value="${count + 1 }"></c:set>
-							</c:if>
+							<c:set var="countEnrrol" value="0"></c:set>
+							<c:forEach var="enrrolTest" items="${mockTest.enrrolTests }">
+				      			<c:if test="${enrrolTest.users.userId == currentUser.userId}">
+				      				<c:set var="countEnrrol" value="${countEnrrol + 1 }"></c:set>
+				      			</c:if>
+				      		</c:forEach>
+				      		<c:if test="${countEnrrol > 0 }">
+				      			<c:set var="count" value="${count + 1 }"></c:set>
+				      		</c:if>
 						</c:forEach>
 						<c:set var="style" value=""></c:set>
 						<c:choose>
@@ -135,7 +141,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 							  		<div class="col-6" style="cursor:pointer">
 								      <div class="p-3 border bg-white d-flex flex-row rounded-3">
 								      	<c:choose>
-								      		<c:when test="${mockTest.enrrolTests.size() == 0}">
+								      		<c:when test="${currentUser.userId == null}">
 									      		<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: rgb(240, 247, 255); color:rgb(0, 74, 185); width: 50px; height: 50px;">
 										      		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
 						  								<path d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z"/>
@@ -144,19 +150,28 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 								      		</c:when>
 								      		<c:otherwise>
 								      			<c:set var="maxScore" value="0"></c:set>
+								      			<c:set var="count" value="0"></c:set>
 									      		<c:forEach var="enrrolTest" items="${mockTest.enrrolTests }">
-									      			<c:if test="${maxScore < enrrolTest.score}">
+									      			<c:if test="${maxScore < enrrolTest.score && enrrolTest.users.userId == currentUser.userId}">
 									      				<c:set var="maxScore" value="${enrrolTest.score}"></c:set>
+									      				<c:set var="count" value="${count + 1 }"></c:set>
 									      			</c:if>
 									      		</c:forEach>
-								  				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: #00B135; color: white; width: 50px; height: 50px;">${maxScore}</div>
+									      		<c:choose>
+									      			<c:when test="${count == 0 }">
+									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: rgb(240, 247, 255); color:rgb(0, 74, 185); width: 50px; height: 50px;">
+												      		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
+								  								<path d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z"/>
+															</svg>
+									      				</div>
+									      			</c:when>
+									      			<c:otherwise>
+									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: #00B135; color: white; width: 50px; height: 50px;">${maxScore}</div>
+									      			</c:otherwise>
+									      		</c:choose>
 								      		</c:otherwise>
 								      	</c:choose>
-								      	
-								      	
-								      	
-								      	<p class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${mockTest.testName}</p>
-							      		
+								      	<p class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${mockTest.testName}</p>					      		
 								      </div>
 							    	</div>
 							    	<c:set var="i" value="${i+1 }"></c:set>

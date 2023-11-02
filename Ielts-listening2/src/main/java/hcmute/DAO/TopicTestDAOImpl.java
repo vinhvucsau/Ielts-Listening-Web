@@ -11,7 +11,7 @@ public class TopicTestDAOImpl implements ITopicTestDAO {
 	@Override
 	public List<TopicTest> findAll(String searchStr, int tab) {
 		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M WHERE (LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0)";
+		String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0))";
 		if (tab == 2) {
 			jpql += "ORDER BY T.createTime DESC";
 		}
@@ -24,7 +24,7 @@ public class TopicTestDAOImpl implements ITopicTestDAO {
 	}
 	public List<TopicTest> findAll(int page, int pagesize, String searchStr, int tab) {
 		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M WHERE (LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0)";
+		String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0))";
 		if (tab == 2) {
 			jpql += "ORDER BY T.createTime DESC";
 		}
