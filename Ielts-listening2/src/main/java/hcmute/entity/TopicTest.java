@@ -38,12 +38,10 @@ public class TopicTest implements Serializable{
 	@OneToMany(mappedBy = "topicTests", fetch = FetchType.EAGER)
 	private List<MockTest> mockTests;
 
-	
-
 	@Override
 	public String toString() {
 		return "TopicTest [topicId=" + topicId + ", topicName=" + topicName + ", description=" + description
-				+ ", createTime=" + createTime + ", image=" + image + ", mockTests=" + mockTests + "]";
+				+ ", createTime=" + createTime + ", image=" + image + ", mockTests=" + mockTests.toString() + "]";
 	}
 	public TopicTest(String topicId, String topicName, String description, Date createTime, String image,
 			List<MockTest> mockTests) {
@@ -70,13 +68,9 @@ public class TopicTest implements Serializable{
 		this.topicId = topicId;
 	}
 
-
-
 	public String getTopicName() {
 		return topicName;
 	}
-
-
 
 	public void setTopicName(String topicName) {
 		this.topicName = topicName;
@@ -129,6 +123,5 @@ public class TopicTest implements Serializable{
 	public void setMockTests(List<MockTest> mockTests) {
 		this.mockTests = mockTests;
 	}
-	
 	
 }

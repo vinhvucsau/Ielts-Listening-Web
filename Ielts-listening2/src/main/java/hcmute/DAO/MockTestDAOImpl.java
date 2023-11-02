@@ -1,12 +1,12 @@
 package hcmute.DAO;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.MockTest;
+
 
 public class MockTestDAOImpl extends AbstractDao<MockTest> implements IMockTestDAO {
 

@@ -41,5 +41,4 @@ public class MockTestServiceImpl implements IMockTestService {
 	public List<MockTest> findAll(boolean all, int firstResult, int maxResult) {
 		return mockDao.findAll(all,firstResult,maxResult);
 	}
-
 }
