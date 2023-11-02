@@ -13,6 +13,10 @@ public class MockTestServiceImpl implements IMockTestService {
 	public List<MockTest> getAllMockTest() {
 		return mockDao.getAllMockTest();
 	}
+
+	public List<MockTest> getMockTestByTopicId(String id) {
+		return mockDao.getMockTestByTopicId(id);
+	}
 	@Override
 	public void insert(MockTest mockTest) {
 		mockDao.insert(mockTest);
@@ -41,4 +45,6 @@ public class MockTestServiceImpl implements IMockTestService {
 	public List<MockTest> findAll(boolean all, int firstResult, int maxResult) {
 		return mockDao.findAll(all,firstResult,maxResult);
 	}
+	
+
 }

@@ -7,7 +7,12 @@ import javax.persistence.TypedQuery;
 import JPAConfig.JPAConfig;
 import hcmute.entity.TopicTest;
 
-public class TopicTestDAOImpl implements ITopicTestDAO {
+public class TopicTestDAOImpl extends AbstractDao<TopicTest> implements ITopicTestDAO {
+
+	public TopicTestDAOImpl() {
+		super(TopicTest.class);
+		
+	}
 	@Override
 	public List<TopicTest> findAll(String searchStr, int tab) {
 		EntityManager enma = JPAConfig.getEntityManager();
