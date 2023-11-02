@@ -49,4 +49,10 @@ public class EnrollTestServiceImpl implements IEnrollTestService{
 	public List<EnrrolTest> findAll(boolean all, int firstResult, int maxResult) {
 		return enrollTestDao.findAll(all,firstResult,maxResult);
 	}
+
+	@Override
+	public List<EnrrolTest> getEnrollTestByUserId(String id) {
+		// TODO Auto-generated method stub
+		return enrollTestDao.getEnrollTestByUserId(id);
+	}
 }

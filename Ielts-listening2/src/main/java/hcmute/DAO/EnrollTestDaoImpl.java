@@ -20,7 +20,7 @@ public class EnrollTestDaoImpl extends AbstractDao<EnrrolTest> implements IEnrol
 	public List<EnrrolTest> getEnrollTestByUserId(String userId) {
 		EntityManager en = JPAConfig.getEntityManager();
         String jpql ="SELECT e " +
-                "FROM ENRROL_TEST e " +
+                "FROM EnrrolTest e " +
                 "WHERE e.users.userId = :userId";
         TypedQuery<EnrrolTest> q = en.createQuery(jpql, EnrrolTest.class);
         q.setParameter("userId", userId);

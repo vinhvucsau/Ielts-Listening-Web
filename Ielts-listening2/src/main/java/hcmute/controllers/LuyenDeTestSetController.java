@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import hcmute.DAO.IMockTestDAO;
+import hcmute.entity.EnrrolTest;
 import hcmute.entity.MockTest;
 import hcmute.services.EnrollTestServiceImpl;
 import hcmute.services.IEnrollTestService;
@@ -44,7 +45,7 @@ public class LuyenDeTestSetController extends HttpServlet{
 			System.out.print(listMocktest);
 			req.setAttribute("listMocktest", listMocktest);
 			
-			List<EnrrolTest> listEnrolltest = enrollTestService.findById("UserId1002");
+			List<EnrrolTest> listEnrolltest = enrollTestService.getEnrollTestByUserId("UserId1100");
 			System.out.print(listEnrolltest);
 			req.setAttribute("listEnrolltest", listEnrolltest);
 		}

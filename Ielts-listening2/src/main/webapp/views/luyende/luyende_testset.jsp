@@ -139,14 +139,14 @@
 			<td>topicId</td>
 			
 		</tr>
-			<c:forEach var="i" items="${listMocktest}">
+			<c:forEach var="i" items="${listEnrolltest}">
 				<tr>
-					<td>${i.testId}</td>
-					<td>${i.testName}</td>
-					<td>${i.topicTests.topicId}</td>
+					<td>${i.enrrolId}</td>
+					<td>${i.mockTests.TopicTest.topicId}</td>
+					<td>${i.users.userId}</td>
 				</tr>
 			</c:forEach>
 		</table>
-	</div>
+	
 </body>
 </html>

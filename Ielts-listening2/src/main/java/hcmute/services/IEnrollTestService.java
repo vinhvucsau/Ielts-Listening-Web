@@ -12,4 +12,5 @@ public interface IEnrollTestService {
 	Long countAll();
 	List<EnrrolTest> findAll();
 	List<EnrrolTest> findAll(boolean all, int firstResult, int maxResult);
+	List <EnrrolTest> getEnrollTestByUserId(String id);
 }
