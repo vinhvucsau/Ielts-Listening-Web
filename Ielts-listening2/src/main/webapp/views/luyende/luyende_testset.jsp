@@ -142,7 +142,7 @@
 			<c:forEach var="i" items="${listEnrolltest}">
 				<tr>
 					<td>${i.enrrolId}</td>
-					<td>${i.mockTests.TopicTest.topicId}</td>
+					<td>${i.mockTests.topicTests.topicId}</td>
 					<td>${i.users.userId}</td>
 				</tr>
 			</c:forEach>
