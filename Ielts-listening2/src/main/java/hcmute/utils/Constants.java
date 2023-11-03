@@ -26,4 +26,7 @@ public class Constants {
 	public static final String READ_NOTIFY_RELATION = "READ_NOTIFY";
 	public static final String ANSWER_USER_RELATION = "ANSWER_USER";
 	
+	
+	public static final String DIR = "D:\\UpLoadFileWeb";
+	
 }
