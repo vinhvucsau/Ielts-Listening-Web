@@ -26,6 +26,10 @@ public class TopicTestServiceImpl implements ITopicTestService{
 	public void addTopic(TopicTest topic) {
 		topicDAO.insert(topic);;
 	}
+	@Override
+	public void addTopic(TopicTest topic) {
+		topicDAO.addTopic(topic);
+	}
 
 	@Override
 	public void deleteTopic(String topicID) throws Exception {
