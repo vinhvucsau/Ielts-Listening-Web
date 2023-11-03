@@ -9,20 +9,17 @@ import hcmute.entity.MockTest;
 public class MockTestServiceImpl implements IMockTestService {
 
 	MockTestDAOImpl mockDao = new MockTestDAOImpl();
-	@Override
-	public List<MockTest> getAllMockTest() {
-		return mockDao.getAllMockTest();
-	}
+	
 	@Override
 	public void insert(MockTest mockTest) {
-		mockDao.insert(mockTest);
+		mockDao.insert(mockTest); 
 	}
 	@Override
 	public void update(MockTest mockTest) {
 		mockDao.update(mockTest);
 	}
 	@Override
-	public void delete(MockTest mockTest) {
+	public void delete(Object mockTest) throws Exception {
 		mockDao.delete(mockTest);
 	}
 	@Override
