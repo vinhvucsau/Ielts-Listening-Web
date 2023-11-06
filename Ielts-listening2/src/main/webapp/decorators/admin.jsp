@@ -22,7 +22,8 @@
 	type="text/css">
 <link href='<c:url value="/stylecss/components/dropdown.css" />'
 	rel="stylesheet" type="text/css">
-
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 
 </head>
@@ -41,5 +42,7 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 </body>
 </html>
