@@ -3,6 +3,7 @@ package hcmute.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ public class AnswerTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private String answerId;
 	
 	@Column(columnDefinition = "varchar(255)")
@@ -38,7 +39,7 @@ public class AnswerTest implements Serializable{
 	@JoinColumn(name = "partId")
 	private ListeningPart listeningParts;
 	
-	@OneToMany(mappedBy = "answerTest",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "answerTest",fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 	private List<AnswerUser> answerUsers;
 
 	public AnswerTest(String answerId, String answerKey, int number, ListeningPart listeningParts,

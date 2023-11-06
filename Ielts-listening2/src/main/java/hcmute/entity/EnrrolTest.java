@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +25,7 @@ public class EnrrolTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private String enrrolId;
 	
 	@Column(columnDefinition = "date")
@@ -34,7 +35,7 @@ public class EnrrolTest implements Serializable{
 	private Integer timeTest;
 	
 	@Column(columnDefinition = "double")
-	private double score;
+	private Double score;
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
@@ -44,7 +45,7 @@ public class EnrrolTest implements Serializable{
 	@JoinColumn(name = "testId")
 	private MockTest mockTests;
 	
-	@OneToMany(mappedBy = "enrollTest", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "enrollTest", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private List<AnswerUser> answerUsers;
 
 	
@@ -53,7 +54,7 @@ public class EnrrolTest implements Serializable{
 	}
 
 
-	public EnrrolTest(String enrrolId, Date enrrollmentDate, Integer timeTest, double score, User users,
+	public EnrrolTest(String enrrolId, Date enrrollmentDate, Integer timeTest, Double score, User users,
 			MockTest mockTests, List<AnswerUser> answerUsers) {
 		super();
 		this.enrrolId = enrrolId;
@@ -96,12 +97,12 @@ public class EnrrolTest implements Serializable{
 	}
 
 
-	public double getScore() {
+	public Double getScore() {
 		return score;
 	}
 
 
-	public void setScore(double score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
 
@@ -135,5 +136,4 @@ public class EnrrolTest implements Serializable{
 		this.answerUsers = answerUsers;
 	}
 
-	
 }

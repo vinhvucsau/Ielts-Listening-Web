@@ -24,7 +24,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 					<div class="col-6 d-flex justify-content-center">
 						<div class="test-time">
 							<i class="ti-alarm-clock me-2"></i>
-							<h6 class="timer">00 : 00 : 00</h6>
+							<h6 class="timer" valuenow="${currentTime}" valuemax="${endingTime}" enrollTestId="${enrollTest.enrrolId}">00 : 00 : 00</h6>
 						</div>
 						<h3 class="d-flex align-items-center">CAM 18 - TEST 2</h3>
 					</div>
@@ -92,11 +92,18 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 								<i class="setting ti-settings"></i>
 							</div>
 						</div>
-						<audio class="audio">
-							<source
-								src="https://cms-artifacts.motionarray.com/content/motion-array/772/Corporate_Harmonics_mp3.mp3?Expires=2003734641521&Key-Pair-Id=K2ZDLYDZI2R1DF&Signature=lic-nd1pMzUpkh-PSxXaOx-6a0S~toPg83287IAlvS7fIcTgWSeghJftr8bhbkeDsDQHBXXOt03Ikj-XOqDkkVrJoOUdlP5Njr3nyt3xM8atgPNdG8lRFMyy7rH5o1QdizrFRc-LGgZKOH6l0VsOf2XeqOrvTOp4FdFKNs-lypViq4hRZLEdhuqzyEB231n4I1cGAVLDVTMesz24h910RDjc441d~McpxX3mBLg3EEwb0HAHSo4jYn0~i6Tg6DmXs1eL4NT80J5qOv-DpeolxEli26g9u7QU4q2EjHKtHDDJZNOtmNCKxrfNat9GIuiXWeBMNBseXGmtSsQ8ZiRoeA__"
-								type="audio/mpeg">
-						</audio>
+						<c:choose>
+							<c:when test="${currentPart.audio.substring(0,4)!='http'}">
+								<audio class="audio">
+									<source src='<c:url value="/audio?fname=audioMockTest/${currentPart.audio}"></c:url>' type="audio/mpeg">
+								</audio>
+							</c:when>
+							<c:otherwise>
+								<audio class="audio">
+									<source src="${currentPart.audio}" type="audio/mpeg">
+								</audio>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="question-area">
 						<div class="d-flex">
@@ -122,19 +129,43 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 											<li class="mt-4 d-flex justify-content-center">
 										</c:if>
 										
+										<c:set var="isCorrect" value="${false}" />
+										<c:if test="${not empty isCompleted}">
+											<c:forEach items="${enrollTest.answerUsers}" var="answerUser">
+												<c:if test="${answerTest.answerId.equals(answerUser.answerTest.answerId) 
+												and answerTest.answerKey.equals(answerUser.answer)}">
+													<c:set var="isCorrect" value="${true}"/>
+												</c:if>
+											</c:forEach>
+										</c:if>
+										
+										
 										<c:set var="isAnswered" value="${false}" />
-										<c:forEach items="${enrollTest.answerUsers}" var="answerUser">
-											<c:if test="${answerUser.answerTest.answerId.equals(answerTest.answerId)}">
-												<c:set var="isAnswered" value="${true}" />
-											</c:if>
-										</c:forEach>
+										<c:if test="${empty isCompleted}">
+											<c:forEach items="${enrollTest.answerUsers}" var="answerUser">
+												<c:if test="${answerUser.answerTest.answerId.equals(answerTest.answerId) 
+												and (not empty answerUser.answer)}">
+													<c:set var="isAnswered" value="${true}" />
+												</c:if>
+											</c:forEach>
+										</c:if>
 										
 										<c:choose>
-										    <c:when test="${isAnswered}">
-										    	<a href="#" class="number-question-item answered" answerTestId="${answerTest.answerId}">${answerTest.number}</a>
+										    <c:when test="${empty isCompleted and isAnswered}">
+										    	<a href="#" class="number-question-item answered" enrollTestId="${enrollTest.enrrolId}"
+										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a>
+										    </c:when>
+										    <c:when test="${not empty isCompleted and isCorrect}">
+										    	<a href="#" class="number-question-item correct" enrollTestId="${enrollTest.enrrolId}"
+										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a>
+										    </c:when>
+										    <c:when test="${not empty isCompleted and not isCorrect}">
+										    	<a href="#" class="number-question-item incorrect" enrollTestId="${enrollTest.enrrolId}"
+										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a>
 										    </c:when>
 										    <c:otherwise>
-										        <a href="#" class="number-question-item" answerTestId="${answerTest.answerId}">${answerTest.number}</a>
+										        <a href="#" class="number-question-item" enrollTestId="${enrollTest.enrrolId}" 
+										        answerTestId="${answerTest.answerId}">${answerTest.number}</a>
 										    </c:otherwise>
 										</c:choose>
 	
@@ -155,67 +186,102 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 							</div>
 						</div>
 					</div>
-					<div class="test-result-area">
-						<div class="d-flex">
-							<i class="ti-cup me-2"></i>
-							<h6>Kết quả</h6>
-						</div>
-						<select class="test-history form-select mt-3">
-							<option>Lịch sử làm bài lần 1</option>
-							<option>Lịch sử làm bài lần 2</option>
-							<option>Lịch sử làm bài lần 3</option>
-						</select>
-						<div class="test-score mt-3">
-							<div class="d-flex align-items-center">
-								<img
-									src="https://i.pinimg.com/originals/20/ba/a2/20baa2e5826f7c93e0f32203851bcabf.png"
-									alt="">
-								<div>
-									<h3 class="test-score-value">8.5</h3>
-									<span> <span>37</span><span> đáp án đúng / </span><span>40</span><span>
-											câu hỏi</span>
-									</span>
+					<c:if test="${not empty isCompleted }">
+						<div class="test-result-area">
+							<div class="d-flex">
+								<i class="ti-cup me-2"></i>
+								<h6>Kết quả</h6>
+							</div>
+							<select class="test-history form-select mt-3">
+								<option>Lịch sử làm bài lần 1</option>
+								<option>Lịch sử làm bài lần 2</option>
+								<option>Lịch sử làm bài lần 3</option>
+							</select>
+							<div class="test-score mt-3">
+								<div class="d-flex align-items-center">
+									<img
+										src="https://i.pinimg.com/originals/20/ba/a2/20baa2e5826f7c93e0f32203851bcabf.png"
+										alt="">
+									<div>
+										<h3 class="test-score-value">${enrollTest.score}</h3>
+										<span>${numberOfCorrectAnswers} đáp án đúng / ${numberOfQuestTion} câu hỏi</span>
+										</span>
+									</div>
 								</div>
 							</div>
+							<a href="#"
+								class="a-btn mt-3 d-flex justify-content-center align-items-center">
+								<h6>Quay về trang luyện đề</h6>
+							</a> <a href="#"
+								class="a-btn mt-3 d-flex justify-content-center align-items-center">
+								<h6>Làm lại</h6>
+							</a>
 						</div>
-						<a href="#"
-							class="a-btn mt-3 d-flex justify-content-center align-items-center">
-							<h6>Quay về trang luyện đề</h6>
-						</a> <a href="#"
-							class="a-btn mt-3 d-flex justify-content-center align-items-center">
-							<h6>Làm lại</h6>
-						</a>
-					</div>
+					</c:if>
 				</div>
 				<div class="reading-session col-6">
 					<div class="heading-container">
 						<div class="row">
 							<div class="col d-flex justify-content-start">
-								<a href="#" class="prev-part disabled d-flex">
-									<div class="icon me-2 d-flex align-items-center justify-content-center">
-										<i class="ti-arrow-left"></i>
-									</div>
-									<h6>Phần trước</h6>
-								</a>
+								<c:choose>
+									<c:when test="${not empty prevPart}">
+										<a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&prevPartId=${prevPart}"></c:url>'
+										 class="prev-part d-flex">
+											<div class="icon me-2 d-flex align-items-center justify-content-center">
+												<i class="ti-arrow-left"></i>
+											</div>
+											<h6>Phần trước</h6>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="prev-part disabled d-flex">
+											<div class="icon me-2 d-flex align-items-center justify-content-center">
+												<i class="ti-arrow-left"></i>
+											</div>
+											<h6>Phần trước</h6>
+										</a>
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="col d-flex justify-content-center">
 								<h6>PART</h6>
-								<h6 class="part-number ms-2">1</h6>
+								<h6 class="part-number ms-2">${currentPartNumber}</h6>
 							</div>
 							<div class="col d-flex justify-content-end">
-								<a href="#" class="next-part d-flex">
-									<h6>Phần sau</h6>
-									<div class="icon ms-2 d-flex align-items-center justify-content-center">
-										<i class="ti-arrow-right"></i>
-									</div>
-								</a>
+								<c:choose>
+									<c:when test="${not empty nextPart}">
+										<a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&nextPartId=${nextPart}"></c:url>' 
+										class="next-part d-flex">
+											<h6>Phần sau</h6>
+											<div class="icon ms-2 d-flex align-items-center justify-content-center">
+												<i class="ti-arrow-right"></i>
+											</div>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="next-part disabled d-flex">
+											<h6>Phần sau</h6>
+											<div class="icon ms-2 d-flex align-items-center justify-content-center">
+												<i class="ti-arrow-right"></i>
+											</div>
+										</a>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
 					<div>
-						<img class="mt-3"
+						<c:choose>
+							<c:when test="${currentPart.image.substring(0,4)!='http'}">
+								<img class="mt-3" src='<c:url value="/image?fname=imgMockTest/${currentPart.image}"></c:url>' alt="bai thi">
+							</c:when>
+							<c:otherwise>
+								<img class="mt-3" src="${currentPart.image}" alt="bai thi">
+							</c:otherwise>
+						</c:choose>
+						<!-- <img class="mt-3"
 							src="https://ieltsdatio.edu.vn/wp-content/uploads/Picture1-910x1024.png"
-							alt="bai thi">
+							alt="bai thi"> -->
 					</div>
 				</div>
 				<div class="col-3">
@@ -226,54 +292,53 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 									<c:set var="answer" value="" />
 									<c:forEach items="${enrollTest.answerUsers}" var="answerUser">
 										<c:if test="${answerUser.answerTest.answerId.equals(answerTest.answerId) 
-											and (not empty answerUser.answerTest.answer)}">
-											<c:set var="answer" value="${answerUser.answerTest.answer}" />
+											and (not empty answerUser.answer)}">
+											<c:set var="answer" value="${answerUser.answer}" />
 										</c:if>
 									</c:forEach>
-									<li class="answer-item d-flex">
-										<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
-										<div class="col">
-											<input class="answer-input" type="text" value="${answer}"> 
-											<span class="correct-answer"></span>
-										</div>
-									</li>
 									
+									<c:if test="${not empty isCompleted}">
+										<c:choose>
+											<c:when test="${not empty answer and answer.equals(answerTest.answerKey)}">
+												<li class="answer-item correct d-flex">
+													<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+													<div class="col">
+														<input class="answer-input" type="text" value="${answer}">
+													</div>
+												</li>
+											</c:when>
+											<c:otherwise>
+												<li class="answer-item incorrect d-flex">
+													<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+													<div class="col">
+														<input class="answer-input" type="text" value="${answer}"> 
+														<span class="correct-answer">${answerTest.answerKey}</span>
+													</div>
+												</li>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+									<c:if test="${empty isCompleted}">
+										<li class="answer-item d-flex">
+											<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+											<div class="col">
+												<input class="answer-input not-completed" enrollTestId="${enrollTest.enrrolId}" answerTestId="${answerTest.answerId}" type="text" value="${answer}"> 
+											</div>
+										</li>
+									</c:if>
 								</c:forEach>
 							</c:if>
 						</c:forEach>
-						<li class="answer-item d-flex"><span
-							class="number-question d-flex justify-content-center align-items-center">1</span>
-							<div class="col">
-								<input class="answer-input" type="text"> <span
-									class="correct-answer"></span>
-							</div>
-						</li>
-						<li class="answer-item incorrect d-flex">
-							<p
-								class="number-question d-flex justify-content-center align-items-center">2</p>
-							<div class="col">
-								<input class="answer-input" type="text" value="trả lời gì đó">
-								<span class="correct-answer">Đáp án đúng đây nè</span>
-							</div>
-						</li>
-						<li class="answer-item correct d-flex">
-							<p
-								class="number-question d-flex justify-content-center align-items-center">3</p>
-							<div class="col">
-								<input class="answer-input" type="text" value="trả lời gì đó">
-								<span class="correct-answer"></span>
-							</div>
-						</li>
-						<li class="answer-item d-flex">
-							<p class="number-question d-flex justify-content-center align-items-center">4</p>
-							<div class="col">
-								<input class="answer-input" type="text"> <span
-									class="correct-answer"></span>
-							</div>
-						</li>
 					</ul>
 					<div class="text-center">
-						<a class="btn-next-questions"> Phần kế tiếp </a>
+						<c:choose>
+							<c:when test="${not empty nextPart}">
+								<a class="btn-next-questions" href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&nextPartId=${nextPart}"></c:url>'> Phần kế tiếp </a>
+							</c:when>
+							<c:otherwise>
+								<a class="btn-next-questions disabled" href="#"> Phần kế tiếp </a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -302,11 +367,6 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 
         var isPlaying = false;
 
-        testTimer.setAttribute('valuenow', 13 * 60);
-        testTimer.setAttribute('valuemax', 40 * 60);
-
-
-
         function convertSecondsToStringTime(seconds) {
             function addLeadingZero(number) {
                 return number < 10 ? '0' + number : number;
@@ -319,6 +379,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 
         //Xử lí khi audio đã tải thành công lên trình duyệt
         audio.addEventListener('loadedmetadata', function () {
+        	console.log(audio.duration);
             if (audio.duration) {
                 audioTimer.querySelector('.time-duration').textContent =
                     convertSecondsToStringTime(audio.duration);
@@ -328,12 +389,32 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
         function setTestTime() {
             var valueNow = parseInt(testTimer.getAttribute('valuenow'));
             var valueMax = parseInt(testTimer.getAttribute('valuemax'));
-            if (valueNow < valueMax) {
-                valueNow += 1;
-                testTimer.setAttribute('valueNow', valueNow);
-                timeRemaining = valueMax - valueNow;
-                var fomattedTime = convertSecondsToStringTime(timeRemaining);
-                testTimer.textContent = fomattedTime;
+            if(valueMax)
+            {
+                if (valueNow < valueMax) {
+                    valueNow += 1;
+                    testTimer.setAttribute('valueNow', valueNow);
+                    timeRemaining = valueMax - valueNow;
+                    var fomattedTime = convertSecondsToStringTime(timeRemaining);
+                    testTimer.textContent = fomattedTime;
+                }
+                else {
+                    fetch('http://localhost:8080/Ielts-listening2/api-luyende_test',
+                        {
+                            method:'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({enrrolId: enrollTestId})
+                        })
+                    .then(resp => {
+                        return resp.json();
+                    })
+                    .then(data => {
+                        location.reload();
+                    })
+                    .catch(error => {
+                        alert(error);
+                    })
+                }
             }
         }
 
@@ -390,7 +471,44 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
         listAnswer.forEach((p) => {
             p.setAttribute('readonly', 'readonly');
         });
-
+        
+        
+        //Xử lí api lưu trả lời tự động
+        document.querySelectorAll('#test .answer-input.not-completed').forEach(input => {
+            input.onblur = (e) => {
+                const answerInput = e.target;
+                const data = {
+                		answerUserId: {
+                			answerId: answerInput.getAttribute('answerTestId'),
+                			enrrolId: answerInput.getAttribute('enrollTestId')
+                		},
+                		answer: answerInput.value
+                }
+                var options = { method:"POST",
+                        		body: JSON.stringify(data)
+                        	  }
+                fetch("http://localhost:8080/Ielts-listening2/api-luyende_test",options)
+                .then(resp => {
+                	return resp.json();
+                })
+                .then(enrollTest => {
+                	const questionItem = document.querySelector('.question-container .number-question-item[answerTestId='+
+                		data['answerUserId']['answerId']+'][enrollTestId='+data['answerUserId']['enrrolId']+']');
+                	if (questionItem) {
+                		if (enrollTest['answer'] === ''){
+                			questionItem.classList.remove('answered');
+                		}
+                		else{
+                			questionItem.classList.add('answered');
+                		}
+                	}
+               		answerInput.value = enrollTest['answer'];
+                })
+                .catch(error => {
+                	alert(error);
+                })
+            };
+       });
         setTestTime()
         setInterval(setTestTime, 1000);
     </script>
