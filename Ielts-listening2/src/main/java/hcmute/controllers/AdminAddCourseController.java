@@ -30,6 +30,7 @@ import hcmute.services.ITopicTestService;
 import hcmute.services.MockTestServiceImpl;
 import hcmute.services.TopicTestServiceImpl;
 import hcmute.utils.Constants;
+import hcmute.utils.DeleteImage;
 import hcmute.utils.UploadUtils;
 
 @MultipartConfig
@@ -53,6 +54,7 @@ public class AdminAddCourseController extends HttpServlet {
 
 			List<TopicTest> topicList = topicService.getAllTopicTest();
 			req.setAttribute("topicList", topicList);
+
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_taobode.jsp");
 			rd.forward(req, resp);
 		} else if (url.contains("deleteTopic")) {
@@ -75,7 +77,7 @@ public class AdminAddCourseController extends HttpServlet {
 			}
 			RequestDispatcher rd = req.getRequestDispatcher("listTopic"); // file .jsp viết giao diện
 			rd.forward(req, resp);
-		}
+		} 
 	}
 
 	@Override
@@ -86,7 +88,6 @@ public class AdminAddCourseController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 
 		if (url.contains("addTopic")) {
-			// lấy dữ liệu từ trang jsp bằng BeanUltis:
 			TopicTest topic = new TopicTest();
 			try {
 
@@ -156,17 +157,24 @@ public class AdminAddCourseController extends HttpServlet {
 				topic.setTopicName(req.getParameter("name"));
 				topic.setDescription(req.getParameter("description"));
 				topic.setTopicId(req.getParameter("id"));
-				
+
 				long millis = System.currentTimeMillis();
 				Date date = new Date(millis);
 				topic.setCreateTime(date);
-			
-				if (req.getPart("image").getSize() != 0) {
-					String fileName = "" + System.currentTimeMillis();
-					topic.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\topicIMG\\", fileName));
+
+				TopicTest oldModel = topicService.getOneTopicTest(topic.getTopicId());
+
+				if (req.getPart("image").getSize() == 0) {
+					topic.setImage(oldModel.getImage());
 				} else {
-					TopicTest oldTopic = topicService.getOneTopicTest(topic.getTopicId());
-					topic.setImage(oldTopic.getImage());
+					//xoa anh cu
+					if (oldModel.getImage() != null) {
+						String fileImg = oldModel.getImage();
+						DeleteImage.deleteImage(oldModel.getImage(), Constants.FOLDER_TOPIC);
+					}
+					//update anh moi
+					String fileName = "" + System.currentTimeMillis();
+					topic.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\"+ Constants.FOLDER_TOPIC +"\\", fileName));
 				}
 
 				topicService.updateTopic(topic);
@@ -176,7 +184,7 @@ public class AdminAddCourseController extends HttpServlet {
 				e.printStackTrace();
 			}
 			resp.sendRedirect(req.getContextPath() + "/admin/listTopic");
-			
+
 		} else if (url.contains("updateMockTest")) {
 			MockTest test = new MockTest();
 			try {

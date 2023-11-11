@@ -64,8 +64,9 @@
 						<div class="bodethi">
 							<button value="${t.topicId}"
 								class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
-								<span class="accordion-order"></span> <span
-									class="accordion-title ms-4">${t.topicName}</span>
+								<span class="accordion-order"></span> 
+								<span class="accordion-title ms-4">${t.topicName}</span>
+							
 								<div class="icon-list d-flex ">
 									<a href="#" class="btn-openpopup icon-link icon-update"
 										value="${t.topicId }"> <i
@@ -212,7 +213,8 @@
 	            {
 	                document.querySelector(".card-cover .card-body__title").innerHTML = i.topicId;
 	                document.querySelector(".card-cover .card-body__text").innerHTML = i.topicName;
-	                var fileImg = "<c:url value='/assets/topicIMG/" + String(i.image) +"'/>";
+	                //console.log(i.image);
+	                var fileImg = "<c:url value='/image?fname=topicIMG/" + String(i.image) +"'/>";
 	                document.querySelector(".card-cover .card__img").setAttribute("src", fileImg);	   
 	                document.querySelector(".card-cover .group__content").innerHTML = countMockByTopic(id) + " đề" ;	
 	                return;
