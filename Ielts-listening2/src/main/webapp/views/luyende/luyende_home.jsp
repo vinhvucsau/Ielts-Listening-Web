@@ -109,7 +109,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 						<c:forEach var="mockTest" items='${topicTest.mockTests}'>
 							<c:set var="countEnrrol" value="0"></c:set>
 							<c:forEach var="enrrolTest" items="${mockTest.enrrolTests }">
-				      			<c:if test="${enrrolTest.users.userId == currentUser.userId}">
+				      			<c:if test="${enrrolTest.users.userId == currentUser.userId && enrrolTest.score > 0}">
 				      				<c:set var="countEnrrol" value="${countEnrrol + 1 }"></c:set>
 				      			</c:if>
 				      		</c:forEach>
@@ -123,7 +123,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 								<c:set var="style" value="background-color: #00B135; color: white;"></c:set>
 							</c:when>
 							<c:when test="${count < topicTest.mockTests.size() && count > 0 }">
-								<c:set var="style" value="background-color: #fffbeb; color: #f8b23c;"></c:set>
+								<c:set var="style" value="background-color: #fffbeb; color: rgb(245,158,11);"></c:set>
 							</c:when>
 							<c:otherwise>
 								<c:set var="style" value="background-color: rgb(243,244,246);"></c:set>
@@ -149,7 +149,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 									      		</div>
 								      		</c:when>
 								      		<c:otherwise>
-								      			<c:set var="maxScore" value="0"></c:set>
+								      			<c:set var="maxScore" value="-10"></c:set>
 								      			<c:set var="count" value="0"></c:set>
 									      		<c:forEach var="enrrolTest" items="${mockTest.enrrolTests }">
 									      			<c:if test="${maxScore < enrrolTest.score && enrrolTest.users.userId == currentUser.userId}">
@@ -164,6 +164,9 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 								  								<path d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z"/>
 															</svg>
 									      				</div>
+									      			</c:when>
+									      			<c:when test="${maxScore == -1 }">
+									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: #fffbeb; color: rgb(245,158,11); width: 50px; height: 50px;">3%</div>
 									      			</c:when>
 									      			<c:otherwise>
 									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: #00B135; color: white; width: 50px; height: 50px;">${maxScore}</div>
