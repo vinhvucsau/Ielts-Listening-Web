@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,6 +25,7 @@ public class EnrrolTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue
 	private String enrrolId;
 	
 	@Column(columnDefinition = "date")
@@ -33,7 +35,7 @@ public class EnrrolTest implements Serializable{
 	private Integer timeTest;
 	
 	@Column(columnDefinition = "double")
-	private double score;
+	private Double score;
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
@@ -43,11 +45,17 @@ public class EnrrolTest implements Serializable{
 	@JoinColumn(name = "testId")
 	private MockTest mockTests;
 	
-	@OneToMany(mappedBy = "enrrolTests", fetch = FetchType.EAGER)
-	private List<HistoryTest> historyTests;
+	@OneToMany(mappedBy = "enrollTest", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private List<AnswerUser> answerUsers;
 
-	public EnrrolTest(String enrrolId, Date enrrollmentDate, Integer timeTest, double score, User users,
-			MockTest mockTests, List<HistoryTest> historyTests) {
+	
+	public EnrrolTest() {
+		super();
+	}
+
+
+	public EnrrolTest(String enrrolId, Date enrrollmentDate, Integer timeTest, Double score, User users,
+			MockTest mockTests, List<AnswerUser> answerUsers) {
 		super();
 		this.enrrolId = enrrolId;
 		this.enrrollmentDate = enrrollmentDate;
@@ -55,73 +63,77 @@ public class EnrrolTest implements Serializable{
 		this.score = score;
 		this.users = users;
 		this.mockTests = mockTests;
-		this.historyTests = historyTests;
+		this.answerUsers = answerUsers;
 	}
 
-	public EnrrolTest() {
-		super();
-	}
 
 	public String getEnrrolId() {
 		return enrrolId;
 	}
 
+
 	public void setEnrrolId(String enrrolId) {
 		this.enrrolId = enrrolId;
 	}
+
 
 	public Date getEnrrollmentDate() {
 		return enrrollmentDate;
 	}
 
+
 	public void setEnrrollmentDate(Date enrrollmentDate) {
 		this.enrrollmentDate = enrrollmentDate;
 	}
+
 
 	public Integer getTimeTest() {
 		return timeTest;
 	}
 
+
 	public void setTimeTest(Integer timeTest) {
 		this.timeTest = timeTest;
 	}
 
-	public double getScore() {
+
+	public Double getScore() {
 		return score;
 	}
 
-	public void setScore(double score) {
+
+	public void setScore(Double score) {
 		this.score = score;
 	}
+
 
 	public User getUsers() {
 		return users;
 	}
 
+
 	public void setUsers(User users) {
 		this.users = users;
 	}
+
 
 	public MockTest getMockTests() {
 		return mockTests;
 	}
 
+
 	public void setMockTests(MockTest mockTests) {
 		this.mockTests = mockTests;
 	}
 
-	public List<HistoryTest> getHistoryTests() {
-		return historyTests;
+
+	public List<AnswerUser> getAnswerUsers() {
+		return answerUsers;
 	}
 
-	public void setHistoryTests(List<HistoryTest> historyTests) {
-		this.historyTests = historyTests;
+
+	public void setAnswerUsers(List<AnswerUser> answerUsers) {
+		this.answerUsers = answerUsers;
 	}
 
-	@Override
-	public String toString() {
-		return "EnrrolTest [enrrolId=" + enrrolId + ", enrrollmentDate=" + enrrollmentDate + ", timeTest=" + timeTest
-				+ ", score=" + score + ", users=" + users + ", mockTests=" + mockTests + ", historyTests="
-				+ historyTests + "]";
-	}
 }
