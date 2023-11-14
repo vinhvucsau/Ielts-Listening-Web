@@ -46,7 +46,7 @@ public abstract class AbstractDao<T> {
 		}
 	}
 	
-	public void delete(Object id) {
+	public void delete(Object id) throws Exception {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
 		try {
@@ -54,11 +54,14 @@ public abstract class AbstractDao<T> {
 			T entity = enma.find(entityClass, id);
 			if (entity != null) {
 				enma.remove(entity);
+			}else {
+				throw new Exception("Không tìm thấy");
 			}
 			trans.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			trans.rollback();
+			throw e;
 		} finally {
 			enma.close();
 		}

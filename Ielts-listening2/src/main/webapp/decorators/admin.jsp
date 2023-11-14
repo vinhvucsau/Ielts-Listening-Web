@@ -19,7 +19,7 @@
 	rel="stylesheet">
 
 <link href='<c:url value="/stylecss/base/base.css" />' rel="stylesheet"
-	type="text/css">
+	type="text/css"> 
 <link href='<c:url value="/stylecss/components/dropdown.css" />'
 	rel="stylesheet" type="text/css">
 

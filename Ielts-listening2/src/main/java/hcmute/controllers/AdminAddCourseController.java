@@ -1,18 +1,26 @@
 package hcmute.controllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.beanutils.BeanUtils;
 
 import hcmute.DAO.ITopicTestDAO;
-import hcmute.entity.Course;
-import hcmute.entity.Lesson;
 import hcmute.entity.MockTest;
 import hcmute.entity.TopicTest;
 
@@ -21,30 +29,187 @@ import hcmute.services.ITopicTestService;
 
 import hcmute.services.MockTestServiceImpl;
 import hcmute.services.TopicTestServiceImpl;
+import hcmute.utils.Constants;
+import hcmute.utils.DeleteImage;
+import hcmute.utils.UploadUtils;
 
-@WebServlet(urlPatterns = {"/admin/taobode"})
-public class AdminAddCourseController extends HttpServlet{
+@MultipartConfig
+@WebServlet(urlPatterns = { "/admin/listTopic", "/admin/addTopic", "/admin/deleteTopic", "/admin/updateTopic",
+		"/admin/addMockTest", "/admin/deleteTest", "/admin/updateMockTest" })
+public class AdminAddCourseController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	ITopicTestService topicService = new TopicTestServiceImpl();
 	IMockTestService mockService = new MockTestServiceImpl();
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
-		if (url.contains("taobode")) {
-			List<MockTest> listMocktest = mockService.getAllMockTest();
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+
+		if (url.contains("listTopic")) {
+			List<MockTest> listMocktest = mockService.findAll();
 			req.setAttribute("listMocktest", listMocktest);
-			
+
 			List<TopicTest> topicList = topicService.getAllTopicTest();
 			req.setAttribute("topicList", topicList);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/luyende/admin_taobode.jsp");
+
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_taobode.jsp");
 			rd.forward(req, resp);
-		}
+		} else if (url.contains("deleteTopic")) {
+			String topicID = req.getParameter("id");
+			try {
+				topicService.deleteTopic(topicID);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			RequestDispatcher rd = req.getRequestDispatcher("listTopic"); // file .jsp viết giao diện
+			rd.forward(req, resp);
+		} else if (url.contains("deleteTest")) {
+			String testID = req.getParameter("idTest");
+			try {
+				mockService.delete(testID);
+				req.setAttribute("messSuccess", "oke");
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("messError", e.getMessage());
+			}
+			RequestDispatcher rd = req.getRequestDispatcher("listTopic"); // file .jsp viết giao diện
+			rd.forward(req, resp);
+		} 
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		super.doPost(req, resp);
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+
+		String url = req.getRequestURI().toString();
+
+		if (url.contains("addTopic")) {
+			TopicTest topic = new TopicTest();
+			try {
+
+				// BeanUtils.populate(topic, req.getParameterMap());
+				topic.setTopicName(req.getParameter("name"));
+				topic.setDescription(req.getParameter("description"));
+				topic.setTopicId("ID");
+				long millis = System.currentTimeMillis();
+				Date date = new Date(millis);
+				topic.setCreateTime(date);
+
+				if (req.getPart("image").getSize() != 0) {
+					// tạo tên file mới để khỏi bị trùng
+					String fileName = "" + System.currentTimeMillis();
+					topic.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\topicIMG\\", fileName));
+				}
+				// prod.setCategory(cateService.findOne(prod.getProductID()));
+				topicService.addTopic(topic);
+
+				req.setAttribute("topic", topic);
+				req.setAttribute("messSuccess", "Thanh cong");
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("messError", e.getMessage());
+			}
+
+			resp.sendRedirect(req.getContextPath() + "/admin/listTopic");
+
+		} else if (url.contains("addMockTest")) {
+			// lấy dữ liệu từ trang jsp bằng BeanUltis:
+			MockTest test = new MockTest();
+			try {
+
+				// BeanUtils.populate(topic, req.getParameterMap());
+				test.setTestId("");
+				test.setTestName(req.getParameter("name"));
+				test.setDescription(req.getParameter("description"));
+				test.setCost(Integer.parseInt(req.getParameter("cost").toString()));
+				TopicTest topic = topicService.getOneTopicTest(req.getParameter("id"));
+				test.setTopicTests(topic);
+
+				if (req.getPart("image").getSize() != 0) {
+					// tạo tên file mới để khỏi bị trùng
+					// String fileName = "" + System.currentTimeMillis();
+					// test.setImage(UploadUtils.processUpload("image", req, Constants.DIR +
+					// "\\topicIMG\\", fileName));
+				}
+				mockService.insert(test);
+				;
+
+				req.setAttribute("test", test);
+				req.setAttribute("messSuccess", "mock test ok");
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("messError", e.getMessage());
+			}
+
+			// RequestDispatcher rd = req.getRequestDispatcher("listTopic"); // file .jsp
+			// viết giao diện
+			// rd.forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/admin/listTopic");
+
+		} else if (url.contains("updateTopic")) {
+			TopicTest topic = new TopicTest();
+			try {
+
+				topic.setTopicName(req.getParameter("name"));
+				topic.setDescription(req.getParameter("description"));
+				topic.setTopicId(req.getParameter("id"));
+
+				long millis = System.currentTimeMillis();
+				Date date = new Date(millis);
+				topic.setCreateTime(date);
+
+				TopicTest oldModel = topicService.getOneTopicTest(topic.getTopicId());
+
+				if (req.getPart("image").getSize() == 0) {
+					topic.setImage(oldModel.getImage());
+				} else {
+					//xoa anh cu
+					if (oldModel.getImage() != null) {
+						String fileImg = oldModel.getImage();
+						DeleteImage.deleteImage(oldModel.getImage(), Constants.FOLDER_TOPIC);
+					}
+					//update anh moi
+					String fileName = "" + System.currentTimeMillis();
+					topic.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\"+ Constants.FOLDER_TOPIC +"\\", fileName));
+				}
+
+				topicService.updateTopic(topic);
+				req.setAttribute("messSuccess", "OKKKK");
+			} catch (Exception e) {
+				req.setAttribute("messError", e.getMessage());
+				e.printStackTrace();
+			}
+			resp.sendRedirect(req.getContextPath() + "/admin/listTopic");
+
+		} else if (url.contains("updateMockTest")) {
+			MockTest test = new MockTest();
+			try {
+
+				// BeanUtils.populate(topic, req.getParameterMap());
+				test.setTestId(req.getParameter("id"));
+				test.setTestName(req.getParameter("name"));
+				test.setDescription(req.getParameter("description"));
+				test.setCost(Integer.parseInt(req.getParameter("cost").toString()));
+
+				MockTest tempTest = mockService.findById(req.getParameter("id"));
+				TopicTest topic = topicService.getOneTopicTest(tempTest.getTopicTests().getTopicId());
+				test.setTopicTests(topic);
+
+				mockService.update(test);
+
+				req.setAttribute("topic", test);
+				req.setAttribute("messSuccess", "Thanh cong");
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("messError", e.getMessage());
+			}
+
+			resp.sendRedirect(req.getContextPath() + "/admin/listTopic");
+		}
+
 	}
 }

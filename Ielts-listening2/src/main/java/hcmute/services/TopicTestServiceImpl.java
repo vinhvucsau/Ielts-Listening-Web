@@ -8,10 +8,38 @@ import hcmute.entity.TopicTest;
 
 public class TopicTestServiceImpl implements ITopicTestService{
 
-	ITopicTestDAO topicDAO = new TopicTestDAOImpl();
+	TopicTestDAOImpl topicDAO = new TopicTestDAOImpl();
+
+
 	@Override
 	public List<TopicTest> getAllTopicTest() {
-		return topicDAO.getAllTopicTest();
+		// TODO Auto-generated method stub
+		return topicDAO.findAll();
 	}
+
+	@Override
+	public TopicTest getOneTopicTest(String topicID) {
+		return topicDAO.findById(topicID);
+	}
+
+	@Override
+	public void addTopic(TopicTest topic) {
+		topicDAO.insert(topic);;
+	}
+	@Override
+	public void addTopic(TopicTest topic) {
+		topicDAO.addTopic(topic);
+	}
+
+	@Override
+	public void deleteTopic(String topicID) throws Exception {
+		topicDAO.delete(topicID);
+	}
+
+	@Override
+	public void updateTopic(TopicTest newTopicID) throws Exception {
+		topicDAO.update(newTopicID);
+	}
+
 
 }
