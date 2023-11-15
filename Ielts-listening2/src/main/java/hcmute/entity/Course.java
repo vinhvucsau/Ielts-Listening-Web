@@ -35,7 +35,7 @@ public class Course implements Serializable{
 	private String image;
 	
 	@Column(columnDefinition = "int")
-	private int cost;
+	private Integer cost;
 	
 	@Column(name = "enrrollmentDate")
 	private String enrrolmentDate;
@@ -49,24 +49,6 @@ public class Course implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "creatorId")
 	private User users;
-
-	public Course(String courseId, String courseName, String description, String image, int cost, String enrrolmentDate,
-			List<EnrrolCourse> enrrolCourses, List<Lesson> lessons, User users) {
-		super();
-		this.courseId = courseId;
-		this.courseName = courseName;
-		this.description = description;
-		this.image = image;
-		this.cost = cost;
-		this.enrrolmentDate = enrrolmentDate;
-		this.enrrolCourses = enrrolCourses;
-		this.lessons = lessons;
-		this.users = users;
-	}
-	
-	public Course() {
-		super();
-	}
 
 	public String getCourseId() {
 		return courseId;
@@ -100,11 +82,11 @@ public class Course implements Serializable{
 		this.image = image;
 	}
 
-	public int getCost() {
+	public Integer getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	public void setCost(Integer cost) {
 		this.cost = cost;
 	}
 
@@ -139,6 +121,22 @@ public class Course implements Serializable{
 	public void setUsers(User users) {
 		this.users = users;
 	}
+
+	public Course(String courseId, String courseName, String description, String image, Integer cost,
+			String enrrolmentDate, List<EnrrolCourse> enrrolCourses, List<Lesson> lessons, User users) {
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.description = description;
+		this.image = image;
+		this.cost = cost;
+		this.enrrolmentDate = enrrolmentDate;
+		this.enrrolCourses = enrrolCourses;
+		this.lessons = lessons;
+		this.users = users;
+	}
+
 	
-	
+	public Course() {
+		super();
+	}
 }

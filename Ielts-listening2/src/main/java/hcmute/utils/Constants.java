@@ -3,7 +3,7 @@ package hcmute.utils;
 public class Constants {
 	public static final String USER_RELATION = "USER";
 	public static final String ACCOUNT_RELATION = "ACCOUNT";
-	public static final String ENRROL_COURSE_RELATION = "ENRROL_COURSE";
+	public static final String ENRROL_COURSE_RELATION = "enrrol_course";
 	public static final String COURSE_RELATION = "COURSE";
 	public static final String LESSON_RELATION = "COURSE";
 	public static final String ANSWER_LESSON_RELATION = "ANSWER_LESSON";
