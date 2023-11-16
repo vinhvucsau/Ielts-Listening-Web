@@ -45,7 +45,7 @@
 	<div style="height: 60px; background-color: red" class="header-admin">HEADER ADMIN</div>
 
 	<div class="admin-taobode container-fluid p-0 m-0">
-		<div class="row g-4">
+		<div class="row g-4 m-0">
 			<div
 				class="col col-8 admin-taobode-left position-relative text-center">
 				<h1 class="text--title color-blue--primary">IELTS Essential
