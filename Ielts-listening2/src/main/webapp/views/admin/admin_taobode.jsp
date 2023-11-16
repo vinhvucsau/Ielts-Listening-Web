@@ -41,7 +41,7 @@
 			arrMock.push(itemMock);
 		</c:forEach>
 	</script>
-
+	
 	<div style="height: 60px; background-color: red" class="header-admin">HEADER ADMIN</div>
 
 	<div class="admin-taobode container-fluid p-0 m-0">
@@ -276,6 +276,7 @@
 			)
         }
         
+        
       //update MockTest
 		var btn = document.getElementsByClassName("btn-popup-updateTest");
 		for (i = 0; i < btn.length; i++) {
@@ -287,7 +288,7 @@
 		        for(var t of arrMock) {
 	                if(t.testId === testID) {
 	                	console.log(t);
-	                	//document.querySelector(".popup .popup-upload__input").setAttribute("value", t.image) ;
+	                	//document.q   uerySelector(".popup .popup-upload__input").setAttribute("value", t.image) ;
 	                	document.querySelector(".popup .popup-title__input").setAttribute("value",t.testName) ;
 	                	document.querySelector(".popup .popup-descript__input").setAttribute("value", t.description) ;
 	                	document.querySelector(".popup .popup-id_input").setAttribute("value", t.testId) ;
@@ -295,11 +296,9 @@
 	                	document.querySelector(".popup .popup-cost__input").setAttribute("value", t.cost) ;
 	                	document.querySelector(".popup .form-popup").setAttribute("action", "updateMockTest") ;
 	                	//document.querySelector(".popup .form-popup").setAttribute("method", "GET") ;
-		                
 	                }
 	            }
 			}, false);
-	        
 		}
 		
 		//close popup

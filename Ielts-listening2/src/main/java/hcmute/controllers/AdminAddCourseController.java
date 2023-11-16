@@ -52,7 +52,7 @@ public class AdminAddCourseController extends HttpServlet {
 			List<MockTest> listMocktest = mockService.findAll();
 			req.setAttribute("listMocktest", listMocktest);
 
-			List<TopicTest> topicList = topicService.getAllTopicTest();
+				List<TopicTest> topicList = topicService.getAllTopicTest();
 			req.setAttribute("topicList", topicList);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_taobode.jsp");
