@@ -106,8 +106,8 @@ Long count = (Long) request.getAttribute("countCourse");
 								<span class="me-3">Mặc định</span>
 							</button>
 							<ul class="dropdown-menu bg-color-grey">
-								<li><a class="dropdown-item " href="#">Cao đến thấp</a></li>
-								<li><a class="dropdown-item " href="#">Thấp đến cao</a></li>
+								<li><a class="dropdown-item" href="admin/khoahoc/caodenthap">Cao đến thấp</a></li>
+								<li><a class="dropdown-item" href="#">Thấp đến cao</a></li>
 							</ul>
 						</div>
 					</div>
@@ -118,15 +118,7 @@ Long count = (Long) request.getAttribute("countCourse");
 			</div>
 			<div class="container-fluid p-0 m-0 ">
 				<div class="adminkhoahoc-course d-flex flex-wrap">
-					<c:forEach var="i" items="${course}">
-					
-					
-						<div >
-						
-							<input name="courseId" value="${i.courseId }">
-						</div>
-						
-						
+					<c:forEach var="i" items="${course}">				
 						<div class=" d-flex justify-content-center">
 							<div class="card adminkhoahoc-course--detail"
 								style="width: 14rem;">
@@ -152,11 +144,11 @@ Long count = (Long) request.getAttribute("countCourse");
 											data-rating="5">★</span>
 									</div>
 									12345
-									<c:forEach var="i" items="${listStar}">
+									<%-- <c:forEach var="i" items="${listStar}">
 									123
 									${listStar}
 										<div class="rating-value my-0">${i }</div>
-									</c:forEach>
+									</c:forEach> --%>
 								</div>
 							</div>
 						</div>

@@ -38,6 +38,7 @@ public class AdminKhoaHocController extends HttpServlet{
 	private void FindAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		try {
 			List<Course> list = adminKhoaHocService.FindAllCourse();
+
 			System.out.print(list.size());
 			req.setAttribute("course", list);
 			String courseId = req.getParameter("courseId");

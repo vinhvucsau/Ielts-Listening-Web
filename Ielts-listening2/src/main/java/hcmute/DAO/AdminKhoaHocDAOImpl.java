@@ -23,20 +23,27 @@ public class AdminKhoaHocDAOImpl implements IAdminKhoaHocDAO {
 	@Override
 	public List<Course> FindAllCourse() {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "select c from Course c";
+		String jpql = "select c from Course c ";
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
 	}
 
 	@Override
 	public Long starKhoaHoc(String courseIds) {
-	    EntityManager enma = JPAConfig.getEntityManager();
-	    String jpql = "SELECT ec.numberOfStart FROM EnrrolCourse ec WHERE ec.courses.courseId IN :courseIds";
-	    Query query = enma.createQuery(jpql);
-	    query.setParameter("courseIds", courseIds); 
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "SELECT ec.numberOfStart FROM EnrrolCourse ec WHERE ec.courses.courseId IN :courseIds";
+		Query query = enma.createQuery(jpql);
+		query.setParameter("courseIds", courseIds);
 		Long star = (Long) query.getSingleResult();
-	    return star;
+		return star;
 	}
 
+	@Override
+	public List<Course> FindAllCourseIncrease() {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c order by c.cost";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
+	}
 
 }
