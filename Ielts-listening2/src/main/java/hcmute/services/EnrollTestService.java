@@ -48,7 +48,7 @@ public class EnrollTestService{
 			try {
 				long numberOfCorrectAnswer = calcNumberOfCorrectAnswers(enrrolTestId);
 				long numberOfQuestion = calcNumberOfQuestTion(enrrolTestId);
-				double score = (double)numberOfCorrectAnswer / numberOfQuestion;
+				double score = 10*((double)numberOfCorrectAnswer / numberOfQuestion);
 				newEnrrolTest.setScore(score);
 				enrollTestDao.update(newEnrrolTest);
 			} catch (Exception e) {

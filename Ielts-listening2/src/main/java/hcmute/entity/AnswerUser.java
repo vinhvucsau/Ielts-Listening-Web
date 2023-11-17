@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.sym.Name;
 
 import hcmute.utils.Constants;
@@ -23,10 +24,12 @@ public class AnswerUser implements Serializable {
 	private AnswerUserId answerUserId;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "answerId", insertable = false, updatable = false)
 	private AnswerTest answerTest;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "enrrolId", insertable = false, updatable = false)
 	private EnrrolTest enrollTest;
 	private String answer;

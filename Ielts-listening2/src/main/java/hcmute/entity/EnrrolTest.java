@@ -1,7 +1,7 @@
 package hcmute.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import hcmute.utils.Constants;
 
 @Entity
@@ -28,7 +30,7 @@ public class EnrrolTest implements Serializable{
 	@GeneratedValue
 	private String enrrolId;
 	
-	@Column(columnDefinition = "date")
+	@Column(columnDefinition = "datetime")
 	private Date enrrollmentDate;
 	
 	@Column(columnDefinition = "int")
@@ -45,7 +47,7 @@ public class EnrrolTest implements Serializable{
 	@JoinColumn(name = "testId")
 	private MockTest mockTests;
 	
-	@OneToMany(mappedBy = "enrollTest", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "enrollTest", fetch = FetchType.LAZY)
 	private List<AnswerUser> answerUsers;
 
 	

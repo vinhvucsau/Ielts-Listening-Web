@@ -121,14 +121,10 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 									<p>Chưa trả lời</p>
 								</div>
 							</div>
-							<ul>
-								<c:set var="stt" value="0" scope="page"></c:set>
+							<c:set var="stt" value="${1}"/>
+							<ul class="mt-4 d-flex flex-wrap justify-content-center">
 								<c:forEach items="${enrollTest.mockTests.listeningParts}" var="listeningPart">
 									<c:forEach items="${listeningPart.answerTests}" var="answerTest" varStatus="status">
-										<c:if test="${stt % 5 == 0 }">
-											<li class="mt-4 d-flex justify-content-center">
-										</c:if>
-										
 										<c:set var="isCorrect" value="${false}" />
 										<c:if test="${not empty isCompleted}">
 											<c:forEach items="${enrollTest.answerUsers}" var="answerUser">
@@ -152,38 +148,31 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 										
 										<c:choose>
 										    <c:when test="${empty isCompleted and isAnswered}">
-										    	<a href="#" class="number-question-item answered" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a>
+										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
+										    	 class="number-question-item answered" enrollTestId="${enrollTest.enrrolId}"
+										    	 answerTestId="${answerTest.answerId}">${stt}</a></li>
 										    </c:when>
 										    <c:when test="${not empty isCompleted and isCorrect}">
-										    	<a href="#" class="number-question-item correct" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a>
+										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
+										    	 class="number-question-item correct" enrollTestId="${enrollTest.enrrolId}"
+										    	 answerTestId="${answerTest.answerId}">${stt}</a></li>
 										    </c:when>
 										    <c:when test="${not empty isCompleted and not isCorrect}">
-										    	<a href="#" class="number-question-item incorrect" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a>
+										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
+										    	 class="number-question-item incorrect" enrollTestId="${enrollTest.enrrolId}"
+										    	 answerTestId="${answerTest.answerId}">${stt}</a></li>
 										    </c:when>
 										    <c:otherwise>
-										        <a href="#" class="number-question-item" enrollTestId="${enrollTest.enrrolId}" 
-										        answerTestId="${answerTest.answerId}">${answerTest.number}</a>
+										        <li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
+										         class="number-question-item" enrollTestId="${enrollTest.enrrolId}" 
+										         answerTestId="${answerTest.answerId}">${stt}</a></li>
 										    </c:otherwise>
 										</c:choose>
+										<c:set var="stt" value="${stt + 1}"></c:set>
 	
-										<c:if test="${stt % 5 == 4 }">
-											</li>
-										</c:if>
-										<c:set var="stt" value="${stt + 1 }" scope="page"></c:set>
 									</c:forEach>
 								</c:forEach>
-							</ul>
-							<div class="row mt-3">
-								<div class="col d-flex justify-content-start">
-									<a href="#" class="btn-save-draft">Lưu nháp</a>
-								</div>
-								<div class="col d-flex justify-content-end">
-									<a href="#" class="btn-submit-test">Nộp bài</a>
-								</div>
-							</div>
+                            </ul>
 						</div>
 					</div>
 					<c:if test="${not empty isCompleted }">
@@ -205,7 +194,6 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 									<div>
 										<h3 class="test-score-value">${enrollTest.score}</h3>
 										<span>${numberOfCorrectAnswers} đáp án đúng / ${numberOfQuestTion} câu hỏi</span>
-										</span>
 									</div>
 								</div>
 							</div>
@@ -225,7 +213,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 							<div class="col d-flex justify-content-start">
 								<c:choose>
 									<c:when test="${not empty prevPart}">
-										<a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&prevPartId=${prevPart}"></c:url>'
+										<a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${prevPart}"></c:url>'
 										 class="prev-part d-flex">
 											<div class="icon me-2 d-flex align-items-center justify-content-center">
 												<i class="ti-arrow-left"></i>
@@ -250,7 +238,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 							<div class="col d-flex justify-content-end">
 								<c:choose>
 									<c:when test="${not empty nextPart}">
-										<a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&nextPartId=${nextPart}"></c:url>' 
+										<a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${nextPart}"></c:url>' 
 										class="next-part d-flex">
 											<h6>Phần sau</h6>
 											<div class="icon ms-2 d-flex align-items-center justify-content-center">
@@ -279,15 +267,13 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 								<img class="mt-3" src="${currentPart.image}" alt="bai thi">
 							</c:otherwise>
 						</c:choose>
-						<!-- <img class="mt-3"
-							src="https://ieltsdatio.edu.vn/wp-content/uploads/Picture1-910x1024.png"
-							alt="bai thi"> -->
 					</div>
 				</div>
 				<div class="col-3">
 					<ul class="answer-container">
+						<c:set var="i" value="${1}"></c:set>
 						<c:forEach items="${enrollTest.mockTests.listeningParts}" var="listeningPart">
-							<c:if test="${listeningPart.partId == currentPartId}">
+							<c:if test="${listeningPart.partId == currentPart.partId}">
 								<c:forEach items="${listeningPart.answerTests}" var="answerTest">
 									<c:set var="answer" value="" />
 									<c:forEach items="${enrollTest.answerUsers}" var="answerUser">
@@ -301,7 +287,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 										<c:choose>
 											<c:when test="${not empty answer and answer.equals(answerTest.answerKey)}">
 												<li class="answer-item correct d-flex">
-													<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+													<span class="number-question d-flex justify-content-center align-items-center">${i}</span>
 													<div class="col">
 														<input class="answer-input" type="text" value="${answer}">
 													</div>
@@ -309,7 +295,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 											</c:when>
 											<c:otherwise>
 												<li class="answer-item incorrect d-flex">
-													<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+													<span class="number-question d-flex justify-content-center align-items-center">${i}</span>
 													<div class="col">
 														<input class="answer-input" type="text" value="${answer}"> 
 														<span class="correct-answer">${answerTest.answerKey}</span>
@@ -320,31 +306,68 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 									</c:if>
 									<c:if test="${empty isCompleted}">
 										<li class="answer-item d-flex">
-											<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+											<span class="number-question d-flex justify-content-center align-items-center">${i}</span>
 											<div class="col">
 												<input class="answer-input not-completed" enrollTestId="${enrollTest.enrrolId}" answerTestId="${answerTest.answerId}" type="text" value="${answer}"> 
 											</div>
 										</li>
 									</c:if>
+									<c:set var="i" value="${i + 1}"></c:set>
 								</c:forEach>
 							</c:if>
+							<c:if test="${listeningPart.partId != currentPart.partId}">
+								<c:set var="i" value="${i + listeningPart.answerTests.size()}"></c:set>
+							</c:if>
+							
 						</c:forEach>
 					</ul>
 					<div class="text-center">
-						<c:choose>
-							<c:when test="${not empty nextPart}">
-								<a class="btn-next-questions" href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&nextPartId=${nextPart}"></c:url>'> Phần kế tiếp </a>
-							</c:when>
-							<c:otherwise>
-								<a class="btn-next-questions disabled" href="#"> Phần kế tiếp </a>
-							</c:otherwise>
-						</c:choose>
+						<c:if test="${not empty nextPart}">
+							<a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${nextPart}"></c:url>'
+							 class="d-flex btn-next-questions justify-content-center align-items-center">
+								<h6>Phần kế tiếp</h6> 
+							</a>
+						</c:if>
+						<c:if test="${(empty nextPart) and (empty isCompleted)}">
+							<button type="button" class="btn-submit-test d-flex justify-content-center align-items-center"
+							data-bs-toggle="modal" data-bs-target="#myModal">
+								<h6>Nộp bài</h6>
+							</button>
+						</c:if>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
+	<div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Xác nhận nộp bài</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+    
+                <!-- Modal body -->
+                <div class="modal-body overflow-auto">
+                    Danh sách câu hỏi
+                    <ul class="list-group">
+	                    <li class="list-group-item list-group-item-dark">Đã trả lời</li>
+	    				<li class="list-group-item list-group-item-light">Chưa trả lời</li>
+                    </ul>
+    
+                </div>
+    
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
+                    <a href='<c:url value="/test/complete_test?enrollTestId=${enrollTest.enrrolId}"></c:url>'
+                     class="btn btn-success">Xác nhận</a>
+                </div>
+            </div>
+        </div>
+    </div>
 	<script>
         const testTimer = document.querySelector('.test-time .timer');
         const player = document.querySelector('.audio-area .btn-toggle-play');
@@ -354,16 +377,10 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
         const progressVolume = document.querySelector('.audio-area .volume-range');
         const volumeText = document.querySelector('.audio-area .volume-text-value');
         
+        const apiUrl = window.location.protocol + '//' + window.location.host + '/Ielts-listening2/api-luyende_test';
         //thử nghiệm
-        document.querySelectorAll('.number-question-item').forEach((value)=>{
-            value.addEventListener('click',()=>{
-                var a = document.querySelector('.answer-item .answer-input');
-                a.focus();
-                console.log(a);
-            });
-        });
-        //thử nghiệm
-
+        const enrollTestId = '${enrollTest.enrrolId}';
+        
 
         var isPlaying = false;
 
@@ -379,7 +396,6 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 
         //Xử lí khi audio đã tải thành công lên trình duyệt
         audio.addEventListener('loadedmetadata', function () {
-        	console.log(audio.duration);
             if (audio.duration) {
                 audioTimer.querySelector('.time-duration').textContent =
                     convertSecondsToStringTime(audio.duration);
@@ -399,21 +415,9 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                     testTimer.textContent = fomattedTime;
                 }
                 else {
-                    fetch('http://localhost:8080/Ielts-listening2/api-luyende_test',
-                        {
-                            method:'PUT',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({enrrolId: enrollTestId})
-                        })
-                    .then(resp => {
-                        return resp.json();
-                    })
-                    .then(data => {
-                        location.reload();
-                    })
-                    .catch(error => {
-                        alert(error);
-                    })
+                	const completeTestUrl = window.location.protocol + '//' + window.location.host + 
+                	'/Ielts-listening2/test/complete_test?enrollTestId=' + enrollTestId;
+                	window.location.href = completeTestUrl;
                 }
             }
         }
@@ -487,7 +491,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                 var options = { method:"POST",
                         		body: JSON.stringify(data)
                         	  }
-                fetch("http://localhost:8080/Ielts-listening2/api-luyende_test",options)
+                fetch(apiUrl,options)
                 .then(resp => {
                 	return resp.json();
                 })
@@ -509,6 +513,33 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                 })
             };
        });
+        
+        const btnSubmit = document.querySelector('#test .btn-submit-test');
+        if(btnSubmit){
+        	btnSubmit.onclick = () => {
+        		const modalBody = document.querySelector('#myModal .modal-body ul');
+                var options = { method:"POST",
+                        		body: JSON.stringify({ enrrolId: enrollTestId})
+                        	  }
+                const url = window.location.protocol + '//' + window.location.host + '/Ielts-listening2/api-comfirm-answers';
+            	fetch(url,options)
+                .then(resp => {
+                	return resp.json();
+                })
+                .then(data => {
+                	var strRender = data.reduce((total, item) => total.concat('<li class="list-group-item '+
+                			(item["DaTraLoi"]? 'list-group-item-light':'list-group-item-dark')+' ">Câu '+
+                			item["CauHoiSo"] + ': ' + (item["DaTraLoi"]? 'Đã trả lời':'Chưa trả lời') + '</li>'),'');
+                	const modalBody = document.querySelector('#myModal .modal-body ul');
+                    modalBody.innerHTML = strRender;
+                })
+                .catch(error => {
+                	console.log(error);
+                });
+        	}
+        }
+        
+        
         setTestTime()
         setInterval(setTestTime, 1000);
     </script>
