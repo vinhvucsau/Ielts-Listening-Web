@@ -137,3 +137,20 @@
 	box-shadow: 2px 4px 75px 2px rgb(85 85 85 / 50%);
 	display: none;
 }
+
+/*.popup_add_list*/
+.popup_addpart  {
+   width: 100vw;
+	height: 100dvh;
+	padding: 15px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+	background: rgba(0, 0, 0, 0.6);
+}
+
+
+
+
