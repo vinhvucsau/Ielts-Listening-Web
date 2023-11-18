@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder.In;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.Course;
@@ -28,15 +29,6 @@ public class AdminKhoaHocDAOImpl implements IAdminKhoaHocDAO {
 		return q.getResultList();
 	}
 
-	@Override
-	public Long starKhoaHoc(String courseIds) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT ec.numberOfStart FROM EnrrolCourse ec WHERE ec.courses.courseId IN :courseIds";
-		Query query = enma.createQuery(jpql);
-		query.setParameter("courseIds", courseIds);
-		Long star = (Long) query.getSingleResult();
-		return star;
-	}
 
 	@Override
 	public List<Course> FindAllCourseIncreaseCost() {
@@ -44,6 +36,22 @@ public class AdminKhoaHocDAOImpl implements IAdminKhoaHocDAO {
 		String jpql = "select c from Course c order by c.cost";
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
+	}
+
+	@Override
+	public List<Course> FindAllCourseDecreaseCost() {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c order by c.cost desc";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
+	}
+
+	@Override
+	public List<Integer> starCourse(String courseId) {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c order by c.cost desc";
+		TypedQuery<Integer> q = en.createQuery(jpql, Course.class);
+		return star;
 	}
 
 }

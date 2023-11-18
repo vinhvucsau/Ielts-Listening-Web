@@ -9,23 +9,6 @@ Long count = (Long) request.getAttribute("countCourse");
 <%@ page import="javax.servlet.jsp.PageContext"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 
-<%
-// Sử dụng request
-String currentURL = ((HttpServletRequest) request).getRequestURL().toString();
-out.println("URL hiện tại từ request: " + currentURL);
-%>
-
-<br>
-
-<%
-// Sử dụng pageContext
-String contextPath = ((HttpServletRequest) pageContext.getRequest()).getContextPath();
-String servletPath = ((HttpServletRequest) pageContext.getRequest()).getServletPath();
-String pathInfo = ((HttpServletRequest) pageContext.getRequest()).getPathInfo();
-
-String currentURLPageContext = contextPath + servletPath + (pathInfo != null ? pathInfo : "");
-out.println("URL hiện tại từ pageContext: " + currentURLPageContext);
-%>
 
 
 <!DOCTYPE html>
@@ -70,6 +53,7 @@ out.println("URL hiện tại từ pageContext: " + currentURLPageContext);
 	margin-right: 40px;
 }
 </style>
+
 
 	<div class="adminkhoahoc container-fluid p-0 m-0 row">
 
@@ -126,14 +110,26 @@ out.println("URL hiện tại từ pageContext: " + currentURLPageContext);
 								class="btn bg-color-white dropdown-toggle border border-secondary-subtle "
 								type="button" data-bs-toggle="dropdown" aria-expanded="false"
 								style="width: 160px">
-								<span class="me-3">Mặc định</span>
+								<c:choose>
+									<c:when test="${param.gia == 'thapdencao'}">
+										<span class="me-3">Thấp đến cao</span>
+									</c:when>
+									<c:when test="${param.gia == 'caodenthap'}">
+										<span class="me-3">Cao đến thấp</span>
+									</c:when>
+									<c:otherwise>
+										<span class="me-3">Mặc định</span>
+									</c:otherwise>
+								</c:choose>
+
+
 							</button>
 							<ul class="dropdown-menu bg-color-grey">
 								<li><a class="dropdown-item"
-									href="/Ielts-listening2/admin/khoahoc/giacaodenthap">Cao
+									href="/Ielts-listening2/admin/khoahoc?gia=caodenthap">Cao
 										đến thấp</a></li>
 								<li><a class="dropdown-item"
-									href="/Ielts-listening2/admin/khoahoc/giathapdencao">Thấp
+									href="/Ielts-listening2/admin/khoahoc?gia=thapdencao">Thấp
 										đến cao</a></li>
 								<li><a class="dropdown-item"
 									href="/Ielts-listening2/admin/khoahoc">Mặc định</a></li>
@@ -147,117 +143,47 @@ out.println("URL hiện tại từ pageContext: " + currentURLPageContext);
 			</div>
 			<div class="container-fluid p-0 m-0 ">
 				<div class="adminkhoahoc-course d-flex flex-wrap">
-					<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-					<c:choose>
-						<c:when
-							test="${fn:contains(pageContext.request.requestURI, 'khoahoc')}">
-							<p>${(pageContext.request.requestURL)}</p>
-							<p>${(request.getRequestURL)}</p>
-							<c:forEach var="i" items="${courseIncreaseCost}">
-								<div class=" d-flex justify-content-center">
-									<div class="card adminkhoahoc-course--detail"
-										style="width: 14rem;">
-										<img style="cursor: pointer" src="${i.image }" width="100%"
-											height="150px" />
-										<div class="card-body adminkhoahoc-course--detail--info pb-0">
-											<p class="card-text text--h3 fs-5 my-0">${i.courseName}</p>
-											<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
-										</div>
-										<div
-											class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
-											<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
-											<p class="card-text fw-bold fs-5"
-												style="color: rgb(113, 113, 113)">VND</p>
-										</div>
+					<c:forEach var="i" items="${course}">
+						<div class=" d-flex justify-content-center">
+							<div class="card adminkhoahoc-course--detail"
+								style="width: 14rem;">
+								<img style="cursor: pointer" src="${i.image }" width="100%"
+									height="150px" />
+								<div class="card-body adminkhoahoc-course--detail--info pb-0">
+									<p class="card-text text--h3 fs-5 my-0 py-2">${i.courseName}</p>
+									<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
+								</div>
+								<div
+									class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
+									<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
+									<p class="card-text fw-bold fs-5"
+										style="color: rgb(113, 113, 113)">VND</p>
+								</div>
 
-										<div
-											class="rating my-0 d-flex flex-row justify-content-between mx-3">
-											<div class="rating-star">
-												<span class="star" data-rating="1">★</span> <span
-													class="star" data-rating="2">★</span> <span class="star"
-													data-rating="3">★</span> <span class="star" data-rating="4">★</span>
-												<span class="star" data-rating="5">★</span>
-											</div>
-											12345
-											<%-- <c:forEach var="i" items="${listStar}">
+								<div
+									class="rating my-0 d-flex flex-row justify-content-between mx-3">
+									<div class="rating-star">
+										<span class="star" data-rating="1">★</span> <span class="star"
+											data-rating="2">★</span> <span class="star" data-rating="3">★</span>
+										<span class="star" data-rating="4">★</span> <span class="star"
+											data-rating="5">★</span>
+									</div>
+									12345
+									<%-- <c:forEach var="i" items="${listStar}">
 									123
 									${listStar}
 										<div class="rating-value my-0">${i }</div>
 									</c:forEach> --%>
-										</div>
-									</div>
 								</div>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<p>mac dinh</p>
-							<c:forEach var="i" items="${course}">
-								<div class=" d-flex justify-content-center">
-									<div class="card adminkhoahoc-course--detail"
-										style="width: 14rem;">
-										<img style="cursor: pointer" src="${i.image }" width="100%"
-											height="150px" />
-										<div class="card-body adminkhoahoc-course--detail--info pb-0">
-											<p class="card-text text--h3 fs-5 my-0">${i.courseName}</p>
-											<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
-										</div>
-										<div
-											class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
-											<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
-											<p class="card-text fw-bold fs-5"
-												style="color: rgb(113, 113, 113)">VND</p>
-										</div>
-
-										<div
-											class="rating my-0 d-flex flex-row justify-content-between mx-3">
-											<div class="rating-star">
-												<span class="star" data-rating="1">★</span> <span
-													class="star" data-rating="2">★</span> <span class="star"
-													data-rating="3">★</span> <span class="star" data-rating="4">★</span>
-												<span class="star" data-rating="5">★</span>
-											</div>
-											12345
-											<%-- <c:forEach var="i" items="${listStar}">
-									123
-									${listStar}
-										<div class="rating-value my-0">${i }</div>
-									</c:forEach> --%>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
 
-		<script>
-			/* const dropDownRateItem = document.querySelectorAll(".dropdown-rate .dropdown-item");
-			const dropDownRateBtn = document.querySelector(".dropdown-rate button");
-			if(dropDownRateItem){
-				dropDownRateItem.forEach((dropdownItem) => {
-					dropdownItem.addEventListener("click", (e) => {
-						e.preventDefault();
-						dropDownRateBtn.querySelector("span").textContent = dropdownItem.textContent;
-					
-					})
-				})
-			}
-			
-			
-			const dropDownGiaItem = document.querySelectorAll(".dropdown-gia .dropdown-item");
-			const dropDownGiaBtn = document.querySelector(".dropdown-gia button");
-			if(dropDownGiaItem){
-				dropDownGiaItem.forEach((dropdownItem) => {
-					dropdownItem.addEventListener("click", (e) => {
-						e.preventDefault();
-						dropDownGiaBtn.textContent = dropdownItem.textContent;
-					})
-				})
-			}
-			 */
 
+		<script>
 			var ratingValue = 4; // Số thập phân bạn có
 
 			// Lấy tất cả các sao
@@ -275,9 +201,6 @@ out.println("URL hiện tại từ pageContext: " + currentURLPageContext);
 			if (ratingValue - Math.floor(ratingValue) >= 0.5) {
 				stars[Math.floor(ratingValue)].classList.add('half-rated');
 			}
-
-			// Hiển thị điểm số thập phân
-			ratingDisplay.textContent = ratingValue;
 		</script>
 	</div>
 

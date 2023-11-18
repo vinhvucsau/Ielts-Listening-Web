@@ -1,7 +1,6 @@
 package hcmute.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,31 +15,33 @@ import hcmute.services.AdminKhoaHocServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
 
 @WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/khoahoc/giathapdencao" })
-public class AdminKhoaHocController extends HttpServlet{
+public class AdminKhoaHocController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	IAdminKhoaHocService adminKhoaHocService = new AdminKhoaHocServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String url = req.getRequestURI().toString();
-		if (url.contains("khoahoc")) {
-			FindAll(req, resp);
-			Long count = adminKhoaHocService.countKhoaHoc();
-			req.setAttribute("countCourse", count);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
-			rd.forward(req, resp);
-		} else if(url.contains("giacaodenthap")){
-			FindAll(req, resp);
-			Long count = adminKhoaHocService.countKhoaHoc();
-			req.setAttribute("countCourse", count);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
-			rd.forward(req, resp);
-			
-		}else if(url.contains("giathapdencao")) {
+		String gia = req.getParameter("gia") == null ? "" : req.getParameter("gia");
+
+		if (gia.equals("thapdencao")) {
 			FindAllIncreaseCost(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
+		}else if(gia.equals("caodenthap")) {
+			FindAllDecreaseCost(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
+		}
+		else {
+			FindAll(req, resp);
 			Long count = adminKhoaHocService.countKhoaHoc();
 			req.setAttribute("countCourse", count);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
@@ -48,13 +49,31 @@ public class AdminKhoaHocController extends HttpServlet{
 		}
 	}
 
+	private void FindAllDecreaseCost(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			List<Course> list = adminKhoaHocService.FindAllCourseDecreaseCost();
+
+			req.setAttribute("course", list);
+			String courseId = req.getParameter("courseId");
+
+			Long listStar = adminKhoaHocService.starCourse(courseId);
+			req.setAttribute("listStar", listStar);
+			System.out.print("List star la: " + listStar);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("error", "Eror: " + e.getMessage());
+		}
+		
+	}
+
 	private void FindAllIncreaseCost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			List<Course> list = adminKhoaHocService.FindAllCourseIncreaseCost();
 
-			req.setAttribute("courseIncreaseCost", list);
+			req.setAttribute("course", list);
 			String courseId = req.getParameter("courseId");
-			
+
 			Long listStar = adminKhoaHocService.starCourse(courseId);
 			req.setAttribute("listStar", listStar);
 			System.out.print("List star la: " + listStar);
@@ -65,7 +84,7 @@ public class AdminKhoaHocController extends HttpServlet{
 		}
 	}
 
-	private void FindAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+	private void FindAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			List<Course> list = adminKhoaHocService.FindAllCourse();
 
@@ -74,7 +93,7 @@ public class AdminKhoaHocController extends HttpServlet{
 			String courseId = req.getParameter("courseId");
 
 			System.out.print("course Id la: " + courseId);
-			
+
 			Long listStar = adminKhoaHocService.starCourse(courseId);
 			req.setAttribute("listStar", listStar);
 			System.out.print("List star la: " + listStar);
@@ -84,5 +103,5 @@ public class AdminKhoaHocController extends HttpServlet{
 			req.setAttribute("error", "Eror: " + e.getMessage());
 		}
 	}
-	
+
 }

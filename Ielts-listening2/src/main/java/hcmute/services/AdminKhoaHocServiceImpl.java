@@ -28,6 +28,11 @@ public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService{
 	public List<Course> FindAllCourseIncreaseCost() {
 		return khoaHocDAO.FindAllCourseIncreaseCost();
 	}
+
+	@Override
+	public List<Course> FindAllCourseDecreaseCost() {
+		return khoaHocDAO.FindAllCourseDecreaseCost();
+	}
 	
 
 }
