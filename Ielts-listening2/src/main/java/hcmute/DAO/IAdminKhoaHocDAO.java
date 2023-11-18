@@ -7,6 +7,6 @@ import hcmute.entity.Course;
 public interface IAdminKhoaHocDAO {
 	Long countKhoaHoc();
 	List<Course> FindAllCourse();
-	List<Course> FindAllCourseIncrease();
+	List<Course> FindAllCourseIncreaseCost();
 	Long starKhoaHoc(String courseId);
 }

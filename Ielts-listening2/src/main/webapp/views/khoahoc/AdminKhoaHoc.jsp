@@ -5,6 +5,29 @@ Long count = (Long) request.getAttribute("countCourse");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
+<%@ page import="javax.servlet.jsp.PageContext"%>
+<%@ page import="javax.servlet.http.HttpServletRequest"%>
+
+<%
+// Sử dụng request
+String currentURL = ((HttpServletRequest) request).getRequestURL().toString();
+out.println("URL hiện tại từ request: " + currentURL);
+%>
+
+<br>
+
+<%
+// Sử dụng pageContext
+String contextPath = ((HttpServletRequest) pageContext.getRequest()).getContextPath();
+String servletPath = ((HttpServletRequest) pageContext.getRequest()).getServletPath();
+String pathInfo = ((HttpServletRequest) pageContext.getRequest()).getPathInfo();
+
+String currentURLPageContext = contextPath + servletPath + (pathInfo != null ? pathInfo : "");
+out.println("URL hiện tại từ pageContext: " + currentURLPageContext);
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,8 +113,8 @@ Long count = (Long) request.getAttribute("countCourse");
 								<span class="me-3">Mặc định</span>
 							</button>
 							<ul class="dropdown-menu bg-color-grey">
-								<li><a class="dropdown-item " href="#">Cao đến thấp</a></li>
-								<li><a class="dropdown-item " href="#">Thấp đến cao</a></li>
+								<li><a class="dropdown-item" href="">Cao đến thấp</a></li>
+								<li><a class="dropdown-item" href="#">Thấp đến cao</a></li>
 							</ul>
 						</div>
 					</div>
@@ -106,8 +129,14 @@ Long count = (Long) request.getAttribute("countCourse");
 								<span class="me-3">Mặc định</span>
 							</button>
 							<ul class="dropdown-menu bg-color-grey">
-								<li><a class="dropdown-item" href="admin/khoahoc/caodenthap">Cao đến thấp</a></li>
-								<li><a class="dropdown-item" href="#">Thấp đến cao</a></li>
+								<li><a class="dropdown-item"
+									href="/Ielts-listening2/admin/khoahoc/giacaodenthap">Cao
+										đến thấp</a></li>
+								<li><a class="dropdown-item"
+									href="/Ielts-listening2/admin/khoahoc/giathapdencao">Thấp
+										đến cao</a></li>
+								<li><a class="dropdown-item"
+									href="/Ielts-listening2/admin/khoahoc">Mặc định</a></li>
 							</ul>
 						</div>
 					</div>
@@ -118,47 +147,93 @@ Long count = (Long) request.getAttribute("countCourse");
 			</div>
 			<div class="container-fluid p-0 m-0 ">
 				<div class="adminkhoahoc-course d-flex flex-wrap">
-					<c:forEach var="i" items="${course}">				
-						<div class=" d-flex justify-content-center">
-							<div class="card adminkhoahoc-course--detail"
-								style="width: 14rem;">
-								<img style="cursor: pointer" src="${i.image }" width="100%"
-									height="150px" />
-								<div class="card-body adminkhoahoc-course--detail--info pb-0">
-									<p class="card-text text--h3 fs-5 my-0">${i.courseName}</p>
-									<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
-								</div>
-								<div
-									class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
-									<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
-									<p class="card-text fw-bold fs-5"
-										style="color: rgb(113, 113, 113)">VND</p>
-								</div>
+					<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+					<c:choose>
+						<c:when
+							test="${fn:contains(pageContext.request.requestURI, 'khoahoc')}">
+							<p>${(pageContext.request.requestURL)}</p>
+							<p>${(request.getRequestURL)}</p>
+							<c:forEach var="i" items="${courseIncreaseCost}">
+								<div class=" d-flex justify-content-center">
+									<div class="card adminkhoahoc-course--detail"
+										style="width: 14rem;">
+										<img style="cursor: pointer" src="${i.image }" width="100%"
+											height="150px" />
+										<div class="card-body adminkhoahoc-course--detail--info pb-0">
+											<p class="card-text text--h3 fs-5 my-0">${i.courseName}</p>
+											<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
+										</div>
+										<div
+											class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
+											<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
+											<p class="card-text fw-bold fs-5"
+												style="color: rgb(113, 113, 113)">VND</p>
+										</div>
 
-								<div
-									class="rating my-0 d-flex flex-row justify-content-between mx-3">
-									<div class="rating-star">
-										<span class="star" data-rating="1">★</span> <span class="star"
-											data-rating="2">★</span> <span class="star" data-rating="3">★</span>
-										<span class="star" data-rating="4">★</span> <span class="star"
-											data-rating="5">★</span>
-									</div>
-									12345
-									<%-- <c:forEach var="i" items="${listStar}">
+										<div
+											class="rating my-0 d-flex flex-row justify-content-between mx-3">
+											<div class="rating-star">
+												<span class="star" data-rating="1">★</span> <span
+													class="star" data-rating="2">★</span> <span class="star"
+													data-rating="3">★</span> <span class="star" data-rating="4">★</span>
+												<span class="star" data-rating="5">★</span>
+											</div>
+											12345
+											<%-- <c:forEach var="i" items="${listStar}">
 									123
 									${listStar}
 										<div class="rating-value my-0">${i }</div>
 									</c:forEach> --%>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-					</c:forEach>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<p>mac dinh</p>
+							<c:forEach var="i" items="${course}">
+								<div class=" d-flex justify-content-center">
+									<div class="card adminkhoahoc-course--detail"
+										style="width: 14rem;">
+										<img style="cursor: pointer" src="${i.image }" width="100%"
+											height="150px" />
+										<div class="card-body adminkhoahoc-course--detail--info pb-0">
+											<p class="card-text text--h3 fs-5 my-0">${i.courseName}</p>
+											<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
+										</div>
+										<div
+											class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
+											<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
+											<p class="card-text fw-bold fs-5"
+												style="color: rgb(113, 113, 113)">VND</p>
+										</div>
+
+										<div
+											class="rating my-0 d-flex flex-row justify-content-between mx-3">
+											<div class="rating-star">
+												<span class="star" data-rating="1">★</span> <span
+													class="star" data-rating="2">★</span> <span class="star"
+													data-rating="3">★</span> <span class="star" data-rating="4">★</span>
+												<span class="star" data-rating="5">★</span>
+											</div>
+											12345
+											<%-- <c:forEach var="i" items="${listStar}">
+									123
+									${listStar}
+										<div class="rating-value my-0">${i }</div>
+									</c:forEach> --%>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
 
 		<script>
-			const dropDownRateItem = document.querySelectorAll(".dropdown-rate .dropdown-item");
+			/* const dropDownRateItem = document.querySelectorAll(".dropdown-rate .dropdown-item");
 			const dropDownRateBtn = document.querySelector(".dropdown-rate button");
 			if(dropDownRateItem){
 				dropDownRateItem.forEach((dropdownItem) => {
@@ -181,29 +256,28 @@ Long count = (Long) request.getAttribute("countCourse");
 					})
 				})
 			}
-			
-			
-			
-			 var ratingValue = 4; // Số thập phân bạn có
+			 */
 
-			  // Lấy tất cả các sao
-			  var stars = document.querySelectorAll('.star');
-			  var ratingDisplay = document.querySelector('.rating-value');
+			var ratingValue = 4; // Số thập phân bạn có
 
-			  // Kích hoạt sao dựa trên điểm số
-			  for (var i = 0; i < stars.length; i++) {
-			    if (i < Math.floor(ratingValue)) {
-			      stars[i].classList.add('active');
-			    }
-			  }
+			// Lấy tất cả các sao
+			var stars = document.querySelectorAll('.star');
+			var ratingDisplay = document.querySelector('.rating-value');
 
-			  // Xử lý nửa ngôi sao nếu có
-			  if (ratingValue - Math.floor(ratingValue) >= 0.5) {
-			    stars[Math.floor(ratingValue)].classList.add('half-rated');
-			  }
+			// Kích hoạt sao dựa trên điểm số
+			for (var i = 0; i < stars.length; i++) {
+				if (i < Math.floor(ratingValue)) {
+					stars[i].classList.add('active');
+				}
+			}
 
-			  // Hiển thị điểm số thập phân
-			  ratingDisplay.textContent = ratingValue;
+			// Xử lý nửa ngôi sao nếu có
+			if (ratingValue - Math.floor(ratingValue) >= 0.5) {
+				stars[Math.floor(ratingValue)].classList.add('half-rated');
+			}
+
+			// Hiển thị điểm số thập phân
+			ratingDisplay.textContent = ratingValue;
 		</script>
 	</div>
 

@@ -39,7 +39,7 @@ public class AdminKhoaHocDAOImpl implements IAdminKhoaHocDAO {
 	}
 
 	@Override
-	public List<Course> FindAllCourseIncrease() {
+	public List<Course> FindAllCourseIncreaseCost() {
 		EntityManager en = JPAConfig.getEntityManager();
 		String jpql = "select c from Course c order by c.cost";
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);

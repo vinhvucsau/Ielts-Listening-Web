@@ -8,4 +8,5 @@ public interface IAdminKhoaHocService {
 	Long countKhoaHoc();
 	List<Course> FindAllCourse();
 	Long starCourse(String id);
+	List<Course> FindAllCourseIncreaseCost();
 }

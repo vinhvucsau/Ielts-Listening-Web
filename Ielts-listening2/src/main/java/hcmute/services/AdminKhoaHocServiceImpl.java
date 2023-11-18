@@ -23,6 +23,11 @@ public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService{
 	public Long starCourse(String id) {
 		return khoaHocDAO.starKhoaHoc(id);
 	}
+
+	@Override
+	public List<Course> FindAllCourseIncreaseCost() {
+		return khoaHocDAO.FindAllCourseIncreaseCost();
+	}
 	
 
 }
