@@ -8,12 +8,18 @@ import hcmute.entity.Account;
 import hcmute.entity.User;
 
 public class UserServiceImpl implements IUserService {
-	IUserDAO userDAO = new UserDAOImpl();
+	UserDAOImpl userDAO = new UserDAOImpl();
 
 	@Override
 	public User findUserByID(String id) {
 		// TODO Auto-generated method stub
-		return userDAO.findUserByID(id);
+		return userDAO.findById(id);
+	}
+
+	@Override
+	public void update(User user) {
+		// TODO Auto-generated method stub
+		userDAO.update(user);
 	}
 
 }

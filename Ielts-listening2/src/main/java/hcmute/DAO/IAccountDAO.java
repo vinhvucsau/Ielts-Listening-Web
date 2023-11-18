@@ -7,4 +7,8 @@ public interface IAccountDAO {
 	String SignUp(Account account);
 
 	User Login(Account account);
+	
+	Account findById(String id);
+	
+	void update(Account account);
 }

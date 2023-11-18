@@ -128,7 +128,7 @@
 								class="rounded-circle nav-link header-item" role="button"
 								data-bs-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false" alt=""
-								src="<c:url value='${currentUser.image }' />" />
+								src="<c:url value='/image?fname=userAvatar/${ currentUser.image}' />" />
 						</c:if>
 						<c:if test="${currentUser.image == null}">
 							<img style="width: 48px; height: 48px;"

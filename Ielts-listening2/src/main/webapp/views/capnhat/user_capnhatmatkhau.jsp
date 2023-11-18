@@ -10,24 +10,24 @@
 <body>
 	<div class="user_capnhat container-fluid p-0 m-0">
 		<div class="d-flex flex-xxl-row justify-content-center border-bottom border-gray-300 mt-5 ">
-			<a href="capnhattaikhoan" class="px-3 py-2 text--description text-dark">Tài khoản</a>
+			<a href="user-capnhattaikhoan" class="px-3 py-2 text--description text-dark">Tài khoản</a>
 			<a class="px-3 py-2 text--description color-blue--primary border-bottom border-primary">Mật khẩu</a>
 		</div>
 		<div style="min-height:500px" class="my-5">
 			<div class="row justify-content-center my-5">
 				<div class="col-lg-6">
-					<form class="row gx-3">
+					<form class="row gx-3" action="user-capnhatmatkhau" method="post">
 						<div class="col-12 mb-3">
 							<label for="inputOldPass" class="form-label text--h4">Mật khẩu cũ</label>
-							<input type="password" id="inputOldPass" class="form-control mt-2">
+							<input type="password" id="inputoldpass" name="inputOldPass" class="form-control shadow-none mt-2" required>
 						</div>
 						<div class="col-12 mb-3">
 						<label for="inputNewPass" class="form-label text--h4">Mật khẩu mới</label>
-						<input type="password" id="inputNewPass" class="form-control mt-2">
+						<input type="password" id="inputnewpass" name="inputNewPass" class="form-control shadow-none mt-2" required>
 						</div>
 						<div class="col-12 mb-3">
-							<label for="inputNewPassConfirm" class="form-label text--h4">Mật khẩu mới</label>
-							<input type="password" id="inputNewPassConfirm" class="form-control mt-2">
+							<label for="inputNewPassConfirm" class="form-label text--h4">Xác nhận mật khẩu</label>
+							<input type="password" id="inputnewpassconfirm" name="inputNewPassConfirm" class="form-control shadow-none mt-2">
 						</div>
 						<div class="col-12 mt-3 mb-5">
 							<div class="d-flex justify-content-center">
@@ -35,7 +35,6 @@
 							</div>
 						</div>
 					</form>
-					
 				</div>
 			</div>
 		</div>
