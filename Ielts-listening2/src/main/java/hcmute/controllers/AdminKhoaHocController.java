@@ -14,7 +14,7 @@ import hcmute.entity.Course;
 import hcmute.services.AdminKhoaHocServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
 
-@WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/khoahoc/giathapdencao" })
+@WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/deletecourse" })
 public class AdminKhoaHocController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -26,20 +26,38 @@ public class AdminKhoaHocController extends HttpServlet {
 
 		String url = req.getRequestURI().toString();
 		String gia = req.getParameter("gia") == null ? "" : req.getParameter("gia");
+		String rate = req.getParameter("rate") == null ? "" : req.getParameter("rate");
 
-		if (gia.equals("thapdencao")) {
+		if (url.contains("/deletecourse")) {
+			Delete(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/admin/khoahoc");
+		} else if (gia.equals("thapdencao")) {
 			FindAllIncreaseCost(req, resp);
 			Long count = adminKhoaHocService.countKhoaHoc();
 			req.setAttribute("countCourse", count);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
 			rd.forward(req, resp);
-		}else if(gia.equals("caodenthap")) {
+		} else if (gia.equals("caodenthap")) {
 			FindAllDecreaseCost(req, resp);
 			Long count = adminKhoaHocService.countKhoaHoc();
 			req.setAttribute("countCourse", count);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
 			rd.forward(req, resp);
+		} else if (rate.equals("thapdencao")) {
+			FindAllIncreaseRate(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
+
+		} else if (rate.equals("caodenthap")) {
+			FindAllDecreaseRate(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
 		}
+
 		else {
 			FindAll(req, resp);
 			Long count = adminKhoaHocService.countKhoaHoc();
@@ -49,16 +67,11 @@ public class AdminKhoaHocController extends HttpServlet {
 		}
 	}
 
-	private void FindAllDecreaseCost(HttpServletRequest req, HttpServletResponse resp) {
+	private void FindAllDecreaseRate(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			List<Course> list = adminKhoaHocService.FindAllCourseDecreaseCost();
+			List<Course> list = adminKhoaHocService.FindAllCourseDecreaseRate();
 
 			req.setAttribute("course", list);
-			String courseId = req.getParameter("courseId");
-
-			Long listStar = adminKhoaHocService.starCourse(courseId);
-			req.setAttribute("listStar", listStar);
-			System.out.print("List star la: " + listStar);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,16 +80,51 @@ public class AdminKhoaHocController extends HttpServlet {
 		
 	}
 
+	private void FindAllIncreaseRate(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			List<Course> list = adminKhoaHocService.FindAllCourseIncreaseRate();
+
+			req.setAttribute("course", list);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("error", "Eror: " + e.getMessage());
+		}
+
+		
+	}
+
+	private void Delete(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			String courseId = req.getParameter("courseId");
+			System.out.print("courseId la: " + courseId);
+			adminKhoaHocService.deleteCourse(courseId);
+			req.setAttribute("Message", "Da xoa thanh cong");
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("error", "Eror: " + e.getMessage());
+		}
+
+	}
+
+	private void FindAllDecreaseCost(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			List<Course> list = adminKhoaHocService.FindAllCourseDecreaseCost();
+
+			req.setAttribute("course", list);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("error", "Eror: " + e.getMessage());
+		}
+	}
+
 	private void FindAllIncreaseCost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			List<Course> list = adminKhoaHocService.FindAllCourseIncreaseCost();
 
 			req.setAttribute("course", list);
 			String courseId = req.getParameter("courseId");
-
-			Long listStar = adminKhoaHocService.starCourse(courseId);
-			req.setAttribute("listStar", listStar);
-			System.out.print("List star la: " + listStar);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,13 +138,6 @@ public class AdminKhoaHocController extends HttpServlet {
 
 			System.out.print(list.size());
 			req.setAttribute("course", list);
-			String courseId = req.getParameter("courseId");
-
-			System.out.print("course Id la: " + courseId);
-
-			Long listStar = adminKhoaHocService.starCourse(courseId);
-			req.setAttribute("listStar", listStar);
-			System.out.print("List star la: " + listStar);
 
 		} catch (Exception e) {
 			e.printStackTrace();

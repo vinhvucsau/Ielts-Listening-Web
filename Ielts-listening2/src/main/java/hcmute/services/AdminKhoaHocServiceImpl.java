@@ -20,11 +20,6 @@ public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService{
 	}
 
 	@Override
-	public Long starCourse(String id) {
-		return khoaHocDAO.starKhoaHoc(id);
-	}
-
-	@Override
 	public List<Course> FindAllCourseIncreaseCost() {
 		return khoaHocDAO.FindAllCourseIncreaseCost();
 	}
@@ -32,6 +27,21 @@ public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService{
 	@Override
 	public List<Course> FindAllCourseDecreaseCost() {
 		return khoaHocDAO.FindAllCourseDecreaseCost();
+	}
+
+	@Override
+	public void deleteCourse(String course) throws Exception {
+		khoaHocDAO.deleteCourse(course);
+	}
+
+	@Override
+	public List<Course> FindAllCourseIncreaseRate() {
+		return khoaHocDAO.FindAllCourseIncreaseRate();
+	}
+
+	@Override
+	public List<Course> FindAllCourseDecreaseRate() {
+		return khoaHocDAO.FindAllCourseDecreaseRate();
 	}
 	
 

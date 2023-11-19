@@ -174,7 +174,4 @@ public class Lesson implements Serializable {
 		this.enrrolLesson = enrrolLesson;
 		this.courses = courses;
 	}
-	
-	
-
 }

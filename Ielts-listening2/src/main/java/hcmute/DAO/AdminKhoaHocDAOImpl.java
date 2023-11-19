@@ -3,9 +3,9 @@ package hcmute.DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder.In;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.Course;
@@ -29,7 +29,6 @@ public class AdminKhoaHocDAOImpl implements IAdminKhoaHocDAO {
 		return q.getResultList();
 	}
 
-
 	@Override
 	public List<Course> FindAllCourseIncreaseCost() {
 		EntityManager en = JPAConfig.getEntityManager();
@@ -47,11 +46,42 @@ public class AdminKhoaHocDAOImpl implements IAdminKhoaHocDAO {
 	}
 
 	@Override
-	public List<Integer> starCourse(String courseId) {
-		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "select c from Course c order by c.cost desc";
-		TypedQuery<Integer> q = en.createQuery(jpql, Course.class);
-		return star;
+	public void deleteCourse(String courseId) throws Exception {
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+			trans.begin();
+			Course course = enma.find(Course.class, courseId);
+			if (course != null) {
+				enma.remove(course);
+			} else {
+				throw new Exception("Không tìm thấy");
+			}
+			trans.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			trans.rollback();
+			throw e;
+		} finally {
+			enma.close();
+		}
 	}
 
+	@Override
+	public List<Course> FindAllCourseIncreaseRate() {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(e.numberOfStar)";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
+	}
+
+	@Override
+	public List<Course> FindAllCourseDecreaseRate() {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e group by c ORDER BY AVG(e.numberOfStar) DESC";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
+	}
 }

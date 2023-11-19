@@ -10,7 +10,6 @@ Long count = (Long) request.getAttribute("countCourse");
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +50,10 @@ Long count = (Long) request.getAttribute("countCourse");
 .adminkhoahoc-course--detail {
 	margin-bottom: 60px;
 	margin-right: 40px;
+}
+
+.button-delete-course:hover {
+	color: red;
 }
 </style>
 
@@ -94,11 +97,29 @@ Long count = (Long) request.getAttribute("countCourse");
 								class="btn bg-color-white dropdown-toggle border border-secondary-subtle"
 								type="button" data-bs-toggle="dropdown" aria-expanded="false"
 								style="width: 160px">
-								<span class="me-3">Mặc định</span>
+								<!-- 								<span class="me-3">Mặc định</span>
+ -->
+								<c:choose>
+									<c:when test="${param.rate == 'thapdencao'}">
+										<span class="me-3">Thấp đến cao</span>
+									</c:when>
+									<c:when test="${param.rate == 'caodenthap'}">
+										<span class="me-3">Cao đến thấp</span>
+									</c:when>
+									<c:otherwise>
+										<span class="me-3">Mặc định</span>
+									</c:otherwise>
+								</c:choose>
 							</button>
 							<ul class="dropdown-menu bg-color-grey">
-								<li><a class="dropdown-item" href="">Cao đến thấp</a></li>
-								<li><a class="dropdown-item" href="#">Thấp đến cao</a></li>
+								<li><a class="dropdown-item"
+									href="/Ielts-listening2/admin/khoahoc?rate=caodenthap">Cao
+										đến thấp</a></li>
+								<li><a class="dropdown-item"
+									href="/Ielts-listening2/admin/khoahoc?rate=thapdencao">Thấp
+										đến cao</a></li>
+								<li><a class="dropdown-item"
+									href="/Ielts-listening2/admin/khoahoc">Mặc định</a></li>
 							</ul>
 						</div>
 					</div>
@@ -150,7 +171,17 @@ Long count = (Long) request.getAttribute("countCourse");
 								<img style="cursor: pointer" src="${i.image }" width="100%"
 									height="150px" />
 								<div class="card-body adminkhoahoc-course--detail--info pb-0">
-									<p class="card-text text--h3 fs-5 my-0 py-2">${i.courseName}</p>
+									<div class="d-flex justify-content-between">
+										<p class="card-text text--h3 fs-5 my-0 py-2">${i.courseName}</p>
+										<a
+											href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
+												class="btn btn-sm rounded-0 button-delete-course"
+												type="button" data-toggle="tooltip" data-placement="top"
+												title="Delete">
+												<i class="fa fa-trash"></i>
+											</button></a>
+
+									</div>
 									<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
 								</div>
 								<div
@@ -159,21 +190,35 @@ Long count = (Long) request.getAttribute("countCourse");
 									<p class="card-text fw-bold fs-5"
 										style="color: rgb(113, 113, 113)">VND</p>
 								</div>
+								<div class="d-flex justify-content-between">
+									<c:forEach var="lesson" items="${i.lessons}">
+										<c:forEach var="enrrol_lesson" items="${lesson.enrrolLesson }">
 
-								<div
-									class="rating my-0 d-flex flex-row justify-content-between mx-3">
-									<div class="rating-star">
-										<span class="star" data-rating="1">★</span> <span class="star"
-											data-rating="2">★</span> <span class="star" data-rating="3">★</span>
-										<span class="star" data-rating="4">★</span> <span class="star"
-											data-rating="5">★</span>
-									</div>
-									12345
-									<%-- <c:forEach var="i" items="${listStar}">
-									123
-									${listStar}
-										<div class="rating-value my-0">${i }</div>
-									</c:forEach> --%>
+
+											<c:set var="totalStars" value="0" />
+											<c:set var="count" value="0" />
+											<c:forEach var="lesson" items="${i.lessons}">
+												<c:forEach var="enrrol_lesson"
+													items="${lesson.enrrolLesson}">
+													<c:set var="totalStars"
+														value="${totalStars +enrrol_lesson.numberOfStar}" />
+													<c:set var="count" value="${count + 1}" />
+												</c:forEach>
+											</c:forEach>
+											<c:choose>
+												<c:when test="${count > 0}">
+													<c:set var="averageStars" value="${totalStars / count}" />
+													<c:set var="roundedAverage">
+														<c:out
+															value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+													</c:set>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</c:forEach>
+									<div class="stars rating-star ps-3 "
+										data-rating="${roundedAverage}"></div>
+									<div class="rating-avg pe-3">${roundedAverage}</div>
 								</div>
 							</div>
 						</div>
@@ -181,28 +226,24 @@ Long count = (Long) request.getAttribute("countCourse");
 				</div>
 			</div>
 		</div>
-
-
-		<script>
-			var ratingValue = 4; // Số thập phân bạn có
-
-			// Lấy tất cả các sao
-			var stars = document.querySelectorAll('.star');
-			var ratingDisplay = document.querySelector('.rating-value');
-
-			// Kích hoạt sao dựa trên điểm số
-			for (var i = 0; i < stars.length; i++) {
-				if (i < Math.floor(ratingValue)) {
-					stars[i].classList.add('active');
-				}
-			}
-
-			// Xử lý nửa ngôi sao nếu có
-			if (ratingValue - Math.floor(ratingValue) >= 0.5) {
-				stars[Math.floor(ratingValue)].classList.add('half-rated');
-			}
-		</script>
 	</div>
-
+	<script>
+	    document.querySelectorAll('.stars').forEach(starContainer => {
+	        const rating = parseInt(starContainer.getAttribute('data-rating'));
+	        starContainer.innerHTML = getStarRating(rating);
+	    });
+	
+	    function getStarRating(rating) {
+	        let stars = '';
+	        for (let i = 0; i < 5; i++) {
+	            if (i < rating) {
+	                stars += '⭐'; 
+	            } else {
+	                stars += '★'; 
+	            }
+	        }
+	        return stars;
+	    }
+	</script>
 </body>
 </html>

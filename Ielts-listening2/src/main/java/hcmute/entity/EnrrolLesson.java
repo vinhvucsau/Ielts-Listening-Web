@@ -21,15 +21,14 @@ public class EnrrolLesson implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
 	private String enrrolId;
 	
 	@Column(name = "enrrollmentDate")
 	private Date enrrollmentDate;
 
-	@Column(name = "numberOfStart")
-	private Integer numberOfStart;
+	@Column(name = "numberOfStar")
+	private Integer numberOfStar;
 	
 	@Column(name = "score")
 	private double score;
@@ -65,12 +64,12 @@ public class EnrrolLesson implements Serializable {
 		this.enrrollmentDate = enrrollmentDate;
 	}
 
-	public Integer getNumberOfStart() {
-		return numberOfStart;
+	public Integer getNumberOfStar() {
+		return numberOfStar;
 	}
 
-	public void setNumberOfStart(Integer numberOfStart) {
-		this.numberOfStart = numberOfStart;
+	public void setNumberOfStar(Integer numberOfStar) {
+		this.numberOfStar = numberOfStar;
 	}
 
 	public double getScore() {
@@ -105,11 +104,11 @@ public class EnrrolLesson implements Serializable {
 		this.answerLessonUser = answerLessonUser;
 	}
 
-	public EnrrolLesson(String enrrolId, Date enrrollmentDate, Integer numberOfStart, double score, User users,
+	public EnrrolLesson(String enrrolId, Date enrrollmentDate, Integer numberOfStar, double score, User users,
 			Lesson lessons, List<AnswerLessonUser> answerLessonUser) {
 		this.enrrolId = enrrolId;
 		this.enrrollmentDate = enrrollmentDate;
-		this.numberOfStart = numberOfStart;
+		this.numberOfStar = numberOfStar;
 		this.score = score;
 		this.users = users;
 		this.lessons = lessons;

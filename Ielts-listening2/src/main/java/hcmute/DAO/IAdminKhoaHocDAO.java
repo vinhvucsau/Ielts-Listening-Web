@@ -9,5 +9,7 @@ public interface IAdminKhoaHocDAO {
 	List<Course> FindAllCourse();
 	List<Course> FindAllCourseIncreaseCost();
 	List<Course> FindAllCourseDecreaseCost();
-	List<Integer> starCourse(String courseId);
+	List<Course> FindAllCourseIncreaseRate();
+	List<Course> FindAllCourseDecreaseRate();
+	void deleteCourse(String courseId) throws Exception;
 }
