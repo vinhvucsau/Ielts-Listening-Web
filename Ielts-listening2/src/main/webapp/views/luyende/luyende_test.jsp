@@ -352,6 +352,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                 <!-- Modal body -->
                 <div class="modal-body overflow-auto">
                     Danh sách câu hỏi
+                    <div class="spinner-border text-primary d-none"></div>
                     <ul class="list-group">
 	                    <li class="list-group-item list-group-item-dark">Đã trả lời</li>
 	    				<li class="list-group-item list-group-item-light">Chưa trả lời</li>
@@ -368,6 +369,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
             </div>
         </div>
     </div>
+    <div id="my-toast"></div>
 	<script>
         const testTimer = document.querySelector('.test-time .timer');
         const player = document.querySelector('.audio-area .btn-toggle-play');
@@ -401,6 +403,19 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                     convertSecondsToStringTime(audio.duration);
             }
         });
+        
+        function remindTimeTest({
+        	title = '', 
+            message = '', 
+            type = 'info'}
+        ){
+        	toast({title: title, message: message, type: type, duration: 5000});
+    		const clock = document.querySelector('#test .nav-test .test-time i');
+    		clock.style.animation = 'rotate 0.5s ease infinite alternate, ripple 3s linear infinite';
+    		setTimeout(()=>{
+    			clock.style.animation = 'none';
+            },20000)
+        }
 
         function setTestTime() {
             var valueNow = parseInt(testTimer.getAttribute('valuenow'));
@@ -411,13 +426,20 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                     valueNow += 1;
                     testTimer.setAttribute('valueNow', valueNow);
                     timeRemaining = valueMax - valueNow;
+	            	if(timeRemaining == 5*60){
+	            		remindTimeTest({title: "Chú ý", message: 'Bạn còn lại 5 phút', type: 'info'});
+	            	}
+	            	if(timeRemaining == 1*60){
+	                    remindTimeTest({title: "Chú ý", message: 'Bạn còn lại 1 phút', type: 'warning'})
+	            	}
                     var fomattedTime = convertSecondsToStringTime(timeRemaining);
                     testTimer.textContent = fomattedTime;
                 }
                 else {
                 	const completeTestUrl = window.location.protocol + '//' + window.location.host + 
                 	'/Ielts-listening2/test/complete_test?enrollTestId=' + enrollTestId;
-                	window.location.href = completeTestUrl;
+                	//window.location.href = completeTestUrl;
+                	window.location.replace(completeTestUrl);
                 }
             }
         }
@@ -509,7 +531,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                		answerInput.value = enrollTest['answer'];
                 })
                 .catch(error => {
-                	alert(error);
+                	toast({title: 'Lỗi', message: 'Không thể lưu câu trả lời', type: 'error', duration: 3000});
                 })
             };
        });
@@ -517,7 +539,11 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
         const btnSubmit = document.querySelector('#test .btn-submit-test');
         if(btnSubmit){
         	btnSubmit.onclick = () => {
+        		const spinner = document.querySelector('#myModal .modal-body .spinner-border');
+        		spinner.classList.remove('d-none');
         		const modalBody = document.querySelector('#myModal .modal-body ul');
+        		modalBody.innerHTML = '';
+        		
                 var options = { method:"POST",
                         		body: JSON.stringify({ enrrolId: enrollTestId})
                         	  }
@@ -532,13 +558,60 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                 			item["CauHoiSo"] + ': ' + (item["DaTraLoi"]? 'Đã trả lời':'Chưa trả lời') + '</li>'),'');
                 	const modalBody = document.querySelector('#myModal .modal-body ul');
                     modalBody.innerHTML = strRender;
+                    spinner.classList.add('d-none');
                 })
                 .catch(error => {
+                	toast({title: 'Lỗi', message: 'Không thể tải các câu trả lời', type: 'error', duration: 5000});
+                	spinner.classList.add('d-none');
                 	console.log(error);
                 });
         	}
         }
         
+        function toast({
+            title = '', 
+            message = '', 
+            type = 'info', 
+            duration = 3000
+        }) {
+            const myToast = document.getElementById('my-toast');
+            const icons = {
+                info: 'ti-info',
+                warning: 'ti-face-sad',
+                error:'ti-face-sad'
+            };
+            const icon = icons[type];
+            if(myToast){
+                const toast = document.createElement('div');
+
+                const autoRemove = setTimeout(function(){
+                    myToast.removeChild(toast);
+                }, duration + 1000);
+
+                toast.onclick = function(e) {
+                    if(e.target.closest('.toast-close')){
+                        myToast.removeChild(toast);
+                        clearTimeout(autoRemove);
+                    }
+                }
+
+                const delay = (duration / 1000).toFixed(2);
+                toast.classList.add('my-toast','toast-' + type);
+                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s `+ delay +`s forwards`;
+                toast.innerHTML = `<div class="toast-icon rounded-circle">
+                                        <i class="` + icon + `"></i>
+                                    </div>
+                                    <div class="toast-body">
+                                        <h6 class="toast-title">`+ title + `</h6>
+                                        <p class="toast-msg">` + message + `</p>
+                                    </div>
+                                    <div class="toast-close">
+                                        <i class="ti-close"></i>
+                                    </div>
+                                    <div class="my-border"></div>`;
+                myToast.appendChild(toast);
+            }
+        }
         
         setTestTime()
         setInterval(setTestTime, 1000);

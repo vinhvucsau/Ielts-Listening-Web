@@ -154,9 +154,9 @@ public class TestControllers extends HttpServlet{
 		EnrrolTest enrollTest = enrollTestService.findById(enrollTestId);
 		if(enrollTest != null && enrollTest.getScore() == null) {
 			enrollTestService.completeTest(enrollTestId);
-			String childUrl = "/test/luyende_test?enrollTestId=" +enrollTestId;
-			resp.sendRedirect(req.getContextPath() + childUrl);
 		}
+		String childUrl = "/test/luyende_test?enrollTestId=" +enrollTestId;
+		resp.sendRedirect(req.getContextPath() + childUrl);
 	}
 	
 	protected void postSaveAnswers(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
