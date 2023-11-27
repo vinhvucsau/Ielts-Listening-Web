@@ -13,6 +13,8 @@
 		<span>${currentUser.sex}</span>
 		<span>${currentUser.email}</span>
 		<span>${currentUser.image }</span>
+		
+		<span>HOME</span>
 	</div>
 </body>
 </html>
