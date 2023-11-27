@@ -14,7 +14,7 @@
 	<nav class="navbar navbar-expand-lg shadow-none">
 		<div class="container px-0">
 			<a class="navbar-brand" href="./index.html"><img
-				src="./assets/images/brand/logo/logo.svg" alt="Geeks" /></a>
+				src="../assets/images/brand/logo/logo.svg" alt="Geeks" /></a>
 			<div class="d-flex align-items-center order-lg-3">
 				<div class="d-flex align-items-center">
 					<div class="dropdown me-2">

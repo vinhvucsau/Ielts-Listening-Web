@@ -28,24 +28,24 @@
 	type="text/css">
 
 <link rel="stylesheet"
-	href="./assets/libs/glightbox/dist/css/glightbox.min.css" />
+	href="../assets/libs/glightbox/dist/css/glightbox.min.css" />
 
 <!-- Favicon icon-->
 <link rel="shortcut icon" type="image/x-icon"
-	href="./assets/images/favicon/favicon.ico" />
+	href="../assets/images/favicon/favicon.ico" />
 
 <!-- darkmode js -->
-<script src="./assets/js/vendors/darkMode.js"></script>
+<script src="../assets/js/vendors/darkMode.js"></script>
 
 <!-- Libs CSS -->
-<link href="./assets/fonts/feather/feather.css" rel="stylesheet" />
-<link href="./assets/libs/bootstrap-icons/font/bootstrap-icons.min.css"
+<link href="../assets/fonts/feather/feather.css" rel="stylesheet" />
+<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.min.css"
 	rel="stylesheet" />
-<link href="./assets/libs/simplebar/dist/simplebar.min.css"
+<link href="../assets/libs/simplebar/dist/simplebar.min.css"
 	rel="stylesheet" />
 
 <!-- Theme CSS -->
-<link rel="stylesheet" href="./assets/css/theme.min.css" />
+<link rel="stylesheet" href="../assets/css/theme.min.css" />
 
 <title>Education - Geeks Bootstrap 5 Template</title>
 
@@ -60,16 +60,16 @@
 
 	<!-- Scripts -->
 	<!-- Libs JS -->
-	<script src="./assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
-	<script src="./assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="./assets/libs/simplebar/dist/simplebar.min.js"></script>
+	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
 
 	<!-- Theme JS -->
-	<script src="./assets/js/theme.min.js"></script>
+	<script src="../assets/js/theme.min.js"></script>
 
-	<script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-	<script src="./assets/js/vendors/chart.js"></script>
-	<script src="./assets/libs/flatpickr/dist/flatpickr.min.js"></script>
-	<script src="./assets/js/vendors/flatpickr.js"></script>
+	<script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script src="../assets/js/vendors/chart.js"></script>
+	<script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+	<script src="../assets/js/vendors/flatpickr.js"></script>
 </body>
 </html>
