@@ -8,9 +8,7 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
 	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,27 +17,62 @@
 	rel="stylesheet">
 
 <link href='<c:url value="/stylecss/base/base.css" />' rel="stylesheet"
-	type="text/css"> 
+	type="text/css">
 <link href='<c:url value="/stylecss/components/dropdown.css" />'
 	rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="../assets/libs/flatpickr/dist/flatpickr.min.css" />
+<!-- Required meta tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="author" content="Codescandy" />
 
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon"
+	href="../assets/images/favicon/favicon.ico" />
 
+<script src="../assets/js/vendors/darkMode.js"></script>
+<!-- Libs CSS -->
+<link href="../assets/fonts/feather/feather.css" rel="stylesheet" />
+<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.min.css"
+	rel="stylesheet" />
+<link href="../assets/libs/simplebar/dist/simplebar.min.css"
+	rel="stylesheet" />
 
+<!-- Theme CSS -->
+<link rel="stylesheet" href="../assets/css/theme.min.css" />
+
+<title>Dashboard | Geeks - Bootstrap 5 Admin Dashboard Template</title>
 </head>
+
 <body>
-	<div style="font-size: 16px;" class="admin container-fluid ">
-		<div class="d-flex ">
-			<div class=" fixed-left ">
-				<%@ include file="/common/admin/Left.jsp"%></div>
-			<div class=" ">
+
+	<div id="db-wrapper">
+		<div>
+			<%@ include file="/common/admin/Left.jsp"%></div>
+		<main id="page-content">
+			<div>
+				<%@ include file="/common/admin/Header.jsp"%></div>
+			<div style="padding-left: 24px; padding-right: 24px;">
 				<decorator:body>
 				</decorator:body>
 			</div>
-		</div>
+		</main>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+	<!-- Theme JS -->
+	<script src="../assets/js/theme.min.js"></script>
+
+	<script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script src="../assets/js/vendors/chart.js"></script>
+	<script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+	<script src="../assets/js/vendors/flatpickr.js"></script>
 </body>
 </html>

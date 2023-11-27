@@ -42,7 +42,6 @@
 		</c:forEach>
 	</script>
 
-	<div style="height: 60px; background-color: red" class="header-admin">HEADER ADMIN</div>
 
 	<div class="admin-taobode container-fluid p-0 m-0">
 		<div class="row g-4">
@@ -64,16 +63,16 @@
 						<div class="bodethi">
 							<button value="${t.topicId}"
 								class="accordion d-flex justify-content-between align-items-center text--h3 color-white bg-color-blue--primary rounder-8">
-								<span class="accordion-order"></span> 
-								<span class="accordion-title ms-4">${t.topicName}</span>
-							
+								<span class="accordion-order"></span> <span
+									class="accordion-title ms-4">${t.topicName}</span>
+
 								<div class="icon-list d-flex ">
 									<a href="#" class="btn-openpopup icon-link icon-update"
 										value="${t.topicId }"> <i
-										class="fa-solid fa-pen me-4 color-white"></i>
+										class="nav-icon fe fe-edit-2 me-4 color-white"></i>
 									</a> <a href="<c:url value='/admin/deleteTopic?id=${t.topicId}'/>"
 										class="icon-link icon-delete"> <i
-										class="fa-solid fa-trash color-white"></i>
+										class="nav-icon fe fe-trash color-white"></i>
 									</a>
 								</div>
 							</button>
@@ -83,18 +82,18 @@
 									<c:forEach var="m" items="${listMocktest }">
 										<c:choose>
 											<c:when test="${t.topicId == m.topicTests.topicId}">
-												<li class="item bg-color-blue--light mb-4 text--h3">
-													<a class="item-link text-start" href="<c:url value='/admin/listPart?idTest=${m.testId}'/>">${m.testName }</a>
+												<li class="item bg-color-blue--light mb-4 text--h3"><a
+													class="item-link text-start"
+													href="<c:url value='/admin/listPart?idTest=${m.testId}'/>">${m.testName }</a>
 													<div class="item-icon">
 														<a href="#"
 															class="btn-popup-updateTest icon-link icon-update"
-															value="${m.testId}"> 
-															<i class="fa-solid fa-pen me-4 color-blue--primary"></i>
-														</a> 
-														<a
+															value="${m.testId}"> <i
+															class="nav-icon fe fe-edit me-4 color-blue--primary"></i>
+														</a> <a
 															href="<c:url value='/admin/deleteTest?idTest=${m.testId}'/>"
 															class="icon-link icon-delete"> <i
-															class="fa-solid fa-trash color-red--medium"></i>
+															class="nav-icon fe fe-trash color-red--medium"></i>
 														</a>
 													</div></li>
 											</c:when>
@@ -103,8 +102,8 @@
 
 									<a href="#" class="btn-open-popupTest icon-link icon-update"
 										id="" value="${t.topicId}"> <i
-										class="fa-solid fa-plus me-4 color-blue--primary"></i> Tạo đề
-										thi mới
+										class="nav-icon fe fe-plus me-4 color-blue--primary"></i> Tạo
+										đề thi mới
 									</a>
 
 								</ul>
@@ -115,30 +114,30 @@
 			</div>
 
 			<div class="col col-4 admin-taobode-right">
-				<div class="card-cover border-0 bg-color-grey">
+				<div class="card-cover border-0 ">
 					<span class="card__text text--description">Chi tiết</span> <img
 						class="card__img shadow-black" src="" alt="hinh anh bo de">
 					<div class="card-body p-0">
-						<h2 class="card-body__title text--h2 color-black">Bộ đề
-							Listening</h2>
-						<p class="card-body__text text--description color-black">Lorem
-							ipsum dolor sit amet consectetur adipisicing elit. Vero,
-							necessitatibus quisquam! Quasi ipsa repellat necessitatibus
-							consectetur dolores. Dolores, perferendis. Architecto esse, ut
-							minima iusto cumque commodi? Expedita tempora numquam omnis!</p>
+						<h2 class="card-body__title text--h2 ">Bộ đề Listening</h2>
+						<p class="card-body__text text--description ">Lorem ipsum
+							dolor sit amet consectetur adipisicing elit. Vero, necessitatibus
+							quisquam! Quasi ipsa repellat necessitatibus consectetur dolores.
+							Dolores, perferendis. Architecto esse, ut minima iusto cumque
+							commodi? Expedita tempora numquam omnis!</p>
 					</div>
-					<div class="card-list text--description color-blue--primary">
+					<div class="card-list text--description ">
 						<div class="card-list__group">
-							<i class="group__icon fa-solid fa-book-open"></i> <span
-								class="group__content">4 đề</span>
+							<i class="group__icon nav-icon fe fe-book-open"></i> <span
+								class="">4 đề</span>
 						</div>
 						<div class="card-list__group">
-							<i class="group__icon fa-solid fa-clock"></i> <span
-								class="group__content">180p</span>
+							<i class="group__icon nav-icon fe fe-clock"></i> <span
+								class="">180p</span>
 						</div>
 						<div class="card-list__group">
-							<i class="group__icon fa-solid fa-eye"></i> <span
-								class="group__content">100 lượt truy cập</span>
+							<i class="group__icon nav-icon fe fe-eye"></i> 
+							<span
+								class="">100 lượt truy cập</span>
 						</div>
 					</div>
 				</div>
@@ -163,7 +162,8 @@
 			<div
 				class="popup-upload d-flex justify-content-between align-items-center">
 				<span class="popup-upload__text">upload</span> <input type="file"
-					name="image" id="" class="popup-upload__input" accept="image/jpeg, image/png">
+					name="image" id="" class="popup-upload__input"
+					accept="image/jpeg, image/png">
 			</div>
 			<div
 				class="popup-title d-flex justify-content-between align-items-center">
@@ -180,8 +180,9 @@
 				<span class="popup-cost__text">Gia tien</span> <input type="text"
 					name="cost" id="" class="popup-cost__input">
 			</div>
-			<input style="display: none !important" type="text" name="id" id="" class="popup-id_input">
-			<input type="submit" value="hoan thanh" onclick="show()">
+			<input style="display: none !important" type="text" name="id" id=""
+				class="popup-id_input"> <input type="submit"
+				value="hoan thanh" onclick="show()">
 		</form>
 	</div>
 
