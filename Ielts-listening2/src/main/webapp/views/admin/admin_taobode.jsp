@@ -69,10 +69,10 @@
 								<div class="icon-list d-flex ">
 									<a href="#" class="btn-openpopup icon-link icon-update"
 										value="${t.topicId }"> <i
-										class="nav-icon fe fe-edit-2 me-4 color-white"></i>
+										class="fe fe-edit me-4 color-white"></i>
 									</a> <a href="<c:url value='/admin/deleteTopic?id=${t.topicId}'/>"
 										class="icon-link icon-delete"> <i
-										class="nav-icon fe fe-trash color-white"></i>
+										class="fe fe-trash color-white"></i>
 									</a>
 								</div>
 							</button>
@@ -89,11 +89,11 @@
 														<a href="#"
 															class="btn-popup-updateTest icon-link icon-update"
 															value="${m.testId}"> <i
-															class="nav-icon fe fe-edit me-4 color-blue--primary"></i>
+															class="fe fe-edit me-4 color-blue--primary"></i>
 														</a> <a
 															href="<c:url value='/admin/deleteTest?idTest=${m.testId}'/>"
 															class="icon-link icon-delete"> <i
-															class="nav-icon fe fe-trash color-red--medium"></i>
+															class="fe fe-trash color-red--medium"></i>
 														</a>
 													</div></li>
 											</c:when>
@@ -102,8 +102,8 @@
 
 									<a href="#" class="btn-open-popupTest icon-link icon-update"
 										id="" value="${t.topicId}"> <i
-										class="nav-icon fe fe-plus me-4 color-blue--primary"></i> Tạo
-										đề thi mới
+										class="fe fe-plus me-4 color-blue--primary"></i> Tạo đề thi
+										mới
 									</a>
 
 								</ul>
@@ -114,30 +114,30 @@
 			</div>
 
 			<div class="col col-4 admin-taobode-right">
-				<div class="card-cover border-0 ">
+				<div class="card-cover border-0 bg-color-grey">
 					<span class="card__text text--description">Chi tiết</span> <img
 						class="card__img shadow-black" src="" alt="hinh anh bo de">
 					<div class="card-body p-0">
-						<h2 class="card-body__title text--h2 ">Bộ đề Listening</h2>
-						<p class="card-body__text text--description ">Lorem ipsum
-							dolor sit amet consectetur adipisicing elit. Vero, necessitatibus
-							quisquam! Quasi ipsa repellat necessitatibus consectetur dolores.
-							Dolores, perferendis. Architecto esse, ut minima iusto cumque
-							commodi? Expedita tempora numquam omnis!</p>
+						<h2 class="card-body__title text--h2 color-black">Bộ đề
+							Listening</h2>
+						<p class="card-body__text text--description color-black">Lorem
+							ipsum dolor sit amet consectetur adipisicing elit. Vero,
+							necessitatibus quisquam! Quasi ipsa repellat necessitatibus
+							consectetur dolores. Dolores, perferendis. Architecto esse, ut
+							minima iusto cumque commodi? Expedita tempora numquam omnis!</p>
 					</div>
-					<div class="card-list text--description ">
+					<div class="card-list text--description color-blue--primary">
 						<div class="card-list__group">
-							<i class="group__icon nav-icon fe fe-book-open"></i> <span
-								class="">4 đề</span>
+							<i class="group__icon fe fe-book-open"></i> <span
+								class="group__content">4 đề</span>
 						</div>
 						<div class="card-list__group">
-							<i class="group__icon nav-icon fe fe-clock"></i> <span
-								class="">180p</span>
+							<i class="group__icon fe fe-clock"></i> <span
+								class="group__content">180p</span>
 						</div>
 						<div class="card-list__group">
-							<i class="group__icon nav-icon fe fe-eye"></i> 
-							<span
-								class="">100 lượt truy cập</span>
+							<i class="group__icon fe fe-eye"></i> <span
+								class="group__content">100 lượt truy cập</span>
 						</div>
 					</div>
 				</div>
@@ -153,7 +153,7 @@
 	<div class="popup" id="popup-add-bo-de">
 		<div
 			class="popup-group d-flex justify-content-between align-items-center">
-			<span class="title">Title</span> <i class="fa-solid fa-xmark"
+			<span class="title">Title</span> <i class="fe fa-xmark"
 				id="btn-close"></i>
 		</div>
 
