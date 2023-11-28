@@ -8,9 +8,13 @@ import JPAConfig.JPAConfig;
 import hcmute.entity.Account;
 import hcmute.entity.User;
 
-public class AccountDAOImpl implements IAccountDAO {
+public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO {
 
-	@Override
+	public AccountDAOImpl(Class<Account> cls) {
+		super(cls);
+		// TODO Auto-generated constructor stub
+	}
+
 	public String SignUp(Account account) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
@@ -34,7 +38,6 @@ public class AccountDAOImpl implements IAccountDAO {
 		}
 	}
 
-	@Override
 	public User Login(Account account) {
 		EntityManager entityManager = JPAConfig.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -61,6 +64,30 @@ public class AccountDAOImpl implements IAccountDAO {
 		}
 
 		return null; // Return null if login fails
+	}
+
+	@Override
+	public Account findById(String id) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		Account account = enma.find(Account.class, id);
+		return account;
+	}
+
+	@Override
+	public void update(Account account) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		EntityTransaction trans = enma.getTransaction();
+		try {
+			trans.begin();
+			enma.merge(account);
+			trans.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			trans.rollback();
+		} finally {
+			enma.close();
+		}
+		
 	}
 
 }

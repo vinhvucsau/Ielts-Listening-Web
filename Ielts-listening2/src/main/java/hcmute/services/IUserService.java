@@ -4,4 +4,5 @@ import hcmute.entity.User;
 
 public interface IUserService {
 	User findUserByID(String id);
+	void update (User user);
 }

@@ -1,15 +1,17 @@
 package hcmute.DAO;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 import JPAConfig.JPAConfig;
-import hcmute.entity.Account;
 import hcmute.entity.User;
 
-public class UserDAOImpl implements IUserDAO {
+public class UserDAOImpl extends AbstractDao<User> implements IUserDAO{
 
-	@Override
+	public UserDAOImpl() {
+		super(User.class);
+		// TODO Auto-generated constructor stub
+	}
+
 	public User findUserByID(String id) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		User user = enma.find(User.class, id);
