@@ -28,6 +28,8 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <meta name="author" content="Codescandy" />
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 <!-- Favicon icon-->
 <link rel="shortcut icon" type="image/x-icon"
@@ -74,5 +76,11 @@
 	<script src="../assets/js/vendors/chart.js"></script>
 	<script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
 	<script src="../assets/js/vendors/flatpickr.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 </body>
 </html>

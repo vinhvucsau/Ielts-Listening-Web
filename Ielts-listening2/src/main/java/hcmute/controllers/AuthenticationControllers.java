@@ -3,6 +3,7 @@ package hcmute.controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +11,17 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import JPAConfig.JPAConfig;
 import hcmute.entity.Account;
 import hcmute.entity.User;
 import hcmute.services.AccountServiceImpl;
 import hcmute.services.IAccountServices;
 import hcmute.utils.compositeId.PasswordEncryptor;
 
-@WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup" })
+@WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup", "/user/logout", "/admin/logout",
+		"/waiting" })
 public class AuthenticationControllers extends HttpServlet {
 
 	IAccountServices accountService = new AccountServiceImpl();
@@ -27,11 +31,26 @@ public class AuthenticationControllers extends HttpServlet {
 
 		String url = req.getRequestURI().toString();
 		if (url.contains("login")) {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
-			rd.forward(req, resp);
+			getLogin(req, resp);
 		} else if (url.contains("signup")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
 			rd.forward(req, resp);
+		} else if (url.contains("waiting")) {
+			HttpSession session = req.getSession();
+			if (session != null && session.getAttribute("user") != null) {
+				User user = (User) session.getAttribute("user");
+				String role = (String) session.getAttribute("role");
+
+				if (role.equals("admin")) {
+					req.setAttribute("user", user);
+					resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+				} else {
+					req.setAttribute("user", user);
+					resp.sendRedirect(req.getContextPath() + "/user/home");
+				}
+
+			} else
+				resp.sendRedirect(req.getContextPath() + "authentication/login");
 		}
 	}
 
@@ -40,9 +59,14 @@ public class AuthenticationControllers extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		if (url.contains("signup")) {
 			SignUp(req, resp);
-		}
-		if (url.contains("login")) {
-			Login(req, resp);
+		} else if (url.contains("login")) {
+			postLogin(req, resp);
+		} else if (url.contains("logout")) {
+			HttpSession session = req.getSession();
+			session.removeAttribute("user");
+			session.removeAttribute("role");
+			resp.sendRedirect(req.getContextPath() + "/user/home");
+
 		}
 	}
 
@@ -52,7 +76,7 @@ public class AuthenticationControllers extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 			Account account = new Account();
 			String userName = req.getParameter("userName");
-			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord")) ;
+			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord"));
 			account.setUserName(userName);
 			account.setPassWord(passWord);
 			account.setRole("user");
@@ -75,17 +99,24 @@ public class AuthenticationControllers extends HttpServlet {
 
 	}
 
-	public void Login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void postLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			req.setCharacterEncoding("UTF-8");
 			resp.setCharacterEncoding("UTF-8");
 			Account account = new Account();
 			String userName = req.getParameter("userName");
-			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord")) ;
+			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord"));
 			account.setUserName(userName);
 			account.setPassWord(passWord);
-			System.out.println(userName + " " + passWord);
-			if (userName != "admin" && passWord != "admin")
+			if (userName.isEmpty() || passWord.isEmpty()) {
+				req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
+				return;
+			}
+
+			EntityManager entityManager = JPAConfig.getEntityManager();
+			Account acc = entityManager.find(Account.class, userName);
+
+			if (acc.getRole() != "admin")
 				account.setRole("user");
 			else
 				account.setRole("admin");
@@ -95,19 +126,40 @@ public class AuthenticationControllers extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
 				rd.forward(req, resp);
 			} else {
-				Cookie currentUser = new Cookie("currentUserID", user.getUserId());
-				currentUser.setMaxAge(15 * 24 * 60 * 60); // cookie ton tai trong 15 ngay
-				resp.addCookie(currentUser);
-				PrintWriter out = resp.getWriter();
-				Cookie[] cookies = req.getCookies();
-				resp.sendRedirect("/Ielts-listening2/home");
+				HttpSession session = req.getSession(true);
+				session.setAttribute("user", user);
+				session.setAttribute("role", acc.getRole());
+				resp.sendRedirect(req.getContextPath() + "/waiting");
+				return;
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
+	}
+
+	private void getLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession(false);
+		if (session != null && session.getAttribute("account") != null) {
+			resp.sendRedirect(req.getContextPath() + "/waiting");
+			return;
+		}
+
+		Cookie[] cookies = req.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("email")) {
+					session = req.getSession(true);
+					session.setAttribute("email", cookie.getValue());
+					resp.sendRedirect(req.getContextPath() + "/waiting");
+					return;
+				}
+			}
+		}
+		req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
+
 	}
 
 	private static final long serialVersionUID = 1L;
-
 }

@@ -13,8 +13,8 @@
 <body>
 	<nav class="navbar navbar-expand-lg shadow-none">
 		<div class="container px-0">
-			<a class="navbar-brand" href="./index.html"><img
-				src="../assets/images/brand/logo/logo.svg" alt="Geeks" /></a>
+			<a class="navbar-brand" href="/Ielts-listening2/user/home"><img
+				src="https://prep.vn/imgs/logo-n.svg" alt="Geeks" /></a>
 			<div class="d-flex align-items-center order-lg-3">
 				<div class="d-flex align-items-center">
 					<div class="dropdown me-2">
@@ -51,11 +51,80 @@
 							</li>
 						</ul>
 					</div>
-					<div class="d-none d-md-block me-2">
-						<a
-							href="https://themes.getbootstrap.com/product/geeks-academy-admin-template/"
-							class="btn btn-primary">Buy Now</a>
-					</div>
+					<c:if test="${user == null}">
+						<div class="d-none d-md-block me-2">
+							<a href="<c:url value='/authentication-login' />"
+								class="btn btn-primary">Đăng nhập</a>
+						</div>
+					</c:if>
+					<c:if test="${user != null}">
+						<li class="dropdown ms-2 d-inline-block position-static"><a
+							class="rounded-circle" href="#" data-bs-toggle="dropdown"
+							data-bs-display="static" aria-expanded="false">
+								<div class="avatar avatar-md avatar-indicators avatar-online">
+									<img alt="avatar" src="../assets/images/avatar/avatar-1.jpg"
+										class="rounded-circle" />
+								</div>
+						</a>
+							<div
+								class="dropdown-menu dropdown-menu-end position-absolute mx-3 my-5">
+								<div class="dropdown-item">
+									<div class="d-flex">
+										<div class="avatar avatar-md avatar-indicators avatar-online">
+											<img alt="avatar" src="../assets/images/avatar/avatar-1.jpg"
+												class="rounded-circle" />
+										</div>
+										<div class="ms-3 lh-1">
+											<h5 class="mb-1">${user.userId }</h5>
+											<p class="mb-0">${user.email }</p>
+										</div>
+									</div>
+								</div>
+								<div class="dropdown-divider"></div>
+								<ul class="list-unstyled">
+									<li class="dropdown-submenu dropstart-lg"><a
+										class="dropdown-item dropdown-list-group-item dropdown-toggle"
+										href="#"> <i class="fe fe-circle me-2"></i> Status
+									</a>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" href="#"> <span
+													class="badge-dot bg-success me-2"></span> Online
+											</a></li>
+											<li><a class="dropdown-item" href="#"> <span
+													class="badge-dot bg-secondary me-2"></span> Offline
+											</a></li>
+											<li><a class="dropdown-item" href="#"> <span
+													class="badge-dot bg-warning me-2"></span> Away
+											</a></li>
+											<li><a class="dropdown-item" href="#"> <span
+													class="badge-dot bg-danger me-2"></span> Busy
+											</a></li>
+										</ul></li>
+									<li><a class="dropdown-item" href="profile-edit.html">
+											<i class="fe fe-user me-2"></i> Profile
+									</a></li>
+									<li><a class="dropdown-item"
+										href="student-subscriptions.html"> <i
+											class="fe fe-star me-2"></i> Subscription
+									</a></li>
+									<li><a class="dropdown-item" href="#"> <i
+											class="fe fe-settings me-2"></i> Settings
+									</a></li>
+								</ul>
+								<div class="dropdown-divider"></div>
+								<ul class="list-unstyled">
+									<li>
+										<form action=logout method="post">
+											<button class="dropdown-item">
+												<i class="fe fe-power me-2"></i> Đăng Xuất
+											</button>
+										</form>
+									</li>
+								</ul>
+							</div></li>
+
+					</c:if>
+
 				</div>
 				<div>
 					<button class="navbar-toggler collapsed" type="button"
