@@ -10,13 +10,13 @@
 <body>
 	<div class="user_capnhat container-fluid p-0 m-0">
 		<div class="d-flex flex-xxl-row justify-content-center border-bottom border-gray-300 mt-5 ">
-			<a href="user-capnhattaikhoan" class="px-3 py-2 text--description text-dark">Tài khoản</a>
-			<a class="px-3 py-2 text--description color-blue--primary border-bottom border-primary">Mật khẩu</a>
+			<a href="capnhattaikhoan" class="px-3 py-2 text--description text-dark">Tài khoản</a>
+			<a class="px-3 py-2 text--description text-primary border-bottom border-primary">Mật khẩu</a>
 		</div>
 		<div style="min-height:500px" class="my-5">
 			<div class="row justify-content-center my-5">
 				<div class="col-lg-6">
-					<form class="row gx-3" action="user-capnhatmatkhau" method="post">
+					<form class="row gx-3" action="capnhatmatkhau" method="post">
 						<div class="col-12 mb-3">
 							<label for="inputOldPass" class="form-label text--h4">Mật khẩu cũ</label>
 							<input type="password" id="inputoldpass" name="inputOldPass" class="form-control shadow-none mt-2" required>

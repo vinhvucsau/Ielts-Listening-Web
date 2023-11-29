@@ -22,9 +22,10 @@ import hcmute.services.UserServiceImpl;
 import hcmute.utils.Constants;
 import hcmute.utils.DeleteImage;
 import hcmute.utils.UploadUtils;
+import hcmute.utils.compositeId.PasswordEncryptor;
 
 @MultipartConfig (fileSizeThreshold = 1024*1024*10, maxFileSize = 1024*1024*50, maxRequestSize = 1024*1024*50)
-@WebServlet(urlPatterns = { "/user-capnhattaikhoan", "/user-capnhatmatkhau" })
+@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau" })
 public class CapNhatThongTinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,7 +37,7 @@ public class CapNhatThongTinController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		
 		//Set cứng ID để test chức năng
-		String id = "UserId1005";
+		String id = req.getParameter("userId");
 		User user = findUserById(id);
 		Account account = accountService.findByID(user.getAccount().getUserName());
 		
@@ -69,16 +70,16 @@ public class CapNhatThongTinController extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 
 			//Set cứng ID để test chức năng
-			User user = userService.findUserByID("UserId1005");
+			User user = userService.findUserByID("UserId1003");
 			Account account = accountService.findByID(user.getAccount().getUserName());
-			
+			System.out.print(false);
 			String oldPass = req.getParameter("inputOldPass").trim();
 			String newPass = req.getParameter("inputNewPass").trim();
 			String confirmPass = req.getParameter("inputNewPassConfirm").trim();
-			String accPass = account.getPassWord().trim();
+			String accPass = PasswordEncryptor.decryptPassword(account.getPassWord()).trim();
 			
 			if (oldPass.equals(accPass) && newPass.equals(confirmPass)) {
-				account.setPassWord(newPass);
+				account.setPassWord(PasswordEncryptor.encryptPassword(newPass));
 			}
 			
 			accountService.update(account);
@@ -86,7 +87,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			req.setAttribute("account", account);
 			req.setAttribute("message", "Cập nhật thành công!");
 			
-			resp.sendRedirect(req.getContextPath() + "/user-capnhatmatkhau");
+			resp.sendRedirect(req.getContextPath() + "/user/capnhatmatkhau");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,7 +103,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 
 			//Set cứng ID để test chức năng
-			User user = userService.findUserByID("UserId1005");
+			User user = userService.findUserByID("UserId1003");
 			
 			String name = req.getParameter("inputName");
 			String phoneNumber = req.getParameter("inputPhone");
@@ -110,6 +111,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			String address = req.getParameter("inputAddress");
 			String dateOfBirth = req.getParameter("datePicker");
 			String networth = req.getParameter("inputNetworth");
+			
 			Integer currentNetworth = 0;
 			boolean check = networth.equals("");
 			
@@ -154,7 +156,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			req.setAttribute("currentUser", user);
 			req.setAttribute("message", "Cập nhật thành công!");
 			
-			resp.sendRedirect(req.getContextPath() + "/user-capnhattaikhoan");
+			resp.sendRedirect(req.getContextPath() + "/user/capnhattaikhoan");
 
 		} catch (Exception e) {
 			e.printStackTrace();
