@@ -21,25 +21,24 @@ import hcmute.utils.Constants;
 
 @Entity
 @Table(name = Constants.ANSWER_TEST_RELATION)
-public class AnswerTest implements Serializable{
+public class AnswerTest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue
 	private String answerId;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String answerKey;
-	
+
 	@Column(columnDefinition = "int")
 	private int number;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "partId")
 	private ListeningPart listeningParts;
-	
-	@OneToMany(mappedBy = "answerTest",fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+
+	@OneToMany(mappedBy = "answerTest", fetch = FetchType.LAZY)
 	private List<AnswerUser> answerUsers;
 
 	public AnswerTest(String answerId, String answerKey, int number, ListeningPart listeningParts,

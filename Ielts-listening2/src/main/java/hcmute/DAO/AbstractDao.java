@@ -11,10 +11,11 @@ import JPAConfig.JPAConfig;
 
 public abstract class AbstractDao<T> {
 	private Class<T> entityClass;
+
 	public AbstractDao(Class<T> cls) {
 		this.entityClass = cls;
 	}
-	
+
 	public void insert(T entity) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
@@ -30,7 +31,7 @@ public abstract class AbstractDao<T> {
 			enma.close();
 		}
 	}
-	
+
 	public void update(T entity) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
@@ -45,7 +46,7 @@ public abstract class AbstractDao<T> {
 			enma.close();
 		}
 	}
-	
+
 	public void delete(Object id) throws Exception {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
@@ -54,7 +55,7 @@ public abstract class AbstractDao<T> {
 			T entity = enma.find(entityClass, id);
 			if (entity != null) {
 				enma.remove(entity);
-			}else {
+			} else {
 				throw new Exception("Không tìm thấy");
 			}
 			trans.commit();
@@ -66,17 +67,17 @@ public abstract class AbstractDao<T> {
 			enma.close();
 		}
 	}
-	
+
 	public T findById(Object id) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		T entity = enma.find(entityClass, id);
 		return entity;
 	}
-	
+
 	public Long countAll() {
 		EntityManager enma = JPAConfig.getEntityManager();
 		try {
-			//Tạo truy vấn từ entity class
+			// Tạo truy vấn từ entity class
 			CriteriaQuery cq = enma.getCriteriaBuilder().createQuery();
 			Root<T> rt = cq.from(entityClass);
 			cq.select(enma.getCriteriaBuilder().count(rt));
@@ -86,11 +87,11 @@ public abstract class AbstractDao<T> {
 			enma.close();
 		}
 	}
-	
+
 	public List<T> findAll() {
 		EntityManager enma = JPAConfig.getEntityManager();
 		try {
-			//Tạo truy vấn dữ liệu từ query
+			// Tạo truy vấn dữ liệu từ query
 			CriteriaQuery cq = enma.getCriteriaBuilder().createQuery();
 			cq.select(cq.from(entityClass));
 			return enma.createQuery(cq).getResultList();
@@ -98,16 +99,16 @@ public abstract class AbstractDao<T> {
 			enma.close();
 		}
 	}
-	
-	//FindAll nhưng có phân trang
-	
+
+	// FindAll nhưng có phân trang
+
 	public List<T> findAll(boolean all, int firstResult, int maxResult) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		try {
 			CriteriaQuery cq = enma.getCriteriaBuilder().createQuery();
 			cq.select(cq.from(entityClass));
 			Query q = enma.createQuery(cq);
-			if(!all) {
+			if (!all) {
 				q.setFirstResult(firstResult);
 				q.setMaxResults(maxResult);
 			}
