@@ -49,10 +49,11 @@
 		  margin: 0;
 		}
 	</style>
-	<div class="m-0 p-0" style="background-color: rgb(247, 247, 247); ">
+	<div class="m-0 p-0" >
 		<div class="w-100 m-0" style="background-color: #DDE4FB; height: 450px;"></div>
-		<div class="px-7 py-7">
-			<div class="bg-white px-4 py-4 rounded-4">
+		<div class="px-7 py-7 card ">
+		
+			<div class="bg-white px-4 py-4 rounded-4 card-body">
 				<p class="fs-5 fw-bold mb-0 color-blue--primary">Tiếp tục làm bài</p>
 				<p class="fs-4 fw-bold mb-0">IELTS Essential Guide</p>
 				<p class="fs-5 fw-bold mb-0" style="color: rgb(113,113,113)">Cam 18 - Test 2</p>
