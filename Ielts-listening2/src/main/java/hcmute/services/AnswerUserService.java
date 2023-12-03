@@ -14,7 +14,7 @@ public class AnswerUserService {
 	public void update(AnswerUser answerUser) {
 		answerUserDao.update(answerUser);
 	}
-	public void delete(AnswerUser answerUser) {
+	public void delete(AnswerUser answerUser) throws Exception {
 		answerUserDao.delete(answerUser);
 	}
 	public Long countAll() {

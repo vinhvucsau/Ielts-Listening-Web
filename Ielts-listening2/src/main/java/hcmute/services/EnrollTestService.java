@@ -22,7 +22,7 @@ public class EnrollTestService{
 		enrollTestDao.update(enrollTest);
 	}
 
-	public void delete(EnrrolTest enrollTest) {
+	public void delete(EnrrolTest enrollTest) throws Exception {
 		enrollTestDao.delete(enrollTest);
 	}
 

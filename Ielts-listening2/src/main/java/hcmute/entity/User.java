@@ -29,8 +29,8 @@ public class User implements Serializable {
 	@Column(name = "sex")
 	private String sex;
 
-	@Column(name = "dateOfBirth")
-	private Date dateOfBirth;
+	@Column(columnDefinition = "date")
+	private String dateOfBirth;
 
 	@Column(name = "email")
 	private String email;
@@ -112,11 +112,11 @@ public class User implements Serializable {
 		this.sex = sex;
 	}
 
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -248,7 +248,7 @@ public class User implements Serializable {
 		this.payment = payment;
 	}
 
-	public User(String userId, String name, String sex, Date dateOfBirth, String email, String phoneNumber,
+	public User(String userId, String name, String sex, String dateOfBirth, String email, String phoneNumber,
 			String address, String image, Integer networth, Integer contributeScore, List<EnrrolLesson> enrrolLesson,
 			List<UserCourse> userCourse, List<EnrrolTest> enrrolTests, List<Blog> blogs, List<Cart> cart,
 			List<RepComment> repComment, List<CommentLesson> commentLesson, List<ReadNotify> readNotifys,
