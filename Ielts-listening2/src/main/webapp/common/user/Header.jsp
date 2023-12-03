@@ -100,8 +100,8 @@
 													class="badge-dot bg-danger me-2"></span> Busy
 											</a></li>
 										</ul></li>
-									<li><a class="dropdown-item" href="profile-edit.html">
-											<i class="fe fe-user me-2"></i> Profile
+									<li><a class="dropdown-item" href="/Ielts-listening2/user/capnhattaikhoan?userId=${user.userId}">
+											<i class="fe fe-user me-2">></i> Profile
 									</a></li>
 									<li><a class="dropdown-item"
 										href="student-subscriptions.html"> <i

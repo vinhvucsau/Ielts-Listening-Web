@@ -133,8 +133,9 @@
 									account setting.</p>
 							</div>
 							<!-- Card body -->
-							<form action="capnhattaikhoan"  method="post" 
+							<form action="capnhattaikhoan?userId=${user.userId}"  method="post" 
 					enctype="multipart/form-data" >
+					<input name="userId" value ="${user.userId}" class="hide" style="display:none">
 							<div class="card-body">
 								<div
 									class="d-lg-flex align-items-center justify-content-between">

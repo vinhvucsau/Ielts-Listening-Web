@@ -1,6 +1,7 @@
 package hcmute.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -103,60 +104,44 @@ public class CapNhatThongTinController extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 
 			//Set cứng ID để test chức năng
-			User user = userService.findUserByID("UserId1003");
+			User user = userService.findUserByID(req.getParameter("userId"));
 			
-			String name = req.getParameter("inputName");
-			String phoneNumber = req.getParameter("inputPhone");
-			String email = req.getParameter("inputEmail");
-			String address = req.getParameter("inputAddress");
-			String dateOfBirth = req.getParameter("datePicker");
-			String networth = req.getParameter("inputNetworth");
-			
-			Integer currentNetworth = 0;
-			boolean check = networth.equals("");
-			
-			if (req.getPart("inputImage").getSize() == 0) {
-				user.setImage(user.getImage());
-			} else {
-				//xoa anh cu
-				if (user.getImage() != null) {
-					String fileImg = user.getImage();
-					DeleteImage.deleteImage(user.getImage(), Constants.FOLDER_AVATAR);
-				}
-				//update anh moi
-				String fileName = "" + System.currentTimeMillis();
-				user.setImage(UploadUtils.processUpload("inputImage", req, Constants.DIR + "\\"+ Constants.FOLDER_AVATAR +"\\", fileName));
-			}
-		
-			if (dateOfBirth == "") {
-				dateOfBirth = null;
-			}
-			
-			if (user.getNetworth() != null) {
-				if (check == false) {
-					currentNetworth = user.getNetworth() + Integer.parseInt(networth);
-				} else {
-					currentNetworth = user.getNetworth();
-				}
-			} else {
-				if (check == false) {
-					currentNetworth = Integer.parseInt(networth);
-				}
-			}
-			
-			user.setName(name);
-			user.setPhoneNumber(phoneNumber);
-			user.setEmail(email);
-			user.setAddress(address);
-			user.setDateOfBirth(dateOfBirth);
-			user.setNetworth(currentNetworth);
-			
-			userService.update(user);
-
-			req.setAttribute("currentUser", user);
-			req.setAttribute("message", "Cập nhật thành công!");
-			
-			resp.sendRedirect(req.getContextPath() + "/user/capnhattaikhoan");
+			  String name = req.getParameter("inputName"); String phoneNumber =
+			  req.getParameter("inputPhone"); String email =
+			  req.getParameter("inputEmail"); String address =
+			  req.getParameter("inputAddress"); String dateOfBirth =
+			  req.getParameter("datePicker"); String networth =
+			  req.getParameter("inputNetworth");
+			  
+			  Integer currentNetworth = 0; boolean check = networth.equals("");
+			  
+			  if (req.getPart("inputImage").getSize() == 0) {
+			  user.setImage(user.getImage()); } else { //xoa anh cu 
+				  if (user.getImage() !=
+			  null) { String fileImg = user.getImage();
+			  DeleteImage.deleteImage(user.getImage(), Constants.FOLDER_AVATAR); } //update anh moi 
+			  String fileName = "" + System.currentTimeMillis();
+			  user.setImage(UploadUtils.processUpload("inputImage", req, Constants.DIR +
+			  "\\"+ Constants.FOLDER_AVATAR +"\\", fileName)); }
+			  
+			  if (dateOfBirth == "") { dateOfBirth = null; }
+			  
+			  if (user.getNetworth() != null) { if (check == false) { currentNetworth =
+			  user.getNetworth() + Integer.parseInt(networth); } else { currentNetworth =
+			  user.getNetworth(); } } else { if (check == false) { currentNetworth =
+			  Integer.parseInt(networth); } }
+			  
+			  user.setName(name); user.setPhoneNumber(phoneNumber); user.setEmail(email);
+			  user.setAddress(address); user.setDateOfBirth(dateOfBirth);
+			  user.setNetworth(currentNetworth);
+			  
+			  userService.update(user);
+			  
+			  req.setAttribute("currentUser", user); req.setAttribute("message",
+			  "Cập nhật thành công!");
+			  
+				 resp.sendRedirect(req.getContextPath() + "/user/capnhattaikhoan?userId="+req.getParameter("userId")); 
+			 
 
 		} catch (Exception e) {
 			e.printStackTrace();
