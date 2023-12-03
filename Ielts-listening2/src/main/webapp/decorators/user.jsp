@@ -52,10 +52,9 @@
 </head>
 <body>
 	<%@ include file="/common/user/Header.jsp"%>
-	<div>
-		<decorator:body>
-		</decorator:body>
-	</div>
+	<decorator:body>
+		<h1>test chinh sua</h1>
+	</decorator:body>
 	<%@ include file="/common/user/Footer.jsp"%>
 
 	<!-- Scripts -->

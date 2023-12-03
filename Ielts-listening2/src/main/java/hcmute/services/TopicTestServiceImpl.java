@@ -11,6 +11,17 @@ public class TopicTestServiceImpl implements ITopicTestService{
 	TopicTestDAOImpl topicDAO = new TopicTestDAOImpl();
 
 
+	ITopicTestDAO topicTestDAO = new TopicTestDAOImpl();
+	IMockTestService mockTestService = new MockTestServiceImpl();
+	@Override
+	public List<TopicTest> findAll(String searchStr, int tab) {
+		return topicTestDAO.findAll(searchStr, tab);
+	}
+	@Override
+	public List<TopicTest> findAll(int page, int pagesize, String searchStr, int tab) {
+		return topicTestDAO.findAll(page, pagesize, searchStr, tab);
+	}
+
 	@Override
 	public List<TopicTest> getAllTopicTest() {
 		// TODO Auto-generated method stub

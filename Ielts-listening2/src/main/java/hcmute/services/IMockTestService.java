@@ -5,6 +5,8 @@ import java.util.List;
 import hcmute.entity.MockTest;
 
 public interface IMockTestService {
+	
+
 	void insert(MockTest mockTest);
 	void update(MockTest mockTest);
 	void delete(Object mockTest) throws Exception;
@@ -15,3 +17,4 @@ public interface IMockTestService {
 	
 
 }
+
