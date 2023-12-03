@@ -151,7 +151,9 @@ public class AdminAddPartController extends HttpServlet {
 				String fileName = "" + System.currentTimeMillis();
 				listeningPart.setAudio(
 						UploadUtils.processUpload("audioFile", req, Constants.DIR + "\\topicAudio\\", fileName));
-			}
+			} else
+				listeningPart.setAudio(req.getParameter("preAudio"));
+			
 			List<AnswerTest> answerTests = new ArrayList<AnswerTest>();
 			for (int i = 1; i < 100; i++) {
 				String answerKey = req.getParameter("answer" + i);
@@ -169,7 +171,7 @@ public class AdminAddPartController extends HttpServlet {
 			listeningPartService.update(listeningPart);
 			for (AnswerTest ans : answerTests)
 				answerTestService.update(ans);
-			resp.sendRedirect(req.getContextPath() + "/admin/editPart?id=" + partId);
+			resp.sendRedirect(req.getContextPath() + "/admin/listPart?idTest=" + testid);
 		}
 	}
 }

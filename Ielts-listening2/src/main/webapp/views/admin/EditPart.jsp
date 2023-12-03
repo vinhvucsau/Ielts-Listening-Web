@@ -35,8 +35,13 @@
 								src="<c:url value='/image?fname=topicAudio/${listeningPart.audio }'/>"
 								controls></audio>
 
-							<label class="form-label">Edit Audio File</label> <input
-								type="file" id="audioFile" name="audioFile" multiple="multiple"
+							<label class="form-label">Edit Audio File</label> 
+							<input
+								style="display: none" name="preAudio"
+								value="${listeningPart.audio }"> 
+								<input
+								value="${listeningPart.audio }" type="file" id="audioFile"
+								name="audioFile" multiple="multiple"
 								style="border: 1px solid black;" accept="audio/*, .mp3"
 								onchange="showFile(this)">
 
@@ -47,7 +52,8 @@
 							<div id="editor">
 								<div>${listeningPart.answerSheet}</div>
 							</div>
-							<input type="hidden" id="answerSheetInput" name="answerSheet" />
+							<input type="hidden" id="answerSheetInput" name="answerSheet"
+								value="${listeningPart.answerSheet }" />
 						</div>
 					</div>
 
