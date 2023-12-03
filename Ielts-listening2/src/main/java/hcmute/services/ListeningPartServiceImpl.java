@@ -3,11 +3,14 @@ package hcmute.services;
 import java.util.List;
 
 import hcmute.DAO.ListeningPartDao;
+import hcmute.entity.AnswerTest;
 import hcmute.entity.ListeningPart;
+import hcmute.entity.MockTest;
 
 public class ListeningPartServiceImpl implements IListeningPartService {
 
 	ListeningPartDao dao = new ListeningPartDao();
+
 	@Override
 	public void insert(ListeningPart listeningPart) {
 		dao.insert(listeningPart);
@@ -19,8 +22,8 @@ public class ListeningPartServiceImpl implements IListeningPartService {
 	}
 
 	@Override
-	public void delete(ListeningPart listeningPart) {
-		dao.delete(listeningPart);
+	public void delete(Object partId) throws Exception {
+		dao.delete(partId);
 	}
 
 	@Override
@@ -46,6 +49,12 @@ public class ListeningPartServiceImpl implements IListeningPartService {
 	@Override
 	public List<ListeningPart> findByMockTestId(String mockTestId) {
 		return dao.findByMockTestId(mockTestId);
+	}
+
+	@Override
+	public ListeningPart findByTestIDandNumber(MockTest mockTest, int number) {
+		// TODO Auto-generated method stub
+		return dao.findByTestIDandNumber(mockTest, number);
 	}
 
 }

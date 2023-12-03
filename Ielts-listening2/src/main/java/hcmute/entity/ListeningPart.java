@@ -3,6 +3,7 @@ package hcmute.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,31 +18,31 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import hcmute.utils.Constants;
+
 @Entity
 @Table(name = Constants.LISTENING_PART_RELATION)
-public class ListeningPart implements Serializable{
+public class ListeningPart implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String partId;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String image;
-	
+
 	@Column(columnDefinition = "int")
 	private Integer number;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String audio;
-	
+
 	@Column(columnDefinition = "varchar(10000)")
 	private String answerSheet;
-	
-	
+
 	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.EAGER)
 	private List<AnswerTest> answerTests;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "testId")
 	private MockTest mockTests;
@@ -117,5 +118,5 @@ public class ListeningPart implements Serializable{
 	public ListeningPart() {
 		super();
 	}
-	
+
 }
