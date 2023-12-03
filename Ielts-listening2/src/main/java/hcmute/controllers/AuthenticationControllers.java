@@ -18,10 +18,11 @@ import hcmute.entity.Account;
 import hcmute.entity.User;
 import hcmute.services.AccountServiceImpl;
 import hcmute.services.IAccountServices;
+import hcmute.utils.Email;
 import hcmute.utils.compositeId.PasswordEncryptor;
 
-@WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup", "/user/logout", "/admin/logout",
-		"/waiting" })
+@WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup", "/authentication-forgotpassword",
+		"/user/logout", "/admin/logout", "/waiting" })
 public class AuthenticationControllers extends HttpServlet {
 
 	IAccountServices accountService = new AccountServiceImpl();
@@ -51,6 +52,8 @@ public class AuthenticationControllers extends HttpServlet {
 
 			} else
 				resp.sendRedirect(req.getContextPath() + "authentication/login");
+		} else if (url.contains("forgotpassword")) {
+			req.getRequestDispatcher("views/authentication/forgotpassword.jsp").forward(req, resp);
 		}
 	}
 
@@ -67,6 +70,8 @@ public class AuthenticationControllers extends HttpServlet {
 			session.removeAttribute("role");
 			resp.sendRedirect(req.getContextPath() + "/user/home");
 
+		} else if (url.contains("forgotpassword")) {
+			postForgotPassword(req, resp);
 		}
 	}
 
@@ -159,6 +164,39 @@ public class AuthenticationControllers extends HttpServlet {
 		}
 		req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
 
+	}
+
+	private void postForgotPassword(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		resp.setContentType("text/html");
+		resp.setCharacterEncoding("UTF-8");
+		req.setCharacterEncoding("UTF-8");
+
+		String username = req.getParameter("username");
+		String email = req.getParameter("email");
+		Account account = accountService.findByID(username);
+
+		if (account == null ) {
+			req.setAttribute("message", "Username hoặc Email không tồn tại trong hệ thống!");
+			req.getRequestDispatcher("views/authentication/forgotpassword.jsp").forward(req, resp);
+			return;
+		}
+		if (!account.getUsers().getEmail().equals(email)) {
+			req.setAttribute("message", "Username hoặc Email không tồn tại trong hệ thống!");
+			req.getRequestDispatcher("views/authentication/forgotpassword.jsp").forward(req, resp);
+			return;
+		}
+
+		Email sm = new Email();
+
+		boolean test = sm.sendPasswordEmail(account);
+
+		if (test) {
+			req.setAttribute("message", "Vui lòng kiểm tra email để nhận mật khẩu nhé!");
+		} else {
+			req.setAttribute("message", "Lỗi gửi mail!");
+		}
+		req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
 	}
 
 	private static final long serialVersionUID = 1L;
