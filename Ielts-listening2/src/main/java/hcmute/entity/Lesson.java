@@ -1,13 +1,12 @@
 package hcmute.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,59 +17,46 @@ import hcmute.utils.Constants;
 
 @Entity
 @Table(name = Constants.LESSON_RELATION)
-public class Lesson implements Serializable{
+public class Lesson implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String lessonId;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "lessonName")
 	private String lessonName;
-	
-	@Column(columnDefinition = "varchar(1000)")
+
+	@Column(name = "description")
 	private String description;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "video")
 	private String video;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "image")
 	private String image;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "audio")
 	private String audio;
-	
-	@Column(columnDefinition = "date")
-	private String createdDate;
-	
-	@Column(columnDefinition = "varchar(10000)")
+
+	@Column(name = "createdDate")
+	private Date createdDate;
+
+	@Column(name = "answerSheet")
 	private String answerSheet;
+
+	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
+	private List<CommentLesson> commentLesson;
+
+	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
+	private List<AnswerLesson> answerLesson;
 	
 	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
-	private List<Score> scores;
-	
-	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
-	private List<AnswerLesson> answerQuestions;
-	
+	private List<EnrrolLesson> enrrolLesson;
+
 	@ManyToOne
 	@JoinColumn(name = "courseId")
 	private Course courses;
-
-	public Lesson(String lessonId, String lessonName, String description, String video, String image,
-			String createdDate, String answerSheet, List<Score> scores, List<AnswerLesson> answerQuestions,
-			Course courses) {
-		super();
-		this.lessonId = lessonId;
-		this.lessonName = lessonName;
-		this.description = description;
-		this.video = video;
-		this.image = image;
-		this.createdDate = createdDate;
-		this.answerSheet = answerSheet;
-		this.scores = scores;
-		this.answerQuestions = answerQuestions;
-		this.courses = courses;
-	}
 	
 	public Lesson() {
 		super();
@@ -116,11 +102,19 @@ public class Lesson implements Serializable{
 		this.image = image;
 	}
 
-	public String getCreatedDate() {
+	public String getAudio() {
+		return audio;
+	}
+
+	public void setAudio(String audio) {
+		this.audio = audio;
+	}
+
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(String createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -132,20 +126,28 @@ public class Lesson implements Serializable{
 		this.answerSheet = answerSheet;
 	}
 
-	public List<Score> getScores() {
-		return scores;
+	public List<CommentLesson> getCommentLesson() {
+		return commentLesson;
 	}
 
-	public void setScores(List<Score> scores) {
-		this.scores = scores;
+	public void setCommentLesson(List<CommentLesson> commentLesson) {
+		this.commentLesson = commentLesson;
 	}
 
-	public List<AnswerLesson> getAnswerQuestions() {
-		return answerQuestions;
+	public List<AnswerLesson> getAnswerLesson() {
+		return answerLesson;
 	}
 
-	public void setAnswerQuestions(List<AnswerLesson> answerQuestions) {
-		this.answerQuestions = answerQuestions;
+	public void setAnswerLesson(List<AnswerLesson> answerLesson) {
+		this.answerLesson = answerLesson;
+	}
+
+	public List<EnrrolLesson> getEnrrolLesson() {
+		return enrrolLesson;
+	}
+
+	public void setEnrrolLesson(List<EnrrolLesson> enrrolLesson) {
+		this.enrrolLesson = enrrolLesson;
 	}
 
 	public Course getCourses() {
@@ -153,6 +155,23 @@ public class Lesson implements Serializable{
 	}
 
 	public void setCourses(Course courses) {
+		this.courses = courses;
+	}
+
+	public Lesson(String lessonId, String lessonName, String description, String video, String image, String audio,
+			Date createdDate, String answerSheet, List<CommentLesson> commentLesson, List<AnswerLesson> answerLesson,
+			List<EnrrolLesson> enrrolLesson, Course courses) {
+		this.lessonId = lessonId;
+		this.lessonName = lessonName;
+		this.description = description;
+		this.video = video;
+		this.image = image;
+		this.audio = audio;
+		this.createdDate = createdDate;
+		this.answerSheet = answerSheet;
+		this.commentLesson = commentLesson;
+		this.answerLesson = answerLesson;
+		this.enrrolLesson = enrrolLesson;
 		this.courses = courses;
 	}
 }

@@ -1,11 +1,10 @@
 package hcmute.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,24 +22,24 @@ public class Blog implements Serializable{
 	@Id
 	private String blogId;
 	
-	@Column(columnDefinition = "date")
-	private String createdDate;
+	@Column(name = "createdDate")
+	private Date createdDate;
 	
-	@Column(columnDefinition = "varchar(10000)")
+	@Column(name = "content")
 	private String content;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name = "title")
 	private String title;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name = "image")
 	private String image;
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "userId") //tham chieu den truong creatorId trog Blog
+	@JoinColumn(name = "userName") 
 	private User users;
 
-	public Blog(String blogId, String createdDate, String content, String title, String image, User users) {
+	public Blog(String blogId, Date createdDate, String content, String title, String image, User users) {
 		super();
 		this.blogId = blogId;
 		this.createdDate = createdDate;
@@ -63,11 +62,11 @@ public class Blog implements Serializable{
 		this.blogId = blogId;
 	}
 
-	public String getCreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(String createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 

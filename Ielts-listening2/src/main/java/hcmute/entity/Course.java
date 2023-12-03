@@ -1,16 +1,13 @@
 package hcmute.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,120 +22,124 @@ public class Course implements Serializable{
 	@Id
 	private String courseId;
 	
-	@Column(columnDefinition = "varchar(1000)")
+	@Column(name = "courseName")
 	private String courseName;
 	
-	@Column(columnDefinition = "varchar(10000)")
+	@Column(name = "description")
 	private String description;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name = "image")
 	private String image;
 	
-	@Column(columnDefinition = "int")
-	private int cost;
+	@Column(name = "cost")
+	private Integer cost;
 	
 	@Column(name = "enrrollmentDate")
-	private String enrrolmentDate;
+	private Date enrrolmentDate;
 	
 	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-	private List<EnrrolCourse> enrrolCourses;
+	private List<UserCourse> userCourse;
 	
 	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
 	private List<Lesson> lessons;
 	
-	@ManyToOne
-	@JoinColumn(name = "creatorId")
-	private User users;
-
-	public Course(String courseId, String courseName, String description, String image, int cost, String enrrolmentDate,
-			List<EnrrolCourse> enrrolCourses, List<Lesson> lessons, User users) {
-		super();
-		this.courseId = courseId;
-		this.courseName = courseName;
-		this.description = description;
-		this.image = image;
-		this.cost = cost;
-		this.enrrolmentDate = enrrolmentDate;
-		this.enrrolCourses = enrrolCourses;
-		this.lessons = lessons;
-		this.users = users;
-	}
 	
 	public Course() {
 		super();
 	}
 
+
+	public Course(String courseId, String courseName, String description, String image, Integer cost,
+			Date enrrolmentDate, List<UserCourse> userCourse, List<Lesson> lessons) {
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.description = description;
+		this.image = image;
+		this.cost = cost;
+		this.enrrolmentDate = enrrolmentDate;
+		this.userCourse = userCourse;
+		this.lessons = lessons;
+	}
+
+
 	public String getCourseId() {
 		return courseId;
 	}
+
 
 	public void setCourseId(String courseId) {
 		this.courseId = courseId;
 	}
 
+
 	public String getCourseName() {
 		return courseName;
 	}
+
 
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
 
+
 	public String getDescription() {
 		return description;
 	}
+
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+
 	public String getImage() {
 		return image;
 	}
+
 
 	public void setImage(String image) {
 		this.image = image;
 	}
 
-	public int getCost() {
+
+	public Integer getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+
+	public void setCost(Integer cost) {
 		this.cost = cost;
 	}
 
-	public String getEnrrolmentDate() {
+
+	public Date getEnrrolmentDate() {
 		return enrrolmentDate;
 	}
 
-	public void setEnrrolmentDate(String enrrolmentDate) {
+
+	public void setEnrrolmentDate(Date enrrolmentDate) {
 		this.enrrolmentDate = enrrolmentDate;
 	}
 
-	public List<EnrrolCourse> getEnrrolCourses() {
-		return enrrolCourses;
+
+	public List<UserCourse> getUserCourse() {
+		return userCourse;
 	}
 
-	public void setEnrrolCourses(List<EnrrolCourse> enrrolCourses) {
-		this.enrrolCourses = enrrolCourses;
+
+	public void setUserCourse(List<UserCourse> userCourse) {
+		this.userCourse = userCourse;
 	}
+
 
 	public List<Lesson> getLessons() {
 		return lessons;
 	}
 
+
 	public void setLessons(List<Lesson> lessons) {
 		this.lessons = lessons;
 	}
 
-	public User getUsers() {
-		return users;
-	}
-
-	public void setUsers(User users) {
-		this.users = users;
-	}
-	
 	
 }
