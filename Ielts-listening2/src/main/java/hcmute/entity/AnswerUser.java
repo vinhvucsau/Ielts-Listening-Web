@@ -2,6 +2,8 @@ package hcmute.entity;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.sym.Name;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -25,10 +27,12 @@ public class AnswerUser implements Serializable {
 	private AnswerUserId answerUserId;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "answerId", insertable = false, updatable = false)
 	private AnswerTest answerTest;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "enrrolId", insertable = false, updatable = false)
 	private EnrrolTest enrollTest;
 	private String answer;
