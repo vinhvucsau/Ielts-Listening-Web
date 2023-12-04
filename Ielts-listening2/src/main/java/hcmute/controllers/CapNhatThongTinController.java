@@ -26,7 +26,7 @@ import hcmute.utils.UploadUtils;
 import hcmute.utils.compositeId.PasswordEncryptor;
 
 @MultipartConfig (fileSizeThreshold = 1024*1024*10, maxFileSize = 1024*1024*50, maxRequestSize = 1024*1024*50)
-@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi", "/user/thongkediem" })
+@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi"})
 public class CapNhatThongTinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -44,6 +44,7 @@ public class CapNhatThongTinController extends HttpServlet {
 		
 		req.setAttribute("currentUser", user);
 		req.setAttribute("account", account);
+	
 		
 		if (url.contains("capnhattaikhoan")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
@@ -54,10 +55,7 @@ public class CapNhatThongTinController extends HttpServlet {
 		} else if (url.contains("khoahoccuatoi")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_khoahoccuatoi.jsp");
 			rd.forward(req, resp);
-		} else if (url.contains("thongkediem")) {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_thongkediem.jsp");
-			rd.forward(req, resp);
-		}
+		} 
 	}
 
 	@Override
