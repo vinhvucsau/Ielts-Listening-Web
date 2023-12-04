@@ -36,8 +36,14 @@
 									</c:if>
 								</div>
 								<div class="lh-1">
-									<h2 class="mb-0" name="userId" value ="${user.userId}"> ${user.userId }
-										Stella Flores <a href="#" class="" data-bs-toggle="tooltip"
+									<h2 class="mb-0" name="userId" value ="${user.userId}"> 
+										<c:if test="${ currentUser.name != null}">
+											${ currentUser.name}
+										</c:if>
+										<c:if test="${ currentUser.name == null}">
+											${user.userId }
+										</c:if>
+										<a href="#" class="" data-bs-toggle="tooltip"
 											data-placement="top" title="Beginner"> <svg width="16"
 												height="16" viewBox="0 0 16 16" fill="none"
 												xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +56,7 @@
                                                     </svg>
 										</a>
 									</h2>
-									<p class="mb-0 d-block">@stellaflores</p>
+									<p class="mb-0 d-block">@${account.userName }</p>
 								</div>
 							</div>
 
