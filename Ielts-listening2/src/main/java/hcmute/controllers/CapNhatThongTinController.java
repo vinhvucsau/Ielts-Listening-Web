@@ -26,7 +26,7 @@ import hcmute.utils.UploadUtils;
 import hcmute.utils.compositeId.PasswordEncryptor;
 
 @MultipartConfig (fileSizeThreshold = 1024*1024*10, maxFileSize = 1024*1024*50, maxRequestSize = 1024*1024*50)
-@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau" })
+@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi", "/user/thongkediem" })
 public class CapNhatThongTinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -51,6 +51,12 @@ public class CapNhatThongTinController extends HttpServlet {
 		} else if (url.contains("capnhatmatkhau")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhatmatkhau.jsp");
 			rd.forward(req, resp);
+		} else if (url.contains("khoahoccuatoi")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_khoahoccuatoi.jsp");
+			rd.forward(req, resp);
+		} else if (url.contains("thongkediem")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_thongkediem.jsp");
+			rd.forward(req, resp);
 		}
 	}
 
@@ -71,12 +77,12 @@ public class CapNhatThongTinController extends HttpServlet {
 			resp.setCharacterEncoding("UTF-8");
 
 			//Set cứng ID để test chức năng
-			User user = userService.findUserByID("UserId1003");
+			User user = userService.findUserByID(req.getParameter("userId"));
 			Account account = accountService.findByID(user.getAccount().getUserName());
 			System.out.print(false);
-			String oldPass = req.getParameter("inputOldPass").trim();
-			String newPass = req.getParameter("inputNewPass").trim();
-			String confirmPass = req.getParameter("inputNewPassConfirm").trim();
+			String oldPass = req.getParameter("currentpassword").trim();
+			String newPass = req.getParameter("newpassword").trim();
+			String confirmPass = req.getParameter("confirmpassword").trim();
 			String accPass = PasswordEncryptor.decryptPassword(account.getPassWord()).trim();
 			
 			if (oldPass.equals(accPass) && newPass.equals(confirmPass)) {
@@ -88,7 +94,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			req.setAttribute("account", account);
 			req.setAttribute("message", "Cập nhật thành công!");
 			
-			resp.sendRedirect(req.getContextPath() + "/user/capnhatmatkhau");
+			resp.sendRedirect(req.getContextPath() + "/user/capnhatmatkhau?userId="+req.getParameter("userId"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,7 +146,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			  req.setAttribute("currentUser", user); req.setAttribute("message",
 			  "Cập nhật thành công!");
 			  
-				 resp.sendRedirect(req.getContextPath() + "/user/capnhattaikhoan?userId="+req.getParameter("userId")); 
+			  resp.sendRedirect(req.getContextPath() + "/user/capnhattaikhoan?userId="+req.getParameter("userId")); 
 			 
 
 		} catch (Exception e) {
