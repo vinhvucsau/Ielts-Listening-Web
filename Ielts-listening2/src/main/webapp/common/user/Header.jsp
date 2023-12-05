@@ -59,13 +59,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 										class="ms-2">Dark</span>
 								</button>
 							</li>
-							<li>
-								<button type="button"
-									class="dropdown-item d-flex align-items-center active"
-									data-bs-theme-value="auto" aria-pressed="true">
-									<i class="bi theme-icon bi-circle-half"></i> <span class="ms-2">Auto</span>
-								</button>
-							</li>
+							
 						</ul>
 					</div>
 					<c:if test="${user == null}">
@@ -87,8 +81,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 										alt="avatar" />
 											</c:if>
 											<c:if test="${user.image == null}">
-												<img class="rounded-circle"
-													
+												<img class="rounded-circle"							
 													src='<c:url value = "https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"/>'
 													alt="anh dai dien">
 											</c:if>
@@ -115,7 +108,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 										</div>
 										
 										<div class="ms-3 lh-1">
-											<h5 class="mb-1">${user.userId }</h5>
+											<h5 class="mb-1" name="idUser" value="${user.userId}">${user.userId}</h5>
 											<p class="mb-0">${user.email }</p>
 										</div>
 									</div>
@@ -166,7 +159,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 			<!-- Collapse -->
 			<div class="collapse navbar-collapse" id="navbar-default">
 				<ul class="navbar-nav mx-auto">
-					<li class="nav-item"><a class="nav-link " href="#"
+					<li class="nav-item"><a class="nav-link " href="/Ielts-listening2/user/home"
 						id="navbarLanding" data-bs-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">Trang chủ</a></li>
 
@@ -182,11 +175,11 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 								<h4 class="dropdown-header">Luyện đề</h4>
 							</li>
 
-							<li><a href="landing-education.html"
+							<li><a href="/Ielts-listening2/user/luyen-de-home"
 								class="dropdown-item justify-content-between">Tất cả bộ đề</a></li>
-							<li><a href="home-academy.html"
+							<li><a href="/Ielts-listening2/user/luyen-de-home?tab=2"
 								class="dropdown-item justify-content-between">Bộ đề mới nhất</a></li>
-							<li><a href="landing-courses.html" class="dropdown-item">Bộ đề HOT</a></li>
+							<li><a href="/Ielts-listening2/user/luyen-de-home?tab=3" class="dropdown-item">Bộ đề HOT</a></li>
 
 						</ul></li>
 					<li class="nav-item dropdown"><a

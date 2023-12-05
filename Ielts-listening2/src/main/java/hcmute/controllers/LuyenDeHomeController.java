@@ -2,7 +2,7 @@ package hcmute.controllers;
 
 import java.io.IOException;
 import java.util.List;
-
+import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,19 +35,10 @@ public class LuyenDeHomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String currentUserID = null;
-		User user = null;
-		Cookie[] cookies = request.getCookies();
-		response.setContentType("text/html");
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("currentUserID"))
-					currentUserID = cookie.getValue();
-			}
-		}
-		if (currentUserID != null) {
-			user = findUserByID(currentUserID);
-		}
+		HttpSession session = request.getSession(false);
+		User user = (User) session.getAttribute("user");;
+		
+		
 		request.setAttribute("currentUser", user);
 		int page = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 		String searchStr = request.getParameter("search") == null ? "" : request.getParameter("search");

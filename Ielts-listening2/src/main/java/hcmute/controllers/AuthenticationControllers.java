@@ -179,6 +179,7 @@ public class AuthenticationControllers extends HttpServlet {
 				} else {
 					List<Cart> carts = cartService.findByUserId(user.getUserId());
 					HttpSession session = req.getSession(true);
+					
 					session.setAttribute("user", user);
 					session.setAttribute("role", acc.getRole());
 					session.setAttribute("cart", carts);
