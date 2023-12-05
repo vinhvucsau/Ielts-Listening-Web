@@ -5,6 +5,7 @@
 Long count = (Long) request.getAttribute("countCourse");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/common/taglib.jsp"%>
 
 
 <%@ page import="javax.servlet.jsp.PageContext"%>
@@ -67,11 +68,59 @@ Long count = (Long) request.getAttribute("countCourse");
 		</div>
 		<div
 			class="adminkhoahoc-button d-flex flex-row justify-content-center">
-			<button type="button" class="btn mb-5"
+			<button href="#" type="button" class="btn mb-5" onclick="showModel()"
 				style="background-color: rgb(0, 177, 53)">
 				<span style="color: white">Thêm Khóa Học</span>
 			</button>
+			
 		</div>
+		
+		<!-- Model -->
+		<div id="model"
+			style="max-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
+			<form action="insertCourse" method="POST" enctype="multipart/form-data" >
+				<div id="test-l-1" class="bs-stepper-pane"
+					aria-labelledby="courseFormtrigger1">
+					<!-- Card -->
+					<div class="card mb-3">
+						<div class="card-header border-bottom px-4 py-3">
+							<h4 class="mb-0">Tạo khóa học mới</h4>
+						</div>
+						<!-- Card body -->
+						<div style="max-height: 450px" class=" overflow-auto">
+							<div class="card-body">
+								<div class="mb-3">
+									<label for="courseName" class="form-label">Tên khóa học</label>
+										<input id="" name="courseName"
+										class="form-control" type="text" placeholder="Tên khóa học"
+										required> <small>Write a 60 character course
+										title.</small>
+								</div>
+								<div class="mb-3">
+								   <label class="form-label">Mô tả</label>
+								   <textarea class="form-control" name="description" aria-label="With textarea"></textarea>
+								 </div>
+								<div class="d-flex align-items-center justify-content-between">
+									<div style="min-width: 350px" class="mb-3">
+										<label for="fee" class="form-label">Học phí</label>
+										<input id="" name="cost"
+											class="form-control" type="text" placeholder="Học phí" required>
+									</div>
+											
+									<div style="min-width: 350px" class="mb-3">
+										<label class="form-label" for="startdate">Ngày bắt đầu</label> 
+										<input class="form-control flatpickr" type="text"
+										placeholder="Start date" id="" name="enrrollmentDate" 
+										data-mdb-toggle="datepicker" required/>
+									</div>
+								</div>
+								
+								<div class="mb-3">
+									<label class="form-label">Thêm ảnh bìa</label> 
+									<input type="file" class="form-control"
+											name="image" id=""
+											accept="image/jpeg, image/png" require>
+								</div>
 
 		<%-- <div>
 			<div class="d-flex flex-row justify-content-between mb-4">

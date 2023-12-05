@@ -22,4 +22,16 @@ public class UserServiceImpl implements IUserService {
 		userDAO.update(user);
 	}
 
+	@Override
+	public boolean findDuplicateEmail(String email, String userId) {
+		// TODO Auto-generated method stub
+		return userDAO.findDuplicateEmail(email, userId);
+	}
+
+	@Override
+	public boolean findDuplicatePhone(String phoneNum, String userId) {
+		// TODO Auto-generated method stub
+		return userDAO.findDuplicatePhone(phoneNum, userId);
+	}
+
 }

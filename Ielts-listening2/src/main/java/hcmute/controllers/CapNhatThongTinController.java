@@ -85,8 +85,14 @@ public class CapNhatThongTinController extends HttpServlet {
 			String confirmPass = req.getParameter("confirmpassword").trim();
 			String accPass = PasswordEncryptor.decryptPassword(account.getPassWord()).trim();
 			
-			if (oldPass.equals(accPass) && newPass.equals(confirmPass)) {
-				account.setPassWord(PasswordEncryptor.encryptPassword(newPass));
+			if (oldPass.equals(accPass)) {
+				if (newPass.equals(confirmPass)) {
+					account.setPassWord(PasswordEncryptor.encryptPassword(newPass));
+				}else {
+					req.setAttribute("messError", "Xác nhận mật khẩu mới không thành công!");
+				}
+			}else {
+				req.setAttribute("messError", "Nhập mật khẩu cũ sai!");
 			}
 			
 			accountService.update(account);
@@ -94,8 +100,9 @@ public class CapNhatThongTinController extends HttpServlet {
 			req.setAttribute("account", account);
 			req.setAttribute("message", "Cập nhật thành công!");
 			
-			resp.sendRedirect(req.getContextPath() + "/user/capnhatmatkhau?userId="+req.getParameter("userId"));
-
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhatmatkhau.jsp");
+			rd.forward(req, resp);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("error", "Eror: " + e.getMessage());
@@ -108,16 +115,17 @@ public class CapNhatThongTinController extends HttpServlet {
 		try {
 			req.setCharacterEncoding("UTF-8");
 			resp.setCharacterEncoding("UTF-8");
+			String id = req.getParameter("userId");
 
 			//Set cứng ID để test chức năng
-			User user = userService.findUserByID(req.getParameter("userId"));
+			User user = userService.findUserByID(id);
 			
-			  String name = req.getParameter("inputName"); String phoneNumber =
-			  req.getParameter("inputPhone"); String email =
-			  req.getParameter("inputEmail"); String address =
-			  req.getParameter("inputAddress"); String dateOfBirth =
-			  req.getParameter("datePicker"); String networth =
-			  req.getParameter("inputNetworth");
+			  String name = req.getParameter("inputName").trim(); 
+			  String phoneNumber =req.getParameter("inputPhone").trim(); 
+			  String email =req.getParameter("inputEmail").trim(); 
+			  String address =req.getParameter("inputAddress").trim(); 
+			  String dateOfBirth =req.getParameter("datePicker").trim(); 
+			  String networth = req.getParameter("inputNetworth").trim();
 			  
 			  Integer currentNetworth = 0; boolean check = networth.equals("");
 			  
@@ -137,17 +145,33 @@ public class CapNhatThongTinController extends HttpServlet {
 			  user.getNetworth(); } } else { if (check == false) { currentNetworth =
 			  Integer.parseInt(networth); } }
 			  
-			  user.setName(name); user.setPhoneNumber(phoneNumber); user.setEmail(email);
-			  user.setAddress(address); user.setDateOfBirth(dateOfBirth);
-			  user.setNetworth(currentNetworth);
+			  if (userService.findDuplicateEmail(email, id) == false) {
+				  req.setAttribute("messError", "Email đã được sử dụng!");
+			  }
 			  
-			  userService.update(user);
+			  if (phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+")){
+				  if (userService.findDuplicatePhone(phoneNumber, id) == false) {
+					  req.setAttribute("messError", "Số điện thoại đã được sử dụng!");
+				  }
+			  }else {
+				  req.setAttribute("messError", "Số điện thoại không hợp lệ!");
+			  }
+			  
+			  if (req.getAttribute("messError") == null) {
+				  user.setName(name); 
+				  user.setEmail(email);
+				  user.setPhoneNumber(phoneNumber);
+				  user.setAddress(address); 
+				  user.setDateOfBirth(dateOfBirth);
+				  user.setNetworth(currentNetworth);
+				  userService.update(user);
+			  }
 			  
 			  req.setAttribute("currentUser", user); req.setAttribute("message",
 			  "Cập nhật thành công!");
 			  
-			  resp.sendRedirect(req.getContextPath() + "/user/capnhattaikhoan?userId="+req.getParameter("userId")); 
-			 
+			  RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
+			  rd.forward(req, resp);
 
 		} catch (Exception e) {
 			e.printStackTrace();
