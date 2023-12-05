@@ -33,7 +33,7 @@
 			border-radius: 0.5rem;
 		}
 		.px-7 {
-			padding-left: 6rem !important;
+			padding-left: 6rem !important;	
 			padding-right: 6rem ! important;
 		}
 		.py-7{
@@ -53,11 +53,11 @@
 		<div class="w-100 m-0" style="background-color: #DDE4FB; height: 450px;"></div>
 		<div class="px-7 py-7 card ">
 		
-			<div class="bg-white px-4 py-4 rounded-4 card-body">
+			<div class="bg-white px-4 py-4 rounded-4 card-body shadow-lg">
 				<p class="fs-5 fw-bold mb-0 color-blue--primary">Tiếp tục làm bài</p>
 				<p class="fs-4 fw-bold mb-0">IELTS Essential Guide</p>
 				<p class="fs-5 fw-bold mb-0" style="color: rgb(113,113,113)">Cam 18 - Test 2</p>
-				<button class="btn d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light">
+				<button class="btn d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light align-items-center">
 					Tiếp tục làm bài
 					<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
 						fill="currentColor" class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
@@ -80,12 +80,12 @@
 				  </li>
 				</ul>
 				<div class="input-group" style="width: 400px;">
-				  <span class="input-group-text px-3 border-0" id="basic-addon1" style="background-color: white; color: rgb(107,114,128);">
+				  <span class="input-group-text px-3 boDescription for topic 1rder-0" id="basic-addon1" style="background-color: white; color: rgb(107,114,128);">
 					  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 		  					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 						</svg>
 				  </span>
-				  <input type="text" class="btn__search form-control py-2 fs-5 border-0" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon1" value='${param.search == null ? "" : param.search }'>
+				  <input type="text" class="btn__search form-control py-2 fs-5 border" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon1" value='${param.search == null ? "" : param.search }'>
 				</div>
 			</div>
 			<c:if test="${topicTests.size() == 0}">
@@ -99,9 +99,9 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 				</div>
 			</c:if>
 			<c:forEach var="topicTest" items='${topicTests}'>
-				<div class="w-100 bg-white px-4 py-4 my-5 rounded-4">
+				<div class="w-100 bg-white px-4 py-4 my-5 rounded-4 shadow-lg">
 					<div class="position-relative intro d-flex flex-row">
-						<img style="cursor:pointer" src='<c:url value="/assets/images/${topicTest.image}"/>' width="150px"/>
+						<img style="cursor:pointer" src='<c:url value="/image?fname=ImagesWeb/${topicTest.image}"/>' width="150px"/>
 						<div class="w-75">
 							<p class="fs-4 fw-bold mb-0" style="cursor:pointer">${topicTest.topicName}</p>
 							<p style="color: rgb(123,137,155); font-size: 18px; cursor:pointer">${topicTest.description}</p>
@@ -183,7 +183,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 						  	</c:forEach>	
 					  </div>
 					</div>
-					<button class="btn d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold bg-color-blue--light color-blue--primary">
+					<button class="btn d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold bg-color-blue--light color-blue--primary align-items-center">
 						Xem thêm ${topicTest.mockTests.size() - i} đề
 						<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
 							fill="currentColor" class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
@@ -197,7 +197,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 			<c:if test="${topicTests.size() > 0}">
 				<div class="position-relative w-100 border-top">
 					<div class="d-flex flex-row justify-content-center mx-auto" style="width:500px">
-						<button class="btn__page--previous d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold  border-0 rounded-3" style="width: 220px; padding: 0 30px 0 30px;" ${ param.page == null || param.page == "1" ? "disabled":""}>
+						<button class="btn__page--previous d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold  border-0 rounded-3 align-items-center" style="width: 220px; padding: 0 30px 0 30px;" ${ param.page == null || param.page == "1" ? "disabled":""}>
 							<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
 								fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
 		  						<path fill-rule="evenodd" 
@@ -205,9 +205,9 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 							</svg>
 							Trang Trước
 						</button>
-						<button class="btn__page--next d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold border-0 rounded-3" style="width: 220px; padding: 0 30px 0 30px;" ${ param.page == pageNum || (param.page == null && pageNum == "1") ? "disabled":""}>
+						<button class="btn__page--next d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold border-0 rounded-3 align-items-center" style="width: 220px; padding: 0 30px 0 30px;" ${ param.page == pageNum || (param.page == null && pageNum == "1") ? "disabled":""}>
 							Trang Sau
-							<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
+							<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"	
 								fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
 		  						<path fill-rule="evenodd"
 								d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
