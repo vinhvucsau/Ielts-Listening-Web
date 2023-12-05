@@ -161,63 +161,70 @@ Long count = (Long) request.getAttribute("countCourse");
 			<div class="container-fluid p-0 m-0 ">
 				<div class="adminkhoahoc-course d-flex flex-wrap">
 					<c:forEach var="i" items="${course}">
-						<div class=" d-flex justify-content-center">
-							<div class="card adminkhoahoc-course--detail"
-								style="width: 14rem;">
-								<img style="cursor: pointer" src="${i.image }" width="100%"
-									height="150px" />
-								<div class="card-body adminkhoahoc-course--detail--info pb-0">
-									<div class="d-flex justify-content-between">
-										<p class="card-text text--h3 fs-5 my-0 py-2">${i.courseName}</p>
-										<a
-											href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
-												class="btn btn-sm rounded-0 button-delete-course"
-												type="button" data-toggle="tooltip" data-placement="top"
-												title="Delete">
-												<i class="fa fa-trash"></i>
-											</button></a>
+						<div style="position:relative;">
+							<a href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId}"> <!-- <div class="d-flex justify-content-center"> -->
+								<div class="card adminkhoahoc-course--detail"
+									style="width: 14rem;">
 
+									<img style="cursor: pointer" src="${i.image }" width="100%"
+										height="150px" />
+									<div class="card-body adminkhoahoc-course--detail--info pb-0">
+										<div class="d-flex justify-content-between">
+											<p class="card-text text--h3 fs-5 my-0 py-2">${i.courseName}</p>
+
+										</div>
+										<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
 									</div>
-									<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
-								</div>
-								<div
-									class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
-									<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
-									<p class="card-text fw-bold fs-5"
-										style="color: rgb(113, 113, 113)">VND</p>
-								</div>
-								<div class="d-flex justify-content-between">
-									<c:forEach var="lesson" items="${i.lessons}">
-										<c:forEach var="enrrol_lesson" items="${lesson.enrrolLesson }">
+									<div
+										class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
+										<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
+										<p class="card-text fw-bold fs-5"
+											style="color: rgb(113, 113, 113)">VND</p>
+									</div>
+									<div class="d-flex justify-content-between">
+										<c:forEach var="lesson" items="${i.lessons}">
+											<c:forEach var="enrrol_lesson"
+												items="${lesson.enrrolLesson }">
 
 
-											<c:set var="totalStars" value="0" />
-											<c:set var="count" value="0" />
-											<c:forEach var="lesson" items="${i.lessons}">
-												<c:forEach var="enrrol_lesson"
-													items="${lesson.enrrolLesson}">
-													<c:set var="totalStars"
-														value="${totalStars +enrrol_lesson.numberOfStar}" />
-													<c:set var="count" value="${count + 1}" />
+												<c:set var="totalStars" value="0" />
+												<c:set var="count" value="0" />
+												<c:forEach var="lesson" items="${i.lessons}">
+													<c:forEach var="enrrol_lesson"
+														items="${lesson.enrrolLesson}">
+														<c:set var="totalStars"
+															value="${totalStars +enrrol_lesson.numberOfStar}" />
+														<c:set var="count" value="${count + 1}" />
+													</c:forEach>
 												</c:forEach>
+												<c:choose>
+													<c:when test="${count > 0}">
+														<c:set var="averageStars" value="${totalStars / count}" />
+														<c:set var="roundedAverage">
+															<c:out
+																value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+														</c:set>
+													</c:when>
+												</c:choose>
 											</c:forEach>
-											<c:choose>
-												<c:when test="${count > 0}">
-													<c:set var="averageStars" value="${totalStars / count}" />
-													<c:set var="roundedAverage">
-														<c:out
-															value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-													</c:set>
-												</c:when>
-											</c:choose>
 										</c:forEach>
-									</c:forEach>
-									<div class="stars rating-star ps-3 "
-										data-rating="${roundedAverage}"></div>
-									<div class="rating-avg pe-3">${roundedAverage}</div>
+										<div class="stars rating-star ps-3 "
+											data-rating="${roundedAverage}"></div>
+										<div class="rating-avg pe-3">${roundedAverage}</div>
+									</div>
+									<!-- </div> -->
 								</div>
-							</div>
+							</a> 
+							<a href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"
+								style="position: absolute; top: 175px; left: 170px;">
+								<button class="btn btn-sm rounded-0 button-delete-course"
+									type="button" data-toggle="tooltip" data-placement="top"
+									title="Delete">
+									<i class="fa fa-trash"></i>
+								</button>
+							</a>
 						</div>
+
 					</c:forEach>
 				</div>
 			</div>

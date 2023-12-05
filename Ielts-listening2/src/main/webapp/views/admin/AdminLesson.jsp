@@ -16,8 +16,6 @@
 </head>
 <body>
 
-	<div style="height: 60px; background-color: red" class="header-admin">HEADER ADMIN</div>
-
 	<div class="AdminLesson container-fluid p-0 m-0">
 		<div class="row g-4">
 			<button class="backward w-4">
@@ -52,7 +50,7 @@
 				</div>
 				<form action="addLesson" method="post">
 					<input value="Chapter1" name="lessonName">
-					<input value="Course1040" name="courseId">
+					<%-- <input value="${courseId }" name="courseId"> --%>
 					<input type="submit" value="Thêm bài học mới">	
 				</form>
 				<!-- <a

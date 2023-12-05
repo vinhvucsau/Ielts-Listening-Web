@@ -7,5 +7,4 @@ import hcmute.entity.Lesson;
 
 public interface IAdminLessonDAO {
 	List<Lesson> findLessonByCourse(String courseId);
-	List<Lesson> findAllLesson();
 }

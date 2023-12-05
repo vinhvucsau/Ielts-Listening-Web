@@ -40,7 +40,7 @@ public class AdminLessonControler extends HttpServlet {
 			String courseid = req.getParameter("courseId");
 			List<Lesson> listLesson = lessonService.findLessonByCourse(courseid);
 			req.setAttribute("listLesson", listLesson);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminLesson.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminLesson.jsp");
 			rd.forward(req, resp);
 
 		}
@@ -58,6 +58,7 @@ public class AdminLessonControler extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 
@@ -82,33 +83,18 @@ public class AdminLessonControler extends HttpServlet {
 		
 		if (url.contains("addLesson")) {
 			Lesson lesson = new Lesson();
-			Course course = new Course();
-			try {
-				/*
-				 * BeanUtils.populate(lesson, req.getParameterMap());
-				 *///			lesson.setLessonName(req.getParameter("lessonName"));
-//			Course course = courseService.findById(req.getParameter("courseName"));
-//			lesson.setCourses(course);
-				String lessonName = req.getParameter("lessonName");
-				String courseId = req.getParameter("courseId");
-				String lessonId = "Lesson1051";
-				course = courseService.findById(courseId);
-				lesson.setLessonName(lessonName);
-				lesson.setCourses(course);
-				lesson.setLessonId(lessonId);
-				lessonService.insert(lesson);
-				/* req.setAttribute("lesson", lesson); */
-				
-				String courseid = req.getParameter("courseId");
-				List<Lesson> listLesson = lessonService.findLessonByCourse(courseid);
-				req.setAttribute("listLesson", listLesson);
-				req.setAttribute("messSuccess", "Thanh cong");
-			} catch (Exception e) {
-				e.printStackTrace();
-				req.setAttribute("messError", e.getMessage());
-			}
-
-			resp.sendRedirect(req.getContextPath() + "/admin/listLesson");
+			String lessonName = req.getParameter("lessonName");
+			String courseId = req.getParameter("courseId");
+			String lessonId = "Lesson1051";
+			Course course = courseService.findById(courseId);
+			lesson.setLessonName(lessonName);
+			lesson.setCourses(course);
+			lesson.setLessonId(lessonId);
+			lessonService.insert(lesson);
+			/* req.setAttribute("lesson", lesson); */
+			
+			
+			resp.sendRedirect(req.getContextPath() + "/admin/listLesson?courseId=?" + courseId);
 
 		}
 	}
