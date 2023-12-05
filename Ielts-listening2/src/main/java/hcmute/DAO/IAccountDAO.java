@@ -11,4 +11,6 @@ public interface IAccountDAO {
 	Account findById(String id);
 	
 	void update(Account account);
+	
+	User getUserByEmail(String email);
 }

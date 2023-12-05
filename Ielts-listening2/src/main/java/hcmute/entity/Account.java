@@ -31,6 +31,12 @@ public class Account implements Serializable{
 	@Column(columnDefinition = "varchar(255)")
 	private String role;
 	
+	@Column(columnDefinition = "varchar(10)")
+	private String code;
+	
+	@Column(columnDefinition = "tinyint")
+	private boolean status;
+	
 	/*
 	 * @OneToMany(mappedBy = "accounts", fetch = FetchType.EAGER) private List<User>
 	 * users;
@@ -48,7 +54,14 @@ public class Account implements Serializable{
 		this.role = role;
 		this.users = users;
 	}
-
+	public Account(String userName, String passWord, String role, User users, String code, boolean status) {
+		this.userName = userName;
+		this.passWord = passWord;
+		this.role = role;
+		this.users = users;
+		this.code = code;
+		this.status = status;
+	}
 	public Account() {
 		super();
 	}
@@ -84,5 +97,21 @@ public class Account implements Serializable{
 	public void setUsers(User users) {
 		this.users = users;
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	
 	
 }

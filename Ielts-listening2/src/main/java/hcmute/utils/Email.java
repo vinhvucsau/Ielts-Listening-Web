@@ -23,7 +23,7 @@ public class Email {
 	}
 	
 	// send email to the user email
-	public boolean sendPasswordEmail(Account account) {
+	public boolean sendCodeEmail(Account account) {
 		boolean test = false;
 		
 		String toEmail = account.getUsers().getEmail();
@@ -49,10 +49,53 @@ public class Email {
 			mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 			
 			//set email subject
+			mess.setSubject("Confirm Code");
+			
+			//set message text
+			mess.setText("Mã code của bạn là: " + account.getCode());
+			//send the message
+			Transport.send(mess);
+			
+			test=true;
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return test;
+	}
+	
+	public boolean sendPasswordEmail(User user) {
+		boolean test = false;
+		
+		String toEmail = user.getEmail();
+		String fromEmail = "buiduclong18tuoi@gmail.com";
+		String password = "eumd ouck ilca ykje";
+		try {
+			// your host email smtp server details
+			Properties pr = configEmail(new Properties());
+			// get session to authenticate the host email address and password
+			Session session = Session.getInstance(pr, new Authenticator() {
+				@Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(fromEmail, password);
+				}
+			});
+			
+			//set email message details
+			Message mess = new MimeMessage(session);
+			mess.setHeader("Content-Type", "text-plain; charset=UTF-8");
+			//set from email address
+			mess.setFrom(new InternetAddress(fromEmail));
+			//set to email address or destination email address
+			mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+			
+			//set email subject
 			mess.setSubject("Yours Password");
 			
 			//set message text
-			mess.setText("Mật khẩu của bạn là: " + account.getPassWord());
+			mess.setText("Mật khẩu của bạn là: " + user.getAccount().getPassWord());
 			//send the message
 			Transport.send(mess);
 			

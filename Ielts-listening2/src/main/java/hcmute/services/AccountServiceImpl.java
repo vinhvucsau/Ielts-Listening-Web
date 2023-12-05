@@ -30,4 +30,11 @@ public class AccountServiceImpl implements IAccountServices{
 		// TODO Auto-generated method stub
 		accountDAO.update(account);
 	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return accountDAO.getUserByEmail(email);
+	}
+	
 }
