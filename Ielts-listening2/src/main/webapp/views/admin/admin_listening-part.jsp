@@ -166,9 +166,6 @@
 		class="position-absolute top-0 start-0 bottom-0 end-0 bg-dark"
 		style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow()"></div>
 
-
-
-
 	<script>
     let questionCount = 0;
 
@@ -207,7 +204,7 @@
 		for (let i = 0; i < files.length; i++){
 			const path = (window.URL || window.webkitURL).createObjectURL(files[i]);
 			console.log(files[i]);
-			const html = "<h5>"+files[i].name+"</h5>";
+			const html = "<h5 style='display:none'>"+files[i].name+"</h5>";
 			document.querySelector("form").insertAdjacentHTML("afterend", html);
 		}
 	}
