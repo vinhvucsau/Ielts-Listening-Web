@@ -14,12 +14,7 @@ Long count = (Long) request.getAttribute("countCourse");
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+
 </head>
 <body>
 
@@ -145,14 +140,15 @@ Long count = (Long) request.getAttribute("countCourse");
 
 
 							</button>
-							<ul class="dropdown-menu bg-color-grey">
-								<li><a class="dropdown-item"
+							<ul class="dropdown-menu bg-color-grey"
+								aria-labelledby="navbarLanding">
+								<li><a class="dropdown-item justify-content-between"
 									href="/Ielts-listening2/admin/khoahoc?gia=caodenthap">Cao
 										đến thấp</a></li>
-								<li><a class="dropdown-item"
+								<li><a class="dropdown-item justify-content-between"
 									href="/Ielts-listening2/admin/khoahoc?gia=thapdencao">Thấp
 										đến cao</a></li>
-								<li><a class="dropdown-item"
+								<li><a class="dropdown-item justify-content-between"
 									href="/Ielts-listening2/admin/khoahoc">Mặc định</a></li>
 							</ul>
 						</div>

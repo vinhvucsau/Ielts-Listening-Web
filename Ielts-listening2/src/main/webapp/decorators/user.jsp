@@ -52,9 +52,12 @@
 </head>
 <body>
 	<%@ include file="/common/user/Header.jsp"%>
-	<decorator:body>
-		<h1>test chinh sua</h1>
-	</decorator:body>
+	<div class="d-flex flex-column container-fluid"
+		style="max-width: 1440px">
+		<decorator:body>
+			<h1>test chinh sua</h1>
+		</decorator:body>
+	</div>
 	<%@ include file="/common/user/Footer.jsp"%>
 
 	<!-- Scripts -->
@@ -70,5 +73,8 @@
 	<script src="../assets/js/vendors/chart.js"></script>
 	<script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
 	<script src="../assets/js/vendors/flatpickr.js"></script>
+
+
+
 </body>
 </html>

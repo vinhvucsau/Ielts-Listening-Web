@@ -2,6 +2,7 @@ package hcmute.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -15,9 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.Account;
+import hcmute.entity.Cart;
 import hcmute.entity.User;
 import hcmute.services.AccountServiceImpl;
+import hcmute.services.CartServiceImpl;
 import hcmute.services.IAccountServices;
+import hcmute.services.ICartService;
 import hcmute.utils.compositeId.PasswordEncryptor;
 
 @WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup", "/user/logout", "/admin/logout",
@@ -25,6 +29,7 @@ import hcmute.utils.compositeId.PasswordEncryptor;
 public class AuthenticationControllers extends HttpServlet {
 
 	IAccountServices accountService = new AccountServiceImpl();
+	ICartService cartService = new CartServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,11 +45,12 @@ public class AuthenticationControllers extends HttpServlet {
 			if (session != null && session.getAttribute("user") != null) {
 				User user = (User) session.getAttribute("user");
 				String role = (String) session.getAttribute("role");
-
+				List<Cart> carts = (List<Cart>) session.getAttribute("cart");
 				if (role.equals("admin")) {
 					req.setAttribute("user", user);
 					resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
 				} else {
+					req.setAttribute("cart", carts);
 					req.setAttribute("user", user);
 					resp.sendRedirect(req.getContextPath() + "/user/home");
 				}
@@ -65,6 +71,7 @@ public class AuthenticationControllers extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.removeAttribute("user");
 			session.removeAttribute("role");
+			session.removeAttribute("cart");
 			resp.sendRedirect(req.getContextPath() + "/user/home");
 
 		}
@@ -121,14 +128,17 @@ public class AuthenticationControllers extends HttpServlet {
 			else
 				account.setRole("admin");
 			User user = accountService.Login(account);
+
 			if (user == null) {
 				req.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng");
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
 				rd.forward(req, resp);
 			} else {
+				List<Cart> carts = cartService.findByUserId(user.getUserId());
 				HttpSession session = req.getSession(true);
 				session.setAttribute("user", user);
 				session.setAttribute("role", acc.getRole());
+				session.setAttribute("cart", carts);
 				resp.sendRedirect(req.getContextPath() + "/waiting");
 				return;
 			}
