@@ -4,6 +4,7 @@
 Long count = (Long) request.getAttribute("countCourse");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/common/taglib.jsp"%>
 
 
 <%@ page import="javax.servlet.jsp.PageContext"%>
@@ -66,16 +67,17 @@ Long count = (Long) request.getAttribute("countCourse");
 		</div>
 		<div
 			class="adminkhoahoc-button d-flex flex-row justify-content-center">
-			<button type="button" class="btn mb-5" onclick="showModel()"
+			<button href="#" type="button" class="btn mb-5" onclick="showModel()"
 				style="background-color: rgb(0, 177, 53)">
 				<span style="color: white">Thêm Khóa Học</span>
 			</button>
+			
 		</div>
 		
 		<!-- Model -->
 		<div id="model"
 			style="max-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
-			<form action="addPart" method="post" enctype="multipart/form-data">
+			<form action="insertCourse" method="POST" enctype="multipart/form-data" >
 				<div id="test-l-1" class="bs-stepper-pane"
 					aria-labelledby="courseFormtrigger1">
 					<!-- Card -->
@@ -87,42 +89,42 @@ Long count = (Long) request.getAttribute("countCourse");
 						<div style="max-height: 450px" class=" overflow-auto">
 							<div class="card-body">
 								<div class="mb-3">
-									<label for="courseTitle" class="form-label">Tên khóa học</label>
-										<input id="partNumber" name="partNumber"
+									<label for="courseName" class="form-label">Tên khóa học</label>
+										<input id="" name="courseName"
 										class="form-control" type="text" placeholder="Tên khóa học"
 										required> <small>Write a 60 character course
 										title.</small>
 								</div>
 								<div class="mb-3">
 								   <label class="form-label">Mô tả</label>
-								   <textarea class="form-control" aria-label="With textarea"></textarea>
+								   <textarea class="form-control" name="description" aria-label="With textarea"></textarea>
 								 </div>
 								<div class="d-flex align-items-center justify-content-between">
 									<div style="min-width: 350px" class="mb-3">
 										<label for="fee" class="form-label">Học phí</label>
-										<input id="courseFee" name="courseFee"
+										<input id="" name="cost"
 											class="form-control" type="text" placeholder="Học phí" required>
 									</div>
 											
 									<div style="min-width: 350px" class="mb-3">
 										<label class="form-label" for="startdate">Ngày bắt đầu</label> 
 										<input class="form-control flatpickr" type="text"
-										placeholder="Start date" id="datepicker" name="datePicker" 
+										placeholder="Start date" id="" name="enrrollmentDate" 
 										data-mdb-toggle="datepicker" required/>
 									</div>
 								</div>
 								
 								<div class="mb-3">
 									<label class="form-label">Thêm ảnh bìa</label> 
-									<input type="file" class="form-control" value="Input"
-											name="inputImage" id="inputimage"
+									<input type="file" class="form-control"
+											name="image" id=""
 											accept="image/jpeg, image/png" require>
 								</div>
 
 								<div class="mb-3">
 									<label class="form-label">Thêm video xem trước</label> 
-									<input type="file" class="form-control" value="Input"
-											name="videoFile" id="videoFile"
+									<input type="file" class="form-control" 
+											name="trailer" id=""
 											accept="video/mp4" require>
 									<div id="audio"></div>
 								</div>
@@ -131,7 +133,7 @@ Long count = (Long) request.getAttribute("countCourse");
 						</div>
 						<!-- Button -->
 						<button margin: 10px"
-						class="btn btn-primary" type="submit">Xác
+						class="btn btn-primary" type="submit" onclick="show()">Xác
 							nhận</button>
 					</div>
 				</div>

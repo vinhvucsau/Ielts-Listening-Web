@@ -8,9 +8,15 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
+import hcmute.entity.AnswerTest;
 import hcmute.entity.Course;
+import hcmute.entity.MockTest;
 
-public class AdminKhoaHocDAOImpl implements IAdminKhoaHocDAO {
+public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKhoaHocDAO {
+	
+	public AdminKhoaHocDAOImpl() {
+		super(Course.class);
+	}
 
 	@Override
 	public Long countKhoaHoc() {
