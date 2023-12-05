@@ -5,7 +5,6 @@
 Long count = (Long) request.getAttribute("countCourse");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="/common/taglib.jsp"%>
 
 
 <%@ page import="javax.servlet.jsp.PageContext"%>
@@ -74,8 +73,7 @@ Long count = (Long) request.getAttribute("countCourse");
 			</button>
 			
 		</div>
-		
-		<!-- Model -->
+	<!-- Model -->
 		<div id="model"
 			style="max-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
 			<form action="insertCourse" method="POST" enctype="multipart/form-data" >
@@ -122,158 +120,36 @@ Long count = (Long) request.getAttribute("countCourse");
 											accept="image/jpeg, image/png" require>
 								</div>
 
-		<%-- <div>
-			<div class="d-flex flex-row justify-content-between mb-4">
+<div>
 
-				<div class="adminkhoahoc-soluong">
-					<h5 class="adminkhoahoc-filter-sumcourse my-1">
-						<p style="color: rgb(101, 101, 101)" class="my-auto"><%=count%>
-							Khóa Học
-						</p>
-					</h5>
-				</div>
-
-				<div class="adminkhoahoc-filter d-flex justify-content-between"
-					style="width: 500px">
-					<div class="d-flex  adminkhoahoc-filter--rate ">
-						<p class="my-auto">Rate:</p>
-						<div class="dropdown dropdown-rate my-auto ms-2">
-							<button
-								class="btn bg-color-white dropdown-toggle border border-secondary-subtle"
-								type="button" data-bs-toggle="dropdown" aria-expanded="false"
-								style="width: 160px">
-								<!-- 								<span class="me-3">Mặc định</span>
- -->
-								<c:choose>
-									<c:when test="${param.rate == 'thapdencao'}">
-										<span class="me-3">Thấp đến cao</span>
-									</c:when>
-									<c:when test="${param.rate == 'caodenthap'}">
-										<span class="me-3">Cao đến thấp</span>
-									</c:when>
-									<c:otherwise>
-										<span class="me-3">Mặc định</span>
-									</c:otherwise>
-								</c:choose>
-							</button>
-							<ul class="dropdown-menu bg-color-grey">
-								<li><a class="dropdown-item"
-									href="/Ielts-listening2/admin/khoahoc?rate=caodenthap">Cao
-										đến thấp</a></li>
-								<li><a class="dropdown-item"
-									href="/Ielts-listening2/admin/khoahoc?rate=thapdencao">Thấp
-										đến cao</a></li>
-								<li><a class="dropdown-item"
-									href="/Ielts-listening2/admin/khoahoc">Mặc định</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="d-flex  adminkhoahoc-filter--gia ">
-						<p class="my-auto">Giá:</p>
-						<div class="dropdown dropdown-gia my-auto ms-2">
-							<button
-								class="btn bg-color-white dropdown-toggle border border-secondary-subtle "
-								type="button" data-bs-toggle="dropdown" aria-expanded="false"
-								style="width: 160px">
-								<c:choose>
-									<c:when test="${param.gia == 'thapdencao'}">
-										<span class="me-3">Thấp đến cao</span>
-									</c:when>
-									<c:when test="${param.gia == 'caodenthap'}">
-										<span class="me-3">Cao đến thấp</span>
-									</c:when>
-									<c:otherwise>
-										<span class="me-3">Mặc định</span>
-									</c:otherwise>
-								</c:choose>
-
-
-							</button>
-							<ul class="dropdown-menu bg-color-grey"
-								aria-labelledby="navbarLanding">
-								<li><a class="dropdown-item justify-content-between"
-									href="/Ielts-listening2/admin/khoahoc?gia=caodenthap">Cao
-										đến thấp</a></li>
-								<li><a class="dropdown-item justify-content-between"
-									href="/Ielts-listening2/admin/khoahoc?gia=thapdencao">Thấp
-										đến cao</a></li>
-								<li><a class="dropdown-item justify-content-between"
-									href="/Ielts-listening2/admin/khoahoc">Mặc định</a></li>
-							</ul>
-						</div>
-					</div>
-
-
-				</div>
-
-			</div>
-			<div class="container-fluid p-0 m-0 ">
-				<div class="adminkhoahoc-course d-flex flex-wrap">
-					<c:forEach var="i" items="${course}">
-						<div class=" d-flex justify-content-center">
-							<div class="card adminkhoahoc-course--detail"
-								style="width: 14rem;">
-								<img style="cursor: pointer" src="${i.image }" width="100%"
-									height="150px" />
-								<div class="card-body adminkhoahoc-course--detail--info pb-0">
-									<div class="d-flex justify-content-between">
-										<p class="card-text text--h3 fs-5 my-0 py-2">${i.courseName}</p>
-										<a
-											href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
-												class="btn btn-sm rounded-0 button-delete-course"
-												type="button" data-toggle="tooltip" data-placement="top"
-												title="Delete">
-												<i class="fa fa-trash"></i>
-											</button></a>
-
-									</div>
-									<p class="card-text" style="color: rgb(113, 113, 113)">${i.description}</p>
-								</div>
-								<div
-									class="card-body adminkhoahoc-course--detail--cost mt-2 py-0 d-flex justify-content-between align-item-center">
-									<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}</p>
-									<p class="card-text fw-bold fs-5"
-										style="color: rgb(113, 113, 113)">VND</p>
-								</div>
-								<div class="d-flex justify-content-between">
-									<c:forEach var="lesson" items="${i.lessons}">
-										<c:forEach var="enrrol_lesson" items="${lesson.enrrolLesson }">
-
-
-											<c:set var="totalStars" value="0" />
-											<c:set var="count" value="0" />
-											<c:forEach var="lesson" items="${i.lessons}">
-												<c:forEach var="enrrol_lesson"
-													items="${lesson.enrrolLesson}">
-													<c:set var="totalStars"
-														value="${totalStars +enrrol_lesson.numberOfStar}" />
-													<c:set var="count" value="${count + 1}" />
-												</c:forEach>
-											</c:forEach>
-											<c:choose>
-												<c:when test="${count > 0}">
-													<c:set var="averageStars" value="${totalStars / count}" />
-													<c:set var="roundedAverage">
-														<c:out
-															value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-													</c:set>
-												</c:when>
-											</c:choose>
-										</c:forEach>
-									</c:forEach>
-									<div class="stars rating-star ps-3 "
-										data-rating="${roundedAverage}"></div>
-									<div class="rating-avg pe-3">${roundedAverage}</div>
+								<div class="mb-3">
+									<label class="form-label">Thêm video xem trước</label> 
+									<input type="file" class="form-control" 
+											name="trailer" id=""
+											accept="video/mp4" require>
+									<div id="audio"></div>
 								</div>
 							</div>
+
 						</div>
-					</c:forEach>
+						<!-- Button -->
+						<button
+						class="btn btn-primary m-4" type="submit" onclick="show()">Xác
+							nhận</button>
+					</div>
 				</div>
-			</div>
-		</div> --%>
+				</div>
+			</form>
+		</div>
+		
+	<div id="shadow"
+		class="position-absolute top-0 start-0 bottom-0 end-0 bg-dark"
+		style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow()"></div>
+		<div>
 
+			<div class="d-flex flex-row justify-content-between mb-4">
 
+				
 
 		<section class="py-6">
 			<div class="">
@@ -599,10 +475,7 @@ Long count = (Long) request.getAttribute("countCourse");
 																	<form action="addToCart" method="post">
 																		<input type="hidden" name="courseId"
 																			value="${i.courseId }">
-																		<!-- <button type="submit"
-																			style="border: none; background: none;">
-																			<i class="fe fe-shopping-cart fs-4"></i>
-																		</button> -->
+																		
 
 																		<a
 																			href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
@@ -615,13 +488,7 @@ Long count = (Long) request.getAttribute("countCourse");
 																	</form>
 																</c:when>
 																<c:otherwise>
-																	<!-- User is not logged in, show a login popup or perform any other action -->
-																	<!-- <button style="border: none; background: none;"
-																		type="button" onclick="showLoginPopup()">
-																		<i class="fe fe-shopping-cart fs-4"></i>
-																	</button> -->
-
-
+																
 																	<a
 																		href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
 																			class="btn btn-sm rounded-0 button-delete-course"
@@ -672,5 +539,33 @@ Long count = (Long) request.getAttribute("countCourse");
 	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
 	<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+	<script>
+	function showFile(fileInputs){
+		document.querySelectorAll("h5").forEach(h5 => h5.remove());
+		const files = fileInputs.files;
+		for (let i = 0; i < files.length; i++){
+			const path = (window.URL || window.webkitURL).createObjectURL(files[i]);
+			console.log(files[i]);
+			const html = "<h5>"+files[i].name+"</h5>";
+			document.querySelector("form").insertAdjacentHTML("afterend", html);
+		}
+	}
+	</script>
+
+     
+	<script>
+		function showModel() {
+			// Show the shadow
+			document.getElementById("shadow").style.display = "block";
+			document.getElementById("model").style.display = "block";
+		}
+
+		function hideShadow() {
+			// Hide the shadow
+			document.getElementById("shadow").style.display = "none";
+			document.getElementById("model").style.display = "none";
+		}
+	</script>
+	
 </body>
 </html>
