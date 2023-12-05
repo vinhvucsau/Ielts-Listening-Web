@@ -11,22 +11,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import hcmute.entity.Course;
+import hcmute.entity.Lesson;
 import hcmute.services.AdminKhoaHocServiceImpl;
+import hcmute.services.CourseServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
+import hcmute.services.ICourseService;
+import hcmute.services.ILessonService;
+import hcmute.services.LessonServiceImpl;
 
-@WebServlet(urlPatterns = { "/user/course" })
+@WebServlet(urlPatterns = { "/user/course", "/user/course-detail" })
 public class UserCourseController extends HttpServlet {
 	private static final long serialVersionUID = -687052188296756743L;
 
 	IAdminKhoaHocService adminKhoaHocService = new AdminKhoaHocServiceImpl();
+	ICourseService courseService = new CourseServiceImpl();
+	ILessonService lessonService = new LessonServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		String gia = req.getParameter("gia") == null ? "" : req.getParameter("gia");
 		String rate = req.getParameter("rate") == null ? "" : req.getParameter("rate");
+		if (url.contains("course-detail")) {
+			String courseId = req.getParameter("id");
+			Course course = courseService.findById(courseId);
+			List<Lesson> listLesson = lessonService.findByCourseId(courseId);
+			req.setAttribute("listLesson", listLesson);
+			req.setAttribute("course", course);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/LessonList.jsp");
+			rd.forward(req, resp);
 
-		if (url.contains("course")) {
+		} else if (url.contains("course")) {
 			if (gia.equals("thapdencao")) {
 				FindAllIncreaseCost(req, resp);
 				Long count = adminKhoaHocService.countKhoaHoc();
@@ -62,6 +77,7 @@ public class UserCourseController extends HttpServlet {
 				rd.forward(req, resp);
 			}
 		}
+
 	}
 
 	private void FindAllDecreaseRate(HttpServletRequest req, HttpServletResponse resp) {
