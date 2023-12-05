@@ -36,9 +36,7 @@ public class LuyenDeHomeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		User user = (User) session.getAttribute("user");;
-		
-		
+		User user = (User) session.getAttribute("user");;	
 		request.setAttribute("currentUser", user);
 		int page = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 		String searchStr = request.getParameter("search") == null ? "" : request.getParameter("search");
@@ -56,11 +54,8 @@ public class LuyenDeHomeController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 	}
-	private User findUserByID(String currentUserID) {
-		User user = userService.findUserByID(currentUserID);
-		return user;
-	}
+	
 
 }

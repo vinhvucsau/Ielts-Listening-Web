@@ -160,8 +160,8 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 			<div class="collapse navbar-collapse" id="navbar-default">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item"><a class="nav-link " href="/Ielts-listening2/user/home"
-						id="navbarLanding" data-bs-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">Trang chủ</a></li>
+						 
+						>Trang chủ</a></li>
 
 					<li class="nav-item "><a
 						class="nav-link " href="course">Khóa học</a>
