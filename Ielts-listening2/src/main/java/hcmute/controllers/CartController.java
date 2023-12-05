@@ -25,6 +25,8 @@ import hcmute.services.CourseServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
 import hcmute.services.ICartService;
 import hcmute.services.ICourseService;
+import hcmute.services.IUserService;
+import hcmute.services.UserServiceImpl;
 
 @WebServlet(urlPatterns = { "/user/cart", "/user/addToCart", "/user/mycart", "/user/deleteToCart" })
 public class CartController extends HttpServlet {
@@ -35,10 +37,22 @@ public class CartController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		ICartService cartService = new CartServiceImpl();
 		ICourseService courseService = new CourseServiceImpl();
+		IUserService userService = new UserServiceImpl();
 
 		if (url.contains("mycart")) {
+			int countAddToCartByUser = 0;
+			HttpSession session1 = req.getSession();
+			User user1 = (User) session1.getAttribute("user");
+			List<Cart> cartsUpdated = cartService.findByUserId(user1.getUserId());
+			countAddToCartByUser = cartsUpdated.size();
+			
+			System.out.print("Size cua cart la :" + countAddToCartByUser);
 			HttpSession session = req.getSession();
 			User user = (User) session.getAttribute("user");
+			String userId = req.getParameter("userId") == null ? "" : req.getParameter("userId");
+			System.out.print("UserId la: " + userId);
+			int networth = user.getNetworth() == null ? 0 : user.getNetworth();
+			System.out.print("networth la: " + networth);
 			List<Cart> carts = cartService.findByUserId(user.getUserId());
 			List<Course> courseList = new ArrayList<Course>();
 			ArrayList<CombineCart> newCarts = new ArrayList<CombineCart>();
@@ -52,6 +66,9 @@ public class CartController extends HttpServlet {
 			}
 
 			req.setAttribute("course", newCarts);
+			req.setAttribute("countAddToCartByUser", countAddToCartByUser);
+			req.setAttribute("user", user1);
+			req.setAttribute("networth", networth);
 			req.getRequestDispatcher("/views/user/cart.jsp").forward(req, resp);
 		}
 	}
