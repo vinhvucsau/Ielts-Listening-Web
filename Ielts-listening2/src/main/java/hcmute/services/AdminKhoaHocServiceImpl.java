@@ -43,11 +43,6 @@ public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService{
 	public List<Course> FindAllCourseDecreaseRate() {
 		return khoaHocDAO.FindAllCourseDecreaseRate();
 	}
-
-	@Override
-	public Course findById(String courseID) {
-		return khoaHocDAO.findById(courseID);
-	}
 	
 
 }
