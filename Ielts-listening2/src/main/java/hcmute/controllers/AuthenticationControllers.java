@@ -27,13 +27,14 @@ import hcmute.services.UserServiceImpl;
 import hcmute.utils.Email;
 import hcmute.utils.compositeId.PasswordEncryptor;
 
-@WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup", "/authentication-forgotpassword", "/authentication-verifycode",
-		"/user/logout", "/admin/logout", "/waiting" })
+@WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup", "/authentication-forgotpassword",
+		"/authentication-verifycode", "/user/logout", "/admin/logout", "/waiting" })
 public class AuthenticationControllers extends HttpServlet {
 
 	IAccountServices accountService = new AccountServiceImpl();
 	IUserService userService = new UserServiceImpl();
 	ICartService cartService = new CartServiceImpl();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -95,7 +96,7 @@ public class AuthenticationControllers extends HttpServlet {
 			// get the 6-digit code
 			String code = sm.getRandom();
 			Account account = new Account();
-			
+
 			String email = req.getParameter("email");
 			String userName = req.getParameter("userName");
 			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord"));
@@ -117,18 +118,18 @@ public class AuthenticationControllers extends HttpServlet {
 				rd.forward(req, resp);
 				return;
 			}
-			if (res == "Success") { 
+			if (res == "Success") {
 				req.setAttribute("username", userName);
 				req.setAttribute("email", email);
 				Cookie cookie1 = new Cookie("username", userName);
-				cookie1.setMaxAge(60*60);
+				cookie1.setMaxAge(60 * 60);
 				resp.addCookie(cookie1);
 				Cookie cookie2 = new Cookie("email", email);
-				cookie2.setMaxAge(60*60);
+				cookie2.setMaxAge(60 * 60);
 				resp.addCookie(cookie2);
-				
+
 				req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
-				
+
 			} else {
 				req.setAttribute("message", res);
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
@@ -175,14 +176,15 @@ public class AuthenticationControllers extends HttpServlet {
 					RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
 					rd.forward(req, resp);
 					return;
+				} else {
+					List<Cart> carts = cartService.findByUserId(user.getUserId());
+					HttpSession session = req.getSession(true);
+					session.setAttribute("user", user);
+					session.setAttribute("role", acc.getRole());
+					session.setAttribute("cart", carts);
+					resp.sendRedirect(req.getContextPath() + "/waiting");
+					return;
 				}
-				List<Cart> carts = cartService.findByUserId(user.getUserId());
-				HttpSession session = req.getSession(true);
-				session.setAttribute("user", user);
-				session.setAttribute("role", acc.getRole());
-				session.setAttribute("cart", carts);
-				resp.sendRedirect(req.getContextPath() + "/waiting");
-				return;
 			}
 
 		} catch (Exception e) {
@@ -239,33 +241,33 @@ public class AuthenticationControllers extends HttpServlet {
 			req.setAttribute("message", "Lỗi gửi mail!");
 			resp.sendRedirect(req.getContextPath() + "/authentication-forgotpassword");
 		}
-		
+
 	}
-	private void postVerifyCode(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+
+	private void postVerifyCode(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String otp1 = req.getParameter("otp1");
 		String otp2 = req.getParameter("otp2");
 		String otp3 = req.getParameter("otp3");
 		String otp4 = req.getParameter("otp4");
 		String otp5 = req.getParameter("otp5");
 		String otp6 = req.getParameter("otp6");
-		
+
 		String otp = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
 		String username = "";
 		String email = "";
 		Cookie[] cookies = req.getCookies();
-	    if (cookies != null) {
-	        for (Cookie cookie : cookies) {
-	            if (cookie.getName().equals("username")) {
-	                username = cookie.getValue(); 
-	            }
-	            if (cookie.getName().equals("email")) {
-	                email = cookie.getValue(); 
-	            }
-	        }
-	    }
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("username")) {
+					username = cookie.getValue();
+				}
+				if (cookie.getName().equals("email")) {
+					email = cookie.getValue();
+				}
+			}
+		}
 		Account account = accountService.findByID(username);
-		
+
 		if (account != null) {
 			if (otp.equals(account.getCode())) {
 				account.setStatus(true);
@@ -278,14 +280,14 @@ public class AuthenticationControllers extends HttpServlet {
 				resp.addCookie(cookie2);
 				resp.sendRedirect(req.getContextPath() + "/authentication-login");
 				req.setAttribute("message", "Đã thêm thành công");
-			}
-			else {
+			} else {
 				req.setAttribute("message", "Mã OTP chưa chính xác. Vui lòng nhập lại");
 				req.setAttribute("username", username);
 				req.setAttribute("email", email);
 				req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
 			}
-		}	
+		}
 	}
+
 	private static final long serialVersionUID = 1L;
 }
