@@ -498,7 +498,7 @@ int networth = (int) request.getAttribute("networth");
 							<li
 								class="list-group-item px-0 d-flex justify-content-between fs-5 text-dark fw-medium">
 								<span> Discount <span>(GKDIS15%)</span> <c:set
-										var="discount" value="${totalCost*0.1}" />
+										var="discount" value="0" />
 							</span> <span><fmt:formatNumber value="${discount}"
 										pattern="###,### VNĐ" /></span>
 							</li>
