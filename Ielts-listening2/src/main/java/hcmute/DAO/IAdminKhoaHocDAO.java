@@ -4,6 +4,7 @@ import java.util.List;
 
 import hcmute.entity.Course;
 
+
 public interface IAdminKhoaHocDAO {
 	Long countKhoaHoc();
 	List<Course> FindAllCourse();
@@ -12,4 +13,5 @@ public interface IAdminKhoaHocDAO {
 	List<Course> FindAllCourseIncreaseRate();
 	List<Course> FindAllCourseDecreaseRate();
 	void deleteCourse(String courseId) throws Exception;
+	Course findById(String courseID);
 }

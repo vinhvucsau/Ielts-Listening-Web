@@ -84,4 +84,11 @@ public class AdminKhoaHocDAOImpl implements IAdminKhoaHocDAO {
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
 	}
+
+	@Override
+	public Course findById(String courseID) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		Course course = enma.find(Course.class, courseID);
+		return course;
+	}
 }
