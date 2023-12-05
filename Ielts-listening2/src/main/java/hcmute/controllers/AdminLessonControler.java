@@ -61,7 +61,7 @@ public class AdminLessonControler extends HttpServlet{
 
 		String url = req.getRequestURI().toString();
 		
-		if (url.contains("")) {
+		if (url.contains("addLesson")) {
 			Lesson lesson = new Lesson();
 			try {
 				BeanUtils.populate(lesson, req.getParameterMap());

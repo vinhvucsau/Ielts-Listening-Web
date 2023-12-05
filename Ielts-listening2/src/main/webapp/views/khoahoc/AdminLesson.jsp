@@ -52,7 +52,7 @@
 				</div>
 				<form action="addLesson" method="post">
 					<input value="Chapter1" name="lessonName">
-					<input value="Course1040" name="courseId">
+					<input value="Course1040" name="courses.courseId">
 					<input type="submit" value="Thêm bài học mới">	
 				</form>
 				<!-- <a

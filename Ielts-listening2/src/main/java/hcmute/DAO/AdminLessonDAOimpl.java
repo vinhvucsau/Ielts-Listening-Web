@@ -20,7 +20,7 @@ public class AdminLessonDAOimpl extends AbstractDao<Lesson> implements IAdminLes
 	public List<Lesson> findLessonByCourse(String courseid) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		
-		String jpql = "SELECT l FROM Lesson l WHERE l.courseId = :courseId";
+		String jpql = "SELECT l FROM Lesson l WHERE l.courses.courseId = :courseId";
 		TypedQuery<Lesson> query = enma.createQuery(jpql, Lesson.class);
 		query.setParameter("courseId", "Course1040");
 		return query.getResultList();
