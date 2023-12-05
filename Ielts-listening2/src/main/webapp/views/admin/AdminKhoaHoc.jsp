@@ -66,12 +66,80 @@ Long count = (Long) request.getAttribute("countCourse");
 		</div>
 		<div
 			class="adminkhoahoc-button d-flex flex-row justify-content-center">
-			<button type="button" class="btn mb-5"
+			<button type="button" class="btn mb-5" onclick="showModel()"
 				style="background-color: rgb(0, 177, 53)">
 				<span style="color: white">Thêm Khóa Học</span>
 			</button>
 		</div>
+		
+		<!-- Model -->
+		<div id="model"
+			style="max-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
+			<form action="addPart" method="post" enctype="multipart/form-data">
+				<div id="test-l-1" class="bs-stepper-pane"
+					aria-labelledby="courseFormtrigger1">
+					<!-- Card -->
+					<div class="card mb-3">
+						<div class="card-header border-bottom px-4 py-3">
+							<h4 class="mb-0">Tạo khóa học mới</h4>
+						</div>
+						<!-- Card body -->
+						<div style="max-height: 450px" class=" overflow-auto">
+							<div class="card-body">
+								<div class="mb-3">
+									<label for="courseTitle" class="form-label">Tên khóa học</label>
+										<input id="partNumber" name="partNumber"
+										class="form-control" type="text" placeholder="Tên khóa học"
+										required> <small>Write a 60 character course
+										title.</small>
+								</div>
+								<div class="mb-3">
+								   <label class="form-label">Mô tả</label>
+								   <textarea class="form-control" aria-label="With textarea"></textarea>
+								 </div>
+								<div class="d-flex align-items-center justify-content-between">
+									<div style="min-width: 350px" class="mb-3">
+										<label for="fee" class="form-label">Học phí</label>
+										<input id="courseFee" name="courseFee"
+											class="form-control" type="text" placeholder="Học phí" required>
+									</div>
+											
+									<div style="min-width: 350px" class="mb-3">
+										<label class="form-label" for="startdate">Ngày bắt đầu</label> 
+										<input class="form-control flatpickr" type="text"
+										placeholder="Start date" id="datepicker" name="datePicker" 
+										data-mdb-toggle="datepicker" required/>
+									</div>
+								</div>
+								
+								<div class="mb-3">
+									<label class="form-label">Thêm ảnh bìa</label> 
+									<input type="file" class="form-control" value="Input"
+											name="inputImage" id="inputimage"
+											accept="image/jpeg, image/png" require>
+								</div>
 
+								<div class="mb-3">
+									<label class="form-label">Thêm video xem trước</label> 
+									<input type="file" class="form-control" value="Input"
+											name="videoFile" id="videoFile"
+											accept="video/mp4" require>
+									<div id="audio"></div>
+								</div>
+							</div>
+
+						</div>
+						<!-- Button -->
+						<button margin: 10px"
+						class="btn btn-primary" type="submit">Xác
+							nhận</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="shadow"
+		class="position-absolute top-0 start-0 bottom-0 end-0 bg-dark"
+		style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow()"></div>
 		<div>
 			<div class="d-flex flex-row justify-content-between mb-4">
 
@@ -241,5 +309,35 @@ Long count = (Long) request.getAttribute("countCourse");
 	        return stars;
 	    }
 	</script>
+	<script>
+	function showFile(fileInputs){
+		document.querySelectorAll("h5").forEach(h5 => h5.remove());
+		const files = fileInputs.files;
+		for (let i = 0; i < files.length; i++){
+			const path = (window.URL || window.webkitURL).createObjectURL(files[i]);
+			console.log(files[i]);
+			const html = "<h5>"+files[i].name+"</h5>";
+			document.querySelector("form").insertAdjacentHTML("afterend", html);
+		}
+	}
+	</script>
+
+     <script
+		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+	<script>
+		function showModel() {
+			// Show the shadow
+			document.getElementById("shadow").style.display = "block";
+			document.getElementById("model").style.display = "block";
+		}
+
+		function hideShadow() {
+			// Hide the shadow
+			document.getElementById("shadow").style.display = "none";
+			document.getElementById("model").style.display = "none";
+		}
+	</script>
+	<script src="../node_modules/dropzone/dist/min/dropzone.min.js"></script>
+	<script src="../assets/js/vendors/dropzone.js"></script>
 </body>
 </html>
