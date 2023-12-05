@@ -32,7 +32,7 @@ public class UserController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 
 		if (url.contains("home")) {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Home.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Lesson-content.jsp");
 			rd.forward(req, resp);
 		}
 	}
@@ -45,3 +45,4 @@ public class UserController extends HttpServlet {
 	}
 
 }
+          
