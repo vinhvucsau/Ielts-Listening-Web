@@ -6,6 +6,7 @@ import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.Account;
+import hcmute.entity.ListeningPart;
 import hcmute.entity.User;
 
 public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO {
@@ -72,7 +73,7 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 		Account account = enma.find(Account.class, id);
 		return account;
 	}
-
+	
 	@Override
 	public void update(Account account) {
 		EntityManager enma = JPAConfig.getEntityManager();
@@ -88,6 +89,22 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 			enma.close();
 		}
 		
+	}
+	
+	public User getUserByEmail(String email) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		try {			
+			String jpql = "Select u from User u Where u.email = :email";
+			TypedQuery<User> query = enma.createQuery(jpql, User.class);
+			query.setParameter("email", email);
+			return query.getResultList().get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			enma.close();
+		}
+		return null;
 	}
 
 }

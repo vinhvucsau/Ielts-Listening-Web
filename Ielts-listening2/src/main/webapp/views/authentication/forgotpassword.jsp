@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,51 +34,25 @@
 			<div class="col-lg-2 col-xl-1 col-xxl-1"></div>
 			<div class="col-lg-5 col-xl-5 px-4 py-5">
 				<div class="bg-white p-4 rounded-3">
-					<div class="login-box">
+					<div class="forgotpassword-box">
 						<div class="text-center">
-							<p class="fw-bold fs-5 mb-4">Đăng Nhập</p>
+							<p class="fw-bold fs-5 mb-4">Lấy Lại Mật Khẩu</p>
 						</div>
 						<div class="username-pwd-form">
-							<form action="authentication-login" method="post">
+							<form action="authentication-forgotpassword" method="post">
 								<div class="mb-4">
-									<label for="username" class="form-label mb-2 text-secondary">
-										Username <span class="text-danger">*</span>
+									<label for="email" class="form-label mb-2 text-secondary">
+										Email <span class="text-danger">*</span>
 									</label>
 									<div class="input-group">
-										<input id="username" name="userName" class="form-control"
-											type="text" placeholder="Nhập username">
+										<input id="email" name="email" class="form-control"
+											type="text" placeholder="Nhập email">
 									</div>
 								</div>
 								<div class="mb-4">
-									<label for="pwd" class="form-label mb-2 text-secondary">
-										Mật khẩu <span class="text-danger">*</span>
-									</label>
-									<div class="input-group">
-										<input id="pwd" class="form-control" name="passWord"
-											type="password" placeholder="Nhập mật khẩu">
-										<button onclick="handleToggleShowPassword()"
-											class="bg-white border" type="button">
-											<div style="width: 35px">
-												<i id="icon__show" class="far fa-eye"></i> <i
-													style="display: none" id="icon__hide"
-													class="far fa-eye-slash"></i>
-											</div>
-										</button>
-									</div>
-								</div>
-								<div class="mb-4">
-									<button class="btn btn-primary fw-bold w-100" type="submit">Đăng
-										nhập</button>
+									<button class="btn btn-primary fw-bold w-100" type="submit">Nhận Mật Khẩu</button>
 								</div>
 							</form>
-						</div>
-						<div class="d-flex justify-content-between align-items-center">
-							<a href="authentication-forgotpassword"
-								class=" text-primaryfw-bold text-decoration-underline"> Quên
-								mật khẩu ? </a> <span class="text-primary">Chưa có tài khoản?
-								<a href="authentication-signup" class="fw-bold text-decoration-underline">Đăng
-									ký</a>
-							</span>
 						</div>
 					</div>
 				</div>

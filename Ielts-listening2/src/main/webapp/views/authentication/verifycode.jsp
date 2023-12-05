@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,53 +34,26 @@
 			<div class="col-lg-2 col-xl-1 col-xxl-1"></div>
 			<div class="col-lg-5 col-xl-5 px-4 py-5">
 				<div class="bg-white p-4 rounded-3">
-					<div class="login-box">
-						<div class="text-center">
-							<p class="fw-bold fs-5 mb-4">Đăng Nhập</p>
-						</div>
-						<div class="username-pwd-form">
-							<form action="authentication-login" method="post">
-								<div class="mb-4">
-									<label for="username" class="form-label mb-2 text-secondary">
-										Username <span class="text-danger">*</span>
-									</label>
-									<div class="input-group">
-										<input id="username" name="userName" class="form-control"
-											type="text" placeholder="Nhập username">
-									</div>
-								</div>
-								<div class="mb-4">
-									<label for="pwd" class="form-label mb-2 text-secondary">
-										Mật khẩu <span class="text-danger">*</span>
-									</label>
-									<div class="input-group">
-										<input id="pwd" class="form-control" name="passWord"
-											type="password" placeholder="Nhập mật khẩu">
-										<button onclick="handleToggleShowPassword()"
-											class="bg-white border" type="button">
-											<div style="width: 35px">
-												<i id="icon__show" class="far fa-eye"></i> <i
-													style="display: none" id="icon__hide"
-													class="far fa-eye-slash"></i>
-											</div>
-										</button>
-									</div>
-								</div>
-								<div class="mb-4">
-									<button class="btn btn-primary fw-bold w-100" type="submit">Đăng
-										nhập</button>
-								</div>
-							</form>
-						</div>
-						<div class="d-flex justify-content-between align-items-center">
-							<a href="authentication-forgotpassword"
-								class=" text-primaryfw-bold text-decoration-underline"> Quên
-								mật khẩu ? </a> <span class="text-primary">Chưa có tài khoản?
-								<a href="authentication-signup" class="fw-bold text-decoration-underline">Đăng
-									ký</a>
-							</span>
-						</div>
+					<div class="text-center">
+						<p class="fw-bold fs-5 mb-2">Xác thực OTP</p>
+						<p class="fs-6 mb-1">Mã OTP đã được gửi đến Email ${email}</p>
+						<p class="fs-6 mb-1">Vui lòng nhập mã xác nhận bên dưới</p>
 					</div>
+					<form action="authentication-verifycode" method="post">
+						<div
+							class="w-100 mt-4 mb-3 d-flex flex-row justify-content-between">
+							<c:forEach var="i" begin="1" end="6" step="1">
+								<input
+									class="otp border border-success text-center fs-2 fw-bold"
+									style="height: 60px; width: 60px; border-radius: 10px;"
+									name="otp${i}" type="text" autocomplete="none">
+							</c:forEach>
+						</div>
+						<div class="mb-4">
+							<button class="btn btn-primary fw-bold w-100" type="submit">Xác
+								Nhận</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -90,6 +64,24 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
 	<script>
+		const otpList = document.querySelectorAll(".otp");
+		if (otpList) {
+			otpList.forEach((otp, index) => {
+				otp.addEventListener("input", (e) => {
+					if (otp.value.length > 1){
+						otp.value = otp.value[0];
+					}
+					if (otp.value.length === 1 && index < 5)
+						otpList[index + 1].focus();
+					if (otp.value.length === 0 && index > 0) {
+						otpList[index - 1].focus();
+					}
+				})
+			})
+		}
+	</script>
+	<script>
+		
 		const message = "${message}";
 		if (message && message.trim() !== "") {
 			// If the message is not empty, show it as a toast
@@ -134,6 +126,8 @@
 			const bootstrapToast = new bootstrap.Toast(toast);
 			bootstrapToast.show();
 		}
+		
+		
 	</script>
 </body>
 </html>
