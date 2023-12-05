@@ -8,4 +8,5 @@ public interface IAccountServices {
 	User Login(Account account);
 	Account findByID(String id);
 	void update(Account account);
+	User getUserByEmail(String email);
 }

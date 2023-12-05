@@ -11,20 +11,32 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cart")
-public class Cart implements Serializable{
+public class Cart implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String cartId;
-	
+
 	@Column(name = "isBuy")
 	private boolean isBuy;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "userId") 
+	@JoinColumn(name = "userId")
 	private User users;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "courseId")
+	private Course course;
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	public Cart() {
 		super();
 	}

@@ -36,7 +36,7 @@
 									</c:if>
 								</div>
 								<div class="lh-1">
-									<h2 class="mb-0" name="userId" value ="${user.userId}"> 
+									<h2 class="mb-0" name="userId" value ="${user.userId}">
 										<c:if test="${ currentUser.name != null}">
 											${ currentUser.name}
 										</c:if>
@@ -89,7 +89,7 @@
 									<!-- List -->
 									<ul class="list-unstyled ms-n2 mb-4">
 										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
+										<li class="nav-item active"><a class="nav-link"
 											href="khoahoccuatoi?userId=${user.userId}"> <i
 												class="fe fe-calendar nav-icon"></i> My Course
 										</a></li>
@@ -115,7 +115,7 @@
 												class="fe fe-settings nav-icon"></i> Edit Profile
 										</a></li>
 										<!-- Nav item -->
-										<li class="nav-item active"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link"
 											href="capnhatmatkhau?userId=${user.userId}"> <i class="fe fe-user nav-icon"></i>
 												Security
 										</a></li>
@@ -142,60 +142,73 @@
 						<div class="card">
 							<!-- Card header -->
 							<div class="card-header">
-								<h3 class="mb-0">Security</h3>
-                                <p class="mb-0">Edit your account settings and change your password here.</p>
+								<h3 class="mb-0">My Course</h3>
+                                <p class="mb-0">Tracking your study progress here.</p>
 							</div>
 							<!-- Card body -->
 							<form action="capnhatmatkhau?userId=${user.userId}"  method="post">
-					<input name="userId" value ="${user.userId}" class="hide" style="display:none">
+							<input name="userId" value ="${user.userId}" class="hide" style="display:none">
 							<div class="card-body">
-								<div>
-                                	<h4 class="mb-0">Change Password</h4>
-                                    <p>We will email you a confirmation when changing your password, so please expect that email after submitting.</p>
-                                    <!-- Form -->
-                                     <form class="row needs-validation" novalidate>
-                                     	<div class="col-lg-6 col-md-12 col-12">
-                                        	<!-- Current password -->
-                                        	<div class="mb-3">
-                                            	<label class="form-label" for="currentpassword">Current password</label>
-                                                <input id="currentpassword" type="password" name="currentpassword" class="form-control" placeholder="" required>
-                                                <div class="invalid-feedback">Please enter current password.</div>
-                                            </div>
-                                         	<!-- New password -->
-                                            <div class="mb-3 password-field">
-                                            	<label class="form-label" for="newpassword">New password</label>
-                                                <input id="newpassword" type="password" name="newpassword" class="form-control mb-2" placeholder="" required>
-                                                <div class="invalid-feedback">Please enter new password.</div>
-                                                <div class="row align-items-center g-0">
-                                                	<div class="col-6">
-                                               			<span
-                                                			data-bs-toggle="tooltip"
-                                                    		data-placement="right"
-                                                    		title="Test it by typing a password in the field below. To reach full strength, use at least 6 characters, a capital letter and a digit, e.g. 'Test01'">
-                                                    		Password strength
-                                                    		<i class="fe fe-help-circle ms-1"></i>
-                                                 		</span>
-                                                 	</div>
-                                                </div>
-                                           	</div>
-                                            <div class="mb-3">
-                                            <!-- Confirm new password -->
-                                            	<label class="form-label" for="confirmpassword">Confirm New Password</label>
-                                                <input id="confirmpassword" type="password" name="confirmpassword" class="form-control mb-2" placeholder="" required>
-                                                <div class="invalid-feedback">Please enter confirm new password.</div>
-                                            </div>
-                                            <!-- Button -->
-                                            <button type="submit" class="btn btn-primary">Save Password</button>
-                                            <div class="col-6"></div>
-                                        </div>
-                                        <div class="col-12 mt-4">
-                                        	<p class="mb-0">
-                                            Can't remember your current password?
-                                            <a href="#">Reset your password via email</a>
-                                            </p>
-                                       	</div>
-                                    </form>
-                                </div>
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
+			                            <div class="row d-md-flex justify-content-between align-items-center">
+			                                <div class="col-md-6 col-lg-6 col-xl-7">
+			                                    <h4 class="mb-3 mb-md-0">Displaying 1 out of 1 courses</h4>
+			                                </div>
+			                                <div class="d-inline-flex col-md-6 col-lg-6 col-xl-5">
+			                                    <!-- List  -->
+			                                    <select class="form-select">
+			                                        <option value="">Sort by</option>
+			                                        <option value="Newest">Newest</option>
+			                                        <option value="Free">Free</option>
+			                                        <option value="Most Popular">Most Popular</option>
+			                                        <option value="Highest Rated">Highest Rated</option>
+			                                    </select>
+			                                    <!-- Search -->
+			                                 	<div class="col-7 d-flex align-items-center">
+				                                    <form class="mt-3 mt-lg-0 ms-lg-3">
+											            <span class="position-absolute ps-3 search-icon">
+											              <i class="fe fe-search"></i>
+											            </span>
+											            <label for="search" class="visually-hidden"></label>
+											            <input type="search" id="search" class="form-control ps-6" placeholder="Search Courses">
+											         </form>
+										         </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			                        <div class="col-xl-3 col-md-6 col-12">
+			                            <div class="card mb-4 card-hover border">
+			                                <a href="#!">
+			                                    <img src="https://files.fullstack.edu.vn/f8-prod/courses/27/64e184ee5d7a2.png" alt="health" class="img-fluid w-100 rounded-top-3">
+			                                </a>
+			                                <div class="card-body">
+			                                    <h4 class="mb-3">
+			                                        <a href="#!" class="text-inherit">Health Wellness</a>
+			                                    </h4>
+			                                    <div class="progress mb-3" style="height: 8px;">
+												  <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+			                                    <a href="#!">
+			                                        Continue Studying
+			                                        <span>
+			                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+			                                                <path
+			                                                    fill-rule="evenodd"
+			                                                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+			                                            </svg>
+			                                        </span>
+			                                    </a>
+			                                </div>
+			                            </div>
+			                        </div>
+			                        <div class="col-xl-12 col-md-12 col-12">
+			                            <div class="mt-4">
+			                                <a href="#!" class="btn btn-light-primary text-primary">Show more courses</a>
+			                            </div>
+			                        </div>
+			                    </div>
+							</div>
 							</form>
 							</div>
 						</div>
