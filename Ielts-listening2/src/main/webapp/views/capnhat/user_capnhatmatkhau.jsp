@@ -24,7 +24,7 @@
 								<div
 									class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
 									<c:if test="${currentUser.image != null}">
-										<img src='<c:url value='/image?fname=userAvatar/${ currentUser.image}'/>'
+										<img src='<c:url value='/Ielts-listening2/image?fname=userAvatar/${currentUser.image}'/>'
 										class="avatar-xl rounded-circle border border-4 border-white"
 										alt="avatar" />
 									</c:if>

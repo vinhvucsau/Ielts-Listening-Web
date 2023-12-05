@@ -10,8 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
+import javax.servlet.http.Cookie;
 import hcmute.DAO.AccountDAOImpl;
 import hcmute.DAO.UserDAOImpl;
 import hcmute.entity.Account;
@@ -44,7 +45,8 @@ public class CapNhatThongTinController extends HttpServlet {
 		
 		req.setAttribute("currentUser", user);
 		req.setAttribute("account", account);
-	
+		HttpSession session = req.getSession(true);
+		session.setAttribute("user", user);
 		
 		if (url.contains("capnhattaikhoan")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
