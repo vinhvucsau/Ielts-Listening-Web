@@ -37,6 +37,33 @@ public class Course implements Serializable{
 	@Column(name = "enrrollmentDate")
 	private Date enrrolmentDate;
 	
+	@Column(name = "trailer")
+	private String trailer;
+	public String getTrailer() {
+		return trailer;
+	}
+
+
+	public Course(String courseId, String courseName, String description, String image, Integer cost,
+			Date enrrolmentDate, String trailer, List<UserCourse> userCourse, List<Lesson> lessons) {
+		super();
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.description = description;
+		this.image = image;
+		this.cost = cost;
+		this.enrrolmentDate = enrrolmentDate;
+		this.trailer = trailer;
+		this.userCourse = userCourse;
+		this.lessons = lessons;
+	}
+
+
+	public void setTrailer(String trailer) {
+		this.trailer = trailer;
+	}
+
+
 	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
 	private List<UserCourse> userCourse;
 	
@@ -49,9 +76,8 @@ public class Course implements Serializable{
 	}
 
 
-	public Course(String courseId, String courseName, String description, String image, Integer cost,
+	public Course( String courseName, String description, String image, Integer cost,
 			Date enrrolmentDate, List<UserCourse> userCourse, List<Lesson> lessons) {
-		this.courseId = courseId;
 		this.courseName = courseName;
 		this.description = description;
 		this.image = image;
