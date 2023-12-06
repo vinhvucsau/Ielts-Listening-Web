@@ -25,7 +25,7 @@ import hcmute.utils.Constants;
 import hcmute.utils.UploadUtils;
 
 @MultipartConfig
-@WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/deletecourse","/admin/insertCourse" })
+@WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/deletecourse","/admin/insertCourse", "/admin/lesson" })
 public class AdminKhoaHocController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -66,6 +66,9 @@ public class AdminKhoaHocController extends HttpServlet {
 			req.setAttribute("countCourse", count);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
 			rd.forward(req, resp);
+		} else if (url.contains("lesson")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminLesson.jsp");
+			rd.forward(req, resp);
 		}
 
 		else {
@@ -74,7 +77,7 @@ public class AdminKhoaHocController extends HttpServlet {
 			req.setAttribute("countCourse", count);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
 			rd.forward(req, resp);
-		}
+		} 
 
 	}
 	@Override
