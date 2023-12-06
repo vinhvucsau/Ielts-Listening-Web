@@ -1,5 +1,7 @@
 package hcmute.services;
 
+import java.util.List;
+
 import hcmute.DAO.AccountDAOImpl;
 import hcmute.DAO.IAccountDAO;
 import hcmute.DAO.IUserDAO;
@@ -20,6 +22,12 @@ public class UserServiceImpl implements IUserService {
 	public void update(User user) {
 		// TODO Auto-generated method stub
 		userDAO.update(user);
+	}
+
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return userDAO.findAll();
 	}
 
 }

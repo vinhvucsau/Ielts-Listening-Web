@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="../assets/css/theme.min.css">
 
         <link rel="canonical" href="course-single.html">
-    <title>Course Single | Geeks - Bootstrap 5 Template</title>
+    <title>Bài học</title>
     
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
@@ -38,7 +38,31 @@
 </head>
 
 <body>
+	
+	<script>
+		var arrTopic = [];
+		var arrMock = [];
+		var id = "Less: ${lesson.lessonId}";
+		// Duyệt danh sách Java và thêm dữ liệu vào biến JavaScript
+		<c:forEach var="item" items="${listCmt}">
+			var item = {
+					lessons : "${item.lessons.lessonId}"
+			};
+			arrTopic.push(item);
+		</c:forEach>
+		for(var t of arrTopic){
+			if("${lesson.lessonId}" ==t.lessons ){
+				console.log(t.lessons);
+			}
+			console.log("fail");
+		}
+		
+		
+		console.log(id);
+	</script>
 
+	
+	
     <!-- Video section -->
     <main>
         <section class="p-lg-5 py-7">
@@ -64,10 +88,8 @@
                             <!-- Card body -->
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <h1 class="fw-semibold mb-2">Tên bài học</h1>
-                                    <a href="#" data-bs-toggle="tooltip" data-placement="top" title="Add to Bookmarks">
-                                        <i class="fe fe-bookmark fs-4 fs-3 text-inherit"></i>
-                                    </a>
+                                    <h1 class="fw-semibold mb-2">${lesson.lessonId}</h1>
+                                    
                                 </div>
                                 <div class="d-flex mb-5 lh-1">
                                     <span class="fs-6 align-top me-1">
@@ -110,18 +132,6 @@
                                         <span>100 người đăng ký</span>
                                     </span>
                                 </div>
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img src="../assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-md" alt="avatar">
-                                        <div class="ms-2 lh-1">
-                                            <h4 class="mb-1">Kathryn Jones</h4>
-                                            <p class="fs-6 mb-0">@kathrynjones</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <a href="#" class="btn btn-outline-secondary btn-sm">Follow</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Nav tabs -->
                             <ul class="nav nav-lt-tab" id="tab" role="tablist">
@@ -156,17 +166,8 @@
                                                 <div class="row">
                                                     <div class="col-xl-8">
                                                         <div class="mb-4">
-                                                            <h3 class="mb-2">Course Descriptions</h3>
-                                                            <p>
-                                                                If you’re learning to program for the first time, or if you’re coming from a different language, this course, JavaScript: Getting Started, will give
-                                                                you the basics for coding in JavaScript. First, you'll discover the types of applications that can be built with JavaScript, and the platforms
-                                                                they’ll run on.
-                                                            </p>
-                                                            <p>
-                                                                Next, you’ll explore the basics of the language, giving plenty of examples. Lastly, you’ll put your JavaScript knowledge to work and modify a
-                                                                modern, responsive web page. When you’re finished with this course, you’ll have the skills and knowledge in JavaScript to create simple programs,
-                                                                create simple web applications, and modify web pages.
-                                                            </p>
+                                                            <h3 class="mb-2">Bài tập</h3>
+                                                            <span>${lesson.answerSheet}</span>
                                                         </div>
 
                                                     </div>
@@ -221,9 +222,9 @@
                                         </div>
 
 
-                                        <!-- rating -->
+                                        <!-- review -->
                                         <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                                            <div class="mb-3">
+                                            <div class="review-rate mb-3">
                                                 <h3 class="mb-4">Đánh giá của học viên</h3>
                                                 <div class="row align-items-center">
                                                     <div class="col-auto text-center">
@@ -483,6 +484,36 @@
                                                             <span class="ms-1">2%</span>
                                                         </div>
                                                     </div>
+
+                                                    <!-- rate -->
+                                                    <form action="rate" method="post" class="star-rating order-3" id="Rate">
+                                                        <h1 class="color-black">Đánh giá của bạn</h1>
+                                                        <div class="star-list d-flex flex-row-reverse justify-content-center align-items-center">
+                                                            <input class="radio-input" type="radio" id="star5" name="star-input" value="5" />
+                                                            <label class="radio-label" class for="star5" title="5 stars">5 stars</label>
+        
+                                                            <input class="radio-input" type="radio" id="star4" name="star-input" value="4" />
+                                                            <label class="radio-label" for="star4" title="4 stars">4 stars</label>
+        
+                                                            <input class="radio-input" type="radio" id="star3" name="star-input" value="3" />
+                                                            <label class="radio-label" for="star3" title="3 stars">3 stars</label>
+        
+                                                            <input class="radio-input" type="radio" id="star2" name="star-input" value="2" />
+                                                            <label class="radio-label" for="star2" title="2 stars">2 stars</label>
+        
+                                                            <input class="radio-input" type="radio" id="star1" name="star-input" value="1" />
+                                                            <label class="radio-label" for="star1" title="1 star">1 star</label> 
+                                                            
+                                                            <!-- get result value here ! -->    
+                                                            
+                                                            <input type="text" name="result-rating" id="result-rating" value="0" class="d-none">
+
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary mt-2">Đánh giá</button>
+                                                        
+                                                    </form>
+
+                                                    <p class="order-4 text-center mt-4">Xin cảm ơn những đóng góp của bạn !</p>
                                                 </div>
                                             </div>
                                             <hr class="my-5">
@@ -504,397 +535,193 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                                <!-- rating item-->
-                                                <div class="rating-item d-flex align-items-start border-bottom pb-4 mb-4">
-                                                    <img src="../assets/images/avatar/avatar-2.jpg" alt=""
-                                                        class="rounded-circle avatar-lg">
-                                                    <div class="ms-3">
-                                                        <h4 class="rating-name mb-1 d-flex justify-content-between align-items-center">
-                                                            <div class="rating-name">
-                                                                Tên học viên
-                                                                <!-- <span class="rating-date ms-1 fs-6 color-dimgrey">Bài 01</span> -->
-                                                            </div>
-                                                            <div class="rating-day">
-                                                                <span class="rating-time ms-1 fs-6 color-dimgrey">12:10</span>
-                                                                <span class="rating-date ms-1 fs-6 color-dimgrey">20/12/2023</span>
-                                                            </div>
-                                                        </h4>
-                                                        <!-- <div class="rating-lesson">Bài 01</div> -->
-                                                        <div class="rating-quantity mb-2">
-                                                            <span class="fs-6">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                    height="12" fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                </svg>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                    height="12" fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                </svg>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                    height="12" fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                </svg>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                    height="12" fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                </svg>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                    height="12" fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <p class="rating-content ">
-                                                            Lectures were at a really good pace and I never felt lost. The
-                                                            instructor was well informed and allowed me to learn and
-                                                            navigate Figma
-                                                            easily.
-                                                        </p>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm">Respond</a>
-
-                                                        
-                                                    </div>
-                                                </div>
-    
+                                               
                                             </div>
 
                                             <!-- rep comment -->
-                                        <div class="comment-thread">
-                                            <!-- Comment 1 start -->
-                                            <details open class="comment" id="comment-1">
-                                                <a href="#comment-1" class="comment-border-link d-none">
-                                                    <span class="sr-only">Jump to comment-1</span>
-                                                </a>
-                                                <summary class="border-bottom">
-                                                    <div class="comment-heading">
-                                                        
-                                                        <div class="comment-info">
-                                                            <div class="rating-item d-flex align-items-start">
-                                                                <img src="../assets/images/avatar/avatar-2.jpg" alt=""
-                                                                    class="rounded-circle avatar-lg">
-                                                                <div class="ms-3">
-                                                                    <h4 class="rating-name mb-1 d-flex justify-content-between align-items-center">
-                                                                        <div class="rating-name">
-                                                                            Tên học viên
-                                                                            <!-- <span class="rating-date ms-1 fs-6 color-dimgrey">Bài 01</span> -->
+                        
+                                            <c:forEach var="cmt" items="${listCmt}">
+                                            	<c:choose>
+                                            	<c:when test="${cmt.lessons.lessonId == lesson.lessonId }">
+                                                    <div class="comment-thread">
+                                                        <!-- Comment 1 start -->
+                                                        <details open class="comment" id="comment-1">
+                                                            <a href="#comment-1" class="comment-border-link d-none">
+                                                                <span class="sr-only">Jump to comment-1</span>
+                                                            </a>
+                                                            <summary class="">
+                                                                <div class="comment-heading">
+                                                                    
+                                                                    <div class="comment-info">
+                                                                        <div class="rating-item d-flex align-items-start">
+                                                                            <img src="../assets/images/avatar/avatar-2.jpg" alt=""
+                                                                                class="rounded-circle avatar-lg">
+                                                                            <div class="ms-3">
+                                                                                <c:forEach  var="uCmt" items="${listUser}">
+                                                                                     <c:choose>
+                                                                                     <c:when test="${cmt.users.userId == uCmt.userId }">
+                                                                                        <h4 class="rating-name mb-1 d-flex justify-content-start align-items-center">
+                                                                                             <div class="rating-name me-3">
+                                                                                                ${uCmt.name}
+                                                                                            </div>
+                                                                                            <div class="rating-day" value="${cmt.createTime}">
+                                                                                                <span class="rating-time ms-1 fs-6 color-dimgrey" value="${cmt.createTime}">${cmt.createTime}</span>
+                                                                                                <span class="rating-date ms-1 fs-6 color-dimgrey" value="${cmt.createTime}">${cmt.createTime}</span>
+                                                                                            </div>
+                                                                                        </h4>
+
+                                                                                        <!-- rating star -->
+                                                                                        <c:forEach var="e" items="${listEnroll}">
+                                                                                            <c:choose>
+                                                                                            <c:when test="${cmt.users.userId == e.users.userId && cmt.lessons.lessonId == e.lessons.lessonId}">
+                                                                                                <div class="comment-rating-quantity mb-2" value="${e.numberOfStar}">
+                                                                                                    <span class="fs-6">
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12"
+                                                                                                            height="12" fill="#888"
+                                                                                                            class="bi bi-star-fill text-warning"
+                                                                                                            viewBox="0 0 16 16">
+                                                                                                            <path
+                                                                                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                                                                        </svg>
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12"
+                                                                                                            height="12" fill="#888"
+                                                                                                            class="bi bi-star-fill text-warning"
+                                                                                                            viewBox="0 0 16 16">
+                                                                                                            <path
+                                                                                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                                                                        </svg>
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12"
+                                                                                                            height="12" fill="#888"
+                                                                                                            class="bi bi-star-fill text-warning"
+                                                                                                            viewBox="0 0 16 16">
+                                                                                                            <path
+                                                                                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                                                                        </svg>
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12"
+                                                                                                            height="12" fill="#888"
+                                                                                                            class="bi bi-star-fill text-warning"
+                                                                                                            viewBox="0 0 16 16">
+                                                                                                            <path
+                                                                                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                                                                        </svg>
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12"
+                                                                                                            height="12" fill="#888"
+                                                                                                            class="bi bi-star-fill text-warning"
+                                                                                                            viewBox="0 0 16 16">
+                                                                                                            <path
+                                                                                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                                                                        </svg>
+                                                                                                    </span>
+                                                                                                </div>
+                                                                                            </c:when>
+                                                                                            </c:choose>
+                                                                                        </c:forEach>
+                                                                                    </c:when>
+                                                                                    </c:choose>   
+                                                                                </c:forEach>
+                                                                                
+
+                                                                                
+                                                                                <p class="rating-content ">${cmt.comment}</p>
+            
+                                                                            </div>
+                                                                            
                                                                         </div>
-                                                                        <div class="rating-day">
-                                                                            <span class="rating-time ms-1 fs-6 color-dimgrey">12:10</span>
-                                                                            <span class="rating-date ms-1 fs-6 color-dimgrey">20/12/2023</span>
-                                                                        </div>
-                                                                    </h4>
-                                                                    <!-- <div class="rating-lesson">Bài 01</div> -->
-                                                                    <div class="rating-quantity mb-2">
-                                                                        <span class="fs-6">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                height="12" fill="currentColor"
-                                                                                class="bi bi-star-fill text-warning"
-                                                                                viewBox="0 0 16 16">
-                                                                                <path
-                                                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                            </svg>
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                height="12" fill="currentColor"
-                                                                                class="bi bi-star-fill text-warning"
-                                                                                viewBox="0 0 16 16">
-                                                                                <path
-                                                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                            </svg>
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                height="12" fill="currentColor"
-                                                                                class="bi bi-star-fill text-warning"
-                                                                                viewBox="0 0 16 16">
-                                                                                <path
-                                                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                            </svg>
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                height="12" fill="currentColor"
-                                                                                class="bi bi-star-fill text-warning"
-                                                                                viewBox="0 0 16 16">
-                                                                                <path
-                                                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                            </svg>
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                height="12" fill="currentColor"
-                                                                                class="bi bi-star-fill text-warning"
-                                                                                viewBox="0 0 16 16">
-                                                                                <path
-                                                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                            </svg>
-                                                                        </span>
                                                                     </div>
-                                                                    <p class="rating-content ">
-                                                                        Lectures were at a really good pace and I never felt lost. The
-                                                                        instructor was well informed and allowed me to learn and
-                                                                        navigate Figma
-                                                                        easily.
-                                                                    </p>
                                                                 </div>
+
+                                                                <div class="comment-body mb-4" style="margin-left: 45px;">
+                                                                    <button type="button" data-toggle="reply-form" data-target="comment-${cmt.commentId}-reply-form" class ="btn btn-outline-secondary btn-sm">Trả lời</button>
+                                                                    
+                                                                    <!-- Reply form start -->
+                                                                    <form action="reply?id=${cmt.commentId}" method="post" class="reply-form d-none" id="comment-${cmt.commentId}-reply-form">
+                                                                        <div class="mb-3 col-md-9">
+                                                                            <textarea name="reply-content" rows="3" id="Excerpt" class="form-control text-dark" placeholder="Nhập bình luận mới" style="height: 102px;"></textarea>
+                                                                        </div>
+                                                                        
+                                                                        <button type="submit" class="btn btn-primary" class="new-comment-submit">Đăng tải</button>
+                                                                        <button type="button" data-toggle="reply-form" data-target="comment-1-reply-form" class="btn btn-outline-secondary">Hủy</button>
+                                                                    </form>
+                                                                    
+                                                                    <!-- Reply form end -->
+                                                                </div>
+                                                            </summary>
+                                                    
+                                                    
+                                                            <div class="replies">
+                                                                <!-- Comment 2 start -->
+                                                                <details open class="comment" id="comment-2">
+                                                                    <a href="#comment-2" class="comment-border-link d-none">
+                                                                        <span class="sr-only">Jump to comment-2</span>
+                                                                    </a>
+                                                                    
+                                                                    <!-- rep comments -->
+                                                                    <c:forEach  var="rep" items="${listRep}">
+                                                                        <c:choose>
+                                            	                        <c:when test="${rep.commentLesson.commentId == cmt.commentId }">
+                                                                            <summary>
+                                                                                <div class="mb-4 ms-5">
+                                                                                    <div class="comment-info">
+                                                                                        <div class="rating-item d-flex align-items-start ">
+                                                                                            <img src="../assets/images/avatar/avatar-2.jpg" alt=""
+                                                                                                class="rounded-circle avatar-lg">
+                                                                                            <div class="ms-3">
+                                                                                                <h4 class="rating-name mb-1 d-flex justify-content-start align-items-center">
+                                                                                                    <c:forEach var="uRep" items="${listUser}">
+                                                                                                        <c:choose>
+                                                                                                        <c:when test="${rep.users.userId == uRep.userId }">
+                                                                                                            <div class="rating-name me-2">
+                                                                                                                ${uRep.name}
+                                                                                                            </div>
+                                                                                                        </c:when>
+                                                                                                        </c:choose>   
+                                                                                                    </c:forEach>
+                                                                                                    
+                                                                                                    <div class="rating-day" value="${cmt.createTime}">
+                                                                                                        <span class="rating-time ms-1 fs-6 color-dimgrey" value="${rep.createTime}">${rep.createTime}</span>
+                                                                                                        <span class="rating-date ms-1 fs-6 color-dimgrey" value="${rep.createTime}">${rep.createTime}</span>
+                                                                                                    </div>
+                                                                                                </h4>
+                                                                                                
+                                                                                                
+                                                                                                <p class="rep-comment__text">${rep.replyComment}</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </summary>
+                                                                        </c:when>
+                                                                        </c:choose>
+                                                                    </c:forEach>
+                                                                    
+                                                                </details>
+                                                                <!-- Comment 2 end -->
+                                                    
+                                                                <!-- <a href="#load-more">Load more replies</a> -->
                                                             </div>
-                                                        </div>
+                                                        </details>
+                                                        <!-- Comment 1 end -->
                                                     </div>
-                                                    <div class="comment-body mb-4">
-                                                       
-                                                        <button type="button" data-toggle="reply-form" data-target="comment-1-reply-form" class ="btn btn-outline-secondary btn-sm">Trả lời</button>
-                                                        
+                                                    
+                                                </c:when>
+                                                </c:choose>
+                                        </c:forEach>
                                             
-                                                        <!-- Reply form start -->
-                                                        <!-- Reply form start -->
-                                                        <form action="" method="post" class="reply-form d-none" id="comment-1-reply-form">
-                                                            <div class="mb-3 col-md-9">
-                                                                
-                                                                <textarea rows="3" id="Excerpt" class="form-control text-dark" placeholder="Nhập bình luận mới" style="height: 102px;"></textarea>
-                                                                
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary" class="new-comment-submit">Đăng tải</button>
-                                                            <button type="button" data-toggle="reply-form" data-target="comment-1-reply-form" class="btn btn-outline-secondary">Hủy</button>
-                                                        </form>
-                                                        <!-- <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
-                                                            <textarea placeholder="Reply to comment" rows="4"></textarea>
-                                                            <button type="submit">Submit</button>
-                                                            <button type="button" data-toggle="reply-form" data-target="comment-1-reply-form">Cancel</button>
-                                                        </form> -->
-                                                        <!-- Reply form end -->
-                                                    </div>
-                                                </summary>
-                                        
-                                        
-                                                <div class="replies">
-                                                    <!-- Comment 2 start -->
-                                                    <details open class="comment" id="comment-2">
-                                                        <a href="#comment-2" class="comment-border-link d-none">
-                                                            <span class="sr-only">Jump to comment-2</span>
-                                                        </a>
-                                                        <summary>
-                                                            <div class="">
-                                                                <div class="comment-info">
-                                                                    <div class="rating-item d-flex align-items-start ">
-                                                                        <img src="../assets/images/avatar/avatar-2.jpg" alt=""
-                                                                            class="rounded-circle avatar-lg">
-                                                                        <div class="ms-3">
-                                                                            <h4 class="rating-name mb-1 d-flex justify-content-between align-items-center">
-                                                                                <div class="rating-name">
-                                                                                    Tên học viên
-                                                                                    <!-- <span class="rating-date ms-1 fs-6 color-dimgrey">Bài 01</span> -->
-                                                                                </div>
-                                                                                <div class="rating-day">
-                                                                                    <span class="rating-time ms-1 fs-6 color-dimgrey">12:10</span>
-                                                                                    <span class="rating-date ms-1 fs-6 color-dimgrey">20/12/2023</span>
-                                                                                </div>
-                                                                            </h4>
-                                                                            <!-- <div class="rating-lesson">Bài 01</div> -->
-                                                                            <div class="rating-quantity mb-2">
-                                                                                <span class="fs-6">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                </span>
-                                                                            </div>
-                                                                            
-                                                                            <p class="rep-comment__text">Took the words right out of my mouth! Took the words right out of my mouth! Took the words right out of my mouth!	</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </summary>
-
-                                                        <summary>
-                                                            <div class="">
-                                                                <div class="comment-info">
-                                                                    <div class="rating-item d-flex align-items-start ">
-                                                                        <img src="../assets/images/avatar/avatar-2.jpg" alt=""
-                                                                            class="rounded-circle avatar-lg">
-                                                                        <div class="ms-3">
-                                                                            <h4 class="rating-name mb-1 d-flex justify-content-between align-items-center">
-                                                                                <div class="rating-name">
-                                                                                    Tên học viên
-                                                                                    <!-- <span class="rating-date ms-1 fs-6 color-dimgrey">Bài 01</span> -->
-                                                                                </div>
-                                                                                <div class="rating-day">
-                                                                                    <span class="rating-time ms-1 fs-6 color-dimgrey">12:10</span>
-                                                                                    <span class="rating-date ms-1 fs-6 color-dimgrey">20/12/2023</span>
-                                                                                </div>
-                                                                            </h4>
-                                                                            <!-- <div class="rating-lesson">Bài 01</div> -->
-                                                                            <div class="rating-quantity mb-2">
-                                                                                <span class="fs-6">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                </span>
-                                                                            </div>
-                                                                            
-                                                                            <p class="rep-comment__text">Took the words right out of my mouth!</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </summary>
-
-                                                        <summary>
-                                                            <div class="">
-                                                                <div class="comment-info">
-                                                                    <div class="rating-item d-flex align-items-start ">
-                                                                        <img src="../assets/images/avatar/avatar-2.jpg" alt=""
-                                                                            class="rounded-circle avatar-lg">
-                                                                        <div class="ms-3">
-                                                                            <h4 class="rating-name mb-1 d-flex justify-content-between align-items-center">
-                                                                                <div class="rating-name">
-                                                                                    Tên học viên
-                                                                                    <!-- <span class="rating-date ms-1 fs-6 color-dimgrey">Bài 01</span> -->
-                                                                                </div>
-                                                                                <div class="rating-day">
-                                                                                    <span class="rating-time ms-1 fs-6 color-dimgrey">12:10</span>
-                                                                                    <span class="rating-date ms-1 fs-6 color-dimgrey">20/12/2023</span>
-                                                                                </div>
-                                                                            </h4>
-                                                                            <!-- <div class="rating-lesson">Bài 01</div> -->
-                                                                            <div class="rating-quantity mb-2">
-                                                                                <span class="fs-6">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                                                                                        height="12" fill="currentColor"
-                                                                                        class="bi bi-star-fill text-warning"
-                                                                                        viewBox="0 0 16 16">
-                                                                                        <path
-                                                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                                                    </svg>
-                                                                                </span>
-                                                                            </div>
-                                                                            
-                                                                            <p class="rep-comment__text">Took the words right out of my mouth!</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </summary>
-                                                    </details>
-                                                    <!-- Comment 2 end -->
-                                        
-                                                    <a href="#load-more">Load more replies</a>
-                                                </div>
-                                            </details>
-                                            <!-- Comment 1 end -->
-                                        </div>
 
                                             <!-- new comment -->
-                                            <form action="" method="post" class="form-new-comment">
+                                            <form action="comment?lessId=${lesson.lessonId}" method="post" class="form-new-comment">
+                                               
+                                                <label for="Excerpt" class="form-label">Bình luận</label>
+                                           
                                                 <div class="mb-3 col-md-9">
-                                                    <label for="Excerpt" class="form-label">Bình luận</label>
-                                                    <textarea rows="3" id="Excerpt" class="form-control text-dark" placeholder="Nhập bình luận mới" style="height: 102px;"></textarea>
+                                                    <textarea name = "comment-content" rows="3" id="Excerpt" class="form-control text-dark" placeholder="Nhập bình luận mới" style="height: 102px;"></textarea>
                                                     <small>Đăng tải những đóng góp của bạn.</small>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary" class="new-comment-submit">Đăng tải</button>
                                             </form>
+
+                                            
                                         </div>
 
                              
@@ -1063,7 +890,7 @@ details.comment summary::-webkit-details-marker {
     display: none;
 }
 details.comment:not([open]) .comment-heading {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
 }
 .comment-heading::after {
     display: inline-block;
@@ -1074,10 +901,10 @@ details.comment:not([open]) .comment-heading {
     color: rgba(0, 0, 0, 0.55);
 }
 details.comment[open] .comment-heading::after {
-    content: "Click to hide";
+    content: "Ẩn bình luận";
 }
 details.comment:not([open]) .comment-heading::after {
-    content: "Click to show";
+    content: "Hiện bình luận";
 }
 
 /* Adjustment for Internet Explorer */
@@ -1106,10 +933,84 @@ details.comment:not([open]) .comment-heading::after {
 .d-none {
     display: none;
 }
+
+/* rating css */
+.star-rating {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.radio-input {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-label {
+  cursor: pointer;
+  font-size: 0;
+  color: rgba(0,0,0,0.2);
+  transition: color 0.1s ease-in-out;
+}
+
+.radio-label:before {
+  content: "★";
+  display: inline-block;
+  font-size: 48px;
+  margin: -12px 4px 0 4px;
+}
+
+.radio-input:checked ~ .radio-label {
+  color: #ffc700;
+  color: gold;
+}
+
+.radio-label:hover,
+.radio-label:hover ~ .radio-label {
+  color: goldenrod;
+}
+
+.radio-input:checked + .radio-label:hover,
+.radio-input:checked + .radio-label:hover ~ .radio-label,
+.radio-input:checked ~ .radio-label:hover,
+.radio-input:checked ~ .radio-label:hover ~ .radio-label,
+.radio-label:hover ~ .radio-input:checked ~ .radio-label {
+  color: darkgoldenrod;
+}
+
+
+.average-rating {
+  position: relative;
+  appearance: none;
+  color: transparent;
+  width: auto;
+  display: inline-block;
+  vertical-align: baseline;
+  font-size: 25px;
+}
+
+.average-rating::before {
+  --percent: calc(4.3/5*100%);
+  content: '★★★★★';
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgba(0,0,0,0.2);
+  background: linear-gradient(90deg, gold var(--percent), rgba(0,0,0,0.2) var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 </style>
 
     <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+    // hide/show form repcomment
+	console.log(${lessID});
     document.addEventListener(
     "click",
     function(event) {
@@ -1121,7 +1022,95 @@ details.comment:not([open]) .comment-heading::after {
         }
     },
     false
-);
+    );
+
+    
+    // const detailsElements = document.querySelectorAll('details');
+
+    // // Lặp qua từng phần tử <details>
+    // detailsElements.forEach((detailsElement) => {
+    //     // Lắng nghe sự kiện nhấn phím
+    //     detailsElement.addEventListener('keydown', (event) => {
+    //         // Kiểm tra nếu phím Space được nhấn
+    //         if (event.code === 'Space') {
+    //         // Ngăn chặn hành vi mặc định của phím Space (cuộn trang)
+    //         // event.preventDefault();
+            
+    //         // Thay đổi thuộc tính "open" của phần tử <details>
+    //         detailsElement.open = true;
+    //         console.log(detailsElement.open);
+    //         }
+    //     }, true);
+    // });
+
+    // textarea.addEventListener('keydown', function(event) {
+    //     if (event.key === ' ' && event.target === textarea) {
+    //         event.stopPropagation();
+    //         detailsElement.open = true;
+    //     }
+    //     }, true);
+
+    // xu ly đánh giá sao
+    const starRatingForm = document.querySelector(".star-rating") 
+    const handleFormChange = (e) => {
+        var res = document.getElementById("result-rating");
+        res.setAttribute("value",e.target.value );
+        res.innerHTML = e.target.value;
+        console.log(res.innerHTML);
+        return e.target.value
+    }
+    starRatingForm.addEventListener("change", handleFormChange)
+
+    // xu ly hien thi rating
+    var rate = document.querySelectorAll(".comment-rating-quantity");
+    console.log(rate);
+    $(document).ready(function() {
+        $(window).on("load", function() {
+            for (var i = 0; i < rate.length; i++){
+                var rateNum = rate[i].getAttribute("value");
+                var listStart = rate[i].querySelectorAll("svg");
+            
+                for (var j = 0; j < rateNum; j++){
+                    listStart[j].setAttribute("fill", "currentColor");      
+                }
+            }
+
+            loadTime();
+        });
+    });
+
+    //format date:
+    var createTime = "${cmt.createTime}";
+    var days = document.getElementsByClassName("rating-day");
+    function loadTime(){
+        for(var i = 0; i < days.length; i++ ){
+            console.log(days[i]);
+            var dateObj = new Date(days[i].getAttribute("value"));
+            var formattedDate = dateObj.toLocaleDateString();
+            var formattedTime = dateObj.toLocaleTimeString();
+
+            console.log(formattedTime);
+            console.log(formattedDate);
+            days[i].querySelector(".rating-time").innerHTML = formattedTime;
+            days[i].querySelector(".rating-date").innerHTML = formattedDate;
+        }
+    }
+    
+
+   
+
+    //show my old rating
+    // var stars = document.querySelectorAll(".radio-label");
+    // console.log(stars);
+    // function showOldRating(num = 4){
+    //     var len = stars.length
+    //     for(var i = 0; i < num;i++){
+    //         var j = 5- i;
+    //         console.log(j);
+    //         stars[j].style.color = "gold";
+    //     }
+    // }
+    // showOldRating();
 </script>
     <!-- Libs JS -->
 <script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
