@@ -9,21 +9,8 @@
 </head>
 <body>
 	<style>
-		.btn{
-			transition: 0.3s ease-out;
-		}
-		.btn--2{
-			background-color: #eceef1; 
-		}
-		.btn:hover{
-			color: #fff !important;
-			background-color: #0071F9 !important;
-		}
-		.btn:disabled,
-		button[disabled]{
-			color: #9ca3af;
-			background-color: #e5e7eb;
-		}
+		
+		
 		.ul__test li div{
 			transition: 0.6s ease-in-out;
 		}
@@ -32,13 +19,7 @@
 			color: #0071F9 !important;
 			border-radius: 0.5rem;
 		}
-		.px-7 {
-			padding-left: 6rem !important;	
-			padding-right: 6rem ! important;
-		}
-		.py-7{
-			padding-top: 6rem !important;
-			padding-bottom: 6rem ! important;
+		
 		}
 		.div__tab{
 			cursor: pointer;
@@ -51,13 +32,13 @@
 	</style>
 	<div class="m-0 p-0" >
 		<div class="w-100 m-0" style="background-color: #DDE4FB; height: 450px;"></div>
-		<div class="px-7 py-7 card ">
+		<div class="px-7 py-7  ">
 		
 			<div class="bg-white px-4 py-4 rounded-4 card-body shadow-lg">
 				<p class="fs-5 fw-bold mb-0 color-blue--primary">Tiếp tục làm bài</p>
 				<p class="fs-4 fw-bold mb-0">IELTS Essential Guide</p>
 				<p class="fs-5 fw-bold mb-0" style="color: rgb(113,113,113)">Cam 18 - Test 2</p>
-				<button class="btn d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light align-items-center">
+				<button class="btn  btn-primary d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light align-items-center">
 					Tiếp tục làm bài
 					<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
 						fill="currentColor" class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
@@ -101,7 +82,8 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 			<c:forEach var="topicTest" items='${topicTests}'>
 				<div class="w-100 bg-white px-4 py-4 my-5 rounded-4 shadow-lg">
 					<div class="position-relative intro d-flex flex-row">
-						<img style="cursor:pointer" src='<c:url value="/image?fname=ImagesWeb/${topicTest.image}"/>' width="150px"/>
+				
+						<img style="cursor:pointer" src='<c:url value="/image?fname=topicIMG/${topicTest.image}"/>' width="150px"/>
 						<div class="w-75">
 							<p class="fs-4 fw-bold mb-0" style="cursor:pointer">${topicTest.topicName}</p>
 							<p style="color: rgb(123,137,155); font-size: 18px; cursor:pointer">${topicTest.description}</p>
@@ -183,7 +165,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 						  	</c:forEach>	
 					  </div>
 					</div>
-					<button class="btn d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold bg-color-blue--light color-blue--primary align-items-center">
+					<button class="btn btn-primary d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold  align-items-center">
 						Xem thêm ${topicTest.mockTests.size() - i} đề
 						<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
 							fill="currentColor" class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
