@@ -188,7 +188,6 @@ public class AdminKhoaHocController extends HttpServlet {
 		try {
 			List<Course> list = adminKhoaHocService.FindAllCourse();
 
-			System.out.print(list.size());
 			req.setAttribute("course", list);
 
 		} catch (Exception e) {
