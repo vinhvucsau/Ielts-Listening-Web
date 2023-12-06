@@ -39,14 +39,14 @@ public class CapNhatThongTinController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		
 		//Set cứng ID để test chức năng
-		String id = req.getParameter("userId");
-		User user = findUserById(id);
+		HttpSession session = req.getSession(false);
+		User user = (User) session.getAttribute("user");
+		
 		Account account = accountService.findByID(user.getAccount().getUserName());
 		
 		req.setAttribute("currentUser", user);
 		req.setAttribute("account", account);
-		HttpSession session = req.getSession(true);
-		session.setAttribute("user", user);
+		
 		
 		if (url.contains("capnhattaikhoan")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
@@ -118,7 +118,8 @@ public class CapNhatThongTinController extends HttpServlet {
 			String id = req.getParameter("userId");
 
 			//Set cứng ID để test chức năng
-			User user = userService.findUserByID(id);
+			HttpSession session = req.getSession(false);
+			User user = (User) session.getAttribute("user");
 			
 			  String name = req.getParameter("inputName").trim(); 
 			  String phoneNumber =req.getParameter("inputPhone").trim(); 
