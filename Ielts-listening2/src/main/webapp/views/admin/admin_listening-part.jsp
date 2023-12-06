@@ -204,7 +204,7 @@
 		for (let i = 0; i < files.length; i++){
 			const path = (window.URL || window.webkitURL).createObjectURL(files[i]);
 			console.log(files[i]);
-			const html = "<h5 style=''>"+files[i].name+"</h5>";
+			const html = "<h5 style='display:none'>"+files[i].name+"</h5>";
 			document.querySelector("form").insertAdjacentHTML("afterend", html);
 		}
 	}
