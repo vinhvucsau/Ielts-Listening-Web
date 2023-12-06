@@ -11,6 +11,7 @@ public interface IEnrollLessonService {
 	void delete(String enLessId) throws Exception;
 	void insert(EnrrolLesson model);
 	EnrrolLesson findOneByUser_Lesson(String userId, String lessId);
+	EnrrolLesson findByUserIdAndLessonId(String UserId, String LessonId);
 }
 
-	EnrrolLesson findByUserIdAndLessonId(String UserId, String LessonId);
+	

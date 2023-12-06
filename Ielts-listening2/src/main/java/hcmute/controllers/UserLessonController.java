@@ -99,6 +99,7 @@ public class UserLessonController extends HttpServlet {
 			rep.setReplyComment(req.getParameter("reply-content"));
 			rep.setCommentLesson(c);
 			rep.setCreateTime(curDate);
+			repService.insert(rep);
 			try {
 				repService.insert(rep);
 //				req.setAttribute("u", user);
@@ -107,7 +108,7 @@ public class UserLessonController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/user/lesson#review");
 			} catch (Exception e) {
 				e.getStackTrace();
-				req.setAttribute("e", e);
+			
 				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
 				rd.forward(req, resp);
 			}
