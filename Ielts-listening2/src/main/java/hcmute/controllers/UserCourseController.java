@@ -1,6 +1,8 @@
 package hcmute.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,15 +11,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import hcmute.entity.Course;
+import hcmute.entity.EnrollLessonCombine;
+import hcmute.entity.EnrrolLesson;
 import hcmute.entity.Lesson;
+import hcmute.entity.User;
+import hcmute.entity.UserCourse;
 import hcmute.services.AdminKhoaHocServiceImpl;
 import hcmute.services.CourseServiceImpl;
+import hcmute.services.EnrollLessonServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
 import hcmute.services.ICourseService;
+import hcmute.services.IEnrollLessonService;
 import hcmute.services.ILessonService;
+import hcmute.services.IUserCourseService;
 import hcmute.services.LessonServiceImpl;
+import hcmute.services.UserCourseServiceImpl;
 
 @WebServlet(urlPatterns = { "/user/course", "/user/course-detail" })
 public class UserCourseController extends HttpServlet {
@@ -26,6 +37,8 @@ public class UserCourseController extends HttpServlet {
 	IAdminKhoaHocService adminKhoaHocService = new AdminKhoaHocServiceImpl();
 	ICourseService courseService = new CourseServiceImpl();
 	ILessonService lessonService = new LessonServiceImpl();
+	IUserCourseService userCourseService = new UserCourseServiceImpl();
+	IEnrollLessonService enrollLessonService = new EnrollLessonServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,9 +48,35 @@ public class UserCourseController extends HttpServlet {
 		if (url.contains("course-detail")) {
 			String courseId = req.getParameter("id");
 			Course course = courseService.findById(courseId);
+			HttpSession session = req.getSession();
+			User user = (User) session.getAttribute("user");
+			String userId;
+			if (user != null)
+				userId = user.getUserId();
+			else
+				userId = "0";
+			List<UserCourse> listUserCourse = userCourseService.findByUserIdAndCourseId(userId, courseId);
 			List<Lesson> listLesson = lessonService.findByCourseId(courseId);
-			req.setAttribute("listLesson", listLesson);
-			req.setAttribute("course", course);
+			if (listUserCourse.size() != 0) { // user da dang ki khoa hoc
+				req.setAttribute("isBuy", 1);
+				List<EnrollLessonCombine> listEnCombine = new ArrayList<EnrollLessonCombine>();
+				for (Lesson lesson : listLesson) {
+					EnrrolLesson enrollLesson = enrollLessonService.findByUserIdAndLessonId(userId,
+							lesson.getLessonId());
+
+					EnrollLessonCombine en = new EnrollLessonCombine();
+					en.setEnrollLesson(enrollLesson);
+					en.setLesson(lesson);
+					listEnCombine.add(en);
+				}
+				req.setAttribute("listLesson", listEnCombine);
+				req.setAttribute("course", course);
+			} else {
+				req.setAttribute("isBuy", 0);
+				req.setAttribute("listLesson", listLesson);
+				req.setAttribute("course", course);
+			}
+
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/LessonList.jsp");
 			rd.forward(req, resp);
 

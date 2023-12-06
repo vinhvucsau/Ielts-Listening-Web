@@ -182,31 +182,53 @@
 															<div class="pt-3 pb-2 disable">
 																<!-- List group item -->
 																<ul class="list-group list-group-flush">
-																	<c:forEach var="lesson" items="${listLesson }">
-																		<li
-																			class="list-group-item list-group-item-action active">
-																			<a href="#"
-																			class="d-flex justify-content-between align-items-center text-inherit">
-																				<div class="text-truncate">
-																					<span
-																						class="icon-shape bg-light text-primary icon-sm rounded-circle me-2">
-																						<svg xmlns="http://www.w3.org/2000/svg" width="14"
-																							height="14" fill="currentColor"
-																							class="bi bi-play-fill" viewBox="0 0 16 16">
+																	<c:if test="${isBuy ==0 }">
+																		<c:forEach var="lesson" items="${listLesson }">
+																			<li class="list-group-item list-group-item-action">
+																				<a href="#"
+																				class="d-flex justify-content-between align-items-center text-inherit">
+																					<div class="text-truncate">
+																						<span
+																							class="icon-shape bg-light text-primary icon-sm rounded-circle me-2">
+																							<i class="fe fe-lock"></i>
+																						</span> <span class="main-lesson__title">${lesson.lessonName }</span>
+																					</div>
+																					<div class="text-truncate">
+																						<span class="main-lesson__time">1m 7s</span>
+																					</div>
+																			</a>
+																			</li>
+																		</c:forEach>
+																	</c:if>
+																	<c:if test="${isBuy ==1 }">
+																		<c:forEach var="lesson" items="${listLesson }">
+																			<li class="list-group-item list-group-item-action">
+																				<a href="#"
+																				class="d-flex justify-content-between align-items-center text-inherit">
+																					<div class="text-truncate">
+																						<span
+																							class="icon-shape bg-light text-primary icon-sm rounded-circle me-2">
+																							<svg xmlns="http://www.w3.org/2000/svg"
+																								width="14" height="14" fill="currentColor"
+																								class="bi bi-play-fill" viewBox="0 0 16 16">
                                                                         <path
-																								d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z">
+																									d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z">
                                                                     </path></svg>
-																					</span> <span class="main-lesson__title">${lesson.lessonName }</span>
-																				</div>
-																				<div class="text-truncate">
-																					<span class="main-lesson__time">1m 7s</span>
-																				</div>
-																		</a>
-																		</li>
-																	</c:forEach>
-
-
-
+																						</span> <span class="main-lesson__title">${lesson.lesson.lessonName}</span>
+																					</div>
+																					<div class="text-truncate">
+																						<span class="main-lesson__time"> <c:if
+																								test="${lesson.enrollLesson != null }">
+																								<span>${lesson.enrollLesson.score}</span>
+																							</c:if> <c:if test="${lesson.enrollLesson == null }">
+																								<span>1m 7s</span>
+																							</c:if>
+																						</span>
+																					</div>
+																			</a>
+																			</li>
+																		</c:forEach>
+																	</c:if>
 																</ul>
 															</div>
 														</div>

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,14 +23,15 @@ public class EnrrolLesson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	private String enrrolId;
-	
+
 	@Column(name = "enrrollmentDate")
 	private Date enrrollmentDate;
 
 	@Column(name = "numberOfStar")
 	private Integer numberOfStar;
-	
+
 	@Column(name = "score")
 	private double score;
 
@@ -43,7 +45,7 @@ public class EnrrolLesson implements Serializable {
 
 	@OneToMany(mappedBy = "enrrolLesson", fetch = FetchType.LAZY)
 	private List<AnswerLessonUser> answerLessonUser;
-	
+
 	public EnrrolLesson() {
 		super();
 	}
@@ -114,7 +116,5 @@ public class EnrrolLesson implements Serializable {
 		this.lessons = lessons;
 		this.answerLessonUser = answerLessonUser;
 	}
-	
-	
-	
+
 }
