@@ -257,7 +257,7 @@ Long count = (Long) request.getAttribute("countCourse");
 									<c:forEach var="i" items="${course}">
 										<div class="col-lg-3 col-md-6 col-12">
 											<div class="card mb-4 card-hover">
-												<a href="lesson"><img
+												<a href="listLesson?courseId=${course.courseId}"><img
 													src="../assets/images/course/course-node.jpg" alt=""
 													class="card-img-top"></a>
 												<!-- Card Body -->

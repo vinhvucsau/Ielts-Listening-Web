@@ -18,17 +18,18 @@ import org.apache.commons.beanutils.BeanUtils;
 import hcmute.entity.Course;
 import hcmute.entity.Lesson;
 import hcmute.services.AdminKhoaHocServiceImpl;
-import hcmute.services.AdminLessonServiceimpl;
+import hcmute.services.CourseServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
-import hcmute.services.IAdminLessonService;
+
+import hcmute.services.LessonServiceImpl;
 
 @WebServlet(urlPatterns = { "/admin/listLesson", "/admin/addLesson", "/admin/deleteLesson", "/admin/updateLesson" })
 public class AdminLessonControler extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	IAdminLessonService lessonService = new AdminLessonServiceimpl();
-	IAdminKhoaHocService courseService = new AdminKhoaHocServiceImpl();
+	LessonServiceImpl lessonService = new LessonServiceImpl ();
+	CourseServiceImpl courseService = new CourseServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,7 +39,7 @@ public class AdminLessonControler extends HttpServlet {
 		if (url.contains("listLesson")) {
 
 			String courseid = req.getParameter("courseId");
-			List<Lesson> listLesson = lessonService.findLessonByCourse(courseid);
+			List<Lesson> listLesson = lessonService.findByCourseId(courseid);
 			req.setAttribute("listLesson", listLesson);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminLesson.jsp");
 			rd.forward(req, resp);

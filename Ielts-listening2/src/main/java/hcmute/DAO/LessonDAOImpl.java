@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 import JPAConfig.JPAConfig;
 import hcmute.entity.Lesson;
 
-public class LessonDAOImpl extends AbstractDao<Lesson> implements ILessonDAO {
+public class LessonDAOImpl extends AbstractDao<Lesson> implements IAdminLessonDAO {
 
 	public LessonDAOImpl() {
 		super(Lesson.class);
@@ -16,7 +16,7 @@ public class LessonDAOImpl extends AbstractDao<Lesson> implements ILessonDAO {
 	}
 
 	@Override
-	public List<Lesson> findByCourseId(String courseId) {
+	public List<Lesson> findLessonByCourse(String courseId) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		String jpql = "SELECT l FROM Lesson l WHERE l.courses.courseId = :courseId";
 		TypedQuery<Lesson> query = enma.createQuery(jpql, Lesson.class);
