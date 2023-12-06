@@ -24,4 +24,5 @@ public class LessonDAOImpl extends AbstractDao<Lesson> implements ILessonDAO {
 		return query.getResultList();
 	}
 
+
 }
