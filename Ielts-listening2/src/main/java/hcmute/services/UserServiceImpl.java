@@ -1,5 +1,7 @@
 package hcmute.services;
 
+import java.util.List;
+
 import hcmute.DAO.AccountDAOImpl;
 import hcmute.DAO.IAccountDAO;
 import hcmute.DAO.IUserDAO;
@@ -32,6 +34,12 @@ public class UserServiceImpl implements IUserService {
 	public boolean findDuplicatePhone(String phoneNum, String userId) {
 		// TODO Auto-generated method stub
 		return userDAO.findDuplicatePhone(phoneNum, userId);
+	}
+
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return userDAO.findAll();
 	}
 
 }

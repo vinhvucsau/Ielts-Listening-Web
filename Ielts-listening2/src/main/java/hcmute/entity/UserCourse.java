@@ -14,61 +14,56 @@ import javax.persistence.Table;
 import hcmute.utils.compositeId.CompositeUserCourse;
 
 @Entity
-@IdClass(CompositeUserCourse.class)
-@Table(name = "user_course" )
-public class UserCourse implements Serializable{
+@Table(name = "user_course")
+public class UserCourse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
+	private String user_courseId;
+
+	public String getUser_courseId() {
+		return user_courseId;
+	}
+
+	public void setUser_courseId(String user_courseId) {
+		this.user_courseId = user_courseId;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "courseId")
 	private Course courses;
-	
-	@Id
+
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User users;
-	
+
 	@Column(name = "acceptDay")
 	private Date acceptDay;
 
-	
-	
 	public Course getCourses() {
 		return courses;
 	}
-
 
 	public void setCourses(Course courses) {
 		this.courses = courses;
 	}
 
-
-
 	public User getUsers() {
 		return users;
 	}
-
-
 
 	public void setUsers(User users) {
 		this.users = users;
 	}
 
-
-
 	public Date getAcceptDay() {
 		return acceptDay;
 	}
 
-
-
 	public void setAcceptDay(Date acceptDay) {
 		this.acceptDay = acceptDay;
 	}
-
-
 
 	public UserCourse(Course courses, User users, Date acceptDay) {
 		super();
@@ -77,10 +72,8 @@ public class UserCourse implements Serializable{
 		this.acceptDay = acceptDay;
 	}
 
-
-
 	public UserCourse() {
 		super();
 	}
-	
+
 }

@@ -160,13 +160,14 @@ User user = (User) session.getAttribute("user");
 								<c:forEach var="i" items="${course}">
 									<div class="col-lg-3 col-md-6 col-12">
 										<div class="card mb-4 card-hover">
-											<a href="course-single.html"><img
+											<a href="course-detail?id=${i.courseId }"><img
 												src="../assets/images/course/course-node.jpg" alt=""
 												class="card-img-top"></a>
 											<!-- Card Body -->
 											<div class="card-body">
 												<h4 class="mb-2 text-truncate-line-2">
-													<a href="course-single.html" class="text-inherit">${i.courseName}</a>
+													<a href="course-detail?id=${i.courseId }"
+														class="text-inherit">${i.courseName}</a>
 												</h4>
 												<!-- List inline -->
 												<div class="d-flex align-items-center gap-3">
