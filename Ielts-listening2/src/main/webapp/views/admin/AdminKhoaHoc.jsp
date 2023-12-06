@@ -65,6 +65,7 @@ Long count = (Long) request.getAttribute("countCourse");
 				amet consectetur. Cras ultricies sapien venenatis vulputate felis.
 				Non hendrerit lectus enim semper et nisl nunc lobortis ultrices.</span>
 		</div>
+		<!-- Button Thêm khóa học -->
 		<div
 			class="adminkhoahoc-button d-flex flex-row justify-content-center">
 			<button href="#" type="button" class="btn mb-5" onclick="showModel()"
@@ -256,7 +257,7 @@ Long count = (Long) request.getAttribute("countCourse");
 									<c:forEach var="i" items="${course}">
 										<div class="col-lg-3 col-md-6 col-12">
 											<div class="card mb-4 card-hover">
-												<a href="course-single.html"><img
+												<a href="lesson"><img
 													src="../assets/images/course/course-node.jpg" alt=""
 													class="card-img-top"></a>
 												<!-- Card Body -->
