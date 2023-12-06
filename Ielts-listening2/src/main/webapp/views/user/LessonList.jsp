@@ -825,9 +825,14 @@
 									<div class="price-vnd">VNĐ</div>
 								</div>
 								<div class="d-grid card-button">
-									<a href="#"
-										class="btn btn-primary bg-color-blue--primary mb-2 card-button__reg">Đăng
-										ký</a> <a href="pricing.html"
+									<c:if test="${isBuy ==0 }">
+										<a href="#"
+											class="btn btn-primary bg-color-blue--primary mb-2 card-button__reg">Đăng
+											ký</a>
+									</c:if>
+
+
+									<a href="pricing.html"
 										class="btn btn-outline-primary card-button__chat">Tư vấn</a>
 								</div>
 							</div>
