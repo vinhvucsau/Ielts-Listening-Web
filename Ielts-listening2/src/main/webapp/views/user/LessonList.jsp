@@ -203,7 +203,7 @@
 																	<c:if test="${isBuy ==1 }">
 																		<c:forEach var="lesson" items="${listLesson }">
 																			<li class="list-group-item list-group-item-action">
-																				<a href="#"
+																				<a href="lesson?id=${lesson.lesson.lessonId }"
 																				class="d-flex justify-content-between align-items-center text-inherit">
 																					<div class="text-truncate">
 																						<span

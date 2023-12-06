@@ -45,6 +45,24 @@ public class UserCourseController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		String gia = req.getParameter("gia") == null ? "" : req.getParameter("gia");
 		String rate = req.getParameter("rate") == null ? "" : req.getParameter("rate");
+		if (url.contains("course-detail")) {
+			String courseId = req.getParameter("id");
+			Course course = courseService.findById(courseId);
+			HttpSession session = req.getSession();
+			User user = (User) session.getAttribute("user");
+			String userId;
+			if (user != null)
+				userId = user.getUserId();
+			else
+				userId = "0";
+			List<UserCourse> listUserCourse = userCourseService.findByUserIdAndCourseId(userId, courseId);
+			List<Lesson> listLesson = lessonService.findByCourseId(courseId);
+			if (listUserCourse.size() != 0) { // user da dang ki khoa hoc
+				req.setAttribute("isBuy", 1);
+				List<EnrollLessonCombine> listEnCombine = new ArrayList<EnrollLessonCombine>();
+				for (Lesson lesson : listLesson) {
+					EnrrolLesson enrollLesson = enrollLessonService.findByUserIdAndLessonId(userId,
+							lesson.getLessonId());
 
 					EnrollLessonCombine en = new EnrollLessonCombine();
 					en.setEnrollLesson(enrollLesson);
