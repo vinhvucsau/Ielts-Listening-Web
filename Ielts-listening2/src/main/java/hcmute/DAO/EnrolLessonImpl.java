@@ -32,13 +32,17 @@ public class EnrolLessonImpl extends AbstractDao<EnrrolLesson> implements IEnrol
 
 	@Override
 	public EnrrolLesson findOneByUser_Lesson(String userId, String lessId) {
+		System.out.println(userId + " " + lessId);
 		EntityManager enma = JPAConfig.getEntityManager();
 		try {
 			String jpql = "SELECT e FROM EnrrolLesson e WHERE e.users.userId = :userId AND e.lessons.lessonId = :lessId";
 			TypedQuery<EnrrolLesson> query = enma.createQuery(jpql, EnrrolLesson.class);
 			query.setParameter("userId", userId);
 			query.setParameter("lessId", lessId);
-			return query.getSingleResult();
+			List<EnrrolLesson> list = query.getResultList();
+			if (list.size() == 0)
+				return null;
+			return list.get(0);
 		} catch (Exception e) {
 			return null;
 		} finally {
