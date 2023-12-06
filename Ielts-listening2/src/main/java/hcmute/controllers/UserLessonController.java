@@ -42,19 +42,21 @@ public class UserLessonController extends HttpServlet {
 	Date curDate = new Date();// current date
 	Lesson curLesson = new Lesson();// current lesson
 
+	User user = new User();// session login
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		String url = req.getRequestURI().toString();
-		HttpSession session = req.getSession();
+
 		List<CommentLesson> listCmt = cmtService.findAll();
 		List<RepComment> listRep = repService.findAll();
 		List<User> listUser = userService.findAll();
 		List<EnrrolLesson> listEnroll = enrService.findAll();
-		User user = (User) session.getAttribute("user");
-		session = req.getSession(false);
+
+		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			user = (User) session.getAttribute("user");
 		} else {
@@ -63,7 +65,6 @@ public class UserLessonController extends HttpServlet {
 		}
 
 		if (url.contains("lesson")) {
-
 			String lessID = req.getParameter("id");
 			curLesson = lessonService.findOneById(lessID);
 
@@ -73,6 +74,11 @@ public class UserLessonController extends HttpServlet {
 			req.setAttribute("listUser", listUser);
 			req.setAttribute("user", user);
 			req.setAttribute("listEnroll", listEnroll);
+			EnrrolLesson enrollLesson = enrService.findByUserIdAndLessonId(user.getUserId(), lessID);
+			if (enrollLesson.getNumberOfStar() != null)
+				req.setAttribute("star", enrollLesson.getNumberOfStar());
+			else
+				req.setAttribute("star", 0);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Lesson-content.jsp");
 			rd.forward(req, resp);
@@ -86,8 +92,7 @@ public class UserLessonController extends HttpServlet {
 		resp.setContentType("text/html");
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
-		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("user");
+
 		String url = req.getRequestURI().toString();
 
 		if (url.contains("reply")) {
@@ -105,7 +110,7 @@ public class UserLessonController extends HttpServlet {
 //				req.setAttribute("u", user);
 //				req.setAttribute("text", req.getParameter("reply-content"));
 //				req.setAttribute("cmt", c);
-				resp.sendRedirect(req.getContextPath() + "/user/lesson#review");
+				resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + curLesson.getLessonId());
 			} catch (Exception e) {
 				e.getStackTrace();
 			
@@ -129,7 +134,7 @@ public class UserLessonController extends HttpServlet {
 
 			try {
 				cmtService.insert(c);
-				resp.sendRedirect(req.getContextPath() + "/user/lesson#review");
+				resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + curLesson.getLessonId());
 			} catch (Exception e) {
 				e.getMessage();
 				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
@@ -138,13 +143,13 @@ public class UserLessonController extends HttpServlet {
 
 		} else if (url.contains("rate")) {
 
-			EnrrolLesson enr = enrService.findOneByUser_Lesson(user.getUserId(), curLesson.getLessonId());
+			EnrrolLesson enr = enrService.findByUserIdAndLessonId(user.getUserId(), curLesson.getLessonId());
 			Integer numRating = Integer.parseInt(req.getParameter("result-rating"));
 			enr.setNumberOfStar(numRating);
 
 			try {
 				enrService.update(enr);
-				resp.sendRedirect(req.getContextPath() + "/user/lesson#review");
+				resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + curLesson.getLessonId());
 			} catch (Exception e) {
 				e.getMessage();
 				req.setAttribute("e", e);
