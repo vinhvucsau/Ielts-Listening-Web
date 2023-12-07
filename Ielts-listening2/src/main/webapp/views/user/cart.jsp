@@ -78,7 +78,7 @@ int networth = (int) request.getAttribute("networth");
 				<div class="border-bottom pb-3 mb-3">
 					<div class="mb-2 mb-lg-0">
 						<h1 class="mb-0 h2 fw-bold">Shopping Cart</h1>
-						
+
 					</div>
 				</div>
 			</div>
@@ -122,7 +122,8 @@ int networth = (int) request.getAttribute("networth");
 									<!-- Table body -->
 									<c:set var="totalCost" value="0" />
 									<c:forEach var="i" items="${course }">
-
+										<input class="d-none courseItem" name="courseId"
+											value="${i.course.courseId}">
 										<tr>
 											<td>
 												<div class="d-flex">
@@ -133,7 +134,7 @@ int networth = (int) request.getAttribute("networth");
 													</div>
 													<div class="ms-4 mt-2 mt-lg-0">
 														<h4 class="mb-1 text-primary-hover">${i.course.courseName }</h4>
-														
+
 
 
 														<ul class="list-inline">
@@ -210,7 +211,7 @@ int networth = (int) request.getAttribute("networth");
 														pattern="###,### VNĐ" />
 												</h4>
 											</td>
-											
+
 
 											<td>
 												<h4 class="mb-0">1</h4>
@@ -272,21 +273,26 @@ int networth = (int) request.getAttribute("networth");
 				</div>
 				<div class="mt-4 d-flex justify-content-between">
 					<a href="product-grid.html" class="btn btn-outline-primary">Continue
-						Shopping</a> <a href="checkout.html" class="btn btn-primary">Checkout</a>
+						Shopping</a>
+
+					<form action="order" method=get>
+						<input name="listCourseId" value="" id="listCourseId"
+							class="d-none">
+						<button class="btn btn-primary">Checkout</button>
+					</form>
 				</div>
 			</div>
 			<div class="col-lg-4">
 				<!-- card -->
 				<div class="card mb-4 mt-4 mt-lg-0">
-
-					
-
 					<div class="card-body">
 
 						<li
 							class="list-group-item px-0 d-flex justify-content-between fs-5 text-dark fw-medium">
-							<h4>NetWorth Total: </span> <span><fmt:formatNumber
-									value="<%=networth%>" pattern="###,### VNĐ" /></h4>
+							<h4>
+								NetWorth Total: </span> <span><fmt:formatNumber
+										value="<%=networth%>" pattern="###,### VNĐ" />
+							</h4>
 						</li>
 					</div>
 
@@ -355,6 +361,13 @@ int networth = (int) request.getAttribute("networth");
 	</section>
 
 	<script>
+		var courseHtml = document.querySelector("#listCourseId");
+		let listId="";
+		document.querySelectorAll(".courseItem").forEach(courseId=>{
+			listId = listId + courseId.value + "&";
+		})
+		courseHtml.setAttribute("value", listId);
+	
 	    document.querySelectorAll('.stars').forEach(starContainer => {
 	        const rating = parseInt(starContainer.getAttribute('data-rating'));
 	        starContainer.innerHTML = getStarRating(rating);
