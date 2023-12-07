@@ -104,24 +104,31 @@
 							<div class="card-body text-center">
 								<!-- Card -->
 								<div class="accordion" id="courseAccordion">
-									<!-- Lesson list -->
-									<div class="row" id="lessonList">
-										<button class="accordion d-flex justify-content-between align-items-center btn btn-light mb-2" onclick="showModel()">
-											<span class="accordion-title ms-4">Lesson 01</span>
-											<a href="#" class="icon-link icon-delete"> 
-												<i class="fe fe-trash color-dark"></i>
-											</a>
-										</button>
-										<button class="accordion d-flex justify-content-between align-items-center btn btn-light mb-2" onclick="showModel()">
-											<span class="accordion-title ms-4">Lesson 02</span>
-											<a href="#" class="icon-link icon-delete"> 
-												<i class="fe fe-trash color-dark"></i>
-											</a>
-										</button>
-									</div>
+									<c:forEach var="i" items="${listLesson}">
+										<!-- Lesson list -->
+										<div class="row" id="lessonList">
+											<button value="${i.lessonId }" class="accordion d-flex justify-content-between align-items-center btn btn-light mb-2" onclick="showModel()">
+												<span class="accordion-title ms-4">${i.lessonName }</span>
+												<a href="<c:url value='/admin/deleteLesson?Id=${i.lessonId}'/>" class="icon-link icon-delete"> 
+													<i class="fe fe-trash color-dark"></i>
+												</a>
+											</button>
+											<!-- <button class="accordion d-flex justify-content-between align-items-center btn btn-light mb-2" onclick="showModel()">
+												<span class="accordion-title ms-4">Lesson 02</span>
+												<a href="#" class="icon-link icon-delete"> 
+													<i class="fe fe-trash color-dark"></i>
+												</a>
+											</button> -->
+										</div>
+									</c:forEach>
 								</div>
-								<!-- Add Button -->
-								<button type="submit" class="accordion btn btn-primary mt-2">Thêm bài học</button>
+								<!-- Add Lesson -->								
+								<form action="addLesson" method="post">
+									<input type="hidden" name="courseId" value="${listLesson[0].courses.courseId}">
+								  	<!-- Add Button -->
+								  	<button type="submit" class="accordion btn btn-primary mt-2">Thêm bài học</button>
+								</form>
+								
 							</div>
 						</div>
 					</div>
