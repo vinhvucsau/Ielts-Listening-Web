@@ -64,7 +64,7 @@ public class CapNhatThongTinController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 
-		if (url.contains("capnhattaikhoan")) {
+		if (url.contains("user/capnhattaikhoan")) {
 			UpdateInfo(req, resp);
 		} else if (url.contains("capnhatmatkhau")) {
 			UpdatePass(req, resp);

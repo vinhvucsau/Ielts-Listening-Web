@@ -98,7 +98,7 @@
 									<thead class="table-light">
 										<tr>
 											<th>Name</th>
-											<th>Sex</th>
+											<th>User Name</th>
 											<th>Date Of Birth</th>
 											<th>Email</th>
 											<th>Phone Number</th>
@@ -106,11 +106,11 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="i" items="${currentUser}">
+										<c:forEach var="i" items="${users}">
 											<tr
 												onclick="location.href='/Ielts-listening2/admin/capnhattaikhoan?userId=${i.userId}'">
 												<td>${i.name}</td>
-												<td>${i.sex}</td>
+												<td>${i.account.userName}</td>
 												<td>${i.dateOfBirth}</td>
 												<td>${i.email}</td>
 												<td>${i.phoneNumber}</td>
