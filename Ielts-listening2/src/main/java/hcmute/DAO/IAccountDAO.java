@@ -12,5 +12,8 @@ public interface IAccountDAO {
 	
 	void update(Account account);
 	
+	User getUserByUsername(String email);
 	User getUserByEmail(String email);
+	boolean checkExistEmail(String email);
+	boolean checkExistUsername(String username);
 }

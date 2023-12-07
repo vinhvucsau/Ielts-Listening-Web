@@ -32,9 +32,28 @@ public class AccountServiceImpl implements IAccountServices{
 	}
 
 	@Override
+	public User getUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return accountDAO.getUserByUsername(username);
+	}
+
+	@Override
 	public User getUserByEmail(String email) {
 		// TODO Auto-generated method stub
 		return accountDAO.getUserByEmail(email);
 	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		// TODO Auto-generated method stub
+		return accountDAO.checkExistEmail(email);
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		// TODO Auto-generated method stub
+		return accountDAO.checkExistUsername(username);
+	}
+	
 	
 }

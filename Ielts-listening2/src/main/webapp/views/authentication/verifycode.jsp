@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +37,7 @@
 				<div class="bg-white p-4 rounded-3">
 					<div class="text-center">
 						<p class="fw-bold fs-5 mb-2">Xác thực OTP</p>
-						<p class="fs-6 mb-1">Mã OTP đã được gửi đến Email ${email}</p>
+						<p class="fs-6 mb-1">Mã OTP đã được gửi đến Email ${cookie['email'].value}</p>
 						<p class="fs-6 mb-1">Vui lòng nhập mã xác nhận bên dưới</p>
 					</div>
 					<form action="authentication-verifycode" method="post">
@@ -44,7 +45,7 @@
 							class="w-100 mt-4 mb-3 d-flex flex-row justify-content-between">
 							<c:forEach var="i" begin="1" end="6" step="1">
 								<input
-									class="otp border border-success text-center fs-2 fw-bold"
+									class="otp border border-success text-center fs-2 fw-bold mb-2" 
 									style="height: 60px; width: 60px; border-radius: 10px;"
 									name="otp${i}" type="text" autocomplete="none">
 							</c:forEach>
@@ -52,6 +53,12 @@
 						<div class="mb-4">
 							<button class="btn btn-primary fw-bold w-100" type="submit">Xác
 								Nhận</button>
+						</div>
+						<div id="countdown" class="text-center mt-5"></div>
+						<div class="text-center">
+							Bạn chưa nhận được mã? <a style="text-decoration:none"
+								href="http://localhost:8080/Ielts-listening2/authentication-resent">Gửi
+								mã</a>
 						</div>
 					</form>
 				</div>
@@ -63,6 +70,39 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+	<script>
+		function getCookie(name) {
+		    function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
+		    var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
+		    return match ? match[1] : null;
+		}
+		const countdown = document.querySelector("#countdown");
+
+		let startSeconds = 15*60 - parseInt((Date.now() - getCookie("createCodeAt")) / 1000);
+		startSeconds = startSeconds > 0 ? startSeconds : 0;
+		let startMinutes = parseInt(startSeconds / 60);
+		startMinutes = startMinutes > 0 ? startMinutes : 0;
+		startMinutes = startMinutes < 10 ? '0' + startMinutes : startMinutes;
+		countdown.innerHTML = "Mã xác minh chỉ có hiệu lực trong " + startMinutes + ':' + (startSeconds % 60 < 10 ? '0' + startSeconds % 60 : startSeconds % 60);
+		setInterval(countdownFunc, 1000);
+		let minutes;
+		let seconds;
+		if (getCookie("code") === null) 
+			window.location.replace('http://localhost:8080/Ielts-listening2/authentication-signup');
+		function countdownFunc() {
+			if (startSeconds > 0)	
+				startSeconds -= 1;
+			else {
+				window.location.replace('http://localhost:8080/Ielts-listening2/authentication-signup');
+				
+			}
+			minutes = Math.floor(startSeconds / 60);
+			seconds = startSeconds % 60;
+			minutes = minutes < 10 ? '0' + minutes : minutes;
+			seconds = seconds < 10 ? '0' + seconds : seconds;
+			countdown.innerHTML = "Mã xác minh chỉ có hiệu lực trong " + minutes + ':' + seconds;	
+		}
+	</script>
 	<script>
 		const otpList = document.querySelectorAll(".otp");
 		if (otpList) {

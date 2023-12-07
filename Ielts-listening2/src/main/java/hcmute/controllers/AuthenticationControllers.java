@@ -2,6 +2,8 @@ package hcmute.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.module.ModuleDescriptor.Requires;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -28,7 +30,7 @@ import hcmute.utils.Email;
 import hcmute.utils.compositeId.PasswordEncryptor;
 
 @WebServlet(urlPatterns = { "/authentication-login", "/authentication-signup", "/authentication-forgotpassword",
-		"/authentication-verifycode", "/user/logout", "/admin/logout", "/waiting" })
+		"/authentication-verifycode", "/authentication-resent", "/user/logout", "/admin/logout", "/waiting" })
 public class AuthenticationControllers extends HttpServlet {
 
 	IAccountServices accountService = new AccountServiceImpl();
@@ -63,6 +65,10 @@ public class AuthenticationControllers extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "authentication/login");
 		} else if (url.contains("forgotpassword")) {
 			req.getRequestDispatcher("views/authentication/forgotpassword.jsp").forward(req, resp);
+		} else if (url.contains("verifycode")) {
+			req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
+		} else if (url.contains("resent")) {
+			getResent(req, resp);
 		}
 	}
 
@@ -84,8 +90,10 @@ public class AuthenticationControllers extends HttpServlet {
 			postForgotPassword(req, resp);
 		} else if (url.contains("verifycode")) {
 			postVerifyCode(req, resp);
-		}
+		} 
 	}
+
+	
 
 	private void SignUp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -96,45 +104,65 @@ public class AuthenticationControllers extends HttpServlet {
 			// get the 6-digit code
 			String code = sm.getRandom();
 			Account account = new Account();
-
+			
 			String email = req.getParameter("email");
 			String userName = req.getParameter("userName");
 			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord"));
-			account.setUserName(userName);
-			account.setPassWord(passWord);
-			account.setRole("user");
-			account.setCode(code);
 
-			String res = accountService.SignUp(account);
-			User user = accountService.findByID(userName).getUsers();
-			user.setEmail(email);
-			userService.update(user);
-			account = accountService.findByID(userName);
-			System.out.println(res);
-			boolean test = sm.sendCodeEmail(account);
+			/*
+			 * if (accountService.checkExistEmail(email)) { req.setAttribute("message",
+			 * "Email đã tồn tại trong hệ thống!"); RequestDispatcher rd =
+			 * req.getRequestDispatcher("/views/authentication/signUp.jsp"); rd.forward(req,
+			 * resp); return; }
+			 */
+			if (accountService.checkExistUsername(userName)) {
+				req.setAttribute("message", "Username đã tồn tại trong hệ thống!");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
+				rd.forward(req, resp);
+				return;
+			}
+
+			boolean test = sm.sendCodeEmail(email, code);
 			if (!test) {
 				req.setAttribute("message", "Lỗi gửi email!");
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
 				rd.forward(req, resp);
 				return;
 			}
-			if (res == "Success") {
-				req.setAttribute("username", userName);
-				req.setAttribute("email", email);
-				Cookie cookie1 = new Cookie("username", userName);
-				cookie1.setMaxAge(60 * 60);
-				resp.addCookie(cookie1);
-				Cookie cookie2 = new Cookie("email", email);
-				cookie2.setMaxAge(60 * 60);
-				resp.addCookie(cookie2);
+			int minutes = 15;
+			Cookie cookie1 = new Cookie("username", userName);
+			cookie1.setMaxAge(minutes * 60);
+			resp.addCookie(cookie1);
 
-				req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
+			Cookie cookie2 = new Cookie("email", email);
+			cookie2.setMaxAge(minutes * 60);
+			resp.addCookie(cookie2);
 
-			} else {
-				req.setAttribute("message", res);
-				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
-				rd.forward(req, resp);
+			Cookie cookie3 = new Cookie("code", PasswordEncryptor.encryptPassword(code));
+			cookie3.setMaxAge(minutes * 60);
+			resp.addCookie(cookie3);
+
+			Cookie cookie4 = new Cookie("password", passWord);
+			cookie4.setMaxAge(minutes * 60);
+			resp.addCookie(cookie4);
+
+			long createCodeAt = 0;
+			Cookie[] cookies = req.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (cookie.getName().equals("createCodeAt")) {
+						createCodeAt = Long.parseLong(cookie.getValue());
+					}
+				}
 			}
+			if (createCodeAt == 0) {
+				createCodeAt = new Date().getTime();
+				Cookie cookie5 = new Cookie("createCodeAt", String.valueOf(createCodeAt));
+				cookie5.setMaxAge(minutes * 60);
+				resp.addCookie(cookie5);
+
+			}
+			resp.sendRedirect(req.getContextPath() + "/authentication-verifycode");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,21 +199,11 @@ public class AuthenticationControllers extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
 				rd.forward(req, resp);
 			} else {
-				if (user.getAccount().isStatus() == false) {
-					req.setAttribute("message", "Tài khoản chưa được kích hoạt!");
-					RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
-					rd.forward(req, resp);
-					return;
-				} else {
-					List<Cart> carts = cartService.findByUserId(user.getUserId());
-					HttpSession session = req.getSession(true);
-					
-					session.setAttribute("user", user);
-					session.setAttribute("role", acc.getRole());
-					session.setAttribute("cart", carts);
-					resp.sendRedirect(req.getContextPath() + "/waiting");
-					return;
-				}
+				HttpSession session = req.getSession(true);
+				session.setAttribute("user", user);
+				session.setAttribute("role", acc.getRole());
+				resp.sendRedirect(req.getContextPath() + "/waiting");
+				return;
 			}
 
 		} catch (Exception e) {
@@ -253,9 +271,12 @@ public class AuthenticationControllers extends HttpServlet {
 		String otp5 = req.getParameter("otp5");
 		String otp6 = req.getParameter("otp6");
 
-		String otp = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
+		String otp = PasswordEncryptor.encryptPassword(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
+		
 		String username = "";
 		String email = "";
+		String code = "";
+		String password = "";
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -265,30 +286,87 @@ public class AuthenticationControllers extends HttpServlet {
 				if (cookie.getName().equals("email")) {
 					email = cookie.getValue();
 				}
+				if (cookie.getName().equals("code")) {
+					code = cookie.getValue();
+				}
+				if (cookie.getName().equals("password")) {
+					password = cookie.getValue();
+				}
 			}
 		}
-		Account account = accountService.findByID(username);
 
-		if (account != null) {
-			if (otp.equals(account.getCode())) {
-				account.setStatus(true);
-				accountService.update(account);
-				Cookie cookie1 = new Cookie("username", "");
-				cookie1.setMaxAge(0);
-				resp.addCookie(cookie1);
-				Cookie cookie2 = new Cookie("email", "");
-				cookie2.setMaxAge(0);
-				resp.addCookie(cookie2);
-				resp.sendRedirect(req.getContextPath() + "/authentication-login");
-				req.setAttribute("message", "Đã thêm thành công");
-			} else {
-				req.setAttribute("message", "Mã OTP chưa chính xác. Vui lòng nhập lại");
-				req.setAttribute("username", username);
-				req.setAttribute("email", email);
-				req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
+		if (otp.equals(code)) {
+			Cookie cookie1 = new Cookie("username", "");
+			cookie1.setMaxAge(0);
+			resp.addCookie(cookie1);
+			Cookie cookie2 = new Cookie("email", "");
+			cookie2.setMaxAge(0);
+			resp.addCookie(cookie2);
+			Cookie cookie3 = new Cookie("code", "");
+			cookie3.setMaxAge(0);
+			resp.addCookie(cookie3);
+			Cookie cookie4 = new Cookie("password", "");
+			cookie4.setMaxAge(0);
+			resp.addCookie(cookie4);
+			Cookie cookie5 = new Cookie("createCodeAt", "");
+			cookie5.setMaxAge(0);
+			resp.addCookie(cookie5);
+			Account account = new Account();
+			account.setUserName(username);
+			account.setPassWord(password);
+			account.setRole("user");
+
+			String res = accountService.SignUp(account);
+			account = accountService.findByID(username);
+			User user = account.getUsers();
+			user.setEmail(email);
+			userService.update(user);
+
+			if (res != "Success") {
+				req.setAttribute("message", res);
+				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
+				rd.forward(req, resp);
+
 			}
+
+			resp.sendRedirect(req.getContextPath() + "/authentication-login");
+			req.setAttribute("message", "Đã thêm thành công");
+		} else {
+			req.setAttribute("message", "Mã OTP chưa chính xác. Vui lòng nhập lại");
+			req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
 		}
 	}
+	private void getResent(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		Email sm = new Email();
 
+		// get the 6-digit code
+		String code = sm.getRandom();
+		Cookie[] cookies = req.getCookies();
+		long time = 0;
+		String email = "";
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("createCodeAt")) {
+					time = Long.parseLong(cookie.getValue());
+				}
+				if (cookie.getName().equals("email")) {
+					email = cookie.getValue();
+				}
+			}
+		}
+		boolean test = sm.sendCodeEmail(email, code);
+		if (!test) {
+			req.setAttribute("message", "Lỗi gửi email!");
+			req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
+			return;
+		}
+
+		Cookie cookie3 = new Cookie("code", PasswordEncryptor.encryptPassword(code));
+		int age = (int)((new Date().getTime() - time) / 1000);
+		cookie3.setMaxAge(15*60 - age);
+		resp.addCookie(cookie3);
+		resp.sendRedirect(req.getContextPath() + "/authentication-verifycode");
+	}
 	private static final long serialVersionUID = 1L;
 }
