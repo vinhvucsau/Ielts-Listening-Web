@@ -54,6 +54,7 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 				query.setParameter("username", userName);
 				User user = query.getSingleResult();
 				transaction.commit();
+				System.out.println(user);
 				return user;
 			}
 			transaction.rollback();
@@ -91,6 +92,22 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 		
 	}
 	
+	public User getUserByUsername(String username) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		try {			
+			String jpql = "Select u from User u Where u.userName = :username";
+			TypedQuery<User> query = enma.createQuery(jpql, User.class);
+			query.setParameter("username", username);
+			return query.getResultList().get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			enma.close();
+		}
+		return null;
+	}
+	
 	public User getUserByEmail(String email) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		try {			
@@ -106,5 +123,22 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 		}
 		return null;
 	}
+	@Override
+    public boolean checkExistEmail(String email) {
+        EntityManager em = JPAConfig.getEntityManager();
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email", Long.class);
+        query.setParameter("email", email);
+        Long count = query.getSingleResult();
+        return count > 0;
+    }
+	@Override
+    public boolean checkExistUsername(String username) {
+        EntityManager em = JPAConfig.getEntityManager();
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.account.userName = :username", Long.class);
+        query.setParameter("username", username);
+        Long count = query.getSingleResult();
+        return count > 0;
+    }
+	
 
 }

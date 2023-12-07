@@ -23,10 +23,10 @@ public class Email {
 	}
 	
 	// send email to the user email
-	public boolean sendCodeEmail(Account account) {
+	public boolean sendCodeEmail(String email, String code) {
 		boolean test = false;
 		
-		String toEmail = account.getUsers().getEmail();
+		String toEmail = email;
 		String fromEmail = "buiduclong18tuoi@gmail.com";
 		String password = "eumd ouck ilca ykje";
 		try {
@@ -52,7 +52,7 @@ public class Email {
 			mess.setSubject("Confirm Code");
 			
 			//set message text
-			mess.setText("Mã code của bạn là: " + account.getCode());
+			mess.setText("Mã code của bạn là: " + code);
 			//send the message
 			Transport.send(mess);
 			
