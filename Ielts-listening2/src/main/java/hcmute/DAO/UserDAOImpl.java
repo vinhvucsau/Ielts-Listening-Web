@@ -1,10 +1,15 @@
 package hcmute.DAO;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
+import hcmute.entity.Course;
 import hcmute.entity.User;
+import hcmute.entity.UserCourse;
 
 public class UserDAOImpl extends AbstractDao<User> implements IUserDAO{
 
@@ -43,6 +48,25 @@ public class UserDAOImpl extends AbstractDao<User> implements IUserDAO{
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public Long countCourseByUserId(String userId) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "SELECT COUNT(uc) FROM UserCourse uc WHERE uc.users.userId = :userId";
+		Query query = enma.createQuery(jpql);
+		query.setParameter("userId", userId);
+		Long count = (Long) query.getSingleResult();
+		return count;
+	}
+
+	@Override
+	public List<UserCourse> findAllUserCourseByUserId(String userId) {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "SELECT uc FROM UserCourse uc WHERE uc.users.userId = :userId";
+		TypedQuery<UserCourse> query = en.createQuery(jpql, UserCourse.class);
+		query.setParameter("userId", userId);
+		return query.getResultList();
 	}
 
 }

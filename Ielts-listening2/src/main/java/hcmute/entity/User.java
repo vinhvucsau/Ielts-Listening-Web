@@ -49,7 +49,6 @@ public class User implements Serializable {
 	private Integer networth;
 	
 	
-	
 	@Column(name = "contributeScore")
 	private Integer contributeScore;
 

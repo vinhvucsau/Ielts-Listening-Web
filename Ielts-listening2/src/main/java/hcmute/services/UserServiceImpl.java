@@ -8,6 +8,7 @@ import hcmute.DAO.IUserDAO;
 import hcmute.DAO.UserDAOImpl;
 import hcmute.entity.Account;
 import hcmute.entity.User;
+import hcmute.entity.UserCourse;
 
 public class UserServiceImpl implements IUserService {
 	UserDAOImpl userDAO = new UserDAOImpl();
@@ -40,6 +41,18 @@ public class UserServiceImpl implements IUserService {
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		return userDAO.findAll();
+	}
+
+	@Override
+	public Long countCourseByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return userDAO.countCourseByUserId(userId);
+	}
+
+	@Override
+	public List<UserCourse> findAllUserCourseByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return userDAO.findAllUserCourseByUserId(userId);
 	}
 
 }
