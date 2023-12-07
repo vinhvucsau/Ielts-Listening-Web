@@ -12,4 +12,6 @@ public interface IAdminKhoaHocService {
 	List<Course> FindAllCourseIncreaseRate();
 	List<Course> FindAllCourseDecreaseRate();
 	void deleteCourse(String course) throws Exception;
+	List<Course> findAll(int page, int pagesize, String searchStr, int tab);
+	List<Course> findAll(String searchStr, int tab);
 }

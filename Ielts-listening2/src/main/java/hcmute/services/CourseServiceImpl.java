@@ -1,12 +1,13 @@
 package hcmute.services;
 
+import java.util.List;
+
 import hcmute.DAO.CourseDAOImpl;
 import hcmute.DAO.ICourseDAO;
 import hcmute.entity.Course;
 
 public class CourseServiceImpl implements ICourseService {
 	CourseDAOImpl courseAbs = new CourseDAOImpl();
-	ICourseDAO courseDAO = new CourseDAOImpl();
 
 	@Override
 	public void insert(Course course) {
@@ -20,5 +21,12 @@ public class CourseServiceImpl implements ICourseService {
 		// TODO Auto-generated method stub
 		return courseAbs.findById(courseId);
 	}
+
+	@Override
+	public void update(Course course) {
+		courseAbs.update(course);
+		
+	}
+
 
 }
