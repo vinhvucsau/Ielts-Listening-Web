@@ -51,6 +51,7 @@ public class AuthenticationControllers extends HttpServlet {
 			if (session != null && session.getAttribute("user") != null) {
 				User user = (User) session.getAttribute("user");
 				String role = (String) session.getAttribute("role");
+				@SuppressWarnings("unchecked")
 				List<Cart> carts = (List<Cart>) session.getAttribute("cart");
 				if (role.equals("admin")) {
 					req.setAttribute("user", user);
@@ -62,7 +63,7 @@ public class AuthenticationControllers extends HttpServlet {
 				}
 
 			} else
-				resp.sendRedirect(req.getContextPath() + "authentication/login");
+				req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
 		} else if (url.contains("forgotpassword")) {
 			req.getRequestDispatcher("views/authentication/forgotpassword.jsp").forward(req, resp);
 		} else if (url.contains("verifycode")) {
@@ -102,13 +103,28 @@ public class AuthenticationControllers extends HttpServlet {
 			Email sm = new Email();
 
 			// get the 6-digit code
-			String code = sm.getRandom();
-			Account account = new Account();
-			
+			String code = sm.getRandom();	
 			String email = req.getParameter("email");
+			if (email.contains(" ")) {
+				req.setAttribute("message", "Xin lỗi, Email chỉ được phép sử dụng các chữ cái (a-z), số (0-9), và dấu chấm (.).");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
+				rd.forward(req, resp);
+				return;
+			}
 			String userName = req.getParameter("userName");
-			String passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord"));
-
+			if (userName.contains(" ")) {
+				req.setAttribute("message", "username nhập không được phép có dấu cách");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
+				rd.forward(req, resp);
+				return;
+			}
+			String passWord;
+			if (req.getParameter("passWord").contains(" ")) {
+				req.setAttribute("message", "Mật khẩu không được phép có dấu cách");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
+				rd.forward(req, resp);
+				return;
+			} else  passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord"));
 			/*
 			 * if (accountService.checkExistEmail(email)) { req.setAttribute("message",
 			 * "Email đã tồn tại trong hệ thống!"); RequestDispatcher rd =
@@ -145,7 +161,9 @@ public class AuthenticationControllers extends HttpServlet {
 			Cookie cookie4 = new Cookie("password", passWord);
 			cookie4.setMaxAge(minutes * 60);
 			resp.addCookie(cookie4);
-
+			
+			
+			
 			long createCodeAt = 0;
 			Cookie[] cookies = req.getCookies();
 			if (cookies != null) {
@@ -162,7 +180,14 @@ public class AuthenticationControllers extends HttpServlet {
 				resp.addCookie(cookie5);
 
 			}
+			
+			String turn = "5" ;
+			Cookie cookieTurn = new Cookie("turn", turn);
+			cookieTurn.setMaxAge(minutes * 60);
+			resp.addCookie(cookieTurn);
+			
 			resp.sendRedirect(req.getContextPath() + "/authentication-verifycode");
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -219,17 +244,7 @@ public class AuthenticationControllers extends HttpServlet {
 			return;
 		}
 
-		Cookie[] cookies = req.getCookies();
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("email")) {
-					session = req.getSession(true);
-					session.setAttribute("email", cookie.getValue());
-					resp.sendRedirect(req.getContextPath() + "/waiting");
-					return;
-				}
-			}
-		}
+		
 		req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
 
 	}
@@ -254,7 +269,7 @@ public class AuthenticationControllers extends HttpServlet {
 		boolean test = sm.sendPasswordEmail(user);
 
 		if (test) {
-			req.setAttribute("message", "Vui lòng kiểm tra email để nhận mật khẩu nhé!");
+			req.setAttribute("message", "Mật khẩu đã được gửi về email. \nVui lòng kiểm tra email để nhận mật khẩu nhé!");
 			req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
 		} else {
 			req.setAttribute("message", "Lỗi gửi mail!");
@@ -277,6 +292,7 @@ public class AuthenticationControllers extends HttpServlet {
 		String email = "";
 		String code = "";
 		String password = "";
+		int turn =0;
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -292,8 +308,37 @@ public class AuthenticationControllers extends HttpServlet {
 				if (cookie.getName().equals("password")) {
 					password = cookie.getValue();
 				}
+				if (cookie.getName().equals("turn")) {
+					turn = Integer.parseInt(cookie.getValue());
+				}
 			}
 		}
+		if (turn <= 0)
+		{
+			Cookie cookie1 = new Cookie("username", "");
+			cookie1.setMaxAge(0);
+			resp.addCookie(cookie1);
+			Cookie cookie2 = new Cookie("email", "");
+			cookie2.setMaxAge(0);
+			resp.addCookie(cookie2);
+			Cookie cookie3 = new Cookie("code", "");
+			cookie3.setMaxAge(0);
+			resp.addCookie(cookie3);
+			Cookie cookie4 = new Cookie("password", "");
+			cookie4.setMaxAge(0);
+			resp.addCookie(cookie4);
+			Cookie cookie5 = new Cookie("createCodeAt", "");
+			cookie5.setMaxAge(0);
+			resp.addCookie(cookie5);
+			Cookie cookie6 = new Cookie("turn", "");
+			cookie6.setMaxAge(0);
+			resp.addCookie(cookie6);
+			req.setAttribute("message", "tạo tài khoản không thành công do otp nhập sai quá 5 lần!");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
+			rd.forward(req, resp);
+			return;
+		}
+		
 
 		if (otp.equals(code)) {
 			Cookie cookie1 = new Cookie("username", "");
@@ -332,6 +377,12 @@ public class AuthenticationControllers extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/authentication-login");
 			req.setAttribute("message", "Đã thêm thành công");
 		} else {
+			
+			turn = turn -1 ;
+			Cookie cookieTurn = new Cookie("turn",String.valueOf(turn));
+			cookieTurn.setMaxAge(15*60); // 
+			resp.addCookie(cookieTurn);
+			
 			req.setAttribute("message", "Mã OTP chưa chính xác. Vui lòng nhập lại");
 			req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
 		}
@@ -361,12 +412,14 @@ public class AuthenticationControllers extends HttpServlet {
 			req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
 			return;
 		}
+		
 
 		Cookie cookie3 = new Cookie("code", PasswordEncryptor.encryptPassword(code));
 		int age = (int)((new Date().getTime() - time) / 1000);
 		cookie3.setMaxAge(15*60 - age);
 		resp.addCookie(cookie3);
-		resp.sendRedirect(req.getContextPath() + "/authentication-verifycode");
+		req.setAttribute("message", "Gửi otp mới thành công. Hãy kiểm tra lại!");
+		req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
 	}
 	private static final long serialVersionUID = 1L;
 }

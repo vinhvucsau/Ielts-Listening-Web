@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 import hcmute.entity.Account;
 import hcmute.entity.User;
+import hcmute.utils.compositeId.PasswordEncryptor;
 
 public class Email {
 	
@@ -95,7 +96,7 @@ public class Email {
 			mess.setSubject("Yours Password");
 			
 			//set message text
-			mess.setText("Mật khẩu của bạn là: " + user.getAccount().getPassWord());
+			mess.setText("Mật khẩu của bạn là: " + PasswordEncryptor.decryptPassword(user.getAccount().getPassWord()) );
 			//send the message
 			Transport.send(mess);
 			
