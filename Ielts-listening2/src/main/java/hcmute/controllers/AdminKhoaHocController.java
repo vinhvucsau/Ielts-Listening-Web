@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import hcmute.entity.Course;
+import hcmute.entity.TopicTest;
 import hcmute.services.AdminKhoaHocServiceImpl;
 import hcmute.services.CourseServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
@@ -37,48 +38,38 @@ public class AdminKhoaHocController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		String gia = req.getParameter("gia") == null ? "" : req.getParameter("gia");
 		String rate = req.getParameter("rate") == null ? "" : req.getParameter("rate");
-
+		String searchStr = req.getParameter("search") == null ? "" : req.getParameter("search");
+		int page = Integer.parseInt(req.getParameter("page") == null ? "1" : req.getParameter("page"));
+		int tab=1;
+		int pagesize = 16;
 		if (url.contains("/deletecourse")) {
 			Delete(req, resp);
 			resp.sendRedirect(req.getContextPath() + "/admin/khoahoc");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
 		} else if (gia.equals("thapdencao")) {
-			FindAllIncreaseCost(req, resp);
-			Long count = adminKhoaHocService.countKhoaHoc();
-			req.setAttribute("countCourse", count);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
-			rd.forward(req, resp);
+			tab = 4;
 		} else if (gia.equals("caodenthap")) {
-			FindAllDecreaseCost(req, resp);
-			Long count = adminKhoaHocService.countKhoaHoc();
-			req.setAttribute("countCourse", count);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
-			rd.forward(req, resp);
+			tab = 5;
 		} else if (rate.equals("thapdencao")) {
-			FindAllIncreaseRate(req, resp);
-			Long count = adminKhoaHocService.countKhoaHoc();
-			req.setAttribute("countCourse", count);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
-			rd.forward(req, resp);
-
+			tab = 2;
 		} else if (rate.equals("caodenthap")) {
-			FindAllDecreaseRate(req, resp);
-			Long count = adminKhoaHocService.countKhoaHoc();
-			req.setAttribute("countCourse", count);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
-			rd.forward(req, resp);
+			tab = 3;
 		} else if (url.contains("lesson")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminLesson.jsp");
 			rd.forward(req, resp);
 		}
-
-		else {
-			FindAll(req, resp);
-			Long count = adminKhoaHocService.countKhoaHoc();
-			req.setAttribute("countCourse", count);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
-			rd.forward(req, resp);
-		} 
-
+		Long count = adminKhoaHocService.countKhoaHoc();
+		List<Course> allCourseList = adminKhoaHocService.findAll(searchStr, tab);
+		List<Course> CourseList = adminKhoaHocService.findAll(page - 1, pagesize, searchStr, tab);
+		req.setAttribute("countCourse", count);
+		int pageNum = (int) (allCourseList.size() / pagesize) + (allCourseList.size() % pagesize == 0 ? 0 : 1);
+		req.setAttribute("course", CourseList);
+		req.setAttribute("pagesize", pagesize);
+		req.setAttribute("pageNum", pageNum);
+		RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
+		rd.forward(req, resp);
+		
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

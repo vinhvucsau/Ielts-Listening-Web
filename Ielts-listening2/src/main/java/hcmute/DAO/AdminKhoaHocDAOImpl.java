@@ -11,6 +11,7 @@ import JPAConfig.JPAConfig;
 import hcmute.entity.AnswerTest;
 import hcmute.entity.Course;
 import hcmute.entity.MockTest;
+import hcmute.entity.TopicTest;
 
 public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKhoaHocDAO {
 	
@@ -89,5 +90,47 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 		String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e group by c ORDER BY AVG(e.numberOfStar) DESC";
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
+	}
+	@Override
+	public List<Course> findAll(int page, int pagesize, String searchStr, int tab) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0) ";
+		if (tab == 2) {
+			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0)  ORDER BY AVG(e.numberOfStar)";
+		}
+		else if (tab == 3) {
+			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0)  ORDER BY AVG(e.numberOfStar) DESC";
+		}
+		else if (tab == 4) {
+			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
+		}
+		else if (tab == 5) {
+			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost desc";
+		}
+		TypedQuery<Course> query = enma.createQuery(jpql, Course.class);
+		query.setParameter("searchStr", searchStr);
+		query.setFirstResult(page * pagesize);
+		query.setMaxResults(pagesize);
+		return query.getResultList();
+	}
+	@Override
+	public List<Course> findAll(String searchStr, int tab) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0)";
+		if (tab == 2) {
+			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0)  ORDER BY AVG(e.numberOfStar)";
+		}
+		else if (tab == 3) {
+			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0)  ORDER BY AVG(e.numberOfStar) DESC";
+		}
+		else if (tab == 4) {
+			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
+		}
+		else if (tab == 5) {
+			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost desc";
+		}
+		TypedQuery<Course> query = enma.createQuery(jpql, Course.class);
+		query.setParameter("searchStr", searchStr);
+		return query.getResultList();
 	}
 }
