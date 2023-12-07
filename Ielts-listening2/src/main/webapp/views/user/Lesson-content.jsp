@@ -169,56 +169,40 @@
                                                             <h3 class="mb-2">Bài tập</h3>
                                                             <span>${lesson.answerSheet}</span>
                                                         </div>
-
                                                     </div>
-                                                    <!-- resolv -->
+
+                                                    <!-- answer -->
                                                     <div class="col-xl-4 col-lg-12 col-md-12 col-12">
                                                         <div class="card" id="courseAccordion">
                                                             <div>
                                                                 <h3 class="ms-3">Đáp án</h3>
-                                                                <!-- List group -->
+                                                                <!-- List answer -->
                                                                 <form action="" method="post" class="form-answer">
                                                                     <ul class="list-answer list-group list-group-flush">
+
                                                                          <!-- List group item -->
-                                                                         <li class="answer-item list-group-item border-0">
-                                                                            <div class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-                                                                                <h4 class="form-label me-3 m-0" for="phone" style="width: 80px;">Câu 01: </h4>
-                                                                                
-                                                                                <input type="text" id="phone" class="answer-item__text form-control" placeholder="Nhập đáp án" required="">
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="answer-item list-group-item border-0">
-                                                                            <div class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-                                                                                <h4 class="form-label me-3 m-0" for="phone" style="width: 80px;">Câu 01: </h4>
-                                                                                
-                                                                                <input type="text" id="phone" class="answer-item__text form-control" placeholder="Nhập đáp án" required="">
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="answer-item list-group-item border-0">
-                                                                            <div class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-                                                                                <h4 class="form-label me-3 m-0" for="phone" style="width: 80px;">Câu 01: </h4>
-                                                                                
-                                                                                <input type="text" id="phone" class="answer-item__text form-control" placeholder="Nhập đáp án" required="">
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="answer-item list-group-item border-0">
-                                                                            <div class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-                                                                                <h4 class="form-label me-3 m-0" for="phone" style="width: 80px;">Câu 01: </h4>
-                                                                                
-                                                                                <input type="text" id="phone" class="answer-item__text form-control" placeholder="Nhập đáp án" required="">
-                                                                            </div>
-                                                                        </li>
+                                                                         <c:forEach  var="a" items="${listAnswer}">
+                                                                            <c:choose>
+                                                                                <c:when test="${a.lessons.lessonId == lesson.lessonId}">
+                                                                                    <li class="answer-item list-group-item border-0">
+                                                                                        <div class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
+                                                                                            <h4 class="answer-item__order me-3 m-0" for="phone" style="width: 80px;">Câu 01: </h4>
+                                                                                            <input type="text" name="answer-item__text" data-target="${a.answerId}" id="answer-item__text" class="answer-item__text form-control" placeholder="Nhập đáp án">
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </c:when>
+                                                                            </c:choose>
+                                                                         </c:forEach>
+                                                                        
+                                                                        
                                                                         <!-- submit -->
                                                                         <button type="submit" class="btn btn-primary">Nộp bài</button>
                                                                     </ul>
                                                                 </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-
-                                            </div>
-                                            
                                         </div>
 
 
@@ -1097,7 +1081,7 @@ details.comment:not([open]) .comment-heading::after {
     }
     
 
-   
+   WebTransportDatagramDuplexStream
 
     //show my old rating
     // var stars = document.querySelectorAll(".radio-label");
@@ -1114,8 +1098,8 @@ details.comment:not([open]) .comment-heading::after {
 </script>
     <!-- Libs JS -->
 <script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
-<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+<!-- <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+ --><script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
 
 <!-- Theme JS -->
 <script src="../assets/js/theme.min.js"></script>

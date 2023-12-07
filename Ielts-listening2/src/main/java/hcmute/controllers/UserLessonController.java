@@ -12,13 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import hcmute.entity.AnswerLesson;
 import hcmute.entity.CommentLesson;
 import hcmute.entity.EnrrolLesson;
 import hcmute.entity.Lesson;
 import hcmute.entity.RepComment;
 import hcmute.entity.User;
+import hcmute.services.AnswerLessonServiceImpl;
 import hcmute.services.CommentServiceImpl;
 import hcmute.services.EnrollLessonService;
+import hcmute.services.IAnswerLessonService;
 import hcmute.services.ICommentService;
 import hcmute.services.IEnrollLessonService;
 import hcmute.services.ILessonService;
@@ -38,6 +41,7 @@ public class UserLessonController extends HttpServlet{
 	IRepCommentService repService = new RepCommentServiceImpl();
 	IUserService userService = new UserServiceImpl();
 	IEnrollLessonService enrService = new EnrollLessonService();
+	IAnswerLessonService ansService = new AnswerLessonServiceImpl();
 	
 	Date curDate = new Date();//current date
 	Lesson curLesson = new Lesson();//current lesson
@@ -55,6 +59,7 @@ public class UserLessonController extends HttpServlet{
 		List<RepComment> listRep = repService.findAll();
 		List<User> listUser = userService.findAll();
 		List<EnrrolLesson> listEnroll = enrService.findAll();
+		List<AnswerLesson> listAnswer = ansService.findAll();
 		
 		HttpSession session = req.getSession(false);
 		if(session != null && session.getAttribute("user") != null) {
@@ -76,6 +81,7 @@ public class UserLessonController extends HttpServlet{
 			req.setAttribute("listUser", listUser);
 			req.setAttribute("user", user);
 			req.setAttribute("listEnroll", listEnroll);
+			req.setAttribute("listAnswer", listAnswer);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Lesson-content.jsp");
 			rd.forward(req, resp);
