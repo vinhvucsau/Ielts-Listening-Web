@@ -292,7 +292,7 @@ Long count = (Long) request.getAttribute("countCourse");
 																				<c:forEach var="enrrol_lesson"
 																					items="${lesson.enrrolLesson}">
 																					<c:set var="totalStars"
-																						value="${totalStars +enrrol_lesson.numberOfStar}" />
+																						value="${totalStars + enrrol_lesson.numberOfStar}" />
 																					<c:set var="count" value="${count + 1}" />
 																				</c:forEach>
 																			</c:forEach>
