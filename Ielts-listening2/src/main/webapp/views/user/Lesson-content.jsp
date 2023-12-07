@@ -1172,7 +1172,7 @@ details.comment:not([open]) .comment-heading::after {
     }
     
 
-   
+   WebTransportDatagramDuplexStream
 
     //show my old rating
     // var stars = document.querySelectorAll(".radio-label");
