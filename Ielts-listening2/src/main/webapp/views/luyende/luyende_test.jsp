@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <<<<<<< Updated
 upstream:Ielts-listening2/src/main/webapp/views/luyende/luyende_test.jsp
 <title>Insert title here</title> =======
@@ -71,7 +72,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 							</div>
 						</div>
 						<input type="range" value="0"
-							class="progress-time form-range mt-3">
+							class="progress-time w-100 mt-3 h-2">
 						<div class="mt-2 d-flex">
 							<div
 								class="text-start d-flex justify-content-start align-items-center">
@@ -121,7 +122,6 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 									<p>Chưa trả lời</p>
 								</div>
 							</div>
-							<c:set var="stt" value="${1}"/>
 							<ul class="mt-4 d-flex flex-wrap justify-content-center">
 								<c:forEach items="${enrollTest.mockTests.listeningParts}" var="listeningPart">
 									<c:forEach items="${listeningPart.answerTests}" var="answerTest" varStatus="status">
@@ -150,25 +150,24 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 										    <c:when test="${empty isCompleted and isAnswered}">
 										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
 										    	 class="number-question-item answered" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${stt}</a></li>
+										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a></li>
 										    </c:when>
 										    <c:when test="${not empty isCompleted and isCorrect}">
 										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
 										    	 class="number-question-item correct" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${stt}</a></li>
+										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a></li>
 										    </c:when>
 										    <c:when test="${not empty isCompleted and not isCorrect}">
 										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
 										    	 class="number-question-item incorrect" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${stt}</a></li>
+										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a></li>
 										    </c:when>
 										    <c:otherwise>
 										        <li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
 										         class="number-question-item" enrollTestId="${enrollTest.enrrolId}" 
-										         answerTestId="${answerTest.answerId}">${stt}</a></li>
+										         answerTestId="${answerTest.answerId}">${answerTest.number}</a></li>
 										    </c:otherwise>
 										</c:choose>
-										<c:set var="stt" value="${stt + 1}"></c:set>
 	
 									</c:forEach>
 								</c:forEach>
@@ -181,11 +180,23 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 								<i class="ti-cup me-2"></i>
 								<h6>Kết quả</h6>
 							</div>
-							<select class="test-history form-select mt-3">
-								<option>Lịch sử làm bài lần 1</option>
-								<option>Lịch sử làm bài lần 2</option>
-								<option>Lịch sử làm bài lần 3</option>
-							</select>
+							<div class="dropdown mt-3">
+							  <button type="button" class="btn btn-outline-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
+							    Lịch sử làm bài
+							  </button>
+							  
+							  <ul class="dropdown-menu w-100">
+							  	<c:forEach items="${listHistoryTest}" var="enrollTest">
+							  		<li><a class="dropdown-item " href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId }"></c:url>'>
+							  			Thời điểm: 
+							  			<fmt:formatDate value="${enrollTest.enrrollmentDate}" pattern="hh:mm - dd/MM/yyyy"/>
+							  			
+							  			<span class="badge bg-primary rounded-pill float-end">${enrollTest.score}</span>
+							  		</a>
+							  		</li>
+							  	</c:forEach>
+							  </ul>
+							</div>
 							<div class="test-score mt-3">
 								<div class="d-flex align-items-center">
 									<img
@@ -233,7 +244,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 							</div>
 							<div class="col d-flex justify-content-center">
 								<h6>PART</h6>
-								<h6 class="part-number ms-2">${currentPartNumber}</h6>
+								<h6 class="part-number ms-2">${currentPart.number}</h6>
 							</div>
 							<div class="col d-flex justify-content-end">
 								<c:choose>
@@ -268,10 +279,12 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 							</c:otherwise>
 						</c:choose>
 					</div>
+					<div class='mt-2'>
+						${currentPart.answerSheet}
+					</div>
 				</div>
 				<div class="col-3">
 					<ul class="answer-container">
-						<c:set var="i" value="${1}"></c:set>
 						<c:forEach items="${enrollTest.mockTests.listeningParts}" var="listeningPart">
 							<c:if test="${listeningPart.partId == currentPart.partId}">
 								<c:forEach items="${listeningPart.answerTests}" var="answerTest">
@@ -287,7 +300,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 										<c:choose>
 											<c:when test="${not empty answer and answer.equals(answerTest.answerKey)}">
 												<li class="answer-item correct d-flex">
-													<span class="number-question d-flex justify-content-center align-items-center">${i}</span>
+													<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
 													<div class="col">
 														<input class="answer-input" type="text" value="${answer}">
 													</div>
@@ -295,7 +308,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 											</c:when>
 											<c:otherwise>
 												<li class="answer-item incorrect d-flex">
-													<span class="number-question d-flex justify-content-center align-items-center">${i}</span>
+													<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
 													<div class="col">
 														<input class="answer-input" type="text" value="${answer}"> 
 														<span class="correct-answer">${answerTest.answerKey}</span>
@@ -306,19 +319,14 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 									</c:if>
 									<c:if test="${empty isCompleted}">
 										<li class="answer-item d-flex">
-											<span class="number-question d-flex justify-content-center align-items-center">${i}</span>
+											<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
 											<div class="col">
 												<input class="answer-input not-completed" enrollTestId="${enrollTest.enrrolId}" answerTestId="${answerTest.answerId}" type="text" value="${answer}"> 
 											</div>
 										</li>
 									</c:if>
-									<c:set var="i" value="${i + 1}"></c:set>
 								</c:forEach>
 							</c:if>
-							<c:if test="${listeningPart.partId != currentPart.partId}">
-								<c:set var="i" value="${i + listeningPart.answerTests.size()}"></c:set>
-							</c:if>
-							
 						</c:forEach>
 					</ul>
 					<div class="text-center">
@@ -370,6 +378,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
         </div>
     </div>
     <div id="my-toast"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script>
         const testTimer = document.querySelector('.test-time .timer');
         const player = document.querySelector('.audio-area .btn-toggle-play');
@@ -379,8 +388,6 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
         const progressVolume = document.querySelector('.audio-area .volume-range');
         const volumeText = document.querySelector('.audio-area .volume-text-value');
         
-        const apiUrl = window.location.protocol + '//' + window.location.host + '/Ielts-listening2/api-luyende_test';
-        //thử nghiệm
         const enrollTestId = '${enrollTest.enrrolId}';
         
 
@@ -510,28 +517,26 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
                 		},
                 		answer: answerInput.value
                 }
-                var options = { method:"POST",
-                        		body: JSON.stringify(data)
-                        	  }
-                fetch(apiUrl,options)
-                .then(resp => {
-                	return resp.json();
-                })
-                .then(enrollTest => {
-                	const questionItem = document.querySelector('.question-container .number-question-item[answerTestId='+
-                		data['answerUserId']['answerId']+'][enrollTestId='+data['answerUserId']['enrrolId']+']');
-                	if (questionItem) {
-                		if (enrollTest['answer'] === ''){
-                			questionItem.classList.remove('answered');
-                		}
-                		else{
-                			questionItem.classList.add('answered');
-                		}
-                	}
-               		answerInput.value = enrollTest['answer'];
-                })
-                .catch(error => {
-                	toast({title: 'Lỗi', message: 'Không thể lưu câu trả lời', type: 'error', duration: 3000});
+                $.ajax({url: "/Ielts-listening2/api-luyende_test",
+        			type: 'POST',
+        			contentType: "application/json",
+        			data:JSON.stringify(data),
+                    success: function(enrollTest){
+                   		const questionItem = document.querySelector('.question-container .number-question-item[answerTestId='+
+                       		data['answerUserId']['answerId']+'][enrollTestId='+data['answerUserId']['enrrolId']+']');
+                       	if (questionItem) {
+                       		if (enrollTest['answer'] === ''){
+                       			questionItem.classList.remove('answered');
+                       		}
+                       		else{
+                       			questionItem.classList.add('answered');
+                       		}
+                       	}
+                       	answerInput.value = enrollTest['answer'];
+                    },
+                    error:function(xhr){
+                    	toast({title: 'Lỗi', message: 'Không thể lưu câu trả lời', type: 'error', duration: 3000});
+                    }
                 })
             };
        });
@@ -543,28 +548,24 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
         		spinner.classList.remove('d-none');
         		const modalBody = document.querySelector('#myModal .modal-body ul');
         		modalBody.innerHTML = '';
-        		
-                var options = { method:"POST",
-                        		body: JSON.stringify({ enrrolId: enrollTestId})
-                        	  }
-                const url = window.location.protocol + '//' + window.location.host + '/Ielts-listening2/api-comfirm-answers';
-            	fetch(url,options)
-                .then(resp => {
-                	return resp.json();
+            	$.ajax({url: "/Ielts-listening2/api-comfirm-answers",
+        			type: 'POST',
+        			contentType: "application/json",
+        			data:JSON.stringify({ enrrolId: enrollTestId}),
+                    success: function(data){
+                    	var strRender = data.reduce((total, item) => total.concat('<li class="list-group-item '+
+                    			(item["DaTraLoi"]? 'list-group-item-light':'list-group-item-dark')+' ">Câu '+
+                    			item["CauHoiSo"] + ': ' + (item["DaTraLoi"]? 'Đã trả lời':'Chưa trả lời') + '</li>'),'');
+                    	const modalBody = document.querySelector('#myModal .modal-body ul');
+                        modalBody.innerHTML = strRender;
+                        spinner.classList.add('d-none');
+                    },
+                    error:function(xhr){
+                    	toast({title: 'Lỗi', message: 'Không thể tải các câu trả lời', type: 'error', duration: 5000});
+                    	spinner.classList.add('d-none');
+                    	console.log(error);
+                    }
                 })
-                .then(data => {
-                	var strRender = data.reduce((total, item) => total.concat('<li class="list-group-item '+
-                			(item["DaTraLoi"]? 'list-group-item-light':'list-group-item-dark')+' ">Câu '+
-                			item["CauHoiSo"] + ': ' + (item["DaTraLoi"]? 'Đã trả lời':'Chưa trả lời') + '</li>'),'');
-                	const modalBody = document.querySelector('#myModal .modal-body ul');
-                    modalBody.innerHTML = strRender;
-                    spinner.classList.add('d-none');
-                })
-                .catch(error => {
-                	toast({title: 'Lỗi', message: 'Không thể tải các câu trả lời', type: 'error', duration: 5000});
-                	spinner.classList.add('d-none');
-                	console.log(error);
-                });
         	}
         }
         

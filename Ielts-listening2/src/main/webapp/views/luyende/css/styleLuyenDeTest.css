@@ -40,7 +40,7 @@
 }
 
 #test input[type="range"]{
-    height: 2px;
+    height: 6px;
     outline: none;
     overflow: visible;
 }
