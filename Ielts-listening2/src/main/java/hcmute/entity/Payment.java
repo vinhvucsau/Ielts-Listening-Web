@@ -1,6 +1,7 @@
 package hcmute.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,22 +16,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "payment")
-public class Payment implements Serializable{
+public class Payment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String paymentId;
-	
+
 	@Column(name = "dateBuy")
-	private Date dateBuy;
-	
+	private LocalDateTime dateBuy;
+
 	@Column(name = "cost")
 	private Integer cost;
-	
+
 	@OneToMany(mappedBy = "payment", fetch = FetchType.LAZY)
 	private List<PayDetail> payDetail;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User users;
@@ -43,11 +44,11 @@ public class Payment implements Serializable{
 		this.paymentId = paymentId;
 	}
 
-	public Date getDateBuy() {
+	public LocalDateTime getDateBuy() {
 		return dateBuy;
 	}
 
-	public void setDateBuy(Date dateBuy) {
+	public void setDateBuy(LocalDateTime dateBuy) {
 		this.dateBuy = dateBuy;
 	}
 
@@ -81,8 +82,8 @@ public class Payment implements Serializable{
 				+ payDetail + ", users=" + users + "]";
 	}
 
-	public Payment(String paymentId, Date dateBuy, Integer cost, List<PayDetail> payDetail, User users) {
-		
+	public Payment(String paymentId, LocalDateTime dateBuy, Integer cost, List<PayDetail> payDetail, User users) {
+
 		this.paymentId = paymentId;
 		this.dateBuy = dateBuy;
 		this.cost = cost;
@@ -95,6 +96,4 @@ public class Payment implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
 }

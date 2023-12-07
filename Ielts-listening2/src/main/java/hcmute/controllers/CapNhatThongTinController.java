@@ -26,8 +26,9 @@ import hcmute.utils.DeleteImage;
 import hcmute.utils.UploadUtils;
 import hcmute.utils.compositeId.PasswordEncryptor;
 
-@MultipartConfig (fileSizeThreshold = 1024*1024*10, maxFileSize = 1024*1024*50, maxRequestSize = 1024*1024*50)
-@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
+		* 50)
+@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi" })
 public class CapNhatThongTinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,17 +38,17 @@ public class CapNhatThongTinController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
-		
-		//Set cứng ID để test chức năng
-		HttpSession session = req.getSession(false);
-		User user = (User) session.getAttribute("user");
-		
+
+		// Set cứng ID để test chức năng
+		String id = req.getParameter("userId");
+		User user = findUserById(id);
 		Account account = accountService.findByID(user.getAccount().getUserName());
-		
+
 		req.setAttribute("currentUser", user);
 		req.setAttribute("account", account);
-		
-		
+		HttpSession session = req.getSession(true);
+		session.setAttribute("user", user);
+
 		if (url.contains("capnhattaikhoan")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
 			rd.forward(req, resp);
@@ -57,7 +58,7 @@ public class CapNhatThongTinController extends HttpServlet {
 		} else if (url.contains("khoahoccuatoi")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_khoahoccuatoi.jsp");
 			rd.forward(req, resp);
-		} 
+		}
 	}
 
 	@Override
@@ -76,7 +77,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			req.setCharacterEncoding("UTF-8");
 			resp.setCharacterEncoding("UTF-8");
 
-			//Set cứng ID để test chức năng
+			// Set cứng ID để test chức năng
 			User user = userService.findUserByID(req.getParameter("userId"));
 			Account account = accountService.findByID(user.getAccount().getUserName());
 			System.out.print(false);
@@ -84,25 +85,25 @@ public class CapNhatThongTinController extends HttpServlet {
 			String newPass = req.getParameter("newpassword").trim();
 			String confirmPass = req.getParameter("confirmpassword").trim();
 			String accPass = PasswordEncryptor.decryptPassword(account.getPassWord()).trim();
-			
+
 			if (oldPass.equals(accPass)) {
 				if (newPass.equals(confirmPass)) {
 					account.setPassWord(PasswordEncryptor.encryptPassword(newPass));
-				}else {
+				} else {
 					req.setAttribute("messError", "Xác nhận mật khẩu mới không thành công!");
 				}
-			}else {
+			} else {
 				req.setAttribute("messError", "Nhập mật khẩu cũ sai!");
 			}
-			
+
 			accountService.update(account);
-			
+
 			req.setAttribute("account", account);
 			req.setAttribute("message", "Cập nhật thành công!");
-			
+
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhatmatkhau.jsp");
 			rd.forward(req, resp);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("error", "Eror: " + e.getMessage());
@@ -111,68 +112,80 @@ public class CapNhatThongTinController extends HttpServlet {
 	}
 
 	private void UpdateInfo(HttpServletRequest req, HttpServletResponse resp) {
-		//User user = new User();
+		// User user = new User();
 		try {
 			req.setCharacterEncoding("UTF-8");
 			resp.setCharacterEncoding("UTF-8");
 			String id = req.getParameter("userId");
 
-			//Set cứng ID để test chức năng
-			HttpSession session = req.getSession(false);
-			User user = (User) session.getAttribute("user");
-			
-			  String name = req.getParameter("inputName").trim(); 
-			  String phoneNumber =req.getParameter("inputPhone").trim(); 
-			  String email =req.getParameter("inputEmail").trim(); 
-			  String address =req.getParameter("inputAddress").trim(); 
-			  String dateOfBirth =req.getParameter("datePicker").trim(); 
-			  String networth = req.getParameter("inputNetworth").trim();
-			  
-			  Integer currentNetworth = 0; boolean check = networth.equals("");
-			  
-			  if (req.getPart("inputImage").getSize() == 0) {
-			  user.setImage(user.getImage()); } else { //xoa anh cu 
-				  if (user.getImage() !=
-			  null) { String fileImg = user.getImage();
-			  DeleteImage.deleteImage(user.getImage(), Constants.FOLDER_AVATAR); } //update anh moi 
-			  String fileName = "" + System.currentTimeMillis();
-			  user.setImage(UploadUtils.processUpload("inputImage", req, Constants.DIR +
-			  "\\"+ Constants.FOLDER_AVATAR +"\\", fileName)); }
-			  
-			  if (dateOfBirth == "") { dateOfBirth = null; }
-			  
-			  if (user.getNetworth() != null) { if (check == false) { currentNetworth =
-			  user.getNetworth() + Integer.parseInt(networth); } else { currentNetworth =
-			  user.getNetworth(); } } else { if (check == false) { currentNetworth =
-			  Integer.parseInt(networth); } }
-			  
-			  if (userService.findDuplicateEmail(email, id) == false) {
-				  req.setAttribute("messError", "Email đã được sử dụng!");
-			  }
-			  
-			  if (phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+")){
-				  if (userService.findDuplicatePhone(phoneNumber, id) == false) {
-					  req.setAttribute("messError", "Số điện thoại đã được sử dụng!");
-				  }
-			  }else {
-				  req.setAttribute("messError", "Số điện thoại không hợp lệ!");
-			  }
-			  
-			  if (req.getAttribute("messError") == null) {
-				  user.setName(name); 
-				  user.setEmail(email);
-				  user.setPhoneNumber(phoneNumber);
-				  user.setAddress(address); 
-				  user.setDateOfBirth(dateOfBirth);
-				  user.setNetworth(currentNetworth);
-				  userService.update(user);
-			  }
-			  
-			  req.setAttribute("currentUser", user); req.setAttribute("message",
-			  "Cập nhật thành công!");
-			  
-			  RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
-			  rd.forward(req, resp);
+			// Set cứng ID để test chức năng
+			User user = userService.findUserByID(id);
+
+			String name = req.getParameter("inputName").trim();
+			String phoneNumber = req.getParameter("inputPhone").trim();
+			String email = req.getParameter("inputEmail").trim();
+			String address = req.getParameter("inputAddress").trim();
+			String dateOfBirth = req.getParameter("datePicker").trim();
+			String networth = req.getParameter("inputNetworth").trim();
+
+			Integer currentNetworth = 0;
+			boolean check = networth.equals("");
+
+			if (req.getPart("inputImage").getSize() == 0) {
+				user.setImage(user.getImage());
+			} else { // xoa anh cu
+				if (user.getImage() != null) {
+					String fileImg = user.getImage();
+					DeleteImage.deleteImage(user.getImage(), Constants.FOLDER_AVATAR);
+				} // update anh moi
+				String fileName = "" + System.currentTimeMillis();
+				user.setImage(UploadUtils.processUpload("inputImage", req,
+						Constants.DIR + "\\" + Constants.FOLDER_AVATAR + "\\", fileName));
+			}
+
+			if (dateOfBirth == "") {
+				dateOfBirth = null;
+			}
+
+			if (user.getNetworth() != null) {
+				if (check == false) {
+					currentNetworth = user.getNetworth() + Integer.parseInt(networth);
+				} else {
+					currentNetworth = user.getNetworth();
+				}
+			} else {
+				if (check == false) {
+					currentNetworth = Integer.parseInt(networth);
+				}
+			}
+
+			if (userService.findDuplicateEmail(email, id) == false) {
+				req.setAttribute("messError", "Email đã được sử dụng!");
+			}
+
+			if (phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+")) {
+				if (userService.findDuplicatePhone(phoneNumber, id) == false) {
+					req.setAttribute("messError", "Số điện thoại đã được sử dụng!");
+				}
+			} else {
+				req.setAttribute("messError", "Số điện thoại không hợp lệ!");
+			}
+
+			if (req.getAttribute("messError") == null) {
+				user.setName(name);
+				user.setEmail(email);
+				user.setPhoneNumber(phoneNumber);
+				user.setAddress(address);
+				user.setDateOfBirth(dateOfBirth);
+				user.setNetworth(currentNetworth);
+				userService.update(user);
+			}
+			HttpSession session = req.getSession();
+			session.setAttribute("user", user);
+			req.setAttribute("currentUser", user);
+			req.setAttribute("message", "Cập nhật thành công!");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
+			rd.forward(req, resp);
 
 		} catch (Exception e) {
 			e.printStackTrace();

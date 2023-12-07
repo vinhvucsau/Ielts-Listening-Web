@@ -826,9 +826,13 @@
 								</div>
 								<div class="d-grid card-button">
 									<c:if test="${isBuy ==0 }">
-										<a href="#"
-											class="btn btn-primary bg-color-blue--primary mb-2 card-button__reg">Đăng
-											ký</a>
+										<form action="order" method=get>
+											<input name="listCourseId" value="${course.courseId}"
+												id="listCourseId" class="d-none">
+											<button
+												class="w-100 btn btn-primary bg-color-blue--primary mb-2 card-button__reg">Đăng
+												ký</button>
+										</form>
 									</c:if>
 
 

@@ -32,9 +32,10 @@ public class UserCourse implements Serializable {
 	public void setUser_courseId(String user_courseId) {
 		this.user_courseId = user_courseId;
 	}
+
 	@OneToMany(mappedBy = "userCourse", fetch = FetchType.LAZY)
 	private List<PayDetail> payDetail;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "courseId")
 	private Course courses;

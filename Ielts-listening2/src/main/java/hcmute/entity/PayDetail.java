@@ -12,62 +12,57 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Pay_Detail")
-public class PayDetail implements Serializable{
+public class PayDetail implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	 @Id
-	    @Column(name = "Pay_DetailId")
-	    private String payDetailId;
+	@Id
+	@Column(name = "Pay_DetailId")
+	private String payDetailId;
 
-	  
-	    
-	    @ManyToOne
-		@JoinColumn(name = "paymentId")
-		private Payment payment;
+	@ManyToOne
+	@JoinColumn(name = "paymentId")
+	private Payment payment;
 
-		@ManyToOne
-		@JoinColumn(name = "user_courseId")
-		private UserCourse userCourse;
-	    // Constructors, getters, setters, and other annotations
+	@ManyToOne
+	@JoinColumn(name = "user_courseId")
+	private UserCourse userCourse;
+	// Constructors, getters, setters, and other annotations
 
-		public String getPayDetailId() {
-			return payDetailId;
-		}
+	public String getPayDetailId() {
+		return payDetailId;
+	}
 
-		public void setPayDetailId(String payDetailId) {
-			this.payDetailId = payDetailId;
-		}
+	public void setPayDetailId(String payDetailId) {
+		this.payDetailId = payDetailId;
+	}
 
-		public Payment getPayment() {
-			return payment;
-		}
+	public Payment getPayment() {
+		return payment;
+	}
 
-		public void setPayment(Payment payment) {
-			this.payment = payment;
-		}
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
 
-		public UserCourse getUserCourse() {
-			return userCourse;
-		}
+	public UserCourse getUserCourse() {
+		return userCourse;
+	}
 
-		public void setUserCourse(UserCourse userCourse) {
-			this.userCourse = userCourse;
-		}
+	public void setUserCourse(UserCourse userCourse) {
+		this.userCourse = userCourse;
+	}
 
-		public PayDetail(String payDetailId, Payment payment, UserCourse userCourse) {
-			super();
-			this.payDetailId = payDetailId;
-			this.payment = payment;
-			this.userCourse = userCourse;
-		}
+	public PayDetail(String payDetailId, Payment payment, UserCourse userCourse) {
+		super();
+		this.payDetailId = payDetailId;
+		this.payment = payment;
+		this.userCourse = userCourse;
+	}
 
-		public PayDetail() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
+	public PayDetail() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-	  
-	    
-	    
 }

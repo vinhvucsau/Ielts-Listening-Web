@@ -8,8 +8,15 @@ import hcmute.entity.UserCourse;
 
 public class UserCourseServiceImpl implements IUserCourseService {
 	IUserCourseDAO userCourseDAO = new UserCourseDAOImpl();
+	UserCourseDAOImpl abs = new UserCourseDAOImpl();
 
 	public List<UserCourse> findByUserIdAndCourseId(String userId, String courseId) {
 		return userCourseDAO.findByUserIdAndCourseId(userId, courseId);
+	}
+
+	@Override
+	public void insert(UserCourse userCourse) {
+		// TODO Auto-generated method stub
+		abs.insert(userCourse);
 	}
 }
