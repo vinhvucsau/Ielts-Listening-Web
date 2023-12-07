@@ -41,7 +41,7 @@ public class AdminKhoaHocController extends HttpServlet {
 		String searchStr = req.getParameter("search") == null ? "" : req.getParameter("search");
 		int page = Integer.parseInt(req.getParameter("page") == null ? "1" : req.getParameter("page"));
 		int tab=1;
-		int pagesize = 16;
+		int pagesize = 8;
 		if (url.contains("/deletecourse")) {
 			Delete(req, resp);
 			resp.sendRedirect(req.getContextPath() + "/admin/khoahoc");
