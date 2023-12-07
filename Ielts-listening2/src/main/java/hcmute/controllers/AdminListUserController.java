@@ -23,7 +23,7 @@ import hcmute.utils.DeleteImage;
 import hcmute.utils.UploadUtils;
 
 @WebServlet(urlPatterns = { "/admin/listUser", "/admin/capnhattaikhoan" })
-@MultipartConfig
+@MultipartConfig (fileSizeThreshold = 1024*1024*10, maxFileSize = 1024*1024*50, maxRequestSize = 1024*1024*50)
 public class AdminListUserController extends HttpServlet {
 	IAccountServices accountService = new AccountServiceImpl();
 	IAdminListUserService adminService = new AdminListUserServiceImpl();

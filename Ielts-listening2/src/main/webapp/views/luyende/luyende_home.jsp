@@ -92,7 +92,8 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 						<c:forEach var="mockTest" items='${topicTest.mockTests}'>
 							<c:set var="countEnrrol" value="0"></c:set>
 							<c:forEach var="enrrolTest" items="${mockTest.enrrolTests }">
-				      			<c:if test="${enrrolTest.users.userId == currentUser.userId && enrrolTest.score > 0}">
+				      			<c:if test="${enrrolTest.users.userId == currentUser.userId && enrrolTest.
+ > 0}">
 				      				<c:set var="countEnrrol" value="${countEnrrol + 1 }"></c:set>
 				      			</c:if>
 				      		</c:forEach>
@@ -157,7 +158,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 									      		</c:choose>
 								      		</c:otherwise>
 								      	</c:choose>
-								      	<p class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${mockTest.testName}</p>					      		
+								      	<p class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0" value="${mockTest.testId}">${mockTest.testName}</p>					      		
 								      </div>
 							    	</div>
 							    	<c:set var="i" value="${i+1 }"></c:set>
