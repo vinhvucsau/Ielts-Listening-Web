@@ -204,7 +204,7 @@
 											<label class="form-label" for="fname">Họ và tên</label> <input
 												type="text" class="form-control " id="inputname"
 												name="inputName" placeholder="Họ và tên"
-												value="${ currentUser.name}" required>
+												value="${currentUser.name}" required>
 											<div class="invalid-feedback">Hãy điền tên vào</div>
 										</div>
 										<!-- Email-->

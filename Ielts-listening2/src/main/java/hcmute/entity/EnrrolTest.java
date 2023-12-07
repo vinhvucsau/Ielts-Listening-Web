@@ -1,6 +1,9 @@
 package hcmute.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class EnrrolTest implements Serializable{
 	private String enrrolId;
 	
 	@Column(columnDefinition = "datetime")
-	private Date enrrollmentDate;
+	private LocalDateTime enrrollmentDate;
 	
 	@Column(columnDefinition = "int")
 	private Integer timeTest;
@@ -55,7 +58,7 @@ public class EnrrolTest implements Serializable{
 	}
 
 
-	public EnrrolTest(String enrrolId, Date enrrollmentDate, Integer timeTest, Double score, User users,
+	public EnrrolTest(String enrrolId, LocalDateTime enrrollmentDate, Integer timeTest, Double score, User users,
 			MockTest mockTests, List<AnswerUser> answerUsers) {
 		super();
 		this.enrrolId = enrrolId;
@@ -78,12 +81,14 @@ public class EnrrolTest implements Serializable{
 	}
 
 
-	public Date getEnrrollmentDate() {
-		return enrrollmentDate;
+	public  Date getEnrrollmentDate() {
+		
+		ZonedDateTime zonedDateTime = enrrollmentDate.atZone(ZoneId.systemDefault());       
+		return Date.from(zonedDateTime.toInstant());
 	}
 
 
-	public void setEnrrollmentDate(Date enrrollmentDate) {
+	public void setEnrrollmentDate(LocalDateTime enrrollmentDate) {
 		this.enrrollmentDate = enrrollmentDate;
 	}
 

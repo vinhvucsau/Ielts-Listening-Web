@@ -20,31 +20,16 @@ public class PayDetail implements Serializable{
 	    @Column(name = "Pay_DetailId")
 	    private String payDetailId;
 
-	    @Column(name = "paymentId")
-	    private String paymentId;
+	  
+	    
+	    @ManyToOne
+		@JoinColumn(name = "paymentId")
+		private Payment payment;
 
-	    @Column(name = "user_courseId")
-	    private String userCourseId;
-
+		@ManyToOne
+		@JoinColumn(name = "user_courseId")
+		private UserCourse userCourse;
 	    // Constructors, getters, setters, and other annotations
-
-	    @ManyToOne
-	    @JoinColumn(name = "paymentId", referencedColumnName = "paymentId", insertable = false, updatable = false)
-	    private Payment payment;
-
-	    @ManyToOne
-	    @JoinColumn(name = "user_courseId", referencedColumnName = "user_courseId", insertable = false, updatable = false)
-	    private UserCourse userCourse;
-
-		public PayDetail(String payDetailId, String paymentId, String userCourseId, Payment payment,
-				UserCourse userCourse) {
-			super();
-			this.payDetailId = payDetailId;
-			this.paymentId = paymentId;
-			this.userCourseId = userCourseId;
-			this.payment = payment;
-			this.userCourse = userCourse;
-		}
 
 		public String getPayDetailId() {
 			return payDetailId;
@@ -52,22 +37,6 @@ public class PayDetail implements Serializable{
 
 		public void setPayDetailId(String payDetailId) {
 			this.payDetailId = payDetailId;
-		}
-
-		public String getPaymentId() {
-			return paymentId;
-		}
-
-		public void setPaymentId(String paymentId) {
-			this.paymentId = paymentId;
-		}
-
-		public String getUserCourseId() {
-			return userCourseId;
-		}
-
-		public void setUserCourseId(String userCourseId) {
-			this.userCourseId = userCourseId;
 		}
 
 		public Payment getPayment() {
@@ -86,16 +55,19 @@ public class PayDetail implements Serializable{
 			this.userCourse = userCourse;
 		}
 
+		public PayDetail(String payDetailId, Payment payment, UserCourse userCourse) {
+			super();
+			this.payDetailId = payDetailId;
+			this.payment = payment;
+			this.userCourse = userCourse;
+		}
+
 		public PayDetail() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
 
-		@Override
-		public String toString() {
-			return "PayDetail [payDetailId=" + payDetailId + ", paymentId=" + paymentId + ", userCourseId="
-					+ userCourseId + ", payment=" + payment + ", userCourse=" + userCourse + "]";
-		}
+	  
 	    
 	    
 }

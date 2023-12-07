@@ -122,6 +122,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 						  	<c:forEach var="mockTest" items='${topicTest.mockTests}'>
 						  		<c:if test="${i < 6}">
 							  		<div class="col-6" style="cursor:pointer">
+							  		<form action="gotoTest" method="post">
 								      <div class="p-3 border bg-white d-flex flex-row rounded-3">
 								      	<c:choose>
 								      		<c:when test="${currentUser.userId == null}">
@@ -157,8 +158,9 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 									      		</c:choose>
 								      		</c:otherwise>
 								      	</c:choose>
-								      	<p class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${mockTest.testName}</p>					      		
+								      	<p class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0" value="${mockTest.testId}">${mockTest.testName}</p>					      		
 								      </div>
+							    	</form>
 							    	</div>
 							    	<c:set var="i" value="${i+1 }"></c:set>
 							    </c:if>
