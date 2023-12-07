@@ -55,6 +55,7 @@
 								Nhận</button>
 						</div>
 						<div id="countdown" class="text-center mt-5"></div>
+						<div id="turn" class="text-center text-danger" > số lần còn lại bạn được nhập  </div>
 						<div class="text-center">
 							Bạn chưa nhận được mã? <a style="text-decoration:none"
 								href="http://localhost:8080/Ielts-listening2/authentication-resent">Gửi
@@ -76,6 +77,13 @@
 		    var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
 		    return match ? match[1] : null;
 		}
+		console.log(getCookie("turn"));
+		const turn = document.querySelector("#turn");
+		if (getCookie("turn") === "0")
+			turn.innerHTML="Bạn đã hết lượt nhập vui lòng quay về trang đăng ký!";
+		else 
+		turn.innerHTML="số lần còn lại bạn được nhập:"+getCookie("turn");
+		
 		const countdown = document.querySelector("#countdown");
 
 		let startSeconds = 15*60 - parseInt((Date.now() - getCookie("createCodeAt")) / 1000);
