@@ -28,16 +28,5 @@ public class CourseServiceImpl implements ICourseService {
 		
 	}
 
-	@Override
-	public List<Course> findAll(String searchStr) {
-		// TODO Auto-generated method stub
-		return courseAbs.findAll(searchStr);
-	}
-
-	@Override
-	public List<Course> findAll(int page, int pagesize, String searchStr) {
-		// TODO Auto-generated method stub
-		return courseAbs.findAll(page, pagesize, searchStr);
-	}
 
 }
