@@ -124,8 +124,8 @@
 								</div>
 								<!-- Add Lesson -->								
 								<form action="addLesson" method="post">
-									<input type="hidden" name="courseId" value="${listLesson[0].courses.courseId}">
-								  	<!-- Add Button -->
+<%-- 									<input type="hidden" name="courseId" value="${listLesson[0].courses.courseId}">
+ --%>								  	<!-- Add Button -->
 								  	<button type="submit" class="accordion btn btn-primary mt-2">Thêm bài học</button>
 								</form>
 								

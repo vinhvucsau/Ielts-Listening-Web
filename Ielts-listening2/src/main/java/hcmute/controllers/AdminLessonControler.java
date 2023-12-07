@@ -25,6 +25,7 @@ import hcmute.services.LessonServiceImpl;
 
 @WebServlet(urlPatterns = { "/admin/listLesson", "/admin/addLesson", "/admin/deleteLesson", "/admin/updateLesson" })
 public class AdminLessonControler extends HttpServlet {
+	String courseIdAdd;
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +40,7 @@ public class AdminLessonControler extends HttpServlet {
 		if (url.contains("listLesson")) {
 			
 			String courseId = req.getParameter("courseId");
+			courseIdAdd = courseId;
 			List<Lesson> listLesson = lessonService.findLessonByCourse(courseId);
 			req.setAttribute("listLesson", listLesson);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminLesson.jsp");
@@ -70,16 +72,21 @@ public class AdminLessonControler extends HttpServlet {
 			String lessonName = "LessonName";
 			// String courseId = "Course1040";
 			String courseId = req.getParameter("courseId"); 
-			System.out.print("tttt" + courseId);
+			System.out.print("tttt" + courseIdAdd);
 			String lessonId = "Lesson1051";
-			Course course = courseService.findById(courseId);
+			Course course = courseService.findById(courseIdAdd);
 			lesson.setLessonName(lessonName);
 			lesson.setCourses(course);
 			lesson.setLessonId(lessonId);
 			lessonService.insert(lesson);
 			/* req.setAttribute("lesson", lesson); */
 			
-			resp.sendRedirect(req.getContextPath() + "/admin/listLesson"); 
+			 resp.sendRedirect(req.getContextPath() + "/admin/listLesson?courseId=" + courseIdAdd); 
+			/*
+			 * RequestDispatcher rd =?courseId="
+			 * req.getRequestDispatcher("/views/admin/listLesson + courseId +
+			 * ".jsp"); rd.forward(req, resp);
+			 */
 
 		}
 	}
