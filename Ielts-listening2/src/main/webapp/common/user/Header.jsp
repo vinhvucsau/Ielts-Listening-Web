@@ -29,7 +29,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 					type="button" aria-expanded="false" data-bs-toggle="dropdown"
 					aria-label="Toggle theme (auto)">
 					<i class="fe fe-shopping-cart"></i> <span
-						style="z-index: 2; background-color: white; bottom: -4px; right: -8px; width: 24px; height: 24px; padding; 2; border-radius: 100%;"
+						style="z-index: 2; background-color: white; top: -4px; right: -8px; width: 24px; height: 24px; padding; 2; border-radius: 100%;"
 						class="position-absolute text-primary border ">${cartSize}</span>
 
 				</button>

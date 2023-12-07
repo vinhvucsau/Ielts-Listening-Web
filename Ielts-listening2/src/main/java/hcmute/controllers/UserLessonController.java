@@ -20,7 +20,8 @@ import hcmute.entity.RepComment;
 import hcmute.entity.User;
 import hcmute.services.AnswerLessonServiceImpl;
 import hcmute.services.CommentServiceImpl;
-import hcmute.services.EnrollLessonService;
+
+import hcmute.services.EnrollLessonServiceImpl;
 import hcmute.services.IAnswerLessonService;
 import hcmute.services.ICommentService;
 import hcmute.services.IEnrollLessonService;
@@ -40,8 +41,8 @@ public class UserLessonController extends HttpServlet {
 	ICommentService cmtService = new CommentServiceImpl();
 	IRepCommentService repService = new RepCommentServiceImpl();
 	IUserService userService = new UserServiceImpl();
-	IEnrollLessonService enrService = new EnrollLessonService();
-	
+	IEnrollLessonService enrService = new EnrollLessonServiceImpl();
+	IAnswerLessonService ansService =new AnswerLessonServiceImpl();
 	Date curDate = new Date();//current date
 	Lesson curLesson = new Lesson();//current lesson
 	
