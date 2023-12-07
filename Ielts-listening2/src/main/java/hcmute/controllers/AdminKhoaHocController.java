@@ -25,7 +25,7 @@ import hcmute.utils.Constants;
 import hcmute.utils.UploadUtils;
 
 @MultipartConfig
-@WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/deletecourse","/admin/insertCourse", "/admin/lesson" })
+@WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/deletecourse","/admin/insertCourse", "/admin/lesson","/admin/updateCourse" })
 public class AdminKhoaHocController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -87,36 +87,69 @@ public class AdminKhoaHocController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		if (url.contains("insertCourse"))
 		{
-		Course model = new Course();
-		try {
-			//BeanUtils.populate(model, req.getParameterMap());
-			model.setCourseId("");
-			System.out.println(req.getParameter("courseName"));
-			model.setCourseName(req.getParameter("courseName"));
-			model.setDescription(req.getParameter("description"));
-			model.setCost(Integer.parseInt(req.getParameter("cost")));
-			if (req.getPart("image").getSize() != 0) {
-				// tạo tên file mới để khỏi bị trùng
-				String fileName = "" + System.currentTimeMillis();
-				model.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\courseIMG\\", fileName));
+			Course model = new Course();
+			try {
+				//BeanUtils.populate(model, req.getParameterMap());
+				model.setCourseId("");
+				model.setCourseName(req.getParameter("courseName"));
+				model.setDescription(req.getParameter("description"));
+				model.setCost(Integer.parseInt(req.getParameter("cost")));
+				if (req.getPart("image").getSize() != 0) {
+					// tạo tên file mới để khỏi bị trùng
+					String fileName = "" + System.currentTimeMillis();
+					model.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\courseIMG\\", fileName));
+				}
+				if (req.getPart("trailer").getSize() != 0) {
+					// tạo tên file mới để khỏi bị trùng
+					String fileName = "" + System.currentTimeMillis();
+					model.setTrailer(UploadUtils.processUpload("trailer", req, Constants.DIR + "\\courseTrailer\\", fileName));
+				}
+				Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("enrrollmentDate")); 
+				model.setEnrrolmentDate(date1);
+				courseService.insert(model);
+				req.setAttribute("course", model);
+				req.setAttribute("message", "add succes");
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("error", "add faild");
 			}
-			if (req.getPart("trailer").getSize() != 0) {
-				// tạo tên file mới để khỏi bị trùng
-				String fileName = "" + System.currentTimeMillis();
-				model.setTrailer(UploadUtils.processUpload("trailer", req, Constants.DIR + "\\courseTrailer\\", fileName));
+			resp.sendRedirect(req.getContextPath()+"/admin/khoahoc");	
+	
 			}
-			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("enrrollmentDate")); 
-			model.setEnrrolmentDate(date1);
-			courseService.insert(model);
-			req.setAttribute("course", model);
-			req.setAttribute("message", "add succes");
-		} catch (Exception e) {
-			e.printStackTrace();
-			req.setAttribute("error", "add faild");
-		}
-		resp.sendRedirect(req.getContextPath()+"/admin/khoahoc");	
-
-		}
+		else if (url.contains("updateCourse"))
+			{
+			Course model = new Course();
+			try {
+				//BeanUtils.populate(model, req.getParameterMap());
+				model.setCourseId(req.getParameter("CourseId"));
+				model.setCourseName(req.getParameter("CourseName"));
+				System.out.println(req.getParameter("CourseName"));
+				System.out.println(req.getParameter("CourseId"));
+				System.out.println(req.getParameter("courseId"));
+				model.setDescription(req.getParameter("Description"));
+				model.setCost(Integer.parseInt(req.getParameter("Cost")));
+				if (req.getPart("Image").getSize() != 0) {
+					// tạo tên file mới để khỏi bị trùng
+					String fileName = "" + System.currentTimeMillis();
+					model.setImage(UploadUtils.processUpload("Image", req, Constants.DIR + "\\courseIMG\\", fileName));
+				}
+				if (req.getPart("Trailer").getSize() != 0) {
+					// tạo tên file mới để khỏi bị trùng
+					String fileName = "" + System.currentTimeMillis();
+					model.setTrailer(UploadUtils.processUpload("Trailer", req, Constants.DIR + "\\courseTrailer\\", fileName));
+				}
+				Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("EnrrollmentDate")); 
+				model.setEnrrolmentDate(date1);
+				courseService.update(model);
+				req.setAttribute("course", model);
+				req.setAttribute("message", "add succes");
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.setAttribute("error", "add faild");
+			}
+			resp.sendRedirect(req.getContextPath()+"/admin/khoahoc");	
+	
+			}
 
 	}
 

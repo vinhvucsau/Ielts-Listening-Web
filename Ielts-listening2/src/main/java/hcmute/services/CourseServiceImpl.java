@@ -21,4 +21,10 @@ public class CourseServiceImpl implements ICourseService {
 		return courseAbs.findById(courseId);
 	}
 
+	@Override
+	public void update(Course course) {
+		courseAbs.update(course);
+		
+	}
+
 }

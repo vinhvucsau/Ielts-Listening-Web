@@ -72,10 +72,9 @@ Long count = (Long) request.getAttribute("countCourse");
 				style="background-color: rgb(0, 177, 53)">
 				<span style="color: white">Thêm Khóa Học</span>
 			</button>
-			
 		</div>
 	<!-- Model -->
-		<div id="model"
+		<div id="model" class="course_input"
 			style="max-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
 			<form action="insertCourse" method="POST" enctype="multipart/form-data" >
 				<div id="test-l-1" class="bs-stepper-pane"
@@ -91,24 +90,24 @@ Long count = (Long) request.getAttribute("countCourse");
 								<div class="mb-3">
 									<label for="courseName" class="form-label">Tên khóa học</label>
 										<input id="" name="courseName"
-										class="form-control" type="text" placeholder="Tên khóa học"
+										class="form-control courseName" type="text" placeholder="Tên khóa học"
 										required> <small>Write a 60 character course
 										title.</small>
 								</div>
 								<div class="mb-3">
 								   <label class="form-label">Mô tả</label>
-								   <textarea class="form-control" name="description" aria-label="With textarea"></textarea>
+								   <textarea class="form-control description" name="description" aria-label="With textarea"></textarea>
 								 </div>
 								<div class="d-flex align-items-center justify-content-between">
 									<div style="min-width: 350px" class="mb-3">
 										<label for="fee" class="form-label">Học phí</label>
 										<input id="" name="cost"
-											class="form-control" type="text" placeholder="Học phí" required>
+											class="form-control cost" type="text" placeholder="Học phí" required>
 									</div>
 											
 									<div style="min-width: 350px" class="mb-3">
 										<label class="form-label" for="startdate">Ngày bắt đầu</label> 
-										<input class="form-control flatpickr" type="text"
+										<input class="form-control flatpickr enrrollmentDate" type="text"
 										placeholder="Start date" id="" name="enrrollmentDate" 
 										data-mdb-toggle="datepicker" required/>
 									</div>
@@ -116,7 +115,7 @@ Long count = (Long) request.getAttribute("countCourse");
 								
 								<div class="mb-3">
 									<label class="form-label">Thêm ảnh bìa</label> 
-									<input type="file" class="form-control"
+									<input type="file" class="form-control image"
 											name="image" id=""
 											accept="image/jpeg, image/png" require>
 								</div>
@@ -125,7 +124,7 @@ Long count = (Long) request.getAttribute("countCourse");
 
 								<div class="mb-3">
 									<label class="form-label">Thêm video xem trước</label> 
-									<input type="file" class="form-control" 
+									<input type="file" class="form-control trailer" 
 											name="trailer" id=""
 											accept="video/mp4" require>
 									<div id="audio"></div>
@@ -142,10 +141,80 @@ Long count = (Long) request.getAttribute("countCourse");
 				</div>
 			</form>
 		</div>
-		
+		<div id="model1" 
+			style="max-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
+			<form action="updateCourse" method="post" enctype="multipart/form-data" >
+				<div id="test-l-1" class="course_Update bs-stepper-pane"
+					aria-labelledby="courseFormtrigger1">
+					<!-- Card -->
+					<div class="card mb-3">
+						<div class="card-header border-bottom px-4 py-3">
+							<h4 class="mb-0">Sửa khóa học</h4>
+						</div>
+						<!-- Card body -->
+						<div style="max-height: 450px" class=" overflow-auto">
+							<div class="card-body">
+								<div class="mb-3">
+								   <label for="courseId"class="form-label">ID</label>
+								   <input id="courseId" name="CourseId"
+											class="form-control cost" type="text" readonly >
+								</div>
+								<div class="mb-3">
+									<label for="courseName" class="form-label">Tên khóa học</label>
+										<input id="courseName" name="CourseName" value="${i.courseName }"
+										class="form-control courseName" type="text" placeholder="Tên khóa học"
+										required> <small>Write a 60 character course
+										title.</small>
+								</div>
+								<div class="mb-3">
+								   <label class="form-label">Mô tả</label>
+								   <textarea id="description" class="form-control description" name="description" aria-label="With textarea"></textarea>
+								 </div>
+								<div class="d-flex align-items-center justify-content-between">
+									<div style="min-width: 350px" class="mb-3">
+										<label for="fee" class="form-label">Học phí</label>
+										<input id="cost" name="Cost"
+											class="form-control cost" type="text" placeholder="Học phí" required>
+									</div>
+											
+									<div style="min-width: 350px" class="mb-3">
+										<label class="form-label" for="startdate">Ngày bắt đầu</label> 
+										<input class="form-control flatpickr enrrollmentDate" type="text"
+										placeholder="Start date" id="" name="EnrrollmentDate" 
+										data-mdb-toggle="datepicker" required/>
+									</div>
+								</div>
+								
+								<div class="mb-3">
+									<label class="form-label">Ảnh bìa</label> 
+									<input type="file" class="form-control image"
+											name="Image" id=""
+											accept="image/jpeg, image/png" require>
+								</div>
+
+<div>
+
+								<div class="mb-3">
+									<label class="form-label">Video xem trước</label> 
+									<input type="file" class="form-control trailer" 
+											name="Trailer" id=""
+											accept="video/mp4" require>
+									<div id="audio"></div>
+								</div>
+							</div>
+
+						</div>
+						<!-- Button -->
+						<button
+						class="btn btn-primary m-4" type="submit" onclick="show()">Cập nhật </button>
+					</div>
+				</div>
+				</div>
+			</form>
+		</div>
 	<div id="shadow"
 		class="position-absolute top-0 start-0 bottom-0 end-0 bg-dark"
-		style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow()"></div>
+		style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow(),hideShadow1()"></div>
 		<div>
 
 			<div class="d-flex flex-row justify-content-between mb-4">
@@ -344,6 +413,13 @@ Long count = (Long) request.getAttribute("countCourse");
 																				data-placement="top" title="Delete">
 																				<i class="fa fa-trash"></i>
 																			</button></a>
+																			<a
+																			href="#" value="${i.courseId }"><button
+																				class="btn btn-sm rounded-0 button-add-course" value="${i.courseId }"	
+																				type="button" data-toggle="tooltip" 
+																				data-placement="top" title="Update">
+																				<i class="fa fa-edit"></i>
+																			</button></a>
 
 
 																	</form>
@@ -364,7 +440,13 @@ Long count = (Long) request.getAttribute("countCourse");
 																			onclick="showLoginPopup()">
 																			<i class="fa fa-trash"></i>
 																		</button></a>
-
+																	<a
+																			value="${i.courseId }"><button
+																				class="btn btn-sm rounded-0 button-add-course" value="${i.courseId }"	
+																				type="button" data-toggle="tooltip" 
+																				data-placement="top" title="Update">
+																				<i class="fa fa-edit"></i>
+																			</button></a>
 																</c:otherwise>
 															</c:choose>
 
@@ -485,6 +567,13 @@ Long count = (Long) request.getAttribute("countCourse");
 																				data-placement="top" title="Delete">
 																				<i class="fa fa-trash"></i>
 																			</button></a>
+																		<a
+																			href="#" value="${i.courseId }"><button
+																				class="btn btn-sm rounded-0 button-add-course" value="${i.courseId }"	
+																				type="button" data-toggle="tooltip" 
+																				data-placement="top" title="Update">
+																				<i class="fa fa-edit"></i>
+																			</button></a>
 
 																	</form>
 																</c:when>
@@ -498,6 +587,13 @@ Long count = (Long) request.getAttribute("countCourse");
 																			onclick="showLoginPopup()">
 																			<i class="fa fa-trash"></i>
 																		</button></a>
+																	<a
+																			href="#" value="${i.courseId }"><button
+																				class="btn btn-sm rounded-0 button-add-course" value="${i.courseId }"	
+																				type="button" data-toggle="tooltip" 
+																				data-placement="top" title="Update">
+																				<i class="fa fa-edit"></i>
+																			</button></a>
 
 																</c:otherwise>
 															</c:choose>
@@ -537,6 +633,56 @@ Long count = (Long) request.getAttribute("countCourse");
 	        return stars;
 	    }
 	</script>
+		<script>
+		var arrCourse = [];
+		// Duyệt danh sách Java và thêm dữ liệu vào biến JavaScript
+		<c:forEach var="item" items="${course}">
+			var item = {
+				courseId : "${item.courseId}",
+				courseName : "${item.courseName}",
+				image : "${item.image}",
+				trailer : "${item.trailer}",
+				enrrollmentDate: "${item.enrrolmentDate}",
+				description: "${item.description}",
+				cost: "${item.cost}"
+			};
+			arrCourse.push(item);
+		</c:forEach>
+		console.log(arrCourse);
+		function showCourseInfo(courseId) {
+		    // Find the course object in arrCourse array based on courseId
+		    var selectedCourse = arrCourse.find(function(course) {
+		      return course.courseId === courseId;
+		    });
+		    console.log(selectedCourse);
+		    console.log(selectedCourse.courseName);
+		    // Populate the modal with course information
+		    document.getElementById('courseId').value = selectedCourse.courseId;
+		    document.getElementById('courseName').value = selectedCourse.courseName;
+		    document.getElementById('description').value = selectedCourse.description;
+		    document.getElementById('image').value = selectedCourse.image;
+		    document.getElementById('trailer').value = selectedCourse.trailer;
+		    document.getElementById('enrrollmentDate').value = selectedCourse.enrrollmentDate;
+		    document.getElementById('cost').value = selectedCourse.cost;
+		    // Populate other fields as needed
+
+		    // Display the modal
+		    showModel1()
+		  }
+
+		  // Event listener for button clicks
+		 /*  document.addEventListener('DOMContentLoaded', function() { */
+		    var buttons = document.querySelectorAll('.button-add-course');
+			console.log(buttons);
+		    buttons.forEach(function(button) {
+		      button.addEventListener('click', function() {
+		        var courseId = this.value;
+		        showCourseInfo(courseId);
+		      });
+		    });
+
+	</script>
+	
 	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
 	<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
@@ -551,6 +697,8 @@ Long count = (Long) request.getAttribute("countCourse");
 			document.querySelector("form").insertAdjacentHTML("afterend", html);
 		}
 	}
+	
+	
 	</script>
 
      
@@ -560,11 +708,21 @@ Long count = (Long) request.getAttribute("countCourse");
 			document.getElementById("shadow").style.display = "block";
 			document.getElementById("model").style.display = "block";
 		}
+		function showModel1() {
+			// Show the shadow
+			document.getElementById("shadow").style.display = "block";
+			document.getElementById("model1").style.display = "block";
+		}
 
 		function hideShadow() {
 			// Hide the shadow
 			document.getElementById("shadow").style.display = "none";
 			document.getElementById("model").style.display = "none";
+		}
+		function hideShadow1() {
+			// Hide the shadow
+			document.getElementById("shadow").style.display = "none";
+			document.getElementById("model1").style.display = "none";
 		}
 	</script>
 	
