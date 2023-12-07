@@ -16,7 +16,7 @@ import hcmute.services.IAccountServices;
 import hcmute.services.IUserService;
 import hcmute.services.UserServiceImpl;
 
-@WebServlet(urlPatterns = { "/user/home" })
+@WebServlet(urlPatterns = { "/user/home", "/user/order" })
 public class UserController extends HttpServlet {
 
 	/**
