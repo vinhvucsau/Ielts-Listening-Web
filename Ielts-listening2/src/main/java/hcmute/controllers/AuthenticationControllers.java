@@ -224,9 +224,11 @@ public class AuthenticationControllers extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
 				rd.forward(req, resp);
 			} else {
+				List<Cart> carts = cartService.findByUserId(user.getUserId());
 				HttpSession session = req.getSession(true);
 				session.setAttribute("user", user);
 				session.setAttribute("role", acc.getRole());
+				session.setAttribute("cart", carts);
 				resp.sendRedirect(req.getContextPath() + "/waiting");
 				return;
 			}
