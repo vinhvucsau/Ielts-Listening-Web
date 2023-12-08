@@ -49,12 +49,17 @@ public class AdminAddCourseController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 
 		if (url.contains("listTopic")) {
+			int page = Integer.parseInt(req.getParameter("page") == null ? "1" : req.getParameter("page"));
+			int pagesize = 8;
+			
 			List<MockTest> listMocktest = mockService.findAll();
-			List<TopicTest> topicList = topicService.getAllTopicTest();
-
+			List<TopicTest> allTopicList = topicService.getAllTopicTest();
+			List<TopicTest> topicList = topicService.getAllTopicTest(page - 1, pagesize);
+			int numPage = (int)(allTopicList.size() / pagesize) + (allTopicList.size() % pagesize != 0 ? 1 : 0);
 			req.setAttribute("listMocktest", listMocktest);
 			req.setAttribute("topicList", topicList);
 			req.setAttribute("folder", Constants.FOLDER_TOPIC);
+			req.setAttribute("pageNum", numPage);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_taobode.jsp");
 			rd.forward(req, resp);

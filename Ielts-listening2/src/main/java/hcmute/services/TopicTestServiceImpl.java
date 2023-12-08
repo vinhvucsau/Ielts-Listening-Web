@@ -48,6 +48,11 @@ public class TopicTestServiceImpl implements ITopicTestService{
 	public void updateTopic(TopicTest newTopicID) throws Exception {
 		topicDAO.update(newTopicID);
 	}
+	@Override
+	public List<TopicTest> getAllTopicTest(int page, int pagesize) {
+		// TODO Auto-generated method stub
+		return topicDAO.getAllTopicTest(page, pagesize);
+	}
 
 
 }
