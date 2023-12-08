@@ -42,7 +42,7 @@ public class EnrollTestService{
 		return enrollTestDao.findAll(all,firstResult,maxResult);
 	}
 
-	public void completeTest(String enrrolTestId) {
+	public double completeTest(String enrrolTestId) {
 		EnrrolTest newEnrrolTest = enrollTestDao.findById(enrrolTestId);
 		if (newEnrrolTest != null) {
 			try {
@@ -51,10 +51,12 @@ public class EnrollTestService{
 				double score = 10*((double)numberOfCorrectAnswer / numberOfQuestion);
 				newEnrrolTest.setScore(score);
 				enrollTestDao.update(newEnrrolTest);
+				return score;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		return -1;
 	}
 	
 	public long calcNumberOfCorrectAnswers(String enrollTestId) {
@@ -78,5 +80,9 @@ public class EnrollTestService{
 					.sum();
 		} 
 		return number;
+	}
+	
+	public List<EnrrolTest> findByUserIdAndMockTestId(String userId, String mockTestId) {
+		return enrollTestDao.findByUserIdAndMockTestId(userId, mockTestId);
 	}
 }

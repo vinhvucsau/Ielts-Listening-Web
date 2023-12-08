@@ -65,8 +65,6 @@ public class TestControllers extends HttpServlet{
 	protected void getLuyenDeTest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String enrollTestId = req.getParameter("enrollTestId");
 		//Chức năng còn thiếu: Xác thực tài khoản đăng nhập vào enrollTest có phải là của người dùng test không
-		//Chức năng này cần có getSession.getAttribute mới thực hiện
-		//Khi nối code sẽ hoàn thiện chức năng
 		
 		if (enrollTestId == null) {
 			resp.setContentType("text/html");
@@ -74,8 +72,11 @@ public class TestControllers extends HttpServlet{
 			resp.getWriter().print(errorMsg);
 			return;
 		}
-		
 		EnrrolTest enrollTest = enrollTestService.findById(enrollTestId);
+		enrollTest.getMockTests().getListeningParts().sort((a,b) -> a.getNumber() - b.getNumber());
+		enrollTest.getMockTests().getListeningParts().forEach(part -> {
+			part.getAnswerTests().sort((a,b) -> a.getNumber() - b.getNumber());
+		});
 		
 		String currentPartId;
 		if(req.getParameter("currentPartId") == null) {
@@ -95,10 +96,11 @@ public class TestControllers extends HttpServlet{
 		calendar.add(Calendar.SECOND, timeTest);
 		Date endingEnrollmentDate = calendar.getTime();
 		
-		if(currentDate.after(endingEnrollmentDate) || enrollTest.getScore() != null) {
+		if(currentDate.after(endingEnrollmentDate) || enrollTest.getScore() >= 0) {
 			//đăng nhập sau khi test đã hoàn thành
-			if(enrollTest.getScore() == null) {
-				enrollTestService.completeTest(enrollTest.getEnrrolId());
+			if(enrollTest.getScore() < 0) {
+				double score = enrollTestService.completeTest(enrollTest.getEnrrolId());
+				enrollTest.setScore(score);
 			}
 			req.setAttribute("currentTime", 0);
 			req.setAttribute("endingTime", 0);
@@ -107,6 +109,10 @@ public class TestControllers extends HttpServlet{
 			long numberOfQuestTion = enrollTestService.calcNumberOfQuestTion(enrollTestId);
 			req.setAttribute("numberOfCorrectAnswers", numberOfCorrectAnswers);
 			req.setAttribute("numberOfQuestTion", numberOfQuestTion);
+			String userId = enrollTest.getUsers().getUserId();
+			String mockTestId = enrollTest.getMockTests().getTestId();
+			List<EnrrolTest> listHistoryTest = enrollTestService.findByUserIdAndMockTestId(userId, mockTestId);
+			req.setAttribute("listHistoryTest", listHistoryTest);
 		}else if(currentDate.after(enrollmentDate) && currentDate.before(endingEnrollmentDate)) { 
 			//thời gian làm test nằm trong thời gian hiệu lực
 			req.setAttribute("currentTime", (currentDate.getTime() - enrollmentDate.getTime())/1000);
@@ -127,7 +133,6 @@ public class TestControllers extends HttpServlet{
 		List<ListeningPart> parts = enrollTest.getMockTests().getListeningParts();
 		String prevPart = null;
 		String nextPart = null;
-		int currentPartNumber = 0;
 		for(ListeningPart part: parts) {
 			if(part.getPartId().equals(currentPartId)) {
 				int index = parts.indexOf(part);
@@ -137,13 +142,11 @@ public class TestControllers extends HttpServlet{
 				if(index != 0) {
 					prevPart = parts.get(index - 1).getPartId();
 				}
-				currentPartNumber = index + 1;
 				break;
 			}
 		}
 		req.setAttribute("prevPart", prevPart);
 		req.setAttribute("nextPart", nextPart);
-		req.setAttribute("currentPartNumber", currentPartNumber);
 		req.setAttribute("enrollTest", enrollTest);
 		req.setAttribute("currentPart", currentPart);
 		req.getRequestDispatcher("/views/luyende/luyende_test.jsp").forward(req, resp);
@@ -152,7 +155,7 @@ public class TestControllers extends HttpServlet{
 	protected void getCompleteTest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String enrollTestId = req.getParameter("enrollTestId");
 		EnrrolTest enrollTest = enrollTestService.findById(enrollTestId);
-		if(enrollTest != null && enrollTest.getScore() == null) {
+		if(enrollTest != null && enrollTest.getScore() < 0) {
 			enrollTestService.completeTest(enrollTestId);
 		}
 		String childUrl = "/test/luyende_test?enrollTestId=" +enrollTestId;
@@ -163,7 +166,7 @@ public class TestControllers extends HttpServlet{
 		HttpUtil httpUtil = HttpUtil.of(req.getReader());
 		AnswerUser answerUser= httpUtil.toModel(AnswerUser.class);
 		EnrrolTest enrollTest = enrollTestService.findById(answerUser.getAnswerUserId().getEnrrolId());
-		if(enrollTest != null && enrollTest.getScore() == null) {
+		if(enrollTest != null && enrollTest.getScore() < 0) {
 			answerUserService.SaveOrUpdate(answerUser);
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.writeValue(resp.getOutputStream(), answerUser);
@@ -177,10 +180,9 @@ public class TestControllers extends HttpServlet{
 		String json = "[";
 		try {
 			if(enrrolTest2 != null) {
-				int sttCauHoi = 1;
 				for(ListeningPart part: enrrolTest2.getMockTests().getListeningParts()) {
 					for(AnswerTest answerTest: part.getAnswerTests()) {
-						json += "{ \"CauHoiSo\" : %d,".formatted(sttCauHoi);
+						json += "{ \"CauHoiSo\" : %d,".formatted(answerTest.getNumber());
 						boolean isAnwser = false;
 						if(enrrolTest2.getAnswerUsers() != null) {
 							for(AnswerUser answerUser: enrrolTest2.getAnswerUsers()) {
@@ -191,7 +193,6 @@ public class TestControllers extends HttpServlet{
 							}
 						}
 						json += "\"DaTraLoi\" :%b}".formatted(isAnwser);
-						sttCauHoi++;
 					}
 				}
 				json = json.replace("}{", "},{");
