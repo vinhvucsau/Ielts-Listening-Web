@@ -81,12 +81,12 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
-	<script src="../../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
-	<script src="../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="../../assets/libs/simplebar/dist/simplebar.min.js"></script>
+	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
 
 	<!-- Theme JS -->
-	<script src="../../assets/js/theme.min.js"></script>
+	<script src="../assets/js/theme.min.js"></script>
 
 	<script src="../assets/js/vendors/jquery.min.js"></script>
 	<script src="../assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
