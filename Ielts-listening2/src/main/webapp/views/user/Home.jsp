@@ -36,57 +36,56 @@
 </head>
 
 <body class="bg-white">
+ <!-- Page Content -->
  
-	<!-- Page Content -->
-	<section class="py-8 bg-auto bg-light hero-graphics">
-		<div class="container my-lg-8">
-			<!-- Hero Section -->
-			<div class="row justify-content-center">
-				<div class="col-xl-7 col-lg-9 col-md-12">
-					<div class="text-center">
-						<h1 class="display-2 fw-bold mb-3 text-primary">
-							<span class="text-dark px-3 px-md-0">Build Better</span>
-							<span class="headingTyped text-primary"></span>
-							<span class="typed-cursor typed-cursor--blink" aria-hidden="true">|</span>
-						</h1>
-						<p data-aos="zoom-out-up" class="mb-6 h2 text-dark">Build skills with courses Join Geeks to watch, play, learn, make, and discover, uscipit esi viimentum laoreet non et odio.</p>
-						<a href="../pricing.html" class="btn btn-primary me-2">Bắt đầu ngay &RightArrow;</a>
-						<div class="mt-8 mb-0">
-							<ul class="list-inline">
-								<li class="list-inline-item text-dark fw-semibold lh-1 fs-4 me-3 mb-2 mb-md-0">
-									<span class="icon-shape icon-xs rounded-circle bg-light-success text-center me-2">
-										<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check text-success" viewBox="0 0 16 16">
-											<path
-												d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z">
-										</svg>
-									</span>
-									<span class="align-middle">30 khóa học</span>
-								</li>
-								<li class="list-inline-item text-dark fw-semibold lh-1 fs-4 me-3 mb-2 mb-md-0">
-									<span class="icon-shape icon-xs rounded-circle bg-light-success text-center me-2">
-										<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check text-success" viewBox="0 0 16 16">
-											<path
-												d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z">
-										</svg>
-									</span>
-									<span class="align-middle">Kiến thức chuyên sâu</span>
-								</li>
-								<li class="list-inline-item text-dark fw-semibold lh-1 fs-4">
-									<span class="icon-shape icon-xs rounded-circle bg-light-success text-center me-2">
-										<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check text-success" viewBox="0 0 16 16">
-											<path
-												d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z">
-										</svg>
-									</span>
-									<span class="align-middle">Đăng ký vô thời hạn</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+ 	<!-- Hero Section -->
+	<section class="py-lg-16 py-8">
+    <!-- container -->
+    	<div class="container">
+        <!-- row -->
+        	<div class="row align-items-center">
+            <!-- col -->
+            	<div class="col-lg-6 mb-6 mb-lg-0">
+                	<div class="">
+                    <!-- heading -->
+                       	<h5 class="text-dark mb-4">
+                       		<i class="fe fe-check icon-xxs icon-shape bg-light-success text-success rounded-circle me-2"></i>
+                       			Nền tảng học trực tuyến đáng tin cậy nhất
+                        </h5>
+                          <!-- heading -->
+                       <h1 class="display-3 fw-bold mb-3 text-dark">
+                       		<span>Nền Tảng </span>
+                       		<span class="text-primary">Học & Luyện Thi Listening</span>
+                       		<span> Thông Minh</span>
+                       </h1>
+                        <!-- para -->
+                       <p class="pe-lg-10 mb-5">PREP - sản phẩm công nghệ giúp bạn giải quyết gốc rễ của mọi rào cản học thi tiếng Anh và IELTS.
+                       							Chương trình học trên Prep đã giúp 620+ học viên đạt IELTS 7.0 trở lên
+												và 90+ học viên đạt 8.0 - 8.5.</p>
+                          <!-- btn -> Register -->
+                       <a href="#" class="btn btn-primary">Bắt đầu ngay</a>
+                       <a href="https://youtu.be/Wfo4JGPY7HA?si=YQAcPaBl9-ci84gN" class="glightbox fs-4 text-inherit ms-3"><img src="../assets/images/svg/play-btn.svg" alt="" class="me-2">Xem giới thiệu</a>
+
+
+                     </div>
+                 </div>
+                 <!-- col -->
+                 <div class="col-lg-6 d-flex justify-content-center">
+                 <!-- images -->
+                    <div class="position-relative">
+                     <img src="../assets/images/background/acedamy-img/bg-thumb.svg" alt="" class=" ">
+                     <img src="../assets/images/background/acedamy-img/girl-image.png" alt="" class=" position-absolute end-0 bottom-0">
+                     <img src="../assets/images/background/acedamy-img/frame-1.svg" alt="" class=" position-absolute top-0 ms-lg-n10 ms-n19">
+                     <img src="../assets/images/background/acedamy-img/frame-2.svg" alt="" class=" position-absolute bottom-0 start-0 ms-lg-n14 ms-n6 mb-n7">
+                     <img src="../assets/images/background/acedamy-img/target.svg" alt="" class=" position-absolute bottom-0 mb-8 ms-n10 ms-lg-n1 ">
+                     <img src="../assets/images/background/acedamy-img/sound.svg" alt="" class=" position-absolute top-0  start-0 mt-18 ms-lg-n19 ms-n8">
+                     <img src="../assets/images/background/acedamy-img/trophy.svg" alt="" class=" position-absolute top-0  start-0 ms-lg-n14 ms-n5">
+
+                    </div>
+                 </div>
+        	</div>
+    	</div>
+    </section>
 	<!-- Features -->
 	<section class="py-8">
 		<div class="container mb-lg-8">
@@ -106,44 +105,59 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-6 col-12">
 					<!-- features -->
-					<div class="mb-4">
+					<div class="feature mb-4 p-2">
+						<span>
 						<!-- icon -->
-						<div class="display-4 text-primary">
-							<i class="fe fe-play"></i>
-						</div>
+							<div class="display-4 text-primary">
+								<i class="fe fe-play"></i>
+							</div>
 						<!-- para -->
-						<div class="mt-4">
-							<h3>Video bài giảng chất lượng cao</h3>
-							<p class="fs-4 mb-0">Bởi đội ngũ giáo viên xuất sắc và tận tâm IELTS 8.0 - 8.5,cựu du học sinh, tốt nghiệp tại các trường Đại học danh tiếng.</p>
-						</div>
+							<div class="mt-2">
+								<span>
+								    <h3>Video bài giảng chất lượng cao</h3>
+								    <p class="fs-4 mb-0">Bởi đội ngũ giáo viên xuất sắc và tận tâm IELTS 8.0 - 8.5,cựu du học sinh, tốt nghiệp tại các trường Đại học danh tiếng.</p>
+								</span>
+							</div>
+							<svg preserveAspectRatio="none" viewBox="0 0 546.714 178.143"><path d="M546.214 89.072c0 48.917-122.162 88.571-272.857 88.571C122.662 177.643.5 137.988.5 89.072.5 40.155 122.662.5 273.357.5c150.695 0 272.857 39.655 272.857 88.572z"/></svg>
+						</span>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-12">
 					<!-- features -->
-					<div class="mb-4">
+					<div class="feature mb-4 p-2">
+						<span>
 						<!-- icon -->
-						<div class="display-4 text-primary">
-							<i class="fe fe-book"></i>
-						</div>
+							<div class="display-4 text-primary">
+								<i class="fe fe-book"></i>
+							</div>
 						<!-- para -->
-						<div class="mt-4">
-							<h3>Đầy đủ bài mẫu, bài tập, mini test, progress test như thi thật</h3>
-							<p class="fs-4 mb-0">Bộ tài liệu đã giúp 600 học viên đã đạt IELTS 7.0-8.5 tính tới tháng 5/2021.</p>
-						</div>
+							<div class="mt-2">
+								<span>
+								    <h3>Đầy đủ bài mẫu, bài tập, mini test, progress test như thi thật</h3>
+								    <p class="fs-4 mb-0">Bộ tài liệu đã giúp 600 học viên đã đạt IELTS 7.0-8.5 tính tới tháng 5/2021.</p>
+								</span>
+							</div>
+							<svg preserveAspectRatio="none" viewBox="0 0 546.714 178.143"><path d="M546.214 89.072c0 48.917-122.162 88.571-272.857 88.571C122.662 177.643.5 137.988.5 89.072.5 40.155 122.662.5 273.357.5c150.695 0 272.857 39.655 272.857 88.572z"/></svg>
+						</span>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-12">
 					<!-- features -->
-					<div class="mb-4">
+					<div class="feature mb-4 p-2">
+						<span>
 						<!-- icon -->
-						<div class="display-4 text-primary">
-							<i class="fe fe-check-circle"></i>
-						</div>
+							<div class="display-4 text-primary">
+								<i class="fe fe-check-circle"></i>
+							</div>
 						<!-- para -->
-						<div class="mt-4">
-							<h3>Bài Listening được chấm nhanh chóng</h3>
-							<p class="fs-4 mb-0">Bài tập cũng như bài thi thử được chấm tự động. Điểm số được trả trực tiếp ngay sau khi học viên nộp bài.</p>
-						</div>
+							<div class="mt-2">
+								<span>
+								    <h3>Bài Listening được chấm nhanh chóng</h3>
+								    <p class="fs-4 mb-0">Bài tập cũng như bài thi thử được chấm tự động. Điểm số được trả trực tiếp ngay sau khi học viên nộp bài.</p>
+								</span>
+							</div>
+							<svg preserveAspectRatio="none" viewBox="0 0 546.714 178.143"><path d="M546.214 89.072c0 48.917-122.162 88.571-272.857 88.571C122.662 177.643.5 137.988.5 89.072.5 40.155 122.662.5 273.357.5c150.695 0 272.857 39.655 272.857 88.572z"/></svg>
+						</span>
 					</div>
 				</div>
 			</div>
@@ -155,29 +169,30 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="mb-5">
-						<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-lg">Browse Categories</span>
+						<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-lg">Danh sách khóa học</span>
 						<h2 class="mb-1 display-4 fw-bold">Các khóa học nổi bật</h2>
-						<p class="mb-0 lead">Choose from 32,000 online video courses with new additions published every month.</p>
+						<p class="mb-0 lead">Chọn từ 200 khóa học video trực tuyến với những bổ sung mới được xuất bản hàng tháng.</p>
 					</div>
 				</div>
 			</div>
 			<!-- List -->
-			<section class="py-5">
-								<div class="container my-lg-5">
-									<!-- row -->
-									<div class="row">
-										<div class="col-xl-3 col-lg-4 col-md-6 col-12">
-											<!-- Card -->
-                                            <div class="card card-hover mb-3">
-                                                <a href="course-single.html"><img src="../assets/images/course/course-react.jpg" alt="course" class="card-img-top"></a>
-                                                <!-- Card Body -->
-                                                <div class="card-body">
-                                                    <h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">How to easily create a website with React</a></h4>
-                                                    <!-- List -->
-                                                    <ul class="mb-3 list-inline">
-                                                        <li class="list-inline-item">
-                                                            <span>
-                                                                <svg
+			<div class="row">
+				<div class="col-md-12">
+					<div class="position-relative">
+						<div class="slider">
+							<div class="wrapper">
+								<i id="left" class="fe fe-chevron-left"></i>
+								<ul class="carousel">
+									<li class="card">
+										<a href="course-single.html"><img src="../assets/images/course/course-python.jpg" alt="course" class="card-img-top"></a>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                        	<h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">The Python Course: build web application</a></h4>
+                                            <!-- List -->
+                                            <ul class="mb-3 list-inline">
+                                            	<li class="list-inline-item">
+                                                	<span>
+                                                    	<svg
                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                     width="12"
                                                                     height="12"
@@ -186,10 +201,102 @@
                                                                     viewBox="0 0 16 16">
                                                                     <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z">
                                                                     <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z">
-                                                                </svg>
-                                                            </span>
-                                                            <span>3h 56m</span>
-                                                        </li>
+                                                        </svg>
+                                                     </span>
+                                                     <span>2h 30m</span>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                     <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                          <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
+                                                          <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE">
+                                                          <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9">
+                                                     </svg>
+                                                     Intermediate
+                                                </li>
+                                            </ul>
+                                            <div class="lh-1">
+                                                <span class="align-text-top">
+                                                     <span class="fs-6">
+                                                           <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="12"
+                                                                    height="12"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-star-fill text-warning"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                                            </svg>
+                                                            <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="12"
+                                                                    height="12"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-star-fill text-warning"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                                            </svg>
+                                                            <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="12"
+                                                                    height="12"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-star-fill text-warning"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                                            </svg>
+                                                            <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="12"
+                                                                    height="12"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-star-fill text-warning"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                                            </svg>
+                                                            <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="12"
+                                                                    height="12"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-star-fill text-warning"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </span>
+                                                    <span class="text-warning">4.5</span>
+                                                    <span class="fs-6">(13,245)</span>
+                                                    </div>
+                                                </div>
+                                                
+									</li>
+									<li class="card">
+										<a href="course-single.html"><img src="../assets/images/course/course-react.jpg" alt="course" class="card-img-top"></a>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                        	<h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">How to easily create a website with React</a></h4>
+                                            <!-- List -->
+                                            <ul class="mb-3 list-inline">
+                                                 <li class="list-inline-item">
+                                                      <span>
+                                                          <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="12"
+                                                                    height="12"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-clock align-baseline"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z">
+                                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z">
+                                                            </svg>
+                                                       </span>
+                                                       <span>3h 56m</span>
+                                                  </li>
                                                         <li class="list-inline-item">
                                                             <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
@@ -258,138 +365,10 @@
                                                         <span class="fs-6">(7,700)</span>
                                                     </div>
                                                 </div>
-                                                <!-- Card Footer -->
-                                                <div class="card-footer">
-                                                    <div class="row align-items-center g-0">
-                                                        <div class="col-auto">
-                                                            <img src="../assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                        </div>
-                                                        <div class="col ms-2">
-                                                            <span>Morris Mccoy</span>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <a href="#" class="text-reset bookmark">
-                                                                <i class="fe fe-bookmark fs-4"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-										</div>
-										<div class="col-xl-3 col-lg-4 col-md-6 col-12">
-											<!-- Card -->
-											<div class="card card-hover mb-3">
-                                                <a href="course-single.html"><img src="../assets/images/course/course-graphql.jpg" alt="course" class="card-img-top"></a>
-                                                <!-- Card Body -->
-                                                <div class="card-body">
-                                                    <h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">GraphQL: introduction to graphQL for beginners</a></h4>
-                                                    <!-- List -->
-                                                    <ul class="mb-3 list-inline">
-                                                        <li class="list-inline-item">
-                                                            <span>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-clock align-baseline"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z">
-                                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z">
-                                                                </svg>
-                                                            </span>
-                                                            <span>2h 46m</span>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE">
-                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE">
-                                                            </svg>
-                                                            Advance
-                                                        </li>
-                                                    </ul>
-                                                    <div class="lh-1">
-                                                        <span class="align-text-top">
-                                                            <span class="fs-6">
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </span>
-                                                        <span class="text-warning">4.5</span>
-                                                        <span class="fs-6">(9,300)</span>
-                                                    </div>
-                                                </div>
-                                                <!-- Card Footer -->
-                                                <div class="card-footer">
-                                                    <div class="row align-items-center g-0">
-                                                        <div class="col-auto">
-                                                            <img src="../assets/images/avatar/avatar-2.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                        </div>
-                                                        <div class="col ms-2">
-                                                            <span>Ted Hawkins</span>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <a href="#" class="text-reset bookmark">
-                                                                <i class="fe fe-bookmark fs-4"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-										</div>
-										<div class="col-xl-3 col-lg-4 col-md-6 col-12">
-											<!-- Card -->
-                                            <div class="card card-hover mb-3">
-                                                <a href="course-single.html"><img src="../assets/images/course/course-angular.jpg" alt="course" class="card-img-top"></a>
+                                                
+									</li>
+									<li class="card">
+										<a href="course-single.html"><img src="../assets/images/course/course-angular.jpg" alt="course" class="card-img-top"></a>
                                                 <!-- Card Body -->
                                                 <div class="card-body">
                                                     <h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">Angular - the complete guide for beginner</a></h4>
@@ -478,31 +457,13 @@
                                                         <span class="fs-6">(8,890)</span>
                                                     </div>
                                                 </div>
-                                                <!-- Card Footer -->
-                                                <div class="card-footer">
-                                                    <div class="row align-items-center g-0">
-                                                        <div class="col-auto">
-                                                            <img src="../assets/images/avatar/avatar-3.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                        </div>
-                                                        <div class="col ms-2">
-                                                            <span>Juanita Bell</span>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <a href="#" class="text-reset bookmark">
-                                                                <i class="fe fe-bookmark fs-4"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-										</div>
-										<div class="col-xl-3 col-lg-4 col-md-6 col-12 d-lg-none d-xl-block">
-											<!-- Card -->
-                                            <div class="card card-hover mb-3">
-                                                <a href="course-single.html"><img src="../assets/images/course/course-python.jpg" alt="course" class="card-img-top"></a>
+                                                
+									</li>
+									<li class="card">
+										<a href="course-single.html"><img src="../assets/images/course/course-graphql.jpg" alt="course" class="card-img-top"></a>
                                                 <!-- Card Body -->
                                                 <div class="card-body">
-                                                    <h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">The Python Course: build web application</a></h4>
+                                                    <h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">GraphQL: introduction to graphQL for beginners</a></h4>
                                                     <!-- List -->
                                                     <ul class="mb-3 list-inline">
                                                         <li class="list-inline-item">
@@ -518,15 +479,15 @@
                                                                     <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z">
                                                                 </svg>
                                                             </span>
-                                                            <span>2h 30m</span>
+                                                            <span>2h 46m</span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
                                                                 <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE">
-                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9">
+                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE">
                                                             </svg>
-                                                            Intermediate
+                                                            Advance
                                                         </li>
                                                     </ul>
                                                     <div class="lh-1">
@@ -585,48 +546,34 @@
                                                             </span>
                                                         </span>
                                                         <span class="text-warning">4.5</span>
-                                                        <span class="fs-6">(13,245)</span>
+                                                        <span class="fs-6">(9,300)</span>
                                                     </div>
                                                 </div>
-                                                <!-- Card Footer -->
-                                                <div class="card-footer">
-                                                    <div class="row align-items-center g-0">
-                                                        <div class="col-auto">
-                                                            <img src="../assets/images/avatar/avatar-4.jpg" class="rounded-circle avatar-xs" alt="avatar">
-                                                        </div>
-                                                        <div class="col ms-2">
-                                                            <span>Claire Robertson</span>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <a href="#" class="text-reset bookmark">
-                                                                <i class="fe fe-bookmark fs-4"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-										</div>
-										<!-- btn -->
-										<div class="col-md-12 mt-3 text-center">
-											<a href="#" class="btn btn-primary">Xem tất cả các khóa học</a>
-										</div>
-									</div>
-								</div>
-							</section>
+									</li>
+								</ul>
+								<i id="right" class="fe fe-chevron-right"></i>
+							</div>
+						</div>
+						<!-- btn -->
+						<div class="col-md-12 text-center">
+							<!-- btn -> Courses -->
+							<a href="#" class="btn btn-primary">Xem tất cả các khóa học</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
-
 	<!-- Instructor -->
-
 	<section class="bg-light-gradient-top pt-4 pb-8">
 		<div class="container my-lg-8">
 			<div class="row justify-content-center">
 				<!-- caption -->
 				<div class="col-lg-8 col-md-12 col-12">
 					<div class="mb-8 text-center">
-						<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-xl">Giáo viên chất lượng</span>
+						<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-xl">Đội ngũ chất lượng</span>
 						<h2 class="mb-2 display-4 fw-bold text-dark">
-							<span>100% Giáo viên trên Prep đạt</span><br>
+							<span>100% Đội ngũ trên Prep đạt</span><br>
 							<span class="text-primary">IELTS 8.0-8.5</span>
 						</h2>
 						<p class="lead mb-0">Cựu du học sinh hoặc tốt nghiệp từ ĐH danh tiếng.</p>
@@ -712,12 +659,15 @@
 							</div>
 						</div>
 						<!-- heading -->
-						<div class="col-lg-4 col-md-5 col-12 mb-6">
-							<h1 class="display-3 fw-bold text-dark">
-								<span>Tham gia </span>
-								<span class="text-primary"> PREP </span>
-								<span>ngay</span>
-							</h1>
+						<div class="feature col-lg-4 col-md-5 col-12 mb-6">
+							<span>
+								<h1 class="display-3 fw-bold text-dark">
+									<span>Về đội với </span>
+									<span class="text-primary"> PREP </span>
+									<span>ngay hôm nay</span>
+								</h1>
+								<svg preserveAspectRatio="none" viewBox="0 0 546.714 178.143"><path d="M546.214 89.072c0 48.917-122.162 88.571-272.857 88.571C122.662 177.643.5 137.988.5 89.072.5 40.155 122.662.5 273.357.5c150.695 0 272.857 39.655 272.857 88.572z"/></svg>
+							</span>
 						</div>
 						<div class="offset-lg-1 col-lg-6 col-md-7 col-12 mb-6">
 							<!-- para -->
@@ -728,231 +678,80 @@
 					<div class="row">
 						<div class="col-lg-4 col-md-4 col-12 mb-3">
 							<!-- text -->
-							<h3 class="fw-semibold mb-2">Earn money</h3>
-							<p class="fs-4 mb-0">
-								Earn money every time a student purchases your course. Get paid monthly through
-								<span class="text-dark">Paypal</span>
-								or
-								<span class="text-dark">Payoneer</span>
-								.
-							</p>
+							<h3 class="fw-semibold mb-2">Nền tảng giáo dục hàng đầu</h3>
+							<p class="fs-4 mb-0">Cung cấp cho học viên những bài học với nội dung tương tác thú vị.
+												Học viên có thể dễ dàng học mọi lúc mọi nơi.</p>
 						</div>
 						<div class="col-lg-4 col-md-4 col-12 mb-3">
 							<!-- text -->
-							<h3 class="fw-semibold mb-2">Inspire students</h3>
-							<p class="fs-4 mb-0">Help people learn new skills, advance their careers, and explore their hobbies by sharing your knowledge.</p>
+							<h3 class="fw-semibold mb-2">Lấy học viên làm trung tâm</h3>
+							<p class="fs-4 mb-0">Được thiết kế để phù hợp với lịch trình, trình độ và mục tiêu của bạn,
+											 khóa học của chúng tôi cho phép bạn học tiếng Anh theo cách của riêng bạn.</p>
 						</div>
 						<div class="col-lg-4 col-md-4 col-12 mb-3">
 							<!-- text -->
-							<h3 class="fw-semibold mb-2">Join our community</h3>
-							<p class="fs-4 mb-0">Take advantage of our active community of instructors to help you through your course creation process.</p>
+							<h3 class="fw-semibold mb-2">Cam kết hiệu quả</h3>
+							<p class="fs-4 mb-0">Bạn sẽ được trải nghiệm phương pháp học tiếng Anh theo chuẩn quốc tế,
+												từ đó đẩy nhanh thời gian chinh phục mục tiêu của bạn.</p>
 						</div>
 						<!-- btn -->
 						<div class="col-md-12 mt-3">
-							<a href="#" class="btn btn-primary">Start Teaching Today</a>
+							<a href="#" class="btn btn-primary">Đăng ký ngay</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!-- Review -->
-
-		<div class="container">
-			<hr class="my-8">
-			<div class="row justify-content-center">
-				<div class="col-lg-8 col-md-12 col-12 text-center">
-					<div class="mb-8">
-						<!-- caption -->
-						<h2 class="mb-2 display-4 fw-bold text-dark">
-							<span class="text-primary">Học viên nói gì</span>
-							<span> về PREP</span>
-						</h2>
-						<p class="lead mb-0">Chương trình học trên Prep đã giúp 620+ học viên đạt IELTS 7.0 trở lên</p>
-					</div>
+	</section>
+	<!-- Blog -->
+	<section class="py-8">
+		<div class="container mb-lg-8">
+			<div class="row mb-8 justify-content-center">
+				<div class="col-lg-8 col-md-12 col-12 text-center mb-4">
+					<!-- caption -->
+					<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-xl">Câu chuyện của học viên</span>
+					<h2 class="mb-2 display-4 fw-bold text-dark">
+						<span class="text-primary">Học viên nói gì </span>
+						<span>về PREP</span>
+					</h2>
 				</div>
-			</div>
-			<!-- row -->
-			<div class="row mb-8">
-				<!-- col -->
-				<div class="col-md-12">
-					<div class="position-relative">
-						<!-- controls -->
-						
-						<!-- Alternate for slider -->
-						<section class="py-5">
-								<div class="container my-lg-5">
-									<!-- row -->
-									<div class="row">
-										<div class="col-lg-4 col-md-6 col-12">
-											<!-- Card -->
-                                            <div class="card card-hover mb-3">
-                                                <!-- Card Body -->
-                                                <div class="card-body p-5">
-													<div class="mb-2">
-														<span class="align-text-top">
-															<span class="fs-6">
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-															</span>
-														</span>
-													</div>
-													<!-- para -->
-													<p class="lead text-dark font-italic fw-medium mb-0">
-														"I started at stage zero. With Geeks I was able to start learning online and eventually build up enough knowledge and skills to transition into a
-														well-paying career."
-													</p>
-												</div>
-                                                <!-- Card Footer -->
-                                            	<div class="card-footer px-5 py-4">
-													<div class="d-flex align-items-center">
-														<img src="../assets/images/avatar/avatar-1.jpg" alt="avatar" class="avatar avatar-md rounded-circle">
-														<div class="ms-3">
-															<h4 class="mb-0">Barry Watson</h4>
-															<p class="mb-0 small">Web Developer,UK</p>
-														</div>
-													</div>
-												</div>
-                                            </div>
-										</div>
-										<div class="col-lg-4 col-md-6 col-12">
-											<!-- Card -->
-											<div class="card card-hover mb-3">
-                                                <!-- Card Body -->
-                                                <div class="card-body p-5">
-													<div class="mb-2">
-														<span class="align-text-top">
-															<span class="fs-6">
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-															</span>
-														</span>
-													</div>
-													<!-- para -->
-													<p class="lead text-dark font-italic fw-medium mb-0">
-														"Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vulputate euismod justo in consequat. Sed tempus elementum
-														urnanisl et lacus. "
-													</p>
-												</div>
-                                                <!-- Card Footer -->
-                                                <div class="card-footer px-5 py-4">
-													<div class="d-flex align-items-center">
-														<!-- img -->
-														<img src="../assets/images/avatar/avatar-2.jpg" alt="avatar" class="avatar avatar-md rounded-circle">
-														<div class="ms-3">
-															<h4 class="mb-0">Linda Shenoy</h4>
-															<p class="mb-0 small">Developer and Bootcamp Instructor</p>
-														</div>
-													</div>
-												</div>
-                                            </div>
-										</div>
-										<div class="col-lg-4 col-md-6 col-12">
-											<!-- Card -->
-                                            <div class="card card-hover mb-3">
-                                            	<!-- card body -->
-												<div class="card-body p-5">
-													<div class="mb-2">
-														<span class="align-text-top">
-															<span class="fs-6">
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-																	<path
-																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-																</svg>
-															</span>
-														</span>
-													</div>
-													<!-- para -->
-													<p class="lead text-dark font-italic fw-medium mb-0">
-														"Sed pretium risus magna, ac efficitur nunc rutrum imperdiet. Vivamus sed ante sed mi fermentum tempus. Nullam finibus augue eget felis efficitur
-														semper."
-													</p>
-												</div>
-												<!-- card footer -->
-												<div class="card-footer px-5 py-4">
-													<div class="d-flex align-items-center">
-														<img src="../assets/images/avatar/avatar-3.jpg" alt="avatar" class="avatar avatar-md rounded-circle">
-														<div class="ms-3">
-															<h4 class="mb-0">Jean Watson</h4>
-															<p class="mb-0 small">Engineering Architect</p>
-														</div>
-													</div>
-												</div>
-                                            </div>
-										</div>
-									</div>
-								</div>
-							</section>
+				<div class="row align-items-center">
+                      <div class="col-lg-7 col-md-12 col-12">
+                        <div class="mb-8 mb-lg-0 me-lg-4">
+                          <!-- text -->
 
-						<!-- slider -->
-						<ul class="controls-testimonial controls" id="sliderTestimonialControls">
-							<li class="prev me-md-1">
-								<i class="fe fe-chevron-left"></i>
-							</li>
-							<li class="next ms-md-1">
-								<i class="fe fe-chevron-right"></i>
-							</li>
-						</ul>
-					</div>
-				</div>
+                          <p class="display-6 mb-4 ">"Theo em, học Prep tiện hơn về mặt thời gian giúp em tự chủ được việc học của em. 
+                          							 Em cũng là người thích tự học nên việc học Prep giúp em tự mình khai quật kiến thức, nó rất vui ạ. 
+                          							 Ngoài ra Prep chữa bài kĩ bài bản với giá cả hợp lí nên em khá yên tâm."</p>
+                          <!-- text -->
+
+                          <p class="mb-0 ">Nguyễn Tú Linh</p>
+                        </div>
+
+
+                      </div>
+                      <!-- col -->
+
+                      <div class="col-lg-5 col-md-12 col-12">
+                        <div>
+                          <!-- Img -->
+
+                          <img src="../assets/images/background/case-study-img-1.jpg" alt="" class="img-fluid rounded-3 w-100">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <!-- button -->
+
+                        <a href="#" class="btn btn-outline-primary mt-lg-2 mt-4">Xem thêm câu chuyện</a>
+                      </div>
+                    </div>
 			</div>
-		</div>
-	
+			</div>
 	</section>
 	<!-- call to action -->
-	<section class="py-8 bg-gray-200" style="background: url(../assets/images/background/course-graphics.svg) no-repeat; background-size: cover; background-position: top center">
+	<section class="py-8 bg-light-gradient-bottom">
 		<div class="container my-lg-8">
 			<!-- row -->
 			<div class="row justify-content-center text-center">
@@ -973,7 +772,6 @@
 			</div>
 		</div>
 	</section>
-	
 	<!-- Slider -->
 	 
 	<!-- Scroll top -->
@@ -1001,6 +799,192 @@
 		100% { opacity: 1; }
 	}
 	</style>
+	
+	<style>
+	.feature span {
+  	position: relative;
+	}
+	.feature span svg {
+	  position: absolute;
+	  top: 50%;
+	  left: 45%;
+	  transform: translate(-50%, -50%);
+	  width: 110%;
+	  height: 120%;
+	  z-index: -1;
+	}
+	.feature span svg path {
+	  fill: transparent;
+	  stroke-width: 5px;
+	  stroke: currentColor;
+	  opacity: 20%
+	}
+	.feature span svg path {
+	  stroke-dasharray: 1210.709716796875;
+	  stroke-dashoffset: -1210.709716796875; /*or the positive one*/
+	  transition: stroke-dashoffset .5s cubic-bezier(.29,.68,.74,1.02);
+	}
+	.feature span:hover svg path {
+	  stroke-dashoffset: 0;
+	}
+	.slider{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 100vh;
+		padding: 0 35px;
+		background: linear-gradient(to left top);
+	}
+	.wrapper{
+		max-width: 1100px;
+		width: 100%;
+		position: relative;
+	}
+	.wrapper i{
+		height: 50px;
+		width: 50px;
+		background: #fff;
+		text-align: center;
+		line-height: 50px;
+		border-radius: 50%;
+		curor: pointer;
+		position: absolute;
+		top: 50%;
+		font-size: 1.25rem;
+		transform: translateY(-50%);
+		box-shadow: 0 3px 6px rgba(0,0,0,0.23);
+		z-index: 9;
+	}
+	.wrapper i:first-child{
+		left: -22px;
+	}
+	.wrapper i:last-child{
+		right: -22px;
+	}
+	.wrapper .carousel{
+		display: grid;
+		grid-auto-flow: column;
+		grid-auto-columns: calc((100%/3) - 12px);
+		gap: 16px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		scrollbar-width: 0;
+	}
+	.carousel::-webkit-scrollbar{
+		display: none;
+	}
+	.carousel :where(.card, .img){
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.carousel.no-transition{
+		scroll-behavior: auto;
+	}
+	.carousel.dragging{
+		scroll-snap-type: none;
+		scroll-behavior: auto;
+	}
+	.carousel.dragging .card{
+		cursor: grab;
+		user-select: none;
+	}
+	.carousel .card{
+		scroll-snap-align: start;
+		list-style: none;
+		background: light;
+		border-radius: 8px;
+		display: flex;
+		cursor: pointer;
+		padding-bottom: 15px;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+	@media screen and (max-width: 900px){
+		.wrapper .carousel {
+			grid-auto-columns: calc((100%/2) - 9px);
+		}
+	}
+	@media screen and (max-width: 600px){
+		.wrapper .carousel {
+			grid-auto-columns: 100%;
+		}
+	}
+	</style>
+	<script type="text/javascript">
+		const wrapper = document.querySelector(".wrapper");
+		const carousel = document.querySelector(".carousel");
+		const arrowBtns = document.querySelectorAll(".wrapper i");
+		const firstCardWidth = carousel.querySelector(".card").offsetWidth;
+		const carouselChildren = [...carousel.children];
+		
+		let isDragging  = false, startX, startScrollLeft, timeoutId;
+		
+		let cardPerView = Math.round(carousel.offsetWidth / firstCardWidth);
+		
+		carouselChildren.slice(-cardPerView).reverse().forEach(card => {
+			carousel.insertAdjacentHTML("afterBegin", card.outerHTML);
+		});
+		
+		carouselChildren.slice(0, cardPerView).forEach(card => {
+			carousel.insertAdjacentHTML("beforeEnd", card.outerHTML);
+		});
+		
+		arrowBtns.forEach(btn => {
+			btn.addEventListener ("click", () => {
+				carousel.scrollLeft += btn.id === "left" ? -firstCardWidth : firstCardWidth;
+			})
+		});
+		
+		const dragStart = (e) => {
+			isDragging  = true;
+			carousel.classList.add("dragging");
+			startX = e.pageX;
+			startScrollLeft = carousel.scrollLeft;
+		}
+		
+		const dragging = (e) => {
+			if(!isDragging) return;
+			carousel.scrollLeft= startScrollLeft - (e.pageX - startX);
+		}
+		
+		const dragStop = () => {
+			isDragging  = false;
+			carousel.classList.remove("dragging");
+		}
+		
+		const autoPlay = () => {
+			if (window.innerWidth < 800) return;
+			timeoutId = setTimeout(() => carousel.scrollLeft += firstCardWidth, 2500);
+		}
+		autoPlay();
+		
+		const infinteScroll = () => {
+			if (carousel.scrollLeft === 0){
+				carousel.classList.add("no-transition");
+				carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidth);
+				carousel.classList.remove("no-transition");
+			} else if (Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth){
+				carousel.classList.add("no-transition");
+				carousel.scrollLeft = carousel.offsetWidth;
+				carousel.classList.remove("no-transition");
+			}
+			
+			clearTimeout(timeoutId);
+			if(!wrapper.matches(":hover")) autoPlay();
+		}
+		
+		carousel.addEventListener("mousedown", dragStart);
+		carousel.addEventListener("mousemove", dragging);
+		document.addEventListener("mouseup", dragStop);
+		carousel.addEventListener("scroll", infinteScroll);
+		wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
+		wrapper.addEventListener("mouseleave", autoPlay);
+	</script>
+	
+	
 	<!-- Scripts -->
 	<script src="../assets/libs/typed.js/dist/typed.umd.js"></script>
 	<!-- Libs JS -->
