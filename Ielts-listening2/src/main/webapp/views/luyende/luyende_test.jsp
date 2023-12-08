@@ -96,7 +96,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 						<c:choose>
 							<c:when test="${currentPart.audio.substring(0,4)!='http'}">
 								<audio class="audio">
-									<source src='<c:url value="/audio?fname=audioMockTest/${currentPart.audio}"></c:url>' type="audio/mpeg">
+									<source src='<c:url value="/image?fname=topicAudio/${currentPart.audio}"></c:url>' type="audio/mpeg">
 								</audio>
 							</c:when>
 							<c:otherwise>

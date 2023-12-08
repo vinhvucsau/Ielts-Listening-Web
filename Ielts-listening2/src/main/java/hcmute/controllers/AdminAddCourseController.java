@@ -132,7 +132,7 @@ public class AdminAddCourseController extends HttpServlet {
 
 				
 				mockService.insert(test);
-				;
+				
 
 				req.setAttribute("test", test);
 				req.setAttribute("messSuccess", "mock test ok");
