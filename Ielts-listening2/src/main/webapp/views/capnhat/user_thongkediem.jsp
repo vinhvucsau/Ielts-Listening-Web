@@ -214,7 +214,7 @@
             yaxis: {
                 labels: {
                     formatter: function (e) {
-                        return e + "k";
+                        return e ;
                     },
                     style: { fontSize: "13px", fontWeight: 400, cssClass: "apexcharts-xaxis-label" },
                     offsetX: -15,

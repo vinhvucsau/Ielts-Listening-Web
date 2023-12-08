@@ -63,6 +63,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			User userCurrent = userService.findUserByID(userId);
 			List<UserCourse> listUserCourse = userService.findAllUserCourseByUserId(userId);
 			req.setAttribute("userCourse", listUserCourse);
+			req.setAttribute("userId", userId);
 			req.setAttribute("currentUser", userCurrent);
 			req.setAttribute("count", count);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_khoahoccuatoi.jsp");
