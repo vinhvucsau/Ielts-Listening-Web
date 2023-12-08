@@ -1085,7 +1085,6 @@ details.comment:not([open]) .comment-heading::after {
 	<script>
 
     // hide/show form repcomment
-	console.log(${lessID});
     document.addEventListener(
     "click",
     function(event) {
@@ -1099,52 +1098,23 @@ details.comment:not([open]) .comment-heading::after {
     false
     );
 
-    
-    // const detailsElements = document.querySelectorAll('details');
-
-    // // Lặp qua từng phần tử <details>
-    // detailsElements.forEach((detailsElement) => {
-    //     // Lắng nghe sự kiện nhấn phím
-    //     detailsElement.addEventListener('keydown', (event) => {
-    //         // Kiểm tra nếu phím Space được nhấn
-    //         if (event.code === 'Space') {
-    //         // Ngăn chặn hành vi mặc định của phím Space (cuộn trang)
-    //         // event.preventDefault();
-            
-    //         // Thay đổi thuộc tính "open" của phần tử <details>
-    //         detailsElement.open = true;
-    //         console.log(detailsElement.open);
-    //         }
-    //     }, true);
-    // });
-
-    // textarea.addEventListener('keydown', function(event) {
-    //     if (event.key === ' ' && event.target === textarea) {
-    //         event.stopPropagation();
-    //         detailsElement.open = true;
-    //     }
-    //     }, true);
-
     // xu ly đánh giá sao
     const starRatingForm = document.querySelector(".star-rating") 
     const handleFormChange = (e) => {
         var res = document.getElementById("result-rating");
         res.setAttribute("value",e.target.value );
         res.innerHTML = e.target.value;
-        console.log(res.innerHTML);
         return e.target.value
     }
     starRatingForm.addEventListener("change", handleFormChange)
 
     // xu ly hien thi rating
     var rate = document.querySelectorAll(".comment-rating-quantity");
-    console.log(rate);
     $(document).ready(function() {
         $(window).on("load", function() {
             for (var i = 0; i < rate.length; i++){
                 var rateNum = rate[i].getAttribute("value");
                 var listStart = rate[i].querySelectorAll("svg");
-            
                 for (var j = 0; j < rateNum; j++){
                     listStart[j].setAttribute("fill", "currentColor");      
                 }
@@ -1159,34 +1129,17 @@ details.comment:not([open]) .comment-heading::after {
     var days = document.getElementsByClassName("rating-day");
     function loadTime(){
         for(var i = 0; i < days.length; i++ ){
-            console.log(days[i]);
+            
             var dateObj = new Date(days[i].getAttribute("value"));
             var formattedDate = dateObj.toLocaleDateString();
             var formattedTime = dateObj.toLocaleTimeString();
 
-            console.log(formattedTime);
-            console.log(formattedDate);
             days[i].querySelector(".rating-time").innerHTML = formattedTime;
             days[i].querySelector(".rating-date").innerHTML = formattedDate;
         }
     }
     
 
-   WebTransportDatagramDuplexStream
-
-    //show my old rating
-    // var stars = document.querySelectorAll(".radio-label");
-    // console.log(stars);
-    // function showOldRating(num = 4){
-    //     var len = stars.length
-    //     for(var i = 0; i < num;i++){
-    //         var j = 5- i;
-    //         console.log(j);
-    //         stars[j].style.color = "gold";
-    //     }
-    // }
-    // showOldRating();
-    
     var star = "${star}"
     var starsHtml = document.querySelectorAll(".radio-label");
     	  console.log(star);

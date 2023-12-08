@@ -50,10 +50,11 @@ public class AdminAddCourseController extends HttpServlet {
 
 		if (url.contains("listTopic")) {
 			List<MockTest> listMocktest = mockService.findAll();
-			req.setAttribute("listMocktest", listMocktest);
-
 			List<TopicTest> topicList = topicService.getAllTopicTest();
+
+			req.setAttribute("listMocktest", listMocktest);
 			req.setAttribute("topicList", topicList);
+			req.setAttribute("folder", Constants.FOLDER_TOPIC);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_taobode.jsp");
 			rd.forward(req, resp);
@@ -117,7 +118,7 @@ public class AdminAddCourseController extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/admin/listTopic");
 
 		} else if (url.contains("addMockTest")) {
-			// lấy dữ liệu từ trang jsp bằng BeanUltis:
+			
 			MockTest test = new MockTest();
 			try {
 
@@ -125,16 +126,11 @@ public class AdminAddCourseController extends HttpServlet {
 				test.setTestId("");
 				test.setTestName(req.getParameter("name"));
 				test.setDescription(req.getParameter("description"));
-				test.setCost(Integer.parseInt(req.getParameter("cost").toString()));
+				test.setCost(1);
 				TopicTest topic = topicService.getOneTopicTest(req.getParameter("id"));
 				test.setTopicTests(topic);
 
-				if (req.getPart("image").getSize() != 0) {
-					// tạo tên file mới để khỏi bị trùng
-					// String fileName = "" + System.currentTimeMillis();
-					// test.setImage(UploadUtils.processUpload("image", req, Constants.DIR +
-					// "\\topicIMG\\", fileName));
-				}
+				
 				mockService.insert(test);
 				;
 
@@ -193,8 +189,7 @@ public class AdminAddCourseController extends HttpServlet {
 				test.setTestId(req.getParameter("id"));
 				test.setTestName(req.getParameter("name"));
 				test.setDescription(req.getParameter("description"));
-				test.setCost(Integer.parseInt(req.getParameter("cost").toString()));
-
+				test.setCost(1);
 				MockTest tempTest = mockService.findById(req.getParameter("id"));
 				TopicTest topic = topicService.getOneTopicTest(tempTest.getTopicTests().getTopicId());
 				test.setTopicTests(topic);
