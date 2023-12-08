@@ -54,15 +54,14 @@ public class UserOrderController extends HttpServlet {
 		user = (User) session.getAttribute("user");
 		if (url.contains("order")) {
 			listCourseId = req.getParameter("listCourseId");
-			if (listCourseId != null)
-
-			{
+			if (listCourseId != null) {
 				String[] courseIds = listCourseId.split("&");
-
 				List<Course> courseList = new ArrayList<Course>();
 				for (String courseId : courseIds) {
-					Course course = courseService.findById(courseId);
-					courseList.add(course);
+					if (!courseId.isEmpty()) {
+						Course course = courseService.findById(courseId);
+						courseList.add(course);
+					}
 				}
 				req.setAttribute("networth", user.getNetworth());
 				req.setAttribute("courseList", courseList);
