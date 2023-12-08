@@ -1,6 +1,7 @@
 package hcmute.services;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import hcmute.DAO.IPaymentDAO;
 import hcmute.DAO.PaymentDAOImpl;
@@ -20,6 +21,12 @@ public class PaymentServiceImpl implements IPaymentService {
 	public Payment findByDatebuyAndUserId(LocalDateTime dateBuy, String userId) {
 		// TODO Auto-generated method stub
 		return payDAO.findByDatebuyAndUserId(dateBuy, userId);
+	}
+
+	@Override
+	public List<Payment> findAll() {
+		// TODO Auto-generated method stub
+		return payAbs.findAll();
 	}
 
 }
