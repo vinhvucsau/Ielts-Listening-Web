@@ -45,9 +45,8 @@ public class AdminKhoaHocController extends HttpServlet {
 		if (url.contains("/deletecourse")) {
 			Delete(req, resp);
 			resp.sendRedirect(req.getContextPath() + "/admin/khoahoc");
-			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
-			rd.forward(req, resp);
-		} else if (gia.equals("thapdencao")) {
+		}
+		else { if (gia.equals("thapdencao")) {
 			tab = 4;
 		} else if (gia.equals("caodenthap")) {
 			tab = 5;
@@ -69,6 +68,7 @@ public class AdminKhoaHocController extends HttpServlet {
 		req.setAttribute("pageNum", pageNum);
 		RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
 		rd.forward(req, resp);
+		}
 		
 	}
 	@Override

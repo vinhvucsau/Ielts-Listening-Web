@@ -79,7 +79,7 @@ Long count = (Long) request.getAttribute("countCourse");
 					<div>
 						<img class="mx-auto d-block my-3" src='<c:url value="/assets/images/bee-find.svg"/>' width="150px"/>
 						<p class="fs-4 fw-bold mb-0 text-center">Không tìm thấy kết quả phù hợp</p>
-						<p class="text-center" style="color: rgb(123,137,155); font-size: 18px; width: 680px;">Hiện tại, kho đề của Prep chưa có bộ đề nào phù hợp với yêu cầu của bạn rồi !
+						<p class="text-center" style="color: rgb(123,137,155); font-size: 18px; width: 680px;">Hiện tại, khóa học của Prep chưa có khóa học nào phù hợp với yêu cầu của bạn rồi !
 Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 					</div>
 				</div>
@@ -126,8 +126,8 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 									<div style="min-width: 350px" class="mb-3">
 										<label class="form-label" for="startdate">Ngày bắt đầu</label> 
 										<input class="form-control flatpickr enrrollmentDate" type="text"
-										placeholder="Start date" id="" name="enrrollmentDate" 
-										data-mdb-toggle="datepicker" required/>
+										placeholder="Start date" required id="" name="enrrollmentDate" 
+										data-mdb-toggle="datepicker" />
 									</div>
 								</div>
 								
@@ -929,6 +929,14 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 		        localStorage.setItem('activeButtonId', buttonId);
 		    }
 		});
+		</script>
+		<script>
+		    document.addEventListener('DOMContentLoaded', function () {
+		        flatpickr('.flatpickr', {
+		            defaultDate: new Date(),
+		            dateFormat: 'Y-m-d',
+		        });
+		    });
 		</script>
 	
 </body>
