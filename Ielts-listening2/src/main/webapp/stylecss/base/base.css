@@ -56,6 +56,10 @@ a {
   font-weight: 500;
 }
 
+.fit-content{
+  width: fit-content;
+}
+
 /*COLOR*/
 .color-blue--primary {
   color: #0071f9 !important;
@@ -168,6 +172,7 @@ a {
 .rounder-16 {
   border-radius: 16px;
 }
+
 
 /* Css theme */
 .btn-primary {
