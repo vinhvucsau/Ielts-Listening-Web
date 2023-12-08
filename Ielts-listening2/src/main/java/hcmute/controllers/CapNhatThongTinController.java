@@ -129,11 +129,11 @@ public class CapNhatThongTinController extends HttpServlet {
 			String id = req.getParameter("userId");
 
 			// Set cứng ID để test chức năng
+			
 			User user = userService.findUserByID(id);
-
 			String name = req.getParameter("inputName").trim();
 			String phoneNumber = req.getParameter("inputPhone").trim();
-			String email = req.getParameter("inputEmail").trim();
+			
 			String address = req.getParameter("inputAddress").trim();
 			String dateOfBirth = req.getParameter("datePicker").trim();
 			String networth = req.getParameter("inputNetworth").trim();
@@ -168,11 +168,6 @@ public class CapNhatThongTinController extends HttpServlet {
 					currentNetworth = Integer.parseInt(networth);
 				}
 			}
-
-			if (userService.findDuplicateEmail(email, id) == false) {
-				req.setAttribute("messError", "Email đã được sử dụng!");
-			}
-
 			if (phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+")) {
 				if (userService.findDuplicatePhone(phoneNumber, id) == false) {
 					req.setAttribute("messError", "Số điện thoại đã được sử dụng!");
@@ -183,7 +178,6 @@ public class CapNhatThongTinController extends HttpServlet {
 
 			if (req.getAttribute("messError") == null) {
 				user.setName(name);
-				user.setEmail(email);
 				user.setPhoneNumber(phoneNumber);
 				user.setAddress(address);
 				user.setDateOfBirth(dateOfBirth);

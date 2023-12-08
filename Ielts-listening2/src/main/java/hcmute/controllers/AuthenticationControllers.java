@@ -3,6 +3,7 @@ package hcmute.controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.module.ModuleDescriptor.Requires;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -91,10 +92,8 @@ public class AuthenticationControllers extends HttpServlet {
 			postForgotPassword(req, resp);
 		} else if (url.contains("verifycode")) {
 			postVerifyCode(req, resp);
-		} 
+		}
 	}
-
-	
 
 	private void SignUp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -103,10 +102,11 @@ public class AuthenticationControllers extends HttpServlet {
 			Email sm = new Email();
 
 			// get the 6-digit code
-			String code = sm.getRandom();	
+			String code = sm.getRandom();
 			String email = req.getParameter("email");
 			if (email.contains(" ")) {
-				req.setAttribute("message", "Xin lỗi, Email chỉ được phép sử dụng các chữ cái (a-z), số (0-9), và dấu chấm (.).");
+				req.setAttribute("message",
+						"Xin lỗi, Email chỉ được phép sử dụng các chữ cái (a-z), số (0-9), và dấu chấm (.).");
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
 				rd.forward(req, resp);
 				return;
@@ -124,7 +124,8 @@ public class AuthenticationControllers extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/signUp.jsp");
 				rd.forward(req, resp);
 				return;
-			} else  passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord"));
+			} else
+				passWord = PasswordEncryptor.encryptPassword(req.getParameter("passWord"));
 			/*
 			 * if (accountService.checkExistEmail(email)) { req.setAttribute("message",
 			 * "Email đã tồn tại trong hệ thống!"); RequestDispatcher rd =
@@ -161,9 +162,7 @@ public class AuthenticationControllers extends HttpServlet {
 			Cookie cookie4 = new Cookie("password", passWord);
 			cookie4.setMaxAge(minutes * 60);
 			resp.addCookie(cookie4);
-			
-			
-			
+
 			long createCodeAt = 0;
 			Cookie[] cookies = req.getCookies();
 			if (cookies != null) {
@@ -180,14 +179,13 @@ public class AuthenticationControllers extends HttpServlet {
 				resp.addCookie(cookie5);
 
 			}
-			
-			String turn = "5" ;
+
+			String turn = "5";
 			Cookie cookieTurn = new Cookie("turn", turn);
 			cookieTurn.setMaxAge(minutes * 60);
 			resp.addCookie(cookieTurn);
-			
+
 			resp.sendRedirect(req.getContextPath() + "/authentication-verifycode");
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -225,10 +223,15 @@ public class AuthenticationControllers extends HttpServlet {
 				rd.forward(req, resp);
 			} else {
 				List<Cart> carts = cartService.findByUserId(user.getUserId());
+				List<Cart> finalCarts = new ArrayList<Cart>();
+				for (Cart cart2 : carts) {
+					if (cart2.isBuy() == false)
+						finalCarts.add(cart2);
+				}
 				HttpSession session = req.getSession(true);
 				session.setAttribute("user", user);
 				session.setAttribute("role", acc.getRole());
-				session.setAttribute("cart", carts);
+				session.setAttribute("cart", finalCarts);
 				resp.sendRedirect(req.getContextPath() + "/waiting");
 				return;
 			}
@@ -246,7 +249,6 @@ public class AuthenticationControllers extends HttpServlet {
 			return;
 		}
 
-		
 		req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
 
 	}
@@ -271,7 +273,8 @@ public class AuthenticationControllers extends HttpServlet {
 		boolean test = sm.sendPasswordEmail(user);
 
 		if (test) {
-			req.setAttribute("message", "Mật khẩu đã được gửi về email. \nVui lòng kiểm tra email để nhận mật khẩu nhé!");
+			req.setAttribute("message",
+					"Mật khẩu đã được gửi về email. \nVui lòng kiểm tra email để nhận mật khẩu nhé!");
 			req.getRequestDispatcher("views/authentication/login.jsp").forward(req, resp);
 		} else {
 			req.setAttribute("message", "Lỗi gửi mail!");
@@ -289,12 +292,12 @@ public class AuthenticationControllers extends HttpServlet {
 		String otp6 = req.getParameter("otp6");
 
 		String otp = PasswordEncryptor.encryptPassword(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
-		
+
 		String username = "";
 		String email = "";
 		String code = "";
 		String password = "";
-		int turn =0;
+		int turn = 0;
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -315,8 +318,7 @@ public class AuthenticationControllers extends HttpServlet {
 				}
 			}
 		}
-		if (turn <= 0)
-		{
+		if (turn <= 0) {
 			Cookie cookie1 = new Cookie("username", "");
 			cookie1.setMaxAge(0);
 			resp.addCookie(cookie1);
@@ -340,7 +342,6 @@ public class AuthenticationControllers extends HttpServlet {
 			rd.forward(req, resp);
 			return;
 		}
-		
 
 		if (otp.equals(code)) {
 			Cookie cookie1 = new Cookie("username", "");
@@ -379,17 +380,18 @@ public class AuthenticationControllers extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/authentication-login");
 			req.setAttribute("message", "Đã thêm thành công");
 		} else {
-			
-			turn = turn -1 ;
-			Cookie cookieTurn = new Cookie("turn",String.valueOf(turn));
-			cookieTurn.setMaxAge(15*60); // 
+
+			turn = turn - 1;
+			Cookie cookieTurn = new Cookie("turn", String.valueOf(turn));
+			cookieTurn.setMaxAge(15 * 60); //
 			resp.addCookie(cookieTurn);
-			
+
 			req.setAttribute("message", "Mã OTP chưa chính xác. Vui lòng nhập lại");
 			req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
 		}
 	}
-	private void getResent(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+
+	private void getResent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Email sm = new Email();
 
@@ -414,14 +416,14 @@ public class AuthenticationControllers extends HttpServlet {
 			req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
 			return;
 		}
-		
 
 		Cookie cookie3 = new Cookie("code", PasswordEncryptor.encryptPassword(code));
-		int age = (int)((new Date().getTime() - time) / 1000);
-		cookie3.setMaxAge(15*60 - age);
+		int age = (int) ((new Date().getTime() - time) / 1000);
+		cookie3.setMaxAge(15 * 60 - age);
 		resp.addCookie(cookie3);
 		req.setAttribute("message", "Gửi otp mới thành công. Hãy kiểm tra lại!");
 		req.getRequestDispatcher("views/authentication/verifycode.jsp").forward(req, resp);
 	}
+
 	private static final long serialVersionUID = 1L;
 }

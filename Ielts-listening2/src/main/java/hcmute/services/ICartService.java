@@ -10,4 +10,6 @@ public interface ICartService {
 	void insert(Cart cart);
 
 	void delete(Object cartId);
+
+	void update(Cart cart);
 }

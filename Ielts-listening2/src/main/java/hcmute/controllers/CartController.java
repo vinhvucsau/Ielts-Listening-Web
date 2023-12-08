@@ -40,44 +40,48 @@ public class CartController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		ICartService cartService = new CartServiceImpl();
 		ICourseService courseService = new CourseServiceImpl();
-		IUserService userService = new UserServiceImpl();
 		IUserCourseService userCourseService = new UserCourseServiceImpl();
 		if (url.contains("mycart")) {
 			int countAddToCartByUser = 0;
 			HttpSession session1 = req.getSession();
 			User user1 = (User) session1.getAttribute("user");
-			List<Cart> cartsUpdated = cartService.findByUserId(user1.getUserId());
-			countAddToCartByUser = cartsUpdated.size();
+			List<Cart> finalCarts = new ArrayList<Cart>();
 
-			System.out.print("Size cua cart la :" + countAddToCartByUser);
 			HttpSession session = req.getSession();
 			User user = (User) session.getAttribute("user");
 			String userId = req.getParameter("userId") == null ? "" : req.getParameter("userId");
-			System.out.print("UserId la: " + userId);
+
 			int networth = user.getNetworth() == null ? 0 : user.getNetworth();
-			System.out.print("networth la: " + networth);
+
 			List<Cart> carts = cartService.findByUserId(user.getUserId());
-			List<Course> courseList = new ArrayList<Course>();
-			ArrayList<CombineCart> newCarts = new ArrayList<CombineCart>();
-			for (Cart cart : carts) {
-				Course course = courseService.findById(cart.getCourse().getCourseId());
-				CombineCart newCart1 = new CombineCart();
-				newCart1.setCartId(cart.getCartId());
-				newCart1.setCourse(course);
-				List<UserCourse> listUc = userCourseService.findByUserIdAndCourseId(userId, course.getCourseId());
-				if (listUc.size() == 0)
-					newCart1.setIsBuy(false);
-				else
-					newCart1.setIsBuy(true);
-				newCarts.add(newCart1);
-			}
-//			PrintWriter out = resp.getWriter();
+//			ArrayList<CombineCart> newCarts = new ArrayList<CombineCart>();
+
+//			for (Cart cart : carts) {
+//				Course course = courseService.findById(cart.getCourse().getCourseId());
+//				CombineCart newCart1 = new CombineCart();
+//				newCart1.setCartId(cart.getCartId());
+//				newCart1.setCourse(course);
+//				List<UserCourse> listUc = userCourseService.findByUserIdAndCourseId(userId, course.getCourseId());
+//				if (listUc.size() == 0) {
+//					cart.setBuy(false);
+//					newCart1.setIsBuy(false);
+//					newCarts.add(newCart1);
 //
-//			for (CombineCart cart : newCarts) {
-//
-//				out.println(cart.getCartId() + " " + cart.getIsBuy());
+//				} else {
+//					cart.setBuy(true);
+//					newCart1.setIsBuy(true);
+//				}
 //			}
-			req.setAttribute("course", newCarts);
+
+			for (Cart cart2 : carts) {
+				cartService.update(cart2);
+				if (cart2.isBuy() == false)
+					finalCarts.add(cart2);
+			}
+			countAddToCartByUser = finalCarts.size();
+
+			session.setAttribute("cart", finalCarts);
+			req.setAttribute("course", finalCarts);
 			req.setAttribute("countAddToCartByUser", countAddToCartByUser);
 			req.setAttribute("user", user1);
 			req.setAttribute("networth", networth);
@@ -90,12 +94,12 @@ public class CartController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		ICourseService courseService = new CourseServiceImpl();
 		ICartService cartService = new CartServiceImpl();
+		IUserCourseService userCourseService = new UserCourseServiceImpl();
 		HttpSession session = req.getSession();
 		String prevUrl = req.getHeader("referer");
 		String[] prev = prevUrl.split("/");
 		String lastPrevUrl = prev[prev.length - 1];
 		if (url.contains("addToCart")) {
-
 			User user = (User) session.getAttribute("user");
 			if (user == null) {
 				req.setAttribute("err", "Not Login");
@@ -103,14 +107,18 @@ public class CartController extends HttpServlet {
 			} else {
 				String courseId = req.getParameter("courseId");
 				List<Cart> carts = (List<Cart>) session.getAttribute("cart");
-				int isInCart = 0;
+				int flag = 0;
 				for (Cart cart : carts) {
 					if (cart.getCourse().getCourseId().equals(courseId)) {
-						isInCart = 1;
+						flag = 1;
 						break;
 					}
 				}
-				if (isInCart == 1) {
+				List<UserCourse> usercourseList = userCourseService.findByUserIdAndCourseId(user.getUserId(), courseId);
+				if (usercourseList.size() != 0)
+					flag = 1;
+				if (flag == 1) {
+					System.out.println("Da mua");
 					req.setAttribute("err", "Existed");
 					resp.sendRedirect(req.getContextPath() + "/user/" + lastPrevUrl);
 				} else {
@@ -122,7 +130,13 @@ public class CartController extends HttpServlet {
 					cart.setCartId("ID");
 					cartService.insert(cart);
 					List<Cart> cartsUpdated = cartService.findByUserId(user.getUserId());
-					session.setAttribute("cart", cartsUpdated);
+					List<Cart> finalCarts = new ArrayList<Cart>();
+					for (Cart cart2 : cartsUpdated) {
+						if (cart2.isBuy() == false)
+							finalCarts.add(cart2);
+					}
+
+					session.setAttribute("cart", finalCarts);
 					resp.sendRedirect(req.getContextPath() + "/user/" + lastPrevUrl);
 				}
 
@@ -131,9 +145,6 @@ public class CartController extends HttpServlet {
 		} else if (url.contains("deleteToCart")) {
 			String cartId = req.getParameter("cartId");
 			cartService.delete(cartId);
-			User user = (User) session.getAttribute("user");
-			List<Cart> cartsUpdated = cartService.findByUserId(user.getUserId());
-			session.setAttribute("cart", cartsUpdated);
 			resp.sendRedirect(req.getContextPath() + "/user/" + lastPrevUrl);
 		}
 	}

@@ -19,12 +19,16 @@ import javax.servlet.http.HttpSession;
 
 import JPAConfig.JPAConfig;
 import hcmute.DAO.IPayDetailDAO;
+import hcmute.entity.Cart;
+import hcmute.entity.CombineCart;
 import hcmute.entity.Course;
 import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
+import hcmute.services.CartServiceImpl;
 import hcmute.services.CourseServiceImpl;
+import hcmute.services.ICartService;
 import hcmute.services.ICourseService;
 import hcmute.services.IPayDetailService;
 import hcmute.services.IPaymentService;
@@ -75,6 +79,7 @@ public class UserOrderController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		IUserService userService = new UserServiceImpl();
+		ICartService cartService = new CartServiceImpl();
 		if (url.contains("updateNetworth")) {
 			String inputNetworth = req.getParameter("inputNetworth");
 			int networth = Integer.parseInt(inputNetworth) + user.getNetworth();
@@ -115,10 +120,27 @@ public class UserOrderController extends HttpServlet {
 				payDetail.setUserCourse(userCourse);
 				payDetailService.insert(payDetail);
 			}
+			List<Cart> carts = cartService.findByUserId(user.getUserId());
+			List<Cart> finalCarts = new ArrayList<Cart>();
+			for (Cart cart : carts) {
+				Course course = courseService.findById(cart.getCourse().getCourseId());
+				System.out.println("khoa hoc" + user.getUserId() + "  " + course.getCourseId());
+				List<UserCourse> listUc = userCourseService.findByUserIdAndCourseId(user.getUserId(),
+						course.getCourseId());
+				if (listUc.size() == 0) {
+					cart.setBuy(false);
+					finalCarts.add(cart);
+				} else {
+					cart.setBuy(true);
+				}
+				cartService.update(cart);
+			}
+
 			user.setNetworth(user.getNetworth() - totalCost);
 			userService.update(user);
 			HttpSession session = req.getSession();
 			session.setAttribute("user", user);
+			session.setAttribute("cart", finalCarts);
 			resp.sendRedirect(req.getContextPath() + "/user/course");
 		}
 	}

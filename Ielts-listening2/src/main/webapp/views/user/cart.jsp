@@ -122,8 +122,8 @@ int networth = (int) request.getAttribute("networth");
 									<c:set var="totalCost" value="0" />
 									<c:forEach var="i" items="${course }">
 										<input class="d-none courseItem" name="courseId"
-											value="${i.isBuy == true ? '': i.course.courseId}">
-										<tr style="${i.isBuy == true ? "background-color:#d7dce3": "background-color:#32b879" }">
+											value="${i.course.courseId}">
+										<tr>
 											<td>
 												<div class="d-flex">
 													<div>
@@ -237,8 +237,7 @@ int networth = (int) request.getAttribute("networth");
 
 
 										</tr>
-										<c:set var="totalCost"
-											value="${ i.isBuy ? totalCost :totalCost + i.course.cost}" />
+										<c:set var="totalCost" value="${totalCost + i.course.cost}" />
 									</c:forEach>
 									<tr>
 
