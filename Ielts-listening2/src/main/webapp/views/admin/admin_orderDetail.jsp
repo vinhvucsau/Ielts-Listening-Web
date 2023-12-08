@@ -45,7 +45,12 @@
 									</div>
 								</c:forEach>
 							</div>
+							<c:set var="totalCount" value="0" />
+							<!-- Tăng giá trị của biến bên ngoài mỗi lần lặp -->
+
 							<c:forEach var="course" items="${list_oddetail}">
+								<c:set var="totalCount"
+									value="${totalCount + course.payment.cost}" />
 								<div class="row justify-content-between mb-5 mt-2">
 									<!-- col -->
 									<div class="col-lg-8 col-12">
@@ -71,17 +76,16 @@
 												pattern="###,### VNĐ" />
 										</div>
 									</div>
-
 								</div>
 							</c:forEach>
 							<hr class="my-3" />
 							<ul class="list-unstyled mb-0">
 
 								<li class="d-flex justify-content-between mb-2 mt-3"><span>Giảm
-										giá</span> <span class="text-dark fw-medium">$0.00</span></li>
+										giá</span> <span class="text-dark fw-medium">0 VNĐ</span></li>
 								<li class="d-flex justify-content-between mb-2"><span>Thành
 										tiền</span> <span class="text-success fw-medium"> <fmt:formatNumber
-											value="${course.payment.cost}" pattern="###,### VNĐ" />
+											value="${totalCount}" pattern="###,### VNĐ" />
 								</span></li>
 
 								<li class="d-flex justify-content-between mb-2"><span>Phương
@@ -91,19 +95,23 @@
 							<hr class="my-3" />
 							<div>
 
-								<form action="confirmCheckout" method=post>
-									<button style="float: right;" class="btn btn-primary">Mua
-										khóa học mới</button>
+								<form id="buyCourseForm" action="confirmCheckout" method="post">
+									<button type="button" style="float: right;"
+										class="btn btn-primary" onclick="redirectToCoursePage()">
+										Mua khóa học mới</button>
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
-
-
 	</section>
+	
+	<script>
+		function redirectToCoursePage() {
+			window.location.href = '/Ielts-listening2/user/course';
+		}
+	</script>
 </body>
 </html>

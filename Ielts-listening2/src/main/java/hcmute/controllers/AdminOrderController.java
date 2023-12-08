@@ -42,8 +42,6 @@ public class AdminOrderController extends HttpServlet {
 			req.setAttribute("list_oddetail", lisl);
 			req.setAttribute("list", list_orderdetail);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_orderDetail.jsp");
-			
-			
 			rd.forward(req, resp);
 		}
 	}
