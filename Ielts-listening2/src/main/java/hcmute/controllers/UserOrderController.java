@@ -96,6 +96,7 @@ public class UserOrderController extends HttpServlet {
 				Course course = courseService.findById(courseId);
 				courseList.add(course);
 			}
+
 			LocalDateTime currentDateTime = LocalDateTime.now();
 			Payment payment = new Payment();
 			payment.setPaymentId("ID");
@@ -124,7 +125,6 @@ public class UserOrderController extends HttpServlet {
 			List<Cart> finalCarts = new ArrayList<Cart>();
 			for (Cart cart : carts) {
 				Course course = courseService.findById(cart.getCourse().getCourseId());
-				System.out.println("khoa hoc" + user.getUserId() + "  " + course.getCourseId());
 				List<UserCourse> listUc = userCourseService.findByUserIdAndCourseId(user.getUserId(),
 						course.getCourseId());
 				if (listUc.size() == 0) {

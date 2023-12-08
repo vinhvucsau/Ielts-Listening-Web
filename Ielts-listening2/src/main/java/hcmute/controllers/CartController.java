@@ -54,25 +54,9 @@ public class CartController extends HttpServlet {
 			int networth = user.getNetworth() == null ? 0 : user.getNetworth();
 
 			List<Cart> carts = cartService.findByUserId(user.getUserId());
-//			ArrayList<CombineCart> newCarts = new ArrayList<CombineCart>();
-
-//			for (Cart cart : carts) {
-//				Course course = courseService.findById(cart.getCourse().getCourseId());
-//				CombineCart newCart1 = new CombineCart();
-//				newCart1.setCartId(cart.getCartId());
-//				newCart1.setCourse(course);
-//				List<UserCourse> listUc = userCourseService.findByUserIdAndCourseId(userId, course.getCourseId());
-//				if (listUc.size() == 0) {
-//					cart.setBuy(false);
-//					newCart1.setIsBuy(false);
-//					newCarts.add(newCart1);
-//
-//				} else {
-//					cart.setBuy(true);
-//					newCart1.setIsBuy(true);
-//				}
-//			}
-
+//			PrintWriter out = resp.getWriter();
+//			for (Cart cart : carts)
+//				out.println(cart.getCartId());
 			for (Cart cart2 : carts) {
 				cartService.update(cart2);
 				if (cart2.isBuy() == false)
@@ -145,6 +129,16 @@ public class CartController extends HttpServlet {
 		} else if (url.contains("deleteToCart")) {
 			String cartId = req.getParameter("cartId");
 			cartService.delete(cartId);
+			User user = (User) session.getAttribute("user");
+			List<Cart> cartsUpdated = cartService.findByUserId(user.getUserId());
+			List<Cart> finalCarts = new ArrayList<Cart>();
+			for (Cart cart2 : cartsUpdated) {
+				if (cart2.isBuy() == false)
+					finalCarts.add(cart2);
+			}
+
+			session.setAttribute("cart", finalCarts);
+			
 			resp.sendRedirect(req.getContextPath() + "/user/" + lastPrevUrl);
 		}
 	}

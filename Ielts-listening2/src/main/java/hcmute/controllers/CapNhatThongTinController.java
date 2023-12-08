@@ -184,7 +184,7 @@ public class CapNhatThongTinController extends HttpServlet {
 				user.setNetworth(currentNetworth);
 				userService.update(user);
 			}
-			HttpSession session = req.getSession();
+			HttpSession session = req.getSession(false);
 			session.setAttribute("user", user);
 			req.setAttribute("currentUser", user);
 			req.setAttribute("message", "Cập nhật thành công!");
