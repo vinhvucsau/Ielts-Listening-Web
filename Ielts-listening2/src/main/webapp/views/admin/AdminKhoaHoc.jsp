@@ -231,7 +231,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 			</form>
 		</div>
 	<div id="shadow"
-		class="position-absolute top-0 start-0 bottom-0 end-0 bg-dark"
+		class="position-fixed top-0 start-0 bottom-0 end-0 bg-dark"
 		style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow(),hideShadow1()"></div>
 		<div>
 
