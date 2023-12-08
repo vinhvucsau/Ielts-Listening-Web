@@ -42,6 +42,11 @@
 									<div class="d-flex align-items-center">
 										<h4 class="mb-0">Order tracking number</h4>
 										<a href="#" class="ms-2 fw-semibold" style="color: white;">${idpayment.paymentId}</a>
+
+									</div>
+									<div class="mb-0 d-flex align-items-center ">
+										<a href="#" class=" fw-semibold" style="color: white;">Date
+											time: ${idpayment.dateBuy} </a>
 									</div>
 								</c:forEach>
 							</div>
@@ -94,7 +99,6 @@
 							</ul>
 							<hr class="my-3" />
 							<div>
-
 								<form id="buyCourseForm" action="confirmCheckout" method="post">
 									<button type="button" style="float: right;"
 										class="btn btn-primary" onclick="redirectToCoursePage()">
@@ -107,7 +111,7 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<script>
 		function redirectToCoursePage() {
 			window.location.href = '/Ielts-listening2/user/course';
