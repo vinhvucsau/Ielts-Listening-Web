@@ -186,7 +186,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 								</div>
 								<div class="mb-3">
 								   <label class="form-label">Mô tả</label>
-								   <textarea id="description" class="form-control description" name="description" aria-label="With textarea"></textarea>
+								   <textarea id="description" class="form-control description" name="Description" aria-label="With textarea"></textarea>
 								 </div>
 								<div class="d-flex align-items-center justify-content-between">
 									<div style="min-width: 350px" class="mb-3">
@@ -206,7 +206,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 								<div class="mb-3">
 									<label class="form-label">Ảnh bìa</label> 
 									<input type="file" class="form-control image"
-											name="Image" id=""
+											name="Image" id="image"
 											accept="image/jpeg, image/png" require>
 								</div>
 

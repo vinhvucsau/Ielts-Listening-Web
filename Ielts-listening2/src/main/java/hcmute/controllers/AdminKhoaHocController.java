@@ -110,25 +110,30 @@ public class AdminKhoaHocController extends HttpServlet {
 		else if (url.contains("updateCourse"))
 			{
 			Course model = new Course();
+			Course course = courseService.findById(req.getParameter("CourseId"));
 			try {
 				//BeanUtils.populate(model, req.getParameterMap());
 				model.setCourseId(req.getParameter("CourseId"));
 				model.setCourseName(req.getParameter("CourseName"));
-				System.out.println(req.getParameter("CourseName"));
-				System.out.println(req.getParameter("CourseId"));
-				System.out.println(req.getParameter("courseId"));
 				model.setDescription(req.getParameter("Description"));
 				model.setCost(Integer.parseInt(req.getParameter("Cost")));
 				if (req.getPart("Image").getSize() != 0) {
-					// tạo tên file mới để khỏi bị trùng
+						// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
 					model.setImage(UploadUtils.processUpload("Image", req, Constants.DIR + "\\courseIMG\\", fileName));
 				}
+				else {
+					model.setImage(course.getImage());
+				}
 				if (req.getPart("Trailer").getSize() != 0) {
-					// tạo tên file mới để khỏi bị trùng
+						// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
 					model.setTrailer(UploadUtils.processUpload("Trailer", req, Constants.DIR + "\\courseTrailer\\", fileName));
 				}
+				else {
+					model.setTrailer(course.getTrailer());
+				}
+				
 				Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("EnrrollmentDate")); 
 				model.setEnrrolmentDate(date1);
 				courseService.update(model);
