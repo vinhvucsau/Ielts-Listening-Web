@@ -1,5 +1,7 @@
 package hcmute.services;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import hcmute.DAO.EnrollTestDao;
@@ -84,5 +86,8 @@ public class EnrollTestService{
 	
 	public List<EnrrolTest> findByUserIdAndMockTestId(String userId, String mockTestId) {
 		return enrollTestDao.findByUserIdAndMockTestId(userId, mockTestId);
+	}
+	public EnrrolTest findByUserIdAndMockTestIdAndDate(String userId, String mockTestId, LocalDateTime date) {
+		return enrollTestDao.findByUserIdAndMockTestIdAndDate(userId, mockTestId, date);
 	}
 }
