@@ -43,5 +43,10 @@ public class LessonServiceImpl implements ILessonService {
 	public void update(Lesson lesson) {
 		lessonAbstract.update(lesson);
 	}
+
+	@Override
+	public Lesson getNewLesson() {
+		return lessonDAO.getNewLesson();
+	}
 	
 }

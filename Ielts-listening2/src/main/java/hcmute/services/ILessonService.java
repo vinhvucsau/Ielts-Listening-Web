@@ -12,4 +12,6 @@ public interface ILessonService {
 	void insert(Lesson lesson);
 	void update(Lesson lesson);
 	
+	Lesson getNewLesson();
+	
 }

@@ -104,19 +104,19 @@
 							<div class="card-body text-center">
 								<!-- Card -->
 								<div class="accordion" id="courseAccordion">
-									<!-- Test UI -->
+									<%-- <!-- Test UI -->
 									<div class="row">
 										<button class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2">
 											<span>01</span>
 											<a href="updateLesson">
-												<%-- <input type="hidden" name="lessonId" value="${i.lessonId}"> --%>
+												<input type="hidden" name="lessonId" value="${i.lessonId}">
 												<span class="accordion-title ms-4">Introduction to IELTS Listening 01</span>
 											</a>
 											<a href="#" class="icon-link icon-delete"> 
 												<i class="fe fe-trash color-dark"></i>
 											</a>
 										</button>
-									</div>
+									</div> --%>
 									<!-- Updated UI -->
 									<c:forEach var="i" items="${listLesson}">
 										<!-- Lesson list -->
@@ -124,12 +124,16 @@
 											<button value="${i.lessonId }" class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2" >
 												<span>${i.lessonId }</span>
 												<%-- <input type="hidden" name="lessonId" value="${i.lessonId}"> --%>
-												<a href="updateLesson">
+												<a href="editLesson?lessonId=${i.lessonId }">
 													<span class="accordion-title ms-4">${i.lessonName }</span>
 												</a>
-												<a href="<c:url value='/admin/deleteLesson?Id=${i.lessonId}'/>" class="icon-link icon-delete"> 
+												<form action="deleteLesson" method="post" enctype="multipart/form-data">
+													<input type="hidden" name="lessonId" value="${i.lessonId}">
+													<button class="icon-link icon-delete"><i class="fe fe-trash color-dark"></i> </button>
+												</form>
+												<%-- <a href="<c:url value='/admin/deleteLesson?id=${i.lessonId}'/>" class="icon-link icon-delete"> 
 													<i class="fe fe-trash color-dark"></i>
-												</a>
+												</a> --%>
 											</button>
 										</div>
 									</c:forEach>
@@ -173,7 +177,7 @@
 		<!-- Model -->
 		<div class="model" id="model"
 			style="min-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
-			<form action="" method="" enctype="multipart/form-data">
+			<form action="addLesson" method="post" enctype="multipart/form-data">
 				<div id="test-l-1" class="bs-stepper-pane"
 					aria-labelledby="courseFormtrigger1">
 					<!-- Card -->
@@ -186,16 +190,16 @@
 							<div class="card-body">
 								<div class="mb-3">
 									<label for="courseTitle" class="form-label">Tên bài học</label>
-										<input id="lessonName" name="lessonName" value="${i.lessonName }"
-										class="model__name form-control" type="text" placeholder="Tên bài học"
+										<input id="lessonName" name="lessonName" value=""
+										class="form-control" type="text" placeholder="Tên bài học"
 										required> <small>Write a 60 character course
 										title.</small>
 								</div>
 
 								<div class="mb-3">
 									<label class="form-label">Thêm video bài giảng</label> 
-									<input type="file" class="model__video form-control" value=""
-											name="trailer" id=""
+									<input type="file" class="form-control" value=""
+											name="video" id=""
 											accept="video/mp4" require>
 									<div id="audio"></div>
 								</div>
