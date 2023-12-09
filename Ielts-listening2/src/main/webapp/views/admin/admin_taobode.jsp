@@ -48,7 +48,7 @@
         <div class="col-lg-8 col-md-12 col-12 pt-lg-8 pb-8 pe-3">
         	<div class="border-bottom pb-3 mb-3 d-md-flex align-items-center justify-content-between">
             	<div class="mb-3 mb-md-0">
-                	<h1 class="mb-1 h2 fw-bold">Courses Category</h1>
+                	<h1 class="mb-1 h2 fw-bold">Bộ đề</h1>
                     <!-- Breadcrumb -->
                     <nav aria-label="breadcrumb">
                     	<ol class="breadcrumb">
@@ -58,7 +58,7 @@
                            	<li class="breadcrumb-item">
                             	<a href="#">Khóa học</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Đề thi</li>
+                            <li class="breadcrumb-item active" aria-current="page">Bộ đề</li>
                     	</ol>
                 	</nav>
                 </div>
@@ -460,19 +460,11 @@
 				child = document.getElementsByClassName(t.parentNode.getAttribute("data-target"));
 				for(var i = 0; i < child.length; i++){
 					child[i].classList.toggle("d-table-row");
-
-					// if (element[i].classList.contains('fe-chevron-down')){
-					// 	element[i].classList.replace('fe-chevron-down', 'fe-chevron-up');
-					// } else if (element[i].classList.contains('fe-chevron-up')){
-					// 	element[i].classList.replace('fe-chevron-up', 'fe-chevron-down');
-					// }
 				}
 			}
 		},
 		false
 		);
-		
-
 	</script>
 
 	<script>

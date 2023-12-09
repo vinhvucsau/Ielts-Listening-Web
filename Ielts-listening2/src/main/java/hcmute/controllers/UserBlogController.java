@@ -26,6 +26,7 @@ import hcmute.utils.UploadUtils;
 
 @MultipartConfig
 @WebServlet(urlPatterns = { "/user/blogs", "/user/delete-blog", "/user/add-blog", "/user/edit-blog" })
+@WebServlet(urlPatterns = {"/user/blogs-page", "/user/blogs", "/user/update-blog-status", "/user/edit-blog"})
 public class UserBlogController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -51,17 +52,23 @@ public class UserBlogController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 			rd.forward(req, resp);
 		}
-
-		if (url.contains("blogs")) {
+		if (url.contains("blogs-page")) {
+			req.setAttribute("folder", Constants.FOLDER_AVATAR);
+			req.setAttribute("listBlog", listBlog);
+			req.setAttribute("listUser", listUser);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/blogs_page.jsp");
+			rd.forward(req, resp);
+			
+		} else if (url.contains("blogs")) {
 			req.setAttribute("user", user);
 			req.setAttribute("folder", Constants.FOLDER_AVATAR);
 			req.setAttribute("listBlog", listBlog);
 			req.setAttribute("listUser", listUser);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/blog.jsp");
 			rd.forward(req, resp);
-		} else if (url.contains("delete-blog")) {
+		} else if (url.contains("update-blog-status")) {
 			Blog b = blogService.findOneById(req.getParameter("id"));
-			b.setStatus(Integer.parseInt(req.getParameter("status"))); // trash
+			b.setStatus(Integer.parseInt(req.getParameter("status")));
 			try {
 				blogService.update(b);
 				resp.sendRedirect(req.getContextPath() + "/user/blogs");
