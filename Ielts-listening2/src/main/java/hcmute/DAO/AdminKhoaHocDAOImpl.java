@@ -83,6 +83,14 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
 	}
+	@Override
+	public List<Course> FindCourseIncreaseRate() {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		q.setMaxResults(4);
+		return q.getResultList();
+	}
 
 	@Override
 	public List<Course> FindAllCourseDecreaseRate() {
@@ -96,10 +104,10 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 		EntityManager enma = JPAConfig.getEntityManager();
 		String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0) ";
 		if (tab == 2) {
-			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar)";
+			jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END)";
 		}
 		else if (tab == 3) {
-			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
+			jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
 		}
 		else if (tab == 4) {
 			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
@@ -118,10 +126,10 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 		EntityManager enma = JPAConfig.getEntityManager();
 		String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0)";
 		if (tab == 2) {
-			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar)";
+			jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END)";
 		}
 		else if (tab == 3) {
-			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
+			jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
 		}
 		else if (tab == 4) {
 			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";

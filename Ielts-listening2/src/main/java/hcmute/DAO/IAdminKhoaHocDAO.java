@@ -15,4 +15,5 @@ public interface IAdminKhoaHocDAO {
 	void deleteCourse(String courseId) throws Exception;
 	List<Course> findAll(int page, int pagesize, String searchStr, int tab);
 	List<Course> findAll(String searchStr, int tab);
+	List<Course> FindCourseIncreaseRate();
 }

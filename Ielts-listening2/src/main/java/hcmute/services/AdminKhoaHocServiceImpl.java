@@ -57,4 +57,11 @@ public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService {
 		return khoaHocDAO.findAll(searchStr, tab);
 	}
 
+	@Override
+	public List<Course> FindCourseIncreaseRate() {
+		// TODO Auto-generated method stub
+		return khoaHocDAO.FindCourseIncreaseRate();
+	}
+	
+
 }
