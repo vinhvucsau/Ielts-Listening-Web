@@ -25,8 +25,8 @@ import hcmute.utils.DeleteImage;
 import hcmute.utils.UploadUtils;
 
 @MultipartConfig
-@WebServlet(urlPatterns = { "/user/blogs", "/user/delete-blog", "/user/add-blog", "/user/edit-blog" })
-@WebServlet(urlPatterns = {"/user/blogs-page", "/user/blogs", "/user/update-blog-status", "/user/edit-blog"})
+
+@WebServlet(urlPatterns = {"/user/blogs-page", "/user/blogs", "/user/update-blog-status", "/user/edit-blog","/user/delete-blog", "/user/add-blog"})
 public class UserBlogController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

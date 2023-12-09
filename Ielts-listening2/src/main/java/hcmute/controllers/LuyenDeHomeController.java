@@ -1,6 +1,8 @@
 package hcmute.controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -12,7 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import hcmute.services.IMockTestService;
 import hcmute.entity.EnrrolTest;
 import hcmute.entity.MockTest;
 import hcmute.entity.TopicTest;
@@ -36,6 +38,7 @@ public class LuyenDeHomeController extends HttpServlet {
 	IMockTestService mockTestService = new MockTestServiceImpl();
 	IUserService userService = new UserServiceImpl();
 	EnrollTestService enService = new EnrollTestService();
+	EnrollTestService enrollTestService = new EnrollTestService();
 	public LuyenDeHomeController() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -91,7 +94,7 @@ public class LuyenDeHomeController extends HttpServlet {
 
 		LocalDateTime date = LocalDateTime.now();
 		enrrolTest.setEnrrollmentDate(date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
-		enrollTestService.insert(enrrolTest);
+		enService.insert(enrrolTest);
 		
 
 		EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(userId, testId,
