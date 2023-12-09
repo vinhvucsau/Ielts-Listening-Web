@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.Course;
+import hcmute.entity.EnrrolLesson;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
 
@@ -92,6 +93,33 @@ public class UserDAOImpl extends AbstractDao<User> implements IUserDAO {
 				entityManager.close();
 			}
 		}
+	}
+
+	@Override
+	public List<Double> findAllEnrrolTestScoreByUserId(String userId) {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "select e.score from EnrrolTest e where e.users.userId = :userId";
+		TypedQuery<Double> query = en.createQuery(jpql, Double.class);
+		query.setParameter("userId", userId);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<EnrrolLesson> findAllEnrrolLessonByUserId(String userId) {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "SELECT er FROM EnrrolLesson er WHERE er.users.userId = :userId";
+		TypedQuery<EnrrolLesson> query = en.createQuery(jpql, EnrrolLesson.class);
+		query.setParameter("userId", userId);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<String> findAllTestNamefromUserId(String userId) {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "select mt.testName from MockTest mt join EnrrolTest et on mt.testId = et.mockTests.testId where et.users.userId = :userId";
+		TypedQuery<String> query = en.createQuery(jpql, String.class);
+		query.setParameter("userId", userId);
+		return query.getResultList();
 	}
 
 }
