@@ -56,8 +56,10 @@ public class AdminLessonControler extends HttpServlet {
 			String courseId = req.getParameter("courseId");
 			courseIdAdd = courseId;
 			List<Lesson> listLesson = lessonService.findLessonByCourse(courseId);
+			Course course = courseService.findById(courseId);
 			
 			req.setAttribute("courseID", courseId);
+			req.setAttribute("course", course);
 			req.setAttribute("listLesson", listLesson);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminLesson.jsp");
 			rd.forward(req, resp);

@@ -21,13 +21,15 @@
 			<div class="container pb-lg-8">
 				<div class="row align-items-center">
 					<div class="col-xl-7 col-lg-7 col-md-12">
+						<a href="khoahoc" class="link-primary fw-semibold">
+                        		<div class="d-flex align-items-center pb-4">
+                        			<i class="fe fe-arrow-left"></i>
+                                	Trở về
+                        		</div>
+                        </a>
 						<div>
-							<h1 class="text-dark display-4 fw-semibold">Getting Started
-								with JavaScript</h1>
-							<p class="text-dark mb-6 lead">JavaScript is the popular
-								programming language which powers web pages and web
-								applications. This course will get you started coding in
-								JavaScript.</p>
+							<h1 class="text-dark display-4 fw-semibold">${course.courseName }</h1>
+							<p class="text-dark mb-6 lead">${course.description }</p>
 							<div class="d-flex align-items-center">
 								<a href="#" class="bookmark text-dark"> <i
 									class="fe fe-bookmark fs-4 me-2"></i> Bookmark
@@ -127,13 +129,13 @@
 												<a href="editLesson?lessonId=${i.lessonId }">
 													<span class="accordion-title ms-4">${i.lessonName }</span>
 												</a>
-												<form action="deleteLesson" method="post" enctype="multipart/form-data">
+												<%-- <form action="deleteLesson" method="post" enctype="multipart/form-data">
 													<input type="hidden" name="lessonId" value="${i.lessonId}">
 													<button class="icon-link icon-delete"><i class="fe fe-trash color-dark"></i> </button>
-												</form>
-												<%-- <a href="<c:url value='/admin/deleteLesson?id=${i.lessonId}'/>" class="icon-link icon-delete"> 
+												</form> --%>
+												<a href="<c:url value='/admin/deleteLesson?id=${i.lessonId}'/>" class="icon-link icon-delete"> 
 													<i class="fe fe-trash color-dark"></i>
-												</a> --%>
+												</a>
 											</button>
 										</div>
 									</c:forEach>
@@ -149,24 +151,23 @@
 							<div class="p-1">
 								<div
 									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
-									style="background-image: url(../assets/images/course/course-javascript.jpg); height: 210px">
-									<a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-										href="https://www.youtube.com/watch?v=Nfzi7034Kbg"> <i
-										class="fe fe-play"></i>
-									</a>
+									height: 210px">
+									<video width="370" height="220" controls class="pt-2">
+										<source src="${course.trailer }" type="video/mp4">
+									</video>
 								</div>
 							</div>
 							<!-- Card body -->
 							<div class="card-body">
 								<!-- Price single page -->
 								<div class="mb-3">
-									<span class="text-dark fw-bold h2">$600</span>
-									<del class="fs-4">$750</del>
-								</div>
-								<div class="d-grid">
-									<a href="#" class="btn btn-primary mb-2">Start Free Month</a> <a
-										href="pricing.html" class="btn btn-outline-primary">Get
-										Full Access</a>
+									<span class="text-dark fw-bold h1">${course.courseName }</span>
+									<span class="text-primary fw-bold h3">
+										<p><fmt:formatNumber value="${course.cost}" pattern="###,### VNĐ" /></p>
+									</span>
+									<span class="text-dark">
+										<p>${course.description }</p>
+									</span>
 								</div>
 							</div>
 						</div>
