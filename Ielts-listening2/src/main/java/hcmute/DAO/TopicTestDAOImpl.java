@@ -88,6 +88,14 @@ public class TopicTestDAOImpl extends AbstractDao<TopicTest> implements ITopicTe
 		q.setFirstResult(page * pagesize);
 		q.setMaxResults(pagesize);
 		return q.getResultList();
+>>>>>>> Stashed changes
+	}
+ 	public List<TopicTest> getAllTopicTest() {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "Select t From TopicTest t";
+		TypedQuery<TopicTest> q = en.createQuery(jpql, TopicTest.class);
+		System.out.println(q.getResultList());
+		return q.getResultList();
 	}
 
 }

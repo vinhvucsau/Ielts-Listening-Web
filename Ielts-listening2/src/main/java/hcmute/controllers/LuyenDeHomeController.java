@@ -39,7 +39,7 @@ public class LuyenDeHomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");;	
 		request.setAttribute("currentUser", user);
 		int page = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
@@ -49,6 +49,9 @@ public class LuyenDeHomeController extends HttpServlet {
 		List<TopicTest> allTopicTestList = topicTestService.findAll(searchStr, tab);
 		List<TopicTest> topicTestList = topicTestService.findAll(page - 1, pagesize, searchStr, tab);
 		int pageNum = (int) (allTopicTestList.size() / pagesize) + (allTopicTestList.size() % pagesize == 0 ? 0 : 1);
+		System.out.print("errrr" +topicTestList );
+		System.out.print("errrr" +pagesize );
+		System.out.print("errrr" +pageNum );
 		request.setAttribute("topicTests", topicTestList);
 		request.setAttribute("pagesize", pagesize);
 		request.setAttribute("pageNum", pageNum);

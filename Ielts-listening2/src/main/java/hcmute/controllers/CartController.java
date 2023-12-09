@@ -71,6 +71,7 @@ public class CartController extends HttpServlet {
 			req.setAttribute("countAddToCartByUser", countAddToCartByUser);
 			req.setAttribute("user", user);
 			req.setAttribute("networth", networth);
+			System.out.println("err"+ finalCarts);
 			req.getRequestDispatcher("/views/user/cart.jsp").forward(req, resp);
 		}
 	}

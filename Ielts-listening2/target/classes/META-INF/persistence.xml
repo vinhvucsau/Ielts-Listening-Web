@@ -41,7 +41,10 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 
-
+			<property name="initialSize" value="10" />
+        <property name="maxActive" value="15" />
+        <property name="maxWait" value="5000" />
+        <property name="maxIdle" value="1" />
 		</properties>
 	</persistence-unit>
 
