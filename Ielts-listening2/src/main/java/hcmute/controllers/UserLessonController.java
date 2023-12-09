@@ -65,7 +65,7 @@ public class UserLessonController extends HttpServlet {
 		if (session != null && session.getAttribute("user") != null) {
 			user = (User) session.getAttribute("user");
 		} else {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 			rd.forward(req, resp);
 		}
 
@@ -120,7 +120,7 @@ public class UserLessonController extends HttpServlet {
 			} catch (Exception e) {
 				e.getStackTrace();
 			
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 
@@ -143,7 +143,7 @@ public class UserLessonController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + curLesson.getLessonId());
 			} catch (Exception e) {
 				e.getMessage();
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 
@@ -159,7 +159,7 @@ public class UserLessonController extends HttpServlet {
 			} catch (Exception e) {
 				e.getMessage();
 				req.setAttribute("e", e);
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 
