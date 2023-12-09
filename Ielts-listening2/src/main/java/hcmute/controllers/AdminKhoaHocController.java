@@ -54,12 +54,16 @@ public class AdminKhoaHocController extends HttpServlet {
 			tab = 2;
 		} else if (rate.equals("caodenthap")) {
 			tab = 3;
+			
 		} else if (url.contains("lesson")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminLesson.jsp");
 			rd.forward(req, resp);
 		}
 		Long count = adminKhoaHocService.countKhoaHoc();
 		List<Course> allCourseList = adminKhoaHocService.findAll(searchStr, tab);
+		for (Course course : allCourseList) {
+			System.out.print("course" + course.getCourseId());
+		}
 		List<Course> CourseList = adminKhoaHocService.findAll(page - 1, pagesize, searchStr, tab);
 		req.setAttribute("countCourse", count);
 		int pageNum = (int) (allCourseList.size() / pagesize) + (allCourseList.size() % pagesize == 0 ? 0 : 1);

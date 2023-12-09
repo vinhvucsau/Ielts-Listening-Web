@@ -104,10 +104,10 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 		EntityManager enma = JPAConfig.getEntityManager();
 		String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0) ";
 		if (tab == 2) {
-			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar)";
+			jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END)";
 		}
 		else if (tab == 3) {
-			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
+			jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
 		}
 		else if (tab == 4) {
 			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
@@ -126,10 +126,10 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 		EntityManager enma = JPAConfig.getEntityManager();
 		String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0)";
 		if (tab == 2) {
-			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar)";
+			jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END)";
 		}
 		else if (tab == 3) {
-			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
+			jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
 		}
 		else if (tab == 4) {
 			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
