@@ -39,4 +39,9 @@ public class LessonServiceImpl implements ILessonService {
 		lessonAbstract.insert(lesson);
 		
 	}
+
+	public void update(Lesson lesson) {
+		lessonAbstract.update(lesson);
+	}
+	
 }

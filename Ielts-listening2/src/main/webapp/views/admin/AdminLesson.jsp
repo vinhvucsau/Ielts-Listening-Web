@@ -107,28 +107,23 @@
 									<c:forEach var="i" items="${listLesson}">
 										<!-- Lesson list -->
 										<div class="row" id="lessonList">
-											<button value="${i.lessonId }" class="accordion d-flex justify-content-between align-items-center btn btn-light mb-2" onclick="showModel()">
+											<button value="${i.lessonId }" class="btn-openmodel accordion d-flex justify-content-between align-items-center btn btn-light mb-2" >
+												<span>${i.lessonId }</span>
+												<%-- <input type="hidden" name="lessonId" value="${i.lessonId}"> --%>
 												<span class="accordion-title ms-4">${i.lessonName }</span>
 												<a href="<c:url value='/admin/deleteLesson?Id=${i.lessonId}'/>" class="icon-link icon-delete"> 
 													<i class="fe fe-trash color-dark"></i>
 												</a>
 											</button>
-											<!-- <button class="accordion d-flex justify-content-between align-items-center btn btn-light mb-2" onclick="showModel()">
-												<span class="accordion-title ms-4">Lesson 02</span>
-												<a href="#" class="icon-link icon-delete"> 
-													<i class="fe fe-trash color-dark"></i>
-												</a>
-											</button> -->
 										</div>
 									</c:forEach>
 								</div>
 								<!-- Add Lesson -->								
 								<form action="addLesson" method="post">
-									<input type="hidden" name="courseId" value="${listLesson[0].courses.courseId}">
+									<%-- <input type="hidden" name="courseId" value="${listLesson[0].courses.courseId}"> --%>
 								  	<!-- Add Button -->
-								  	<button type="submit" class="accordion btn btn-primary mt-2">Thêm bài học</button>
-								</form>
-								
+								  	<button type="submit" class="accordion btn btn-primary mt-2">Thêm bài học</button>		
+								</form>						
 							</div>
 						</div>
 					</div>
@@ -164,9 +159,9 @@
 			</div>
 		</section>
 		<!-- Model -->
-		<div id="model"
+		<div class="model" id="model"
 			style="min-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
-			<form action="addPart" method="post" enctype="multipart/form-data">
+			<form action="updateLesson" method="post" enctype="multipart/form-data">
 				<div id="test-l-1" class="bs-stepper-pane"
 					aria-labelledby="courseFormtrigger1">
 					<!-- Card -->
@@ -179,15 +174,15 @@
 							<div class="card-body">
 								<div class="mb-3">
 									<label for="courseTitle" class="form-label">Tên bài học</label>
-										<input id="lessonName" name="lessonName"
-										class="form-control" type="text" placeholder="Tên bài học"
+										<input id="lessonName" name="lessonName" value="${i.lessonName }"
+										class="model__name form-control" type="text" placeholder="Tên bài học"
 										required> <small>Write a 60 character course
 										title.</small>
 								</div>
 
 								<div class="mb-3">
 									<label class="form-label">Thêm video bài giảng</label> 
-									<input type="file" class="form-control" 
+									<input type="file" class="model__video form-control" value=""
 											name="trailer" id=""
 											accept="video/mp4" require>
 									<div id="audio"></div>
@@ -207,9 +202,17 @@
 									<label class="form-label">Answer Test</label>
 
 								</div>
-								<div id="answerTest" class="d-flex flex-column gap-3"></div>
+								<c:forEach var="j" items="${listAnsLesson}">
+									<div id="answerTest" class="d-flex flex-column gap-3">
+										<div class="d-flex flex-column gap-3">
+											<label name="model-ans__number question" value="${j.number }">Question ${j.number }</label>
+											<input type="text" placeholder="Enter your answer..." value="${j.answerKey }" class="model-ans__key form-control" name="answerKey">
+										</div>
+									</div>
+								</c:forEach>
 								<div onclick="addQuestion()" style="margin: 10px"
-									class="btn btn-light">Add Answer Test</div>
+									class="btn btn-light">Add Answer Test
+								</div>
 							</div>
 
 						</div>
@@ -220,13 +223,40 @@
 				</div>
 			</form>
 		</div>
+		
 		<div id="shadow"
 			class="position-fixed  top-0 start-0 bottom-0 end-0 bg-dark"
 			style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow()"></div>
 	</main>
-	<script>
-	    let questionCount = 0;
 	
+	<script>
+		var arrLesson = [];
+		var arrAnswer = [];
+		// Duyệt danh sách Java và thêm dữ liệu vào biến JavaScript
+		<c:forEach var="item" items="${listLesson}">
+			var item = {
+				lessonId : "${item.lessonId}",
+				lessonName : "${item.lessonName}",
+				video : "${item.video}",
+				answerSheet: "${item.answerSheet}"
+			};
+			arrLesson.push(item);
+		</c:forEach>
+		
+		<c:forEach var="item" items="${listAnsLesson}">
+			var itemAns = {
+				answerId : "${item.answerId}",
+				answerKey : "${item.answerKey}",
+				number: "${item.number}",
+				lesson : "${item.lessons.lessonId}",
+			};
+			arrAnswer.push(itemAns);
+		</c:forEach>
+	</script>
+	
+	<script>
+	    /* let questionCount = ${listAnsLesson[-1].number}; */
+	    let questionCount = 0 
 	    function addQuestion() {
 	        // Increment the question count
 	        questionCount++;
@@ -266,9 +296,9 @@
 				document.querySelector("form").insertAdjacentHTML("afterend", html);
 			}
 		}
-		</script>
+	</script>
 	
-		<script>
+	<script>
 		 ClassicEditor
 	     .create(document.querySelector('#editor'))
 	     .then(editor => {
@@ -285,18 +315,55 @@
 	</script>
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+		
 	<script>
+		var model = document.getElementById("model");
+		var shadow = document.getElementById("shadow");
+		
+		/*var btn = document.getElementsByClassName("btn-openmodel");
+		for (i = 0; i < btn.length; i++) {
+			btn[i].addEventListener("click", function() {
+				
+		        model.style.display = "block";
+				shadow.style.display = "block";
+				// document.body.style.overflow = 'hidden';
+		        var lessonID = this.getAttribute("value");
+		        console.log(this.getAttribute("value"));
+		        for(var t of arrLesson) {
+	                if(t.lessonId == lessonID) {
+	                	document.querySelector(".model .model__name").setAttribute("value",t.lessonName);
+	                	for (var a of arrAnswer) {
+	                		if (lessonID == a.lesson) {}
+	                		//document.querySelector(".model .model-ans__number").setAttribute("value", a.number);
+	                		document.querySelector(".model .model-ans__key").setAttribute("value", a.answerKey);
+	                	}
+	                	/* document.querySelector(".model .model__video").setAttribute("value", t.video);
+	                	document.querySelector(".model .model__answer-sheet").setAttribute("value", t.answerSheet);
+	                	document.querySelector(".model .model__answer-sheet").setAttribute("value", t.image) ;
+	                	document.querySelector(".model .popup-title__input").setAttribute("value",t.topicName) ;
+	                	document.querySelector(".model .popup-descript__input").setAttribute("value", t.description) ;
+	                	document.querySelector(".model .popup-id_input").setAttribute("value", t.topicId) ;
+	                	document.querySelector(".model .form-popup").setAttribute("action", "updateTopic") ;
+	                }
+	            }
+			}, false);
+	        
+		} */
+		
 		function showModel() {
 			// Show the shadow
-			document.getElementById("shadow").style.display = "block";
-			document.getElementById("model").style.display = "block";
+			model.style.display = "block";
+			shadow.style.display = "block";
+			
+			
 		}
 
 		function hideShadow() {
 			// Hide the shadow
-			document.getElementById("shadow").style.display = "none";
-			document.getElementById("model").style.display = "none";
+			model.style.display = "none";
+			shadow.style.display = "none";
 		}
 	</script>
+
 </body>
 </html>

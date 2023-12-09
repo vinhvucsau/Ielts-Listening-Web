@@ -10,4 +10,6 @@ public interface ILessonService {
 	Lesson findOneById (String lessonId);
 	void delete(String lessonID);
 	void insert(Lesson lesson);
+	void update(Lesson lesson);
+	
 }
