@@ -54,26 +54,26 @@ Long count = (Long) request.getAttribute("countCourse");
 </style>
 
 
-	<div class="adminkhoahoc container-fluid p-0 m-0 row">
-
-		<h1 class="adminkhoahoc-title text-center mb-4">
-			Lộ Trình Học <span class="color-blue--primary">IELTS</span> Toàn
-			Diện
-		</h1>
-		<div class="adminkhoahoc-description w-75 text-center mx-auto mb-3">
-			<span style="color: rgb(113, 113, 113)">Lorem ipsum dolor sit
-				amet consectetur. Cras ultricies sapien venenatis vulputate felis.
-				Non hendrerit lectus enim semper et nisl nunc lobortis ultrices.</span>
-		</div>
-		<div class="input-group" style="width: 400px;">
+	<div class="adminkhoahoc container-fluid p-0 m-0 row pt-8 pb-4">
+		<div class="d-flex justify-content-between">
+			<div class="input-group" style="width: 400px;">
 				  <span class="input-group-text px-3 boDescription for topic 1rder-0" id="basic-addon1" style="background-color: white; color: rgb(107,114,128);">
 					  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 		  					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 						</svg>
 				  </span>
 				  <input type="text" class="btn__search form-control py-2 fs-5 border" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon1" value='${param.search == null ? "" : param.search }'>
-				</div>
 			</div>
+			<div
+				class="adminkhoahoc-button d-flex flex-row justify-content-center">
+				<button href="#" type="button" class="btn" onclick="showModel()"
+					style="background-color: rgb(0, 177, 53)">
+					<span style="color: white">Thêm Khóa Học</span>
+				</button>
+			</div>
+		</div>
+		
+	</div>
 			<c:if test="${course.size() == 0}">
 				<div class="w-100 d-flex flex-row justify-content-center my-5">
 					<div>
@@ -84,13 +84,6 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 					</div>
 				</div>
 				</c:if>
-		<div
-			class="adminkhoahoc-button d-flex flex-row justify-content-center">
-			<button href="#" type="button" class="btn mb-5" onclick="showModel()"
-				style="background-color: rgb(0, 177, 53)">
-				<span style="color: white">Thêm Khóa Học</span>
-			</button>
-		</div>
 	<!-- Model -->
 		<div id="model" class="course_input"
 			style="max-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
@@ -138,7 +131,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 											accept="image/jpeg, image/png" require>
 								</div>
 
-<div>
+							<div>
 
 								<div class="mb-3">
 									<label class="form-label">Thêm video xem trước</label> 
@@ -210,7 +203,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 											accept="image/jpeg, image/png" require>
 								</div>
 
-<div>
+							<div>
 
 								<div class="mb-3">
 									<label class="form-label">Video xem trước</label> 
@@ -342,11 +335,18 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 								role="tabpanel" aria-labelledby="tabPaneGrid">
 								<div class="row">
 									<c:forEach var="i" items="${course}">
-										<div class="col-lg-3 col-md-6 col-12">
+										<div class="col-lg-3 col-md-6 col-12 " data-bs-toggle="popover" data-bs-trigger="hover focus" title="${i.courseName}" data-bs-content="${i.description}">
 											<div class="card mb-4 card-hover">
-												<a href="listLesson?courseId=${i.courseId}"><img
-													src="../assets/images/course/course-node.jpg" alt=""
-													class="card-img-top"></a>
+												<c:if test="${i.image != null}">
+													<a href="listLesson?courseId=${i.courseId}"><img style="height: 200px; object-fit: cover;"
+													src="<c:url value='/image?fname=courseIMG/${ i.image}'/>" alt="course"
+													class="card-img-top img-fluid"></a>
+												</c:if>
+												<c:if test="${i.image == null}">
+													<a href="listLesson?courseId=${i.courseId}"><img style="height: 200px; object-fit: cover;"
+													src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain" alt="course"
+													class="card-img-top img-fluid"></a>
+												</c:if>
 												<!-- Card Body -->
 												<div class="card-body">
 													<h4 class="mb-2 text-truncate-line-2">
