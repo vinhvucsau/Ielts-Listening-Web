@@ -20,6 +20,7 @@ import hcmute.entity.User;
 import hcmute.services.EnrollTestService;
 import hcmute.services.ITopicTestService;
 import hcmute.services.IUserService;
+import hcmute.services.MockTestServiceImpl;
 import hcmute.services.TopicTestServiceImpl;
 import hcmute.services.UserServiceImpl;
 
@@ -32,6 +33,7 @@ import hcmute.services.UserServiceImpl;
 public class LuyenDeHomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ITopicTestService topicTestService = new TopicTestServiceImpl();
+	IMockTestService mockTestService = new MockTestServiceImpl();
 	IUserService userService = new UserServiceImpl();
 	EnrollTestService enService = new EnrollTestService();
 	public LuyenDeHomeController() {
@@ -76,9 +78,26 @@ public class LuyenDeHomeController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		String testId = request.getParameter("testId");
+
+		EnrrolTest enrrolTest = new EnrrolTest();
+		enrrolTest.setEnrrolId("");
+		enrrolTest.setScore(-1.0);
+		User user = userService.findUserByID(userId);
+		enrrolTest.setUsers(user);
+		MockTest mockTest = mockTestService.findById(testId);
+		enrrolTest.setMockTests(mockTest);
+
+		LocalDateTime date = LocalDateTime.now();
+		enrrolTest.setEnrrollmentDate(date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
+		enrollTestService.insert(enrrolTest);
 		
-		
+
+		EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(userId, testId,
+				date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
+		response.sendRedirect(request.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
+
 	}
-	
 
 }
