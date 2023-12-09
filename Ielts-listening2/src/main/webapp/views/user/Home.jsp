@@ -192,12 +192,12 @@
 								<c:forEach var="item" items="${course}">								
 									<li class="card">
 												<c:if test="${item.image != null}">
-													<a href="listLesson?courseId=${item.courseId}"><img style="height: 200px; object-fit: cover;"
+													<a class="w-100" href="listLesson?courseId=${item.courseId}"><img style="height: 200px; object-fit: cover;"
 													src="<c:url value='/image?fname=courseIMG/${ item.image}'/>" alt="course"
 													class="card-img-top img-fluid"></a>
 												</c:if>    
 												<c:if test="${item.image == null}">
-													<a href="listLesson?courseId=${item.courseId}"><img style="height: 200px; object-fit: cover;"
+													<a class="w-100" href="listLesson?courseId=${item.courseId}"><img style="height: 200px; object-fit: cover;"
 													src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain" alt="course"
 													class="card-img-top img-fluid"></a>
 												</c:if>                                    <!-- Card Body -->

@@ -483,12 +483,17 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 								<c:forEach var="i" items="${course}">
 									<div class="card mb-4 card-hover">
 										<div class="row g-0">
-											<a
-												class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
-												style="background-image: url(../assets/images/course/course-javascript.jpg)">
-												<img src="../assets/images/course/course-node.jpg" alt="..."
-												class="img-fluid d-lg-none invisible">
-											</a>
+
+											<c:if test="${i.image != null}">
+													<a class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded" href="listLesson?courseId=${i.courseId}"><img style="height: 200px; object-fit: cover;"
+													src="<c:url value='/image?fname=courseIMG/${ i.image}'/>" alt="course"
+													class="img-fluid w-100"></a>
+												</c:if>
+												<c:if test="${i.image == null}">
+													<a class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded" href="listLesson?courseId=${i.courseId}"><img style="height: 200px; object-fit: cover;"
+													src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain" alt="course"
+													class="img-fluid w-100"></a>
+												</c:if>
 											<div class="col-lg-9 col-md-12 col-12">
 												<!-- Card body -->
 												<div class="card-body">
