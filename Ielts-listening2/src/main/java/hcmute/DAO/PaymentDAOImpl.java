@@ -25,9 +25,7 @@ public class PaymentDAOImpl extends AbstractDao<Payment> implements IPaymentDAO 
 			TypedQuery<Payment> query = entityManager.createQuery(jpql, Payment.class);
 			query.setParameter("dateBuy", dateBuy);
 			query.setParameter("userId", userId);
-
 			List<Payment> resultList = query.getResultList();
-
 			return resultList.isEmpty() ? null : resultList.get(0);
 		} catch (Exception e) {
 			// Handle your exception (log, rethrow, etc.)

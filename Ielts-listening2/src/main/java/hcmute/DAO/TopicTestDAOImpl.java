@@ -29,9 +29,8 @@ public class TopicTestDAOImpl extends AbstractDao<TopicTest> implements ITopicTe
 			query.setParameter("searchStr", searchStr);
 			return query.getResultList();
 		} catch (Exception e) {
-			// Handle your exception (log, rethrow, etc.)
-			e.printStackTrace(); // replace with proper logging
-			return null; // or throw a custom exception, return an empty list, etc.
+			e.printStackTrace();
+			return null;
 		} finally {
 			if (entityManager != null && entityManager.isOpen()) {
 				entityManager.close();
