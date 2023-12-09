@@ -124,21 +124,43 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 		return null;
 	}
 	@Override
-    public boolean checkExistEmail(String email) {
-        EntityManager em = JPAConfig.getEntityManager();
-        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email", Long.class);
-        query.setParameter("email", email);
-        Long count = query.getSingleResult();
-        return count > 0;
-    }
+	public boolean checkExistEmail(String email) {
+	    EntityManager em = null;
+	    try {
+	        em = JPAConfig.getEntityManager();
+	        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email", Long.class);
+	        query.setParameter("email", email);
+	        Long count = query.getSingleResult();
+	        return count > 0;
+	    } catch (Exception e) {
+	        // Handle the exception or log the error
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        if (em != null) {
+	            em.close();
+	        }
+	    }
+	}
+
 	@Override
-    public boolean checkExistUsername(String username) {
-        EntityManager em = JPAConfig.getEntityManager();
-        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.account.userName = :username", Long.class);
-        query.setParameter("username", username);
-        Long count = query.getSingleResult();
-        return count > 0;
-    }
-	
+	public boolean checkExistUsername(String username) {
+	    EntityManager em = null;
+	    try {
+	        em = JPAConfig.getEntityManager();
+	        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.account.userName = :username", Long.class);
+	        query.setParameter("username", username);
+	        Long count = query.getSingleResult();
+	        return count > 0;
+	    } catch (Exception e) {
+	        // Handle the exception or log the error
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        if (em != null) {
+	            em.close();
+	        }
+	    }
+	}
 
 }

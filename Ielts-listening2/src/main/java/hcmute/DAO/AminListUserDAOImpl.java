@@ -6,23 +6,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
+import hcmute.entity.Course;
+import hcmute.entity.Lesson;
 import hcmute.entity.User;
 
-public class AminListUserDAOImpl implements IAdminListUserDAO{
+public class AminListUserDAOImpl extends AbstractDao<User> implements IAdminListUserDAO{
 
-	@Override
-	public List<User> findAllUser() {
-		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "select c from User c ";
-		TypedQuery<User> q = en.createQuery(jpql, User.class);
-		return q.getResultList();
+	
+	public AminListUserDAOImpl() {
+		super(User.class);
 	}
 
-	@Override
-	public User findUserById(String userId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		User user = enma.find(User.class, userId);
-		return user;
-	}
+	
 
 }
