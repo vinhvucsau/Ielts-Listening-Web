@@ -130,14 +130,17 @@ public class CapNhatThongTinController extends HttpServlet {
 			  
 			  Integer currentNetworth = 0; boolean check = networth.equals("");
 			  
-			  if (req.getPart("inputImage").getSize() == 0) {
-			  user.setImage(user.getImage()); } else { //xoa anh cu 
-				  if (user.getImage() !=
-			  null) { String fileImg = user.getImage();
-			  DeleteImage.deleteImage(user.getImage(), Constants.FOLDER_AVATAR); } //update anh moi 
-			  String fileName = "" + System.currentTimeMillis();
-			  user.setImage(UploadUtils.processUpload("inputImage", req, Constants.DIR +
-			  "\\"+ Constants.FOLDER_AVATAR +"\\", fileName)); }
+				if (req.getPart("inputImage").getSize() == 0) {
+					user.setImage(user.getImage());
+				} else { // xoa anh cu
+					if (user.getImage() != null) {
+						String fileImg = user.getImage();
+						DeleteImage.deleteImage(user.getImage(), Constants.FOLDER_AVATAR);
+					} // update anh moi
+					String fileName = "" + System.currentTimeMillis();
+					user.setImage(UploadUtils.processUpload("inputImage", req,
+							Constants.DIR + "\\" + Constants.FOLDER_AVATAR + "\\", fileName));
+				}
 			  
 			  if (dateOfBirth == "") { dateOfBirth = null; }
 			  
