@@ -57,9 +57,18 @@
 							<h1 class="text-white display-4 fw-semibold">${course.courseName }</h1>
 							<p class="text-white mb-6 lead">${course.description }</p>
 							<div class="d-flex align-items-center">
-								<a href="#" class="bookmark text-white"> <i
-									class=" ti ti-shopping-cart fs-4 me-2"></i> Giỏ hàng
-								</a> <span class="text-white ms-3"> <i class="fe fe-user"></i>
+
+								<form action="addToCart" method="post">
+									<input type="hidden" name="courseId"
+										value="${course.courseId }">
+									<button class="bookmark text-white" type="submit"
+										style="border: none; background: none;">
+										<i class="ti ti-shopping-cart fs-4 me-2"></i> Giỏ hàng
+									</button>
+								</form>
+
+
+								<span class="text-white ms-3"> <i class="fe fe-user"></i>
 									100 người đăng ký
 								</span>
 								<div>

@@ -1,5 +1,6 @@
 package hcmute.DAO;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,17 +12,11 @@ import hcmute.entity.Course;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
 
-public class UserDAOImpl extends AbstractDao<User> implements IUserDAO{
+public class UserDAOImpl extends AbstractDao<User> implements IUserDAO {
 
 	public UserDAOImpl() {
 		super(User.class);
 		// TODO Auto-generated constructor stub
-	}
-
-	public User findUserByID(String id) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		User user = enma.find(User.class, id);
-		return user;
 	}
 
 	@Override
@@ -39,34 +34,64 @@ public class UserDAOImpl extends AbstractDao<User> implements IUserDAO{
 
 	@Override
 	public boolean findDuplicatePhone(String phoneNum, String userId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT u from User u where u.phoneNumber = :phoneNumber and u.userId != :userId";
-		TypedQuery<User> query = enma.createQuery(jpql, User.class);
-		query.setParameter("phoneNumber", phoneNum);
-		query.setParameter("userId", userId);
-		if (query.getResultList().size() > 0) {
-			return false;
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT u from User u where u.phoneNumber = :phoneNumber and u.userId != :userId";
+			TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
+			query.setParameter("phoneNumber", phoneNum);
+			query.setParameter("userId", userId);
+			if (query.getResultList().size() > 0) {
+				return false;
+			}
+			return true;
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return false; // or throw a custom exception, return a default value, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
 		}
-		return true;
 	}
 
 	@Override
 	public Long countCourseByUserId(String userId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT COUNT(uc) FROM UserCourse uc WHERE uc.users.userId = :userId";
-		Query query = enma.createQuery(jpql);
-		query.setParameter("userId", userId);
-		Long count = (Long) query.getSingleResult();
-		return count;
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT COUNT(uc) FROM UserCourse uc WHERE uc.users.userId = :userId";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("userId", userId);
+			Long count = (Long) query.getSingleResult();
+			return count;
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return 0L; // or throw a custom exception, return a default value, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 	@Override
 	public List<UserCourse> findAllUserCourseByUserId(String userId) {
-		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "SELECT uc FROM UserCourse uc WHERE uc.users.userId = :userId";
-		TypedQuery<UserCourse> query = en.createQuery(jpql, UserCourse.class);
-		query.setParameter("userId", userId);
-		return query.getResultList();
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT uc FROM UserCourse uc WHERE uc.users.userId = :userId";
+			TypedQuery<UserCourse> query = entityManager.createQuery(jpql, UserCourse.class);
+			query.setParameter("userId", userId);
+			return query.getResultList();
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return Collections.emptyList(); // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 }

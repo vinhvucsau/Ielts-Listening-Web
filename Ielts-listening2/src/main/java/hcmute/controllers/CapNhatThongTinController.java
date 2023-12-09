@@ -38,15 +38,14 @@ public class CapNhatThongTinController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		HttpSession session = req.getSession(false);
-		
+
 		// Set cứng ID để test chức năng
-		
+
 		User user = (User) session.getAttribute("user");
 		Account account = accountService.findByID(user.getAccount().getUserName());
 
 		req.setAttribute("currentUser", user);
 		req.setAttribute("account", account);
-		
 
 		if (url.contains("capnhattaikhoan")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
@@ -126,11 +125,11 @@ public class CapNhatThongTinController extends HttpServlet {
 			String id = req.getParameter("userId");
 
 			// Set cứng ID để test chức năng
-			
+
 			User user = userService.findUserByID(id);
 			String name = req.getParameter("inputName").trim();
 			String phoneNumber = req.getParameter("inputPhone").trim();
-			
+
 			String address = req.getParameter("inputAddress").trim();
 			String dateOfBirth = req.getParameter("datePicker").trim();
 			String networth = req.getParameter("inputNetworth").trim();
@@ -172,7 +171,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			} else {
 				req.setAttribute("messError", "Số điện thoại không hợp lệ!");
 			}
-
+			System.out.println("errrr " + req.getAttribute("messError"));
 			if (req.getAttribute("messError") == null) {
 				user.setName(name);
 				user.setPhoneNumber(phoneNumber);
@@ -194,5 +193,4 @@ public class CapNhatThongTinController extends HttpServlet {
 		}
 	}
 
-	
 }

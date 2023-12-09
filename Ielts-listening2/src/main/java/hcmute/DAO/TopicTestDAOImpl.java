@@ -11,43 +11,74 @@ import hcmute.entity.TopicTest;
 public class TopicTestDAOImpl extends AbstractDao<TopicTest> implements ITopicTestDAO {
 
 	public TopicTestDAOImpl() {
-		super(TopicTest.class);}
-		// TODO Auto-generated constructor stub
+		super(TopicTest.class);
+	}
+
+	// TODO Auto-generated constructor stub
 	@Override
 	public List<TopicTest> findAll(String searchStr, int tab) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0))";
-		if (tab == 2) {
-			jpql += "ORDER BY T.createTime DESC";
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0))";
+			if (tab == 2) {
+				jpql += " ORDER BY T.createTime DESC";
+			} else if (tab == 3) {
+				jpql = "SELECT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0)) GROUP BY T.topicId ORDER BY COUNT(E) DESC";
+			}
+			TypedQuery<TopicTest> query = entityManager.createQuery(jpql, TopicTest.class);
+			query.setParameter("searchStr", searchStr);
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
 		}
-		else if (tab == 3) {
-			jpql = "SELECT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0)) GROUP BY T.topicId ORDER BY COUNT(E) DESC ";
-		}
-		TypedQuery<TopicTest> query = enma.createQuery(jpql, TopicTest.class);
-		query.setParameter("searchStr", searchStr);
-		return query.getResultList();
 	}
+
 	public List<TopicTest> findAll(int page, int pagesize, String searchStr, int tab) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0))";
-		if (tab == 2) {
-			jpql += "ORDER BY T.createTime DESC";
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT DISTINCT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0))";
+			if (tab == 2) {
+				jpql += " ORDER BY T.createTime DESC";
+			} else if (tab == 3) {
+				jpql = "SELECT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0)) GROUP BY T.topicId ORDER BY COUNT(E) DESC";
+			}
+			TypedQuery<TopicTest> query = entityManager.createQuery(jpql, TopicTest.class);
+			query.setParameter("searchStr", searchStr);
+			query.setFirstResult(page * pagesize);
+			query.setMaxResults(pagesize);
+			return query.getResultList();
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return null; // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
 		}
-		else if (tab == 3) {
-			jpql = "SELECT T FROM TopicTest T LEFT JOIN T.mockTests M LEFT JOIN M.enrrolTests E WHERE ((LOCATE(:searchStr, M.testName) > 0) OR (LOCATE(:searchStr, T.topicName) > 0)) GROUP BY T.topicId ORDER BY COUNT(E) DESC ";
-		}
-		TypedQuery<TopicTest> query = enma.createQuery(jpql, TopicTest.class);
-		query.setParameter("searchStr", searchStr);
-		query.setFirstResult(page * pagesize);
-		query.setMaxResults(pagesize);
-		return query.getResultList();
 	}
- 	public List<TopicTest> getAllTopicTest() {
-		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "Select t From TopicTest t";
-		TypedQuery<TopicTest> q = en.createQuery(jpql, TopicTest.class);
-		System.out.println(q.getResultList());
-		return q.getResultList();
+
+	public List<TopicTest> getAllTopicTest() {
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT t FROM TopicTest t";
+			TypedQuery<TopicTest> query = entityManager.createQuery(jpql, TopicTest.class);
+			System.out.println(query.getResultList());
+			return query.getResultList();
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return null; // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
  	public List<TopicTest> getAllTopicTest(int page, int pagesize) {
 		EntityManager en = JPAConfig.getEntityManager();
@@ -59,5 +90,4 @@ public class TopicTestDAOImpl extends AbstractDao<TopicTest> implements ITopicTe
 		return q.getResultList();
 	}
 
-	
 }
