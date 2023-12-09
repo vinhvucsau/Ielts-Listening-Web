@@ -47,7 +47,7 @@ public class UserCourseController extends HttpServlet {
 		if (url.contains("course-detail")) {
 			String courseId = req.getParameter("id");
 			Course course = courseService.findById(courseId);
-			HttpSession session = req.getSession();
+			HttpSession session = req.getSession(false);
 			User user = (User) session.getAttribute("user");
 			String userId;
 			if (user != null)
@@ -83,6 +83,7 @@ public class UserCourseController extends HttpServlet {
 			if (gia.equals("thapdencao")) {
 				FindAllIncreaseCost(req, resp);
 				Long count = adminKhoaHocService.countKhoaHoc();
+
 				req.setAttribute("countCourse", count);
 				RequestDispatcher rd = req.getRequestDispatcher("/views/user/coursePage.jsp");
 				rd.forward(req, resp);
@@ -161,7 +162,6 @@ public class UserCourseController extends HttpServlet {
 			List<Course> list = adminKhoaHocService.FindAllCourseIncreaseCost();
 
 			req.setAttribute("course", list);
-			String courseId = req.getParameter("courseId");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -173,7 +173,6 @@ public class UserCourseController extends HttpServlet {
 		try {
 			List<Course> list = adminKhoaHocService.FindAllCourse();
 
-			System.out.print(list.size());
 			req.setAttribute("course", list);
 
 		} catch (Exception e) {

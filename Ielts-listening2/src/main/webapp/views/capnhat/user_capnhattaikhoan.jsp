@@ -57,7 +57,7 @@
                                                     </svg>
 											</a>
 										</h2>
-										<p class="mb-0 d-block">@${account.userName }</p>
+										<p class="mb-0 d-block">${account.userName }</p>
 									</div>
 								</div>
 
@@ -197,39 +197,12 @@
 										<p class="mb-4">Edit your personal information and
 											address.</p>
 										<!-- Form -->
-										<div class="row gx-3 ">
-
+										<div class="row gx-3 "></div>
 									</div>
-								</div>
-								<hr class="my-5" />
-								<div>
-									<h4 class="mb-0">Personal Details</h4>
-									<p class="mb-4">Edit your personal information and address.</p>
-									<!-- Form -->
-									<div class="row gx-3 " >
-									
-									
-									
-									
-										<!--  name -->
-										<div class="mb-3 col-12 col-md-6">
-											<label class="form-label" for="fname">Họ và tên</label> <input
-												type="text" class="form-control " id="inputname"
-												name="inputName" placeholder="Họ và tên"
-												value="${currentUser.name}" required>
-											<div class="invalid-feedback">Hãy điền tên vào</div>
-										</div>
-										<!-- Email-->
-										<div class="mb-3 col-12 col-md-6">
-											<label class="form-label" for="Email">Email</label> <input
-												type="text" class="form-control " id="inputemail"
-												name="inputEmail" placeholder="Email"
-												value="${ currentUser.email}" required>
-											<div class="invalid-feedback">Hãy điền Email.</div>
-										</div>
+									<hr class="my-5" />
+									<div>
 
-
-
+										<div class="row gx-3 ">
 											<!--  name -->
 											<div class="mb-3 col-12 col-md-6">
 												<label class="form-label" for="fname">Họ và tên</label> <input

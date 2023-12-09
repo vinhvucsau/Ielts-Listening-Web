@@ -12,48 +12,33 @@ import javax.persistence.Table;
 
 import hcmute.utils.Constants;
 
-
 @Entity
 @Table(name = Constants.BLOG_RELATION)
-public class Blog implements Serializable{
+public class Blog implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String blogId;
-	
+
 	@Column(name = "createdDate")
 	private Date createdDate;
-	
+
 	@Column(name = "content")
 	private String content;
-	
+
 	@Column(name = "title")
 	private String title;
-	
+
 	@Column(name = "image")
 	private String image;
-	
-	
+
+	@Column(name = "status")
+	private Integer status;
 	@ManyToOne
-	@JoinColumn(name = "userName") 
+	@JoinColumn(name = "userId")
 	private User users;
 
-	public Blog(String blogId, Date createdDate, String content, String title, String image, User users) {
-		super();
-		this.blogId = blogId;
-		this.createdDate = createdDate;
-		this.content = content;
-		this.title = title;
-		this.image = image;
-		this.users = users;
-	}
-
-	
-	public Blog() {
-		super();
-	}
-	
 	public String getBlogId() {
 		return blogId;
 	}
@@ -94,6 +79,14 @@ public class Blog implements Serializable{
 		this.image = image;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	public User getUsers() {
 		return users;
 	}
@@ -101,6 +94,22 @@ public class Blog implements Serializable{
 	public void setUsers(User users) {
 		this.users = users;
 	}
-	
+
+	public Blog(String blogId, Date createdDate, String content, String title, String image, Integer status,
+			User users) {
+
+		this.blogId = blogId;
+		this.createdDate = createdDate;
+		this.content = content;
+		this.title = title;
+		this.image = image;
+		this.status = status;
+		this.users = users;
+	}
+
+	public Blog() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 }

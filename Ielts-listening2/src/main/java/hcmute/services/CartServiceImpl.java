@@ -33,4 +33,10 @@ public class CartServiceImpl implements ICartService {
 
 	}
 
+	@Override
+	public void update(Cart cart) {
+		cartAbs.update(cart);
+		
+	}
+
 }

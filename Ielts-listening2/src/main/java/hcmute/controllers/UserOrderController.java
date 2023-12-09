@@ -19,12 +19,16 @@ import javax.servlet.http.HttpSession;
 
 import JPAConfig.JPAConfig;
 import hcmute.DAO.IPayDetailDAO;
+import hcmute.entity.Cart;
+import hcmute.entity.CombineCart;
 import hcmute.entity.Course;
 import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
+import hcmute.services.CartServiceImpl;
 import hcmute.services.CourseServiceImpl;
+import hcmute.services.ICartService;
 import hcmute.services.ICourseService;
 import hcmute.services.IPayDetailService;
 import hcmute.services.IPaymentService;
@@ -54,15 +58,14 @@ public class UserOrderController extends HttpServlet {
 		user = (User) session.getAttribute("user");
 		if (url.contains("order")) {
 			listCourseId = req.getParameter("listCourseId");
-			if (listCourseId != null)
-
-			{
+			if (listCourseId != null) {
 				String[] courseIds = listCourseId.split("&");
-
 				List<Course> courseList = new ArrayList<Course>();
 				for (String courseId : courseIds) {
-					Course course = courseService.findById(courseId);
-					courseList.add(course);
+					if (!courseId.isEmpty()) {
+						Course course = courseService.findById(courseId);
+						courseList.add(course);
+					}
 				}
 				req.setAttribute("networth", user.getNetworth());
 				req.setAttribute("courseList", courseList);
@@ -76,12 +79,13 @@ public class UserOrderController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		IUserService userService = new UserServiceImpl();
+		ICartService cartService = new CartServiceImpl();
 		if (url.contains("updateNetworth")) {
 			String inputNetworth = req.getParameter("inputNetworth");
 			int networth = Integer.parseInt(inputNetworth) + user.getNetworth();
 			user.setNetworth(networth);
 			userService.update(user);
-			HttpSession session = req.getSession();
+			HttpSession session = req.getSession(false);
 			session.setAttribute("user", user);
 			resp.sendRedirect(req.getContextPath() + "/user/order?listCourseId=" + listCourseId.replaceAll("&", "%26"));
 		} else if (url.contains("confirmCheckout")) {
@@ -92,6 +96,7 @@ public class UserOrderController extends HttpServlet {
 				Course course = courseService.findById(courseId);
 				courseList.add(course);
 			}
+
 			LocalDateTime currentDateTime = LocalDateTime.now();
 			Payment payment = new Payment();
 			payment.setPaymentId("ID");
@@ -107,6 +112,7 @@ public class UserOrderController extends HttpServlet {
 				userCourse.setUsers(user);
 				userCourse.setCourses(course);
 				userCourse.setUser_courseId("ID");
+				userCourse.setAcceptDay(null);
 				userCourseService.insert(userCourse);
 
 				userCourse = userCourseService.findByUserIdAndCourseId(user.getUserId(), course.getCourseId()).get(0);
@@ -116,10 +122,26 @@ public class UserOrderController extends HttpServlet {
 				payDetail.setUserCourse(userCourse);
 				payDetailService.insert(payDetail);
 			}
+			List<Cart> carts = cartService.findByUserId(user.getUserId());
+			List<Cart> finalCarts = new ArrayList<Cart>();
+			for (Cart cart : carts) {
+				Course course = courseService.findById(cart.getCourse().getCourseId());
+				List<UserCourse> listUc = userCourseService.findByUserIdAndCourseId(user.getUserId(),
+						course.getCourseId());
+				if (listUc.size() == 0) {
+					cart.setBuy(false);
+					finalCarts.add(cart);
+				} else {
+					cart.setBuy(true);
+				}
+				cartService.update(cart);
+			}
+
 			user.setNetworth(user.getNetworth() - totalCost);
 			userService.update(user);
-			HttpSession session = req.getSession();
+			HttpSession session = req.getSession(false);
 			session.setAttribute("user", user);
+			session.setAttribute("cart", finalCarts);
 			resp.sendRedirect(req.getContextPath() + "/user/course");
 		}
 	}
