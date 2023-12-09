@@ -74,7 +74,7 @@ public abstract class AbstractDao<T> {
 		T entity = enma.find(entityClass, id);
 		return entity;
 		} finally {
-			enma.close();
+			/* enma.close(); */
 		}
 	}
 
