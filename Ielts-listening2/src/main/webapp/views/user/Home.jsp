@@ -63,7 +63,13 @@
                        							Chương trình học trên Prep đã giúp 620+ học viên đạt IELTS 7.0 trở lên
 												và 90+ học viên đạt 8.0 - 8.5.</p>
                           <!-- btn -> Register -->
-                       <a href="#" class="btn btn-primary">Bắt đầu ngay</a>
+                       <c:if test="${user == null}">
+                       	<a href="../authentication-signup" class="btn btn-primary">Bắt đầu ngay</a>
+                       </c:if>
+                       <c:if test="${user != null}">
+                       	<a href="course" class="btn btn-primary">Bắt đầu ngay</a>
+                       </c:if>
+                      
                        <a href="https://youtu.be/Wfo4JGPY7HA?si=YQAcPaBl9-ci84gN" class="glightbox fs-4 text-inherit ms-3"><img src="../assets/images/svg/play-btn.svg" alt="" class="me-2">Xem giới thiệu</a>
 
 
@@ -183,373 +189,77 @@
 							<div class="wrapper">
 								<i id="left" class="fe fe-chevron-left"></i>
 								<ul class="carousel">
+								<c:forEach var="item" items="${course}">								
 									<li class="card">
-										<a href="course-single.html"><img src="../assets/images/course/course-python.jpg" alt="course" class="card-img-top"></a>
-                                        <!-- Card Body -->
+												<c:if test="${item.image != null}">
+													<a href="listLesson?courseId=${item.courseId}"><img style="height: 200px; object-fit: cover;"
+													src="<c:url value='/image?fname=courseIMG/${ item.image}'/>" alt="course"
+													class="card-img-top img-fluid"></a>
+												</c:if>    
+												<c:if test="${item.image == null}">
+													<a href="listLesson?courseId=${item.courseId}"><img style="height: 200px; object-fit: cover;"
+													src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain" alt="course"
+													class="card-img-top img-fluid"></a>
+												</c:if>                                    <!-- Card Body -->
                                         <div class="card-body">
-                                        	<h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">The Python Course: build web application</a></h4>
+                                        	<h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">${item.courseName}</a></h4>
+                                            <span class="fs-5">${item.description}</span>       
                                             <!-- List -->
-                                            <ul class="mb-3 list-inline">
-                                            	<li class="list-inline-item">
-                                                	<span>
-                                                    	<svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-clock align-baseline"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z">
-                                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z">
-                                                        </svg>
-                                                     </span>
-                                                     <span>2h 30m</span>
-                                                </li>
+                                            
+                                            <ul class="mb-0 list-inline "  >
+                                          
                                                 <li class="list-inline-item">
-                                                     <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                          <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                          <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE">
-                                                          <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9">
-                                                     </svg>
-                                                     Intermediate
+                                                     
+                                                     <p class="card-text color-blue--primary fw-bold fs-5 mt-1"><fmt:formatNumber value="${item.cost}"
+														pattern="###,### VNĐ" />
+														
+														<p class="card-text fw-bold fs-5"
+															style="color: rgb(113, 113, 113)"></p>
+														</p>
                                                 </li>
                                             </ul>
                                             <div class="lh-1">
-                                                <span class="align-text-top">
-                                                     <span class="fs-6">
-                                                           <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                            </svg>
-                                                            <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                            </svg>
-                                                            <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                            </svg>
-                                                            <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                            </svg>
-                                                            <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </span>
-                                                    <span class="text-warning">4.5</span>
-                                                    <span class="fs-6">(13,245)</span>
+                                                <span class="align-text-top"> <span class="fs-6">
+																<div class="d-flex gap-5">
+																	<c:forEach var="lesson" items="${item.lessons}">
+																		<c:forEach var="enrrol_lesson"
+																			items="${lesson.enrrolLesson }">
+
+
+																			<c:set var="totalStars" value="0" />
+																			<c:set var="count" value="0" />
+																			<c:forEach var="lesson" items="${item.lessons}">
+																				<c:forEach var="enrrol_lesson"
+																					items="${lesson.enrrolLesson}">
+																					<c:set var="totalStars"
+																						value="${totalStars + enrrol_lesson.numberOfStar}" />
+																					<c:set var="count" value="${count + 1}" />
+																				</c:forEach>
+																			</c:forEach>
+																			<c:choose>
+																				<c:when test="${count > 0}">
+																					<c:set var="averageStars"
+																						value="${totalStars / count}" />
+																					<c:set var="roundedAverage">
+																						<c:out
+																							value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																					</c:set>
+																				</c:when>
+																			</c:choose>
+																		</c:forEach>
+																	</c:forEach>
+																	<div class="stars rating-star"
+																		data-rating="${roundedAverage}"></div>
+																	<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
+																	<span class="fs-6">(${count})</span>
+																</div>
+														</span>
                                                     </div>
                                                 </div>
                                                 
 									</li>
-									<li class="card">
-										<a href="course-single.html"><img src="../assets/images/course/course-react.jpg" alt="course" class="card-img-top"></a>
-                                        <!-- Card Body -->
-                                        <div class="card-body">
-                                        	<h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">How to easily create a website with React</a></h4>
-                                            <!-- List -->
-                                            <ul class="mb-3 list-inline">
-                                                 <li class="list-inline-item">
-                                                      <span>
-                                                          <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-clock align-baseline"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z">
-                                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z">
-                                                            </svg>
-                                                       </span>
-                                                       <span>3h 56m</span>
-                                                  </li>
-                                                        <li class="list-inline-item">
-                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9">
-                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9">
-                                                            </svg>
-                                                            Beginner
-                                                        </li>
-                                                    </ul>
-                                                    <div class="lh-1">
-                                                        <span class="align-text-top">
-                                                            <span class="fs-6">
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </span>
-                                                        <span class="text-warning">4.5</span>
-                                                        <span class="fs-6">(7,700)</span>
-                                                    </div>
-                                                </div>
-                                                
-									</li>
-									<li class="card">
-										<a href="course-single.html"><img src="../assets/images/course/course-angular.jpg" alt="course" class="card-img-top"></a>
-                                                <!-- Card Body -->
-                                                <div class="card-body">
-                                                    <h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">Angular - the complete guide for beginner</a></h4>
-                                                    <!-- List -->
-                                                    <ul class="mb-3 list-inline">
-                                                        <li class="list-inline-item">
-                                                            <span>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-clock align-baseline"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z">
-                                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z">
-                                                                </svg>
-                                                            </span>
-                                                            <span>1h 30m</span>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9">
-                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9">
-                                                            </svg>
-                                                            Beginner
-                                                        </li>
-                                                    </ul>
-                                                    <div class="lh-1">
-                                                        <span class="align-text-top">
-                                                            <span class="fs-6">
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </span>
-                                                        <span class="text-warning">4.5</span>
-                                                        <span class="fs-6">(8,890)</span>
-                                                    </div>
-                                                </div>
-                                                
-									</li>
-									<li class="card">
-										<a href="course-single.html"><img src="../assets/images/course/course-graphql.jpg" alt="course" class="card-img-top"></a>
-                                                <!-- Card Body -->
-                                                <div class="card-body">
-                                                    <h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">GraphQL: introduction to graphQL for beginners</a></h4>
-                                                    <!-- List -->
-                                                    <ul class="mb-3 list-inline">
-                                                        <li class="list-inline-item">
-                                                            <span>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-clock align-baseline"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z">
-                                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z">
-                                                                </svg>
-                                                            </span>
-                                                            <span>2h 46m</span>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE">
-                                                                <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE">
-                                                                <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE">
-                                                            </svg>
-                                                            Advance
-                                                        </li>
-                                                    </ul>
-                                                    <div class="lh-1">
-                                                        <span class="align-text-top">
-                                                            <span class="fs-6">
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="12"
-                                                                    height="12"
-                                                                    fill="currentColor"
-                                                                    class="bi bi-star-fill text-warning"
-                                                                    viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </span>
-                                                        <span class="text-warning">4.5</span>
-                                                        <span class="fs-6">(9,300)</span>
-                                                    </div>
-                                                </div>
-									</li>
+
+								</c:forEach>
 								</ul>
 								<i id="right" class="fe fe-chevron-right"></i>
 							</div>
@@ -557,7 +267,7 @@
 						<!-- btn -->
 						<div class="col-md-12 text-center">
 							<!-- btn -> Courses -->
-							<a href="#" class="btn btn-primary">Xem tất cả các khóa học</a>
+							<a href="course" class="btn btn-primary">Xem tất cả các khóa học</a>
 						</div>
 					</div>
 				</div>
@@ -696,7 +406,12 @@
 						</div>
 						<!-- btn -->
 						<div class="col-md-12 mt-3">
-							<a href="#" class="btn btn-primary">Đăng ký ngay</a>
+						<c:if test="${user == null}">
+                       		<a href="../authentication-signup" class="btn btn-primary">Đăng ký ngay</a>
+                       </c:if>
+                       <c:if test="${user != null}">
+                       		<a href="course" class="btn btn-primary">Đăng ký ngay</a>
+                       </c:if>
 						</div>
 					</div>
 				</div>
@@ -765,8 +480,14 @@
 					<p class="lead px-lg-8 mb-6">Các khoá học của Prep được biên soạn và trình bày một cách khoa học nhất.</p>
 					<!-- button -->
 					<div class="d-grid d-md-block">
-						<a href="../sign-up.html" class="btn btn-primary mb-2 mb-md-0">Xem các khóa học</a>
-						<a href="../sign-up.html" class="btn btn-info">Đăng ký ngay</a>
+						<a href="course" class="btn btn-primary mb-2 mb-md-0">Xem các khóa học</a>
+						
+						<c:if test="${user == null}">
+                       		<a href="../authentication-signup" class="btn btn-info">Đăng ký ngay</a>
+                       </c:if>
+                       <c:if test="${user != null}">
+                       		<a href="course" class="btn btn-info">Đăng ký ngay</a>
+                       </c:if>
 					</div>
 				</div>
 			</div>
@@ -983,7 +704,24 @@
 		wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
 		wrapper.addEventListener("mouseleave", autoPlay);
 	</script>
+	<script>
+	    document.querySelectorAll('.stars').forEach(starContainer => {
+	        const rating = parseInt(starContainer.getAttribute('data-rating'));
+	        starContainer.innerHTML = getStarRating(rating);
+	    });
 	
+	    function getStarRating(rating) {
+	        let stars = '';
+	        for (let i = 0; i < 5; i++) {
+	            if (i < rating) {
+	                stars += '⭐'; 
+	            } else {
+	                stars += '★'; 
+	            }
+	        }
+	        return stars;
+	    }
+	</script>
 	
 	<!-- Scripts -->
 	<script src="../assets/libs/typed.js/dist/typed.umd.js"></script>
