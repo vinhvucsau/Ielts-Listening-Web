@@ -2,6 +2,7 @@ package hcmute.services;
 
 import java.util.List;
 
+import hcmute.entity.EnrrolLesson;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
 
@@ -13,4 +14,7 @@ public interface IUserService {
 	List<User> findAll();
 	Long countCourseByUserId(String userId);
 	List<UserCourse> findAllUserCourseByUserId(String userId);
+	List<Double> findAllScoreByUserId(String userId);
+	List<EnrrolLesson> findAllEnrrolLessonByUserId(String userId);
+	List<String> findAllTestNamefromUserId(String userId); 
 }

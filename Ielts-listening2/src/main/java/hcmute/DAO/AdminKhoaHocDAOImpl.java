@@ -78,7 +78,7 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 	@Override
 	public List<Course> FindAllCourseIncreaseRate() {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(e.numberOfStar)";
+		String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(COALESCE(e.numberOfStar, 0))";
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
 	}

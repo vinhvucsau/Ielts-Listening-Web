@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,16 +171,19 @@
 
     <script>
     var jsonData = '${jsonData}';
+    var jsonDay = '${jsonDay}';
     var data = JSON.parse(jsonData);
+    var days = JSON.parse(jsonDay);
+
 
         var e = {
             series: [
                 {
-                    name: "Current Month",
+                    name: "Score",
                     data: data,
                 },
             ],
-            labels: [
+            /* labels: [
                 "Jan",
                 "Feb",
                 "March",
@@ -192,7 +196,11 @@
                 "Oct",
                 "Nov",
                 "Dec",
-            ],
+                
+            ], */
+            labels: days,
+        
+        
             chart: {
                 fontFamily: "$font-family-base",
                 height: "280px",
@@ -219,9 +227,9 @@
                     style: { fontSize: "13px", fontWeight: 400, cssClass: "apexcharts-xaxis-label" },
                     offsetX: -15,
                 },
-                tickAmount: 3,
-                min: 10,
-                max: 40,
+                tickAmount: 10,
+                min: 0,
+                max: 10,
             },
             grid: {
                 borderColor: "#dddddd",
