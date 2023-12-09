@@ -271,7 +271,7 @@ User user = (User) session.getAttribute("user");
 										<a
 											class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
 											style="background-image: url(../assets/images/course/course-javascript.jpg)">
-											<img src="../assets/images/course/course-node.jpg" alt="..."
+											<img src="${i.image }" alt="..."
 											class="img-fluid d-lg-none invisible">
 										</a>
 										<div class="col-lg-9 col-md-12 col-12">

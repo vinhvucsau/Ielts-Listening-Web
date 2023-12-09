@@ -11,7 +11,7 @@ import hcmute.entity.Course;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
 
-public class UserDAOImpl extends AbstractDao<User> implements IUserDAO{
+public class UserDAOImpl extends AbstractDao<User> implements IUserDAO {
 
 	public UserDAOImpl() {
 		super(User.class);
@@ -19,54 +19,93 @@ public class UserDAOImpl extends AbstractDao<User> implements IUserDAO{
 	}
 
 	public User findUserByID(String id) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		User user = enma.find(User.class, id);
-		return user;
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			User user = entityManager.find(User.class, id);
+			return user;
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return null; // or throw a custom exception, return a default value, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 	@Override
 	public boolean findDuplicateEmail(String email, String userId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT u from User u where u.email = :email and u.userId != :userId";
-		TypedQuery<User> query = enma.createQuery(jpql, User.class);
-		query.setParameter("email", email);
-		query.setParameter("userId", userId);
-		if (query.getResultList().size() > 0) {
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT u FROM User u WHERE u.email = :email AND u.userId != :userId";
+			TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
+			query.setParameter("email", email);
+			query.setParameter("userId", userId);
+			return query.getResultList().isEmpty();
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
 		}
-		return true;
 	}
 
 	@Override
 	public boolean findDuplicatePhone(String phoneNum, String userId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT u from User u where u.phoneNumber = :phoneNumber and u.userId != :userId";
-		TypedQuery<User> query = enma.createQuery(jpql, User.class);
-		query.setParameter("phoneNumber", phoneNum);
-		query.setParameter("userId", userId);
-		if (query.getResultList().size() > 0) {
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber AND u.userId != :userId";
+			TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
+			query.setParameter("phoneNumber", phoneNum);
+			query.setParameter("userId", userId);
+			return query.getResultList().isEmpty();
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
 		}
-		return true;
 	}
 
 	@Override
 	public Long countCourseByUserId(String userId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT COUNT(uc) FROM UserCourse uc WHERE uc.users.userId = :userId";
-		Query query = enma.createQuery(jpql);
-		query.setParameter("userId", userId);
-		Long count = (Long) query.getSingleResult();
-		return count;
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT COUNT(uc) FROM UserCourse uc WHERE uc.users.userId = :userId";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("userId", userId);
+			return (Long) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0L; // or throw a custom exception, return a default value, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 	@Override
 	public List<UserCourse> findAllUserCourseByUserId(String userId) {
-		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "SELECT uc FROM UserCourse uc WHERE uc.users.userId = :userId";
-		TypedQuery<UserCourse> query = en.createQuery(jpql, UserCourse.class);
-		query.setParameter("userId", userId);
-		return query.getResultList();
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT uc FROM UserCourse uc WHERE uc.users.userId = :userId";
+			TypedQuery<UserCourse> query = entityManager.createQuery(jpql, UserCourse.class);
+			query.setParameter("userId", userId);
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null; // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 }

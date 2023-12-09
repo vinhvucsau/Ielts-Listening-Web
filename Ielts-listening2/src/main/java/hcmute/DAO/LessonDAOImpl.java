@@ -17,11 +17,21 @@ public class LessonDAOImpl extends AbstractDao<Lesson> implements IAdminLessonDA
 
 	@Override
 	public List<Lesson> findLessonByCourse(String courseId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT l FROM Lesson l WHERE l.courses.courseId = :courseId";
-		TypedQuery<Lesson> query = enma.createQuery(jpql, Lesson.class);
-		query.setParameter("courseId", courseId);
-		return query.getResultList();
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT l FROM Lesson l WHERE l.courses.courseId = :courseId";
+			TypedQuery<Lesson> query = entityManager.createQuery(jpql, Lesson.class);
+			query.setParameter("courseId", courseId);
+			return query.getResultList();
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return null; // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 }

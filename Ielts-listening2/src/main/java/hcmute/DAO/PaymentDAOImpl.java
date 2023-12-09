@@ -18,16 +18,25 @@ public class PaymentDAOImpl extends AbstractDao<Payment> implements IPaymentDAO 
 	}
 
 	public Payment findByDatebuyAndUserId(LocalDateTime dateBuy, String userId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "SELECT p FROM Payment p WHERE p.dateBuy = :dateBuy AND p.users.userId = :userId";
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT p FROM Payment p WHERE p.dateBuy = :dateBuy AND p.users.userId = :userId";
 
-		TypedQuery<Payment> query = enma.createQuery(jpql, Payment.class);
-		query.setParameter("dateBuy", dateBuy);
-		query.setParameter("userId", userId);
+			TypedQuery<Payment> query = entityManager.createQuery(jpql, Payment.class);
+			query.setParameter("dateBuy", dateBuy);
+			query.setParameter("userId", userId);
 
-		List<Payment> resultList = query.getResultList();
+			List<Payment> resultList = query.getResultList();
 
-		return resultList.isEmpty() ? null : resultList.get(0);
-
+			return resultList.isEmpty() ? null : resultList.get(0);
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return null; // or throw a custom exception, return a default value, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 }
