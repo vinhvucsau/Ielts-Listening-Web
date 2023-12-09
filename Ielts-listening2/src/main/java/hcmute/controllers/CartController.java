@@ -39,17 +39,19 @@ public class CartController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		ICartService cartService = new CartServiceImpl();
-		ICourseService courseService = new CourseServiceImpl();
-		IUserCourseService userCourseService = new UserCourseServiceImpl();
+		/*
+		 * ICourseService courseService = new CourseServiceImpl(); IUserCourseService
+		 * userCourseService = new UserCourseServiceImpl();
+		 */
+		HttpSession session = req.getSession(false);
 		if (url.contains("mycart")) {
 			int countAddToCartByUser = 0;
-			HttpSession session1 = req.getSession();
-			User user1 = (User) session1.getAttribute("user");
+
+			User user = (User) session.getAttribute("user");
 			List<Cart> finalCarts = new ArrayList<Cart>();
 
-			HttpSession session = req.getSession();
-			User user = (User) session.getAttribute("user");
-			String userId = req.getParameter("userId") == null ? "" : req.getParameter("userId");
+			// String userId = req.getParameter("userId") == null ? "" :
+			// req.getParameter("userId");
 
 			int networth = user.getNetworth() == null ? 0 : user.getNetworth();
 
@@ -67,7 +69,7 @@ public class CartController extends HttpServlet {
 			session.setAttribute("cart", finalCarts);
 			req.setAttribute("course", finalCarts);
 			req.setAttribute("countAddToCartByUser", countAddToCartByUser);
-			req.setAttribute("user", user1);
+			req.setAttribute("user", user);
 			req.setAttribute("networth", networth);
 			req.getRequestDispatcher("/views/user/cart.jsp").forward(req, resp);
 		}
@@ -79,7 +81,7 @@ public class CartController extends HttpServlet {
 		ICourseService courseService = new CourseServiceImpl();
 		ICartService cartService = new CartServiceImpl();
 		IUserCourseService userCourseService = new UserCourseServiceImpl();
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
 		String prevUrl = req.getHeader("referer");
 		String[] prev = prevUrl.split("/");
 		String lastPrevUrl = prev[prev.length - 1];
@@ -127,6 +129,7 @@ public class CartController extends HttpServlet {
 			}
 
 		} else if (url.contains("deleteToCart")) {
+
 			String cartId = req.getParameter("cartId");
 			cartService.delete(cartId);
 			User user = (User) session.getAttribute("user");
@@ -138,7 +141,7 @@ public class CartController extends HttpServlet {
 			}
 
 			session.setAttribute("cart", finalCarts);
-			
+
 			resp.sendRedirect(req.getContextPath() + "/user/" + lastPrevUrl);
 		}
 	}

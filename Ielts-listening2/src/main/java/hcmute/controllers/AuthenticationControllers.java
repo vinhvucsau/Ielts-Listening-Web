@@ -86,6 +86,28 @@ public class AuthenticationControllers extends HttpServlet {
 			session.removeAttribute("user");
 			session.removeAttribute("role");
 			session.removeAttribute("cart");
+			Cookie[] cookies = req.getCookies();
+
+			if (cookies != null) {
+				Cookie cookie1 = new Cookie("username", "");
+				cookie1.setMaxAge(0);
+				resp.addCookie(cookie1);
+				Cookie cookie2 = new Cookie("email", "");
+				cookie2.setMaxAge(0);
+				resp.addCookie(cookie2);
+				Cookie cookie3 = new Cookie("code", "");
+				cookie3.setMaxAge(0);
+				resp.addCookie(cookie3);
+				Cookie cookie4 = new Cookie("password", "");
+				cookie4.setMaxAge(0);
+				resp.addCookie(cookie4);
+				Cookie cookie5 = new Cookie("createCodeAt", "");
+				cookie5.setMaxAge(0);
+				resp.addCookie(cookie5);
+				Cookie cookie6 = new Cookie("turn", "");
+				cookie6.setMaxAge(0);
+				resp.addCookie(cookie6);
+			}
 			resp.sendRedirect(req.getContextPath() + "/user/home");
 
 		} else if (url.contains("forgotpassword")) {

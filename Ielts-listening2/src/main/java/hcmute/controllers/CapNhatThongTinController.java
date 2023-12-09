@@ -1,7 +1,7 @@
 package hcmute.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import javax.servlet.http.Cookie;
-import hcmute.DAO.AccountDAOImpl;
-import hcmute.DAO.UserDAOImpl;
+
 import hcmute.entity.Account;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
@@ -40,16 +37,16 @@ public class CapNhatThongTinController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
-
+		HttpSession session = req.getSession(false);
+		
 		// Set cứng ID để test chức năng
-		String id = req.getParameter("userId");
-		User user = findUserById(id);
+		
+		User user = (User) session.getAttribute("user");
 		Account account = accountService.findByID(user.getAccount().getUserName());
 
 		req.setAttribute("currentUser", user);
 		req.setAttribute("account", account);
-		HttpSession session = req.getSession(true);
-		session.setAttribute("user", user);
+		
 
 		if (url.contains("capnhattaikhoan")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
@@ -197,8 +194,5 @@ public class CapNhatThongTinController extends HttpServlet {
 		}
 	}
 
-	private User findUserById(String id) {
-		User user = userService.findUserByID(id);
-		return user;
-	}
+	
 }

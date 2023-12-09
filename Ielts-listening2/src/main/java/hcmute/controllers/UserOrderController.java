@@ -85,7 +85,7 @@ public class UserOrderController extends HttpServlet {
 			int networth = Integer.parseInt(inputNetworth) + user.getNetworth();
 			user.setNetworth(networth);
 			userService.update(user);
-			HttpSession session = req.getSession();
+			HttpSession session = req.getSession(false);
 			session.setAttribute("user", user);
 			resp.sendRedirect(req.getContextPath() + "/user/order?listCourseId=" + listCourseId.replaceAll("&", "%26"));
 		} else if (url.contains("confirmCheckout")) {
@@ -112,6 +112,7 @@ public class UserOrderController extends HttpServlet {
 				userCourse.setUsers(user);
 				userCourse.setCourses(course);
 				userCourse.setUser_courseId("ID");
+				userCourse.setAcceptDay(null);
 				userCourseService.insert(userCourse);
 
 				userCourse = userCourseService.findByUserIdAndCourseId(user.getUserId(), course.getCourseId()).get(0);
@@ -138,7 +139,7 @@ public class UserOrderController extends HttpServlet {
 
 			user.setNetworth(user.getNetworth() - totalCost);
 			userService.update(user);
-			HttpSession session = req.getSession();
+			HttpSession session = req.getSession(false);
 			session.setAttribute("user", user);
 			session.setAttribute("cart", finalCarts);
 			resp.sendRedirect(req.getContextPath() + "/user/course");
