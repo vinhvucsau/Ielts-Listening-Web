@@ -424,8 +424,6 @@ Long count = (Long) request.getAttribute("countCourse");
 																		<div class="stars rating-star"
 																			data-rating="${roundedAverage}"></div>
 																		<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
-																		<div class="long1">${totalStars}</div>
-																		<div class="long1">${count}</div>
 																	</div>
 															</span>
 														</div>
@@ -559,33 +557,41 @@ Long count = (Long) request.getAttribute("countCourse");
 															<li class=" list-inline-item align-text-top"><span
 																class="fs-6">
 																	<div class="d-flex gap-5">
+																		<c:set var="totalStars" value="0" />
+																		<c:set var="count" value="0" />
 																		<c:forEach var="lesson" items="${i.lessons}">
 																			<c:forEach var="enrrol_lesson"
-																				items="${lesson.enrrolLesson }">
-
-																				<c:set var="totalStars" value="0" />
-																				<c:set var="count" value="0" />
-																				<c:forEach var="lesson" items="${i.lessons}">
-																					<c:forEach var="enrrol_lesson"
-																						items="${lesson.enrrolLesson}">
-																						<c:set var="totalStars"
-																							value="${totalStars +enrrol_lesson.numberOfStar == null ? '0' : enrrol_lesson.numberOfStar}" />
-																						<c:set var="count" value="${count + 1}" />
-																					</c:forEach>
-																				</c:forEach>
+																				items="${lesson.enrrolLesson}">
+																				<c:set var="totalStars"
+																					value="${totalStars + enrrol_lesson.numberOfStar}" />
 
 																				<c:choose>
-																					<c:when test="${count > 0}">
-																						<c:set var="averageStars"
-																							value="${totalStars / count}" />
-																						<c:set var="roundedAverage">
-																							<c:out
-																								value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																						</c:set>
+																					<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																						<c:set var="count" value="${count + 1}" />
 																					</c:when>
+																					
 																				</c:choose>
+
+																				
 																			</c:forEach>
 																		</c:forEach>
+																		<c:choose>
+																			<c:when test="${count == 0}">
+																				<c:set var="averageStars" value="0" />
+																				<c:set var="roundedAverage">
+																					<c:out
+																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																				</c:set>
+																			</c:when>
+																			<c:when test="${count > 0}">
+																				<c:set var="averageStars"
+																					value="${totalStars / count}" />
+																				<c:set var="roundedAverage">
+																					<c:out
+																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																				</c:set>
+																			</c:when>
+																		</c:choose>
 
 																		<div class="stars rating-star"
 																			data-rating="${roundedAverage}"></div>

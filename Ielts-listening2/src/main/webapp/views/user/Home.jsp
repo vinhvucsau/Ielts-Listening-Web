@@ -202,7 +202,7 @@
 													class="card-img-top img-fluid"></a>
 												</c:if>                                    <!-- Card Body -->
                                         <div class="card-body">
-                                        	<h4 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">${item.courseName}</a></h4>
+                                        	<h3 class="mb-2 text-truncate-line-2"><a href="course-single.html" class="text-inherit">${item.courseName}</a></h4>
                                             <span class="fs-5">${item.description}</span>       
                                             <!-- List -->
                                             
@@ -221,33 +221,41 @@
                                             <div class="lh-1">
                                                 <span class="align-text-top"> <span class="fs-6">
 																<div class="d-flex gap-5">
-																	<c:forEach var="lesson" items="${item.lessons}">
-																		<c:forEach var="enrrol_lesson"
-																			items="${lesson.enrrolLesson }">
+																	<c:set var="totalStars" value="0" />
+																		<c:set var="count" value="0" />
+																		<c:forEach var="lesson" items="${item.lessons}">
+																			<c:forEach var="enrrol_lesson"
+																				items="${lesson.enrrolLesson}">
+																				<c:set var="totalStars"
+																					value="${totalStars + enrrol_lesson.numberOfStar}" />
 
+																				<c:choose>
+																					<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																						<c:set var="count" value="${count + 1}" />
+																					</c:when>
+																					
+																				</c:choose>
 
-																			<c:set var="totalStars" value="0" />
-																			<c:set var="count" value="0" />
-																			<c:forEach var="lesson" items="${item.lessons}">
-																				<c:forEach var="enrrol_lesson"
-																					items="${lesson.enrrolLesson}">
-																					<c:set var="totalStars"
-																						value="${totalStars + enrrol_lesson.numberOfStar}" />
-																					<c:set var="count" value="${count + 1}" />
-																				</c:forEach>
+																				
 																			</c:forEach>
-																			<c:choose>
-																				<c:when test="${count > 0}">
-																					<c:set var="averageStars"
-																						value="${totalStars / count}" />
-																					<c:set var="roundedAverage">
-																						<c:out
-																							value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																					</c:set>
-																				</c:when>
-																			</c:choose>
 																		</c:forEach>
-																	</c:forEach>
+																		<c:choose>
+																			<c:when test="${count == 0}">
+																				<c:set var="averageStars" value="0" />
+																				<c:set var="roundedAverage">
+																					<c:out
+																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																				</c:set>
+																			</c:when>
+																			<c:when test="${count > 0}">
+																				<c:set var="averageStars"
+																					value="${totalStars / count}" />
+																				<c:set var="roundedAverage">
+																					<c:out
+																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																				</c:set>
+																			</c:when>
+																		</c:choose>
 																	<div class="stars rating-star"
 																		data-rating="${roundedAverage}"></div>
 																	<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
