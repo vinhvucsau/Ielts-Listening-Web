@@ -1,6 +1,7 @@
 package hcmute.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
@@ -16,6 +17,7 @@ import hcmute.entity.EnrrolTest;
 import hcmute.entity.MockTest;
 import hcmute.entity.TopicTest;
 import hcmute.entity.User;
+import hcmute.services.EnrollTestService;
 import hcmute.services.ITopicTestService;
 import hcmute.services.IUserService;
 import hcmute.services.TopicTestServiceImpl;
@@ -31,7 +33,7 @@ public class LuyenDeHomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ITopicTestService topicTestService = new TopicTestServiceImpl();
 	IUserService userService = new UserServiceImpl();
-
+	EnrollTestService enService = new EnrollTestService();
 	public LuyenDeHomeController() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -52,6 +54,19 @@ public class LuyenDeHomeController extends HttpServlet {
 		System.out.print("errrr" +topicTestList );
 		System.out.print("errrr" +pagesize );
 		System.out.print("errrr" +pageNum );
+		for (TopicTest topic: topicTestList)
+		{
+			List<MockTest> listMock = new ArrayList<MockTest>();
+			for(MockTest test : topic.getMockTests())
+			{
+				
+				test.setEnrrolTests(enService.findByMockTestId(test.getTestId()));
+				//listMock.add(test);
+			}
+			//topic.setMockTests(listMock);
+			
+		}
+		
 		request.setAttribute("topicTests", topicTestList);
 		request.setAttribute("pagesize", pagesize);
 		request.setAttribute("pageNum", pageNum);

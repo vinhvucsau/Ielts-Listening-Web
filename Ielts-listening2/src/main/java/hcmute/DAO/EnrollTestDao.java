@@ -29,4 +29,19 @@ public class EnrollTestDao extends AbstractDao<EnrrolTest>{
 	        }
 	    }
 	}
+	public List<EnrrolTest> findByMockTestId( String mockTestId) {
+	    String jpql = "Select enrollTest from EnrrolTest enrollTest where  " +
+	            "enrollTest.mockTests.testId = :mockTestId";
+	    EntityManager enma = JPAConfig.getEntityManager();
+	    try {
+	        TypedQuery<EnrrolTest> query = enma.createQuery(jpql, EnrrolTest.class);
+	        
+	        query.setParameter("mockTestId", mockTestId);
+	        return query.getResultList();
+	    } finally {
+	        if (enma != null) {
+	            enma.close();
+	        }
+	    }
+	}
 }

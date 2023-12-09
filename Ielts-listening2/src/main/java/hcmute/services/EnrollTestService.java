@@ -85,4 +85,10 @@ public class EnrollTestService{
 	public List<EnrrolTest> findByUserIdAndMockTestId(String userId, String mockTestId) {
 		return enrollTestDao.findByUserIdAndMockTestId(userId, mockTestId);
 	}
+	public List<EnrrolTest> findByMockTestId( String mockTestId) 
+	{
+		return enrollTestDao.findByMockTestId(mockTestId);
+	}
+	
+	
 }

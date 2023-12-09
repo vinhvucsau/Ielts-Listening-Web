@@ -3,6 +3,7 @@ package hcmute.DAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
@@ -88,14 +89,27 @@ public class TopicTestDAOImpl extends AbstractDao<TopicTest> implements ITopicTe
 		q.setFirstResult(page * pagesize);
 		q.setMaxResults(pagesize);
 		return q.getResultList();
->>>>>>> Stashed changes
+
 	}
- 	public List<TopicTest> getAllTopicTest() {
-		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "Select t From TopicTest t";
-		TypedQuery<TopicTest> q = en.createQuery(jpql, TopicTest.class);
-		System.out.println(q.getResultList());
-		return q.getResultList();
+ 	public List<TopicTest> getAllTopic() {
+ 		EntityManager en = JPAConfig.getEntityManager();
+ 		String jpql = "SELECT topic FROM TopicTest topic left JOIN topic.mockTests enrollTest";
+ 		TypedQuery<TopicTest> q = en.createQuery(jpql, TopicTest.class);
+
+ 		try {
+ 		    List<TopicTest> topicTests = q.getResultList();
+ 		    return topicTests;
+ 		} catch (NoResultException e) {
+ 		    // Xử lý khi không có kết quả trả về
+ 		    return null;
+ 		} catch (Exception e) {
+ 		    // Xử lý ngoại lệ khác
+ 		    e.printStackTrace();
+ 		    return null;
+ 		} finally {
+ 		    en.close();
+ 		}
+
 	}
 
 }

@@ -54,6 +54,12 @@ public class AccountServiceImpl implements IAccountServices{
 		// TODO Auto-generated method stub
 		return accountDAO.checkExistUsername(username);
 	}
+
+	@Override
+	public Account findByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return accountDAO.findByUserName(userName);
+	}
 	
 	
 }

@@ -21,59 +21,35 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 
 	@Override
 	public Long countKhoaHoc() {
-	    EntityManager enma = JPAConfig.getEntityManager();
-	    try {
-	        String jpql = "SELECT COUNT(c) FROM Course c";
-	        Query query = enma.createQuery(jpql);
-	        Long count = (Long) query.getSingleResult();
-	        return count;
-	    } finally {
-	        if (enma != null) {
-	            enma.close();
-	        }
-	    }
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "SELECT COUNT(c) FROM Course c";
+		Query query = enma.createQuery(jpql);
+		Long count = (Long) query.getSingleResult();
+		return count;
 	}
 
 	@Override
 	public List<Course> FindAllCourse() {
-	    EntityManager en = JPAConfig.getEntityManager();
-	    try {
-	        String jpql = "select c from Course c ";
-	        TypedQuery<Course> q = en.createQuery(jpql, Course.class);
-	        return q.getResultList();
-	    } finally {
-	        if (en != null) {
-	            en.close();
-	        }
-	    }
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c ";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
 	}
 
 	@Override
 	public List<Course> FindAllCourseIncreaseCost() {
-	    EntityManager en = JPAConfig.getEntityManager();
-	    try {
-	        String jpql = "select c from Course c order by c.cost";
-	        TypedQuery<Course> q = en.createQuery(jpql, Course.class);
-	        return q.getResultList();
-	    } finally {
-	        if (en != null) {
-	            en.close();
-	        }
-	    }
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c order by c.cost";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
 	}
 
 	@Override
 	public List<Course> FindAllCourseDecreaseCost() {
-	    EntityManager en = JPAConfig.getEntityManager();
-	    try {
-	        String jpql = "select c from Course c order by c.cost desc";
-	        TypedQuery<Course> q = en.createQuery(jpql, Course.class);
-	        return q.getResultList();
-	    } finally {
-	        if (en != null) {
-	            en.close();
-	        }
-	    }
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c order by c.cost desc";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
 	}
 
 	@Override
@@ -99,80 +75,62 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 			enma.close();
 		}
 	}
+
 	@Override
 	public List<Course> FindAllCourseIncreaseRate() {
-	    EntityManager en = JPAConfig.getEntityManager();
-	    try {
-	        String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(e.numberOfStar)";
-	        TypedQuery<Course> q = en.createQuery(jpql, Course.class);
-	        return q.getResultList();
-	    } finally {
-	        if (en != null) {
-	            en.close();
-	        }
-	    }
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(e.numberOfStar)";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
 	}
 
 	@Override
 	public List<Course> FindAllCourseDecreaseRate() {
-	    EntityManager en = JPAConfig.getEntityManager();
-	    try {
-	        String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
-	        TypedQuery<Course> q = en.createQuery(jpql, Course.class);
-	        return q.getResultList();
-	    } finally {
-	        if (en != null) {
-	            en.close();
-	        }
-	    }
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e group by c ORDER BY AVG(e.numberOfStar) DESC";
+		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
+		return q.getResultList();
 	}
-
 	@Override
 	public List<Course> findAll(int page, int pagesize, String searchStr, int tab) {
-	    EntityManager enma = JPAConfig.getEntityManager();
-	    try {
-	        String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0) ";
-	        if (tab == 2) {
-	            jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar)";
-	        } else if (tab == 3) {
-	            jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
-	        } else if (tab == 4) {
-	            jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
-	        } else if (tab == 5) {
-	            jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost desc";
-	        }
-	        TypedQuery<Course> query = enma.createQuery(jpql, Course.class);
-	        query.setParameter("searchStr", searchStr);
-	        query.setFirstResult(page * pagesize);
-	        query.setMaxResults(pagesize);
-	        return query.getResultList();
-	    } finally {
-	        if (enma != null) {
-	            enma.close();
-	        }
-	    }
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0) ";
+		if (tab == 2) {
+			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar)";
+		}
+		else if (tab == 3) {
+			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
+		}
+		else if (tab == 4) {
+			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
+		}
+		else if (tab == 5) {
+			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost desc";
+		}
+		TypedQuery<Course> query = enma.createQuery(jpql, Course.class);
+		query.setParameter("searchStr", searchStr);
+		query.setFirstResult(page * pagesize);
+		query.setMaxResults(pagesize);
+		return query.getResultList();
 	}
 	@Override
 	public List<Course> findAll(String searchStr, int tab) {
-	    EntityManager enma = JPAConfig.getEntityManager();
-	    try {
-	        String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0)";
-	        if (tab == 2) {
-	            jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar)";
-	        } else if (tab == 3) {
-	            jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
-	        } else if (tab == 4) {
-	            jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
-	        } else if (tab == 5) {
-	            jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost desc";
-	        }
-	        TypedQuery<Course> query = enma.createQuery(jpql, Course.class);
-	        query.setParameter("searchStr", searchStr);
-	        return query.getResultList();
-	    } finally {
-	        if (enma != null) {
-	            enma.close();
-	        }
-	    }
+		EntityManager enma = JPAConfig.getEntityManager();
+		String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0)";
+		if (tab == 2) {
+			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar)";
+		}
+		else if (tab == 3) {
+			jpql = "SELECT c FROM Course c JOIN c.lessons l JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(e.numberOfStar) DESC";
+		}
+		else if (tab == 4) {
+			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
+		}
+		else if (tab == 5) {
+			jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost desc";
+		}
+		TypedQuery<Course> query = enma.createQuery(jpql, Course.class);
+		query.setParameter("searchStr", searchStr);
+		return query.getResultList();
 	}
 }
