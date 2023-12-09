@@ -104,13 +104,29 @@
 							<div class="card-body text-center">
 								<!-- Card -->
 								<div class="accordion" id="courseAccordion">
+									<!-- Test UI -->
+									<div class="row">
+										<button class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2">
+											<span>01</span>
+											<a href="updateLesson">
+												<%-- <input type="hidden" name="lessonId" value="${i.lessonId}"> --%>
+												<span class="accordion-title ms-4">Introduction to IELTS Listening 01</span>
+											</a>
+											<a href="#" class="icon-link icon-delete"> 
+												<i class="fe fe-trash color-dark"></i>
+											</a>
+										</button>
+									</div>
+									<!-- Updated UI -->
 									<c:forEach var="i" items="${listLesson}">
 										<!-- Lesson list -->
 										<div class="row" id="lessonList">
-											<button value="${i.lessonId }" class="btn-openmodel accordion d-flex justify-content-between align-items-center btn btn-light mb-2" >
+											<button value="${i.lessonId }" class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2" >
 												<span>${i.lessonId }</span>
 												<%-- <input type="hidden" name="lessonId" value="${i.lessonId}"> --%>
-												<span class="accordion-title ms-4">${i.lessonName }</span>
+												<a href="updateLesson">
+													<span class="accordion-title ms-4">${i.lessonName }</span>
+												</a>
 												<a href="<c:url value='/admin/deleteLesson?Id=${i.lessonId}'/>" class="icon-link icon-delete"> 
 													<i class="fe fe-trash color-dark"></i>
 												</a>
@@ -118,12 +134,8 @@
 										</div>
 									</c:forEach>
 								</div>
-								<!-- Add Lesson -->								
-								<form action="addLesson" method="post">
-									<%-- <input type="hidden" name="courseId" value="${listLesson[0].courses.courseId}"> --%>
-								  	<!-- Add Button -->
-								  	<button type="submit" class="accordion btn btn-primary mt-2">Thêm bài học</button>		
-								</form>						
+								<!-- Add Lesson -->		
+								<button class="accordion btn btn-primary mt-2" onclick="showModel()">Thêm bài học</button>	
 							</div>
 						</div>
 					</div>
@@ -161,7 +173,7 @@
 		<!-- Model -->
 		<div class="model" id="model"
 			style="min-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
-			<form action="updateLesson" method="post" enctype="multipart/form-data">
+			<form action="" method="" enctype="multipart/form-data">
 				<div id="test-l-1" class="bs-stepper-pane"
 					aria-labelledby="courseFormtrigger1">
 					<!-- Card -->
@@ -202,17 +214,9 @@
 									<label class="form-label">Answer Test</label>
 
 								</div>
-								<c:forEach var="j" items="${listAnsLesson}">
-									<div id="answerTest" class="d-flex flex-column gap-3">
-										<div class="d-flex flex-column gap-3">
-											<label name="model-ans__number question" value="${j.number }">Question ${j.number }</label>
-											<input type="text" placeholder="Enter your answer..." value="${j.answerKey }" class="model-ans__key form-control" name="answerKey">
-										</div>
-									</div>
-								</c:forEach>
+								<div id="answerTest" class="d-flex flex-column gap-3"></div>
 								<div onclick="addQuestion()" style="margin: 10px"
-									class="btn btn-light">Add Answer Test
-								</div>
+									class="btn btn-light">Add Answer Test</div>
 							</div>
 
 						</div>
