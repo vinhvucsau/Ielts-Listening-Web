@@ -40,6 +40,7 @@ public class AdminLessonControler extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	String courseIdAdd;
+	String LessonIdAdd;
 
 	LessonServiceImpl lessonService = new LessonServiceImpl ();
 	CourseServiceImpl courseService = new CourseServiceImpl();
@@ -66,16 +67,26 @@ public class AdminLessonControler extends HttpServlet {
 
 		} else if (url.contains("editLesson")) {
 			String lessonId = req.getParameter("lessonId");
+			LessonIdAdd = lessonId;
+			System.out.print(LessonIdAdd);
 			/* System.out.print("ttt" + lessonId); */
 			Lesson lesson = lessonService.findOneById(lessonId);
 			List<AnswerLesson> listAns = answerLessonService.findAnswerByLesson(lessonId);
 			
 			req.setAttribute("lesson", lesson);
 			req.setAttribute("listAns", listAns);
-			System.out.print("tttt" + listAns.get(0).getAnswerKey());
 		
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/EditLesson.jsp"); // file .jsp viết giao diện
 			rd.forward(req, resp);
+		} else if (url.contains("deleteLesson")) {
+			String lessonId = req.getParameter("id");
+			try {
+				lessonService.delete(lessonId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			resp.sendRedirect(req.getContextPath() + "/admin/listLesson?courseId="+courseIdAdd);
 		}
 	}
 
@@ -124,22 +135,16 @@ public class AdminLessonControler extends HttpServlet {
 			
 			resp.sendRedirect(req.getContextPath() + "/admin/listLesson?courseId="+courseIdAdd);
 			
-		} else if (url.contains("deleteLesson")) {
-			String lessonId = req.getParameter("lessonId");
-			try {
-				lessonService.delete(lessonId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			resp.sendRedirect(req.getContextPath() + "/admin/listLesson?courseId="+courseIdAdd);
-			
 		} else if (url.contains("editLesson")) {
 			Lesson lesson = new Lesson();
-			String lessonID = req.getParameter("lessonId");
-			lesson.setLessonId(req.getParameter("lessonId"));
-			System.out.print("kkk" + lessonID);
+			Lesson oldLesson = lessonService.findOneById(LessonIdAdd);
+			lesson.setLessonId(LessonIdAdd);
 			lesson.setLessonName(req.getParameter("lessonName"));
+			lesson.setDescription(oldLesson.getDescription());
+			lesson.setImage(oldLesson.getImage());
+			lesson.setAudio(oldLesson.getAudio());
+			lesson.setCreatedDate(new java.util.Date());
+			lesson.setCourses(oldLesson.getCourses());
 			lesson.setAnswerSheet(req.getParameter("answerSheet"));
 			if (req.getPart("video").getSize() != 0) {
 				// tạo tên file mới để khỏi bị trùng

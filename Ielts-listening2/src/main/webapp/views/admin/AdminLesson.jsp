@@ -124,9 +124,9 @@
 										<!-- Lesson list -->
 										<div class="row" id="lessonList">
 											<button value="${i.lessonId }" class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2" >
-												<span>${i.lessonId }</span>
+												<%-- <span>${i.lessonId }</span> --%>
 												<%-- <input type="hidden" name="lessonId" value="${i.lessonId}"> --%>
-												<a href="editLesson?lessonId=${i.lessonId }">
+												<a style="display: block; flex: 1; text-align: left;" href="editLesson?lessonId=${i.lessonId }">
 													<span class="accordion-title ms-4">${i.lessonName }</span>
 												</a>
 												<%-- <form action="deleteLesson" method="post" enctype="multipart/form-data">

@@ -23,7 +23,7 @@
                         </a>
                     </div>
                     <div>
-                        	<form action="editLesson?lessonId=${lessonId}" method="post" enctype="multipart/form-data">
+                        	<form action="editLesson" method="post" enctype="multipart/form-data">
 								<div id="test-l-1" class="bs-stepper-pane"
 									aria-labelledby="courseFormtrigger1">
 									<!-- Card -->
@@ -52,7 +52,7 @@
 														style="display: none" name="preAudio"
 														value="${lesson.video }"> 
 													<input value="${lesson.video }" type="file" class="form-control" 
-														name="trailer" id=""
+														name="video" id=""
 														accept="video/mp4" require>
 													<div id="audio"></div>
 												</div>
