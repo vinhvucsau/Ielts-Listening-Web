@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,8 @@ import hcmute.services.LessonServiceImpl;
 import hcmute.services.RepCommentServiceImpl;
 import hcmute.services.UserServiceImpl;
 
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
+		* 50)
 @WebServlet(urlPatterns = { "/user/lesson", "/user/reply", "/user/comment", "/user/rate" })
 public class UserLessonController extends HttpServlet {
 
@@ -42,12 +45,12 @@ public class UserLessonController extends HttpServlet {
 	IRepCommentService repService = new RepCommentServiceImpl();
 	IUserService userService = new UserServiceImpl();
 	IEnrollLessonService enrService = new EnrollLessonServiceImpl();
-	IAnswerLessonService ansService =new AnswerLessonServiceImpl();
-	Date curDate = new Date();//current date
-	Lesson curLesson = new Lesson();//current lesson
-	
-	User user = new User();//session login
-	
+	IAnswerLessonService ansService = new AnswerLessonServiceImpl();
+	Date curDate = new Date();// current date
+	Lesson curLesson = new Lesson();// current lesson
+
+	User user = new User();// session login
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
@@ -60,12 +63,12 @@ public class UserLessonController extends HttpServlet {
 		List<User> listUser = userService.findAll();
 		List<EnrrolLesson> listEnroll = enrService.findAll();
 		List<AnswerLesson> listAnswer = ansService.findAll();
-		
+
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			user = (User) session.getAttribute("user");
 		} else {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 			rd.forward(req, resp);
 		}
 
@@ -119,8 +122,8 @@ public class UserLessonController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + curLesson.getLessonId());
 			} catch (Exception e) {
 				e.getStackTrace();
-			
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 
@@ -143,7 +146,7 @@ public class UserLessonController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + curLesson.getLessonId());
 			} catch (Exception e) {
 				e.getMessage();
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 
@@ -159,7 +162,7 @@ public class UserLessonController extends HttpServlet {
 			} catch (Exception e) {
 				e.getMessage();
 				req.setAttribute("e", e);
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 

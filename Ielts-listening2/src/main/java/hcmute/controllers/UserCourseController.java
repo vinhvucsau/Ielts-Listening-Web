@@ -47,7 +47,7 @@ public class UserCourseController extends HttpServlet {
 		if (url.contains("course-detail")) {
 			String courseId = req.getParameter("id");
 			Course course = courseService.findById(courseId);
-			HttpSession session = req.getSession(false);
+			HttpSession session = req.getSession();
 			User user = (User) session.getAttribute("user");
 			String userId;
 			if (user != null)

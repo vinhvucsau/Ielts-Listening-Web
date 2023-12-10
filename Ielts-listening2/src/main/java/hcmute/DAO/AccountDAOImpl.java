@@ -74,7 +74,7 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 		Account account = enma.find(Account.class, id);
 		return account;
 	}
-	
+
 	@Override
 	public void update(Account account) {
 		EntityManager enma = JPAConfig.getEntityManager();
@@ -89,78 +89,94 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 		} finally {
 			enma.close();
 		}
-		
+
 	}
-	
+
 	public User getUserByUsername(String username) {
 		EntityManager enma = JPAConfig.getEntityManager();
-		try {			
+		try {
 			String jpql = "Select u from User u Where u.userName = :username";
 			TypedQuery<User> query = enma.createQuery(jpql, User.class);
 			query.setParameter("username", username);
 			return query.getResultList().get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			enma.close();
 		}
 		return null;
 	}
-	
+
 	public User getUserByEmail(String email) {
 		EntityManager enma = JPAConfig.getEntityManager();
-		try {			
+		try {
 			String jpql = "Select u from User u Where u.email = :email";
 			TypedQuery<User> query = enma.createQuery(jpql, User.class);
 			query.setParameter("email", email);
 			return query.getResultList().get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			enma.close();
 		}
 		return null;
 	}
+
 	@Override
 	public boolean checkExistEmail(String email) {
-	    EntityManager em = null;
-	    try {
-	        em = JPAConfig.getEntityManager();
-	        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email", Long.class);
-	        query.setParameter("email", email);
-	        Long count = query.getSingleResult();
-	        return count > 0;
-	    } catch (Exception e) {
-	        // Handle the exception or log the error
-	        e.printStackTrace();
-	        return false;
-	    } finally {
-	        if (em != null) {
-	            em.close();
-	        }
-	    }
+		EntityManager em = null;
+		try {
+			em = JPAConfig.getEntityManager();
+			TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email", Long.class);
+			query.setParameter("email", email);
+			Long count = query.getSingleResult();
+			return count > 0;
+		} catch (Exception e) {
+			// Handle the exception or log the error
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
 	}
 
 	@Override
 	public boolean checkExistUsername(String username) {
-	    EntityManager em = null;
-	    try {
-	        em = JPAConfig.getEntityManager();
-	        TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.account.userName = :username", Long.class);
-	        query.setParameter("username", username);
-	        Long count = query.getSingleResult();
-	        return count > 0;
-	    } catch (Exception e) {
-	        // Handle the exception or log the error
-	        e.printStackTrace();
-	        return false;
-	    } finally {
-	        if (em != null) {
-	            em.close();
-	        }
-	    }
+		EntityManager em = null;
+		try {
+			em = JPAConfig.getEntityManager();
+			TypedQuery<Long> query = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.account.userName = :username",
+					Long.class);
+			query.setParameter("username", username);
+			Long count = query.getSingleResult();
+			return count > 0;
+		} catch (Exception e) {
+			// Handle the exception or log the error
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
 	}
 
+	@Override
+	public Account findByUserName(String userName) {
+		EntityManager em = JPAConfig.getEntityManager();
+		try {
+			TypedQuery<Account> query = em.createQuery("SELECT ac FROM Account ac WHERE ac.userName = :username",
+					Account.class);
+			query.setParameter("username", userName);
+			return(Account) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return null;
+
+	}
 }

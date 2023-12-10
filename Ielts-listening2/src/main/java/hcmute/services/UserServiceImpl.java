@@ -7,6 +7,7 @@ import hcmute.DAO.IAccountDAO;
 import hcmute.DAO.IUserDAO;
 import hcmute.DAO.UserDAOImpl;
 import hcmute.entity.Account;
+import hcmute.entity.EnrrolLesson;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
 
@@ -53,6 +54,24 @@ public class UserServiceImpl implements IUserService {
 	public List<UserCourse> findAllUserCourseByUserId(String userId) {
 		// TODO Auto-generated method stub
 		return userDAO.findAllUserCourseByUserId(userId);
+	}
+
+	@Override
+	public List<Double> findAllScoreByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return userDAO.findAllEnrrolTestScoreByUserId(userId);
+	}
+
+	@Override
+	public List<EnrrolLesson> findAllEnrrolLessonByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return userDAO.findAllEnrrolLessonByUserId(userId);
+	}
+
+	@Override
+	public List<String> findAllTestNamefromUserId(String userId) {
+		// TODO Auto-generated method stub
+		return userDAO.findAllTestNamefromUserId(userId);
 	}
 
 }

@@ -14,5 +14,6 @@ public interface ITopicTestService {
 	void addTopic(TopicTest topic);
 	void deleteTopic(String topicID) throws Exception;
 	void updateTopic(TopicTest newTopicID) throws Exception;
+	List<TopicTest>  getAllTopic();
 	
 }

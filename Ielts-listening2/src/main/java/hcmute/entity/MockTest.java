@@ -25,13 +25,13 @@ public class MockTest implements Serializable{
 	@Id
 	private String testId;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name =  "testName")
 	private String testName;
 	
-	@Column(columnDefinition = "varchar(10000)")
+	@Column(name = "description")
 	private String description;
 	
-	@Column(columnDefinition = "int")
+	@Column(name = "cost")
 	private int cost;
 	
 	@ManyToOne

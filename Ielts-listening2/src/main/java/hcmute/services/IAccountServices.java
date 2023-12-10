@@ -12,4 +12,5 @@ public interface IAccountServices {
 	User getUserByEmail(String email);
 	boolean checkExistEmail(String email);
 	boolean checkExistUsername(String username);
+	Account findByUserName (String userName) ;
 }
