@@ -18,7 +18,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 			<div class="container-xxl">
 				<div class="row">
 					<div class="col-3 d-flex justify-content-start">
-						<a href="#" class="btn-exit"> <i class="ti-angle-left me-1"></i>
+						<a href='<c:url value="/user/luyen-de-home"></c:url>' class="btn-exit"> <i class="ti-angle-left me-1"></i>
 							<h6>Trở về</h6>
 						</a> <img src="https://prep.vn/imgs/logo.png" alt="logo" class="logo">
 					</div>
@@ -270,7 +270,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 							</div>
 						</div>
 					</div>
-					<div>
+					<%-- <div>
 						<c:choose>
 							<c:when test="${currentPart.image.substring(0,4)!='http'}">
 								<img class="mt-3" src='<c:url value="/image?fname=imgMockTest/${currentPart.image}"></c:url>' alt="bai thi">
@@ -279,7 +279,7 @@ changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
 								<img class="mt-3" src="${currentPart.image}" alt="bai thi">
 							</c:otherwise>
 						</c:choose>
-					</div>
+					</div> --%>
 					<div class='mt-2'>
 						${currentPart.answerSheet}
 					</div>
