@@ -58,7 +58,7 @@ public class UserBlogController extends HttpServlet {
 			req.setAttribute("listUser", listUser);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/blogs_page.jsp");
 			rd.forward(req, resp);
-			
+
 		} else if (url.contains("blogs")) {
 			req.setAttribute("user", user);
 			req.setAttribute("folder", Constants.FOLDER_AVATAR);

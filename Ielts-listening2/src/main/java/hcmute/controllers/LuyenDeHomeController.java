@@ -65,7 +65,7 @@ public class LuyenDeHomeController extends HttpServlet {
 				test.setEnrrolTests(enService.findByMockTestId(test.getTestId()));			
 			}					
 		}
-		
+
 		request.setAttribute("topicTests", topicTestList);
 		request.setAttribute("pagesize", pagesize);
 		request.setAttribute("pageNum", pageNum);
@@ -88,12 +88,12 @@ public class LuyenDeHomeController extends HttpServlet {
 
 		LocalDateTime date = LocalDateTime.now();
 		enrrolTest.setEnrrollmentDate(date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
-		enrollTestService.insert(enrrolTest);
-		
+		enService.insert(enrrolTest);
 
 		EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(userId, testId,
 				date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
-		response.sendRedirect(request.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
+		response.sendRedirect(
+				request.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
 
 	}
 
