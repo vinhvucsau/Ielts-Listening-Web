@@ -6,11 +6,7 @@
 <head>
 <meta charset="UTF-8">
 
-<<<<<<< Updated
-upstream:Ielts-listening2/src/main/webapp/views/luyende/luyende_test.jsp
-<title>Insert title here</title> =======
-<title>Insert title here</title> >>>>>>> Stashed
-changes:Ielts-listening2/src/main/webapp/views/luyende_test.jsp
+
 </head>
 <body>
 	<div id="test">

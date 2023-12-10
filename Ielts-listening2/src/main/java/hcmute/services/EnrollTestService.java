@@ -96,4 +96,12 @@ public class EnrollTestService{
 	public EnrrolTest findByUserIdAndMockTestIdAndDate(String userId, String mockTestId, LocalDateTime date) {
 		return enrollTestDao.findByUserIdAndMockTestIdAndDate(userId, mockTestId, date);
 	}
+	public EnrrolTest findByUserIdAndMockTestIdSoon(String userId, String mockTestId)
+	{
+		return enrollTestDao.findByUserIdAndMockTestIdSoon( userId,  mockTestId);
+	}
+	public EnrrolTest findEnTestProcess(String userId)
+	{
+		return enrollTestDao.findEnTestProcess(userId);
+	}
 }

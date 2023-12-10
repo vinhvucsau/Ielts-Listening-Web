@@ -48,7 +48,13 @@ public class LuyenDeHomeController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();	
 		User user = (User) session.getAttribute("user");
-		;
+		if (user != null && enrollTestService.findEnTestProcess(user.getUserId())!= null  )
+		{
+			EnrrolTest enTestProcess = enrollTestService.findEnTestProcess(user.getUserId());
+			request.setAttribute("enTestProcess", enTestProcess);
+			System.out.print("entestprocess"+ enTestProcess.getEnrrolId());
+		}
+		
 		request.setAttribute("currentUser", user);
 		int page = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 		String searchStr = request.getParameter("search") == null ? "" : request.getParameter("search");
@@ -73,28 +79,44 @@ public class LuyenDeHomeController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		String testId = request.getParameter("testId");
+		HttpSession session = req.getSession(false);
 
+		// Set cứng ID để test chức năng
+
+		User user = (User) session.getAttribute("user");
+		String testId = req.getParameter("testId");
+		
 		EnrrolTest enrrolTest = new EnrrolTest();
 		enrrolTest.setEnrrolId("");
 		enrrolTest.setScore(-1.0);
-		User user = userService.findUserByID(userId);
+		
 		enrrolTest.setUsers(user);
 		MockTest mockTest = mockTestService.findById(testId);
 		enrrolTest.setMockTests(mockTest);
-
-		LocalDateTime date = LocalDateTime.now();
-		enrrolTest.setEnrrollmentDate(date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
-		enService.insert(enrrolTest);
-
-		EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(userId, testId,
-				date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
-		response.sendRedirect(
-				request.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
-
+		if(enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId) != null )
+		{
+			EnrrolTest checkEnTest = enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId);
+			if (checkEnTest.getScore() <0 )
+			{
+				
+				resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
+			}
+		}
+		
+		else
+		{
+			LocalDateTime date = LocalDateTime.now();
+			enrrolTest.setEnrrollmentDate(date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
+			enrollTestService.insert(enrrolTest);
+			
+			
+			EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(user.getUserId(), testId,
+					date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
+			
+			resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
+		}
+		
 	}
-
 }

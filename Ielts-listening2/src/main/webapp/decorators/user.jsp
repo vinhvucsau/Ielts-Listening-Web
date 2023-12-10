@@ -91,7 +91,7 @@
 	<div class="d-flex flex-column container-fluid"
 		style="max-width: 1440px">
 		<decorator:body>
-			<h1>test chinh sua</h1>
+			
 		</decorator:body>
 	</div>
 	<%@ include file="/common/user/Footer.jsp"%>
