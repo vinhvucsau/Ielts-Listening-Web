@@ -158,11 +158,22 @@ User user = (User) session.getAttribute("user");
 							role="tabpanel" aria-labelledby="tabPaneGrid">
 							<div class="row">
 								<c:forEach var="i" items="${course}">
-									<div class="col-lg-3 col-md-6 col-12">
-										<div class="card mb-4 card-hover">
-											<a href="course-detail?id=${i.courseId }"><img
-												src="../assets/images/course/course-node.jpg" alt=""
-												class="card-img-top"></a>
+										<div class="col-lg-3 col-md-6 col-12 "
+												data-bs-toggle="popover" data-bs-trigger="hover focus"
+												title="${i.courseName}" data-bs-content="${i.description}">
+												<div class="card mb-4 card-hover">
+													<c:if test="${i.image != null}">
+														<a href="listLesson?courseId=${i.courseId}"><img
+															style="height: 200px; object-fit: cover;"
+															src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
+															alt="course" class="card-img-top img-fluid"></a>
+													</c:if>
+													<c:if test="${i.image == null}">
+														<a href="listLesson?courseId=${i.courseId}"><img
+															style="height: 200px; object-fit: cover;"
+															src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
+															alt="course" class="card-img-top img-fluid"></a>
+											</c:if>
 											<!-- Card Body -->
 											<div class="card-body">
 												<h4 class="mb-2 text-truncate-line-2">
@@ -184,22 +195,32 @@ User user = (User) session.getAttribute("user");
 
 													<span class="align-text-top"> <span class="fs-6">
 															<div class="d-flex gap-5">
-																<c:forEach var="lesson" items="${i.lessons}">
-																	<c:forEach var="enrrol_lesson"
-																		items="${lesson.enrrolLesson }">
-
-
-																		<c:set var="totalStars" value="0" />
-																		<c:set var="count" value="0" />
+																<c:set var="totalStars" value="0" />
+																<c:set var="count" value="0" />
 																		<c:forEach var="lesson" items="${i.lessons}">
 																			<c:forEach var="enrrol_lesson"
 																				items="${lesson.enrrolLesson}">
 																				<c:set var="totalStars"
-																					value="${totalStars +enrrol_lesson.numberOfStar}" />
-																				<c:set var="count" value="${count + 1}" />
+																					value="${totalStars + enrrol_lesson.numberOfStar}" />
+
+																				<c:choose>
+																					<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																						<c:set var="count" value="${count + 1}" />
+																					</c:when>
+																					
+																				</c:choose>
+
+																				
 																			</c:forEach>
 																		</c:forEach>
 																		<c:choose>
+																			<c:when test="${count == 0}">
+																				<c:set var="averageStars" value="0" />
+																				<c:set var="roundedAverage">
+																					<c:out
+																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																				</c:set>
+																			</c:when>
 																			<c:when test="${count > 0}">
 																				<c:set var="averageStars"
 																					value="${totalStars / count}" />
@@ -209,8 +230,6 @@ User user = (User) session.getAttribute("user");
 																				</c:set>
 																			</c:when>
 																		</c:choose>
-																	</c:forEach>
-																</c:forEach>
 																<div class="stars rating-star"
 																	data-rating="${roundedAverage}"></div>
 																<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
@@ -222,11 +241,9 @@ User user = (User) session.getAttribute("user");
 											<div class="card-footer">
 												<div class="row align-items-center g-0">
 													<div class="col-auto">
-														<img src="../assets/images/avatar/avatar-9.jpg"
-															class="rounded-circle avatar-xs" alt="">
+														
 													</div>
 													<div class="col ms-2">
-														<span>Morris Mccoy</span>
 													</div>
 													<div class="col-auto">
 														<c:choose>
@@ -268,12 +285,22 @@ User user = (User) session.getAttribute("user");
 							<c:forEach var="i" items="${course}">
 								<div class="card mb-4 card-hover">
 									<div class="row g-0">
-										<a
-											class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
-											style="background-image: url(../assets/images/course/course-javascript.jpg)">
-											<img src="../assets/images/course/course-node.jpg" alt="..."
-											class="img-fluid d-lg-none invisible">
-										</a>
+										<c:if test="${i.image != null}">
+													<a
+														class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
+														href="listLesson?courseId=${i.courseId}"><img
+														style="height: 200px; object-fit: cover;"
+														src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
+														alt="course" class="img-fluid w-100"></a>
+												</c:if>
+												<c:if test="${i.image == null}">
+													<a
+														class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
+														href="listLesson?courseId=${i.courseId}"><img
+														style="height: 200px; object-fit: cover;"
+														src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
+														alt="course" class="img-fluid w-100"></a>
+												</c:if>
 										<div class="col-lg-9 col-md-12 col-12">
 											<!-- Card body -->
 											<div class="card-body">
@@ -282,44 +309,35 @@ User user = (User) session.getAttribute("user");
 												</h3>
 												<!-- list inline -->
 												<ul class="list-inline">
-													<li class="list-inline-item"><span> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                        <path
-																	d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                        <path
-																	d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                                    </svg>
-													</span> <span>1h 30m</span></li>
-													<li class="list-inline-item"><svg class="me-1 mt-n1"
-															width="16" height="16" viewBox="0 0 16 16" fill="none"
-															xmlns="http://www.w3.org/2000/svg">
-                                                                <rect
-																x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                                <rect
-																x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                                <rect
-																x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                            </svg> Beginner</li>
 													<li class=" list-inline-item align-text-top"><span
 														class="fs-6">
 															<div class="d-flex gap-5">
-																<c:forEach var="lesson" items="${i.lessons}">
-																	<c:forEach var="enrrol_lesson"
-																		items="${lesson.enrrolLesson }">
-
-																		<c:set var="totalStars" value="0" />
+																<c:set var="totalStars" value="0" />
 																		<c:set var="count" value="0" />
 																		<c:forEach var="lesson" items="${i.lessons}">
 																			<c:forEach var="enrrol_lesson"
 																				items="${lesson.enrrolLesson}">
 																				<c:set var="totalStars"
-																					value="${totalStars +enrrol_lesson.numberOfStar}" />
-																				<c:set var="count" value="${count + 1}" />
+																					value="${totalStars + enrrol_lesson.numberOfStar}" />
+
+																				<c:choose>
+																					<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																						<c:set var="count" value="${count + 1}" />
+																					</c:when>
+																					
+																				</c:choose>
+
+																				
 																			</c:forEach>
 																		</c:forEach>
 																		<c:choose>
+																			<c:when test="${count == 0}">
+																				<c:set var="averageStars" value="0" />
+																				<c:set var="roundedAverage">
+																					<c:out
+																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																				</c:set>
+																			</c:when>
 																			<c:when test="${count > 0}">
 																				<c:set var="averageStars"
 																					value="${totalStars / count}" />
@@ -329,8 +347,6 @@ User user = (User) session.getAttribute("user");
 																				</c:set>
 																			</c:when>
 																		</c:choose>
-																	</c:forEach>
-																</c:forEach>
 																<div class="stars rating-star"
 																	data-rating="${roundedAverage}"></div>
 																<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
@@ -344,11 +360,9 @@ User user = (User) session.getAttribute("user");
 												</div>
 												<div class="row align-items-center g-0">
 													<div class="col-auto">
-														<img src="../assets/images/avatar/avatar-6.jpg"
-															class="rounded-circle avatar-xs" alt="">
+														
 													</div>
 													<div class="col ms-2">
-														<span>Sumona Khaat</span>
 													</div>
 													<div class="col-auto">
 														<c:choose>
