@@ -27,6 +27,7 @@ public class Constants {
 	
 	public static final String DIR  = "C:\\ImagesWeb"; 
 	public static final String FOLDER_TOPIC  = "topicIMG"; 
+	public static final String FOLDER_BLOG  = "blogIMG"; 
 	public static final String FOLDER_AVATAR  = "userAvatar";
 	public static final String ANSWER_USER_RELATION = "ANSWER_USER";
 }

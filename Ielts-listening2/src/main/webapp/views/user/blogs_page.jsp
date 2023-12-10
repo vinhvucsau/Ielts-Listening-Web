@@ -674,29 +674,29 @@
               </div>
 
             <c:forEach var="blog" items="${listBlog}">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-12">
-                        <div class="card mb-4 shadow-lg card-lift">
-                          <a href="blog-single.html">
-                            <img src="../assets/images/blog/blogpost-3.jpg" class="card-img-top" alt="blogpost " />
-                          </a>
-                          <div class="card-body">
-                            <a href="#" class="fs-5 mb-2 fw-semibold d-block text-success">Bài viết</a>
-                            <h3><a href="blog-single.html" class="blog-title__text text-inherit">${blog.title}</a></h3>
-                            <p class="blog-content__text">${blog.content}</p>
-                            <div class="row align-items-center g-0 mt-4">
-                              <div class="col-auto">
-                                <img src="../assets/images/avatar/avatar-7.jpg" alt="avatar" class="rounded-circle avatar-sm me-2" />
-                              </div>
-                              <div class="col lh-1">
-                                <h5 class="mb-1">${blog.users.name}</h5>
-                                <p class="fs-6 mb-0">${blog.createdDate}</p>
-                              </div>
-                              <div class="col-auto">
-                              </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                    <div class="card mb-4 shadow-lg card-lift">
+                        <a href="<c:url value='/user/blog-content?id=${blog.blogId}'/>">
+                        <img src="<c:url value='/image?fname=${topicIMG}/${blog.image}'/>" class="card-img-top" alt="blogpost " />
+                        </a>
+                        <div class="card-body">
+                        <a href="#" class="fs-5 mb-2 fw-semibold d-block text-success">Bài viết</a>
+                        <h3><a href="<c:url value='/user/blog-content?id=${blog.blogId}'/>" class="blog-title__text text-inherit">${blog.title}</a></h3>
+                        <p class="blog-content__text">${blog.content}</p>
+                        <div class="row align-items-center g-0 mt-4">
+                            <div class="col-auto">
+                            <img src="<c:url value='/image?fname=${avatarIMG}/${blog.users.image}'/>" alt="avatar" class="rounded-circle avatar-sm me-2" />
                             </div>
-                          </div>
+                            <div class="col lh-1">
+                            <h5 class="mb-1">${blog.users.name}</h5>
+                            <p class="fs-6 mb-0">${blog.createdDate}</p>
+                            </div>
+                            <div class="col-auto">
+                            </div>
                         </div>
-                      </div>
+                        </div>
+                    </div>
+                </div>
             </c:forEach>
               <!-- Buttom -->
               <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center mt-4">
