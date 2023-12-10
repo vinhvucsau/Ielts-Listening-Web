@@ -87,7 +87,7 @@ public class TestControllers extends HttpServlet{
 		
 		
 		//set thời gian
-		Date currentDate = new Date(System.currentTimeMillis());
+		Date currentDate = new Date(System.currentTimeMillis() - 1);
 		int timeTest = 40*60; //thời gian làm test mặc định 40p
 		
 		Date enrollmentDate = enrollTest.getEnrrollmentDate();

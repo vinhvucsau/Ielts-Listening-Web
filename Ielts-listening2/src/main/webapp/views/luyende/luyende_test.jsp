@@ -119,6 +119,7 @@
 								</div>
 							</div>
 							<ul class="mt-4 d-flex flex-wrap justify-content-center">
+								<c:set var="startNumber" value="${0}"></c:set>
 								<c:forEach items="${enrollTest.mockTests.listeningParts}" var="listeningPart">
 									<c:forEach items="${listeningPart.answerTests}" var="answerTest" varStatus="status">
 										<c:set var="isCorrect" value="${false}" />
@@ -146,26 +147,26 @@
 										    <c:when test="${empty isCompleted and isAnswered}">
 										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
 										    	 class="number-question-item answered" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a></li>
+										    	 answerTestId="${answerTest.answerId}">${startNumber + answerTest.number}</a></li>
 										    </c:when>
 										    <c:when test="${not empty isCompleted and isCorrect}">
 										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
 										    	 class="number-question-item correct" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a></li>
+										    	 answerTestId="${answerTest.answerId}">${startNumber + answerTest.number}</a></li>
 										    </c:when>
 										    <c:when test="${not empty isCompleted and not isCorrect}">
 										    	<li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
 										    	 class="number-question-item incorrect" enrollTestId="${enrollTest.enrrolId}"
-										    	 answerTestId="${answerTest.answerId}">${answerTest.number}</a></li>
+										    	 answerTestId="${answerTest.answerId}">${startNumber + answerTest.number}</a></li>
 										    </c:when>
 										    <c:otherwise>
 										        <li><a href='<c:url value="/test/luyende_test?enrollTestId=${enrollTest.enrrolId}&currentPartId=${listeningPart.partId}"></c:url>'
 										         class="number-question-item" enrollTestId="${enrollTest.enrrolId}" 
-										         answerTestId="${answerTest.answerId}">${answerTest.number}</a></li>
+										         answerTestId="${answerTest.answerId}">${startNumber + answerTest.number}</a></li>
 										    </c:otherwise>
 										</c:choose>
-	
 									</c:forEach>
+									<c:set var="startNumber" value="${startNumber + listeningPart.answerTests.size()}"></c:set>
 								</c:forEach>
                             </ul>
 						</div>
@@ -281,6 +282,7 @@
 				</div>
 				<div class="col-3">
 					<ul class="answer-container">
+						<c:set var="startNumber" value="${0}"></c:set>
 						<c:forEach items="${enrollTest.mockTests.listeningParts}" var="listeningPart">
 							<c:if test="${listeningPart.partId == currentPart.partId}">
 								<c:forEach items="${listeningPart.answerTests}" var="answerTest">
@@ -296,7 +298,7 @@
 										<c:choose>
 											<c:when test="${not empty answer and answer.equals(answerTest.answerKey)}">
 												<li class="answer-item correct d-flex">
-													<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+													<span class="number-question d-flex justify-content-center align-items-center">${startNumber + answerTest.number}</span>
 													<div class="col">
 														<input class="answer-input" type="text" value="${answer}">
 													</div>
@@ -304,7 +306,7 @@
 											</c:when>
 											<c:otherwise>
 												<li class="answer-item incorrect d-flex">
-													<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+													<span class="number-question d-flex justify-content-center align-items-center">${startNumber + answerTest.number}</span>
 													<div class="col">
 														<input class="answer-input" type="text" value="${answer}"> 
 														<span class="correct-answer">${answerTest.answerKey}</span>
@@ -315,7 +317,7 @@
 									</c:if>
 									<c:if test="${empty isCompleted}">
 										<li class="answer-item d-flex">
-											<span class="number-question d-flex justify-content-center align-items-center">${answerTest.number}</span>
+											<span class="number-question d-flex justify-content-center align-items-center">${startNumber + answerTest.number}</span>
 											<div class="col">
 												<input class="answer-input not-completed" enrollTestId="${enrollTest.enrrolId}" answerTestId="${answerTest.answerId}" type="text" value="${answer}"> 
 											</div>
@@ -323,6 +325,7 @@
 									</c:if>
 								</c:forEach>
 							</c:if>
+							<c:set var="startNumber" value="${startNumber + listeningPart.answerTests.size()}"></c:set>
 						</c:forEach>
 					</ul>
 					<div class="text-center">

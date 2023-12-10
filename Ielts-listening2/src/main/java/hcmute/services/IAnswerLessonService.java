@@ -10,4 +10,5 @@ public interface IAnswerLessonService {
 	void delete(String id) throws Exception;
 	void update(AnswerLesson ans);
 	void insert(AnswerLesson ans);
+	List<AnswerLesson> findByLessonId(String lessonId);
 }

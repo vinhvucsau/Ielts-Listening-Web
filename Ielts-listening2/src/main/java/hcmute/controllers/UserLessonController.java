@@ -13,17 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import hcmute.entity.AnswerLesson;
+import hcmute.entity.AnswerLessonUser;
+import hcmute.entity.AnswerUser;
 import hcmute.entity.CommentLesson;
 import hcmute.entity.EnrrolLesson;
 import hcmute.entity.Lesson;
 import hcmute.entity.RepComment;
 import hcmute.entity.User;
 import hcmute.services.AnswerLessonServiceImpl;
+import hcmute.services.AnswerLessonUserServiceImpl;
 import hcmute.services.CommentServiceImpl;
 
 import hcmute.services.EnrollLessonServiceImpl;
 import hcmute.services.IAnswerLessonService;
+import hcmute.services.IAnswerLessonUserService;
 import hcmute.services.ICommentService;
 import hcmute.services.IEnrollLessonService;
 import hcmute.services.ILessonService;
@@ -32,10 +38,12 @@ import hcmute.services.IUserService;
 import hcmute.services.LessonServiceImpl;
 import hcmute.services.RepCommentServiceImpl;
 import hcmute.services.UserServiceImpl;
+import hcmute.utils.HttpUtil;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
 		* 50)
-@WebServlet(urlPatterns = { "/user/lesson", "/user/reply", "/user/comment", "/user/rate" })
+@WebServlet(urlPatterns = { "/user/lesson", "/user/reply", "/user/comment", "/user/rate", "/api-AnswerLessonUser",
+		"/user/resetEnrollLesson", "/user/completeEnrollLesson"})
 public class UserLessonController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -46,6 +54,7 @@ public class UserLessonController extends HttpServlet {
 	IUserService userService = new UserServiceImpl();
 	IEnrollLessonService enrService = new EnrollLessonServiceImpl();
 	IAnswerLessonService ansService = new AnswerLessonServiceImpl();
+	IAnswerLessonUserService answerLessonUserService = new AnswerLessonUserServiceImpl();
 	Date curDate = new Date();// current date
 	Lesson curLesson = new Lesson();// current lesson
 
@@ -87,12 +96,26 @@ public class UserLessonController extends HttpServlet {
 				req.setAttribute("star", enrollLesson.getNumberOfStar());
 			else
 				req.setAttribute("star", 0);
-
+			//thêm danh sách câu hỏi
+			req.setAttribute("enrollLesson", enrollLesson);
+			List<AnswerLesson> listAnswerLesson = ansService.findByLessonId(lessID);
+			req.setAttribute("listAnswerLesson", listAnswerLesson);
+			
 			req.setAttribute("listAnswer", listAnswer);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Lesson-content.jsp");
 			rd.forward(req, resp);
 		} else if (url.contains("reply")) {
 
+		} else if (url.contains("completeEnrollLesson")) {
+			String enrollLessonId = req.getParameter("enrollLessonId");
+			enrService.completeTest(enrollLessonId);
+			String lessonId = req.getParameter("lessonId");
+			resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + lessonId);
+		} else if (url.contains("resetEnrollLesson")) {
+			String enrollLessonId = req.getParameter("enrollLessonId");
+			enrService.resetTest(enrollLessonId);
+			String lessonId = req.getParameter("lessonId");
+			resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + lessonId);
 		}
 	}
 
@@ -166,6 +189,16 @@ public class UserLessonController extends HttpServlet {
 				rd.forward(req, resp);
 			}
 
+		} else if (url.contains("/api-AnswerLessonUser")) {
+			try {
+				HttpUtil httpUtil = HttpUtil.of(req.getReader());
+				AnswerLessonUser answerLessonUser= httpUtil.toModel(AnswerLessonUser.class);
+				answerLessonUserService.saveOrUpdate(answerLessonUser);
+				ObjectMapper mapper = new ObjectMapper();
+				mapper.writeValue(resp.getOutputStream(), answerLessonUser);
+			} catch (Exception e) {
+				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			}
 		}
 	}
 }

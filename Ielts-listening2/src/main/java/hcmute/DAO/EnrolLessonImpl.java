@@ -20,7 +20,7 @@ public class EnrolLessonImpl extends AbstractDao<EnrrolLesson> implements IEnrol
 	    EntityManager enma = JPAConfig.getEntityManager();
 	    try {
 	        System.out.println(userId + " " + lessonId);
-	        String jpql = "SELECT el FROM EnrrolLesson el WHERE el.users.userId = :userId AND el.lessons.lessonId = :lessonId";
+	        String jpql = "SELECT el FROM EnrrolLesson el LEFT JOIN FETCH el.answerLessonUser WHERE el.users.userId = :userId AND el.lessons.lessonId = :lessonId";
 	        TypedQuery<EnrrolLesson> query = enma.createQuery(jpql, EnrrolLesson.class);
 	        query.setParameter("userId", userId);
 	        query.setParameter("lessonId", lessonId);
