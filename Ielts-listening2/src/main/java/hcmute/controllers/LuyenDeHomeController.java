@@ -95,12 +95,16 @@ public class LuyenDeHomeController extends HttpServlet {
 		enrrolTest.setUsers(user);
 		MockTest mockTest = mockTestService.findById(testId);
 		enrrolTest.setMockTests(mockTest);
-		EnrrolTest checkEnTest = enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId);
-		if (checkEnTest.getScore() <0)
+		if(enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId) != null )
 		{
-			
-			resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
+			EnrrolTest checkEnTest = enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId);
+			if (checkEnTest.getScore() <0 )
+			{
+				
+				resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
+			}
 		}
+		
 		else
 		{
 			LocalDateTime date = LocalDateTime.now();
