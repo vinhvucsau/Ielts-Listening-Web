@@ -34,7 +34,8 @@
 					<!-- card header  -->
 					<div class="card-header">
 						<h4 class="mb-1">Order</h4>
-						<p class="mb-0">Order</p>
+						<p class="mb-0">Explore Convenience - Place Your Order Easily
+							and Quickly Today!</p>
 					</div>
 					<!-- table  -->
 					<div class="card-body">
@@ -49,19 +50,40 @@
 										<th>Payment</th>
 										<th>Date</th>
 										<th>Total</th>
+										<th>Action</th>
 									</tr>
 
 								</thead>
 								<tbody>
 									<c:forEach var="i" items="${list}">
 										<tr>
-											<td><a href="#" class="fw-semibold">${i.paymentId}</a></td>
+									
+											<td><a href="od-detail?id=${i.paymentId}">${i.paymentId}</a></td>
+
 											<td>${i.users.account.userName }</td>
 											<td>1 Items</td>
 											<td><span class="badge text-success bg-light-success">Paid</span></td>
 											<td>${i.dateBuy}</td>
 											<td>${i.cost}</td>
+											<td><span class="dropdown dropstart"> <a
+													class="btn-icon btn btn-ghost btn-sm rounded-circle"
+													href="#" role="button" id="orderDropdownTwo"
+													data-bs-toggle="dropdown" data-bs-offset="-20,20"
+													aria-expanded="false"> <i class="fe fe-more-vertical"></i>
+												</a> <span class="dropdown-menu"
+													aria-labelledby="orderDropdownTwo"> <span
+														class="dropdown-header">Settings</span> <a
+														class="dropdown-item" href="#"> <i
+															class="fe fe-edit dropdown-item-icon"></i> Edit
+													</a> <a class="dropdown-item" href="#"> <i
+															class="fe fe-mail dropdown-item-icon"></i> Invite
+													</a> <a class="dropdown-item" href="#"> <i
+															class="fe fe-trash dropdown-item-icon"></i> Delete
+													</a>
+												</span>
+											</span></td>
 										</tr>
+
 									</c:forEach>
 								</tbody>
 							</table>
