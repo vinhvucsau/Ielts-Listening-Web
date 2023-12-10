@@ -33,12 +33,13 @@
 	<div class="m-0 p-0" >
 		<div class="w-100 m-0" style="background-color: #DDE4FB; height: 450px;"></div>
 		<div class="px-7 py-7  ">
-		
+		<c:if test="${not empty currentUser and not empty enTestProcess}">
 			<div class="bg-white px-4 py-4 rounded-4 card-body shadow-lg">
 				<p class="fs-5 fw-bold mb-0 color-blue--primary">Tiếp tục làm bài</p>
-				<p class="fs-4 fw-bold mb-0">IELTS Essential Guide</p>
-				<p class="fs-5 fw-bold mb-0" style="color: rgb(113,113,113)">Cam 18 - Test 2</p>
-				<button class="btn  btn-primary d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light align-items-center">
+				<p class="fs-4 fw-bold mb-0">${enTestProcess.enrrollmentDate}</p>
+				<p class="fs-5 fw-bold mb-0" style="color: rgb(113,113,113)">${enTestProcess.mockTests.testName}</p>
+				<a href="http://localhost:8080/Ielts-listening2/test/luyende_test?enrollTestId=${enTestProcess.enrrolId}">
+				<button  class="btn  btn-primary d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light align-items-center">
 					Tiếp tục làm bài
 					<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
 						fill="currentColor" class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
@@ -46,7 +47,9 @@
 						d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
 					</svg> 
 				</button>
+				</a>
 			</div>
+			</c:if>
 			<p class="fs-3 fw-bold my-5">Hôm nay bạn muốn luyện</p>
 			<div class="d-flex flex-row justify-content-between">
 				<ul class="ul__test nav fs-5 fw-bold justify-content-between" style="width:500px">
@@ -171,6 +174,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 						  	</c:forEach>	
 					  </div>
 					</div>
+					<a href="luyende-testset?topicId=${topicTest.topicId}">
 					<button class="btn btn-primary d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold  align-items-center">
 						Xem thêm ${topicTest.mockTests.size() - i} đề
 						<svg xmlns="http://www.w3.org/2000/svg" height="24" style="margin-top: 3px;"
@@ -179,6 +183,7 @@ Hãy thử lại bằng cách bỏ bớt bộ lọc nhé.</p>
 							d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
 						</svg> 
 					</button>
+					</a>
 				</div>
 			</c:forEach>
 			

@@ -9,7 +9,9 @@ import hcmute.entity.MockTest;
 public class MockTestServiceImpl implements IMockTestService {
 
 	MockTestDAOImpl mockDao = new MockTestDAOImpl();
-	
+	public List<MockTest> getMockTestByTopicId(String id) {
+		return mockDao.getMockTestByTopicId(id);
+	}
 	@Override
 	public void insert(MockTest mockTest) {
 		mockDao.insert(mockTest); 

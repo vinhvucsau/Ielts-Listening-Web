@@ -48,14 +48,62 @@ public class EnrollTestDao extends AbstractDao<EnrrolTest>{
 	    }
 	}
 	public EnrrolTest findByUserIdAndMockTestIdAndDate(String userId, String mockTestId, LocalDateTime date) {
-		String jpql = "Select enrollTest from EnrrolTest enrollTest where enrollTest.users.userId = :userId and "
-				+ "enrollTest.mockTests.testId = :mockTestId and enrollTest.enrrollmentDate = :date";
-		EntityManager enma = JPAConfig.getEntityManager();
-		TypedQuery<EnrrolTest> query = enma.createQuery(jpql,EnrrolTest.class);
-		query.setParameter("userId", userId);
-		query.setParameter("mockTestId", mockTestId);
-		query.setParameter("date", date);
-		return query.getSingleResult();
+	    EntityManager enma = JPAConfig.getEntityManager();
+	    try {
+	        String jpql = "SELECT enrollTest FROM EnrrolTest enrollTest WHERE enrollTest.users.userId = :userId "
+	                + "AND enrollTest.mockTests.testId = :mockTestId AND enrollTest.enrrollmentDate = :date";
+	        TypedQuery<EnrrolTest> query = enma.createQuery(jpql, EnrrolTest.class);
+	        query.setParameter("userId", userId);
+	        query.setParameter("mockTestId", mockTestId);
+	        query.setParameter("date", date);
+	        return query.getSingleResult();
+	    } catch (Exception e) {
+	        // Xử lý ngoại lệ (Exception) ở đây
+	        e.printStackTrace();
+	        return null; // Hoặc thực hiện xử lý khác tùy theo yêu cầu
+	    } finally {
+	        enma.close(); // Đảm bảo đóng EntityManager trong mệnh đề finally
+	    }
 	}
-	
+
+	public EnrrolTest findByUserIdAndMockTestIdSoon(String userId, String mockTestId) {
+	    EntityManager enma = JPAConfig.getEntityManager();
+	    try {
+	        String jpql = "SELECT enrollTest FROM EnrrolTest enrollTest WHERE enrollTest.users.userId = :userId "
+	                + "AND enrollTest.mockTests.testId = :mockTestId"
+	                + " AND enrollTest.enrrollmentDate = ("
+	                + "SELECT MAX(enrollTest2.enrrollmentDate) FROM EnrrolTest enrollTest2 "
+	                + "WHERE enrollTest2.users.userId = :userId AND enrollTest2.mockTests.testId = :mockTestId)";
+	        TypedQuery<EnrrolTest> query = enma.createQuery(jpql, EnrrolTest.class);
+	        query.setParameter("userId", userId);
+	        query.setParameter("mockTestId", mockTestId);
+	        return query.getSingleResult();
+	    } catch (Exception e) {
+	        // Xử lý ngoại lệ (Exception) ở đây
+	        e.printStackTrace();
+	        return null; // Hoặc thực hiện xử lý khác tùy theo yêu cầu
+	    } finally {
+	        enma.close(); // Đảm bảo đóng EntityManager trong mệnh đề finally
+	    }
+	}
+
+	public EnrrolTest findEnTestProcess(String userId) {
+	    EntityManager enma = JPAConfig.getEntityManager();
+	    try {
+	        String jpql = "SELECT enrollTest FROM EnrrolTest enrollTest WHERE enrollTest.users.userId = :userId "
+	                + "AND enrollTest.score < 0 "
+	                + "AND enrollTest.enrrollmentDate = ("
+	                + "SELECT MAX(enrollTest2.enrrollmentDate) FROM EnrrolTest enrollTest2 "
+	                + "WHERE enrollTest2.users.userId = :userId AND enrollTest2.score < 0)";
+	        TypedQuery<EnrrolTest> query = enma.createQuery(jpql, EnrrolTest.class);
+	        query.setParameter("userId", userId);
+	        return query.getSingleResult();
+	    } catch (Exception e) {
+	        // Xử lý ngoại lệ (Exception) ở đây
+	        e.printStackTrace();
+	        return null; // Hoặc thực hiện xử lý khác tùy theo yêu cầu
+	    } finally {
+	        enma.close(); // Đảm bảo đóng EntityManager trong mệnh đề finally
+	    }
+	}
 }
