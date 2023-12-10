@@ -1,5 +1,6 @@
 package hcmute.services;
 
+import java.util.Date;
 import java.util.List;
 
 import hcmute.DAO.EnrolLessonImpl;
@@ -50,5 +51,35 @@ public class EnrollLessonServiceImpl implements IEnrollLessonService {
 	public EnrrolLesson findByUserIdAndLessonId(String UserId, String LessonId) {
 		// TODO Auto-generated method stub
 		return enrollLessonDAO.findByUserIdAndLessonId(UserId, LessonId);
+	}
+
+	@Override
+	public void completeTest(String enrollLessonId) {
+		EnrrolLesson enrollLesson = enDao.findById(enrollLessonId);
+		if (enrollLesson != null) {
+			int numberQuestions = enrollLesson.getLessons().getAnswerLesson().size();
+			long numberCorrectAnswers = enrollLesson.getAnswerLessonUser().stream()
+					.filter(ansUser -> ansUser.getAnswerLesson().getAnswerKey().equals(ansUser.getAnswerUser()))
+					.count();
+			try {
+				double score = ((double)numberCorrectAnswers / numberQuestions)*10;
+				enrollLesson.setScore(score);
+				Date currentDate = new Date(System.currentTimeMillis());
+				enrollLesson.setEnrrollmentDate(currentDate);
+				enDao.update(enrollLesson);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void resetTest(String enrollLessonId) {
+		EnrrolLesson enrollLesson = enDao.findById(enrollLessonId);
+		if (enrollLesson != null) {
+			double score = -1;
+			enrollLesson.setScore(score);
+			enDao.update(enrollLesson);
+		}
 	}
 }
