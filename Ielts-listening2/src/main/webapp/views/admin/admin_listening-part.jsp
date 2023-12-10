@@ -32,7 +32,7 @@
 						<input name="idTest" value=${idTest } style="display: none">
 						<button type="submit"
 							style="z-index: 2; color: red; top: -5px; right: 11px"
-							class="position-absolute" class="icon-link icon-delete">
+							class="position-absolute btn " class="icon-link icon-delete">
 							<i style="width: 16px; height: 16px" class="fe fe-trash-2 "></i>
 						</button>
 					</form>

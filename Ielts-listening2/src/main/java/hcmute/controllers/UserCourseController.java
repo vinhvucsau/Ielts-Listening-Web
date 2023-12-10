@@ -55,7 +55,7 @@ public class UserCourseController extends HttpServlet {
 			else
 				userId = "0";
 			List<UserCourse> listUserCourse = userCourseService.findByUserIdAndCourseId(userId, courseId);
-			List<Lesson> listLesson = lessonService.findByCourseId(courseId);
+			List<Lesson> listLesson = lessonService.findLessonByCourse(courseId);
 			if (listUserCourse.size() != 0) { // user da dang ki khoa hoc
 				req.setAttribute("isBuy", 1);
 				List<EnrollLessonCombine> listEnCombine = new ArrayList<EnrollLessonCombine>();

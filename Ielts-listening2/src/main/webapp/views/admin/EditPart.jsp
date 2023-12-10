@@ -9,7 +9,8 @@
 </head>
 <body>
 	<form action="editPart?id=${partId}" method="post"
-		enctype="multipart/form-data">
+		enctype="multipart/form-data"
+		style="margin-bottom: 20px; margin-top: 20px">
 		<input style="display: none" name="testId"
 			value="${listeningPart.mockTests.testId}"> <input
 			style="display: none" name="partId" value="${listeningPart.partId }">
@@ -35,11 +36,9 @@
 								src="<c:url value='/image?fname=topicAudio/${listeningPart.audio }'/>"
 								controls></audio>
 
-							<label class="form-label">Edit Audio File</label> 
-							<input
+							<label class="form-label">Edit Audio File</label> <input
 								style="display: none" name="preAudio"
-								value="${listeningPart.audio }"> 
-								<input
+								value="${listeningPart.audio }"> <input
 								value="${listeningPart.audio }" type="file" id="audioFile"
 								name="audioFile" multiple="multiple"
 								style="border: 1px solid black;" accept="audio/*, .mp3"

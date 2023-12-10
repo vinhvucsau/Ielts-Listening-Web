@@ -22,11 +22,10 @@
 				<div class="row align-items-center">
 					<div class="col-xl-7 col-lg-7 col-md-12">
 						<a href="khoahoc" class="link-primary fw-semibold">
-                        		<div class="d-flex align-items-center pb-4">
-                        			<i class="fe fe-arrow-left"></i>
-                                	Trở về
-                        		</div>
-                        </a>
+							<div class="d-flex align-items-center pb-4">
+								<i class="fe fe-arrow-left"></i> Trở về
+							</div>
+						</a>
 						<div>
 							<h1 class="text-dark display-4 fw-semibold">${course.courseName }</h1>
 							<p class="text-dark mb-6 lead">${course.description }</p>
@@ -123,25 +122,30 @@
 									<c:forEach var="i" items="${listLesson}">
 										<!-- Lesson list -->
 										<div class="row" id="lessonList">
-											<button value="${i.lessonId }" class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2" >
+											<button value="${i.lessonId }"
+												class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2">
 												<%-- <span>${i.lessonId }</span> --%>
 												<%-- <input type="hidden" name="lessonId" value="${i.lessonId}"> --%>
-												<a style="display: block; flex: 1; text-align: left;" href="editLesson?lessonId=${i.lessonId }">
-													<span class="accordion-title ms-4">${i.lessonName }</span>
+												<a style="display: block; flex: 1; text-align: left;"
+													href="editLesson?lessonId=${i.lessonId }"> <span
+													class="accordion-title ms-4">${i.lessonName }</span>
 												</a>
 												<%-- <form action="deleteLesson" method="post" enctype="multipart/form-data">
 													<input type="hidden" name="lessonId" value="${i.lessonId}">
 													<button class="icon-link icon-delete"><i class="fe fe-trash color-dark"></i> </button>
 												</form> --%>
-												<a href="<c:url value='/admin/deleteLesson?id=${i.lessonId}'/>" class="icon-link icon-delete"> 
-													<i class="fe fe-trash color-dark"></i>
+												<a
+													href="<c:url value='/admin/deleteLesson?id=${i.lessonId}'/>"
+													class="icon-link icon-delete"> <i
+													class="fe fe-trash color-dark"></i>
 												</a>
 											</button>
 										</div>
 									</c:forEach>
 								</div>
-								<!-- Add Lesson -->		
-								<button class="accordion btn btn-primary mt-2" onclick="showModel()">Thêm bài học</button>	
+								<!-- Add Lesson -->
+								<button class="accordion btn btn-primary mt-2"
+									onclick="showModel()">Thêm bài học</button>
 							</div>
 						</div>
 					</div>
@@ -150,9 +154,9 @@
 						<div class="card mb-3 mb-4">
 							<div class="p-1">
 								<div
-									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
-									height: 210px">
-									<video width="370" height="220" controls class="pt-2">
+									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"height: 210px">
+									<video style="max-width: 100%; border: none" width="370"
+										height="220" controls class="pt-2">
 										<source src="${course.trailer }" type="video/mp4">
 									</video>
 								</div>
@@ -163,9 +167,11 @@
 								<div class="mb-3">
 									<span class="text-dark fw-bold h1">${course.courseName }</span>
 									<span class="text-primary fw-bold h3">
-										<p><fmt:formatNumber value="${course.cost}" pattern="###,### VNĐ" /></p>
-									</span>
-									<span class="text-dark">
+										<p>
+											<fmt:formatNumber value="${course.cost}"
+												pattern="###,### VNĐ" />
+										</p>
+									</span> <span class="text-dark">
 										<p>${course.description }</p>
 									</span>
 								</div>
@@ -191,20 +197,19 @@
 							<div class="card-body">
 								<div class="mb-3">
 									<label for="courseTitle" class="form-label">Tên bài học</label>
-										<input id="lessonName" name="lessonName" value=""
+									<input id="lessonName" name="lessonName" value=""
 										class="form-control" type="text" placeholder="Tên bài học"
 										required> <small>Write a 60 character course
 										title.</small>
 								</div>
 
 								<div class="mb-3">
-									<label class="form-label">Thêm video bài giảng</label> 
-									<input type="file" class="form-control" value=""
-											name="video" id=""
-											accept="video/mp4" require>
+									<label class="form-label">Thêm video bài giảng</label> <input
+										type="file" class="form-control" value="" name="video" id=""
+										accept="video/mp4" require>
 									<div id="audio"></div>
 								</div>
-								
+
 								<div class="mb-3">
 									<label class="form-label">Answer Sheet</label>
 									<div id="editor">
@@ -226,18 +231,19 @@
 
 						</div>
 						<!-- Button -->
-						<button margin: 10px" class="btn btn-primary"
-							type="submit">Xác nhận</button>
+						<button margin: 10px" class="btn btn-primary" type="submit">Xác
+							nhận</button>
 					</div>
 				</div>
 			</form>
 		</div>
-		
+
 		<div id="shadow"
 			class="position-fixed  top-0 start-0 bottom-0 end-0 bg-dark"
-			style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow()"></div>
+			style="opacity: 0.5; display: none; z-index: 2"
+			onclick="hideShadow()"></div>
 	</main>
-	
+
 	<script>
 		var arrLesson = [];
 		var arrAnswer = [];
@@ -262,7 +268,7 @@
 			arrAnswer.push(itemAns);
 		</c:forEach>
 	</script>
-	
+
 	<script>
 	    /* let questionCount = ${listAnsLesson[-1].number}; */
 	    let questionCount = 0 
@@ -306,7 +312,7 @@
 			}
 		}
 	</script>
-	
+
 	<script>
 		 ClassicEditor
 	     .create(document.querySelector('#editor'))
@@ -324,7 +330,7 @@
 	</script>
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
-		
+
 	<script>
 		var model = document.getElementById("model");
 		var shadow = document.getElementById("shadow");
