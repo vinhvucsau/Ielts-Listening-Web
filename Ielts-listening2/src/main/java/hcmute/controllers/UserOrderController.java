@@ -56,22 +56,28 @@ public class UserOrderController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		HttpSession session = req.getSession(false);
 		user = (User) session.getAttribute("user");
-		if (url.contains("order")) {
-			listCourseId = req.getParameter("listCourseId");
-			if (listCourseId != null) {
-				String[] courseIds = listCourseId.split("&");
-				List<Course> courseList = new ArrayList<Course>();
-				for (String courseId : courseIds) {
-					if (!courseId.isEmpty()) {
-						Course course = courseService.findById(courseId);
-						courseList.add(course);
+		if (user != null) {
+			if (url.contains("order")) {
+				listCourseId = req.getParameter("listCourseId");
+				if (listCourseId != null) {
+					String[] courseIds = listCourseId.split("&");
+					List<Course> courseList = new ArrayList<Course>();
+					for (String courseId : courseIds) {
+						if (!courseId.isEmpty()) {
+							Course course = courseService.findById(courseId);
+							courseList.add(course);
+						}
 					}
+					req.setAttribute("networth", user.getNetworth());
+					req.setAttribute("courseList", courseList);
+					RequestDispatcher rd = req.getRequestDispatcher("/views/user/order.jsp");
+					rd.forward(req, resp);
 				}
-				req.setAttribute("networth", user.getNetworth());
-				req.setAttribute("courseList", courseList);
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/order.jsp");
-				rd.forward(req, resp);
 			}
+
+		} else {
+			PrintWriter out = resp.getWriter();
+			out.println("Chưa login");
 		}
 	}
 

@@ -33,6 +33,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		<div class="w-100 m-0"
 			style="background-color: #DDE4FB; height: 450px;"></div>
 		<div class="px-7 py-7  ">
+
 			<c:if test="${not empty currentUser and not empty enTestProcess}">
 				<div class="bg-white px-4 py-4 rounded-4 card-body shadow-lg">
 					<p class="fs-5 fw-bold mb-0 color-blue--primary">Tiếp tục làm
@@ -56,18 +57,19 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 			</c:if>
 			<p class="fs-3 fw-bold my-5">Hôm nay bạn muốn luyện</p>
 			<div class="d-flex flex-row justify-content-between">
-				<ul class="ul__test nav fs-5 fw-bold " style="width: 500px">
-					<li class="nav-item cursor-pointer ">
+				<ul class="ul__test nav fs-5 fw-bold justify-content-between"
+					style="width: 500px">
+					<li class="nav-item  ">
 						<div
 							class="div__tab div__tab--1 nav-link rounded-3 text-black ${param.tab == null || param.tab == '1' ? 'active' : ''}">Tất
 							cả bộ đề</div>
 					</li>
-					<li class="nav-item cursor-pointer">
+					<li class="nav-item ">
 						<div
 							class="div__tab div__tab--2 nav-link rounded-3 text-black ${param.tab == '2' ? 'active' : ''}"
 							href="#">Bộ đề Mới nhất</div>
 					</li>
-					<li class="nav-item cursor-pointer">
+					<li class="nav-item ">
 						<div
 							class="div__tab div__tab--3 nav-link rounded-3 text-black ${param.tab == '3' ? 'active' : ''}"
 							href="#">Bộ đề HOT</div>
@@ -156,89 +158,187 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 						<div class="row gy-4">
 							<c:forEach var="mockTest" items='${topicTest.mockTests}'>
 								<c:if test="${i < 6}">
-									<div class="col-6" style="cursor: pointer">
-										<form action="luyen-de-home" method="post">
-											<input type="hidden" name="userId"
-												value="${currentUser.userId }" /> <input type="hidden"
-												name="testId" value="${mockTest.testId }" /> 
-												<a href="#"
-												onclick="event.preventDefault();this.parentNode.submit()"
-												style="color: #64748b;">
-												<div class="p-3 border bg-white d-flex flex-row rounded-3">
-													<c:choose>
-														<c:when test="${currentUser.userId == null}">
-															<div
-																class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-																style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-																<svg xmlns="http://www.w3.org/2000/svg" width="32"
-																	height="32" fill="currentColor"
-																	class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
-						  								<path
-																		d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
+									<%-- <div class="col-6" style="cursor:pointer">
+							  		<form action="luyen-de-home" method="post">
+							  			<input type="hidden" name="userId" value="${currentUser.userId }" />
+										<input type="hidden" name="testId" value="${mockTest.testId }" />
+							  			<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;">
+								      <div class="p-3 border bg-white d-flex flex-row rounded-3">
+								      	<c:choose>
+								      		<c:when test="${currentUser.userId == null}">
+									      		<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: rgb(240, 247, 255); color:rgb(0, 74, 185); width: 50px; height: 50px;">
+										      		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
+						  								<path d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z"/>
 													</svg>
-															</div>
-														</c:when>
-														<c:otherwise>
-															<c:set var="maxScore" value="-10"></c:set>
-															<c:set var="count" value="0"></c:set>
-															<c:forEach var="enrrolTest"
-																items="${mockTest.enrrolTests }">
-																<c:if
-																	test="${maxScore < enrrolTest.score && enrrolTest.users.userId == currentUser.userId}">
-																	<c:set var="maxScore" value="${enrrolTest.score}"></c:set>
-																	<c:set var="count" value="${count + 1 }"></c:set>
-																</c:if>
-															</c:forEach>
-															<c:choose>
-																<c:when test="${count == 0 }">
-																	<div
-																		class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-																		style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-																		<svg xmlns="http://www.w3.org/2000/svg" width="32"
-																			height="32" fill="currentColor"
-																			class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
-								  								<path
-																				d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
+									      		</div>
+								      		</c:when>
+								      		<c:otherwise>
+								      			<c:set var="maxScore" value="-10"></c:set>
+								      			<c:set var="count" value="0"></c:set>
+									      		<c:forEach var="enrrolTest" items="${mockTest.enrrolTests }">
+									      			<c:if test="${maxScore < enrrolTest.score && enrrolTest.users.userId == currentUser.userId}">
+									      				<c:set var="maxScore" value="${enrrolTest.score}"></c:set>
+									      				<c:set var="count" value="${count + 1 }"></c:set>
+									      			</c:if>
+									      		</c:forEach>
+									      		<c:choose>
+									      			<c:when test="${count == 0 }">
+									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: rgb(240, 247, 255); color:rgb(0, 74, 185); width: 50px; height: 50px;">
+												      		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
+								  								<path d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z"/>
 															</svg>
-																	</div>
-																</c:when>
-																<c:when test="${maxScore == -1 }">
-																	<div
-																		class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-																		style="background-color: #fffbeb; color: rgb(245, 158, 11); width: 50px; height: 50px;">3%</div>
-																</c:when>
-																<c:otherwise>
-																	<div
-																		class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-																		style="background-color: #00B135; color: white; width: 50px; height: 50px;">${maxScore}</div>
-																</c:otherwise>
-															</c:choose>
-														</c:otherwise>
-													</c:choose>
-													<p
-														class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0"
-														value="${mockTest.testId}">${mockTest.testName}</p>
+									      				</div>
+									      			</c:when>
+									      			<c:when test="${maxScore == -1 }">
+									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: #fffbeb; color: rgb(245,158,11); width: 50px; height: 50px;">3%</div>
+									      			</c:when>
+									      			<c:otherwise>
+									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: #00B135; color: white; width: 50px; height: 50px;">${maxScore}</div>
+									      			</c:otherwise>
+									      		</c:choose>
+								      		</c:otherwise>
+								      	</c:choose>
+								      	<p class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0" value="${mockTest.testId}">${mockTest.testName}</p>					      		
+								      </div>
+								      </a>
+							    	</form>
+							    	</div> --%>
+
+
+
+
+									<!-- Chỉnh sửa 12/11/2023 -->
+
+									<div class="col-6">
+										<div style="color: #64748b;">
+											<div class="p-3 border bg-white rounded-3">
+												<div class="d-flex justify-content-between">
+													<div class="d-flex flex-row">
+														<c:choose>
+															<c:when test="${currentUser.userId == null}">
+																<div
+																	class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
+																	style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="32"
+																		height="32" fill="currentColor"
+																		class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
+										  								<path
+																			d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
+																	</svg>
+																</div>
+															</c:when>
+															<c:otherwise>
+																<c:set var="maxScore" value="-10"></c:set>
+																<c:set var="count" value="0"></c:set>
+																<c:set var="isDoing" value="${false }"></c:set>
+																<c:forEach var="enrrolTest"
+																	items="${mockTest.enrrolTests }">
+																	<c:if
+																		test="${enrrolTest.users.userId.equals(currentUser.userId)}">
+																		<c:set var="count" value="${count + 1 }"></c:set>
+																		<c:if test="${enrrolTest.score == -1}">
+																			<c:set var="isDoing" value="${true}"></c:set>
+																			<c:set var="enrTestId" value="${enrrolTest.enrrolId}"></c:set>
+																		</c:if>
+																		<c:if
+																			test="${enrrolTest.score >= 0 and enrrolTest.score > maxScore }">
+																			<c:set var="maxScore" value="${enrrolTest.score}"></c:set>
+																			<c:set var="doneEnrollTestId"
+																				value="${enrrolTest.enrrolId}"></c:set>
+																		</c:if>
+																	</c:if>
+																</c:forEach>
+
+																<c:choose>
+
+																	<c:when test="${count == 0 }">
+																		<div
+																			class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
+																			style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="32"
+																				height="32" fill="currentColor"
+																				class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
+												  								<path
+																					d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
+																			</svg>
+																		</div>
+																	</c:when>
+																	<c:when test="${isDoing }">
+																		<div
+																			class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
+																			style="background-color: #fffbeb; color: rgb(245, 158, 11); width: 50px; height: 50px;">3%</div>
+																	</c:when>
+																	<c:otherwise>
+																		<div
+																			class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
+																			style="background-color: #00B135; color: white; width: 50px; height: 50px;">${maxScore}</div>
+																	</c:otherwise>
+																</c:choose>
+
+
+															</c:otherwise>
+														</c:choose>
+														<p
+															class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0"
+															value="${mockTest.testId}">${mockTest.testName}</p>
+													</div>
+
+													<div class="d-flex flex-row align-items-center">
+														<c:choose>
+															<c:when test="${count == 0 }">
+																<form action="luyen-de-home" method="post">
+																	<input type="hidden" name="userId"
+																		value="${currentUser.userId }" /> <input
+																		type="hidden" name="testId"
+																		value="${mockTest.testId }" /> <input type="submit"
+																		class="btn btn-primary" value="Làm ngay" />
+																</form>
+															</c:when>
+															<c:when test="${isDoing}">
+																<a
+																	href='<c:url value="/test/luyende_test?enrollTestId=${enrTestId}"></c:url>'
+																	class="btn"
+																	style="background-color: rgb(245, 158, 11); color: #fff;">Làm
+																	tiếp</a>
+															</c:when>
+															<c:otherwise>
+																<a
+																	href='<c:url value="/test/luyende_test?enrollTestId=${doneEnrollTestId}"></c:url>'
+																	class="btn me-1"
+																	style="background-color: #00B135; color: white;">Xem
+																	lại</a>
+																<form action="luyen-de-home" method="post">
+																	<input type="hidden" name="userId"
+																		value="${currentUser.userId }" /> <input
+																		type="hidden" name="testId"
+																		value="${mockTest.testId }" /> <input type="submit"
+																		class="btn btn-primary" value="Làm lại" />
+																</form>
+															</c:otherwise>
+														</c:choose>
+													</div>
 												</div>
-											</a>
-										</form>
+											</div>
+										</div>
 									</div>
+
+									<!-- Chỉnh sửa -->
+
 									<c:set var="i" value="${i+1 }"></c:set>
 								</c:if>
 							</c:forEach>
 						</div>
 					</div>
-					<a href="luyende-testset?topicId=${topicTest.topicId}">
-						<button
-							class="btn btn-primary d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold  align-items-center">
-							Xem thêm ${topicTest.mockTests.size() - i} đề
-							<svg xmlns="http://www.w3.org/2000/svg" height="24"
-								style="margin-top: 3px;" fill="currentColor"
-								class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
+					<button
+						class="btn btn-primary d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold  align-items-center">
+						Xem thêm ${topicTest.mockTests.size() - i} đề
+						<svg xmlns="http://www.w3.org/2000/svg" height="24"
+							style="margin-top: 3px;" fill="currentColor"
+							class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
 	  						<path fill-rule="evenodd"
-									d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+								d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
 						</svg>
-						</button>
-					</a>
+					</button>
 				</div>
 			</c:forEach>
 
