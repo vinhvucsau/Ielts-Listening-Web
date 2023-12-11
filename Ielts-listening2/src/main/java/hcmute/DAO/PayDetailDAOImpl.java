@@ -7,9 +7,10 @@ import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.PayDetail;
+import hcmute.entity.Payment;
 
 public class PayDetailDAOImpl extends AbstractDao<PayDetail> implements IPayDetailDAO {
-
+	
 	public PayDetailDAOImpl() {
 		super(PayDetail.class);
 		// TODO Auto-generated constructor stub
@@ -23,11 +24,11 @@ public class PayDetailDAOImpl extends AbstractDao<PayDetail> implements IPayDeta
 		query.setParameter("idpay", idpay); 
 		return query.getResultList();
 	}
+	
 
-	public static void main(String[] args) {
-		IPayDetailDAO proDAO = new PayDetailDAOImpl();
-		List<PayDetail> list = proDAO.findPayDetailByIDPayment("Payment1074");
-		System.out.print(list);
-	}
-
+//	public static void main(String[] args) {
+//		IPayDetailDAO proDAO = new PayDetailDAOImpl();
+//		List<PayDetail> list = proDAO.findPayDetailByIDPayment("Payment1074");
+//		System.out.print(list);
+//	}
 }

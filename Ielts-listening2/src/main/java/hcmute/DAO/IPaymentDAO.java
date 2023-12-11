@@ -12,4 +12,7 @@ public interface IPaymentDAO {
 
 	List<Payment> findcoursesByIDPayment(String id);
 
+	List<Payment> findcoursesByIDuser(String string);
+
+
 }

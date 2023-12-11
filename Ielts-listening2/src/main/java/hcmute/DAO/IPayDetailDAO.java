@@ -8,5 +8,4 @@ public interface IPayDetailDAO {
 
 	List<PayDetail> findPayDetailByIDPayment(String idpay);
 
-
 }

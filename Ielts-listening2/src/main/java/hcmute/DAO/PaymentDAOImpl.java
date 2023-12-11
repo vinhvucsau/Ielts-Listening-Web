@@ -43,7 +43,6 @@ public class PaymentDAOImpl extends AbstractDao<Payment> implements IPaymentDAO 
 			}
 		}
 	}
-
 	@Override
 	public List<Payment> findcoursesByIDPayment(String id) {
 		EntityManager entityManager = JPAConfig.getEntityManager();
@@ -52,11 +51,20 @@ public class PaymentDAOImpl extends AbstractDao<Payment> implements IPaymentDAO 
 		query.setParameter("id", id); // Thiết lập giá trị của tham số
 		return query.getResultList();
 	}
-
-	public static void main(String[] args) {
-		IPaymentDAO proDAO = new PaymentDAOImpl();
-		List<Payment> list = proDAO.findcoursesByIDPayment("Payment1074");
-		System.out.print(list);
+	public List<Payment> findcoursesByIDuser(String id) {
+	    EntityManager entityManager = JPAConfig.getEntityManager();
+	    String jpql = "SELECT p FROM Payment p WHERE p.users.userId = :id";
+	    TypedQuery<Payment> query = entityManager.createQuery(jpql, Payment.class);
+	    query.setParameter("id", id); // Thiết lập giá trị của tham số
+	    return query.getResultList();
 	}
+
+//	public static void main(String[] args) {
+//		IPaymentDAO proDAO = new PaymentDAOImpl();
+//		List<Payment> list = proDAO.findcoursesByIDuser("UserId1211");
+//		System.out.print(list);
+//	}
+
+	
 
 }
