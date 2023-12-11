@@ -364,7 +364,7 @@ Long count = (Long) request.getAttribute("countCourse");
 													<!-- Card Body -->
 													<div class="card-body">
 														<h4 class="mb-2 text-truncate-line-2">
-															<a href="course-single.html" class="text-inherit">${i.courseName}</a>
+															<a href="listLesson?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
 														</h4>
 														<!-- List inline -->
 														<div class="d-flex align-items-center gap-3">
@@ -527,7 +527,7 @@ Long count = (Long) request.getAttribute("countCourse");
 													<!-- Card body -->
 													<div class="card-body">
 														<h3 class="mb-2 text-truncate-line-2">
-															<a href="#" class="text-inherit">${i.courseName}</a>
+															<a href="listLesson?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
 														</h3>
 														<!-- list inline -->
 														<ul class="list-inline">
@@ -577,11 +577,12 @@ Long count = (Long) request.getAttribute("countCourse");
 																	</div></li>
 														</ul>
 														<div class="d-flex align-items-center gap-3">
-															<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}
-															<p class="card-text fw-bold fs-5"
-																style="color: rgb(113, 113, 113)">VND</p>
-															</p>
-														</div>
+													<p class="card-text color-blue--primary fw-bold fs-5">
+														<fmt:formatNumber value="${i.cost}" pattern="###,### VNĐ" />
+													<p class="card-text fw-bold fs-5"
+														style="color: rgb(113, 113, 113)"></p>
+
+												</div>
 														<div class="row align-items-center g-0">
 															<div class="col-auto">
 																

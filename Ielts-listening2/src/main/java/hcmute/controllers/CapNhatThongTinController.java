@@ -122,11 +122,8 @@ public class CapNhatThongTinController extends HttpServlet {
 		try {
 			req.setCharacterEncoding("UTF-8");
 			resp.setCharacterEncoding("UTF-8");
-			String id = req.getParameter("userId");
-
-			// Set cứng ID để test chức năng
-
-			User user = userService.findUserByID(id);
+			HttpSession session = req.getSession(false);
+			User user = (User) session.getAttribute("user");
 			String name = req.getParameter("inputName").trim();
 			String phoneNumber = req.getParameter("inputPhone").trim();
 
@@ -165,7 +162,7 @@ public class CapNhatThongTinController extends HttpServlet {
 				}
 			}
 			if (phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+")) {
-				if (userService.findDuplicatePhone(phoneNumber, id) == false) {
+				if (userService.findDuplicatePhone(phoneNumber, user.getUserId()) == false) {
 					req.setAttribute("messError", "Số điện thoại đã được sử dụng!");
 				}
 			} else {
@@ -180,7 +177,7 @@ public class CapNhatThongTinController extends HttpServlet {
 				user.setNetworth(currentNetworth);
 				userService.update(user);
 			}
-			HttpSession session = req.getSession(false);
+			
 			session.setAttribute("user", user);
 			req.setAttribute("currentUser", user);
 			req.setAttribute("message", "Cập nhật thành công!");
