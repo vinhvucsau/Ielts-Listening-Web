@@ -368,8 +368,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		const nextPageBtn = document.querySelector(".btn__page--next");
 		if (prePageBtn) {
 			if (prePageBtn.disabled === false) {
-				prePageBtn.classList.add("bg-color-blue--primary");
-				prePageBtn.classList.add("color-white");
+				prePageBtn.classList.add("btn");
+				prePageBtn.classList.add("btn-primary");
 			}
 			prePageBtn.addEventListener("click", (e) => {
 				e.preventDefault();
@@ -390,8 +390,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		
 		if (nextPageBtn) {
 			if (nextPageBtn.disabled === false) {
-				nextPageBtn.classList.add("bg-color-blue--primary");
-				nextPageBtn.classList.add("color-white");
+				nextPageBtn.classList.add("btn");
+				nextPageBtn.classList.add("btn-primary");
 			}
 			nextPageBtn.addEventListener("click", (e) => {
 				e.preventDefault();
