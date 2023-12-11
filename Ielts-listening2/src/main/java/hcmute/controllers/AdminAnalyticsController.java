@@ -25,6 +25,7 @@ public class AdminAnalyticsController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	IAdminAnalysService adminAnaService = new AdminAnalysServiceImpl();
+	IUserService userService = new UserServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -99,12 +100,26 @@ public class AdminAnalyticsController extends HttpServlet {
 				}
 			}
 			
+			
+			List<String> image = new ArrayList<String>();
+			List<String> imageCourse = new ArrayList<String>();
+			for(int i = 0; i < user.size(); i++) {
+				image.add(user.get(i).getImage());
+			}
+			for (int i = 0; i < listCourseJsp.size(); i++) {
+				imageCourse.add(listCourseJsp.get(i).getImage());
+			}
+			
 			System.out.print("user la: " + userId);
 			System.out.print("course la: " + countCourse1);
-			System.out.print("rating la: " + countRating1);
+			for(int i = 0; i < imageCourse.size(); i++) {
+				System.out.print("ImageCOurse la: " + imageCourse.get(i));
+			}
 			
 			
 			req.setAttribute("userId", userIdJsp);
+			req.setAttribute("imageCourse", imageCourse);
+			req.setAttribute("image", image);
 			req.setAttribute("countCourse1", countCourse1);
 			req.setAttribute("countRating1", countRating1);
 			req.setAttribute("sumCost", sumCost);
