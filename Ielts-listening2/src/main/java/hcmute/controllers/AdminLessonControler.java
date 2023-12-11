@@ -59,6 +59,7 @@ public class AdminLessonControler extends HttpServlet {
 			List<Lesson> listLesson = lessonService.findLessonByCourse(courseId);
 			Course course = courseService.findById(courseId);
 			
+			req.setAttribute("folder", Constants.FOLDER_VIDEO);
 			req.setAttribute("courseID", courseId);
 			req.setAttribute("course", course);
 			req.setAttribute("listLesson", listLesson);
@@ -73,6 +74,7 @@ public class AdminLessonControler extends HttpServlet {
 			Lesson lesson = lessonService.findOneById(lessonId);
 			List<AnswerLesson> listAns = answerLessonService.findAnswerByLesson(lessonId);
 			
+			req.setAttribute("folder", Constants.FOLDER_VIDEO);
 			req.setAttribute("lesson", lesson);
 			req.setAttribute("listAns", listAns);
 		
@@ -110,7 +112,7 @@ public class AdminLessonControler extends HttpServlet {
 			if (req.getPart("video").getSize() != 0) {
 				// tạo tên file mới để khỏi bị trùng
 				String fileName = "" + System.currentTimeMillis();
-				lesson.setVideo(UploadUtils.processUpload("video", req, Constants.DIR + "\\videoLesson\\", fileName));
+				lesson.setVideo(UploadUtils.processUpload("video", req, Constants.DIR + "\\"+Constants.FOLDER_VIDEO+"\\", fileName));
 			}
 			lessonService.insert(lesson);
 		

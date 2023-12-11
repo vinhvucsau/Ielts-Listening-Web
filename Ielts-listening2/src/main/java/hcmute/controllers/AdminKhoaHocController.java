@@ -103,7 +103,7 @@ public class AdminKhoaHocController extends HttpServlet {
 			if (req.getPart("trailer").getSize() != 0) {
 				// tạo tên file mới để khỏi bị trùng
 				String fileName = "" + System.currentTimeMillis();
-				model.setTrailer(UploadUtils.processUpload("trailer", req, Constants.DIR + "\\courseTrailer\\", fileName));
+				model.setTrailer(UploadUtils.processUpload("trailer", req, Constants.DIR + "\\"+Constants.FOLDER_VIDEO+"\\", fileName));
 			}
 			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("enrrollmentDate")); 
 			model.setEnrrolmentDate(date1);

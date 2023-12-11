@@ -153,7 +153,7 @@
 									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
 									height: 210px">
 									<video width="370" height="220" controls class="pt-2">
-										<source src="${course.trailer }" type="video/mp4">
+										<source src="<c:url value='/image?fname=${folder }/${course.trailer }'/>" type="video/mp4">
 									</video>
 								</div>
 							</div>
