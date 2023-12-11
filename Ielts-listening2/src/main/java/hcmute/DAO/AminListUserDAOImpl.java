@@ -16,7 +16,6 @@ public class AminListUserDAOImpl extends AbstractDao<User> implements IAdminList
 	public AminListUserDAOImpl() {
 		super(User.class);
 	}
-
 	
 
 }

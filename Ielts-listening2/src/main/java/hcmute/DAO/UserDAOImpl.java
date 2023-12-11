@@ -98,28 +98,59 @@ public class UserDAOImpl extends AbstractDao<User> implements IUserDAO {
 	@Override
 	public List<Double> findAllEnrrolTestScoreByUserId(String userId) {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "select e.score from EnrrolTest e where e.users.userId = :userId";
-		TypedQuery<Double> query = en.createQuery(jpql, Double.class);
-		query.setParameter("userId", userId);
-		return query.getResultList();
+		try {
+			String jpql = "select e.score from EnrrolTest e where e.users.userId = :userId";
+			TypedQuery<Double> query = en.createQuery(jpql, Double.class);
+			query.setParameter("userId", userId);
+			return query.getResultList();
+		}
+		catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return Collections.emptyList(); // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (en != null && en.isOpen()) {
+				en.close();
+			}
+		}
 	}
 
 	@Override
 	public List<EnrrolLesson> findAllEnrrolLessonByUserId(String userId) {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "SELECT er FROM EnrrolLesson er WHERE er.users.userId = :userId";
-		TypedQuery<EnrrolLesson> query = en.createQuery(jpql, EnrrolLesson.class);
-		query.setParameter("userId", userId);
-		return query.getResultList();
+		try {
+			String jpql = "SELECT er FROM EnrrolLesson er WHERE er.users.userId = :userId";
+			TypedQuery<EnrrolLesson> query = en.createQuery(jpql, EnrrolLesson.class);
+			query.setParameter("userId", userId);
+			return query.getResultList();
+		}catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return Collections.emptyList(); // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (en != null && en.isOpen()) {
+				en.close();
+			}
+		}
 	}
 
 	@Override
 	public List<String> findAllTestNamefromUserId(String userId) {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "select mt.testName from MockTest mt join EnrrolTest et on mt.testId = et.mockTests.testId where et.users.userId = :userId";
-		TypedQuery<String> query = en.createQuery(jpql, String.class);
-		query.setParameter("userId", userId);
-		return query.getResultList();
+		try {
+			String jpql = "select mt.testName from MockTest mt join EnrrolTest et on mt.testId = et.mockTests.testId where et.users.userId = :userId";
+			TypedQuery<String> query = en.createQuery(jpql, String.class);
+			query.setParameter("userId", userId);
+			return query.getResultList();
+		}catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return Collections.emptyList(); // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (en != null && en.isOpen()) {
+				en.close();
+			}
+		}
 	}
 
 }
