@@ -92,8 +92,10 @@ public class UserBlogController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/editBlog.jsp");
 			rd.forward(req, resp);
 		} else if (url.contains("blog-content")) {
-			
-
+			String id = req.getParameter("id");
+			Blog Blog = blogService.findOneById(id);
+			req.setAttribute("blog", Blog);
+			req.setAttribute("folder", Constants.FOLDER_BLOG);
 			req.setAttribute("id", req.getParameter("id"));
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/blog_content.jsp");
 			rd.forward(req, resp);
