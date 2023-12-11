@@ -37,4 +37,10 @@ public class PaymentServiceImpl implements IPaymentService {
 		return payDAO.findcoursesByIDPayment(id);
 	}
 
+	@Override
+	public List<Payment> findcoursesByIDuser(String userId) {
+		return payDAO.findcoursesByIDuser(userId);
+	}
+
+	
 }

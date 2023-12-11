@@ -13,12 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import hcmute.DAO.IPayDetailDAO;
+import hcmute.DAO.PayDetailDAOImpl;
 import hcmute.entity.Account;
+import hcmute.entity.PayDetail;
+import hcmute.entity.Payment;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
 import hcmute.services.AccountServiceImpl;
 import hcmute.services.IAccountServices;
+import hcmute.services.IPayDetailService;
+import hcmute.services.IPaymentService;
 import hcmute.services.IUserService;
+import hcmute.services.PayDetailServiceImpl;
+import hcmute.services.PaymentServiceImpl;
 import hcmute.services.UserServiceImpl;
 import hcmute.utils.Constants;
 import hcmute.utils.DeleteImage;
@@ -27,10 +35,11 @@ import hcmute.utils.compositeId.PasswordEncryptor;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
 		* 50)
-@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi" })
+@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi",  "/user/myorder", "/user/myoddetail" })
 public class CapNhatThongTinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	IPaymentService paymentService = new PaymentServiceImpl();
+	IPayDetailService paydetail = new PayDetailServiceImpl();
 	IUserService userService = new UserServiceImpl();
 	IAccountServices accountService = new AccountServiceImpl();
 
@@ -38,7 +47,7 @@ public class CapNhatThongTinController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		HttpSession session = req.getSession(false);
-
+		
 		// Set cứng ID để test chức năng
 
 		User user = (User) session.getAttribute("user");
@@ -63,6 +72,18 @@ public class CapNhatThongTinController extends HttpServlet {
 			req.setAttribute("currentUser", userCurrent);
 			req.setAttribute("count", count);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_khoahoccuatoi.jsp");
+			rd.forward(req, resp);
+		}  else if(url.contains("myorder")) {
+			String userId = req.getParameter("userId");
+			List<Payment> listmyorder = paymentService.findcoursesByIDuser(userId);
+			req.setAttribute("list", listmyorder);	
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/users_myorder.jsp");
+			rd.forward(req, resp);
+		} else if(url.contains("myoddetail")) {
+			String idpay = req.getParameter("id");
+			List<PayDetail> lisl = paydetail.findPayDetailByIDPayment(idpay);
+			req.setAttribute("list_oddetail", lisl);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/users_myorderDetail.jsp");
 			rd.forward(req, resp);
 		}
 	}

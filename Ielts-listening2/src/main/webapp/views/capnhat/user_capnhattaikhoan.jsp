@@ -101,9 +101,10 @@
 										</a></li>
 
 										<!-- Nav item -->
+										
 										<li class="nav-item"><a class="nav-link"
-											href="invoice.html"> <i class="fe fe-clipboard nav-icon"></i>
-												Invoice
+											href="myorder?userId=${user.userId}"> <i
+												class="fe fe-calendar nav-icon"></i> Invoice
 										</a></li>
 
 									</ul>

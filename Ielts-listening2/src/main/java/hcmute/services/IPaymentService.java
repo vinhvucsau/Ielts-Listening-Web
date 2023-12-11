@@ -16,4 +16,7 @@ public interface IPaymentService {
 
 	List<Payment> findcoursesByIDPayment(String id);
 
+	List<Payment> findcoursesByIDuser(String userId);
+
+
 }
