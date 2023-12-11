@@ -68,7 +68,7 @@ Long count = (Long) request.getAttribute("count");
                                                     </svg>
 											</a>
 										</h2>
-										<p class="mb-0 d-block">${currentUser.account.userName }</p>
+										<p class="mb-0 d-block">${currentUser.email }</p>
 									</div>
 								</div>
 

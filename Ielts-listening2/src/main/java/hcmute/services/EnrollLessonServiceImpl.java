@@ -58,7 +58,7 @@ public class EnrollLessonServiceImpl implements IEnrollLessonService {
 		EnrrolLesson enrollLesson = enDao.findById(enrollLessonId);
 		if (enrollLesson != null) {
 			int numberQuestions = enrollLesson.getLessons().getAnswerLesson().size();
-			long numberCorrectAnswers = enrollLesson.getAnswerLessonUser().stream()
+			long numberCorrectAnswers = enrollLesson.getAnswerLessonUser().stream() 
 					.filter(ansUser -> ansUser.getAnswerLesson().getAnswerKey().equals(ansUser.getAnswerUser()))
 					.count();
 			try {

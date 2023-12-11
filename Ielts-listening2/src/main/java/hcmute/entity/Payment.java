@@ -24,7 +24,7 @@ public class Payment implements Serializable {
 	private String paymentId;
 
 	@Column(name = "dateBuy")
-	private LocalDateTime dateBuy;
+	private Date dateBuy;
 
 	@Column(name = "cost")
 	private Integer cost;
@@ -44,11 +44,11 @@ public class Payment implements Serializable {
 		this.paymentId = paymentId;
 	}
 
-	public LocalDateTime getDateBuy() {
+	public Date getDateBuy() {
 		return dateBuy;
 	}
 
-	public void setDateBuy(LocalDateTime dateBuy) {
+	public void setDateBuy(Date dateBuy) {
 		this.dateBuy = dateBuy;
 	}
 
@@ -82,7 +82,7 @@ public class Payment implements Serializable {
 				+ payDetail + ", users=" + users + "]";
 	}
 
-	public Payment(String paymentId, LocalDateTime dateBuy, Integer cost, List<PayDetail> payDetail, User users) {
+	public Payment(String paymentId, Date dateBuy, Integer cost, List<PayDetail> payDetail, User users) {
 
 		this.paymentId = paymentId;
 		this.dateBuy = dateBuy;

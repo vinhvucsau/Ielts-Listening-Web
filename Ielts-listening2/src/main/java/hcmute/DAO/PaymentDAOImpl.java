@@ -1,6 +1,7 @@
 package hcmute.DAO;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,7 +21,7 @@ public class PaymentDAOImpl extends AbstractDao<Payment> implements IPaymentDAO 
 		// TODO Auto-generated constructor stub
 	}
 
-	public Payment findByDatebuyAndUserId(LocalDateTime dateBuy, String userId) {
+	public Payment findByDatebuyAndUserId(Date dateBuy, String userId) {
 		EntityManager entityManager = JPAConfig.getEntityManager();
 		try {
 			String jpql = "SELECT p FROM Payment p WHERE p.dateBuy = :dateBuy AND p.users.userId = :userId";
