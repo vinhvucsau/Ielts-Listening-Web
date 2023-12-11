@@ -19,7 +19,7 @@ public class PaymentServiceImpl implements IPaymentService {
 	}
 
 	@Override
-	public Payment findByDatebuyAndUserId(LocalDateTime dateBuy, String userId) {
+	public Payment findByDatebuyAndUserId(String dateBuy, String userId) {
 		// TODO Auto-generated method stub
 		return payDAO.findByDatebuyAndUserId(dateBuy, userId);
 	}
@@ -35,7 +35,5 @@ public class PaymentServiceImpl implements IPaymentService {
 		// TODO Auto-generated method stub
 		return payDAO.findcoursesByIDPayment(id);
 	}
-
-	
 
 }

@@ -7,9 +7,8 @@ import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
 
 public interface IPaymentDAO {
-	Payment findByDatebuyAndUserId(LocalDateTime dateBuy, String userId);
+	Payment findByDatebuyAndUserId(String dateBuy, String userId);
 
 	List<Payment> findcoursesByIDPayment(String id);
-
 
 }
