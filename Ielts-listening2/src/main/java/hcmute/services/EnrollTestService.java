@@ -1,6 +1,7 @@
 package hcmute.services;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -103,5 +104,21 @@ public class EnrollTestService{
 	public EnrrolTest findEnTestProcess(String userId)
 	{
 		return enrollTestDao.findEnTestProcess(userId);
+	}
+	
+	public void completeExpiredTest(String userId) {
+		List<EnrrolTest> enrollTests = enrollTestDao.findAll();
+		int timeTest = 40*60; 
+		enrollTests.forEach(enrollTest -> {
+			if (enrollTest.getUsers().getUserId().equals(userId)) {
+				Date currentDate = new Date(System.currentTimeMillis());
+				Date enrollmentDate = enrollTest.getEnrrollmentDate();
+				Date endingEnrollmentDate = new Date(enrollmentDate.getTime() + timeTest*1000);
+				System.out.println(endingEnrollmentDate);
+				if (currentDate.after(endingEnrollmentDate) && enrollTest.getScore() < 0) {
+					completeTest(enrollTest.getEnrrolId());
+				}
+			}
+		});
 	}
 }

@@ -48,12 +48,8 @@ public class LuyenDeHomeController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();	
 		User user = (User) session.getAttribute("user");
-		if (user != null && enrollTestService.findEnTestProcess(user.getUserId())!= null  )
-		{
-			EnrrolTest enTestProcess = enrollTestService.findEnTestProcess(user.getUserId());
-			request.setAttribute("enTestProcess", enTestProcess);
-			System.out.print("entestprocess"+ enTestProcess.getEnrrolId());
-		}
+		
+		enService.completeExpiredTest(user.getUserId());
 		
 		request.setAttribute("currentUser", user);
 		int page = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));

@@ -150,27 +150,20 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					</div>
 					<c:set var="i" value="0"></c:set>
 					<div class="overflow-hidden my-3">
-						<div class="row gy-4">
-							<c:forEach var="mockTest" items='${topicTest.mockTests}'>
-								<c:if test="${i < 6}">
-									<div class="col-6" style="cursor: pointer">
-										<form action="luyen-de-home" method="post">
-											<input type="hidden" name="userId"
-												value="${currentUser.userId }" /> <input type="hidden"
-												name="testId" value="${mockTest.testId }" /> <a href="#"
-												onclick="event.preventDefault();this.parentNode.submit()"
-												style="color: #64748b;">
-												<div class="p-3 border bg-white d-flex flex-row rounded-3">
-													<c:choose>
-														<c:when test="${currentUser.userId == null}">
-															<div
-																class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-																style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-																<svg xmlns="http://www.w3.org/2000/svg" width="32"
-																	height="32" fill="currentColor"
-																	class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
-						  								<path
-																		d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
+					  <div class="row gy-4">
+						  	<c:forEach var="mockTest" items='${topicTest.mockTests}'>
+						  		<c:if test="${i < 6}">
+							  		<%-- <div class="col-6" style="cursor:pointer">
+							  		<form action="luyen-de-home" method="post">
+							  			<input type="hidden" name="userId" value="${currentUser.userId }" />
+										<input type="hidden" name="testId" value="${mockTest.testId }" />
+							  			<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;">
+								      <div class="p-3 border bg-white d-flex flex-row rounded-3">
+								      	<c:choose>
+								      		<c:when test="${currentUser.userId == null}">
+									      		<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: rgb(240, 247, 255); color:rgb(0, 74, 185); width: 50px; height: 50px;">
+										      		<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
+						  								<path d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z"/>
 													</svg>
 															</div>
 														</c:when>
@@ -196,32 +189,26 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 								  								<path
 																				d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
 															</svg>
-																	</div>
-																</c:when>
-																<c:when test="${maxScore == -1 }">
-																	<div
-																		class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-																		style="background-color: #fffbeb; color: rgb(245, 158, 11); width: 50px; height: 50px;">3%</div>
-																</c:when>
-																<c:otherwise>
-																	<div
-																		class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-																		style="background-color: #00B135; color: white; width: 50px; height: 50px;">${maxScore}</div>
-																</c:otherwise>
-															</c:choose>
-														</c:otherwise>
-													</c:choose>
-													<p
-														class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0"
-														value="${mockTest.testId}">${mockTest.testName}</p>
-												</div>
-											</a>
-										</form>
-									</div>
-									<c:set var="i" value="${i+1 }"></c:set>
-								</c:if>
-							</c:forEach>
-						</div>
+									      				</div>
+									      			</c:when>
+									      			<c:when test="${maxScore == -1 }">
+									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: #fffbeb; color: rgb(245,158,11); width: 50px; height: 50px;">3%</div>
+									      			</c:when>
+									      			<c:otherwise>
+									      				<div class="rounded-3 d-flex justify-content-center align-items-center fw-bold" style="background-color: #00B135; color: white; width: 50px; height: 50px;">${maxScore}</div>
+									      			</c:otherwise>
+									      		</c:choose>
+								      		</c:otherwise>
+								      	</c:choose>
+								      	<p class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0" value="${mockTest.testId}">${mockTest.testName}</p>					      		
+								      </div>
+								      </a>
+							    	</form>
+							    	</div>
+							    	<c:set var="i" value="${i+1 }"></c:set>
+							    </c:if>
+						  	</c:forEach>	
+					  </div>
 					</div>
 					<a href="luyende-testset?topicId=${topicTest.topicId}">
 					<button class="btn btn-primary d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold  align-items-center">
