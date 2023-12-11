@@ -212,9 +212,11 @@ Long count = (Long) request.getAttribute("count");
 															<%-- <a href="#!" class="text-inherit">${i.courses.lessons }</a> --%>
 															<c:set var="countTren5" value="0" />
 															<c:set var="sumScore" value="0" />
+															<c:set var="score" value="0" />
 															<c:forEach var="i" items="${i.courses.lessons}">
 
 																<c:forEach var="j" items="${i.enrrolLesson}">
+																<c:set var="score" value="${j.score }" />
 
 
 																	<c:choose>
@@ -233,7 +235,7 @@ Long count = (Long) request.getAttribute("count");
 
 															</c:forEach>
 														</h4>
-
+														
 														<c:set var="percen"
 															value="${countTren5 * 100.0 / sumScore}" />
 
