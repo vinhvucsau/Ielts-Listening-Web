@@ -29,20 +29,57 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	margin: 0;
 }
 </style>
-	<div class="m-0 p-0">
-		<div class="w-100 m-0"
-			style="background-color: #DDE4FB; height: 450px;"></div>
-		<div class="px-7 py-7  ">
+	<div class="m-4 p-0">
+		<section class="py-lg-16 pt-8 m-4">
+                <div class="container">
+                  <div class="row d-flex align-items-center justify-content-between">
+                    <div class="col-xl-6 col-lg-6 col-12 p-2">
+                      <div>
+                        <h1 class="display-2 fw-bold mb-3">Luyện đề <u class="text-warning"><span class="text-primary">Listening</span></u> ngay hôm nay</h1>
+                        <p class="lead mb-4">Luyện Listening <span class="fw-bold">MIỄN PHÍ VĨNH VIỄN</span> cùng giải thích đáp án siêu chi tiết với kho đề HOT nhất liên tục cập nhật.</p>
+                        <ul class="list-unstyled mb-5">
+                          <li class="mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="var(--gk-success)" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+                            </svg>
+                            <span class="ms-2">Không tốn phí</span>
+                          </li>
+                          <li class="mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="var(--gk-success)" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+                            </svg>
+                            <span class="ms-2">Dịch vụ hỗ trợ 24/7</span>
+                          </li>
+                          <li class="mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="var(--gk-success)" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+                            </svg>
+                            <span class="ms-2">Làm bài mọi lúc, mọi nơi</span>
+                          </li>
+                        </ul>
+                        <a href="#testList" class="btn btn-primary btn-md">Làm bài ngay</a>
+                      </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-6 col-12 d-lg-flex justify-content-end">
+                      <div class="mt-12 mt-lg-0 position-relative">
+                        <img src="../assets/images/education/skils.jpg" alt="online course" class="img-fluid rounded-4 w-100 z-1 position-relative">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+		<div id="testList" class="px-7 py-7">
 			<c:if test="${not empty currentUser and not empty enTestProcess}">
-				<div class="bg-white px-4 py-4 rounded-4 card-body shadow-lg">
+				<div class="bg-white px-4 py-4 rounded-4 card-body">
 					<p class="fs-5 fw-bold mb-0 color-blue--primary">Tiếp tục làm
 						bài</p>
-					<p class="fs-4 fw-bold mb-0">${enTestProcess.enrrollmentDate}</p>
+					<h3 class="fw-bold mb-0">${enTestProcess.mockTests.topicTests.topicName}</h3>
 					<p class="fs-5 fw-bold mb-0" style="color: rgb(113, 113, 113)">${enTestProcess.mockTests.testName}</p>
+					<p class="fs-5 fw-bold mb-0" style="color: rgb(113, 113, 113)">${enTestProcess.enrrollmentDate}</p>
 					<a
 						href="http://localhost:8080/Ielts-listening2/test/luyende_test?enrollTestId=${enTestProcess.enrrolId}">
 						<button
-							class="btn  btn-primary d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold color-blue--primary bg-color-blue--light align-items-center">
+							class="btn btn-primary d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold text-light align-items-center">
 							Tiếp tục làm bài
 							<svg xmlns="http://www.w3.org/2000/svg" height="24"
 								style="margin-top: 3px;" fill="currentColor"
@@ -54,40 +91,38 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					</a>
 				</div>
 			</c:if>
-			<p class="fs-3 fw-bold my-5">Hôm nay bạn muốn luyện</p>
+			<h2 class="fw-bold my-5">Hôm nay bạn muốn luyện</h2>
 			<div class="d-flex flex-row justify-content-between">
 				<ul class="ul__test nav fs-5 fw-bold " style="width: 500px">
-					<li class="nav-item cursor-pointer ">
+					<li class="nav-item cursor-pointer pe-2">
 						<div
-							class="div__tab div__tab--1 nav-link rounded-3 text-black ${param.tab == null || param.tab == '1' ? 'active' : ''}">Tất
+							class="div__tab div__tab--1 nav-link rounded-3 text-black fs-4 ${param.tab == null || param.tab == '1' ? 'active' : ''}">Tất
 							cả bộ đề</div>
 					</li>
-					<li class="nav-item cursor-pointer">
+					<li class="nav-item cursor-pointer px-2">
 						<div
-							class="div__tab div__tab--2 nav-link rounded-3 text-black ${param.tab == '2' ? 'active' : ''}"
+							class="div__tab div__tab--2 nav-link rounded-3 text-black fs-4 ${param.tab == '2' ? 'active' : ''}"
 							href="#">Bộ đề Mới nhất</div>
 					</li>
-					<li class="nav-item cursor-pointer">
+					<li class="nav-item cursor-pointer px-2">
 						<div
-							class="div__tab div__tab--3 nav-link rounded-3 text-black ${param.tab == '3' ? 'active' : ''}"
+							class="div__tab div__tab--3 nav-link rounded-3 text-black fs-4 ${param.tab == '3' ? 'active' : ''}"
 							href="#">Bộ đề HOT</div>
 					</li>
 				</ul>
-				<div class="input-group" style="width: 400px;">
-					<span class="input-group-text px-3 boDescription for topic 1rder-0"
-						id="basic-addon1"
-						style="background-color: white; color: rgb(107, 114, 128);">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-							fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-		  					<path
-								d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-						</svg>
-					</span> <input type="text"
-						class="btn__search form-control py-2 fs-5 border"
+			</div>
+			<div class="row">
+				<form class="mt-5 d-flex align-items-center">
+	              <span class="position-absolute ps-3 search-icon">
+	                <i class="fe fe-search"></i>
+	              </span>
+	              <label for="search" class="visually-hidden"></label>
+	              <input type="text" style="box-shadow: none;"
+						class="btn__search form-control ps-6 fs-5 border"
 						placeholder="Tìm kiếm" aria-label="Search"
 						aria-describedby="basic-addon1"
-						value='${param.search == null ? "" : param.search }'>
-				</div>
+						value='${param.search == null ? "" : param.search }'/>
+	            </form>
 			</div>
 			<c:if test="${topicTests.size() == 0}">
 				<div class="w-100 d-flex flex-row justify-content-center my-5">
@@ -104,16 +139,22 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 				</div>
 			</c:if>
 			<c:forEach var="topicTest" items='${topicTests}'>
-				<div class="w-100 bg-white px-4 py-4 my-5 rounded-4 shadow-lg">
+				<div class="w-100 bg-white px-5 py-5 my-5 rounded-4">
 					<div class="position-relative intro d-flex flex-row">
-
-						<img style="cursor: pointer"
+						<c:if test="${topicTest.image != null}">
+							<img style="cursor: pointer; height: 150px; width: 150px; object-fit: scale-down;"
 							src='<c:url value="/image?fname=topicIMG/${topicTest.image}"/>'
+							 />
+						</c:if>
+						<c:if test="${topicTest.image == null}">
+							<img style="cursor: pointer; height: 150px; width: 150px; object-fit: scale-down;"
+							src='https://th.bing.com/th/id/OIP.n_HvXqSZmaIW3zdFHOXMKQAAAA?rs=1&pid=ImgDetMain'
 							width="150px" />
-						<div class="w-75">
-							<p class="fs-4 fw-bold mb-0" style="cursor: pointer">${topicTest.topicName}</p>
+						</c:if>
+						<div class="w-75 ps-3">
+							<h3 class="fw-bold mb-1" style="cursor: pointer">${topicTest.topicName}</h3>
 							<p
-								style="color: rgb(123, 137, 155); font-size: 18px; cursor: pointer">${topicTest.description}</p>
+								style="color: rgb(123, 137, 155); font-size: 15px; cursor: pointer">${topicTest.description}</p>
 						</div>
 						<c:set var="count" value="0"></c:set>
 						<c:forEach var="mockTest" items='${topicTest.mockTests}'>
@@ -145,9 +186,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 							</c:otherwise>
 						</c:choose>
 						<div
-							class="position-absolute end-0 px-4 rounded-3 d-flex flex-column justify-content-center"
+							class="position-absolute end-0 px-3 py-2 rounded-3 d-flex flex-column justify-content-center"
 							style="${style} height: 40px;">
-							<p class="fw-semibold h-25" style="font-size: 18px;">${count}/${topicTest.mockTests.size()}
+							<p class="fw-semibold h-25" style="font-size: 15px;">${count}/${topicTest.mockTests.size()}
 								đề</p>
 						</div>
 					</div>
@@ -215,9 +256,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 															</c:choose>
 														</c:otherwise>
 													</c:choose>
-													<p
-														class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0"
-														value="${mockTest.testId}">${mockTest.testName}</p>
+													<h4
+														class="fw-bold d-flex flex-column justify-content-center ms-3 mb-0"
+														value="${mockTest.testId}">${mockTest.testName}</h4>
 												</div>
 											</a>
 										</form>
