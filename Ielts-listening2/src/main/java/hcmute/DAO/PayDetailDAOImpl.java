@@ -7,7 +7,6 @@ import javax.persistence.TypedQuery;
 
 import JPAConfig.JPAConfig;
 import hcmute.entity.PayDetail;
-import hcmute.entity.Payment;
 
 public class PayDetailDAOImpl extends AbstractDao<PayDetail> implements IPayDetailDAO {
 

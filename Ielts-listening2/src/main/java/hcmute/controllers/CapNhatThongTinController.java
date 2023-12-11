@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import hcmute.DAO.IPayDetailDAO;
-import hcmute.DAO.PayDetailDAOImpl;
 import hcmute.entity.Account;
 import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
@@ -84,9 +82,12 @@ public class CapNhatThongTinController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/users_myorder.jsp");
 			rd.forward(req, resp);
 		} else if(url.contains("myoddetail")) {
+			String id = req.getParameter("id");
 			String idpay = req.getParameter("id");
+			List<Payment> list_orderdetail = paymentService.findcoursesByIDPayment(id);
 			List<PayDetail> lisl = paydetail.findPayDetailByIDPayment(idpay);
 			req.setAttribute("list_oddetail", lisl);
+			req.setAttribute("list", list_orderdetail);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/users_myorderDetail.jsp");
 			rd.forward(req, resp);
 		}

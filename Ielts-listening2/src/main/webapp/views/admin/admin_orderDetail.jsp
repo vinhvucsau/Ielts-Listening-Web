@@ -66,9 +66,7 @@
 											<!-- text -->
 											<div class="ms-md-4 mt-2">
 												<h5 class="mb-1">${course.userCourse.courses.courseName}</h5>
-												<span> Color: <span class="text-dark">Orange</span> ,
-													Size: <span class="text-dark">10</span>
-												</span>
+												
 											</div>
 										</div>
 									</div>
@@ -94,15 +92,7 @@
 								<li class="d-flex justify-content-between mb-2"><span>Phương
 										thức thanh toán </span> <span class="text-secondary fw-medium">
 										Chuyển khoản ngân hàng </span></li>
-							</ul>
-							<hr class="my-3" />
-							<div>
-								<form id="buyCourseForm" action="confirmCheckout" method="post">
-									<button type="button" style="float: right;"
-										class="btn btn-primary" onclick="redirectToCoursePage()">
-										Mua khóa học mới</button>
-								</form>
-							</div>
+							</ul>							
 						</div>
 					</div>
 				</div>
