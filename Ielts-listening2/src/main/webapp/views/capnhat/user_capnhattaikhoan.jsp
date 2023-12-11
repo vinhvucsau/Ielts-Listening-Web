@@ -57,7 +57,7 @@
                                                     </svg>
 											</a>
 										</h2>
-										<p class="mb-0 d-block">${account.userName }</p>
+										<p class="mb-0 d-block">${user.email }</p>
 									</div>
 								</div>
 
