@@ -39,6 +39,7 @@ public class LuyenDeHomeController extends HttpServlet {
 	IUserService userService = new UserServiceImpl();
 	EnrollTestService enService = new EnrollTestService();
 	EnrollTestService enrollTestService = new EnrollTestService();
+
 	public LuyenDeHomeController() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -46,11 +47,15 @@ public class LuyenDeHomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();	
+		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
-		enService.completeExpiredTest(user.getUserId());
-		
+		if (user != null && enrollTestService.findEnTestProcess(user.getUserId()) != null) {
+			enService.completeExpiredTest(user.getUserId());
+			EnrrolTest enTestProcess = enrollTestService.findEnTestProcess(user.getUserId());
+			request.setAttribute("enTestProcess", enTestProcess);
+			System.out.print("entestprocess" + enTestProcess.getEnrrolId());
+		}
+
 		request.setAttribute("currentUser", user);
 		int page = Integer.parseInt(request.getParameter("page") == null ? "1" : request.getParameter("page"));
 		String searchStr = request.getParameter("search") == null ? "" : request.getParameter("search");
@@ -59,13 +64,11 @@ public class LuyenDeHomeController extends HttpServlet {
 		List<TopicTest> allTopicTestList = topicTestService.findAll(searchStr, tab);
 		List<TopicTest> topicTestList = topicTestService.findAll(page - 1, pagesize, searchStr, tab);
 		int pageNum = (int) (allTopicTestList.size() / pagesize) + (allTopicTestList.size() % pagesize == 0 ? 0 : 1);
-		
-		for (TopicTest topic: topicTestList)
-		{	
-			for(MockTest test : topic.getMockTests())
-			{		
-				test.setEnrrolTests(enService.findByMockTestId(test.getTestId()));			
-			}					
+
+		for (TopicTest topic : topicTestList) {
+			for (MockTest test : topic.getMockTests()) {
+				test.setEnrrolTests(enService.findByMockTestId(test.getTestId()));
+			}
 		}
 
 		request.setAttribute("topicTests", topicTestList);
@@ -75,44 +78,37 @@ public class LuyenDeHomeController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 
 		// Set cứng ID để test chức năng
 
 		User user = (User) session.getAttribute("user");
 		String testId = req.getParameter("testId");
-		
+
 		EnrrolTest enrrolTest = new EnrrolTest();
 		enrrolTest.setEnrrolId("");
 		enrrolTest.setScore(-1.0);
-		
+
 		enrrolTest.setUsers(user);
 		MockTest mockTest = mockTestService.findById(testId);
 		enrrolTest.setMockTests(mockTest);
-		if(enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId) != null )
-		{
+		if (enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId) != null
+				&& enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId).getScore() < 0) {
 			EnrrolTest checkEnTest = enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId);
-			if (checkEnTest.getScore() <0 )
-			{
-				
-				resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
-			}
-		}
-		
-		else
-		{
+
+			resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
+
+		} else {
 			LocalDateTime date = LocalDateTime.now();
 			enrrolTest.setEnrrollmentDate(date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
 			enrollTestService.insert(enrrolTest);
-			
-			
+
 			EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(user.getUserId(), testId,
 					date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
-			
+
 			resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
 		}
-		
+
 	}
 }
