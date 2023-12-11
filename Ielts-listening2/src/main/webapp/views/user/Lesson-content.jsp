@@ -194,60 +194,110 @@
 												<div class="col-xl-4 col-lg-12 col-md-12 col-12">
 													<div class="card" id="courseAccordion">
 														<div>
-															<h3 class="ms-3">Đáp án</h3>
+														
+															<c:set var="isCompleted" value="${false }"></c:set>
+															<c:if test="${enrollLesson.score >= 0 }">
+																<c:set var="isCompleted" value="${true}"></c:set>
+															</c:if>
+															<div class="mx-3 mt-1 d-flex align-items-center justify-content-between">
+											                    <h3>Đáp án</h3>
+											                    <c:if test="${isCompleted}">
+																	<h3 class="py-1 px-2 rounded border border-primary text-primary">
+																		${enrollLesson.score}
+																	</h3>
+											                    </c:if>
+												            </div>
 															<!-- List group -->
-															<form action="" method="post" class="form-answer">
+															<div class="form-answer">
 																<ul class="list-answer list-group list-group-flush">
 																	<!-- List group item -->
-																	<li class="answer-item list-group-item border-0">
-																		<div
-																			class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-																			<h4 class="form-label me-3 m-0" for="phone"
-																				style="width: 80px;">Câu 01:</h4>
-
-																			<input type="text" id="phone"
-																				class="answer-item__text form-control"
-																				placeholder="Nhập đáp án" required="">
-																		</div>
-																	</li>
-																	<li class="answer-item list-group-item border-0">
-																		<div
-																			class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-																			<h4 class="form-label me-3 m-0" for="phone"
-																				style="width: 80px;">Câu 01:</h4>
-
-																			<input type="text" id="phone"
-																				class="answer-item__text form-control"
-																				placeholder="Nhập đáp án" required="">
-																		</div>
-																	</li>
-																	<li class="answer-item list-group-item border-0">
-																		<div
-																			class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-																			<h4 class="form-label me-3 m-0" for="phone"
-																				style="width: 80px;">Câu 01:</h4>
-
-																			<input type="text" id="phone"
-																				class="answer-item__text form-control"
-																				placeholder="Nhập đáp án" required="">
-																		</div>
-																	</li>
-																	<li class="answer-item list-group-item border-0">
-																		<div
-																			class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-																			<h4 class="form-label me-3 m-0" for="phone"
-																				style="width: 80px;">Câu 01:</h4>
-
-																			<input type="text" id="phone"
-																				class="answer-item__text form-control"
-																				placeholder="Nhập đáp án" required="">
-																		</div>
-																	</li>
+																	
+																	
+																	<c:forEach items="${listAnswerLesson}" var="answerLesson">
+																		<c:set var="answer" value=""></c:set>
+																		<c:set var="isCorrect" value="${false }"></c:set>
+																		<c:forEach items="${enrollLesson.answerLessonUser}" var="answerLessUser">
+																			<c:if test="${answerLesson.answerId.equals(answerLessUser.answerLesson.answerId)}">
+																				<c:set var="answer" value="${answerLessUser.answerUser}"></c:set>
+																				<c:set var="isCorrect" value="${answerLessUser.answerLesson.answerKey.equals(answerLessUser.answerUser)}"></c:set>
+																			</c:if>
+																		</c:forEach>
+																		
+																		<li class="answer-item list-group-item border-0">
+																			<div
+																				class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
+																				<h4 class="form-label me-3 m-0"
+																					style="width: 80px;">Câu ${answerLesson.number}:</h4>
+																					
+																				<c:choose>
+																				
+																					<c:when test="${!isCompleted}">
+																						<input type="text" enrollLessonId = "${enrollLesson.enrrolId}" 
+																							answerLessonId="${answerLesson.answerId}"
+																							class="answer-item__text form-control"
+																							placeholder="Nhập đáp án" required=""
+																							onblur="postApiAnswer(event)"
+																							value="${answer}">
+																					</c:when>
+																					
+																					<c:when test="${isCompleted and isCorrect}">
+																						<div class="input-group">
+																							<input type="text" enrollLessonId = "${enrollLesson.enrrolId}" 
+																								answerLessonId="${answerLesson.answerId}"
+																								class="answer-item__text form-control border border-success"
+																								placeholder="Nhập đáp án" required="" readonly
+																								value="${answer}">
+																							<span class="input-group-text bg-success border border-success">
+																								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="20px" height="20px">
+																									<path fill="#fff" d="M 22.566406 4.730469 L 20.773438 3.511719 C 20.277344 3.175781 
+																									19.597656 3.304688 19.265625 3.796875 L 10.476563 16.757813 L 6.4375 12.71875 C 
+																									6.015625 12.296875 5.328125 12.296875 4.90625 12.71875 L 3.371094 14.253906 C 
+																									2.949219 14.675781 2.949219 15.363281 3.371094 15.789063 L 9.582031 22 C 9.929688 
+																									22.347656 10.476563 22.613281 10.96875 22.613281 C 11.460938 22.613281 11.957031 
+																									22.304688 12.277344 21.839844 L 22.855469 6.234375 C 23.191406 5.742188 23.0625 
+																									5.066406 22.566406 4.730469 Z"/>
+																								</svg>
+																							</span>
+																						</div>
+																					</c:when>
+																					
+																					<c:otherwise>
+																						<div class="input-group">
+																							<input type="text" enrollLessonId = "${enrollLesson.enrrolId}" 
+																								answerLessonId="${answerLesson.answerId}"
+																								class="answer-item__text form-control border border-danger"
+																								placeholder="Nhập đáp án" required="" readonly
+																								value="${answer}">
+																							<span class="input-group-text bg-danger border border-danger">
+																								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+																									<path fill="#fff" d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81
+																									 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+																								</svg>
+																							</span>
+																						</div>
+																					</c:otherwise>
+																				</c:choose>
+																				
+																			</div>
+																		</li>
+																		
+																	</c:forEach>
+																	
 																	<!-- submit -->
-																	<button type="submit" class="btn btn-primary">Nộp
-																		bài</button>
+																	<c:choose>
+																		<c:when test="${isCompleted }">
+																			<a href='<c:url value="/user/resetEnrollLesson?enrollLessonId=${enrollLesson.enrrolId }
+																			&lessonId=${enrollLesson.lessons.lessonId}"></c:url>' 
+																			class="btn btn-primary">Làm lại</a>
+																		</c:when>
+																		<c:otherwise>
+																			<a href='<c:url value="/user/completeEnrollLesson?enrollLessonId=${enrollLesson.enrrolId }
+																			&lessonId=${enrollLesson.lessons.lessonId}"></c:url>'
+																			 class="btn btn-primary">Nộp bài</a>
+																		</c:otherwise>
+																	</c:choose>
 																</ul>
-															</form>
+															</div>
 														</div>
 													</div>
 												</div>
@@ -1163,6 +1213,35 @@ details.comment:not([open]) .comment-heading::after {
     	 });
      }
      
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function postApiAnswer(event) {
+	    const input = event.target;
+	    const enrollLessonId = input.getAttribute('enrollLessonId');
+	    const answer = input.value;
+	    const answerLessonId = input.getAttribute('answerLessonId');
+	    var data = {
+	        enrrolLesson: {
+	            enrrolId: enrollLessonId
+	        },
+	        answerLesson: {
+	            answerId: answerLessonId
+	        },
+	        answerUser: answer
+	
+	    };
+	    $.ajax({url: "/Ielts-listening2/api-AnswerLessonUser",
+	        type: "POST",
+	        contentType: "application/json",
+	        data:JSON.stringify(data),
+	        success: function(resp){
+	            console.log(resp);
+	        },
+	        error:function(xhr){
+	            console.log(xhr);
+	        }})
+	}
 </script>
 	<!-- Libs JS -->
 	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>

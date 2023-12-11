@@ -3,6 +3,7 @@ package hcmute.services;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
 
 public interface IPaymentService {
@@ -11,4 +12,8 @@ public interface IPaymentService {
 	List<Payment> findAll();
 
 	Payment findByDatebuyAndUserId(LocalDateTime dateBuy, String userId);
+
+	List<Payment> findcoursesByIDPayment(String id);
+
+
 }

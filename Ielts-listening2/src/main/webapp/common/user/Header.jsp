@@ -59,7 +59,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 										class="ms-2">Dark</span>
 								</button>
 							</li>
-							
+
 						</ul>
 					</div>
 					<c:if test="${user == null}">
@@ -73,19 +73,20 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 							class="rounded-circle" href="#" data-bs-toggle="dropdown"
 							data-bs-display="static" aria-expanded="false">
 								<div class="avatar avatar-md avatar-indicators avatar-online">
-									
-										
+
+
 									<c:if test="${user.image != null}">
-												<img src='<c:url value='/image?fname=userAvatar/${user.image}'/>'
-										class="avatar-xl rounded-circle border border-4 border-white"
-										alt="avatar" />
-											</c:if>
-											<c:if test="${user.image == null}">
-												<img class="rounded-circle"							
-													src='<c:url value = "https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"/>'
-													alt="anh dai dien">
-											</c:if>
-									
+										<img
+											src='<c:url value='/image?fname=userAvatar/${user.image}'/>'
+											class="avatar-xl rounded-circle border border-4 border-white"
+											alt="avatar" />
+									</c:if>
+									<c:if test="${user.image == null}">
+										<img class="rounded-circle"
+											src='<c:url value = "https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"/>'
+											alt="anh dai dien">
+									</c:if>
+
 								</div>
 						</a>
 							<div
@@ -93,20 +94,21 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 								<div class="dropdown-item">
 									<div class="d-flex">
 										<div class="avatar avatar-md avatar-indicators avatar-online">
-										<c:if test="${user.image != null}">
-										<img src='<c:url value='/image?fname=userAvatar/${user.image}'/>'
-										class="avatar-xl rounded-circle border border-4 border-white"
-										alt="avatar" />
-									</c:if>
-									<c:if test="${user.image == null}">
-										<img class="rounded-circle"									
-											src='<c:url value = "https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"/>'
-											alt="anh dai dien">
-									</c:if>
+											<c:if test="${user.image != null}">
+												<img
+													src='<c:url value='/image?fname=userAvatar/${user.image}'/>'
+													class="avatar-xl rounded-circle border border-4 border-white"
+													alt="avatar" />
+											</c:if>
+											<c:if test="${user.image == null}">
+												<img class="rounded-circle"
+													src='<c:url value = "https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"/>'
+													alt="anh dai dien">
+											</c:if>
 											<!-- <img alt="avatar" src="../assets/images/avatar/avatar-1.jpg"
 												class="rounded-circle" /> -->
 										</div>
-										
+
 										<div class="ms-3 lh-1">
 											<h5 class="mb-1" name="idUser" value="${user.userId}">${user.userId}</h5>
 											<p class="mb-0">${user.email }</p>
@@ -123,8 +125,9 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 										href="/Ielts-listening2/user/capnhattaikhoan?userId=${user.userId}">
 											<i class="fe fe-user me-2"></i> Profile
 									</a></li>
-									
-									<li><a class="dropdown-item" href="capnhatmatkhau?userId=${user.userId}"> <i
+
+									<li><a class="dropdown-item"
+										href="capnhatmatkhau?userId=${user.userId}"> <i
 											class="fe fe-settings me-2"></i> Settings
 									</a></li>
 								</ul>
@@ -159,13 +162,11 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 			<!-- Collapse -->
 			<div class="collapse navbar-collapse" id="navbar-default">
 				<ul class="navbar-nav mx-auto">
-					<li class="nav-item"><a class="nav-link " href="/Ielts-listening2/user/home"
-						 
-						>Trang chủ</a></li>
+					<li class="nav-item"><a class="nav-link "
+						href="/Ielts-listening2/user/home">Trang chủ</a></li>
 
-					<li class="nav-item "><a
-						class="nav-link " href="course">Khóa học</a>
-						</li>
+					<li class="nav-item "><a class="nav-link " href="course">Khóa
+							học</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarLanding"
 						data-bs-toggle="dropdown" aria-haspopup="true"
@@ -179,27 +180,14 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 								class="dropdown-item justify-content-between">Tất cả bộ đề</a></li>
 							<li><a href="/Ielts-listening2/user/luyen-de-home?tab=2"
 								class="dropdown-item justify-content-between">Bộ đề mới nhất</a></li>
-							<li><a href="/Ielts-listening2/user/luyen-de-home?tab=3" class="dropdown-item">Bộ đề HOT</a></li>
+							<li><a href="/Ielts-listening2/user/luyen-de-home?tab=3"
+								class="dropdown-item">Bộ đề HOT</a></li>
 
 						</ul></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarLanding"
-						data-bs-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">Blogs</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarLanding">
-							<li>
-								<h4 class="dropdown-header">Blogs</h4>
-							</li>
-
-							<li><a href="landing-education.html"
-								class="dropdown-item justify-content-between">Học tiếng anh</a></li>
-							<li><a href="home-academy.html"
-								class="dropdown-item justify-content-between">Sự kiện</a></li>
-							<li><a href="landing-courses.html" class="dropdown-item">Vinh
-									danh học viên điểm cao</a></li>
-
-						</ul></li>
-
+					<li class="nav-item "><a class="nav-link " href="blogs-page"
+						id="navbarLanding">Blogs</a>
+					<li class="nav-item"><a class="nav-link " href="helpcenter">Câu
+							hỏi thường gặp</a></li>
 				</ul>
 			</div>
 		</div>

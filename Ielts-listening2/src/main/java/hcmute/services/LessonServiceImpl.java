@@ -13,7 +13,7 @@ public class LessonServiceImpl implements ILessonService {
 	LessonDAOImpl lessonAbstract = new LessonDAOImpl();
 	
 	@Override
-	public List<Lesson> findByCourseId(String courseId) {
+	public List<Lesson> findLessonByCourse(String courseId) {
 		return lessonDAO.findLessonByCourse(courseId) ;
 	}
 
@@ -39,6 +39,14 @@ public class LessonServiceImpl implements ILessonService {
 		lessonAbstract.insert(lesson);
 		
 	}
-	
 
+	public void update(Lesson lesson) {
+		lessonAbstract.update(lesson);
+	}
+
+	@Override
+	public Lesson getNewLesson() {
+		return lessonDAO.getNewLesson();
+	}
+	
 }

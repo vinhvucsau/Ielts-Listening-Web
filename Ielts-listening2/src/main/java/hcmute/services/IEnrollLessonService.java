@@ -12,6 +12,8 @@ public interface IEnrollLessonService {
 	void insert(EnrrolLesson model);
 	EnrrolLesson findOneByUser_Lesson(String userId, String lessId);
 	EnrrolLesson findByUserIdAndLessonId(String UserId, String LessonId);
+	void completeTest(String enrollLessonId);
+	void resetTest(String enrollLessonId);
 }
 
 	

@@ -38,7 +38,7 @@
 
     <!-- Container fluid -->
     <section class="container-fluid">
-        <div class="row">
+        <div class="row mt-4">
             <!-- Page Header -->
             <div class="col-lg-12 col-md-12 col-12">
                 <div class="border-bottom pb-3 mb-3 d-flex align-items-center justify-content-between">
@@ -47,15 +47,14 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="admin-dashboard.html">Trang chủ</a>
+                                    <a href="<c:url value='/admin/dashboard'/>">Trang chủ</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">CMS</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">All Post</li>
+                                <li class="breadcrumb-item active" aria-current="page">Bài viết</li>
                             </ol>
                         </nav>
                     </div>
                     <div>
-                        <a href="#" class="btn btn-primary">Thêm bài viết</a>
+                        <a href="<c:url value='/admin/add-blog'/>" class="btn btn-primary">Thêm bài viết</a>
                     </div>
                 </div>
             </div>
@@ -119,7 +118,7 @@
                                                         <tr class="blog-item" data-value="${blog.status}">
                                                             <td>
                                                                 <h5 class="blog-title mb-0">
-                                                                    <a href="#" class="blog-title__link text-inherit">${blog.title}</a>
+                                                                    <a href="<c:url value='/admin/blog-content?id=${blog.blogId}'/>" class="blog-title__link text-inherit">${blog.title}</a>
                                                                 </h5>
                                                             </td>
                                                             <td class="blog-id">${blog.blogId}</td>
@@ -351,7 +350,7 @@
                                                         <tr class="blog-item" data-value="${blog.status}">
                                                             <td>
                                                                 <h5 class="blog-title mb-0">
-                                                                    <a href="#" class="blog-title__link text-inherit">${blog.title}</a>
+                                                                    <a href="<c:url value='/admin/blog-content?id=${blog.blogId}'/>" class="blog-title__link text-inherit">${blog.title}</a>
                                                                 </h5>
                                                             </td>
                                                             <td class="blog-id">${blog.blogId}</td>
@@ -461,7 +460,7 @@
                                                         <tr class="blog-item" data-value="${blog.status}">
                                                             <td>
                                                                 <h5 class="blog-title mb-0">
-                                                                    <a href="#" class="blog-title__link text-inherit">${blog.title}</a>
+                                                                    <a href="<c:url value='/admin/blog-content?id=${blog.blogId}'/>" class="blog-title__link text-inherit">${blog.title}</a>
                                                                 </h5>
                                                             </td>
                                                             <td class="blog-id">${blog.blogId}</td>
@@ -549,7 +548,7 @@
                                                         <tr class="blog-item" data-value="${blog.status}">
                                                             <td>
                                                                 <h5 class="blog-title mb-0">
-                                                                    <a href="#" class="blog-title__link text-inherit">${blog.title}</a>
+                                                                    <a href="<c:url value='/admin/blog-content?id=${blog.blogId}'/>" class="blog-title__link text-inherit">${blog.title}</a>
                                                                 </h5>
                                                             </td>
                                                             <td class="blog-id">${blog.blogId}</td>
@@ -646,7 +645,7 @@
                                                         <tr class="blog-item" data-value="${blog.status}">
                                                             <td>
                                                                 <h5 class="blog-title mb-0">
-                                                                    <a href="#" class="blog-title__link text-inherit">${blog.title}</a>
+                                                                    <a href="<c:url value='/admin/blog-content?id=${blog.blogId}'/>" class="blog-title__link text-inherit">${blog.title}</a>
                                                                 </h5>
                                                             </td>
                                                             <td class="blog-id">${blog.blogId}</td>

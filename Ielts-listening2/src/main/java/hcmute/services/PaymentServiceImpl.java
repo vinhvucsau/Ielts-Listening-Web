@@ -5,6 +5,7 @@ import java.util.List;
 
 import hcmute.DAO.IPaymentDAO;
 import hcmute.DAO.PaymentDAOImpl;
+import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
 
 public class PaymentServiceImpl implements IPaymentService {
@@ -28,5 +29,13 @@ public class PaymentServiceImpl implements IPaymentService {
 		// TODO Auto-generated method stub
 		return payAbs.findAll();
 	}
+
+	@Override
+	public List<Payment> findcoursesByIDPayment(String id) {
+		// TODO Auto-generated method stub
+		return payDAO.findcoursesByIDPayment(id);
+	}
+
+	
 
 }

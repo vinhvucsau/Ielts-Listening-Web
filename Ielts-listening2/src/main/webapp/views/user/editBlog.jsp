@@ -12,7 +12,7 @@
 <body>
 	<div id="model"
 		style="min-width: 500px; margin-top: 10px; margin-bottom: 10px">
-		<form action="add-blog" method="post" enctype="multipart/form-data">
+		<form action="edit-blog?id=${blog.blogId}" method="post" enctype="multipart/form-data">
 			<input name="idTest" value="${idTest}" style="display: none">
 			<div id="test-l-1" class="bs-stepper-pane"
 				aria-labelledby="courseFormtrigger1">
@@ -56,7 +56,7 @@
 					<!-- Button -->
 
 				</div>
-				<button style="margin: 10px; width: fit;" class="btn btn-primary"
+				<button style="margin: 10px; width: fit;" id="btn-submit" class="btn btn-primary"
 					type="submit">Xác nhận</button>
 			</div>
 		</form>
@@ -65,19 +65,26 @@
 		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 	<script>
-	 ClassicEditor
-     .create(document.querySelector('#editor'))
-     .then(editor => {
-         console.log(editor);
+		ClassicEditor
+		.create(document.querySelector('#editor'))
+		.then(editor => {
+			console.log(editor);
 
-         // Update hidden input with CKEditor content
-         editor.model.document.on('change:data', () => {
-             document.getElementById('content').value = editor.getData();
-         });
-     })
-     .catch(error => {
-         console.error(error);
-     });
+			// Update hidden input with CKEditor content
+			editor.model.document.on('change:data', () => {
+				document.getElementById('content').value = editor.getData();
+			});
+		})
+		.catch(error => {
+			console.error(error);
+		});
+
+		$(document).ready(function() {
+			$('#btn-submit').click(function(e){
+				
+			})
+		})
+	
      </script>
 
 </body>
