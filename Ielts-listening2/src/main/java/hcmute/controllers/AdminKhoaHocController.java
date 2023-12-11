@@ -160,7 +160,6 @@ public class AdminKhoaHocController extends HttpServlet {
 
 		}
 
-	}
 
 	private void FindAllDecreaseRate(HttpServletRequest req, HttpServletResponse resp) {
 		try {
