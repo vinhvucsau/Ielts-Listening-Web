@@ -194,59 +194,67 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 						<!-- Card header -->
 						<div
 							class="card-header d-flex align-items-center justify-content-between card-header-height">
-							<h4 class="mb-0">Học viên có đóng góp nhiều nhất</h4>
-							<a href="#" class="btn btn-outline-secondary btn-sm">View all</a>
+							<h4 class="mb-0">Học viên có đóng góp nhiều</h4>
+							<a href="/Ielts-listening2/admin/listUser"
+								class="btn btn-outline-secondary btn-sm">View all</a>
 						</div>
 						<!-- Card body -->
 						<div class="card-body">
 
 							<ul class="list-group list-group-flush">
 
+
+
 								<c:forEach var="index" begin="0" end="${userId.size() - 1}"
 									step="1" varStatus="loop">
-									<li class="list-group-item px-0">
-										<div class="row">
-											<div class="col-auto">
-												<div
-													class="avatar avatar-md avatar-indicators avatar-online">
-													<img alt="avatar"
-														src="../assets/images/avatar/avatar-2.jpg"
-														class="rounded-circle">
+										<li class="list-group-item px-0">
+																			<a href="/Ielts-listening2/admin/capnhattaikhoan?userId=${userId[loop.index]}">
+										
+											<div class="row">
+												<div class="col-auto">
+													<div
+														class="avatar avatar-md avatar-indicators avatar-online">
+														<img alt="avatar"
+															src="../assets/images/avatar/avatar-2.jpg"
+															class="rounded-circle">
+													</div>
 												</div>
+												<div class="col ms-n3">
+													<h4 class="mb-0 h5">${userId[loop.index]}</h4>
+													<span class="me-2 fs-6"> <span
+														class="text-dark me-1 fw-semibold">${countCourse1[loop.index]}</span>
+														Courses
+													</span> <span class="me-2 fs-6"> <span
+														class="text-dark me-1 fw-semibold">${countRating1[loop.index]}</span>
+														Rated
+													</span> <span class="fs-6"> <span
+														class="text-dark me-1 fw-semibold"> <fmt:formatNumber
+																value="${sumCost[loop.index]}" pattern="###,### VNĐ" /></span>
+													</span>
+												</div>
+												<!-- <div class="col-auto">
+													<span class="dropdown dropstart"> <a
+														class="btn-icon btn btn-ghost btn-sm rounded-circle"
+														href="#" role="button" id="courseDropdown8"
+														data-bs-toggle="dropdown" data-bs-offset="-20,20"
+														aria-expanded="false"> <i class="fe fe-more-vertical"></i>
+													</a> <span class="dropdown-menu"
+														aria-labelledby="courseDropdown8"> <span
+															class="dropdown-header">Settings</span> <a
+															class="dropdown-item" href="#"> <i
+																class="fe fe-edit dropdown-item-icon"></i> Edit
+														</a> <a class="dropdown-item" href="#"> <i
+																class="fe fe-trash dropdown-item-icon"></i> Remove
+														</a>
+													</span>
+													</span>
+												</div> -->
 											</div>
-											<div class="col ms-n3">
-												<h4 class="mb-0 h5">${userId[loop.index]}</h4>
-												<span class="me-2 fs-6"> <span
-													class="text-dark me-1 fw-semibold">${countCourse1[loop.index]}</span>
-													Courses
-												</span> <span class="me-2 fs-6"> <span
-													class="text-dark me-1 fw-semibold">${countRating1[loop.index]}</span>
-													Rated
-												</span> <span class="fs-6"> <span
-													class="text-dark me-1 fw-semibold"> <fmt:formatNumber
-															value="${sumCost[loop.index]}" pattern="###,### VNĐ" /></span>
-												</span>
-											</div>
-											<div class="col-auto">
-												<span class="dropdown dropstart"> <a
-													class="btn-icon btn btn-ghost btn-sm rounded-circle"
-													href="#" role="button" id="courseDropdown8"
-													data-bs-toggle="dropdown" data-bs-offset="-20,20"
-													aria-expanded="false"> <i class="fe fe-more-vertical"></i>
-												</a> <span class="dropdown-menu"
-													aria-labelledby="courseDropdown8"> <span
-														class="dropdown-header">Settings</span> <a
-														class="dropdown-item" href="#"> <i
-															class="fe fe-edit dropdown-item-icon"></i> Edit
-													</a> <a class="dropdown-item" href="#"> <i
-															class="fe fe-trash dropdown-item-icon"></i> Remove
-													</a>
-												</span>
-												</span>
-											</div>
-										</div>
 									</li>
+									</a>
 								</c:forEach>
+
+
 
 
 
@@ -413,7 +421,8 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 						<div
 							class="card-header d-flex align-items-center justify-content-between card-header-height">
 							<h4 class="mb-0">Các khóa học mới nhất</h4>
-							<a href="#" class="btn btn-outline-secondary btn-sm">View all</a>
+							<a href="/Ielts-listening2/admin/khoahoc"
+								class="btn btn-outline-secondary btn-sm">View all</a>
 						</div>
 						<!-- Card body -->
 						<div class="card-body">
@@ -422,42 +431,43 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 
 								<c:forEach var="i" items="${listCourseJsp}">
 									<li class="list-group-item px-0">
-									<div class="row">
-										<div class="col-md-3 col-12 mb-3 mb-md-0">
-											<a href="#"> <img
-												src="../assets/images/course/course-wordpress.jpg" alt=""
-												class="img-fluid rounded">
-											</a>
-										</div>
-										<div class="col-md-8 col-10">
-											<a href="#">
-												<h5 class="text-primary-hover">${i.courseName }</h5>
-											</a>
-											<div class="d-flex align-items-center">
-												<img src="../assets/images/avatar/avatar-5.jpg" alt=""
-													class="rounded-circle avatar-xs me-2"> <span
-													class="fs-6">${i.description }</span>
-											</div>
-										</div>
-										<div class="col-1 col-auto d-flex justify-content-center">
-											<span class="dropdown dropstart"> <a
-												class="btn-icon btn btn-ghost btn-sm rounded-circle"
-												href="#" role="button" id="courseDropdown6"
-												data-bs-toggle="dropdown" data-bs-offset="-20,20"
-												aria-expanded="false"> <i class="fe fe-more-vertical"></i>
-											</a> <span class="dropdown-menu"
-												aria-labelledby="courseDropdown6"> <span
-													class="dropdown-header">Settings</span> <a
-													class="dropdown-item" href="#"> <i
-														class="fe fe-edit dropdown-item-icon"></i> Edit
-												</a> <a class="dropdown-item" href="#"> <i
-														class="fe fe-trash dropdown-item-icon"></i> Remove
+									<a href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }">
+										<div class="row">
+											<div class="col-md-3 col-12 mb-3 mb-md-0">
+												<a href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }"> <img
+													src="../assets/images/course/course-wordpress.jpg" alt=""
+													class="img-fluid rounded">
 												</a>
-											</span>
-											</span>
+											</div>
+											<div class="col-md-8 col-10">
+												<a href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }">
+													<h5 class="text-primary-hover">${i.courseName }</h5>
+												</a>
+												<div class="d-flex align-items-center">
+													<span class="d-inline-block text-truncate"
+														style="max-width: 150px;" class="fs-6">${i.description }</span>
+												</div>
+											</div>
+											<!-- <div class="col-1 col-auto d-flex justify-content-center">
+												<span class="dropdown dropstart"> <a
+													class="btn-icon btn btn-ghost btn-sm rounded-circle"
+													href="#" role="button" id="courseDropdown6"
+													data-bs-toggle="dropdown" data-bs-offset="-20,20"
+													aria-expanded="false"> <i class="fe fe-more-vertical"></i>
+												</a> <span class="dropdown-menu"
+													aria-labelledby="courseDropdown6"> <span
+														class="dropdown-header">Settings</span> <a
+														class="dropdown-item" href="#"> <i
+															class="fe fe-edit dropdown-item-icon"></i> Edit
+													</a> <a class="dropdown-item" href="#"> <i
+															class="fe fe-trash dropdown-item-icon"></i> Remove
+													</a>
+												</span>
+												</span>
+											</div> -->
 										</div>
-									</div>
-								</li>
+									</li>
+									</a>
 								</c:forEach>
 
 								<!-- <li class="list-group-item px-0">
@@ -670,9 +680,12 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 		var jsonData = '${jsonData}';
 		var data = JSON.parse(jsonData);
 
+		var jsonData1 = '${jsonData1}';
+		var data1 = JSON.parse(jsonData1);
+
 		var trafficChart;
 		var orderColumnChart;
-		//var data = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];
+		//var data1 = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];
 
 		document.addEventListener("DOMContentLoaded", function() {
 			var traffic = document.getElementById("traffic1");
@@ -681,9 +694,12 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 			if (traffic) {
 				var trafficOptions = {
 					dataLabels : {
-						enabled : false
+						enabled : true,
+						formatter : function(val, opts) {
+							return data1[opts.seriesIndex] + "%";
+						}
 					},
-					series : data,
+					series : data1,
 					labels : [ "Jan", "Feb", "March", "April", "May", "Jun",
 							"Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ],
 					colors : [ window.theme.darkPrimary, window.theme.primary,
@@ -728,12 +744,14 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 					},
 					tooltip : {
 						theme : "light",
+
 						marker : {
 							show : true
 						},
 						x : {
 							show : false
-						}
+						},
+
 					},
 					states : {
 						hover : {

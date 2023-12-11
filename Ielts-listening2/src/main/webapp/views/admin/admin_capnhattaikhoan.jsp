@@ -57,7 +57,7 @@
                                                     </svg>
 											</a>
 										</h2>
-										<p class="mb-0 d-block">@${currentUser.account.userName }</p>
+										<p class="mb-0 d-block">${currentUser.email }</p>
 									</div>
 								</div>
 
@@ -116,21 +116,21 @@
 												class="fe fe-settings nav-icon"></i> Edit Profile
 										</a></li>
 										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
+										<%-- <li class="nav-item"><a class="nav-link"
 											href="capnhatmatkhau?userId=${currentUser.userId}"> <i
 												class="fe fe-user nav-icon"></i> Security
-										</a></li>
+										</a></li> --%>
 
 										<li class="nav-item"><a class="nav-link"
-											href="notifications.html"> <i class="fe fe-bell nav-icon"></i>
+											href="#"> <i class="fe fe-bell nav-icon"></i>
 												Notifications
 										</a></li>
 
 										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
+										<!-- <li class="nav-item"><a class="nav-link"
 											href="../index.html"> <i class="fe fe-power nav-icon"></i>
 												Sign Out
-										</a></li>
+										</a></li> -->
 									</ul>
 								</div>
 							</div>
@@ -197,23 +197,23 @@
 										<p class="mb-4">Edit your personal information and
 											address.</p>
 										<!-- Form -->
+										<div class="row gx-3 "></div>
+									</div>
+									<div>
+
 										<div class="row gx-3 ">
-
-
-
-
 											<!--  name -->
 											<div class="mb-3 col-12 col-md-6">
 												<label class="form-label" for="fname">Họ và tên</label> <input
 													type="text" class="form-control " id="inputname"
 													name="inputName" placeholder="Họ và tên"
-													value="${currentUser.name}" required>
+													value="${ currentUser.name}" required>
 												<div class="invalid-feedback">Hãy điền tên vào</div>
 											</div>
 											<!-- Email-->
 											<div class="mb-3 col-12 col-md-6">
 												<label class="form-label" for="Email">Email</label> <input
-													type="text" class="form-control " id="inputemail"
+													type="text" class="form-control " id="inputemail" disabled
 													name="inputEmail" placeholder="Email"
 													value="${ currentUser.email}" required>
 												<div class="invalid-feedback">Hãy điền Email.</div>

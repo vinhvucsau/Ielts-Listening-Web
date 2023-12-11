@@ -127,21 +127,21 @@ Long count = (Long) request.getAttribute("count");
 												class="fe fe-settings nav-icon"></i> Edit Profile
 										</a></li>
 										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
+										<%-- <li class="nav-item"><a class="nav-link"
 											href="capnhatmatkhau?userId=${currentUser.userId}"> <i
 												class="fe fe-user nav-icon"></i> Security
-										</a></li>
+										</a></li> --%>
 
 										<li class="nav-item"><a class="nav-link"
-											href="notifications.html"> <i class="fe fe-bell nav-icon"></i>
+											href="#"> <i class="fe fe-bell nav-icon"></i>
 												Notifications
 										</a></li>
 
 										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
+										<!-- <li class="nav-item"><a class="nav-link"
 											href="../index.html"> <i class="fe fe-power nav-icon"></i>
 												Sign Out
-										</a></li>
+										</a></li> -->
 									</ul>
 								</div>
 							</div>
@@ -212,11 +212,9 @@ Long count = (Long) request.getAttribute("count");
 															<%-- <a href="#!" class="text-inherit">${i.courses.lessons }</a> --%>
 															<c:set var="countTren5" value="0" />
 															<c:set var="sumScore" value="0" />
-															<c:set var="score" value="0" />
 															<c:forEach var="i" items="${i.courses.lessons}">
 
 																<c:forEach var="j" items="${i.enrrolLesson}">
-																<c:set var="score" value="${j.score }" />
 
 
 																	<c:choose>
@@ -235,7 +233,7 @@ Long count = (Long) request.getAttribute("count");
 
 															</c:forEach>
 														</h4>
-														
+
 														<c:set var="percen"
 															value="${countTren5 * 100.0 / sumScore}" />
 

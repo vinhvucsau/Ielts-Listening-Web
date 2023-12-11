@@ -47,6 +47,7 @@ public class AdminAnalyticsController extends HttpServlet {
 			Long revenueM12 = adminAnaService.costWithMonth12();
 
 			Long[] data = new Long[12];
+			
 			data[0] = revenueM1;
 			data[1] = revenueM2;
 			data[2] = revenueM3;
@@ -59,10 +60,40 @@ public class AdminAnalyticsController extends HttpServlet {
 			data[9] = revenueM10;
 			data[10] = revenueM11;
 			data[11] = revenueM12;
+			
+			Long[] data1 = new Long[12];
+			for (int i = 0 ; i < 12; i++) {
+				data1[i] =  Math.round((double) (data[i]) / (sumRevenue) *100) ;
+			}
+			/*
+			 * data1[0] = (double) ((double) (revenueM1) / (double) (sumRevenue)) *100;
+			 * data1[1] = (double) ((double) (revenueM1) / (double) (sumRevenue)) *100;
+			 * data1[2] = (double) (revenueM3*100/sumRevenue); data1[3] = (double)
+			 * (revenueM4*100/sumRevenue); data1[4] = (double) (revenueM5*100/sumRevenue);
+			 * data1[5] = (double) (revenueM6*100/sumRevenue); data1[6] = (double)
+			 * (revenueM7*100/sumRevenue); data1[7] = (double) (revenueM8*100/sumRevenue);
+			 * data1[8] = (double) (revenueM9*100/sumRevenue); data1[9] = (double)
+			 * (revenueM10*100/sumRevenue); data1[10] = (double)
+			 * (revenueM11*100/sumRevenue); data1[11] = (double)
+			 * (revenueM12*100/sumRevenue);
+			 */
 
+			System.out.print("213" + data1[11]);
+
+			
+			/*
+			 * String[] data2 = new String[data1.length];
+			 * 
+			 * for(int i = 0; i < data1.length; i++){ data2[i] = String.valueOf(data1[i]) +
+			 * ; }
+			 */
 			Gson gson = new Gson();
 			String jsonData = gson.toJson(data);
 			req.setAttribute("jsonData", jsonData);
+			
+			Gson gson1 = new Gson();
+			String jsonData1 = gson1.toJson(data1);
+			req.setAttribute("jsonData1", jsonData1);
 			
 
 			req.setAttribute("sumRevenue", sumRevenue);
