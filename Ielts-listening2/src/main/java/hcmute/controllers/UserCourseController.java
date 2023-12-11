@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import hcmute.entity.CommentLesson;
 import hcmute.entity.Course;
 import hcmute.entity.EnrollLessonCombine;
 import hcmute.entity.EnrrolLesson;
@@ -19,9 +20,11 @@ import hcmute.entity.Lesson;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
 import hcmute.services.AdminKhoaHocServiceImpl;
+import hcmute.services.CommentServiceImpl;
 import hcmute.services.CourseServiceImpl;
 import hcmute.services.EnrollLessonServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
+import hcmute.services.ICommentService;
 import hcmute.services.ICourseService;
 import hcmute.services.IEnrollLessonService;
 import hcmute.services.ILessonService;
@@ -38,6 +41,7 @@ public class UserCourseController extends HttpServlet {
 	ILessonService lessonService = new LessonServiceImpl();
 	IUserCourseService userCourseService = new UserCourseServiceImpl();
 	IEnrollLessonService enrollLessonService = new EnrollLessonServiceImpl();
+	ICommentService commentService = new CommentServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,6 +64,8 @@ public class UserCourseController extends HttpServlet {
 				userId = "0";
 			List<UserCourse> listUserCourse = userCourseService.findByUserIdAndCourseId(userId, courseId);
 			List<Lesson> listLesson = lessonService.findLessonByCourse(courseId);
+			List<Course> courses = adminKhoaHocService.FindAllCourse();
+			req.setAttribute("courses", courses);
 			if (listUserCourse.size() != 0) { // user da dang ki khoa hoc
 				req.setAttribute("isBuy", 1);
 				List<EnrollLessonCombine> listEnCombine = new ArrayList<EnrollLessonCombine>();
@@ -79,6 +85,8 @@ public class UserCourseController extends HttpServlet {
 				req.setAttribute("listLesson", listLesson);
 				req.setAttribute("course", course);
 			}
+			
+			
 			int[] percentCountOfStars = new int[] { 0, 0, 0, 0, 0 };
 			int people = 0;
 			for (Lesson lesson : course.getLessons()) {
@@ -100,6 +108,15 @@ public class UserCourseController extends HttpServlet {
 				}
 			}
 			req.setAttribute("percentCountOfStars", percentCountOfStars);
+			List<CommentLesson> commentLessonsList = new ArrayList<CommentLesson>();
+			for(Lesson lesson: listLesson) {
+				List<CommentLesson> commentLessons = commentService.getCommentLessonByLesson(lesson.getLessonId());
+				for (CommentLesson cl : commentLessons) {
+					System.out.println(cl.getCommentId());
+				}
+				commentLessonsList.addAll(commentLessons);
+			}
+			req.setAttribute("commentLessonsList", commentLessonsList);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/LessonList.jsp");
 			rd.forward(req, resp);
 

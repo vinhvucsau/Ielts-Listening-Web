@@ -9,4 +9,5 @@ public interface ICourseService {
 
 	Course findById(String courseId);
 	void update(Course course);
+	List<Course> findAll();
 }
