@@ -19,20 +19,18 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg shadow-none">
+	<nav class="navbar navbar-expand-lg shadow-lg header-fixed">
 		<div class="container px-0">
 			<a class="navbar-brand" href="/Ielts-listening2/user/home"><img
 				src="https://prep.vn/imgs/logo-n.svg" alt="Geeks" /></a>
 			<div class="d-flex align-items-center order-lg-3 gap-3">
-				<button
-					class="btn btn-light btn-icon rounded-circle d-flex align-items-center position-relative"
-					type="button" aria-expanded="false" data-bs-toggle="dropdown"
-					aria-label="Toggle theme (auto)">
+				<a href="/Ielts-listening2/user/mycart?userId=${user.userId}"
+					class="btn btn-light btn-icon rounded-circle d-flex align-items-center position-relative">
 					<i class="fe fe-shopping-cart"></i> <span
 						style="z-index: 2; background-color: white; top: -4px; right: -8px; width: 24px; height: 24px; padding; 2; border-radius: 100%;"
 						class="position-absolute text-primary border ">${cartSize}</span>
 
-				</button>
+				</a>
 				<div class="d-flex align-items-center">
 					<div class="dropdown me-2">
 						<button
@@ -91,7 +89,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 						</a>
 							<div
 								class="dropdown-menu dropdown-menu-end position-absolute mx-3 my-5">
-								<div class="dropdown-item">
+								<div class="mx-4">
 									<div class="d-flex">
 										<div class="avatar avatar-md avatar-indicators avatar-online">
 											<c:if test="${user.image != null}">
@@ -110,29 +108,33 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 										</div>
 
 										<div class="ms-3 lh-1">
-											<h5 class="mb-1" name="idUser" value="${user.userId}">${user.userId}</h5>
-											<p class="mb-0">${user.email }</p>
+											<h5 class="mb-0" name="idUser" value="${user.userId}">${user.name}</h5>
+											<h5 class="mb-0">${user.email }</h5>
 										</div>
 									</div>
 								</div>
 								<div class="dropdown-divider"></div>
 								<ul class="list-unstyled">
-									<li><a class="dropdown-item"
-										href="/Ielts-listening2/user/mycart?userId=${user.userId}">
-											<i class="fe fe-shopping-cart me-2"></i> My Cart
-									</a></li>
+									
 									<li><a class="dropdown-item"
 										href="/Ielts-listening2/user/capnhattaikhoan?userId=${user.userId}">
-											<i class="fe fe-user me-2"></i> Profile
+											<i class="fe fe-user me-2"></i> Thông tin
 									</a></li>
-
+									<li><a class="dropdown-item"
+										href="/Ielts-listening2/user/mycart?userId=${user.userId}">
+											<i class="fe fe-shopping-cart me-2"></i> Giỏ hàng
+									</a></li>
+									<li><a class="dropdown-item"
+										href="/Ielts-listening2/user/blogs?userId=${user.userId}">
+											<i class="fe fe-book me-2"></i> Blogs
+									</a></li>
 									<li><a class="dropdown-item"
 										href="capnhatmatkhau?userId=${user.userId}"> <i
-											class="fe fe-settings me-2"></i> Settings
+											class="fe fe-settings me-2"></i> Cài đặt
 									</a></li>
 								</ul>
 								<div class="dropdown-divider"></div>
-								<ul class="list-unstyled">
+								<ul class="list-unstyled m-0">
 									<li>
 										<form action=logout method="post">
 											<button class="dropdown-item">
@@ -186,14 +188,21 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 						</ul></li>
 					<li class="nav-item "><a class="nav-link " href="blogs-page"
 						id="navbarLanding">Blogs</a>
-					<li class="nav-item"><a class="nav-link " href="helpcenter">Câu
-							hỏi thường gặp</a></li>
+					<li class="nav-item"><a class="nav-link " href="helpcenter">FAQs</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-
+	<style>
+		.header-fixed{
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: 0;
+			z-index: 2;
+		}
+	</style>
 
 </body>
 </html>
