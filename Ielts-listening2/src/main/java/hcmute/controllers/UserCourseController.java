@@ -75,7 +75,24 @@ public class UserCourseController extends HttpServlet {
 				req.setAttribute("listLesson", listLesson);
 				req.setAttribute("course", course);
 			}
-
+			int[] percentCountOfStars = new int[] {0,0,0,0,0};
+			int people = 0;
+			for(Lesson lesson: course.getLessons()) {
+				for(EnrrolLesson enrrolLesson: lesson.getEnrrolLesson()) {
+					int star = enrrolLesson.getNumberOfStar() == null ? 0: enrrolLesson.getNumberOfStar();
+					if (star > 0) {
+						percentCountOfStars[star - 1] += 1;
+						people += 1;
+					}
+				}
+			}
+			if (people > 0) {
+				for(int i = 0; i < 5; i++) {
+					System.out.println(((percentCountOfStars[i] * 100) / (float)people));
+					percentCountOfStars[i] = ((((percentCountOfStars[i] * 100) / (float)people) - (int)((percentCountOfStars[i] * 100) / (float)people)) >= 0.5) ? (int)((percentCountOfStars[i] * 100) / (float)people) + 1 : (int)((percentCountOfStars[i] * 100) / (float)people);
+				}
+			}
+			req.setAttribute("percentCountOfStars", percentCountOfStars);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/LessonList.jsp");
 			rd.forward(req, resp);
 
@@ -116,7 +133,6 @@ public class UserCourseController extends HttpServlet {
 				rd.forward(req, resp);
 			}
 		}
-
 	}
 
 	private void FindAllDecreaseRate(HttpServletRequest req, HttpServletResponse resp) {
