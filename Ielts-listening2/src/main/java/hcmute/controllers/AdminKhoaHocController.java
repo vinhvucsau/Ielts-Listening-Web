@@ -108,8 +108,10 @@ public class AdminKhoaHocController extends HttpServlet {
 				e.printStackTrace();
 				req.setAttribute("error", "add faild");
 			}
-			resp.sendRedirect(req.getContextPath()+"/admin/khoahoc");	
-	
+			if (req.getPart("trailer").getSize() != 0) {
+				// tạo tên file mới để khỏi bị trùng
+				String fileName = "" + System.currentTimeMillis();
+				model.setTrailer(UploadUtils.processUpload("trailer", req, Constants.DIR + "\\"+Constants.FOLDER_VIDEO+"\\", fileName));
 			}
 		else if (url.contains("updateCourse"))
 			{

@@ -62,8 +62,29 @@
 												<div id="editor">
 													<div>${lesson.answerSheet }</div>
 												</div>
-												<input type="hidden" id="answerSheetInput"
-													name="answerSheet" value="${lesson.answerSheet }" />
+												
+												<div class="mb-3">
+													<video width="1080" height="607.5" controls class="pt-2">
+														<source src="<c:url value='/image?fname=${folder }/${lesson.video }'/>" type="video/mp4">
+													</video><br>
+						
+													<label class="form-label">Edit Video File</label> 
+													<input
+														style="display: none" name="preAudio"
+														value="${lesson.video }"> 
+													<input  value="${lesson.video }" type="file" class="form-control" 
+														name="video" id=""
+														accept="video/mp4" require>
+													<div id="audio"></div>
+												</div>
+												
+												<div class="mb-3">
+													<label class="form-label">Answer Sheet</label>
+													<div id="editor">
+														<div>${lesson.answerSheet }</div>
+													</div>
+													<input type="hidden" id="answerSheetInput" name="answerSheet" value="${lesson.answerSheet }" />
+												</div>
 											</div>
 										</div>
 
