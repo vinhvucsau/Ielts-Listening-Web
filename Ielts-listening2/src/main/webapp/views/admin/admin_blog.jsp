@@ -162,19 +162,19 @@
                                                                                 <span class="dropdown-header">Thiết lập</span>
                                                                                 
                                                                                     <a class="blog-publish-btn dropdown-item" 
-                                                                                    href="#"
+                                                                                    href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=1'/>"
                                                                                     value="${blog.blogId}">
                                                                                         <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                         Đăng bài
                                                                                     </a>
                                                                                     <a class="blog-edit-btn dropdown-item" 
-                                                                                        href="#"
+                                                                                        href="<c:url value='/admin/edit-blog?id=${blog.blogId}'/>"
                                                                                         value="${blog.blogId}">
                                                                                         <i class="fe fe-edit dropdown-item-icon"></i>
                                                                                         Chỉnh sửa
                                                                                         </a>
                                                                                     <a class="blog-trash-btn dropdown-item" 
-                                                                                    href="#"
+                                                                                    href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=2'/>"
                                                                                     value="${blog.blogId}">
                                                                                         <i class="fe fe-trash dropdown-item-icon"></i>
                                                                                         Thùng rác
@@ -210,19 +210,19 @@
                                                                                 <c:choose>
                                                                                     <c:when test="${blog.users.account.role == 'admin'}">
                                                                                         <a class="blog-edit-btn dropdown-item" 
-                                                                                        href="#"
+                                                                                        href="<c:url value='/admin/edit-blog?id=${blog.blogId}'/>"
                                                                                         value="${blog.blogId}">
                                                                                         <i class="fe fe-edit dropdown-item-icon"></i>
                                                                                         Chỉnh sửa
                                                                                         </a>
                                                                                         <a class="blog-drafts-btn dropdown-item" 
-                                                                                            href="#"
+                                                                                            href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=0'/>"
                                                                                             value="${blog.blogId}">
                                                                                             <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                             Lưu nháp
                                                                                         </a>
                                                                                         <a class="blog-trash-btn dropdown-item" 
-                                                                                        href="#"
+                                                                                        href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=2'/>"
                                                                                         value="${blog.blogId}">
                                                                                             <i class="fe fe-trash dropdown-item-icon"></i>
                                                                                             Thùng rác
@@ -231,7 +231,7 @@
                                                                                         
                                                                                         <c:when test="${blog.users.account.role == 'user'}">
                                                                                             <a class="blog-waiting-btn dropdown-item" 
-                                                                                            href="#"
+                                                                                            href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=3'/>"
                                                                                             value="${blog.blogId}">
                                                                                             <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                             Chờ duyệt
@@ -267,7 +267,7 @@
                                                                             <span class="dropdown-menu" aria-labelledby="courseDropdown1">
                                                                                 <span class="dropdown-header">Thiết lập</span>
                                                                                 
-                                                                                    <a class="blog-rest-btn dropdown-item" href="#"
+                                                                                    <a class="blog-reset-btn dropdown-item" href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=0'/>"
                                                                                     value="${blog.blogId}">
                                                                                         <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                         Khôi phục
@@ -299,12 +299,12 @@
                                                                             
                                                                             <span class="dropdown-menu" aria-labelledby="courseDropdown1">
                                                                                 <span class="dropdown-header">Thiết lập</span>
-                                                                                    <a class="blog-publish-btn dropdown-item" href="#"
+                                                                                    <a class="blog-publish-btn dropdown-item" href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=1'/>"
                                                                                     value="${blog.blogId}">
                                                                                         <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                         Đăng bài
                                                                                     </a>
-                                                                                    <a class="blog-abort-btn dropdown-item" href="#"
+                                                                                    <a class="blog-abort-btn dropdown-item" href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=0'/>"
                                                                                     value="${blog.blogId}">
                                                                                         <i class="fe fe-trash dropdown-item-icon"></i>
                                                                                         Hủy bỏ
@@ -394,19 +394,19 @@
                                                                         <c:choose>
                                                                             <c:when test="${blog.users.account.role == 'admin'}">
                                                                                 <a class="blog-edit-btn dropdown-item" 
-                                                                                href="#"
+                                                                                href="<c:url value='/admin/edit-blog?id=${blog.blogId}'/>"
                                                                                 value="${blog.blogId}">
                                                                                 <i class="fe fe-edit dropdown-item-icon"></i>
                                                                                 Chỉnh sửa
                                                                                 </a>
                                                                                 <a class="blog-drafts-btn dropdown-item" 
-                                                                                    href="#"
+                                                                                    href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=0'/>"
                                                                                     value="${blog.blogId}">
                                                                                     <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                     Lưu nháp
                                                                                 </a>
                                                                                 <a class="blog-trash-btn dropdown-item" 
-                                                                                href="#"
+                                                                                href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=2'/>"
                                                                                 value="${blog.blogId}">
                                                                                     <i class="fe fe-trash dropdown-item-icon"></i>
                                                                                     Thùng rác
@@ -415,7 +415,7 @@
                                                                                 
                                                                                 <c:when test="${blog.users.account.role == 'user'}">
                                                                                     <a class="blog-waiting-btn dropdown-item" 
-                                                                                    href="#"
+                                                                                    href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=3'/>"
                                                                                     value="${blog.blogId}">
                                                                                     <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                     Chờ duyệt
@@ -501,12 +501,12 @@
                                                                     
                                                                     <span class="dropdown-menu" aria-labelledby="courseDropdown1">
                                                                         <span class="dropdown-header">Thiết lập</span>
-                                                                            <a class="blog-publish-btn dropdown-item" href="#"
+                                                                            <a class="blog-publish-btn dropdown-item" href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=1'/>"
                                                                             value="${blog.blogId}">
                                                                                 <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                 Đăng bài
                                                                             </a>
-                                                                            <a class="blog-abort-btn dropdown-item" href="#"
+                                                                            <a class="blog-abort-btn dropdown-item" href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=0'/>"
                                                                             value="${blog.blogId}">
                                                                                 <i class="fe fe-trash dropdown-item-icon"></i>
                                                                                 Hủy bỏ
@@ -591,19 +591,19 @@
                                                                         <span class="dropdown-header">Thiết lập</span>
                                                                         
                                                                             <a class="blog-publish-btn dropdown-item" 
-                                                                            href="#"
+                                                                            href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=1'/>"
                                                                             value="${blog.blogId}">
                                                                                 <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                 Đăng bài
                                                                             </a>
                                                                             <a class="blog-edit-btn dropdown-item" 
-                                                                                href="#"
+                                                                                href="<c:url value='/admin/edit-blog?id=${blog.blogId}'/>"
                                                                                 value="${blog.blogId}">
                                                                                 <i class="fe fe-edit dropdown-item-icon"></i>
                                                                                 Chỉnh sửa
                                                                                 </a>
                                                                             <a class="blog-trash-btn dropdown-item" 
-                                                                            href="#"
+                                                                            href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=2'/>"
                                                                             value="${blog.blogId}">
                                                                                 <i class="fe fe-trash dropdown-item-icon"></i>
                                                                                 Thùng rác
@@ -687,7 +687,7 @@
                                                                     <span class="dropdown-menu" aria-labelledby="courseDropdown1">
                                                                         <span class="dropdown-header">Thiết lập</span>
                                                                         
-                                                                            <a class="blog-rest-btn dropdown-item" href="#"
+                                                                            <a class="blog-reset-btn dropdown-item" href="<c:url value='/admin/update-blog-status?id=${blog.blogId}&status=0'/>"
                                                                             value="${blog.blogId}">
                                                                                 <i class="fe fe-toggle-left dropdown-item-icon"></i>
                                                                                 Khôi phục
@@ -720,11 +720,18 @@
 		</svg>
 	</div>
 
+    <style>
+        .blog-title{
+            width: 180px;
+            overflow: hidden;
+            -webkit-line-clamp: 1;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
 	<!-- My script -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        
-
         $(document).ready(function() {
             
             $('.dropdown-item').hover(function(e){
@@ -755,7 +762,7 @@
                     urlAction = "<c:url value='/admin/update-blog-status?id="+ String(id)+ "&status=" +String(3) + "'/>";
 	                e.target.setAttribute("href", urlAction);
                     return;
-                } else if($(this).hasClass('blog-rest-btn')){ //reset btn 
+                } else if($(this).hasClass('blog-reset-btn')){ //reset btn 
                     urlAction = "<c:url value='/admin/update-blog-status?id="+ String(id)+ "&status=" +String(0) + "'/>";
 	                e.target.setAttribute("href", urlAction);
                     return;
