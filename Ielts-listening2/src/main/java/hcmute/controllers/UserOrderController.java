@@ -2,12 +2,9 @@ package hcmute.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -99,17 +96,6 @@ public class UserOrderController extends HttpServlet {
 				Course course = courseService.findById(courseId);
 				courseList.add(course);
 			}
-			Date currentDateTime1 = new Date();
-			Date currentDateTime = new Date(); 
-			try {
-				currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(currentDateTime1.toString());
-				System.out.print("Time" + currentDateTime);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.print("Loi");
-			} 
-			
 
 			LocalDateTime currentDateTime = LocalDateTime.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

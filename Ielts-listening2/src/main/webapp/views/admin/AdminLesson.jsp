@@ -155,9 +155,11 @@
 							<div class="p-1">
 								<div
 									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"height: 210px">
-									<video style="max-width: 100%; border: none" width="370"
-										height="220" controls class="pt-2">
-										<source src="${course.trailer }" type="video/mp4">
+									<video style="max-width: 100%" width="370" height="220"
+										controls class="pt-2">
+										<source
+											src="<c:url value='/image?fname=${folder }/${course.trailer }'/>"
+											type="video/mp4">
 									</video>
 								</div>
 							</div>
