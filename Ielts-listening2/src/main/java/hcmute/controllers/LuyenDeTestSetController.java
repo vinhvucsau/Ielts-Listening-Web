@@ -52,9 +52,8 @@ public class LuyenDeTestSetController extends HttpServlet{
 		String url = req.getRequestURI().toString();
 		if (url.contains("testset")) {
 			findAll(req, resp);
-			HttpSession session =  req.getSession(false);
-			User user = (User) session.getAttribute("user");
-			req.setAttribute("currentUser", user);
+			
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/views/luyende/luyende_testset.jsp");
 			rd.forward(req, resp);
 		} 
@@ -73,6 +72,7 @@ public class LuyenDeTestSetController extends HttpServlet{
 			{			
 				List<EnrrolTest> listEnrolltest = enrollTestService.getEnrollTestByUserId(user.getUserId(),topicId);
 				req.setAttribute("listEnrolltest", listEnrolltest);
+				req.setAttribute("currentUser", user);
 			}
 			
 		}
@@ -100,11 +100,15 @@ public class LuyenDeTestSetController extends HttpServlet{
 		enrrolTest.setUsers(user);
 		MockTest mockTest = mockTestService.findById(testId);
 		enrrolTest.setMockTests(mockTest);
-		EnrrolTest checkEnTest = enrollTestService2.findByUserIdAndMockTestIdSoon(user.getUserId(), testId);
-		if (checkEnTest.getScore() <0)
+		
+		if(enrollTestService2.findByUserIdAndMockTestIdSoon(user.getUserId(), testId) != null )
 		{
-			
-			resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
+			EnrrolTest checkEnTest = enrollTestService2.findByUserIdAndMockTestIdSoon(user.getUserId(), testId);
+			if (checkEnTest.getScore() <0 )
+			{
+				
+				resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
+			}
 		}
 		else
 		{

@@ -99,22 +99,27 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="luyende-testset-list-de row">
 				<c:forEach var="i" items="${listMocktest}">
 				<c:if test="${not empty currentUser}">
 				
-				<div  class=" col-6 ">
-				<form action="luyende-testset" method="post">
 				
-				<input type="hidden" name="testId" value="${i.testId }" />
-				<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;">
+				
+				
+				
+				<%-- <input type="hidden" name="testId" value="${i.testId }" />
+				<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;"> --%>
 						<c:set var="found" value="false" />
 						<c:forEach var="en" items="${listEnrolltest}">
 							<c:if test="${!found}">
 								<c:choose>
 									<c:when
 										test="${i.testId == en.mockTests.testId && en.score >= 0 }">
-										<div  class="luyende-testset-list-de col-12 luyende-da-lam">
+										<div  class="luyende-testset-list-de col-6 luyende-da-lam">
+										<form action="luyende-testset " method="post">
+										<input type="hidden" name="testId" value="${i.testId }" />
+										<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;">
 										<div class="card" style="border: 0;">
 											<div class="card-body">
 												<div class="card-title text--h3 ">${i.testName}</div>
@@ -128,12 +133,17 @@
 												</div>
 											</div>
 										</div>
+										</a>
+										</form>
 										</div>
 										<c:set var="found" value="true" />
 									</c:when>
 									<c:when
 										test="${i.testId == en.mockTests.testId && en.score < 0 }">
-										<div  class="luyende-testset-list-de col-12 luyende-dang-lam">
+										<div  class="luyende-testset-list-de col-6 luyende-dang-lam">
+										<form action="luyende-testset " method="post">
+										<input type="hidden" name="testId" value="${i.testId }" />
+										<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;">
 										<div class="card" style="border: 0;">
 											<div class="card-body">
 												<div class="card-title text--h3 ">${i.testName}</div>
@@ -149,6 +159,8 @@
 												</div>
 											</div>
 										</div>
+										</a>
+										</form>
 										</div>
 										<c:set var="found" value="true" />
 									</c:when>
@@ -157,7 +169,11 @@
 
 						</c:forEach>
 						<c:if test="${!found}">
-						<div class="luyende-testset-list-de col-12 luyende-chua-lam">
+						<div class="luyende-testset-list-de col-6 luyende-chua-lam">
+						<form action="luyende-testset " method="post">
+										<input type="hidden" name="testId" value="${i.testId }" />
+										
+						<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;">
 							<div class="card" style="border: 0;">
 								<div class="card-body">
 									<div class="card-title text--h3 ">${i.testName}</div>
@@ -178,15 +194,20 @@
 									</div>
 									</div>
 								</div>
+								</a>
+								</form>
 							</div>
 						</c:if>
 
 
 					
 				</a>
-				</form>
-				</div>
+				
+				
+				
+				
 				</c:if>
+				
 				<c:if test="${ empty currentUser}">
 				
 				<div class="luyende-testset-list-de col-6 ">
