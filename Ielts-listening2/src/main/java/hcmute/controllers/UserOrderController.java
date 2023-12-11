@@ -98,15 +98,19 @@ public class UserOrderController extends HttpServlet {
 			}
 
 			LocalDateTime currentDateTime = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String formattedDateTime = currentDateTime.format(formatter);
+
+			// Print the formatted date and time
+			System.out.println("Formatted DateTime: " + formattedDateTime);
+
 			Payment payment = new Payment();
 			payment.setPaymentId("ID");
 			payment.setUsers(user);
 			payment.setCost(totalCost);
-			payment.setDateBuy(currentDateTime);
+			payment.setDateBuy(formattedDateTime);
 			paymentService.insert(payment);
-
-			payment = paymentService.findByDatebuyAndUserId(currentDateTime, user.getUserId());
-
+			payment = paymentService.findByDatebuyAndUserId(formattedDateTime, user.getUserId());
 			for (Course course : courseList) {
 				UserCourse userCourse = new UserCourse();
 				userCourse.setUsers(user);
