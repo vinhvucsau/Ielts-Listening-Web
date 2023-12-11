@@ -25,8 +25,7 @@ import hcmute.utils.DeleteImage;
 import hcmute.utils.UploadUtils;
 
 @MultipartConfig
-@WebServlet(urlPatterns = { "/user/blogs-page", "/user/blogs", "/user/update-blog-status", "/user/add-blog",
-		"/user/edit-blog", "/user/blog-content" })
+@WebServlet(urlPatterns = {"/user/blogs-page", "/user/blogs", "/user/update-blog-status", "/user/add-blog", "/user/edit-blog", "/user/blog-content" })
 
 public class UserBlogController extends HttpServlet {
 
@@ -36,7 +35,6 @@ public class UserBlogController extends HttpServlet {
 	IUserService uService = new UserServiceImpl();
 
 	User user = new User();// session login
-	Date currentDay = new Date(); // curren day
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,10 +46,14 @@ public class UserBlogController extends HttpServlet {
 		List<User> listUser = uService.findAll();
 
 		HttpSession session = req.getSession(false);
-		user = (User) session.getAttribute("user");
+		if (session != null && session.getAttribute("user") != null) {
+			user = (User) session.getAttribute("user");
+		} else {
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
+			rd.forward(req, resp);
+		}
 		if (url.contains("blogs-page")) {
-			req.setAttribute("topicIMG", Constants.FOLDER_BLOG);
-			req.setAttribute("avatarIMG", Constants.FOLDER_AVATAR);
+			req.setAttribute("folder", Constants.FOLDER_AVATAR);
 			req.setAttribute("listBlog", listBlog);
 			req.setAttribute("listUser", listUser);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/blogs_page.jsp");
@@ -98,6 +100,10 @@ public class UserBlogController extends HttpServlet {
 			rd.forward(req, resp);
 		}
 
+			req.setAttribute("blog", oldBlog);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/editBlog.jsp");
+			rd.forward(req, resp);
+		}
 	}
 
 	@Override
@@ -113,8 +119,7 @@ public class UserBlogController extends HttpServlet {
 				Date date = new Date(millis);
 				newBlog.setCreatedDate(date);
 				String fileName = "" + System.currentTimeMillis();
-				newBlog.setImage((UploadUtils.processUpload("image", req,
-						Constants.DIR + "\\" + Constants.FOLDER_BLOG + "\\", fileName)));
+				newBlog.setImage((UploadUtils.processUpload("image", req, Constants.DIR + "\\blogIMG\\", fileName)));
 
 				String title = req.getParameter("title");
 				String content = req.getParameter("content");
@@ -125,50 +130,33 @@ public class UserBlogController extends HttpServlet {
 				newBlog.setTitle(title);
 				newBlog.setUsers(user);
 
-				try {
-					blogService.insert(newBlog);
-					resp.sendRedirect(req.getContextPath() + "/user/blogs");
-				} catch (Exception e) {
-					req.setAttribute("e", e.getMessage());
-					RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
-					rd.forward(req, resp);
-				}
-
+				blogService.insert(newBlog);
+				resp.sendRedirect(req.getContextPath() + "/user/blogs");
 			}
 		} else if (url.contains("edit-blog")) {
 			String id = req.getParameter("id");
+			Blog oldBlog = blogService.findOneById(id);
+
+			if (req.getPart("image").getSize() == 0) {
+				user.setImage(user.getImage());
+			} else {
+				if (user.getImage() != null) {
+					DeleteImage.deleteImage(user.getImage(), Constants.FOLDER_AVATAR);
+				} // update anh moi
+				String fileName = "" + System.currentTimeMillis();
+				oldBlog.setImage((UploadUtils.processUpload("image", req, Constants.DIR + "\\blogIMG\\", fileName)));
+			}
+
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 
-			Blog newBlog = new Blog();
-			Blog oldBlog = blogService.findOneById(id);
+			if (title.trim() != "")
+				oldBlog.setTitle(title);
+			if (content.trim() != "")
+				oldBlog.setContent(content);
 
-			newBlog.setTitle(title);
-			newBlog.setContent(content);
-			newBlog.setBlogId(id);
-			newBlog.setCreatedDate(currentDay);
-			newBlog.setStatus(oldBlog.getStatus());
-			newBlog.setUsers(user);
-
-			try {
-				if (req.getPart("image").getSize() == 0) {
-					newBlog.setImage(oldBlog.getImage());
-				} else {// xoa anh cu
-					if (oldBlog.getImage() != null) {
-						DeleteImage.deleteImage(oldBlog.getImage(), Constants.FOLDER_BLOG);
-					} // update anh moi
-					String fileName = "" + System.currentTimeMillis();
-					newBlog.setImage((UploadUtils.processUpload("image", req,
-							Constants.DIR + "\\" + Constants.FOLDER_BLOG + "\\", fileName)));
-				}
-
-				blogService.update(newBlog);
-				resp.sendRedirect(req.getContextPath() + "/user/blogs");
-			} catch (Exception e) {
-				req.setAttribute("e", e.getMessage());
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
-				rd.forward(req, resp);
-			}
+			blogService.update(oldBlog);
+			resp.sendRedirect(req.getContextPath() + "/user/blogs");
 
 		}
 	}

@@ -38,5 +38,10 @@ public class BlogServiceImpl implements IBlogService {
 		// TODO Auto-generated method stub
 		blogDao.delete(id);
 	}
+
+	@Override
+	public List<Blog> Find3blog(String id) {
+		return blogDao.Find3blog(id);
+	}
 	
 }

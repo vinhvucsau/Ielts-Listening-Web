@@ -10,4 +10,5 @@ public interface IBlogService {
 	void insert(Blog blog);
 	void update(Blog blog);
 	void delete(String id) throws Exception;
+	List<Blog> Find3blog(String id);
 }
