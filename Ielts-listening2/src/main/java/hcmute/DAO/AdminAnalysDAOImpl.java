@@ -60,11 +60,12 @@ public class AdminAnalysDAOImpl implements IAdminAnalysDAO{
 	}
 
 	@Override
-	public Long costWithMonth1() {
+	public Long costWithMonth(int month) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 1";
+			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = :month";
 			Query query = enma.createQuery(jpql);
+			query.setParameter("month", month);
 			Long count = (Long) query.getSingleResult();
 			return count;
 		}finally {
@@ -74,170 +75,6 @@ public class AdminAnalysDAOImpl implements IAdminAnalysDAO{
 		}
 	}
 
-	@Override
-	public Long costWithMonth2() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 2";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth3() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 3";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth4() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 4";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth5() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 5";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth6() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 6";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth7() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 7";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth8() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 8";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth9() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 9";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth10() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 10";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth11() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 11";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
-
-	@Override
-	public Long costWithMonth12() {
-		EntityManager enma = JPAConfig.getEntityManager();
-		try {
-			String jpql = "SELECT COALESCE(SUM(p.cost), 0) FROM Payment p WHERE MONTH(p.dateBuy) = 12";
-			Query query = enma.createQuery(jpql);
-			Long count = (Long) query.getSingleResult();
-			return count;
-		}finally {
-			if (enma != null) {
-				enma.close();
-	        }
-		}
-	}
 
 	@Override
 	public List<String> userIdDescreaseCost() {

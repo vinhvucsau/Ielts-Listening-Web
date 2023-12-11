@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import hcmute.entity.User;
 import hcmute.services.AccountServiceImpl;
@@ -91,12 +92,11 @@ public class AdminListUserController extends HttpServlet {
 		try {
 			req.setCharacterEncoding("UTF-8");
 			resp.setCharacterEncoding("UTF-8");
-			String id = req.getParameter("userId");
-			User user = adminService.findUserById(id);
-
+			String userId = req.getParameter("userId");
+			User user = userService.findUserByID(userId);
 			String name = req.getParameter("inputName").trim();
 			String phoneNumber = req.getParameter("inputPhone").trim();
-			String email = req.getParameter("inputEmail").trim();
+
 			String address = req.getParameter("inputAddress").trim();
 			String dateOfBirth = req.getParameter("datePicker").trim();
 			String networth = req.getParameter("inputNetworth").trim();
@@ -131,34 +131,28 @@ public class AdminListUserController extends HttpServlet {
 					currentNetworth = Integer.parseInt(networth);
 				}
 			}
-
-			if (userService.findDuplicateEmail(email, id) == false) {
-				req.setAttribute("messError", "Email đã được sử dụng!");
-			}
-
 			if (phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+")) {
-				if (userService.findDuplicatePhone(phoneNumber, id) == false) {
+				if (userService.findDuplicatePhone(phoneNumber, user.getUserId()) == false) {
 					req.setAttribute("messError", "Số điện thoại đã được sử dụng!");
 				}
 			} else {
 				req.setAttribute("messError", "Số điện thoại không hợp lệ!");
 			}
-
+			System.out.println("errrr " + req.getAttribute("messError"));
 			if (req.getAttribute("messError") == null) {
 				user.setName(name);
-				user.setEmail(email);
 				user.setPhoneNumber(phoneNumber);
 				user.setAddress(address);
 				user.setDateOfBirth(dateOfBirth);
 				user.setNetworth(currentNetworth);
 				userService.update(user);
 			}
-
+			
 			req.setAttribute("currentUser", user);
 			req.setAttribute("message", "Cập nhật thành công!");
-
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
 			rd.forward(req, resp);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("error", "Eror: " + e.getMessage());

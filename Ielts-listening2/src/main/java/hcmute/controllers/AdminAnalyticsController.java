@@ -25,44 +25,35 @@ public class AdminAnalyticsController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	IAdminAnalysService adminAnaService = new AdminAnalysServiceImpl();
+	IUserService userService = new UserServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		if (url.contains("analytics")) {
-			Long countUser = adminAnaService.countUser();
+
+			Long countUser = adminAnaService.countUser(); 
 			Long countCourse = adminAnaService.countCourse();
-			Long sumRevenue = adminAnaService.sumRevenue();
-			Long revenueM1 = adminAnaService.costWithMonth1();
-			Long revenueM2 = adminAnaService.costWithMonth2();
-			Long revenueM3 = adminAnaService.costWithMonth3();
-			Long revenueM4 = adminAnaService.costWithMonth4();
-			Long revenueM5 = adminAnaService.costWithMonth5();
-			Long revenueM6 = adminAnaService.costWithMonth6();
-			Long revenueM7 = adminAnaService.costWithMonth7();
-			Long revenueM8 = adminAnaService.costWithMonth8();
-			Long revenueM9 = adminAnaService.costWithMonth9();
-			Long revenueM10 = adminAnaService.costWithMonth10();
-			Long revenueM11 = adminAnaService.costWithMonth11();
-			Long revenueM12 = adminAnaService.costWithMonth12();
-
+			Long sumRevenue =adminAnaService.sumRevenue();
 			Long[] data = new Long[12];
-			data[0] = revenueM1;
-			data[1] = revenueM2;
-			data[2] = revenueM3;
-			data[3] = revenueM4;
-			data[4] = revenueM5;
-			data[5] = revenueM6;
-			data[6] = revenueM7;
-			data[7] = revenueM8;
-			data[8] = revenueM9;
-			data[9] = revenueM10;
-			data[10] = revenueM11;
-			data[11] = revenueM12;
+			
+			for(int i = 0; i < 12; i++) {
+				data[i] = adminAnaService.costWithMonth(i+ 1);
+			}
+	
+			Long[] data1 = new Long[12];
+			for (int i = 0 ; i < 12; i++) {
+				data1[i] =  Math.round((double) (data[i]) / (sumRevenue) *100) ;
+			}
 
+	
 			Gson gson = new Gson();
 			String jsonData = gson.toJson(data);
 			req.setAttribute("jsonData", jsonData);
+			
+			Gson gson1 = new Gson();
+			String jsonData1 = gson1.toJson(data1);
+			req.setAttribute("jsonData1", jsonData1);
 			
 
 			req.setAttribute("sumRevenue", sumRevenue);
@@ -109,12 +100,26 @@ public class AdminAnalyticsController extends HttpServlet {
 				}
 			}
 			
+			
+			List<String> image = new ArrayList<String>();
+			List<String> imageCourse = new ArrayList<String>();
+			for(int i = 0; i < user.size(); i++) {
+				image.add(user.get(i).getImage());
+			}
+			for (int i = 0; i < listCourseJsp.size(); i++) {
+				imageCourse.add(listCourseJsp.get(i).getImage());
+			}
+			
 			System.out.print("user la: " + userId);
 			System.out.print("course la: " + countCourse1);
-			System.out.print("rating la: " + countRating1);
+			for(int i = 0; i < imageCourse.size(); i++) {
+				System.out.print("ImageCOurse la: " + imageCourse.get(i));
+			}
 			
 			
 			req.setAttribute("userId", userIdJsp);
+			req.setAttribute("imageCourse", imageCourse);
+			req.setAttribute("image", image);
 			req.setAttribute("countCourse1", countCourse1);
 			req.setAttribute("countRating1", countRating1);
 			req.setAttribute("sumCost", sumCost);

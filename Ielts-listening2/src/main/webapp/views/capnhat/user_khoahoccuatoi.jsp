@@ -202,19 +202,23 @@ Long count = (Long) request.getAttribute("count");
 
 											<div class="col-xl-3 col-md-6 col-12">
 												<div class="card mb-4 card-hover border">
-													<a href="#!"> <img
+													<a href="course-detail?courseId=${i.courses.courseId }">
+														<img
 														src="https://files.fullstack.edu.vn/f8-prod/courses/27/64e184ee5d7a2.png"
 														alt="health" class="img-fluid w-100 rounded-top-3">
 													</a>
 													<div class="card-body">
 														<h4 class="mb-3">
-															<a href="#!" class="text-inherit">${i.courses.courseName }</a>
+															<a href="course-detail?courseId=${i.courses.courseId }"
+																class="text-inherit">${i.courses.courseName }</a>
 															<%-- <a href="#!" class="text-inherit">${i.courses.lessons }</a> --%>
 															<c:set var="countTren5" value="0" />
 															<c:set var="sumScore" value="0" />
+															<c:set var="score" value="0" />
 															<c:forEach var="i" items="${i.courses.lessons}">
 
 																<c:forEach var="j" items="${i.enrrolLesson}">
+																	<c:set var="score" value="${j.score }" />
 
 
 																	<c:choose>
@@ -242,7 +246,8 @@ Long count = (Long) request.getAttribute("count");
 																style="width: ${percen}%" aria-valuenow="50"
 																aria-valuemin="0" aria-valuemax="100"></div>
 														</div>
-														<a href="#!"> Continue Studying <span> <svg
+														<a href="course-detail?courseId=${i.courses.courseId }">
+															Tiếp tục <span> <svg
 																	xmlns="http://www.w3.org/2000/svg" width="20"
 																	height="20" fill="currentColor"
 																	class="bi bi-arrow-right-short" viewBox="0 0 16 16">

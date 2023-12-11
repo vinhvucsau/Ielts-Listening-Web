@@ -101,11 +101,12 @@ public class LuyenDeHomeController extends HttpServlet {
 
 		} else {
 			LocalDateTime date = LocalDateTime.now();
-			enrrolTest.setEnrrollmentDate(date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
+			LocalDateTime dateNow = date.truncatedTo(ChronoUnit.SECONDS);
+			enrrolTest.setEnrrollmentDate(dateNow);
 			enrollTestService.insert(enrrolTest);
 
 			EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(user.getUserId(), testId,
-					date.truncatedTo(ChronoUnit.SECONDS).plusSeconds(1));
+					dateNow);
 
 			resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
 		}

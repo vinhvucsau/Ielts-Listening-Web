@@ -27,7 +27,7 @@ import hcmute.utils.compositeId.PasswordEncryptor;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
 		* 50)
-@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi" })
+@WebServlet(urlPatterns = { "/user/capnhattaikhoan", "/user/capnhatmatkhau", "/user/khoahoccuatoi", "/admin/khoahoccuatoi"})
 public class CapNhatThongTinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,11 +41,13 @@ public class CapNhatThongTinController extends HttpServlet {
 
 		// Set cứng ID để test chức năng
 
-		User user = (User) session.getAttribute("user");
-		Account account = accountService.findByID(user.getAccount().getUserName());
+		if(url.contains("user")) {
+			User user = (User) session.getAttribute("user");
+			Account account = accountService.findByID(user.getAccount().getUserName());
+			req.setAttribute("currentUser", user);
+			req.setAttribute("account", account);
+		}
 
-		req.setAttribute("currentUser", user);
-		req.setAttribute("account", account);
 
 		if (url.contains("capnhattaikhoan")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
@@ -53,7 +55,19 @@ public class CapNhatThongTinController extends HttpServlet {
 		} else if (url.contains("capnhatmatkhau")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhatmatkhau.jsp");
 			rd.forward(req, resp);
-		} else if (url.contains("khoahoccuatoi")) {
+		} else if (url.contains("user/khoahoccuatoi")) {
+			String userId = req.getParameter("userId");
+			System.out.print("userId la: " + userId);
+			Long count = userService.countCourseByUserId(userId);
+			User userCurrent = userService.findUserByID(userId);
+			List<UserCourse> listUserCourse = userService.findAllUserCourseByUserId(userId);
+			req.setAttribute("userCourse", listUserCourse);
+			req.setAttribute("userId", userId);
+			req.setAttribute("currentUser", userCurrent);
+			req.setAttribute("count", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_khoahoccuatoi.jsp");
+			rd.forward(req, resp);
+		} else if (url.contains("admin/khoahoccuatoi")) {
 			String userId = req.getParameter("userId");
 			System.out.print("userId la: " + userId);
 			Long count = userService.countCourseByUserId(userId);
@@ -61,8 +75,9 @@ public class CapNhatThongTinController extends HttpServlet {
 			List<UserCourse> listUserCourse = userService.findAllUserCourseByUserId(userId);
 			req.setAttribute("userCourse", listUserCourse);
 			req.setAttribute("currentUser", userCurrent);
+			req.setAttribute("userId", userId);
 			req.setAttribute("count", count);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_khoahoccuatoi.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_khoahoc_user.jsp");
 			rd.forward(req, resp);
 		}
 	}
