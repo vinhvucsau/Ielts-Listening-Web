@@ -19,7 +19,8 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg shadow-none">
+	<nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 2"
+		class="navbar navbar-expand-lg  shadow-lg">
 		<div class="container px-0">
 			<a class="navbar-brand" href="/Ielts-listening2/user/home"><img
 				src="https://prep.vn/imgs/logo-n.svg" alt="Geeks" /></a>
@@ -117,6 +118,10 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 								</div>
 								<div class="dropdown-divider"></div>
 								<ul class="list-unstyled">
+									<li><a class="dropdown-item"
+										href="/Ielts-listening2/user/mycart?userId=${user.userId}">
+											<i class="fe fe-shopping-cart me-2"></i> My Cart
+									</a></li>
 									<li><a class="dropdown-item"
 										href="/Ielts-listening2/user/mycart?userId=${user.userId}">
 											<i class="fe fe-shopping-cart me-2"></i> My Cart

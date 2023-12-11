@@ -50,14 +50,14 @@ public class Lesson implements Serializable {
 
 	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
 	private List<AnswerLesson> answerLesson;
-	
+
 	@OneToMany(mappedBy = "lessons", fetch = FetchType.EAGER)
 	private List<EnrrolLesson> enrrolLesson;
 
 	@ManyToOne
 	@JoinColumn(name = "courseId")
 	private Course courses;
-	
+
 	public Lesson() {
 		super();
 	}
