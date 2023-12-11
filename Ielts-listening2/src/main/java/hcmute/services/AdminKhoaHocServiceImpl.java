@@ -17,7 +17,7 @@ public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService {
 
 	@Override
 	public List<Course> FindAllCourse() {
-		return khoaHocDAO.FindAllCourse();
+		return KhoaHocABS.findAll();
 	}
 
 	@Override
@@ -62,6 +62,5 @@ public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService {
 		// TODO Auto-generated method stub
 		return khoaHocDAO.FindCourseIncreaseRate();
 	}
-	
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 import JPAConfig.JPAConfig;
 import hcmute.entity.Blog;
 
-public class BlogDaoImpl extends AbstractDao<Blog> implements IBlogDao{
+public class BlogDaoImpl extends AbstractDao<Blog> implements IBlogDao {
 
 	public BlogDaoImpl() {
 		super(Blog.class);
@@ -17,12 +17,20 @@ public class BlogDaoImpl extends AbstractDao<Blog> implements IBlogDao{
 
 	public List<Blog> Find3blog(String id) {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "SELECT b FROM Blog b WHERE b.blogId <> :excludedBlogId ORDER BY b.createdDate DESC";
-		TypedQuery<Blog> q = en.createQuery(jpql, Blog.class)
-		        .setParameter("excludedBlogId", id)
-		        .setMaxResults(3);
-		return q.getResultList();
-		
+		TypedQuery<Blog> q = null;
+
+		try {
+			String jpql = "SELECT b FROM Blog b WHERE b.blogId <> :excludedBlogId ORDER BY b.createdDate DESC";
+			q = en.createQuery(jpql, Blog.class).setParameter("excludedBlogId", id).setMaxResults(3);
+			return q.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (en != null && en.isOpen()) {
+				en.close();
+			}
+		}
 	}
 
 }

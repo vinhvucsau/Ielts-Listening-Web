@@ -80,6 +80,7 @@ public class CapNhatThongTinController extends HttpServlet {
 			String userId = req.getParameter("userId");
 			List<Payment> listmyorder = paymentService.findcoursesByIDuser(userId);
 			req.setAttribute("list", listmyorder);	
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/users_myorder.jsp");
 			rd.forward(req, resp);
 		} else if(url.contains("myoddetail")) {

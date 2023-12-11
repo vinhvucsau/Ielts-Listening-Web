@@ -35,4 +35,25 @@ public class UserCourseDAOImpl extends AbstractDao<UserCourse> implements IUserC
 		}
 	}
 
+	public int countUserCourse(String courseId) {
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		TypedQuery<Long> query = null;
+
+		try {
+			String jpql = "SELECT COUNT(uc) FROM UserCourse uc WHERE uc.courses.courseId = :courseId";
+			query = entityManager.createQuery(jpql, Long.class);
+			query.setParameter("courseId", courseId);
+
+			Long count = query.getSingleResult();
+			return count.intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+	}
+
 }

@@ -29,18 +29,16 @@ public class AdminOrderController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		if (url.contains("order")) {
 			List<Payment> listorder = service.findAll();
-		
-			req.setAttribute("list", listorder);	
+			req.setAttribute("list", listorder);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_order.jsp");
 			rd.forward(req, resp);
-		}
-		else if(url.contains("od-detail")){ 
+		} else if (url.contains("od-detail")) {
 			String id = req.getParameter("id");
-			List<Payment> list_orderdetail = service.findcoursesByIDPayment(id);
+			Payment order = service.findById(id);
 			String idpay = req.getParameter("id");
 			List<PayDetail> lisl = detailservice.findPayDetailByIDPayment(idpay);
 			req.setAttribute("list_oddetail", lisl);
-			req.setAttribute("list", list_orderdetail);
+			req.setAttribute("order", order);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_orderDetail.jsp");
 			rd.forward(req, resp);
 		}

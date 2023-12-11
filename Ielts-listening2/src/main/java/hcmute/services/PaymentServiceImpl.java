@@ -32,9 +32,9 @@ public class PaymentServiceImpl implements IPaymentService {
 	}
 
 	@Override
-	public List<Payment> findcoursesByIDPayment(String id) {
+	public Payment findById(Object id) {
 		// TODO Auto-generated method stub
-		return payDAO.findcoursesByIDPayment(id);
+		return payAbs.findById(id);
 	}
 
 	@Override
@@ -42,5 +42,4 @@ public class PaymentServiceImpl implements IPaymentService {
 		return payDAO.findcoursesByIDuser(userId);
 	}
 
-	
 }

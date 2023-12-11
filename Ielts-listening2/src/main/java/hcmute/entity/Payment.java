@@ -29,7 +29,7 @@ public class Payment implements Serializable {
 	@Column(name = "cost")
 	private Integer cost;
 
-	@OneToMany(mappedBy = "payment", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "payment", fetch = FetchType.EAGER)
 	private List<PayDetail> payDetail;
 
 	@ManyToOne

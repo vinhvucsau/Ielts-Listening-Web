@@ -65,21 +65,21 @@
 										<i class="ti ti-shopping-cart fs-4 me-2"></i> Giỏ hàng
 									</button>
 								</form>
-								
 
 								<span class="text-white ms-3"> <i class="fe fe-user"></i>
-									${course.userCourse.size() } người đăng ký
+									${countUser } người đăng ký
 								</span>
-								
+
 								<c:set var="people" value="0"></c:set>
 								<c:set var="totalStars" value="0"></c:set>
 								
 								<c:forEach var="lesson" items='${course.lessons }'>
-									<c:forEach var="enrrol_les" items='${lesson.enrrolLesson }'>
-										<c:if test="${enrrol_les.numberOfStar > 0}">
-											<c:set var="totalStars" value="${totalStars + enrrol_les.numberOfStar }"></c:set>
+									<c:forEach var="enrrol_lesson" items='${lesson.enrrolLesson }'>
+										<c:if test="${enrrol_lesson.numberOfStar > 0}">
+											<c:set var="totalStars"
+												value="${totalStars + enrrol_lesson.numberOfStar }"></c:set>
 											<c:set var="people" value="${people + 1 }"></c:set>
-										</c:if>	
+										</c:if>
 									</c:forEach>
 								</c:forEach>
 								<c:choose>
@@ -90,29 +90,28 @@
 										<c:set var="star" value="0"></c:set>
 									</c:otherwise>
 								</c:choose>
-								<fmt:formatNumber type="number" maxFractionDigits="0" value="${star}" var="starInteger"/>
+								<fmt:formatNumber type="number" maxFractionDigits="0"
+									value="${star}" var="starInteger" />
 								<c:if test="${people > 0 }">
 									<div>
-										<span class="fs-6 ms-4 align-text-top"> 
-											<c:forEach var="i" begin="1" end="${starInteger }">
-												<svg
-													xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-													fill="currentColor" class="bi bi-star-fill text-warning"
-													viewBox="0 0 16 16">
+										<span class="fs-6 ms-4 align-text-top"> <c:forEach
+												var="i" begin="1" end="${starInteger }">
+												<svg xmlns="http://www.w3.org/2000/svg" width="12"
+													height="12" fill="currentColor"
+													class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
 		                                            <path
 														d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
 		                                            </path>
-	                                        	</svg> 
-											</c:forEach>
-											<c:forEach var="i" begin="1" end="${5 - starInteger }">
-												<svg 
-													xmlns="http://www.w3.org/2000/svg" width="12" height="12" 
-													fill="currentColor" class="bi bi-star-fill text-light" 
-													viewBox="0 0 16 16">
-	                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+	                                        	</svg>
+											</c:forEach> <c:forEach var="i" begin="1" end="${5 - starInteger }">
+												<svg xmlns="http://www.w3.org/2000/svg" width="12"
+													height="12" fill="currentColor"
+													class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+	                                                <path
+														d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
 	                                                            </path>
 	                                            </svg>
-											</c:forEach>	
+											</c:forEach>
 										</span> <span class="text-white">(${people})</span>
 									</div>
 								</c:if>
@@ -262,7 +261,7 @@
 										<div class="mb-4">
 											<h3 class="mb-2">Mô tả khóa học</h3>
 											<p>${course.description}</p>
-<!-- 											<p>Next, you’ll explore the basics of the language,
+											<!-- 											<p>Next, you’ll explore the basics of the language,
 												giving plenty of examples. Lastly, you’ll put your
 												JavaScript knowledge to work and modify a modern, responsive
 												web page. When you’re finished with this course, you’ll have
@@ -366,224 +365,243 @@
 										<div class="mb-3">
 											<h3 class="mb-4">Đánh giá của học viên</h3>
 											<c:if test="${people > 0 }">
-											<div class="row align-items-center">
-												<div class="col-auto text-center">
-													<fmt:formatNumber type="number" maxFractionDigits="1" value="${star}" var="starRounded"/>
-													<fmt:formatNumber type="number" maxFractionDigits="0" value="${star}" var="starInteger"/>
-													<h3 class="display-2 fw-bold">${starRounded}${(starRounded - starInteger) == 0 ? '.0' : '' }</h3>
-													
-													<span class="fs-6"> 
-														<c:forEach var="i" begin="1" end="${starInteger }">
-															<svg
-																xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-																fill="currentColor" class="bi bi-star-fill text-warning"
-																viewBox="0 0 16 16">
+												<div class="row align-items-center">
+													<div class="col-auto text-center">
+														<fmt:formatNumber type="number" maxFractionDigits="1"
+															value="${star}" var="starRounded" />
+														<h3 class="display-2 fw-bold">${starRounded}</h3>
+														<fmt:formatNumber type="number" maxFractionDigits="0"
+															value="${star}" var="starInteger" />
+														<span class="fs-6"> <c:forEach var="i" begin="1"
+																end="${starInteger }">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
 					                                            <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
 					                                            </path>
-				                                        	</svg> 
-														</c:forEach>
-														<c:forEach var="i" begin="1" end="${5 - starInteger }">
-															<svg 
-																xmlns="http://www.w3.org/2000/svg" width="12" height="12" 
-																fill="currentColor" class="bi bi-star-fill text-light" 
-																viewBox="0 0 16 16">
-				                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+				                                        	</svg>
+															</c:forEach> <c:forEach var="i" begin="1" end="${5 - starInteger }">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+				                                                <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
 				                                                            </path>
 				                                            </svg>
+															</c:forEach>
+														</span>
+														<p class="mb-0 fs-6">(Dựa trên ${people } đánh giá)</p>
+													</div>
+
+
+													<!-- Progress Bar -->
+													<div class="col order-3 order-md-2"
+														style="padding-top: 19px;">
+														<c:forEach var="i" begin="0" end="4" step="1">
+															<div class="progress mb-3" style="height: 6px">
+																<div class="progress-bar bg-warning" role="progressbar"
+																	style="width: ${percentCountOfStars[4 - i]}%"
+																	aria-valuenow="90" aria-valuemin="0"
+																	aria-valuemax="100"></div>
+															</div>
 														</c:forEach>
-													</span>
-													<p class="mb-0 fs-6">(Dựa trên ${people } đánh giá)</p>
-												</div>
-											
-												
-												<!-- Progress Bar -->
-												<div class="col order-3 order-md-2" style="padding-top: 19px;">
-													<c:forEach var="i" begin="0" end="4" step="1">
-														<div class="progress mb-3" style="height: 6px">
-															<div class="progress-bar bg-warning" role="progressbar"
-																style="width: ${percentCountOfStars[4 - i]}%" aria-valuenow="90" aria-valuemin="0"
-																aria-valuemax="100"></div>
+													</div>
+													<div class="col-md-auto col-6 order-2 order-md-3">
+														<!-- Rating -->
+														<div>
+															<span class="fs-6"> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
+                                                                <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                            </svg> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
+                                                                <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                            </svg> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
+                                                                <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                            </svg> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
+                                                                <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                            </svg> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
+                                                                <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                            </svg>
+															</span> <span class="ms-1">${percentCountOfStars[4] }%</span>
 														</div>
-													</c:forEach>
-												</div>
-												<div class="col-md-auto col-6 order-2 order-md-3">
-													<!-- Rating -->
-													<div>
-														<span class="fs-6"> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+														<div>
+															<span class="fs-6"> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">${percentCountOfStars[4] }%</span>
-													</div>
-													<div>
-														<span class="fs-6"> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+															</span> <span class="ms-1">${percentCountOfStars[3]}%</span>
+														</div>
+														<div>
+															<span class="fs-6"> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">${percentCountOfStars[3]}%</span>
-													</div>
-													<div>
-														<span class="fs-6"> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+															</span> <span class="ms-1">${percentCountOfStars[2]}%</span>
+														</div>
+														<div>
+															<span class="fs-6"> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">${percentCountOfStars[2]}%</span>
-													</div>
-													<div>
-														<span class="fs-6"> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+															</span> <span class="ms-1">${percentCountOfStars[1]}%</span>
+														</div>
+														<div>
+															<span class="fs-6"> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+																	xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
                                                                 <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">${percentCountOfStars[1]}%</span>
-													</div>
-													<div>
-														<span class="fs-6"> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-light" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg>
-														</span> <span class="ms-1">${percentCountOfStars[0]}%</span>
+															</span> <span class="ms-1">${percentCountOfStars[0]}%</span>
+														</div>
 													</div>
 												</div>
-											</div>
 											</c:if>
 											<c:if test="${people == 0 }">
-												<img class="mx-auto d-block my-3" src='<c:url value="/assets/images/bee-find.svg"/>' width="150px"/>
+												<img class="mx-auto d-block my-3"
+													src='<c:url value="/assets/images/bee-find.svg"/>'
+													width="150px" />
 												<h3 class="text-center">Chưa có đánh giá</h3>
 											</c:if>
 										</div>
@@ -781,8 +799,8 @@
 									class="trailer d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
 									style="background-image: url('${image}'); height: 210px">
 									<a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-										href="http://localhost:8080/Ielts-listening2/video?fname=courseTrailer/${course.trailer }"> <i
-										class="fe fe-play"></i>
+										href="http://localhost:8080/Ielts-listening2/Video?file=${course.trailer }">
+										<i class="fe fe-play"></i>
 									</a>
 								</div>
 							</div>
@@ -830,8 +848,8 @@
 										class="fe fe-award me-2 align-middle text-success"></i> Giấy
 										chứng nhận</li>
 									<li class="list-group-item bg-transparent"><i
-										class="fe fe-calendar align-middle me-2 text-info"></i> ${listLesson.size()} bài
-										học</li>
+										class="fe fe-calendar align-middle me-2 text-info"></i>
+										${course.lessons.size()} bài học</li>
 									<li class="list-group-item bg-transparent"><i
 										class="fe fe-video align-middle me-2 text-secondary"></i> Học
 										trực tuyến</li>
@@ -1058,7 +1076,7 @@
 			</div>
 		</div>
 	</footer>
-	
+
 
 	<!-- Scroll top -->
 	<div class="btn-scroll-top">
@@ -1069,35 +1087,13 @@
     </svg>
 	</div>
 	<script>
-	let number = ${course.cost};
-	let formattedNumber = number.toLocaleString('en-US');
-	const cost = document.querySelector(".price-container span");
-	cost.textContent = formattedNumber;
-	const image = '${course.image}';
-	fetch("http://localhost:8080/Ielts-listening2/video?fname=courseIMG/" + image)
-	  .then((response) => {
-		  console.log(response.status);
-		  if (response.status === 404) {
-		  const trailer = document.querySelector(".trailer");
-	   	  trailer.style = "background-image: url('https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain');height: 210px;";
-		  }
-		  });
-	 document.querySelectorAll('.stars').forEach(starContainer => {
-	        const rating = parseInt(starContainer.getAttribute('data-rating'));
-	        starContainer.innerHTML = getStarRating(rating);
-	    });
-	
-	    function getStarRating(rating) {
-	        let stars = '';
-	        for (let i = 0; i < 5; i++) {
-	            if (i < rating) {
-	                stars += '⭐'; 
-	            } else {
-	                stars += '★'; 
-	            }
-	        }
-	        return stars;
-	    }
+		let number = $
+		{
+			course.cost
+		};
+		let formattedNumber = number.toLocaleString('en-US');
+		const cost = document.querySelector(".price-container span");
+		cost.textContent = formattedNumber;
 	</script>
 	<!-- Scripts -->
 	<!-- Libs JS -->

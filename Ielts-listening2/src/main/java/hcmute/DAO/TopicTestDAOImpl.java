@@ -81,34 +81,45 @@ public class TopicTestDAOImpl extends AbstractDao<TopicTest> implements ITopicTe
 			}
 		}
 	}
- 	public List<TopicTest> getAllTopicTest(int page, int pagesize) {
+
+	public List<TopicTest> getAllTopicTest(int page, int pagesize) {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "Select t From TopicTest t";
-		TypedQuery<TopicTest> q = en.createQuery(jpql, TopicTest.class);
-		System.out.println(q.getResultList());
-		q.setFirstResult(page * pagesize);
-		q.setMaxResults(pagesize);
-		return q.getResultList();
+		TypedQuery<TopicTest> query = null;
 
+		try {
+			String jpql = "SELECT t FROM TopicTest t";
+			query = en.createQuery(jpql, TopicTest.class);
+			query.setFirstResult(page * pagesize);
+			query.setMaxResults(pagesize);
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (en != null && en.isOpen()) {
+				en.close();
+			}
+		}
 	}
- 	public List<TopicTest> getAllTopic() {
- 		EntityManager en = JPAConfig.getEntityManager();
- 		String jpql = "SELECT topic FROM TopicTest topic left JOIN topic.mockTests enrollTest";
- 		TypedQuery<TopicTest> q = en.createQuery(jpql, TopicTest.class);
 
- 		try {
- 		    List<TopicTest> topicTests = q.getResultList();
- 		    return topicTests;
- 		} catch (NoResultException e) {
- 		    // Xử lý khi không có kết quả trả về
- 		    return null;
- 		} catch (Exception e) {
- 		    // Xử lý ngoại lệ khác
- 		    e.printStackTrace();
- 		    return null;
- 		} finally {
- 		    en.close();
- 		}
+	public List<TopicTest> getAllTopic() {
+		EntityManager en = JPAConfig.getEntityManager();
+		String jpql = "SELECT topic FROM TopicTest topic left JOIN topic.mockTests enrollTest";
+		TypedQuery<TopicTest> q = en.createQuery(jpql, TopicTest.class);
+
+		try {
+			List<TopicTest> topicTests = q.getResultList();
+			return topicTests;
+		} catch (NoResultException e) {
+			// Xử lý khi không có kết quả trả về
+			return null;
+		} catch (Exception e) {
+			// Xử lý ngoại lệ khác
+			e.printStackTrace();
+			return null;
+		} finally {
+			en.close();
+		}
 
 	}
 

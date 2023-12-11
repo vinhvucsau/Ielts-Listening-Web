@@ -76,8 +76,7 @@ public class UserOrderController extends HttpServlet {
 			}
 
 		} else {
-			PrintWriter out = resp.getWriter();
-			out.println("Chưa login");
+			resp.sendRedirect(req.getContextPath() + "/authentication-login");
 		}
 	}
 

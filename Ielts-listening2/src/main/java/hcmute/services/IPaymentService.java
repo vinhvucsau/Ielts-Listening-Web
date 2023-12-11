@@ -14,9 +14,8 @@ public interface IPaymentService {
 
 	Payment findByDatebuyAndUserId(String dateBuy, String userId);
 
-	List<Payment> findcoursesByIDPayment(String id);
+	Payment findById(Object id);
 
 	List<Payment> findcoursesByIDuser(String userId);
-
 
 }

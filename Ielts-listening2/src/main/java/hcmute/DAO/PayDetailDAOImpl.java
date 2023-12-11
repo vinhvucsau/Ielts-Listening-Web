@@ -10,7 +10,7 @@ import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
 
 public class PayDetailDAOImpl extends AbstractDao<PayDetail> implements IPayDetailDAO {
-	
+
 	public PayDetailDAOImpl() {
 		super(PayDetail.class);
 		// TODO Auto-generated constructor stub
@@ -19,12 +19,22 @@ public class PayDetailDAOImpl extends AbstractDao<PayDetail> implements IPayDeta
 	@Override
 	public List<PayDetail> findPayDetailByIDPayment(String idpay) {
 		EntityManager entityManager = JPAConfig.getEntityManager();
-		String jpql = "SELECT p FROM PayDetail p WHERE p.payment.paymentId = :idpay";
-		TypedQuery<PayDetail> query = entityManager.createQuery(jpql, PayDetail.class);
-		query.setParameter("idpay", idpay); 
-		return query.getResultList();
+		TypedQuery<PayDetail> query = null;
+
+		try {
+			String jpql = "SELECT p FROM PayDetail p WHERE p.payment.paymentId = :idpay";
+			query = entityManager.createQuery(jpql, PayDetail.class);
+			query.setParameter("idpay", idpay);
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
-	
 
 //	public static void main(String[] args) {
 //		IPayDetailDAO proDAO = new PayDetailDAOImpl();

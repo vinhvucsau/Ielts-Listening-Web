@@ -37,18 +37,16 @@
 						<div>
 							<div class="border-bottom mb-3 pb-3">
 								<!-- text -->
-								<c:forEach var="idpayment" items="${list}">
+								<div class="d-flex align-items-center">
+									<h4 class="mb-0">Order tracking number</h4>
+									<a href="#" class="ms-2 fw-semibold">${order.paymentId}</a>
 
-									<div class="d-flex align-items-center">
-										<h4 class="mb-0">Order tracking number</h4>
-										<a href="#" class="ms-2 fw-semibold" style="color: white;">${idpayment.paymentId}</a>
+								</div>
+								<div class="mb-0 d-flex align-items-center ">
+									<a href="#" class=" fw-semibold">Date time:
+										${order.dateBuy} </a>
+								</div>
 
-									</div>
-									<div class="mb-0 d-flex align-items-center ">
-										<a href="#" class=" fw-semibold" style="color: white;">Date
-											time: ${idpayment.dateBuy} </a>
-									</div>
-								</c:forEach>
 							</div>
 							<c:set var="totalCount" value="0" />
 							<!-- Tăng giá trị của biến bên ngoài mỗi lần lặp -->

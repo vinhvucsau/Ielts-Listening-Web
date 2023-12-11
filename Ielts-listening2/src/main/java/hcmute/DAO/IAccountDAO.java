@@ -8,9 +8,6 @@ public interface IAccountDAO {
 
 	User Login(Account account);
 
-	Account findById(String id);
-
-	void update(Account account);
 
 	User getUserByUsername(String email);
 

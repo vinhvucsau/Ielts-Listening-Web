@@ -53,6 +53,7 @@ public class UserCourseController extends HttpServlet {
 		int pagesize = 8;
 		String searchStr = req.getParameter("search") == null ? "" : req.getParameter("search");
 		if (url.contains("course-detail")) {
+
 			String courseId = req.getParameter("courseId");
 			Course course = courseService.findById(courseId);
 			HttpSession session = req.getSession();
@@ -63,6 +64,9 @@ public class UserCourseController extends HttpServlet {
 			else
 				userId = "0";
 			List<UserCourse> listUserCourse = userCourseService.findByUserIdAndCourseId(userId, courseId);
+
+			req.setAttribute("countUser", userCourseService.countUserCourse(courseId));
+
 			List<Lesson> listLesson = lessonService.findLessonByCourse(courseId);
 			List<Course> courses = adminKhoaHocService.FindAllCourse();
 			req.setAttribute("courses", courses);
@@ -139,6 +143,7 @@ public class UserCourseController extends HttpServlet {
 			List<Course> CourseList = adminKhoaHocService.findAll(page - 1, pagesize, searchStr, tab);
 			req.setAttribute("countCourse", count);
 			int pageNum = (int) (allCourseList.size() / pagesize) + (allCourseList.size() % pagesize == 0 ? 0 : 1);
+
 			req.setAttribute("course", CourseList);
 			req.setAttribute("pagesize", pagesize);
 			req.setAttribute("pageNum", pageNum);

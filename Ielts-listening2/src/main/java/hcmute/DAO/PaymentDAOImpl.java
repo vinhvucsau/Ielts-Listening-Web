@@ -25,8 +25,6 @@ public class PaymentDAOImpl extends AbstractDao<Payment> implements IPaymentDAO 
 		EntityManager entityManager = JPAConfig.getEntityManager();
 		try {
 			String jpql = "SELECT p FROM Payment p WHERE p.dateBuy = :dateBuy AND p.users.userId = :userId";
-
-			System.out.println("thiu" + dateBuy + userId);
 			TypedQuery<Payment> query = entityManager.createQuery(jpql, Payment.class);
 			query.setParameter("dateBuy", dateBuy);
 			query.setParameter("userId", userId);
@@ -43,28 +41,24 @@ public class PaymentDAOImpl extends AbstractDao<Payment> implements IPaymentDAO 
 			}
 		}
 	}
-	@Override
-	public List<Payment> findcoursesByIDPayment(String id) {
-		EntityManager entityManager = JPAConfig.getEntityManager();
-		String jpql = "SELECT p FROM Payment p WHERE p.paymentId = :id";
-		TypedQuery<Payment> query = entityManager.createQuery(jpql, Payment.class);
-		query.setParameter("id", id); // Thiết lập giá trị của tham số
-		return query.getResultList();
-	}
+
 	public List<Payment> findcoursesByIDuser(String id) {
-	    EntityManager entityManager = JPAConfig.getEntityManager();
-	    String jpql = "SELECT p FROM Payment p WHERE p.users.userId = :id";
-	    TypedQuery<Payment> query = entityManager.createQuery(jpql, Payment.class);
-	    query.setParameter("id", id); // Thiết lập giá trị của tham số
-	    return query.getResultList();
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		TypedQuery<Payment> query = null;
+
+		try {
+			String jpql = "SELECT p FROM Payment p WHERE p.users.userId = :id";
+			query = entityManager.createQuery(jpql, Payment.class);
+			query.setParameter("id", id); // Set the value of the parameter
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
-
-//	public static void main(String[] args) {
-//		IPaymentDAO proDAO = new PaymentDAOImpl();
-//		List<Payment> list = proDAO.findcoursesByIDuser("UserId1211");
-//		System.out.print(list);
-//	}
-
-	
 
 }

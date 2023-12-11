@@ -11,8 +11,8 @@ import hcmute.entity.User;
 
 public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO {
 
-	public AccountDAOImpl(Class<Account> cls) {
-		super(cls);
+	public AccountDAOImpl() {
+		super(Account.class);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -66,30 +66,6 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 		}
 
 		return null; // Return null if login fails
-	}
-
-	@Override
-	public Account findById(String id) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		Account account = enma.find(Account.class, id);
-		return account;
-	}
-
-	@Override
-	public void update(Account account) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		EntityTransaction trans = enma.getTransaction();
-		try {
-			trans.begin();
-			enma.merge(account);
-			trans.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			trans.rollback();
-		} finally {
-			enma.close();
-		}
-
 	}
 
 	public User getUserByUsername(String username) {
@@ -170,7 +146,7 @@ public class AccountDAOImpl extends AbstractDao<Account> implements IAccountDAO 
 			TypedQuery<Account> query = em.createQuery("SELECT ac FROM Account ac WHERE ac.userName = :username",
 					Account.class);
 			query.setParameter("username", userName);
-			return(Account) query.getSingleResult();
+			return (Account) query.getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

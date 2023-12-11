@@ -19,4 +19,10 @@ public class UserCourseServiceImpl implements IUserCourseService {
 		// TODO Auto-generated method stub
 		abs.insert(userCourse);
 	}
+
+	@Override
+	public int countUserCourse(String courseId) {
+		// TODO Auto-generated method stub
+		return userCourseDAO.countUserCourse(courseId);
+	}
 }

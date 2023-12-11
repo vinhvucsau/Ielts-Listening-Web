@@ -10,8 +10,6 @@ import hcmute.entity.Payment;
 public interface IPaymentDAO {
 	Payment findByDatebuyAndUserId(String dateBuy, String userId);
 
-	List<Payment> findcoursesByIDPayment(String id);
-
 	List<Payment> findcoursesByIDuser(String string);
 
 
