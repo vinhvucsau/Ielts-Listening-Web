@@ -614,7 +614,13 @@
 											<c:forEach var="c" items='${commentLessonsList}'>
 												<div
 													class="rating-item d-flex align-items-start border-bottom pb-4 mb-4">
-													<img src="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${c.users.image }" alt=""
+													<c:if test="${c.users.image == null }">
+														<c:set var="image" value="https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"></c:set>
+													</c:if>
+													<c:if test="${c.users.image != null}">
+														<c:set var="image" value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${c.users.image }"></c:set>
+													</c:if>
+													<img src="${image }" alt=""
 														class="rounded-circle avatar-md">
 													<div class="ms-3">
 														<h4
