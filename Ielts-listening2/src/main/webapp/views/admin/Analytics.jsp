@@ -29,7 +29,7 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 						<div class="mb-3 mb-lg-0">
 							<h1 class="mb-0 h2 fw-bold">Thống kê</h1>
 						</div>
-						<div class="d-flex">
+						<!-- <div class="d-flex">
 							<div class="input-group me-3">
 								<input class="form-control flatpickr" type="text"
 									placeholder="Select Date" aria-describedby="basic-addon2">
@@ -38,7 +38,7 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 									class="fe fe-calendar"></i></span>
 							</div>
 							<a href="#" class="btn btn-primary">Setting</a>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -124,11 +124,11 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 							</div>
 							<div>
 								<div class="dropdown dropstart">
-									<a class="btn-icon btn btn-ghost btn-sm rounded-circle"
+									<!-- <a class="btn-icon btn btn-ghost btn-sm rounded-circle"
 										href="#" role="button" id="courseDropdown1"
 										data-bs-toggle="dropdown" aria-expanded="false"> <i
 										class="fe fe-more-vertical"></i>
-									</a>
+									</a> -->
 									<div class="dropdown-menu" aria-labelledby="courseDropdown1">
 										<span class="dropdown-header">Settings</span> <a
 											class="dropdown-item" href="#"> <i
@@ -161,11 +161,11 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 							</div>
 							<div>
 								<div class="dropdown dropstart">
-									<a class="btn-icon btn btn-ghost btn-sm rounded-circle"
+									<!-- <a class="btn-icon btn btn-ghost btn-sm rounded-circle"
 										href="#" role="button" id="courseDropdown2"
 										data-bs-toggle="dropdown" aria-expanded="false"> <i
 										class="fe fe-more-vertical"></i>
-									</a>
+									</a> -->
 									<div class="dropdown-menu" aria-labelledby="courseDropdown2">
 										<span class="dropdown-header">Settings</span> <a
 											class="dropdown-item" href="#"> <i
