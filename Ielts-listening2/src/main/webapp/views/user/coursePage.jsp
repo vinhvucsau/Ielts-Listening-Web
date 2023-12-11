@@ -64,13 +64,31 @@ User user = (User) session.getAttribute("user");
 				<div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
 					<div
 						class="row d-md-flex justify-content-between align-items-center">
-						<div class="col-md-6 col-lg-8 col-xl-7">
-							<h4 class="mb-3 mb-md-0"><%=count%>
+						<div class="col-md-6 col-lg-8 col-xl-7 d-flex">
+							<h4 class="mb-3 mb-md-0 mt-2"><%=count%>
 								Khóa Học
 							</h4>
-						</div>
+							<div class="input-group ms-5" style="width: 400px;">
+									<span class="input-group-text"
+										id="basic-addon1"
+										style="background-color: white; color: rgb(107, 114, 128);">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+											fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+							  					<path
+												d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+											</svg>
+									</span> <input type="text"
+										class="btn__search form-control py-2 fs-5 border"
+										placeholder="Tìm kiếm" aria-label="Search"
+										aria-describedby="basic-addon1"
+										value='${param.search == null ? "" : param.search }'>
+								</div>	
+							</div>
+						
 						<div class="d-inline-flex col-md-6 col-lg-4 col-xl-5">
+						
 							<div class="me-2">
+							
 								<!-- Nav -->
 								<div class="nav btn-group flex-nowrap" role="tablist">
 									<button id="gridButton" class="btn btn-outline-secondary"
@@ -177,7 +195,7 @@ User user = (User) session.getAttribute("user");
 											<!-- Card Body -->
 											<div class="card-body">
 												<h4 class="mb-2 text-truncate-line-2">
-													<a href="course-detail?id=${i.courseId }"
+													<a href="course-detail?courseId=${i.courseId }"
 														class="text-inherit">${i.courseName}</a>
 												</h4>
 												<!-- List inline -->
@@ -302,7 +320,7 @@ User user = (User) session.getAttribute("user");
 											<!-- Card body -->
 											<div class="card-body">
 												<h3 class="mb-2 text-truncate-line-2">
-													<a href="#" class="text-inherit">${i.courseName}</a>
+													<a href="course-detail?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
 												</h3>
 												<!-- list inline -->
 												<ul class="list-inline">
@@ -350,10 +368,14 @@ User user = (User) session.getAttribute("user");
 															</div></li>
 												</ul>
 												<div class="d-flex align-items-center gap-3">
-													<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}
+													<p class="card-text color-blue--primary fw-bold fs-5">
+														<fmt:formatNumber value="${i.cost}" pattern="###,### VNĐ" />
 													<p class="card-text fw-bold fs-5"
-														style="color: rgb(113, 113, 113)">VND</p>
+														style="color: rgb(113, 113, 113)"></p>
 													</p>
+
+
+
 												</div>
 												<div class="row align-items-center g-0">
 													<div class="col-auto"></div>
