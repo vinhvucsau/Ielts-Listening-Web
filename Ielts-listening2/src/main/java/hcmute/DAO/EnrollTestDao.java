@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.Hibernate;
+
 import JPAConfig.JPAConfig;
 import hcmute.entity.EnrrolTest;
 
@@ -65,6 +67,21 @@ public class EnrollTestDao extends AbstractDao<EnrrolTest>{
 	        enma.close(); // Đảm bảo đóng EntityManager trong mệnh đề finally
 	    }
 	}
+	
+	public EnrrolTest findByIdContainAnsTestAndAnswerUser(String enrollTestId) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		try {
+			EnrrolTest enrollTest = enma.find(EnrrolTest.class, enrollTestId);
+			if(enrollTest != null) {
+				enrollTest.getAnswerUsers().size();
+				enrollTest.getMockTests().getListeningParts().size();
+			}
+			return enrollTest;
+		} finally {
+			enma.close();
+		}
+	}
+	
 
 	public EnrrolTest findByUserIdAndMockTestIdSoon(String userId, String mockTestId) {
 	    EntityManager enma = JPAConfig.getEntityManager();

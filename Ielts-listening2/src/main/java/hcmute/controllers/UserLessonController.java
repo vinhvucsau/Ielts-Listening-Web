@@ -99,8 +99,8 @@ public class UserLessonController extends HttpServlet {
 			//thêm danh sách câu hỏi
 			req.setAttribute("enrollLesson", enrollLesson);
 			List<AnswerLesson> listAnswerLesson = ansService.findByLessonId(lessID);
+			listAnswerLesson.sort((a,b) -> a.getNumber() - b.getNumber());
 			req.setAttribute("listAnswerLesson", listAnswerLesson);
-			
 			req.setAttribute("listAnswer", listAnswer);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Lesson-content.jsp");
 			rd.forward(req, resp);
@@ -193,7 +193,13 @@ public class UserLessonController extends HttpServlet {
 			try {
 				HttpUtil httpUtil = HttpUtil.of(req.getReader());
 				AnswerLessonUser answerLessonUser= httpUtil.toModel(AnswerLessonUser.class);
-				answerLessonUserService.saveOrUpdate(answerLessonUser);
+				EnrrolLesson enrollLesson = enrService.findOneById(answerLessonUser.getEnrrolLesson().getEnrrolId());
+				AnswerLesson ansLesson = ansService.findOneById(answerLessonUser.getAnswerLesson().getAnswerId());
+				if(enrollLesson != null && ansLesson != null) {
+					answerLessonUser.setEnrrolLesson(enrollLesson);
+					answerLessonUser.setAnswerLesson(ansLesson);
+					answerLessonUserService.saveOrUpdate(answerLessonUser);
+				}
 				ObjectMapper mapper = new ObjectMapper();
 				mapper.writeValue(resp.getOutputStream(), answerLessonUser);
 			} catch (Exception e) {

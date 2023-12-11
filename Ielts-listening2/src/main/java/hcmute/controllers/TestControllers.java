@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,6 +24,7 @@ import hcmute.entity.AnswerTest;
 import hcmute.entity.AnswerUser;
 import hcmute.entity.EnrrolTest;
 import hcmute.entity.ListeningPart;
+import hcmute.entity.User;
 import hcmute.services.AnswerTestServiceImpl;
 import hcmute.services.AnswerUserService;
 import hcmute.services.EnrollTestService;
@@ -64,15 +66,29 @@ public class TestControllers extends HttpServlet{
 	
 	protected void getLuyenDeTest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String enrollTestId = req.getParameter("enrollTestId");
-		//Chức năng còn thiếu: Xác thực tài khoản đăng nhập vào enrollTest có phải là của người dùng test không
-		
 		if (enrollTestId == null) {
 			resp.setContentType("text/html");
 			String errorMsg = "<p>Không có bài kiểm tra</p>";
 			resp.getWriter().print(errorMsg);
 			return;
 		}
-		EnrrolTest enrollTest = enrollTestService.findById(enrollTestId);
+		//Kiểm tra có phải là user sở hữu enrollTest truy cập không
+		EnrrolTest enrollTest = enrollTestService.findByIdContainAnsTestAndAnswerUser(enrollTestId);
+		if (enrollTest == null) {
+			resp.setContentType("text/html");
+			String errorMsg = "<p>Không tìm thấy bài kiểm tra</p>";
+			resp.getWriter().print(errorMsg);
+			return;
+		}
+		HttpSession session = req.getSession();	
+		User user = (User) session.getAttribute("user");
+		if (user == null || !(user.getUserId().equals(enrollTest.getUsers().getUserId()))) {
+			resp.setContentType("text/html");
+			String errorMsg = "<p>Không có quyền truy cập vào bài kiểm tra này</p>";
+			resp.getWriter().print(errorMsg);
+			return;
+		}
+		
 		enrollTest.getMockTests().getListeningParts().sort((a,b) -> a.getNumber() - b.getNumber());
 		enrollTest.getMockTests().getListeningParts().forEach(part -> {
 			part.getAnswerTests().sort((a,b) -> a.getNumber() - b.getNumber());
@@ -176,13 +192,18 @@ public class TestControllers extends HttpServlet{
 	protected void postApiLayDanhSachCauHoi(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpUtil httpUtil = HttpUtil.of(req.getReader());
 		EnrrolTest enrrolTest = httpUtil.toModel(EnrrolTest.class);
-		EnrrolTest enrrolTest2 = enrollTestService.findById(enrrolTest.getEnrrolId());
+		EnrrolTest enrrolTest2 = enrollTestService.findByIdContainAnsTestAndAnswerUser(enrrolTest.getEnrrolId());
 		String json = "[";
 		try {
 			if(enrrolTest2 != null) {
+				enrrolTest2.getMockTests().getListeningParts().sort((a,b) -> a.getNumber() - b.getNumber());
+				enrrolTest2.getMockTests().getListeningParts().forEach(part -> {
+					part.getAnswerTests().sort((a,b) -> a.getNumber() - b.getNumber());
+				});
+				int number = 0;
 				for(ListeningPart part: enrrolTest2.getMockTests().getListeningParts()) {
 					for(AnswerTest answerTest: part.getAnswerTests()) {
-						json += "{ \"CauHoiSo\" : %d,".formatted(answerTest.getNumber());
+						json += "{ \"CauHoiSo\" : %d,".formatted(number + answerTest.getNumber());
 						boolean isAnwser = false;
 						if(enrrolTest2.getAnswerUsers() != null) {
 							for(AnswerUser answerUser: enrrolTest2.getAnswerUsers()) {
@@ -194,6 +215,7 @@ public class TestControllers extends HttpServlet{
 						}
 						json += "\"DaTraLoi\" :%b}".formatted(isAnwser);
 					}
+					number += part.getAnswerTests().size();
 				}
 				json = json.replace("}{", "},{");
 			}

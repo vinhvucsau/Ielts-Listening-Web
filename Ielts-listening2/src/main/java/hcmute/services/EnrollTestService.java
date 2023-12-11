@@ -63,7 +63,7 @@ public class EnrollTestService{
 	}
 	
 	public long calcNumberOfCorrectAnswers(String enrollTestId) {
-		EnrrolTest enrollTest = enrollTestDao.findById(enrollTestId);
+		EnrrolTest enrollTest = enrollTestDao.findByIdContainAnsTestAndAnswerUser(enrollTestId);
 		long number = 0;
 		if(enrollTest != null) {
 			number = enrollTest.getAnswerUsers().stream()
@@ -74,7 +74,7 @@ public class EnrollTestService{
 	}
 	
 	public long calcNumberOfQuestTion(String enrollTestId) {
-		EnrrolTest enrollTest = enrollTestDao.findById(enrollTestId);
+		EnrrolTest enrollTest = enrollTestDao.findByIdContainAnsTestAndAnswerUser(enrollTestId);
 		long number = 0;
 		if(enrollTest != null) {
 			number = enrollTest.getMockTests().getListeningParts().stream()
@@ -120,5 +120,9 @@ public class EnrollTestService{
 				}
 			}
 		});
+	}
+	
+	public EnrrolTest findByIdContainAnsTestAndAnswerUser(String enrollTestId) {
+		return enrollTestDao.findByIdContainAnsTestAndAnswerUser(enrollTestId);
 	}
 }

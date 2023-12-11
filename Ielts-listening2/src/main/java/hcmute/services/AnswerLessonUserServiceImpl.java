@@ -4,6 +4,7 @@ import java.util.List;
 
 import hcmute.DAO.AnswerLessonUserDaoImpl;
 import hcmute.entity.AnswerLessonUser;
+import hcmute.entity.EnrrolLesson;
 import hcmute.utils.compositeId.CompositeAnswerLessonUser;
 
 public class AnswerLessonUserServiceImpl implements IAnswerLessonUserService{
@@ -40,7 +41,16 @@ public class AnswerLessonUserServiceImpl implements IAnswerLessonUserService{
 
 	@Override
 	public void saveOrUpdate(AnswerLessonUser answerLessonUser) {
-		answerLessonUserDao.saveOrUpdate(answerLessonUser);
+		CompositeAnswerLessonUser id = new CompositeAnswerLessonUser();
+		id.setAnswerLesson(answerLessonUser.getAnswerLesson().getAnswerId());
+		id.setEnrrolLesson(answerLessonUser.getEnrrolLesson().getEnrrolId());
+		AnswerLessonUser newAnsUser = answerLessonUserDao.findById(id);
+		if(newAnsUser != null) {
+			newAnsUser.setAnswerUser(answerLessonUser.getAnswerUser());
+			answerLessonUserDao.update(newAnsUser);
+		} else {
+			answerLessonUserDao.insert(answerLessonUser);
+		}	
 	}
 
 }

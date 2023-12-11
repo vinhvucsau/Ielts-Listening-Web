@@ -56,4 +56,18 @@ public class EnrolLessonImpl extends AbstractDao<EnrrolLesson> implements IEnrol
 
 	}
 
+	@Override
+	public EnrrolLesson findOneByIdContainAnsTestAndAnsUser(String enrolLessonId) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		try {
+			EnrrolLesson enrollLesson = enma.find(EnrrolLesson.class, enrolLessonId);
+			if (enrollLesson != null) {
+				enrollLesson.getAnswerLessonUser().size();
+				enrollLesson.getLessons().getAnswerLesson().size();
+			}
+			return enrollLesson;
+		} finally {
+			enma.close();
+		}
+	}
 }

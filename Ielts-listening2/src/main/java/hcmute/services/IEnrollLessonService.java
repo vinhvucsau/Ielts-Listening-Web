@@ -14,6 +14,7 @@ public interface IEnrollLessonService {
 	EnrrolLesson findByUserIdAndLessonId(String UserId, String LessonId);
 	void completeTest(String enrollLessonId);
 	void resetTest(String enrollLessonId);
+	EnrrolLesson findOneByIdContainAnsTestAndAnsUser(String enrollLessonId);
 }
 
 	

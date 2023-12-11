@@ -14,36 +14,4 @@ public class AnswerLessonUserDaoImpl extends AbstractDao<AnswerLessonUser> imple
 	public AnswerLessonUserDaoImpl() {
 		super(AnswerLessonUser.class);
 	}
-
-	@Override
-	public void saveOrUpdate(AnswerLessonUser answerLessonUser) {
-		
-		EntityManager enma = JPAConfig.getEntityManager();
-		EntityTransaction trans = enma.getTransaction();
-		try {
-			trans.begin();
-			EnrrolLesson enrrolLesson = enma.find(EnrrolLesson.class, answerLessonUser.getEnrrolLesson().getEnrrolId());
-			AnswerLesson answerLesson = enma.find(AnswerLesson.class, answerLessonUser.getAnswerLesson().getAnswerId());
-			answerLessonUser.setAnswerLesson(answerLesson);
-			answerLessonUser.setEnrrolLesson(enrrolLesson);
-			CompositeAnswerLessonUser id = new CompositeAnswerLessonUser();
-			id.setAnswerLesson(answerLesson.getAnswerId());
-			id.setEnrrolLesson(enrrolLesson.getEnrrolId());
-			if(enma.find(AnswerLessonUser.class, id) == null) {
-				enma.persist(answerLessonUser);
-			} else {
-				enma.merge(answerLessonUser);
-			}
-			//id.
-			trans.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			trans.rollback();
-			throw e;
-		} finally {
-			enma.close();
-		}
-		
-	}
-	
 }
