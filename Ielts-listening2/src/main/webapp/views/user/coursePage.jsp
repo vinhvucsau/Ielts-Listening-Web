@@ -74,15 +74,15 @@ User user = (User) session.getAttribute("user");
 								<!-- Nav -->
 								<div class="nav btn-group flex-nowrap" role="tablist">
 									<button id="gridButton" class="btn btn-outline-secondary"
-												data-bs-toggle="tab" data-bs-target="#tabPaneGrid"
-												role="tab" aria-controls="tabPaneGrid" aria-selected="true">
-												<span class="fe fe-grid"></span>
-											</button>
-											<button id="listButton" class="btn btn-outline-secondary"
-												data-bs-toggle="tab" data-bs-target="#tabPaneList"
-												role="tab" aria-controls="tabPaneList" aria-selected="false">
-												<span class="fe fe-list"></span>
-											</button>
+										data-bs-toggle="tab" data-bs-target="#tabPaneGrid" role="tab"
+										aria-controls="tabPaneGrid" aria-selected="true">
+										<span class="fe fe-grid"></span>
+									</button>
+									<button id="listButton" class="btn btn-outline-secondary"
+										data-bs-toggle="tab" data-bs-target="#tabPaneList" role="tab"
+										aria-controls="tabPaneList" aria-selected="false">
+										<span class="fe fe-list"></span>
+									</button>
 								</div>
 							</div>
 							<div class="d-flex  adminkhoahoc-filter--rate ">
@@ -158,21 +158,21 @@ User user = (User) session.getAttribute("user");
 							role="tabpanel" aria-labelledby="tabPaneGrid">
 							<div class="row">
 								<c:forEach var="i" items="${course}">
-										<div class="col-lg-3 col-md-6 col-12 "
-												data-bs-toggle="popover" data-bs-trigger="hover focus"
-												title="${i.courseName}" data-bs-content="${i.description}">
-												<div class="card mb-4 card-hover">
-													<c:if test="${i.image != null}">
-														<a href="listLesson?courseId=${i.courseId}"><img
-															style="height: 200px; object-fit: cover;"
-															src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
-															alt="course" class="card-img-top img-fluid"></a>
-													</c:if>
-													<c:if test="${i.image == null}">
-														<a href="listLesson?courseId=${i.courseId}"><img
-															style="height: 200px; object-fit: cover;"
-															src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
-															alt="course" class="card-img-top img-fluid"></a>
+									<div class="col-lg-3 col-md-6 col-12 " data-bs-toggle="popover"
+										data-bs-trigger="hover focus" title="${i.courseName}"
+										data-bs-content="${i.description}">
+										<div class="card mb-4 card-hover">
+											<c:if test="${i.image != null}">
+												<a href="course-detail?courseId=${i.courseId}"><img
+													style="height: 200px; object-fit: cover;"
+													src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
+													alt="course" class="card-img-top img-fluid"></a>
+											</c:if>
+											<c:if test="${i.image == null}">
+												<a href="course-detail?courseId=${i.courseId}"><img
+													style="height: 200px; object-fit: cover;"
+													src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
+													alt="course" class="card-img-top img-fluid"></a>
 											</c:if>
 											<!-- Card Body -->
 											<div class="card-body">
@@ -197,39 +197,39 @@ User user = (User) session.getAttribute("user");
 															<div class="d-flex gap-5">
 																<c:set var="totalStars" value="0" />
 																<c:set var="count" value="0" />
-																		<c:forEach var="lesson" items="${i.lessons}">
-																			<c:forEach var="enrrol_lesson"
-																				items="${lesson.enrrolLesson}">
-																				<c:set var="totalStars"
-																					value="${totalStars + enrrol_lesson.numberOfStar}" />
+																<c:forEach var="lesson" items="${i.lessons}">
+																	<c:forEach var="enrrol_lesson"
+																		items="${lesson.enrrolLesson}">
+																		<c:set var="totalStars"
+																			value="${totalStars + enrrol_lesson.numberOfStar}" />
 
-																				<c:choose>
-																					<c:when test="${enrrol_lesson.numberOfStar != 0}">
-																						<c:set var="count" value="${count + 1}" />
-																					</c:when>
-																					
-																				</c:choose>
-
-																				
-																			</c:forEach>
-																		</c:forEach>
 																		<c:choose>
-																			<c:when test="${count == 0}">
-																				<c:set var="averageStars" value="0" />
-																				<c:set var="roundedAverage">
-																					<c:out
-																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																				</c:set>
+																			<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																				<c:set var="count" value="${count + 1}" />
 																			</c:when>
-																			<c:when test="${count > 0}">
-																				<c:set var="averageStars"
-																					value="${totalStars / count}" />
-																				<c:set var="roundedAverage">
-																					<c:out
-																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																				</c:set>
-																			</c:when>
+
 																		</c:choose>
+
+
+																	</c:forEach>
+																</c:forEach>
+																<c:choose>
+																	<c:when test="${count == 0}">
+																		<c:set var="averageStars" value="0" />
+																		<c:set var="roundedAverage">
+																			<c:out
+																				value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																		</c:set>
+																	</c:when>
+																	<c:when test="${count > 0}">
+																		<c:set var="averageStars"
+																			value="${totalStars / count}" />
+																		<c:set var="roundedAverage">
+																			<c:out
+																				value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																		</c:set>
+																	</c:when>
+																</c:choose>
 																<div class="stars rating-star"
 																	data-rating="${roundedAverage}"></div>
 																<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
@@ -240,11 +240,8 @@ User user = (User) session.getAttribute("user");
 											<!-- Card footer -->
 											<div class="card-footer">
 												<div class="row align-items-center g-0">
-													<div class="col-auto">
-														
-													</div>
-													<div class="col ms-2">
-													</div>
+													<div class="col-auto"></div>
+													<div class="col ms-2"></div>
 													<div class="col-auto">
 														<c:choose>
 															<c:when test="${user ne null}">
@@ -286,21 +283,21 @@ User user = (User) session.getAttribute("user");
 								<div class="card mb-4 card-hover">
 									<div class="row g-0">
 										<c:if test="${i.image != null}">
-													<a
-														class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
-														href="listLesson?courseId=${i.courseId}"><img
-														style="height: 200px; object-fit: cover;"
-														src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
-														alt="course" class="img-fluid w-100"></a>
-												</c:if>
-												<c:if test="${i.image == null}">
-													<a
-														class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
-														href="listLesson?courseId=${i.courseId}"><img
-														style="height: 200px; object-fit: cover;"
-														src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
-														alt="course" class="img-fluid w-100"></a>
-												</c:if>
+											<a
+												class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
+												href="course-detail?courseId=${i.courseId}"><img
+												style="height: 200px; object-fit: cover;"
+												src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
+												alt="course" class="img-fluid w-100"></a>
+										</c:if>
+										<c:if test="${i.image == null}">
+											<a
+												class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
+												href="course-detail?courseId=${i.courseId}"><img
+												style="height: 200px; object-fit: cover;"
+												src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
+												alt="course" class="img-fluid w-100"></a>
+										</c:if>
 										<div class="col-lg-9 col-md-12 col-12">
 											<!-- Card body -->
 											<div class="card-body">
@@ -313,40 +310,40 @@ User user = (User) session.getAttribute("user");
 														class="fs-6">
 															<div class="d-flex gap-5">
 																<c:set var="totalStars" value="0" />
-																		<c:set var="count" value="0" />
-																		<c:forEach var="lesson" items="${i.lessons}">
-																			<c:forEach var="enrrol_lesson"
-																				items="${lesson.enrrolLesson}">
-																				<c:set var="totalStars"
-																					value="${totalStars + enrrol_lesson.numberOfStar}" />
+																<c:set var="count" value="0" />
+																<c:forEach var="lesson" items="${i.lessons}">
+																	<c:forEach var="enrrol_lesson"
+																		items="${lesson.enrrolLesson}">
+																		<c:set var="totalStars"
+																			value="${totalStars + enrrol_lesson.numberOfStar}" />
 
-																				<c:choose>
-																					<c:when test="${enrrol_lesson.numberOfStar != 0}">
-																						<c:set var="count" value="${count + 1}" />
-																					</c:when>
-																					
-																				</c:choose>
-
-																				
-																			</c:forEach>
-																		</c:forEach>
 																		<c:choose>
-																			<c:when test="${count == 0}">
-																				<c:set var="averageStars" value="0" />
-																				<c:set var="roundedAverage">
-																					<c:out
-																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																				</c:set>
+																			<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																				<c:set var="count" value="${count + 1}" />
 																			</c:when>
-																			<c:when test="${count > 0}">
-																				<c:set var="averageStars"
-																					value="${totalStars / count}" />
-																				<c:set var="roundedAverage">
-																					<c:out
-																						value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																				</c:set>
-																			</c:when>
+
 																		</c:choose>
+
+
+																	</c:forEach>
+																</c:forEach>
+																<c:choose>
+																	<c:when test="${count == 0}">
+																		<c:set var="averageStars" value="0" />
+																		<c:set var="roundedAverage">
+																			<c:out
+																				value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																		</c:set>
+																	</c:when>
+																	<c:when test="${count > 0}">
+																		<c:set var="averageStars"
+																			value="${totalStars / count}" />
+																		<c:set var="roundedAverage">
+																			<c:out
+																				value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																		</c:set>
+																	</c:when>
+																</c:choose>
 																<div class="stars rating-star"
 																	data-rating="${roundedAverage}"></div>
 																<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
@@ -359,11 +356,8 @@ User user = (User) session.getAttribute("user");
 													</p>
 												</div>
 												<div class="row align-items-center g-0">
-													<div class="col-auto">
-														
-													</div>
-													<div class="col ms-2">
-													</div>
+													<div class="col-auto"></div>
+													<div class="col ms-2"></div>
 													<div class="col-auto">
 														<c:choose>
 															<c:when test="${user ne null}">
@@ -396,36 +390,36 @@ User user = (User) session.getAttribute("user");
 							</c:forEach>
 						</div>
 						<c:if test="${course.size() > 0}">
-									<div class="position-relative w-100 border-top">
-										<div class="d-flex flex-row justify-content-center mx-auto"
-											style="width: 500px">
-											<button
-												class="btn__page--previous d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold  border-0 rounded-3 align-items-center"
-												style="width: 220px; padding: 0 30px 0 30px;"
-												${ param.page == null || param.page == "1" ? "disabled":""}>
-												<svg xmlns="http://www.w3.org/2000/svg" height="24"
-													style="margin-top: 3px;" fill="currentColor"
-													class="bi bi-arrow-left" viewBox="0 0 16 16">
+							<div class="position-relative w-100 border-top">
+								<div class="d-flex flex-row justify-content-center mx-auto"
+									style="width: 500px">
+									<button
+										class="btn__page--previous d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold  border-0 rounded-3 align-items-center"
+										style="width: 220px; padding: 0 30px 0 30px;"
+										${ param.page == null || param.page == "1" ? "disabled":""}>
+										<svg xmlns="http://www.w3.org/2000/svg" height="24"
+											style="margin-top: 3px;" fill="currentColor"
+											class="bi bi-arrow-left" viewBox="0 0 16 16">
 		  						<path fill-rule="evenodd"
-														d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+												d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
 							</svg>
-												Trang Trước
-											</button>
-											<button
-												class="btn__page--next d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold border-0 rounded-3 align-items-center"
-												style="width: 220px; padding: 0 30px 0 30px;"
-												${ param.page == pageNum || (param.page == null && pageNum == "1") ? "disabled":""}>
-												Trang Sau
-												<svg xmlns="http://www.w3.org/2000/svg" height="24"
-													style="margin-top: 3px;" fill="currentColor"
-													class="bi bi-arrow-right" viewBox="0 0 16 16">
+										Trang Trước
+									</button>
+									<button
+										class="btn__page--next d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold border-0 rounded-3 align-items-center"
+										style="width: 220px; padding: 0 30px 0 30px;"
+										${ param.page == pageNum || (param.page == null && pageNum == "1") ? "disabled":""}>
+										Trang Sau
+										<svg xmlns="http://www.w3.org/2000/svg" height="24"
+											style="margin-top: 3px;" fill="currentColor"
+											class="bi bi-arrow-right" viewBox="0 0 16 16">
 		  						<path fill-rule="evenodd"
-														d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+												d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
 							</svg>
-											</button>
-										</div>
-									</div>
-								</c:if>
+									</button>
+								</div>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -676,6 +670,6 @@ User user = (User) session.getAttribute("user");
 		    }
 		});
 		</script>
-	
+
 </body>
 </html>
