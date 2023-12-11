@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import hcmute.entity.Course;
-import hcmute.entity.TopicTest;
 import hcmute.services.AdminKhoaHocServiceImpl;
 import hcmute.services.CourseServiceImpl;
 import hcmute.services.IAdminKhoaHocService;
@@ -26,66 +24,74 @@ import hcmute.utils.Constants;
 import hcmute.utils.UploadUtils;
 
 @MultipartConfig
-@WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/deletecourse","/admin/insertCourse", "/admin/lesson","/admin/updateCourse" })
+@WebServlet(urlPatterns = { "/admin/khoahoc", "/admin/deletecourse", "/admin/insertCourse", "/admin/lesson" })
 public class AdminKhoaHocController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	ICourseService courseService = new CourseServiceImpl();
 	IAdminKhoaHocService adminKhoaHocService = new AdminKhoaHocServiceImpl();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String url = req.getRequestURI().toString();
 		String gia = req.getParameter("gia") == null ? "" : req.getParameter("gia");
 		String rate = req.getParameter("rate") == null ? "" : req.getParameter("rate");
-		String searchStr = req.getParameter("search") == null ? "" : req.getParameter("search");
-		int page = Integer.parseInt(req.getParameter("page") == null ? "1" : req.getParameter("page"));
-		int tab=1;
-		int pagesize = 8;
+
 		if (url.contains("/deletecourse")) {
 			Delete(req, resp);
 			resp.sendRedirect(req.getContextPath() + "/admin/khoahoc");
-		}
-		else { if (gia.equals("thapdencao")) {
-			tab = 4;
+		} else if (gia.equals("thapdencao")) {
+			FindAllIncreaseCost(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
 		} else if (gia.equals("caodenthap")) {
-			tab = 5;
+			FindAllDecreaseCost(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
 		} else if (rate.equals("thapdencao")) {
-			tab = 2;
+			FindAllIncreaseRate(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
+
 		} else if (rate.equals("caodenthap")) {
-			tab = 3;
-			
+			FindAllDecreaseRate(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
 		} else if (url.contains("lesson")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/khoahoc/AdminLesson.jsp");
 			rd.forward(req, resp);
 		}
-		Long count = adminKhoaHocService.countKhoaHoc();
-		List<Course> allCourseList = adminKhoaHocService.findAll(searchStr, tab);
-		for (Course course : allCourseList) {
-			System.out.print("course" + course.getCourseId());
+
+		else {
+			FindAll(req, resp);
+			Long count = adminKhoaHocService.countKhoaHoc();
+			req.setAttribute("countCourse", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
+			rd.forward(req, resp);
 		}
-		List<Course> CourseList = adminKhoaHocService.findAll(page - 1, pagesize, searchStr, tab);
-		req.setAttribute("countCourse", count);
-		int pageNum = (int) (allCourseList.size() / pagesize) + (allCourseList.size() % pagesize == 0 ? 0 : 1);
-		req.setAttribute("course", CourseList);
-		req.setAttribute("pagesize", pagesize);
-		req.setAttribute("pageNum", pageNum);
-		RequestDispatcher rd = req.getRequestDispatcher("/views/admin/AdminKhoaHoc.jsp");
-		rd.forward(req, resp);
-		}
-		
+
 	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
-		if (url.contains("insertCourse"))
-		{
+		if (url.contains("insertCourse")) {
 			Course model = new Course();
 			try {
-				//BeanUtils.populate(model, req.getParameterMap());
+				// BeanUtils.populate(model, req.getParameterMap());
 				model.setCourseId("");
+				System.out.println(req.getParameter("courseName"));
 				model.setCourseName(req.getParameter("courseName"));
 				model.setDescription(req.getParameter("description"));
 				model.setCost(Integer.parseInt(req.getParameter("cost")));
@@ -97,9 +103,10 @@ public class AdminKhoaHocController extends HttpServlet {
 				if (req.getPart("trailer").getSize() != 0) {
 					// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
-					model.setTrailer(UploadUtils.processUpload("trailer", req, Constants.DIR + "\\courseTrailer\\", fileName));
+					model.setTrailer(UploadUtils.processUpload("trailer", req,
+							Constants.DIR + "\\" + Constants.FOLDER_VIDEO + "\\", fileName));
 				}
-				Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("enrrollmentDate")); 
+				Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("enrrollmentDate"));
 				model.setEnrrolmentDate(date1);
 				courseService.insert(model);
 				req.setAttribute("course", model);
@@ -150,6 +157,8 @@ public class AdminKhoaHocController extends HttpServlet {
 			resp.sendRedirect(req.getContextPath()+"/admin/khoahoc");	
 	
 			}
+
+		}
 
 	}
 

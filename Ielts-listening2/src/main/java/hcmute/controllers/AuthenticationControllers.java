@@ -232,30 +232,37 @@ public class AuthenticationControllers extends HttpServlet {
 		}
 
 		Account acc = accountService.findByUserName(userName);
-		System.out.print("errrer" +acc);
-		if (acc.getRole() != "admin")
-			account.setRole("user");
-		else 
-			account.setRole("admin");
-		User user = accountService.Login(account);
+		System.out.print("errrer" + acc);
+		if ((acc != null)) {
+			if (acc.getRole() != "admin")
+				account.setRole("user");
+			else
+				account.setRole("admin");
 
-		if (user == null) {
+			User user = accountService.Login(account);
+
+			if (user == null) {
+				req.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
+				rd.forward(req, resp);
+			} else {
+				List<Cart> carts = cartService.findByUserId(user.getUserId());
+				List<Cart> finalCarts = new ArrayList<Cart>();
+				for (Cart cart2 : carts) {
+					if (cart2.isBuy() == false)
+						finalCarts.add(cart2);
+				}
+				HttpSession session = req.getSession(true);
+				session.setAttribute("user", user);
+				session.setAttribute("role", acc.getRole());
+				session.setAttribute("cart", finalCarts);
+				resp.sendRedirect(req.getContextPath() + "/waiting");
+				return;
+			}
+		} else {
 			req.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không đúng");
 			RequestDispatcher rd = req.getRequestDispatcher("/views/authentication/login.jsp");
 			rd.forward(req, resp);
-		} else {
-			List<Cart> carts = cartService.findByUserId(user.getUserId());
-			List<Cart> finalCarts = new ArrayList<Cart>();
-			for (Cart cart2 : carts) {
-				if (cart2.isBuy() == false)
-					finalCarts.add(cart2);
-			}
-			HttpSession session = req.getSession(true);
-			session.setAttribute("user", user);
-			session.setAttribute("role", acc.getRole());
-			session.setAttribute("cart", finalCarts);
-			resp.sendRedirect(req.getContextPath() + "/waiting");
-			return;
 		}
 
 	}
