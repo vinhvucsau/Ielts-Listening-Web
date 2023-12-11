@@ -8,6 +8,7 @@ import java.io.OutputStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import org.apache.commons.io.IOUtils;
 
 import hcmute.utils.Constants;
 
-@WebServlet(urlPatterns = {"/image"})
+@WebServlet(urlPatterns = {"/image", "/audio", "/video"})
 public class DownloadImageController extends HttpServlet {
 
 	/**
@@ -80,6 +81,26 @@ public class DownloadImageController extends HttpServlet {
 	                }
 	            }
 			}
+			else if (url.contains("video")) {
+				resp.setContentType("video/mp4");
+				ServletOutputStream output = resp.getOutputStream();
+				try {
+				FileInputStream fin = new FileInputStream(Constants.DIR + "/" + fileName);
+
+				byte[] buf = new byte[4096];
+				int read;
+				while ((read = fin.read(buf)) != -1) {
+					output.write(buf, 0, read);
+				}
+				fin.close();
+				output.flush();
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		} else {
+			  resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			  resp.getWriter().println("<html><body><p>NOT FOUND</p></body></html>");
 		}
 		
 	}

@@ -8,4 +8,5 @@ public interface ICommentService {
 	List<CommentLesson> findAll();
 	CommentLesson findOneById(String commentId);
 	void insert(CommentLesson cmt);
+	List<CommentLesson> getCommentLessonByLesson(String lessonId);
 }

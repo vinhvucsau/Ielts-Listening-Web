@@ -82,4 +82,10 @@ public class EnrollLessonServiceImpl implements IEnrollLessonService {
 			enDao.update(enrollLesson);
 		}
 	}
+
+	@Override
+	public List<EnrrolLesson> findByLesson(String lessonId) {
+		// TODO Auto-generated method stub
+		return enDao.findByLesson(lessonId);
+	}
 }

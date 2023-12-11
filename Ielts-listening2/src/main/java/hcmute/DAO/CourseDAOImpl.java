@@ -8,5 +8,6 @@ public class CourseDAOImpl extends AbstractDao<Course> implements ICourseDAO {
 		super(Course.class);
 		// TODO Auto-generated constructor stub
 	}
+	
 
 }
