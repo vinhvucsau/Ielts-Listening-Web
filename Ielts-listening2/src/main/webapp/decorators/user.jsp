@@ -102,7 +102,7 @@
 <body>
 	<%@ include file="/common/user/Header.jsp"%>
 	<div class="d-flex flex-column container-fluid"
-		style="max-width: 1440px; margin-top: 60px">
+		style="max-width: 1440px; margin-top: 60px;">
 		<decorator:body>
 
 		</decorator:body>

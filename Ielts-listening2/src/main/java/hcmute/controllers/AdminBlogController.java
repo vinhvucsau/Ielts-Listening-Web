@@ -44,52 +44,56 @@ public class AdminBlogController extends HttpServlet {
 		List<Blog> listBlog = blogService.findAll();
 		List<User> listUser = uService.findAll();
 		
-		
-		HttpSession session = req.getSession(false);
-		if (session != null && session.getAttribute("user") != null) {
-			user = (User) session.getAttribute("user");
-		} else {
-			req.setAttribute("e", "Chưa đăng nhập !");
-			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
-			rd.forward(req, resp);
-		}
-		
 		if (url.contains("blogs")) {
 			req.setAttribute("folder", Constants.FOLDER_AVATAR);
 			req.setAttribute("listBlog", listBlog);
 			req.setAttribute("listUser", listUser);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_blog.jsp");
 			rd.forward(req, resp);
-		} else if (url.contains("update-blog-status")) {
-			Blog b = blogService.findOneById(req.getParameter("id"));
-			b.setStatus(Integer.parseInt(req.getParameter("status"))); //trash
-			try {
-				blogService.update(b);
-				resp.sendRedirect(req.getContextPath() + "/admin/blogs");
-			} catch (Exception e) {
-				req.setAttribute("e", e.getMessage());
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
-				rd.forward(req, resp);
-			}
-		} else if (url.contains("add-blog")) {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/user/addBlog.jsp");
-			rd.forward(req, resp);
-		} else if (url.contains("edit-blog")) {
-			String id = req.getParameter("id");
-			Blog oldBlog = blogService.findOneById(id);
-
-			req.setAttribute("blog", oldBlog);
-			RequestDispatcher rd = req.getRequestDispatcher("/views/user/editBlog.jsp");
-			rd.forward(req, resp);
 		} else if (url.contains("blog-content")) {
 			String id = req.getParameter("id");
 			Blog Blog = blogService.findOneById(id);
+			req.setAttribute("listBlog", blogService.Find3blog(id));
 			req.setAttribute("blog", Blog);
 			req.setAttribute("folder", Constants.FOLDER_BLOG);
 			req.setAttribute("id", req.getParameter("id"));
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/blog_content.jsp");
 			rd.forward(req, resp);
 		}
+		
+		HttpSession session = req.getSession(false);
+		if (session != null && session.getAttribute("user") != null) {
+			user = (User) session.getAttribute("user");
+			
+			if (url.contains("update-blog-status")) {
+				Blog b = blogService.findOneById(req.getParameter("id"));
+				b.setStatus(Integer.parseInt(req.getParameter("status"))); //trash
+				try {
+					blogService.update(b);
+					resp.sendRedirect(req.getContextPath() + "/admin/blogs");
+				} catch (Exception e) {
+					req.setAttribute("e", e.getMessage());
+					RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
+					rd.forward(req, resp);
+				}
+			} else if (url.contains("add-blog")) {
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/addBlog.jsp");
+				rd.forward(req, resp);
+			} else if (url.contains("edit-blog")) {
+				String id = req.getParameter("id");
+				Blog oldBlog = blogService.findOneById(id);
+
+				req.setAttribute("blog", oldBlog);
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/editBlog.jsp");
+				rd.forward(req, resp);
+			} 
+		} else {
+			req.setAttribute("e", "Chưa đăng nhập !");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
+			rd.forward(req, resp);
+		}
+		
+		 
 	}
 	
 	@Override
