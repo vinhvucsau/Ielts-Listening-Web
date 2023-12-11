@@ -364,7 +364,7 @@ Long count = (Long) request.getAttribute("countCourse");
 													<!-- Card Body -->
 													<div class="card-body">
 														<h4 class="mb-2 text-truncate-line-2">
-															<a href="course-single.html" class="text-inherit">${i.courseName}</a>
+															<a href="listLesson?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
 														</h4>
 														<!-- List inline -->
 														<div class="d-flex align-items-center gap-3">
@@ -527,7 +527,7 @@ Long count = (Long) request.getAttribute("countCourse");
 													<!-- Card body -->
 													<div class="card-body">
 														<h3 class="mb-2 text-truncate-line-2">
-															<a href="#" class="text-inherit">${i.courseName}</a>
+															<a href="listLesson?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
 														</h3>
 														<!-- list inline -->
 														<ul class="list-inline">

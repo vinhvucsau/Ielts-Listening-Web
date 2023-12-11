@@ -195,7 +195,7 @@ User user = (User) session.getAttribute("user");
 											<!-- Card Body -->
 											<div class="card-body">
 												<h4 class="mb-2 text-truncate-line-2">
-													<a href="course-detail?id=${i.courseId }"
+													<a href="course-detail?courseId=${i.courseId }"
 														class="text-inherit">${i.courseName}</a>
 												</h4>
 												<!-- List inline -->
@@ -320,7 +320,7 @@ User user = (User) session.getAttribute("user");
 											<!-- Card body -->
 											<div class="card-body">
 												<h3 class="mb-2 text-truncate-line-2">
-													<a href="#" class="text-inherit">${i.courseName}</a>
+													<a href="course-detail?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
 												</h3>
 												<!-- list inline -->
 												<ul class="list-inline">
