@@ -17,17 +17,22 @@ public class EnrolLessonImpl extends AbstractDao<EnrrolLesson> implements IEnrol
 
 	@Override
 	public EnrrolLesson findByUserIdAndLessonId(String userId, String lessonId) {
-		EntityManager enma = JPAConfig.getEntityManager();
-		System.out.println(userId + " " + lessonId);
-		String jpql = "SELECT el FROM EnrrolLesson el WHERE el.users.userId = :userId AND el.lessons.lessonId = :lessonId";
-
-		TypedQuery<EnrrolLesson> query = enma.createQuery(jpql, EnrrolLesson.class);
-		query.setParameter("userId", userId);
-		query.setParameter("lessonId", lessonId);
-		List<EnrrolLesson> list = query.getResultList();
-		if (list.size() == 0)
-			return null;
-		return query.getSingleResult();
+	    EntityManager enma = JPAConfig.getEntityManager();
+	    try {
+	        System.out.println(userId + " " + lessonId);
+	        String jpql = "SELECT el FROM EnrrolLesson el LEFT JOIN FETCH el.answerLessonUser WHERE el.users.userId = :userId AND el.lessons.lessonId = :lessonId";
+	        TypedQuery<EnrrolLesson> query = enma.createQuery(jpql, EnrrolLesson.class);
+	        query.setParameter("userId", userId);
+	        query.setParameter("lessonId", lessonId);
+	        List<EnrrolLesson> list = query.getResultList();
+	        if (list.size() == 0)
+	            return null;
+	        return query.getSingleResult();
+	    } finally {
+	        if (enma != null) {
+	            enma.close();
+	        }
+	    }
 	}
 
 	@Override

@@ -35,4 +35,9 @@ public class AnswerLessonServiceImpl implements IAnswerLessonService{
 		ansDao.insert(ans);
 	}
 
+	@Override
+	public List<AnswerLesson> findByLessonId(String lessonId) {
+		return ansDao.findByLessonId(lessonId);
+	}
+
 }

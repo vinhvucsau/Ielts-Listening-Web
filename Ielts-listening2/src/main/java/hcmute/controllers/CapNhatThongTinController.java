@@ -1,7 +1,7 @@
 package hcmute.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import javax.servlet.http.Cookie;
-import hcmute.DAO.AccountDAOImpl;
-import hcmute.DAO.UserDAOImpl;
+
 import hcmute.entity.Account;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
@@ -40,16 +37,15 @@ public class CapNhatThongTinController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
+		HttpSession session = req.getSession(false);
 
 		// Set cứng ID để test chức năng
-		String id = req.getParameter("userId");
-		User user = findUserById(id);
+
+		User user = (User) session.getAttribute("user");
 		Account account = accountService.findByID(user.getAccount().getUserName());
 
 		req.setAttribute("currentUser", user);
 		req.setAttribute("account", account);
-		HttpSession session = req.getSession(true);
-		session.setAttribute("user", user);
 
 		if (url.contains("capnhattaikhoan")) {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
@@ -129,11 +125,11 @@ public class CapNhatThongTinController extends HttpServlet {
 			String id = req.getParameter("userId");
 
 			// Set cứng ID để test chức năng
-			User user = userService.findUserByID(id);
 
+			User user = userService.findUserByID(id);
 			String name = req.getParameter("inputName").trim();
 			String phoneNumber = req.getParameter("inputPhone").trim();
-			String email = req.getParameter("inputEmail").trim();
+
 			String address = req.getParameter("inputAddress").trim();
 			String dateOfBirth = req.getParameter("datePicker").trim();
 			String networth = req.getParameter("inputNetworth").trim();
@@ -168,11 +164,6 @@ public class CapNhatThongTinController extends HttpServlet {
 					currentNetworth = Integer.parseInt(networth);
 				}
 			}
-
-			if (userService.findDuplicateEmail(email, id) == false) {
-				req.setAttribute("messError", "Email đã được sử dụng!");
-			}
-
 			if (phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+")) {
 				if (userService.findDuplicatePhone(phoneNumber, id) == false) {
 					req.setAttribute("messError", "Số điện thoại đã được sử dụng!");
@@ -180,17 +171,16 @@ public class CapNhatThongTinController extends HttpServlet {
 			} else {
 				req.setAttribute("messError", "Số điện thoại không hợp lệ!");
 			}
-
+			System.out.println("errrr " + req.getAttribute("messError"));
 			if (req.getAttribute("messError") == null) {
 				user.setName(name);
-				user.setEmail(email);
 				user.setPhoneNumber(phoneNumber);
 				user.setAddress(address);
 				user.setDateOfBirth(dateOfBirth);
 				user.setNetworth(currentNetworth);
 				userService.update(user);
 			}
-			HttpSession session = req.getSession();
+			HttpSession session = req.getSession(false);
 			session.setAttribute("user", user);
 			req.setAttribute("currentUser", user);
 			req.setAttribute("message", "Cập nhật thành công!");
@@ -203,8 +193,4 @@ public class CapNhatThongTinController extends HttpServlet {
 		}
 	}
 
-	private User findUserById(String id) {
-		User user = userService.findUserByID(id);
-		return user;
-	}
 }

@@ -215,31 +215,35 @@ Long count = (Long) request.getAttribute("count");
 															<c:forEach var="i" items="${i.courses.lessons}">
 
 																<c:forEach var="j" items="${i.enrrolLesson}">
-																	<c:set var="sumScore" value="${sumScore + 1}" />
 
 
 																	<c:choose>
-																		<c:when test="${j.score > 4.9}">
-																			<c:set var="countTren5" value="${countTren5 + 1}" />
+																		<c:when test="${j.users.userId eq userId}">
+																			<c:set var="sumScore" value="${sumScore + 1}" />
 																		</c:when>
 																	</c:choose>
 
-															
+																	<c:choose>
+																		<c:when
+																			test="${j.users.userId eq userId && j.score > 4.9}">
+																			<c:set var="countTren5" value="${countTren5 + 1}" />
+																		</c:when>
+																	</c:choose>
 																</c:forEach>
 
 															</c:forEach>
 														</h4>
-														
+
 														<c:set var="percen"
 															value="${countTren5 * 100.0 / sumScore}" />
-														
+
 														<div class="progress mb-3" style="height: 8px;">
 															<div class="progress-bar" role="progressbar"
-																style="width: ${percen}%" aria-valuenow="50" aria-valuemin="0"
-																aria-valuemax="100"></div>
+																style="width: ${percen}%" aria-valuenow="50"
+																aria-valuemin="0" aria-valuemax="100"></div>
 														</div>
-														<a href="#!"> Continue Studying <span>
-																<svg xmlns="http://www.w3.org/2000/svg" width="20"
+														<a href="#!"> Continue Studying <span> <svg
+																	xmlns="http://www.w3.org/2000/svg" width="20"
 																	height="20" fill="currentColor"
 																	class="bi bi-arrow-right-short" viewBox="0 0 16 16">
 			                                                <path

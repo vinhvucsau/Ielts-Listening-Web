@@ -6,12 +6,13 @@ import hcmute.DAO.AdminKhoaHocDAOImpl;
 import hcmute.DAO.IAdminKhoaHocDAO;
 import hcmute.entity.Course;
 
-public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService{
+public class AdminKhoaHocServiceImpl implements IAdminKhoaHocService {
 	IAdminKhoaHocDAO khoaHocDAO = new AdminKhoaHocDAOImpl();
+	AdminKhoaHocDAOImpl KhoaHocABS = new AdminKhoaHocDAOImpl();
 
 	@Override
 	public Long countKhoaHoc() {
-		return khoaHocDAO.countKhoaHoc();
+		return KhoaHocABS.countAll();
 	}
 
 	@Override

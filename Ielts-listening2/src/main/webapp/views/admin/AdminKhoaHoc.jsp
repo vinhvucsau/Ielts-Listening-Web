@@ -248,12 +248,12 @@ Long count = (Long) request.getAttribute("countCourse");
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
 							<div
 								class="row d-md-flex justify-content-between align-items-center">
-								<div class="col-md-6 col-lg-8 col-xl-7">
+								<div class="col-md-6 col-lg-8 col-xl-5">
 									<h4 class="mb-3 mb-md-0"><%=count%>
 										Khóa Học
 									</h4>
 								</div>
-								<div class="d-inline-flex col-md-6 col-lg-4 col-xl-5">
+								<div class="d-inline-flex col-md-6 col-lg-4 col-xl-7">
 									<div class="me-2">
 										<!-- Nav -->
 										<div class="nav btn-group flex-nowrap" role="tablist">

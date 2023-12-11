@@ -19,12 +19,21 @@ public class ListeningPartDao extends AbstractDao<ListeningPart> {
 	}
 
 	public List<ListeningPart> findByMockTestId(String mockTestId) {
-		System.out.println(mockTestId);
-		EntityManager enma = JPAConfig.getEntityManager();
-		String jpql = "Select l From ListeningPart l Where l.mockTests.testId = :mockTestId ";
-		TypedQuery<ListeningPart> query = enma.createQuery(jpql, ListeningPart.class);
-		query.setParameter("mockTestId", mockTestId);
-		return query.getResultList();
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT l FROM ListeningPart l WHERE l.mockTests.testId = :mockTestId";
+			TypedQuery<ListeningPart> query = entityManager.createQuery(jpql, ListeningPart.class);
+			query.setParameter("mockTestId", mockTestId);
+			return query.getResultList();
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return null; // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
 	}
 
 	public ListeningPart findByTestIDandNumber(MockTest mockTest, int number) {

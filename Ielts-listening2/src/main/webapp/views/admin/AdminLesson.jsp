@@ -21,13 +21,14 @@
 			<div class="container pb-lg-8">
 				<div class="row align-items-center">
 					<div class="col-xl-7 col-lg-7 col-md-12">
+						<a href="khoahoc" class="link-primary fw-semibold">
+							<div class="d-flex align-items-center pb-4">
+								<i class="fe fe-arrow-left"></i> Trở về
+							</div>
+						</a>
 						<div>
-							<h1 class="text-dark display-4 fw-semibold">Getting Started
-								with JavaScript</h1>
-							<p class="text-dark mb-6 lead">JavaScript is the popular
-								programming language which powers web pages and web
-								applications. This course will get you started coding in
-								JavaScript.</p>
+							<h1 class="text-dark display-4 fw-semibold">${course.courseName }</h1>
+							<p class="text-dark mb-6 lead">${course.description }</p>
 							<div class="d-flex align-items-center">
 								<a href="#" class="bookmark text-dark"> <i
 									class="fe fe-bookmark fs-4 me-2"></i> Bookmark
@@ -104,24 +105,47 @@
 							<div class="card-body text-center">
 								<!-- Card -->
 								<div class="accordion" id="courseAccordion">
-									<!-- Lesson list -->
-									<div class="row" id="lessonList">
-										<button class="accordion d-flex justify-content-between align-items-center btn btn-light mb-2" onclick="showModel()">
-											<span class="accordion-title ms-4">Lesson 01</span>
+									<%-- <!-- Test UI -->
+									<div class="row">
+										<button class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2">
+											<span>01</span>
+											<a href="updateLesson">
+												<input type="hidden" name="lessonId" value="${i.lessonId}">
+												<span class="accordion-title ms-4">Introduction to IELTS Listening 01</span>
+											</a>
 											<a href="#" class="icon-link icon-delete"> 
 												<i class="fe fe-trash color-dark"></i>
 											</a>
 										</button>
-										<button class="accordion d-flex justify-content-between align-items-center btn btn-light mb-2" onclick="showModel()">
-											<span class="accordion-title ms-4">Lesson 02</span>
-											<a href="#" class="icon-link icon-delete"> 
-												<i class="fe fe-trash color-dark"></i>
-											</a>
-										</button>
-									</div>
+									</div> --%>
+									<!-- Updated UI -->
+									<c:forEach var="i" items="${listLesson}">
+										<!-- Lesson list -->
+										<div class="row" id="lessonList">
+											<button value="${i.lessonId }"
+												class="btn accordion d-flex justify-content-between align-items-center btn btn-light mb-2">
+												<%-- <span>${i.lessonId }</span> --%>
+												<%-- <input type="hidden" name="lessonId" value="${i.lessonId}"> --%>
+												<a style="display: block; flex: 1; text-align: left;"
+													href="editLesson?lessonId=${i.lessonId }"> <span
+													class="accordion-title ms-4">${i.lessonName }</span>
+												</a>
+												<%-- <form action="deleteLesson" method="post" enctype="multipart/form-data">
+													<input type="hidden" name="lessonId" value="${i.lessonId}">
+													<button class="icon-link icon-delete"><i class="fe fe-trash color-dark"></i> </button>
+												</form> --%>
+												<a
+													href="<c:url value='/admin/deleteLesson?id=${i.lessonId}'/>"
+													class="icon-link icon-delete"> <i
+													class="fe fe-trash color-dark"></i>
+												</a>
+											</button>
+										</div>
+									</c:forEach>
 								</div>
-								<!-- Add Button -->
-								<button type="submit" class="accordion btn btn-primary mt-2">Thêm bài học</button>
+								<!-- Add Lesson -->
+								<button class="accordion btn btn-primary mt-2"
+									onclick="showModel()">Thêm bài học</button>
 							</div>
 						</div>
 					</div>
@@ -130,25 +154,26 @@
 						<div class="card mb-3 mb-4">
 							<div class="p-1">
 								<div
-									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
-									style="background-image: url(../assets/images/course/course-javascript.jpg); height: 210px">
-									<a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-										href="https://www.youtube.com/watch?v=Nfzi7034Kbg"> <i
-										class="fe fe-play"></i>
-									</a>
+									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"height: 210px">
+									<video style="max-width: 100%; border: none" width="370"
+										height="220" controls class="pt-2">
+										<source src="${course.trailer }" type="video/mp4">
+									</video>
 								</div>
 							</div>
 							<!-- Card body -->
 							<div class="card-body">
 								<!-- Price single page -->
 								<div class="mb-3">
-									<span class="text-dark fw-bold h2">$600</span>
-									<del class="fs-4">$750</del>
-								</div>
-								<div class="d-grid">
-									<a href="#" class="btn btn-primary mb-2">Start Free Month</a> <a
-										href="pricing.html" class="btn btn-outline-primary">Get
-										Full Access</a>
+									<span class="text-dark fw-bold h1">${course.courseName }</span>
+									<span class="text-primary fw-bold h3">
+										<p>
+											<fmt:formatNumber value="${course.cost}"
+												pattern="###,### VNĐ" />
+										</p>
+									</span> <span class="text-dark">
+										<p>${course.description }</p>
+									</span>
 								</div>
 							</div>
 						</div>
@@ -157,9 +182,9 @@
 			</div>
 		</section>
 		<!-- Model -->
-		<div id="model"
+		<div class="model" id="model"
 			style="min-width: 800px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; display: none;">
-			<form action="addPart" method="post" enctype="multipart/form-data">
+			<form action="addLesson" method="post" enctype="multipart/form-data">
 				<div id="test-l-1" class="bs-stepper-pane"
 					aria-labelledby="courseFormtrigger1">
 					<!-- Card -->
@@ -172,20 +197,19 @@
 							<div class="card-body">
 								<div class="mb-3">
 									<label for="courseTitle" class="form-label">Tên bài học</label>
-										<input id="lessonName" name="lessonName"
+									<input id="lessonName" name="lessonName" value=""
 										class="form-control" type="text" placeholder="Tên bài học"
 										required> <small>Write a 60 character course
 										title.</small>
 								</div>
 
 								<div class="mb-3">
-									<label class="form-label">Thêm video bài giảng</label> 
-									<input type="file" class="form-control" 
-											name="trailer" id=""
-											accept="video/mp4" require>
+									<label class="form-label">Thêm video bài giảng</label> <input
+										type="file" class="form-control" value="" name="video" id=""
+										accept="video/mp4" require>
 									<div id="audio"></div>
 								</div>
-								
+
 								<div class="mb-3">
 									<label class="form-label">Answer Sheet</label>
 									<div id="editor">
@@ -207,19 +231,47 @@
 
 						</div>
 						<!-- Button -->
-						<button margin: 10px" class="btn btn-primary"
-							type="submit">Xác nhận</button>
+						<button margin: 10px" class="btn btn-primary" type="submit">Xác
+							nhận</button>
 					</div>
 				</div>
 			</form>
 		</div>
+
 		<div id="shadow"
 			class="position-fixed  top-0 start-0 bottom-0 end-0 bg-dark"
-			style="opacity: 0.5; display: none; z-index: 2" onclick="hideShadow()"></div>
+			style="opacity: 0.5; display: none; z-index: 2"
+			onclick="hideShadow()"></div>
 	</main>
+
 	<script>
-	    let questionCount = 0;
-	
+		var arrLesson = [];
+		var arrAnswer = [];
+		// Duyệt danh sách Java và thêm dữ liệu vào biến JavaScript
+		<c:forEach var="item" items="${listLesson}">
+			var item = {
+				lessonId : "${item.lessonId}",
+				lessonName : "${item.lessonName}",
+				video : "${item.video}",
+				answerSheet: "${item.answerSheet}"
+			};
+			arrLesson.push(item);
+		</c:forEach>
+		
+		<c:forEach var="item" items="${listAnsLesson}">
+			var itemAns = {
+				answerId : "${item.answerId}",
+				answerKey : "${item.answerKey}",
+				number: "${item.number}",
+				lesson : "${item.lessons.lessonId}",
+			};
+			arrAnswer.push(itemAns);
+		</c:forEach>
+	</script>
+
+	<script>
+	    /* let questionCount = ${listAnsLesson[-1].number}; */
+	    let questionCount = 0 
 	    function addQuestion() {
 	        // Increment the question count
 	        questionCount++;
@@ -259,9 +311,9 @@
 				document.querySelector("form").insertAdjacentHTML("afterend", html);
 			}
 		}
-		</script>
-	
-		<script>
+	</script>
+
+	<script>
 		 ClassicEditor
 	     .create(document.querySelector('#editor'))
 	     .then(editor => {
@@ -278,18 +330,55 @@
 	</script>
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+
 	<script>
+		var model = document.getElementById("model");
+		var shadow = document.getElementById("shadow");
+		
+		/*var btn = document.getElementsByClassName("btn-openmodel");
+		for (i = 0; i < btn.length; i++) {
+			btn[i].addEventListener("click", function() {
+				
+		        model.style.display = "block";
+				shadow.style.display = "block";
+				// document.body.style.overflow = 'hidden';
+		        var lessonID = this.getAttribute("value");
+		        console.log(this.getAttribute("value"));
+		        for(var t of arrLesson) {
+	                if(t.lessonId == lessonID) {
+	                	document.querySelector(".model .model__name").setAttribute("value",t.lessonName);
+	                	for (var a of arrAnswer) {
+	                		if (lessonID == a.lesson) {}
+	                		//document.querySelector(".model .model-ans__number").setAttribute("value", a.number);
+	                		document.querySelector(".model .model-ans__key").setAttribute("value", a.answerKey);
+	                	}
+	                	/* document.querySelector(".model .model__video").setAttribute("value", t.video);
+	                	document.querySelector(".model .model__answer-sheet").setAttribute("value", t.answerSheet);
+	                	document.querySelector(".model .model__answer-sheet").setAttribute("value", t.image) ;
+	                	document.querySelector(".model .popup-title__input").setAttribute("value",t.topicName) ;
+	                	document.querySelector(".model .popup-descript__input").setAttribute("value", t.description) ;
+	                	document.querySelector(".model .popup-id_input").setAttribute("value", t.topicId) ;
+	                	document.querySelector(".model .form-popup").setAttribute("action", "updateTopic") ;
+	                }
+	            }
+			}, false);
+	        
+		} */
+		
 		function showModel() {
 			// Show the shadow
-			document.getElementById("shadow").style.display = "block";
-			document.getElementById("model").style.display = "block";
+			model.style.display = "block";
+			shadow.style.display = "block";
+			
+			
 		}
 
 		function hideShadow() {
 			// Hide the shadow
-			document.getElementById("shadow").style.display = "none";
-			document.getElementById("model").style.display = "none";
+			model.style.display = "none";
+			shadow.style.display = "none";
 		}
 	</script>
+
 </body>
 </html>

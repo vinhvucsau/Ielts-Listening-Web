@@ -55,7 +55,7 @@ public class UserCourseController extends HttpServlet {
 			else
 				userId = "0";
 			List<UserCourse> listUserCourse = userCourseService.findByUserIdAndCourseId(userId, courseId);
-			List<Lesson> listLesson = lessonService.findByCourseId(courseId);
+			List<Lesson> listLesson = lessonService.findLessonByCourse(courseId);
 			if (listUserCourse.size() != 0) { // user da dang ki khoa hoc
 				req.setAttribute("isBuy", 1);
 				List<EnrollLessonCombine> listEnCombine = new ArrayList<EnrollLessonCombine>();
@@ -75,7 +75,24 @@ public class UserCourseController extends HttpServlet {
 				req.setAttribute("listLesson", listLesson);
 				req.setAttribute("course", course);
 			}
-
+			int[] percentCountOfStars = new int[] {0,0,0,0,0};
+			int people = 0;
+			for(Lesson lesson: course.getLessons()) {
+				for(EnrrolLesson enrrolLesson: lesson.getEnrrolLesson()) {
+					int star = enrrolLesson.getNumberOfStar() == null ? 0: enrrolLesson.getNumberOfStar();
+					if (star > 0) {
+						percentCountOfStars[star - 1] += 1;
+						people += 1;
+					}
+				}
+			}
+			if (people > 0) {
+				for(int i = 0; i < 5; i++) {
+					System.out.println(((percentCountOfStars[i] * 100) / (float)people));
+					percentCountOfStars[i] = ((((percentCountOfStars[i] * 100) / (float)people) - (int)((percentCountOfStars[i] * 100) / (float)people)) >= 0.5) ? (int)((percentCountOfStars[i] * 100) / (float)people) + 1 : (int)((percentCountOfStars[i] * 100) / (float)people);
+				}
+			}
+			req.setAttribute("percentCountOfStars", percentCountOfStars);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/LessonList.jsp");
 			rd.forward(req, resp);
 
@@ -83,6 +100,7 @@ public class UserCourseController extends HttpServlet {
 			if (gia.equals("thapdencao")) {
 				FindAllIncreaseCost(req, resp);
 				Long count = adminKhoaHocService.countKhoaHoc();
+
 				req.setAttribute("countCourse", count);
 				RequestDispatcher rd = req.getRequestDispatcher("/views/user/coursePage.jsp");
 				rd.forward(req, resp);
@@ -115,7 +133,6 @@ public class UserCourseController extends HttpServlet {
 				rd.forward(req, resp);
 			}
 		}
-
 	}
 
 	private void FindAllDecreaseRate(HttpServletRequest req, HttpServletResponse resp) {
@@ -161,7 +178,6 @@ public class UserCourseController extends HttpServlet {
 			List<Course> list = adminKhoaHocService.FindAllCourseIncreaseCost();
 
 			req.setAttribute("course", list);
-			String courseId = req.getParameter("courseId");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -173,7 +189,6 @@ public class UserCourseController extends HttpServlet {
 		try {
 			List<Course> list = adminKhoaHocService.FindAllCourse();
 
-			System.out.print(list.size());
 			req.setAttribute("course", list);
 
 		} catch (Exception e) {

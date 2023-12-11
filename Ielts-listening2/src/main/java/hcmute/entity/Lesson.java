@@ -51,7 +51,7 @@ public class Lesson implements Serializable {
 	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
 	private List<AnswerLesson> answerLesson;
 	
-	@OneToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "lessons", fetch = FetchType.EAGER)
 	private List<EnrrolLesson> enrrolLesson;
 
 	@ManyToOne

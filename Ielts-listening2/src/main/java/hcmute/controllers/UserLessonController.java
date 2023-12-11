@@ -6,23 +6,30 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import hcmute.entity.AnswerLesson;
+import hcmute.entity.AnswerLessonUser;
+import hcmute.entity.AnswerUser;
 import hcmute.entity.CommentLesson;
 import hcmute.entity.EnrrolLesson;
 import hcmute.entity.Lesson;
 import hcmute.entity.RepComment;
 import hcmute.entity.User;
 import hcmute.services.AnswerLessonServiceImpl;
+import hcmute.services.AnswerLessonUserServiceImpl;
 import hcmute.services.CommentServiceImpl;
 
 import hcmute.services.EnrollLessonServiceImpl;
 import hcmute.services.IAnswerLessonService;
+import hcmute.services.IAnswerLessonUserService;
 import hcmute.services.ICommentService;
 import hcmute.services.IEnrollLessonService;
 import hcmute.services.ILessonService;
@@ -31,8 +38,12 @@ import hcmute.services.IUserService;
 import hcmute.services.LessonServiceImpl;
 import hcmute.services.RepCommentServiceImpl;
 import hcmute.services.UserServiceImpl;
+import hcmute.utils.HttpUtil;
 
-@WebServlet(urlPatterns = { "/user/lesson", "/user/reply", "/user/comment", "/user/rate" })
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
+		* 50)
+@WebServlet(urlPatterns = { "/user/lesson", "/user/reply", "/user/comment", "/user/rate", "/api-AnswerLessonUser",
+		"/user/resetEnrollLesson", "/user/completeEnrollLesson"})
 public class UserLessonController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -42,12 +53,13 @@ public class UserLessonController extends HttpServlet {
 	IRepCommentService repService = new RepCommentServiceImpl();
 	IUserService userService = new UserServiceImpl();
 	IEnrollLessonService enrService = new EnrollLessonServiceImpl();
-	IAnswerLessonService ansService =new AnswerLessonServiceImpl();
-	Date curDate = new Date();//current date
-	Lesson curLesson = new Lesson();//current lesson
-	
-	User user = new User();//session login
-	
+	IAnswerLessonService ansService = new AnswerLessonServiceImpl();
+	IAnswerLessonUserService answerLessonUserService = new AnswerLessonUserServiceImpl();
+	Date curDate = new Date();// current date
+	Lesson curLesson = new Lesson();// current lesson
+
+	User user = new User();// session login
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
@@ -60,12 +72,12 @@ public class UserLessonController extends HttpServlet {
 		List<User> listUser = userService.findAll();
 		List<EnrrolLesson> listEnroll = enrService.findAll();
 		List<AnswerLesson> listAnswer = ansService.findAll();
-		
+
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			user = (User) session.getAttribute("user");
 		} else {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 			rd.forward(req, resp);
 		}
 
@@ -84,12 +96,26 @@ public class UserLessonController extends HttpServlet {
 				req.setAttribute("star", enrollLesson.getNumberOfStar());
 			else
 				req.setAttribute("star", 0);
-
+			//thêm danh sách câu hỏi
+			req.setAttribute("enrollLesson", enrollLesson);
+			List<AnswerLesson> listAnswerLesson = ansService.findByLessonId(lessID);
+			req.setAttribute("listAnswerLesson", listAnswerLesson);
+			
 			req.setAttribute("listAnswer", listAnswer);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Lesson-content.jsp");
 			rd.forward(req, resp);
 		} else if (url.contains("reply")) {
 
+		} else if (url.contains("completeEnrollLesson")) {
+			String enrollLessonId = req.getParameter("enrollLessonId");
+			enrService.completeTest(enrollLessonId);
+			String lessonId = req.getParameter("lessonId");
+			resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + lessonId);
+		} else if (url.contains("resetEnrollLesson")) {
+			String enrollLessonId = req.getParameter("enrollLessonId");
+			enrService.resetTest(enrollLessonId);
+			String lessonId = req.getParameter("lessonId");
+			resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + lessonId);
 		}
 	}
 
@@ -119,8 +145,8 @@ public class UserLessonController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + curLesson.getLessonId());
 			} catch (Exception e) {
 				e.getStackTrace();
-			
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 
@@ -143,7 +169,7 @@ public class UserLessonController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + curLesson.getLessonId());
 			} catch (Exception e) {
 				e.getMessage();
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 
@@ -159,10 +185,20 @@ public class UserLessonController extends HttpServlet {
 			} catch (Exception e) {
 				e.getMessage();
 				req.setAttribute("e", e);
-				RequestDispatcher rd = req.getRequestDispatcher("/views/user/test.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 				rd.forward(req, resp);
 			}
 
+		} else if (url.contains("/api-AnswerLessonUser")) {
+			try {
+				HttpUtil httpUtil = HttpUtil.of(req.getReader());
+				AnswerLessonUser answerLessonUser= httpUtil.toModel(AnswerLessonUser.class);
+				answerLessonUserService.saveOrUpdate(answerLessonUser);
+				ObjectMapper mapper = new ObjectMapper();
+				mapper.writeValue(resp.getOutputStream(), answerLessonUser);
+			} catch (Exception e) {
+				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			}
 		}
 	}
 }

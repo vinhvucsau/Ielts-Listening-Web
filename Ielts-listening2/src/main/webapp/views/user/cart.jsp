@@ -114,7 +114,6 @@ int networth = (int) request.getAttribute("networth");
 									<tr>
 										<th>Product</th>
 										<th>Price</th>
-										<th>Qty</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -134,9 +133,6 @@ int networth = (int) request.getAttribute("networth");
 													</div>
 													<div class="ms-4 mt-2 mt-lg-0">
 														<h4 class="mb-1 text-primary-hover">${i.course.courseName }</h4>
-
-
-
 														<ul class="list-inline">
 															<li class="list-inline-item"><span> <svg
 																		xmlns="http://www.w3.org/2000/svg" width="12"
@@ -159,39 +155,39 @@ int networth = (int) request.getAttribute("networth");
 																		x="11" y="2" width="2" height="12" rx="1"
 																		fill="#DBD8E9"></rect>
                                                             </svg> Beginner</li>
-															<li class=" list-inline-item align-text-top"><span
-																class="fs-6">
-																	<div class="d-flex gap-5">
-																		<c:forEach var="lesson" items="${i.course.lessons}">
-																			<c:forEach var="enrrol_lesson"
-																				items="${lesson.enrrolLesson }">
+															<li class=" list-inline-item align-text-top">
+																<div class="d-flex gap-5">
+																	<c:forEach var="lesson" items="${i.course.lessons}">
+																		<c:forEach var="enrrol_lesson"
+																			items="${lesson.enrrolLesson }">
 
-																				<c:set var="totalStars" value="0" />
-																				<c:set var="count" value="0" />
-																				<c:forEach var="lesson" items="${i.course.lessons}">
-																					<c:forEach var="enrrol_lesson"
-																						items="${lesson.enrrolLesson}">
-																						<c:set var="totalStars"
-																							value="${totalStars +enrrol_lesson.numberOfStar}" />
-																						<c:set var="count" value="${count + 1}" />
-																					</c:forEach>
+																			<c:set var="totalStars" value="0" />
+																			<c:set var="count" value="0" />
+																			<c:forEach var="lesson" items="${i.course.lessons}">
+																				<c:forEach var="enrrol_lesson"
+																					items="${lesson.enrrolLesson}">
+																					<c:set var="totalStars"
+																						value="${totalStars +enrrol_lesson.numberOfStar}" />
+																					<c:set var="count" value="${count + 1}" />
 																				</c:forEach>
-																				<c:choose>
-																					<c:when test="${count > 0}">
-																						<c:set var="averageStars"
-																							value="${totalStars / count}" />
-																						<c:set var="roundedAverage">
-																							<c:out
-																								value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																						</c:set>
-																					</c:when>
-																				</c:choose>
 																			</c:forEach>
+																			<c:choose>
+																				<c:when test="${count > 0}">
+																					<c:set var="averageStars"
+																						value="${totalStars / count}" />
+																					<c:set var="roundedAverage">
+																						<c:out
+																							value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																					</c:set>
+																				</c:when>
+																			</c:choose>
 																		</c:forEach>
-																		<div class="stars rating-star"
-																			data-rating="${roundedAverage}"></div>
-																		<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
-																	</div></li>
+																	</c:forEach>
+																	<div class="stars rating-star"
+																		data-rating="${roundedAverage}"></div>
+																	<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
+																</div>
+															</li>
 														</ul>
 
 
@@ -211,13 +207,6 @@ int networth = (int) request.getAttribute("networth");
 														pattern="###,### VNĐ" />
 												</h4>
 											</td>
-
-
-											<td>
-												<h4 class="mb-0">1</h4>
-											</td>
-
-
 											<td>
 
 												<div class="col-auto">
@@ -251,7 +240,7 @@ int networth = (int) request.getAttribute("networth");
 										<c:set var="totalCost" value="${totalCost + i.course.cost}" />
 									</c:forEach>
 									<tr>
-										<td class="align-middle border-top-0 border-bottom-0"></td>
+
 										<td class="align-middle border-top-0 border-bottom-0">
 											<h4 class="mb-0">Total</h4>
 										</td>

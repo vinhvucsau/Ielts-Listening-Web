@@ -494,19 +494,11 @@
 				child = document.getElementsByClassName(t.parentNode.getAttribute("data-target"));
 				for(var i = 0; i < child.length; i++){
 					child[i].classList.toggle("d-table-row");
-
-					// if (element[i].classList.contains('fe-chevron-down')){
-					// 	element[i].classList.replace('fe-chevron-down', 'fe-chevron-up');
-					// } else if (element[i].classList.contains('fe-chevron-up')){
-					// 	element[i].classList.replace('fe-chevron-up', 'fe-chevron-down');
-					// }
 				}
 			}
 		},
 		false
 		);
-		
-
 	</script>
 
 	<script>

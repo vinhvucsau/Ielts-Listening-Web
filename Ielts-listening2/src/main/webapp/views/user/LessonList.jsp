@@ -1,7 +1,7 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -57,49 +57,68 @@
 							<h1 class="text-white display-4 fw-semibold">${course.courseName }</h1>
 							<p class="text-white mb-6 lead">${course.description }</p>
 							<div class="d-flex align-items-center">
-								<a href="#" class="bookmark text-white"> <i
-									class=" ti ti-shopping-cart fs-4 me-2"></i> Giỏ hàng
-								</a> <span class="text-white ms-3"> <i class="fe fe-user"></i>
-									100 người đăng ký
+
+								<form action="addToCart" method="post">
+									<input type="hidden" name="courseId"
+										value="${course.courseId }">
+									<button class="bookmark text-white" type="submit"
+										style="border: none; background: none;">
+										<i class="ti ti-shopping-cart fs-4 me-2"></i> Giỏ hàng
+									</button>
+								</form>
+								
+
+								<span class="text-white ms-3"> <i class="fe fe-user"></i>
+									${course.userCourse.size() } người đăng ký
 								</span>
-								<div>
-									<span class="fs-6 ms-4 align-text-top"> <svg
-											xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-											fill="currentColor" class="bi bi-star-fill text-warning"
-											viewBox="0 0 16 16">
-                                            <path
-												d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </path>
-                                        </svg> <svg
-											xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-											fill="currentColor" class="bi bi-star-fill text-warning"
-											viewBox="0 0 16 16">
-                                            <path
-												d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </path>
-                                        </svg> <svg
-											xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-											fill="currentColor" class="bi bi-star-fill text-warning"
-											viewBox="0 0 16 16">
-                                            <path
-												d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </path>
-                                        </svg> <svg
-											xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-											fill="currentColor" class="bi bi-star-fill text-warning"
-											viewBox="0 0 16 16">
-                                            <path
-												d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </path>
-                                        </svg> <svg
-											xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-											fill="currentColor" class="bi bi-star-fill text-warning"
-											viewBox="0 0 16 16">
-                                            <path
-												d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                        </svg>
-									</span> <span class="text-white">(100)</span>
-								</div>
+								
+								<c:set var="people" value="0"></c:set>
+								<c:set var="totalStars" value="0"></c:set>
+								<c:forEach var="lesson" items='${course.lessons }'>
+									<c:forEach var="enrrol_lesson" items='${lesson.enrrolLesson }'>
+										<c:if test="${enrrol_lesson.numberOfStar > 0}">
+											<c:set var="totalStars" value="${totalStars + enrrol_lesson.numberOfStar }"></c:set>
+											<c:set var="people" value="${people + 1 }"></c:set>
+										</c:if>	
+									</c:forEach>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${people > 0 }">
+										<c:set var="star" value="${totalStars/people }"></c:set>
+									</c:when>
+									<c:otherwise>
+										<c:set var="star" value="0"></c:set>
+									</c:otherwise>
+								</c:choose>
+								<fmt:formatNumber type="number" maxFractionDigits="0" value="${star}" var="starInteger"/>
+								<c:if test="${people > 0 }">
+									<div>
+										<span class="fs-6 ms-4 align-text-top"> 
+											<c:forEach var="i" begin="1" end="${starInteger }">
+												<svg
+													xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+													fill="currentColor" class="bi bi-star-fill text-warning"
+													viewBox="0 0 16 16">
+		                                            <path
+														d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+		                                            </path>
+	                                        	</svg> 
+											</c:forEach>
+											<c:forEach var="i" begin="1" end="${5 - starInteger }">
+												<svg 
+													xmlns="http://www.w3.org/2000/svg" width="12" height="12" 
+													fill="currentColor" class="bi bi-star-fill text-light" 
+													viewBox="0 0 16 16">
+	                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+	                                                            </path>
+	                                            </svg>
+											</c:forEach>	
+										</span> <span class="text-white">(${people})</span>
+									</div>
+								</c:if>
+								<c:if test="${people == 0 }">
+									<span class="ms-4 text-white">Chưa có đánh giá</span>
+								</c:if>
 								<span class="text-white ms-4 d-none d-md-block"> <svg
 										width="16" height="16"
 										viewBox="0 0 16
@@ -241,22 +260,17 @@
 										aria-labelledby="description-tab">
 										<!-- Description -->
 										<div class="mb-4">
-											<h3 class="mb-2">Course Descriptions</h3>
-											<p>If you’re learning to program for the first time, or
-												if you’re coming from a different language, this course,
-												JavaScript: Getting Started, will give you the basics for
-												coding in JavaScript. First, you'll discover the types of
-												applications that can be built with JavaScript, and the
-												platforms they’ll run on.</p>
-											<p>Next, you’ll explore the basics of the language,
+											<h3 class="mb-2">Mô tả khóa học</h3>
+											<p>${course.description}</p>
+<!-- 											<p>Next, you’ll explore the basics of the language,
 												giving plenty of examples. Lastly, you’ll put your
 												JavaScript knowledge to work and modify a modern, responsive
 												web page. When you’re finished with this course, you’ll have
 												the skills and knowledge in JavaScript to create simple
 												programs, create simple web applications, and modify web
-												pages.</p>
+												pages.</p> -->
 										</div>
-										<h4 class="mb-3">What you’ll learn</h4>
+										<!-- <h4 class="mb-3">What you’ll learn</h4>
 										<div class="row mb-3">
 											<div class="col-12 col-md-6">
 												<ul class="list-unstyled">
@@ -338,83 +352,59 @@
 															impromptu communication.</span></li>
 												</ul>
 											</div>
-										</div>
-										<p>Maecenas viverra condimentum nulla molestie
+										</div> -->
+										<!-- <p>Maecenas viverra condimentum nulla molestie
 											condimentum. Nunc ex libero, feugiat quis lectus vel, ornare
 											euismod ligula. Aenean sit amet arcu nulla.</p>
 										<p>Duis facilisis ex a urna blandit ultricies. Nullam
 											sagittis ligula non eros semper, nec mattis odio ullamcorper.
-											Phasellus feugiat sit amet leo eget consectetur.</p>
+											Phasellus feugiat sit amet leo eget consectetur.</p> -->
 									</div>
 									<div class="tab-pane fade" id="review" role="tabpanel"
 										aria-labelledby="review-tab">
 										<!--  -->
 										<div class="mb-3">
 											<h3 class="mb-4">Đánh giá của học viên</h3>
+											<c:if test="${people > 0 }">
 											<div class="row align-items-center">
 												<div class="col-auto text-center">
-													<h3 class="display-2 fw-bold">4.5</h3>
-													<span class="fs-6"> <svg
-															xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-															fill="currentColor" class="bi bi-star-fill text-warning"
-															viewBox="0 0 16 16">
-                                                            <path
-																d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                        </svg> <svg
-															xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-															fill="currentColor" class="bi bi-star-fill text-warning"
-															viewBox="0 0 16 16">
-                                                            <path
-																d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                        </svg> <svg
-															xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-															fill="currentColor" class="bi bi-star-fill text-warning"
-															viewBox="0 0 16 16">
-                                                            <path
-																d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                        </svg> <svg
-															xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-															fill="currentColor" class="bi bi-star-fill text-warning"
-															viewBox="0 0 16 16">
-                                                            <path
-																d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                        </svg> <svg
-															xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-															fill="currentColor" class="bi bi-star-fill text-warning"
-															viewBox="0 0 16 16">
-                                                            <path
-																d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                        </svg>
+													<fmt:formatNumber type="number" maxFractionDigits="1" value="${star}" var="starRounded"/>
+													<h3 class="display-2 fw-bold">${starRounded}</h3>
+													<fmt:formatNumber type="number" maxFractionDigits="0" value="${star}" var="starInteger"/>
+													<span class="fs-6"> 
+														<c:forEach var="i" begin="1" end="${starInteger }">
+															<svg
+																xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+																fill="currentColor" class="bi bi-star-fill text-warning"
+																viewBox="0 0 16 16">
+					                                            <path
+																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+					                                            </path>
+				                                        	</svg> 
+														</c:forEach>
+														<c:forEach var="i" begin="1" end="${5 - starInteger }">
+															<svg 
+																xmlns="http://www.w3.org/2000/svg" width="12" height="12" 
+																fill="currentColor" class="bi bi-star-fill text-light" 
+																viewBox="0 0 16 16">
+				                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+				                                                            </path>
+				                                            </svg>
+														</c:forEach>
 													</span>
-													<p class="mb-0 fs-6">(Dựa trên 100 đánh giá)</p>
+													<p class="mb-0 fs-6">(Dựa trên ${people } đánh giá)</p>
 												</div>
+											
+												
 												<!-- Progress Bar -->
-												<div class="col order-3 order-md-2">
-													<div class="progress mb-3" style="height: 6px">
-														<div class="progress-bar bg-warning" role="progressbar"
-															style="width: 90%" aria-valuenow="90" aria-valuemin="0"
-															aria-valuemax="100"></div>
-													</div>
-													<div class="progress mb-3" style="height: 6px">
-														<div class="progress-bar bg-warning" role="progressbar"
-															style="width: 80%" aria-valuenow="80" aria-valuemin="0"
-															aria-valuemax="100"></div>
-													</div>
-													<div class="progress mb-3" style="height: 6px">
-														<div class="progress-bar bg-warning" role="progressbar"
-															style="width: 70%" aria-valuenow="70" aria-valuemin="0"
-															aria-valuemax="100"></div>
-													</div>
-													<div class="progress mb-3" style="height: 6px">
-														<div class="progress-bar bg-warning" role="progressbar"
-															style="width: 60%" aria-valuenow="60" aria-valuemin="0"
-															aria-valuemax="100"></div>
-													</div>
-													<div class="progress mb-0" style="height: 6px">
-														<div class="progress-bar bg-warning" role="progressbar"
-															style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-															aria-valuemax="100"></div>
-													</div>
+												<div class="col order-3 order-md-2" style="padding-top: 19px;">
+													<c:forEach var="i" begin="0" end="4" step="1">
+														<div class="progress mb-3" style="height: 6px">
+															<div class="progress-bar bg-warning" role="progressbar"
+																style="width: ${percentCountOfStars[4 - i]}%" aria-valuenow="90" aria-valuemin="0"
+																aria-valuemax="100"></div>
+														</div>
+													</c:forEach>
 												</div>
 												<div class="col-md-auto col-6 order-2 order-md-3">
 													<!-- Rating -->
@@ -450,7 +440,7 @@
                                                                 <path
 																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">53%</span>
+														</span> <span class="ms-1">${percentCountOfStars[4] }%</span>
 													</div>
 													<div>
 														<span class="fs-6"> <svg
@@ -484,7 +474,7 @@
                                                                 <path
 																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">36%</span>
+														</span> <span class="ms-1">${percentCountOfStars[3]}%</span>
 													</div>
 													<div>
 														<span class="fs-6"> <svg
@@ -518,7 +508,7 @@
                                                                 <path
 																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">9%</span>
+														</span> <span class="ms-1">${percentCountOfStars[2]}%</span>
 													</div>
 													<div>
 														<span class="fs-6"> <svg
@@ -552,7 +542,7 @@
                                                                 <path
 																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">3%</span>
+														</span> <span class="ms-1">${percentCountOfStars[1]}%</span>
 													</div>
 													<div>
 														<span class="fs-6"> <svg
@@ -586,10 +576,15 @@
                                                                 <path
 																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                             </svg>
-														</span> <span class="ms-1">2%</span>
+														</span> <span class="ms-1">${percentCountOfStars[0]}%</span>
 													</div>
 												</div>
 											</div>
+											</c:if>
+											<c:if test="${people == 0 }">
+												<img class="mx-auto d-block my-3" src='<c:url value="/assets/images/bee-find.svg"/>' width="150px"/>
+												<h3 class="text-center">Chưa có đánh giá</h3>
+											</c:if>
 										</div>
 										<hr class="my-5">
 										<div class="mb-3">
@@ -676,9 +671,9 @@
 
 										</div>
 									</div>
-									<div class="tab-pane fade" id="transcript" role="tabpanel"
+									<!-- <div class="tab-pane fade" id="transcript" role="tabpanel"
 										aria-labelledby="transcript-tab">
-										<!-- Description -->
+										Description
 										<div>
 											<h3 class="mb-3">Transcript from the "Introduction"
 												Lesson</h3>
@@ -747,10 +742,10 @@
 											</div>
 										</div>
 									</div>
-									<!-- Tab pane -->
+									Tab pane
 									<div class="tab-pane fade" id="faq" role="tabpanel"
 										aria-labelledby="faq-tab">
-										<!-- FAQ -->
+										FAQ
 										<div>
 											<h3 class="mb-3">Course - Frequently Asked Questions</h3>
 											<div class="mb-4">
@@ -795,7 +790,7 @@
 													markdown.</p>
 											</div>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -808,7 +803,7 @@
 									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
 									style="background-image: url(../assets/images/course/course-javascript.jpg); height: 210px">
 									<a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-										href="https://www.youtube.com/watch?v=Nfzi7034Kbg"> <i
+										href="http://localhost:8080/Ielts-listening2/Video?file=${course.trailer }"> <i
 										class="fe fe-play"></i>
 									</a>
 								</div>
@@ -819,7 +814,7 @@
 								<div
 									class="price-container d-flex justify-content-between align-items-start">
 									<div class="mb-3">
-										<span class="fw-bold fs-3 color-blue--primary">750.000</span>
+										<span class="fw-bold fs-3 color-blue--primary"></span>
 										<del class="fs-4">1.000.000</del>
 									</div>
 									<div class="price-vnd">VNĐ</div>
@@ -857,7 +852,7 @@
 										class="fe fe-award me-2 align-middle text-success"></i> Giấy
 										chứng nhận</li>
 									<li class="list-group-item bg-transparent"><i
-										class="fe fe-calendar align-middle me-2 text-info"></i> 4 bài
+										class="fe fe-calendar align-middle me-2 text-info"></i> ${course.lessons.size()} bài
 										học</li>
 									<li class="list-group-item bg-transparent"><i
 										class="fe fe-video align-middle me-2 text-secondary"></i> Học
@@ -932,7 +927,7 @@
 				<div class="pt-8 pb-3">
 					<div class="row d-md-flex align-items-center mb-4">
 						<div class="col-12">
-							<h2 class="mb-0">Khóa học liên quan</h2>
+							<h2 class="mb-0">Khóa học nổi bật</h2>
 						</div>
 					</div>
 					<div class="row">
@@ -1325,7 +1320,7 @@
 			</div>
 		</div>
 	</footer>
-
+	
 
 	<!-- Scroll top -->
 	<div class="btn-scroll-top">
@@ -1335,7 +1330,12 @@
 				d="M8 1H32C35.866 1 39 4.13401 39 8V32C39 35.866 35.866 39 32 39H8C4.13401 39 1 35.866 1 32V8C1 4.13401 4.13401 1 8 1Z" />
     </svg>
 	</div>
-
+	<script>
+	let number = ${course.cost};
+	let formattedNumber = number.toLocaleString('en-US');
+	const cost = document.querySelector(".price-container span");
+	cost.textContent = formattedNumber;
+	</script>
 	<!-- Scripts -->
 	<!-- Libs JS -->
 	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>

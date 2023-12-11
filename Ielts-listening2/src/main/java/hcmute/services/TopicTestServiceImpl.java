@@ -53,6 +53,14 @@ public class TopicTestServiceImpl implements ITopicTestService{
 		// TODO Auto-generated method stub
 		return topicDAO.getAllTopicTest(page, pagesize);
 	}
-
+	@Override
+	public List<TopicTest> getAllTopic() {
+		// TODO Auto-generated method stub
+		return topicDAO.getAllTopic();
+	}
+	public TopicTest findById(String topicId)
+	{
+		return topicDAO.findById(topicId);
+	}
 
 }

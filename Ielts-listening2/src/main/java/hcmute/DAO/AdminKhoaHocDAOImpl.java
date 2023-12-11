@@ -10,11 +10,12 @@ import javax.persistence.TypedQuery;
 import JPAConfig.JPAConfig;
 import hcmute.entity.AnswerTest;
 import hcmute.entity.Course;
+import hcmute.entity.Lesson;
 import hcmute.entity.MockTest;
 import hcmute.entity.TopicTest;
 
 public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKhoaHocDAO {
-	
+
 	public AdminKhoaHocDAOImpl() {
 		super(Course.class);
 	}
@@ -30,10 +31,12 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 
 	@Override
 	public List<Course> FindAllCourse() {
+
 		EntityManager en = JPAConfig.getEntityManager();
 		String jpql = "select c from Course c ";
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
+
 	}
 
 	@Override
@@ -79,7 +82,8 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 	@Override
 	public List<Course> FindAllCourseIncreaseRate() {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END)";
+		String jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e " + "GROUP BY c "
+				+ "ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END)";
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
 	}
@@ -95,7 +99,8 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 	@Override
 	public List<Course> FindAllCourseDecreaseRate() {
 		EntityManager en = JPAConfig.getEntityManager();
-		String jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
+		String jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e " + "GROUP BY c "
+				+ "ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
 		TypedQuery<Course> q = en.createQuery(jpql, Course.class);
 		return q.getResultList();
 	}

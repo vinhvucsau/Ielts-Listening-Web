@@ -14,19 +14,19 @@ public class CartDAOImpl extends AbstractDao<Cart> implements ICartDAO {
 		super(Cart.class);
 		// TODO Auto-generated constructor stub
 	}
-
 	@Override
 	public List<Cart> findByUserId(String userId) {
-		// TODO Auto-generated method stub
-
-		EntityManager enma = JPAConfig.getEntityManager();
-
-		String jpql = "SELECT c FROM Cart c WHERE c.users.userId = :userId";
-
-		TypedQuery<Cart> query = enma.createQuery(jpql, Cart.class);
-		query.setParameter("userId", userId);
-
-		return query.getResultList();
+	    EntityManager enma = JPAConfig.getEntityManager();
+	    try {
+	        String jpql = "SELECT c FROM Cart c WHERE c.users.userId = :userId";
+	        TypedQuery<Cart> query = enma.createQuery(jpql, Cart.class);
+	        query.setParameter("userId", userId);
+	        return query.getResultList();
+	    } finally {
+	        if (enma != null) {
+	            enma.close();
+	        }
+	    }
 	}
 
 }

@@ -1,7 +1,7 @@
 <%@page import="hcmute.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 Long count = (Long) request.getAttribute("countCourse");
 %>
@@ -182,8 +182,8 @@ User user = (User) session.getAttribute("user");
 												</h4>
 												<!-- List inline -->
 												<div class="d-flex align-items-center gap-3">
-													<p class="card-text color-blue--primary fw-bold fs-5"><fmt:formatNumber value="${i.cost}"
-														pattern="###,### VNĐ" />
+													<p class="card-text color-blue--primary fw-bold fs-5">
+														<fmt:formatNumber value="${i.cost}" pattern="###,### VNĐ" />
 													<p class="card-text fw-bold fs-5"
 														style="color: rgb(113, 113, 113)"></p>
 													</p>
