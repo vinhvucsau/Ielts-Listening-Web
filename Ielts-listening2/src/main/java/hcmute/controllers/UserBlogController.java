@@ -94,6 +94,8 @@ public class UserBlogController extends HttpServlet {
 		} else if (url.contains("blog-content")) {
 			String id = req.getParameter("id");
 			Blog Blog = blogService.findOneById(id);
+			List<Blog> listblog = blogService.Find3blog(id);
+			req.setAttribute("listBlog", listblog);
 			req.setAttribute("blog", Blog);
 			req.setAttribute("folder", Constants.FOLDER_BLOG);
 			req.setAttribute("id", req.getParameter("id"));
