@@ -577,11 +577,12 @@ Long count = (Long) request.getAttribute("countCourse");
 																	</div></li>
 														</ul>
 														<div class="d-flex align-items-center gap-3">
-															<p class="card-text color-blue--primary fw-bold fs-5">${i.cost}
-															<p class="card-text fw-bold fs-5"
-																style="color: rgb(113, 113, 113)">VND</p>
-															</p>
-														</div>
+													<p class="card-text color-blue--primary fw-bold fs-5">
+														<fmt:formatNumber value="${i.cost}" pattern="###,### VNĐ" />
+													<p class="card-text fw-bold fs-5"
+														style="color: rgb(113, 113, 113)"></p>
+
+												</div>
 														<div class="row align-items-center g-0">
 															<div class="col-auto">
 																
