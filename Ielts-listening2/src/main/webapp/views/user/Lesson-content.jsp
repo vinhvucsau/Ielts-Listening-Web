@@ -306,8 +306,26 @@
 											</div>
 
 										</div>
-
-
+										<c:set var="people" value="0"></c:set>
+										<c:set var="totalStars" value="0"></c:set>
+										
+										<c:forEach var="enrrol_les" items='${enrollLessonList}'>
+											<c:if test="${enrrol_les.numberOfStar > 0}">
+												<c:set var="totalStars" value="${totalStars + enrrol_les.numberOfStar }"></c:set>
+												<c:set var="people" value="${people + 1 }"></c:set>
+											</c:if>	
+										</c:forEach>
+										
+										<c:choose>
+											<c:when test="${people > 0 }">
+												<c:set var="star" value="${totalStars/people }"></c:set>
+											</c:when>
+											<c:otherwise>
+												<c:set var="star" value="0"></c:set>
+											</c:otherwise>
+										</c:choose>
+										<fmt:formatNumber type="number" maxFractionDigits="1" value="${star}" var="starRounded"/>
+										<fmt:formatNumber type="number" maxFractionDigits="0" value="${star}" var="starInteger"/>
 										<!-- review -->
 										<div class="tab-pane fade" id="review" role="tabpanel"
 											aria-labelledby="review-tab">
@@ -315,68 +333,39 @@
 												<h3 class="mb-4">Đánh giá của học viên</h3>
 												<div class="row align-items-center">
 													<div class="col-auto text-center">
-														<h3 class="display-2 fw-bold">4.5</h3>
-														<span class="fs-6"> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg>
+														<h3 class="display-2 fw-bold">${starRounded }${(starRounded - starInteger) == 0 ? '.0' : '' }</h3>
+														<span class="fs-6"> 
+															<c:forEach var="i" begin="1" end="${starInteger }">
+																<svg
+																	xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+																	fill="currentColor" class="bi bi-star-fill text-warning"
+																	viewBox="0 0 16 16">
+						                                            <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+						                                            </path>
+					                                        	</svg> 
+															</c:forEach>
+															<c:forEach var="i" begin="1" end="${5 - starInteger }">
+																<svg 
+																	xmlns="http://www.w3.org/2000/svg" width="12" height="12" 
+																	fill="currentColor" class="bi bi-star-fill text-light" 
+																	viewBox="0 0 16 16">
+					                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+					                                                            </path>
+					                                            </svg>
+															</c:forEach>
 														</span>
-														<p class="mb-0 fs-6">(Dựa trên 100 đánh giá)</p>
+														<p class="mb-0 fs-6">(Dựa trên ${people} đánh giá)</p>
 													</div>
 													<!-- Progress Bar -->
-													<div class="col order-3 order-md-2">
-														<div class="progress mb-3" style="height: 6px">
-															<div class="progress-bar bg-warning" role="progressbar"
-																style="width: 90%" aria-valuenow="90" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="progress mb-3" style="height: 6px">
-															<div class="progress-bar bg-warning" role="progressbar"
-																style="width: 80%" aria-valuenow="80" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="progress mb-3" style="height: 6px">
-															<div class="progress-bar bg-warning" role="progressbar"
-																style="width: 70%" aria-valuenow="70" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="progress mb-3" style="height: 6px">
-															<div class="progress-bar bg-warning" role="progressbar"
-																style="width: 60%" aria-valuenow="60" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="progress mb-0" style="height: 6px">
-															<div class="progress-bar bg-warning" role="progressbar"
-																style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
+													<div class="col order-3 order-md-2" style="padding-top: 20px;">
+														<c:forEach var="i" begin="0" end="4" step="1">
+															<div class="progress mb-3" style="height: 6px">
+																<div class="progress-bar bg-warning" role="progressbar"
+																	style="width: ${percentCountOfStars[4 - i]}%" aria-valuenow="90" aria-valuemin="0"
+																	aria-valuemax="100"></div>
+															</div>
+														</c:forEach>
 													</div>
 													<div class="col-md-auto col-6 order-2 order-md-3">
 														<!-- Rating -->
@@ -417,7 +406,7 @@
                                                                     <path
 																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                                 </svg>
-															</span> <span class="ms-1">53%</span>
+															</span> <span class="ms-1">${percentCountOfStars[4] }%</span>
 														</div>
 														<div>
 															<span class="fs-6"> <svg
@@ -455,7 +444,7 @@
                                                                     <path
 																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                                 </svg>
-															</span> <span class="ms-1">36%</span>
+															</span> <span class="ms-1">${percentCountOfStars[3] }%</span>
 														</div>
 														<div>
 															<span class="fs-6"> <svg
@@ -492,7 +481,7 @@
                                                                     <path
 																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                                 </svg>
-															</span> <span class="ms-1">9%</span>
+															</span> <span class="ms-1">${percentCountOfStars[2] }%</span>
 														</div>
 														<div>
 															<span class="fs-6"> <svg
@@ -528,7 +517,7 @@
                                                                     <path
 																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                                 </svg>
-															</span> <span class="ms-1">3%</span>
+															</span> <span class="ms-1">${percentCountOfStars[1] }%</span>
 														</div>
 														<div>
 															<span class="fs-6"> <svg
@@ -563,7 +552,7 @@
                                                                     <path
 																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
                                                                 </svg>
-															</span> <span class="ms-1">2%</span>
+															</span> <span class="ms-1">${percentCountOfStars[0] }%</span>
 														</div>
 													</div>
 
@@ -634,7 +623,13 @@
 
 																		<div class="comment-info">
 																			<div class="rating-item d-flex align-items-start">
-																				<img src="../assets/images/avatar/avatar-2.jpg"
+																				<c:if test="${cmt.users.image == null }">
+																					<c:set var="image" value="https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"></c:set>
+																				</c:if>
+																				<c:if test="${cmt.users.image != null}">
+																					<c:set var="image" value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${cmt.users.image }"></c:set>
+																				</c:if>
+																				<img src="${image }"
 																					alt="" class="rounded-circle avatar-lg">
 																				<div class="ms-3">
 																					<c:forEach var="uCmt" items="${listUser}">

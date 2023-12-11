@@ -92,7 +92,7 @@ public class UserLessonController extends HttpServlet {
 			req.setAttribute("user", user);
 			req.setAttribute("listEnroll", listEnroll);
 			EnrrolLesson enrollLesson = enrService.findByUserIdAndLessonId(user.getUserId(), lessID);
-			if (enrollLesson.getNumberOfStar() != null)
+			if (enrollLesson != null && enrollLesson.getNumberOfStar() != null)
 				req.setAttribute("star", enrollLesson.getNumberOfStar());
 			else
 				req.setAttribute("star", 0);
@@ -102,6 +102,30 @@ public class UserLessonController extends HttpServlet {
 			listAnswerLesson.sort((a,b) -> a.getNumber() - b.getNumber());
 			req.setAttribute("listAnswerLesson", listAnswerLesson);
 			req.setAttribute("listAnswer", listAnswer);
+			
+			
+			 List<EnrrolLesson> enrollLessonList = enrService.findByLesson(lessID);
+			 req.setAttribute("enrollLessonList", enrollLessonList);
+			 
+			 int[] percentCountOfStars = new int[] { 0, 0, 0, 0, 0 };
+			 int people = 0;
+			 for (EnrrolLesson enrrolLesson : enrollLessonList) {
+				int star = enrrolLesson.getNumberOfStar() == null ? 0 : enrrolLesson.getNumberOfStar();
+				if (star > 0) {
+					percentCountOfStars[star - 1] += 1;
+					people += 1;
+				}
+			 }
+			 if (people > 0) {
+				for (int i = 0; i < 5; i++) {
+					System.out.println(((percentCountOfStars[i] * 100) / (float) people));
+					percentCountOfStars[i] = ((((percentCountOfStars[i] * 100) / (float) people)
+							- (int) ((percentCountOfStars[i] * 100) / (float) people)) >= 0.5)
+									? (int) ((percentCountOfStars[i] * 100) / (float) people) + 1
+									: (int) ((percentCountOfStars[i] * 100) / (float) people);
+				}
+			 }
+			 req.setAttribute("percentCountOfStars", percentCountOfStars);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Lesson-content.jsp");
 			rd.forward(req, resp);
 		} else if (url.contains("reply")) {

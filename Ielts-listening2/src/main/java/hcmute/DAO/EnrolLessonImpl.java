@@ -55,6 +55,23 @@ public class EnrolLessonImpl extends AbstractDao<EnrrolLesson> implements IEnrol
 		}
 
 	}
+	
+	public List<EnrrolLesson> findByLesson(String lessonId) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT e FROM EnrrolLesson e WHERE e.lessons.lessonId = :lessId";
+			TypedQuery<EnrrolLesson> query = enma.createQuery(jpql, EnrrolLesson.class);
+			query.setParameter("lessId", lessonId);
+			List<EnrrolLesson> list = query.getResultList();
+			if (list.size() == 0)
+				return null;
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		} finally {
+			enma.close();
+		}
+	}
 
 	@Override
 	public EnrrolLesson findOneByIdContainAnsTestAndAnsUser(String enrolLessonId) {

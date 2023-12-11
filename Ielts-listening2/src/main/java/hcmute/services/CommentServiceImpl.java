@@ -24,4 +24,12 @@ public class CommentServiceImpl implements ICommentService {
 		cmDao.insert(cmt);
 	}
 
+	@Override
+	public List<CommentLesson> getCommentLessonByLesson(String lessonId) {
+		// TODO Auto-generated method stub
+		return cmDao.getCommentLessonByLesson(lessonId);
+	}
+	
+	
+
 }

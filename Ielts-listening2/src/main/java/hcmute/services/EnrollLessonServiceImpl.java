@@ -87,4 +87,10 @@ public class EnrollLessonServiceImpl implements IEnrollLessonService {
 	public EnrrolLesson findOneByIdContainAnsTestAndAnsUser(String enrollLessonId) {
 		return enDao.findOneByIdContainAnsTestAndAnsUser(enrollLessonId);
 	}
+
+	@Override
+	public List<EnrrolLesson> findByLesson(String lessonId) {
+		// TODO Auto-generated method stub
+		return enDao.findByLesson(lessonId);
+	}
 }

@@ -46,7 +46,6 @@
 </head>
 
 <body>
-
 	<main>
 		<!-- Page header -->
 		<section class="pt-lg-8 pb-8 bg-primary">
@@ -74,10 +73,11 @@
 								
 								<c:set var="people" value="0"></c:set>
 								<c:set var="totalStars" value="0"></c:set>
+								
 								<c:forEach var="lesson" items='${course.lessons }'>
-									<c:forEach var="enrrol_lesson" items='${lesson.enrrolLesson }'>
-										<c:if test="${enrrol_lesson.numberOfStar > 0}">
-											<c:set var="totalStars" value="${totalStars + enrrol_lesson.numberOfStar }"></c:set>
+									<c:forEach var="enrrol_les" items='${lesson.enrrolLesson }'>
+										<c:if test="${enrrol_les.numberOfStar > 0}">
+											<c:set var="totalStars" value="${totalStars + enrrol_les.numberOfStar }"></c:set>
 											<c:set var="people" value="${people + 1 }"></c:set>
 										</c:if>	
 									</c:forEach>
@@ -204,7 +204,7 @@
 																	<c:if test="${isBuy ==0 }">
 																		<c:forEach var="lesson" items="${listLesson }">
 																			<li class="list-group-item list-group-item-action">
-																				<a href="#"
+																				<a href="lesson?id=${lesson.lessonId }"
 																				class="d-flex justify-content-between align-items-center text-inherit">
 																					<div class="text-truncate">
 																						<span
@@ -369,8 +369,9 @@
 											<div class="row align-items-center">
 												<div class="col-auto text-center">
 													<fmt:formatNumber type="number" maxFractionDigits="1" value="${star}" var="starRounded"/>
-													<h3 class="display-2 fw-bold">${starRounded}</h3>
 													<fmt:formatNumber type="number" maxFractionDigits="0" value="${star}" var="starInteger"/>
+													<h3 class="display-2 fw-bold">${starRounded}${(starRounded - starInteger) == 0 ? '.0' : '' }</h3>
+													
 													<span class="fs-6"> 
 														<c:forEach var="i" begin="1" end="${starInteger }">
 															<svg
@@ -594,7 +595,7 @@
 												<div class="mb-3 mb-lg-0">
 													<h3 class="mb-0">Bình luận</h3>
 												</div>
-												<div>
+												<!-- <div>
 													<form class="form-inline">
 														<div class="d-flex align-items-center me-2">
 															<span class="position-absolute ps-3"> <i
@@ -603,72 +604,45 @@
 																placeholder="Tìm kiếm">
 														</div>
 													</form>
-												</div>
+												</div> -->
 											</div>
 											<!-- rating item-->
-											<div
-												class="rating-item d-flex align-items-start border-bottom pb-4 mb-4">
-												<img src="../assets/images/avatar/avatar-2.jpg" alt=""
-													class="rounded-circle avatar-lg">
-												<div class="ms-3">
-													<h4
-														class="rating-name mb-1 d-flex justify-content-between align-items-center">
-														<div class="rating-name">
-															Tên học viên
-															<!-- <span class="rating-date ms-1 fs-6 color-dimgrey">Bài 01</span> -->
-														</div>
-														<div class="rating-day">
-															<span class="rating-time ms-1 fs-6 color-dimgrey">12:10</span>
-															<span class="rating-date ms-1 fs-6 color-dimgrey">20/12/2023</span>
-														</div>
-													</h4>
-													<!-- <div class="rating-lesson">Bài 01</div> -->
-													<div class="rating-quantity mb-2">
-														<span class="fs-6"> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg> <svg
-																xmlns="http://www.w3.org/2000/svg" width="12"
-																height="12" fill="currentColor"
-																class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                <path
-																	d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                            </svg>
-														</span>
-													</div>
-													<p class="rating-content ">Lectures were at a really
-														good pace and I never felt lost. The instructor was well
-														informed and allowed me to learn and navigate Figma
-														easily.</p>
-													<div class="rating-question d-lg-flex">
-														<p class="mb-0">Bình luận này có bổ ích với bạn không?</p>
-														<a href="#" class="btn btn-xs btn-primary ms-lg-3">Có</a>
-														<a href="#" class="btn btn-xs btn-outline-secondary ms-1">Không</a>
+											<c:if test="${commentLessonsList.size() == 0 }">
+												<img class="mx-auto d-block my-3" src='<c:url value="/assets/images/bee-find.svg"/>' width="150px"/>
+												<h3 class="text-center">Chưa có bình luận</h3>
+											</c:if>
+											<c:forEach var="c" items='${commentLessonsList}'>
+												<div
+													class="rating-item d-flex align-items-start border-bottom pb-4 mb-4">
+													<c:if test="${c.users.image == null }">
+														<c:set var="image" value="https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"></c:set>
+													</c:if>
+													<c:if test="${c.users.image != null}">
+														<c:set var="image" value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${c.users.image }"></c:set>
+													</c:if>
+													<img src="${image }" alt=""
+														class="rounded-circle avatar-md">
+													<div class="ms-3">
+														<h4
+															class="rating-name mb-1 d-flex justify-content-between align-items-center">
+															<div class="rating-name">
+																${ c.users.name }
+																<!-- <span class="rating-date ms-1 fs-6 color-dimgrey">Bài 01</span> -->
+															</div>
+															<div class="rating-day">
+																<span class="rating-time ms-1 fs-6 color-dimgrey">${c.createTime.getHours()}:${c.createTime.getMinutes() }</span>
+																<span class="rating-date ms-1 fs-6 color-dimgrey">${c.createTime.getDate()}/${c.createTime.getMonth() + 1}/${c.createTime.getYear() + 1900} </span>
+															</div>
+														</h4>
+														<p class="rating-content" style="width:725px">${c.comment}</p>
+														<!-- <div class="rating-question d-lg-flex">
+															<p class="mb-0">Bình luận này có bổ ích với bạn không?</p>
+															<a href="#" class="btn btn-xs btn-primary ms-lg-3">Có</a>
+															<a href="#" class="btn btn-xs btn-outline-secondary ms-1">Không</a>
+														</div> -->
 													</div>
 												</div>
-											</div>
-
+											</c:forEach>
 										</div>
 									</div>
 									<!-- <div class="tab-pane fade" id="transcript" role="tabpanel"
@@ -799,11 +773,15 @@
 						<!-- Card -->
 						<div class="card mb-3 mb-4">
 							<div class="p-1">
+								<c:set var="image" value="http://localhost:8080/Ielts-listening2/video?fname=courseIMG/${course.image}"></c:set>
+								<c:if test="${course.image == null }">
+									<c:set var="image" value="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"></c:set>
+								</c:if>
 								<div
-									class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
-									style="background-image: url(../assets/images/course/course-javascript.jpg); height: 210px">
+									class="trailer d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
+									style="background-image: url('${image}'); height: 210px">
 									<a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-										href="http://localhost:8080/Ielts-listening2/Video?file=${course.trailer }"> <i
+										href="http://localhost:8080/Ielts-listening2/video?fname=courseTrailer/${course.trailer }"> <i
 										class="fe fe-play"></i>
 									</a>
 								</div>
@@ -815,7 +793,7 @@
 									class="price-container d-flex justify-content-between align-items-start">
 									<div class="mb-3">
 										<span class="fw-bold fs-3 color-blue--primary"></span>
-										<del class="fs-4">1.000.000</del>
+										<!-- <del class="fs-4">1.000.000</del> -->
 									</div>
 									<div class="price-vnd">VNĐ</div>
 								</div>
@@ -852,7 +830,7 @@
 										class="fe fe-award me-2 align-middle text-success"></i> Giấy
 										chứng nhận</li>
 									<li class="list-group-item bg-transparent"><i
-										class="fe fe-calendar align-middle me-2 text-info"></i> ${course.lessons.size()} bài
+										class="fe fe-calendar align-middle me-2 text-info"></i> ${listLesson.size()} bài
 										học</li>
 									<li class="list-group-item bg-transparent"><i
 										class="fe fe-video align-middle me-2 text-secondary"></i> Học
@@ -931,363 +909,123 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-3 col-md-6 col-12">
-							<!-- Card -->
-							<div class="card-relation card mb-4 card-hover">
-								<a href="course-single.html"><img
-									src="../assets/images/course/course-react.jpg" alt="course"
-									class="card-img-top"></a>
-								<!-- Card body -->
-								<div class="card-body">
-									<h4 class="mb-2 text-truncate-line-2">
-										<a href="course-single.html" class="text-inherit">How to
-											easily create a website with React</a>
-									</h4>
-									<ul class="mb-3 list-inline">
-										<li class="list-inline-item"><span> <svg
-													xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-													fill="currentColor" class="bi bi-clock align-baseline"
-													viewBox="0 0 16 16">
-                                                    <path
-														d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                    <path
-														d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                                </svg>
-										</span> <span class="main-lesson__time">3m 11s</span></li>
-										<li class="list-inline-item"><svg class="me-1 mt-n1"
-												width="16" height="16" viewBox="0 0 16 16" fill="none"
-												xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="3" y="8"
-													width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                <rect x="7" y="5"
-													width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                <rect x="11" y="2"
-													width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                            </svg> Cơ bản</li>
-									</ul>
-									<div class="mt-3 d-flex align-baseline lh-1">
-										<span class="fs-6"> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg>
-										</span> <span class="text-warning mx-1">4.5</span> <span class="fs-6">(7.700)</span>
-									</div>
-								</div>
-								<!-- Card footer -->
-								<div class="card-footer">
-									<div class="row align-items-center g-0">
-										<div class="col-auto">
-											<img src="../assets/images/avatar/avatar-1.jpg"
-												class="rounded-circle avatar-xs" alt="avatar">
-										</div>
-										<div class="col ms-2">
-											<span>Morris Mccoy</span>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="text-reset bookmark"> <i
-												class="ti-shopping-cart fs-4"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-12">
-							<!-- Card -->
-							<div class="card-relation card mb-4 card-hover">
-								<a href="course-single.html"><img
-									src="../assets/images/course/course-react.jpg" alt="course"
-									class="card-img-top"></a>
-								<!-- Card body -->
-								<div class="card-body">
-									<h4 class="mb-2 text-truncate-line-2">
-										<a href="course-single.html" class="text-inherit">How to
-											easily create a website with React</a>
-									</h4>
-									<ul class="mb-3 list-inline">
-										<li class="list-inline-item"><span> <svg
-													xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-													fill="currentColor" class="bi bi-clock align-baseline"
-													viewBox="0 0 16 16">
-                                                    <path
-														d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                    <path
-														d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                                </svg>
-										</span> <span class="main-lesson__time">3m 11s</span></li>
-										<li class="list-inline-item"><svg class="me-1 mt-n1"
-												width="16" height="16" viewBox="0 0 16 16" fill="none"
-												xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="3" y="8"
-													width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                <rect x="7" y="5"
-													width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                <rect x="11" y="2"
-													width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                            </svg> Cơ bản</li>
-									</ul>
-									<div class="mt-3 d-flex align-baseline lh-1">
-										<span class="fs-6"> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg>
-										</span> <span class="text-warning mx-1">4.5</span> <span class="fs-6">(7.700)</span>
-									</div>
-								</div>
-								<!-- Card footer -->
-								<div class="card-footer">
-									<div class="row align-items-center g-0">
-										<div class="col-auto">
-											<img src="../assets/images/avatar/avatar-1.jpg"
-												class="rounded-circle avatar-xs" alt="avatar">
-										</div>
-										<div class="col ms-2">
-											<span>Morris Mccoy</span>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="text-reset bookmark"> <i
-												class="ti-shopping-cart fs-4"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-12">
-							<!-- Card -->
-							<div class="card-relation card mb-4 card-hover">
-								<a href="course-single.html"><img
-									src="../assets/images/course/course-react.jpg" alt="course"
-									class="card-img-top"></a>
-								<!-- Card body -->
-								<div class="card-body">
-									<h4 class="mb-2 text-truncate-line-2">
-										<a href="course-single.html" class="text-inherit">How to
-											easily create a website with React</a>
-									</h4>
-									<ul class="mb-3 list-inline">
-										<li class="list-inline-item"><span> <svg
-													xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-													fill="currentColor" class="bi bi-clock align-baseline"
-													viewBox="0 0 16 16">
-                                                    <path
-														d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                    <path
-														d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                                </svg>
-										</span> <span class="main-lesson__time">3m 11s</span></li>
-										<li class="list-inline-item"><svg class="me-1 mt-n1"
-												width="16" height="16" viewBox="0 0 16 16" fill="none"
-												xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="3" y="8"
-													width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                <rect x="7" y="5"
-													width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                <rect x="11" y="2"
-													width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                            </svg> Cơ bản</li>
-									</ul>
-									<div class="mt-3 d-flex align-baseline lh-1">
-										<span class="fs-6"> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg>
-										</span> <span class="text-warning mx-1">4.5</span> <span class="fs-6">(7.700)</span>
-									</div>
-								</div>
-								<!-- Card footer -->
-								<div class="card-footer">
-									<div class="row align-items-center g-0">
-										<div class="col-auto">
-											<img src="../assets/images/avatar/avatar-1.jpg"
-												class="rounded-circle avatar-xs" alt="avatar">
-										</div>
-										<div class="col ms-2">
-											<span>Morris Mccoy</span>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="text-reset bookmark"> <i
-												class="ti-shopping-cart fs-4"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-12">
-							<!-- Card -->
-							<div class="card-relation card mb-4 card-hover">
-								<a href="course-single.html"><img
-									src="../assets/images/course/course-react.jpg" alt="course"
-									class="card-img-top"></a>
-								<!-- Card body -->
-								<div class="card-body">
-									<h4 class="mb-2 text-truncate-line-2">
-										<a href="course-single.html" class="text-inherit">How to
-											easily create a website with React</a>
-									</h4>
-									<ul class="mb-3 list-inline">
-										<li class="list-inline-item"><span> <svg
-													xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-													fill="currentColor" class="bi bi-clock align-baseline"
-													viewBox="0 0 16 16">
-                                                    <path
-														d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                    <path
-														d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                                </svg>
-										</span> <span class="main-lesson__time">3m 11s</span></li>
-										<li class="list-inline-item"><svg class="me-1 mt-n1"
-												width="16" height="16" viewBox="0 0 16 16" fill="none"
-												xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="3" y="8"
-													width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                <rect x="7" y="5"
-													width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                <rect x="11" y="2"
-													width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                            </svg> Cơ bản</li>
-									</ul>
-									<div class="mt-3 d-flex align-baseline lh-1">
-										<span class="fs-6"> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg> <svg
-												xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-												fill="currentColor" class="bi bi-star-fill text-warning"
-												viewBox="0 0 16 16">
-                                                <path
-													d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                            </svg>
-										</span> <span class="text-warning mx-1">4.5</span> <span class="fs-6">(7.700)</span>
-									</div>
-								</div>
-								<!-- Card footer -->
-								<div class="card-footer">
-									<div class="row align-items-center g-0">
-										<div class="col-auto">
-											<img src="../assets/images/avatar/avatar-1.jpg"
-												class="rounded-circle avatar-xs" alt="avatar">
-										</div>
-										<div class="col ms-2">
-											<span>Morris Mccoy</span>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="text-reset bookmark"> <i
-												class="ti-shopping-cart fs-4"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<c:set var="countCourse" value="0"></c:set>
+						<c:forEach var="i" items='${courses}'>
+							<c:if test="${i.courseId != course.courseId && countCourse < 4}">
+							<div class="col-lg-3 col-md-6 col-12 " data-bs-toggle="popover"
+										data-bs-trigger="hover focus" title="${i.courseName}"
+										data-bs-content="${i.description}">
+										<div class="card mb-4 card-hover">
+											<c:if test="${i.image != null}">
+												<a href="course-detail?courseId=${i.courseId}"><img
+													style="height: 200px; object-fit: cover;"
+													src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
+													alt="course" class="card-img-top img-fluid"></a>
+											</c:if>
+											<c:if test="${i.image == null}">
+												<a href="course-detail?courseId=${i.courseId}"><img
+													style="height: 200px; object-fit: cover;"
+													src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
+													alt="course" class="card-img-top img-fluid"></a>
+											</c:if>
+											<!-- Card Body -->
+											<div class="card-body">
+												<h4 class="mb-2 text-truncate-line-2">
+													<a href="course-detail?courseId=${i.courseId }"
+														class="text-inherit">${i.courseName}</a>
+												</h4>
+												<!-- List inline -->
+												<div class="d-flex align-items-center gap-3">
+													<p class="card-text color-blue--primary fw-bold fs-5">
+														<fmt:formatNumber value="${i.cost}" pattern="###,### VNĐ" />
+													<p class="card-text fw-bold fs-5"
+														style="color: rgb(113, 113, 113)"></p>
+													</p>
 
 
+
+												</div>
+												<div class="lh-1">
+
+													<span class="align-text-top"> <span class="fs-6">
+															<div class="d-flex gap-5">
+																<c:set var="totalStars" value="0" />
+																<c:set var="count" value="0" />
+																<c:forEach var="lesson" items="${i.lessons}">
+																	<c:forEach var="enrrol_lesson"
+																		items="${lesson.enrrolLesson}">
+																		<c:set var="totalStars"
+																			value="${totalStars + enrrol_lesson.numberOfStar}" />
+
+																		<c:choose>
+																			<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																				<c:set var="count" value="${count + 1}" />
+																			</c:when>
+
+																		</c:choose>
+
+
+																	</c:forEach>
+																</c:forEach>
+																<c:choose>
+																	<c:when test="${count == 0}">
+																		<c:set var="averageStars" value="0" />
+																		<c:set var="roundedAverage">
+																			<c:out
+																				value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																		</c:set>
+																	</c:when>
+																	<c:when test="${count > 0}">
+																		<c:set var="averageStars"
+																			value="${totalStars / count}" />
+																		<c:set var="roundedAverage">
+																			<c:out
+																				value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																		</c:set>
+																	</c:when>
+																</c:choose>
+																<div class="stars rating-star"
+																	data-rating="${roundedAverage}"></div>
+																<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
+															</div>
+													</span>
+												</div>
+											</div>
+											<!-- Card footer -->
+											<div class="card-footer">
+												<div class="row align-items-center g-0">
+													<div class="col-auto"></div>
+													<div class="col ms-2"></div>
+													<div class="col-auto">
+														<c:choose>
+															<c:when test="${user ne null}">
+																<!-- User is logged in, submit the form -->
+																<form action="addToCart" method="post">
+																	<input type="hidden" name="courseId"
+																		value="${i.courseId }">
+																	<button type="submit"
+																		style="border: none; background: none;">
+																		<i class="fe fe-shopping-cart fs-4"></i>
+																	</button>
+																</form>
+															</c:when>
+															<c:otherwise>
+																<!-- User is not logged in, show a login popup or perform any other action -->
+																<button style="border: none; background: none;"
+																	type="button" onclick="showLoginPopup()">
+																	<i class="fe fe-shopping-cart fs-4"></i>
+																</button>
+															</c:otherwise>
+														</c:choose>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							<c:set var="countCourse" value="${countCourse + 1 }"></c:set>
+							</c:if>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -1335,6 +1073,31 @@
 	let formattedNumber = number.toLocaleString('en-US');
 	const cost = document.querySelector(".price-container span");
 	cost.textContent = formattedNumber;
+	const image = '${course.image}';
+	fetch("http://localhost:8080/Ielts-listening2/video?fname=courseIMG/" + image)
+	  .then((response) => {
+		  console.log(response.status);
+		  if (response.status === 404) {
+		  const trailer = document.querySelector(".trailer");
+	   	  trailer.style = "background-image: url('https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain');height: 210px;";
+		  }
+		  });
+	 document.querySelectorAll('.stars').forEach(starContainer => {
+	        const rating = parseInt(starContainer.getAttribute('data-rating'));
+	        starContainer.innerHTML = getStarRating(rating);
+	    });
+	
+	    function getStarRating(rating) {
+	        let stars = '';
+	        for (let i = 0; i < 5; i++) {
+	            if (i < rating) {
+	                stars += '⭐'; 
+	            } else {
+	                stars += '★'; 
+	            }
+	        }
+	        return stars;
+	    }
 	</script>
 	<!-- Scripts -->
 	<!-- Libs JS -->
