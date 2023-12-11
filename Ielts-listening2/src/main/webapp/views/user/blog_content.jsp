@@ -87,11 +87,11 @@
 								class="d-flex justify-content-between align-items-center mb-5">
 								<div class="d-flex align-items-center">
 									<c:if test="${blog.users.image != null}">
-									<img
-										src='<c:url value='/image?fname=userAvatar/${blog.users.image}'/>'
-										class="avatar-xl rounded-circle border border-4 border-white"
-										alt="avatar" />
-								</c:if>
+										<img
+											src='<c:url value='/image?fname=userAvatar/${blog.users.image}'/>'
+											class="avatar-xl rounded-circle border border-4 border-white"
+											alt="avatar" />
+									</c:if>
 									<div class="ms-2 lh-1">
 										<h5 class="mb-1">${blog.users.name }</h5>
 										<span class="text-primary">Marketing Manager</span>
@@ -122,51 +122,51 @@
 								</div>
 							</div>
 							<!-- Subscribe to Newsletter -->
-							
-				</div>
-				<!-- Container -->
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-12">
-							<div class="my-5">
-								<h2>Related Post</h2>
-							</div>
+
 						</div>
-						<c:forEach var="list" items="${listBlog}">
-							<div class="col-xl-4 col-lg-4 col-md-6 col-12">
-								<!-- Card -->
-								<div class="card mb-4 shadow-lg card-lift">
-									<a href="blog-single.html"><img
-										src="<c:url value='/image?fname=${folder}/${list.image }'/>"
-										class="card-img-top" alt="blogpost "></a>
-									<!-- Card body -->
-									<div class="card-body">
-										<a href="#" class="fs-5 fw-semibold d-block mb-3 text-primary">${list.title }</a>
-										<a href="blog-single.html">
-											<h3>${list.content }</h3>
-										</a>
-										<p></p>
-										<!-- Media content -->
-										<div class="row align-items-center g-0 mt-4">
-											<div class="col-auto">
-												<img src="../assets/images/avatar/avatar-1.jpg" alt="avatar"
-													class="rounded-circle avatar-sm me-2 ">
-											</div>
-											<div class="col lh-1">
-												<h5 class="mb-1">${list.users.name }</h5>
-												<p class="fs-6 mb-0">${list.createdDate }</p>
-											</div>
-											<div class="col-auto">
-												<p class="fs-6 mb-0">12 Min Read</p>
+						<!-- Container -->
+						<div class="container">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+									<div class="my-5">
+										<h2>Bài viết nổi bật</h2>
+									</div>
+								</div>
+								<c:forEach var="list" items="${listBlog}">
+									<div class="col-xl-4 col-lg-4 col-md-6 col-12">
+										<!-- Card -->
+										<div class="card mb-4 shadow-lg card-lift">
+											<a href="blog-single.html"><img
+												src="<c:url value='/image?fname=${folder}/${list.image }'/>"
+												class="card-img-top" alt="blogpost "></a>
+											<!-- Card body -->
+											<div class="card-body">
+												<a href="#"
+													class="fs-5 fw-semibold d-block mb-3 text-primary">${list.title }</a>
+												<a href="blog-single.html">
+													<h3>${list.content }</h3>
+												</a>
+												<p></p>
+												<!-- Media content -->
+												<div class="row align-items-center g-0 mt-4">
+													<div class="col-auto">
+														<img src="../assets/images/avatar/avatar-1.jpg"
+															alt="avatar" class="rounded-circle avatar-sm me-2 ">
+													</div>
+													<div class="col lh-1">
+														<h5 class="mb-1">${list.users.name }</h5>
+														<p class="fs-6 mb-0">${list.createdDate }</p>
+													</div>
+													<div class="col-auto">
+														<p class="fs-6 mb-0">12 Min Read</p>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								</c:forEach>
 							</div>
-						</c:forEach>
-					</div>
-				</div>
-		</section>
+						</div></section>
 	</main>
 
 	<!-- Scroll top -->
@@ -178,12 +178,12 @@
 		</svg>
 
 	</div>
-<style>
+	<style>
 .card-img-top {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    object-position: center;
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	object-position: center;
 }
 </style>
 </body>
