@@ -55,7 +55,7 @@ public class EnrollLessonServiceImpl implements IEnrollLessonService {
 
 	@Override
 	public void completeTest(String enrollLessonId) {
-		EnrrolLesson enrollLesson = enDao.findById(enrollLessonId);
+		EnrrolLesson enrollLesson = enDao.findOneByIdContainAnsTestAndAnsUser(enrollLessonId);
 		if (enrollLesson != null) {
 			int numberQuestions = enrollLesson.getLessons().getAnswerLesson().size();
 			long numberCorrectAnswers = enrollLesson.getAnswerLessonUser().stream()
@@ -75,11 +75,16 @@ public class EnrollLessonServiceImpl implements IEnrollLessonService {
 
 	@Override
 	public void resetTest(String enrollLessonId) {
-		EnrrolLesson enrollLesson = enDao.findById(enrollLessonId);
+		EnrrolLesson enrollLesson = enDao.findOneByIdContainAnsTestAndAnsUser(enrollLessonId);
 		if (enrollLesson != null) {
 			double score = -1;
 			enrollLesson.setScore(score);
 			enDao.update(enrollLesson);
 		}
+	}
+
+	@Override
+	public EnrrolLesson findOneByIdContainAnsTestAndAnsUser(String enrollLessonId) {
+		return enDao.findOneByIdContainAnsTestAndAnsUser(enrollLessonId);
 	}
 }

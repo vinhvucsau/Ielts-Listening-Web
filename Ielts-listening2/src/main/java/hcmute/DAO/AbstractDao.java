@@ -71,10 +71,10 @@ public abstract class AbstractDao<T> {
 	public T findById(Object id) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		try {
-		T entity = enma.find(entityClass, id);
-		return entity;
+			T entity = enma.find(entityClass, id);
+			return entity;
 		} finally {
-			/* enma.close(); */
+			enma.close();
 		}
 	}
 
