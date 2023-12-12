@@ -108,6 +108,11 @@ public class LuyenDeHomeController extends HttpServlet {
 
 				EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(user.getUserId(), testId,
 						dateNow);
+				if (mockTest.getListeningParts().size()<=0)
+				{
+					req.setAttribute("message", "Đề đang trong giao đoạn hoàn thiện");
+				}
+					
 
 				resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
 			}

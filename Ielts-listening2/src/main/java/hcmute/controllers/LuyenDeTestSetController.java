@@ -83,6 +83,7 @@ public class LuyenDeTestSetController extends HttpServlet {
 		if (session != null && session.getAttribute("user") != null) {
 			User user = (User) session.getAttribute("user");
 
+			req.setAttribute("currentUser", user);
 			String testId = req.getParameter("testId");
 			EnrrolTest enrrolTest = new EnrrolTest();
 			enrrolTest.setEnrrolId("");
