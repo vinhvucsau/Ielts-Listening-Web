@@ -1,5 +1,9 @@
 package hcmute.DAO;
 
-public interface IBlogDao {
+import java.util.List;
 
+import hcmute.entity.Blog;
+
+public interface IBlogDao {
+	List<Blog> findAllBlogDesTime();
 }

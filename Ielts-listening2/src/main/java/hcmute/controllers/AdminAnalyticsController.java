@@ -1,6 +1,10 @@
 package hcmute.controllers;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import hcmute.entity.Blog;
 import hcmute.entity.Course;
 import hcmute.entity.User;
 import hcmute.services.AdminAnalysServiceImpl;
+import hcmute.services.BlogServiceImpl;
 import hcmute.services.IAdminAnalysService;
+import hcmute.services.IBlogService;
 import hcmute.services.IUserService;
 import hcmute.services.UserServiceImpl;
 
@@ -26,9 +33,11 @@ public class AdminAnalyticsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	IAdminAnalysService adminAnaService = new AdminAnalysServiceImpl();
 	IUserService userService = new UserServiceImpl();
+	IBlogService blogService = new BlogServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String url = req.getRequestURI().toString();
 		if (url.contains("analytics")) {
 
@@ -101,6 +110,56 @@ public class AdminAnalyticsController extends HttpServlet {
 			}
 			
 			
+			List<Blog> blog = blogService.findAllBlogDesTime();
+			List<Blog> blogJsp = new ArrayList<Blog>();
+			if(blog.size() > 4) {
+				for(int i = 0; i < 4; i++) {
+					blogJsp.add(blog.get(i));
+				}
+			}else {
+				for(int i = 0; i < blog.size(); i++) {
+					blogJsp.add(blog.get(i));
+				}
+			}
+			
+			System.out.print("BlogJSP" + blogJsp.size());
+			
+			LocalDateTime[] localDateTime = new LocalDateTime[blogJsp.size()];
+			Instant[] instant = new Instant[blogJsp.size()];
+			List<Long> differentHour = new ArrayList<>();
+			List<Long> differentMinute = new ArrayList<>();
+			List<Long> differentSecond = new ArrayList<>(); 
+
+			int numberOfElements = 4; 
+			for (int i = 0; i < numberOfElements; i++) {
+			    differentSecond.add(0L); 
+			}
+	        LocalDateTime now = LocalDateTime.now(); 
+
+			
+			for(int i = 0; i < blogJsp.size(); i++) {
+				instant[i] = blogJsp.get(i).getCreatedDate().toInstant();
+		        localDateTime[i] = instant[i].atZone(ZoneId.systemDefault()).toLocalDateTime();
+		        differentHour.add(ChronoUnit.HOURS.between(localDateTime[i], now));				
+			}
+			for(int i = 0 ; i < differentHour.size(); i++) {
+				if(differentHour.get(i) == 0) {
+		        	differentMinute.add(ChronoUnit.MINUTES.between(localDateTime[i], now));
+
+					  if(differentMinute.get(i) ==0) {
+					  differentSecond.add(ChronoUnit.SECONDS.between(localDateTime[i], now)); }
+					 	 
+		        }			
+			}
+			
+			req.setAttribute("differentHour", differentHour);
+			req.setAttribute("differentMinute", differentMinute);
+			req.setAttribute("differentSecond", differentSecond);
+			System.out.print("Hour: " + differentHour);
+			System.out.print("Minute: " + differentMinute);
+			System.out.print("Second: " + differentSecond);
+			
+			
 			List<String> image = new ArrayList<String>();
 			List<String> imageCourse = new ArrayList<String>();
 			for(int i = 0; i < user.size(); i++) {
@@ -124,6 +183,8 @@ public class AdminAnalyticsController extends HttpServlet {
 			req.setAttribute("countRating1", countRating1);
 			req.setAttribute("sumCost", sumCost);
 			req.setAttribute("listCourseJsp", listCourseJsp);
+			req.setAttribute("blogJsp", blogJsp);
+			
 			
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/Analytics.jsp");

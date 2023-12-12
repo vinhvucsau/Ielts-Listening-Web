@@ -10,8 +10,7 @@ public class BlogServiceImpl implements IBlogService {
 	BlogDaoImpl blogDao = new BlogDaoImpl();
 	@Override
 	public List<Blog> findAll() {
-		// TODO Auto-generated method stub
-		System.out.print("HEREEEEEEEEE SERVICE");
+		
 		return blogDao.findAll();
 	}
 
@@ -42,6 +41,12 @@ public class BlogServiceImpl implements IBlogService {
 	@Override
 	public List<Blog> Find3blog(String id) {
 		return blogDao.Find3blog(id);
+	}
+
+	@Override
+	public List<Blog> findAllBlogDesTime() {
+		
+		return blogDao.findAllBlogDesTime();
 	}
 	
 }

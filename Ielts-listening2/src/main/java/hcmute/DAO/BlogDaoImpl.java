@@ -32,5 +32,18 @@ public class BlogDaoImpl extends AbstractDao<Blog> implements IBlogDao {
 			}
 		}
 	}
+	
+	public List<Blog> findAllBlogDesTime(){
+			EntityManager enma = JPAConfig.getEntityManager();
+		    try {
+		        String jpql = "SELECT b FROM Blog b WHERE b.status = 1 ORDER BY b.createdDate DESC";
+		        TypedQuery<Blog> query = enma.createQuery(jpql, Blog.class);
+		        return query.getResultList();
+		    } finally {
+		        if (enma != null) {
+		            enma.close();
+		        }
+		    }
+		}
 
 }

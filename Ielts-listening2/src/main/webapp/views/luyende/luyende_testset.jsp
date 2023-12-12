@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 </head>
 <body>
-	<style>
+<style>
 .luyende-testset-info-de {
 	background: var(--color-light-grey, #F3F3F3);
 	display: flex;
@@ -36,8 +36,9 @@
 	display: flex;
 	align-items: center;
 }
-</style>
 
+</style>
+	
 	<div class="luyende-testset">
 		<div class="luyende-testset-link-paper container-xxl"></div>
 		<div class="luyende-testset-info-de w-100 container-fluid py-5">
@@ -46,7 +47,7 @@
 			<div class="luyende-testset-info-de-content col-8 ">
 				<div
 					class="row d-flex flex-column justify-content-center align-items-center">
-
+					
 
 					<h1 class="text-center  mt-4 mb-3">${topic_test.topicName}</h1>
 					<p class="text-center">${topic_test.description}</p>
@@ -73,7 +74,7 @@
 
 						<select id="selectOption" class="form-select"
 							aria-label="Default select example" style="width: 50%;">
-							<option value="tatCa">Tất cả trạng thái làm bài</option>
+							<option  value="tatCa">Tất cả trạng thái làm bài</option>
 							<option value="chuaLam">Chưa làm bài</option>
 							<option value="dangLam">Đang làm bài</option>
 							<option value="daLam">Đã làm bài</option>
@@ -98,129 +99,95 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="luyende-testset-list-de row">
 				<c:forEach var="i" items="${listMocktest}">
-					<c:if test="${not empty currentUser}">
-
-
-
-
-
-						<%-- <input type="hidden" name="testId" value="${i.testId }" />
-				<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;"> --%>
+				<c:if test="${not empty currentUser}">
+				
+			
 						<c:set var="found" value="false" />
 						<c:set var="maxScore" value="-10"></c:set>
-						<c:set var="count" value="0"></c:set>
-						<c:set var="isDoing" value="${false }"></c:set>
-						<c:forEach var="enrrolTest" items="${listEnrolltest}">
-						
-		
-																	<c:if
-																		test="${enrrolTest.users.userId.equals(currentUser.userId)}">
+																<c:set var="count" value="0"></c:set>
+																<c:set var="isDoing" value="${false }"></c:set>
+																
+						<c:forEach var="en" items="${listEnrolltest}">
+						<c:if
+																		test="${en.users.userId.equals(currentUser.userId)}">
 																		<c:set var="count" value="${count + 1 }"></c:set>
-																		<c:if test="${enrrolTest.score == -1}">
+																		<c:if test="${en.score == -1}">
 																			<c:set var="isDoing" value="${true}"></c:set>
 																			<c:set var="enrTestId" value="${enrrolTest.enrrolId}"></c:set>
 																		</c:if>
 																		<c:if
-																			test="${enrrolTest.score >= 0 and enrrolTest.score > maxScore }">
+																			test="${en.score >= 0 and enrrolTest.score > maxScore }">
 																			<c:set var="maxScore" value="${enrrolTest.score}"></c:set>
 																			<c:set var="doneEnrollTestId"
 																				value="${enrrolTest.enrrolId}"></c:set>
 																		</c:if>
 																	</c:if>
-																</c:forEach>
-						
-						
 							<c:if test="${!found}">
 								<c:choose>
 									<c:when
-										test="${i.testId == enrrolTest.mockTests.testId && enrrolTest.score >= 0 }">
-										<div class="luyende-testset-list-de col-6 luyende-da-lam">
-											<form action="luyende-testset " method="post">
-												<input type="hidden" name="testId" value="${i.testId }" />
-												<div style="color: #64748b; width: 100%">
-													<div class="card" style="border: 0;">
-														<div class="card-body">
-															<div class="card-title text--h3 ">${i.testName}</div>
-															<div
-																class="p-3 border bg-white d-flex justify-content-between flex-row rounded-3"
-																style="border-color: bg-color-green--medium">
-																<div class="d-flex gap-3">
-																	<div
-																		class="rounded-3 d-flex justify-content-center align-items-center fw-bold bg-color-green--medium color-white"
-																		style="width: 50px; height: 50px;">${enrrolTest.score}</div>
-																	<p
-																		class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
-																</div>
-																<div class="d-flex flex-row align-items-center">
-
-
-																	<a
-																		href='<c:url value="/test/luyende_test?enrollTestId=${doneEnrollTestId}"></c:url>'
-																		class="btn me-1"
-																		style="background-color: #00B135; color: white;">Xem
-																		lại</a>
-																	<form action="luyen-de-home" method="post">
-																		<input type="hidden" name="userId"
-																			value="${currentUser.userId }" /> <input
-																			type="hidden" name="testId"
-																			value="${mockTest.testId }" /> <input type="submit"
-																			class="btn btn-primary" value="Làm lại" />
-																	</form>
-
-																</div>
-
-															</div>
-
-
-
-														</div>
-													</div>
+										test="${i.testId == en.mockTests.testId && en.score >= 0 }">
+										<div  class="luyende-testset-list-de col-6 luyende-da-lam">
+										
+										<div class="card" style="border: 0;">
+											<div class="card-body">
+												<div class="card-title text--h3 ">${i.testName}</div>
+												<div class="p-3 border bg-white d-flex flex-row rounded-3"
+													style="border-color: bg-color-green--medium">
+													<div
+														class="rounded-3 d-flex justify-content-center align-items-center fw-bold bg-color-green--medium color-white"
+														style="width: 50px; height: 50px;">${en.score}</div>
+													<p
+														class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
+												<a
+																	href='<c:url value="/test/luyende_test?enrollTestId=${doneEnrollTestId}"></c:url>'
+																	class="btn me-1"
+																	style="background-color: #00B135; color: white;">Xem
+																	lại</a>
+																<form action="luyen-de-home" method="post">
+																	<input type="hidden" name="userId"
+																		value="${currentUser.userId }" /> <input
+																		type="hidden" name="testId"
+																		value="${mockTest.testId }" /> <input type="submit"
+																		class="btn btn-primary" value="Làm lại" />
 												</div>
-											</form>
+											</div>
+										</div>
+										
+										
 										</div>
 										<c:set var="found" value="true" />
 									</c:when>
 									<c:when
-										test="${i.testId == enrrolTest.mockTests.testId && enrrolTest.score < 0 }">
-										<div class="luyende-testset-list-de col-6 luyende-dang-lam">
-											<form action="luyende-testset " method="post">
-												<input type="hidden" name="testId" value="${i.testId }" />
-												<a href="#"
-													onclick="event.preventDefault();this.parentNode.submit()"
-													style="color: #64748b;">
-													<div class="card" style="border: 0;">
-														<div class="card-body">
-															<div class="card-title text--h3 ">${i.testName}</div>
-															<div
-																class="p-3 border bg-white d-flex flex-row rounded-3 justify-content-between"
-																style="border-color: bg-color-green--medium">
-																<div class="d-flex gap-3">
-																	<div
-																		class="rounded-3 d-flex justify-content-center align-items-center fw-bold "
-																		style="background-color: #fef5d2; width: 50px; height: 50px;">
+										test="${i.testId == en.mockTests.testId && en.score < 0 }">
+										<div  class="luyende-testset-list-de col-6 luyende-dang-lam">
+										<form action="luyende-testset " method="post">
+										<input type="hidden" name="testId" value="${i.testId }" />
+										<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;">
+										<div class="card" style="border: 0;">
+											<div class="card-body">
+												<div class="card-title text--h3 ">${i.testName}</div>
+												<div class="p-3 border bg-white d-flex flex-row rounded-3"
+													style="border-color: bg-color-green--medium">
+													<div
+														class="rounded-3 d-flex justify-content-center align-items-center fw-bold "
+														style="background-color: #fef5d2; width: 50px; height: 50px;">
 
-																	</div>
-																	<p
-																		class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
-																</div>
-
-
-
-																<div>
-																	<a
-																		href='<c:url value="/test/luyende_test?enrollTestId=${enrTestId}"></c:url>'
-																		class="btn"
-																		style="background-color: rgb(245, 158, 11); color: #fff;">Làm
-																		tiếp</a>
-																</div>
-															</div>
-														</div>
 													</div>
-												</a>
-											</form>
+													<p
+														class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
+														<a
+																	href='<c:url value="/test/luyende_test?enrollTestId=${enrTestId}"></c:url>'
+																	class="btn"
+																	style="background-color: rgb(245, 158, 11); color: #fff;">Làm
+																	tiếp</a>
+												</div>
+											</div>
+										</div>
+										</a>
+										</form>
 										</div>
 										<c:set var="found" value="true" />
 									</c:when>
@@ -229,64 +196,58 @@
 
 						</c:forEach>
 						<c:if test="${!found}">
-							<div class="luyende-testset-list-de col-6 luyende-chua-lam">
-								<form action="luyende-testset " method="post">
-									<input type="hidden" name="testId" value="${i.testId }" /> <a
-										href="#"
-										onclick="event.preventDefault();this.parentNode.submit()"
-										style="color: #64748b;">
-										<div class="card" style="border: 0;">
-											<div class="card-body">
-												<div class="card-title text--h3 ">${i.testName}</div>
-												<div
-													class="p-3 border bg-white d-flex flex-row rounded-3 justify-content-between"
-													style="border-color: bg-color-green--medium">
-													<div class="d-flex gap-3">
-														<div
-															class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-															style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
-															<svg xmlns="http://www.w3.org/2000/svg" width="32"
-																height="32" fill="currentColor"
-																class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
+						<div class="luyende-testset-list-de col-6 luyende-chua-lam">
+						<form action="luyende-testset " method="post">
+										<input type="hidden" name="testId" value="${i.testId }" />
+										
+						
+							<div class="card" style="border: 0;">
+								<div class="card-body">
+									<div class="card-title text--h3 ">${i.testName}</div>
+									<div class="p-3 border bg-white d-flex flex-row rounded-3"
+										style="border-color: bg-color-green--medium">
+										<div
+											class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
+											style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
+											<svg xmlns="http://www.w3.org/2000/svg" width="32"
+												height="32" fill="currentColor"
+												class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
   								<path
-																	d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
+													d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5z" />
 							</svg>
-														</div>
-														<p
-															class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
-
-													</div>
-
-													<div>
-														<form action="luyen-de-home" method="post">
-															<input type="hidden" name="userId"
-																value="${currentUser.userId }" /> <input type="hidden"
-																name="testId" value="${mockTest.testId }" /> <input
-																type="submit" class="btn btn-primary" value="Làm ngay" />
-														</form>
-													</div>
-
-
-												</div>
-											</div>
 										</div>
-									</a>
+										<p
+											class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
+											<form action="luyende-testset" method="post">
+																	<input type="hidden" name="userId"
+																		value="${currentUser.userId }" /> <input
+																		type="hidden" name="testId"
+																		value="${mockTest.testId }" /> 
+																		<a href="#"  onclick="event.preventDefault();this.parentNode.submit()" style="color:#64748b;">
+																		<input type=""
+																		class="btn btn-primary" value="Làm ngay" />
+														</a>				
+																</form>
+									</div>
+									</div>
+								</div>
+								
 								</form>
 							</div>
 						</c:if>
 
 
-
-						</a>
-
-
-
-
-					</c:if>
-
-					<c:if test="${ empty currentUser}">
-
-						<div class="luyende-testset-list-de col-6 ">
+					
+				</a>
+				
+				
+				
+				
+				</c:if>
+				
+				<c:if test="${ empty currentUser}">
+				
+				<div class="luyende-testset-list-de col-6 ">
 							<div class="card" style="border: 0;">
 								<div class="card-body">
 									<div class="card-title text--h3 ">${i.testName}</div>
@@ -305,66 +266,63 @@
 										<p
 											class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
 									</div>
+									</div>
 								</div>
 							</div>
-						</div>
-
-					</c:if>
+				
+				</c:if>
 				</c:forEach>
-
+				
 			</div>
 
 
 		</div>
 	</div>
+	
+<script>
+  var selectOption = document.getElementById("selectOption");
 
-	<script>
-		var selectOption = document.getElementById("selectOption");
+  // Lắng nghe sự kiện khi giá trị của select thay đổi
+  selectOption.addEventListener("change", function() {
+    // Lấy giá trị được chọn trong select
+    var selectedValue = selectOption.value;
+    var elementsChuaLam = document.getElementsByClassName("luyende-chua-lam");
+    var elementsDangLam = document.getElementsByClassName("luyende-dang-lam");
+    var elementsDaLam = document.getElementsByClassName("luyende-da-lam");
 
-		// Lắng nghe sự kiện khi giá trị của select thay đổi
-		selectOption.addEventListener("change", function() {
-			// Lấy giá trị được chọn trong select
-			var selectedValue = selectOption.value;
-			var elementsChuaLam = document
-					.getElementsByClassName("luyende-chua-lam");
-			var elementsDangLam = document
-					.getElementsByClassName("luyende-dang-lam");
-			var elementsDaLam = document
-					.getElementsByClassName("luyende-da-lam");
+    if (selectedValue === "tatCa") {
+      showElements(elementsChuaLam);
+      showElements(elementsDangLam);
+      showElements(elementsDaLam);
+    } else if (selectedValue === "chuaLam") {
+      showElements(elementsChuaLam);
+      hideElements(elementsDangLam);
+      hideElements(elementsDaLam);
+    } else if (selectedValue === "dangLam") {
+      hideElements(elementsChuaLam);
+      showElements(elementsDangLam);
+      hideElements(elementsDaLam);
+    } else if (selectedValue === "daLam") {
+      hideElements(elementsChuaLam);
+      hideElements(elementsDangLam);
+      showElements(elementsDaLam);
+    }
+  });
 
-			if (selectedValue === "tatCa") {
-				showElements(elementsChuaLam);
-				showElements(elementsDangLam);
-				showElements(elementsDaLam);
-			} else if (selectedValue === "chuaLam") {
-				showElements(elementsChuaLam);
-				hideElements(elementsDangLam);
-				hideElements(elementsDaLam);
-			} else if (selectedValue === "dangLam") {
-				hideElements(elementsChuaLam);
-				showElements(elementsDangLam);
-				hideElements(elementsDaLam);
-			} else if (selectedValue === "daLam") {
-				hideElements(elementsChuaLam);
-				hideElements(elementsDangLam);
-				showElements(elementsDaLam);
-			}
-		});
+  // Hiển thị các phần tử
+  function showElements(elements) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].style.display = "block";
+    }
+  }
 
-		// Hiển thị các phần tử
-		function showElements(elements) {
-			for (var i = 0; i < elements.length; i++) {
-				elements[i].style.display = "block";
-			}
-		}
-
-		// Ẩn các phần tử
-		function hideElements(elements) {
-			for (var i = 0; i < elements.length; i++) {
-				elements[i].style.display = "none";
-			}
-		}
-	</script>
+  // Ẩn các phần tử
+  function hideElements(elements) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].style.display = "none";
+    }
+  }
+</script>
 </body>
 </html>
 
