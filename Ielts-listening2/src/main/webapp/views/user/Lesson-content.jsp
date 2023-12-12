@@ -582,7 +582,7 @@
 															<!-- get result value here ! -->
 
 															<input type="text" name="result-rating"
-																id="result-rating" value="${star}" class="d-none">
+																id="result-rating" value="${starUser}" class="d-none">
 
 														</div>
 														<button type="submit" class="btn btn-primary mt-2">Đánh

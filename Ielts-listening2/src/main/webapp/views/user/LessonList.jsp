@@ -73,7 +73,7 @@
 								<c:set var="people" value="0"></c:set>
 								<c:set var="totalStars" value="0"></c:set>
 								
-								<c:forEach var="lesson" items='${course.lessons }'>
+								<c:forEach var="lesson" items='${listLessonCourse }'>
 									<c:forEach var="enrrol_lesson" items='${lesson.enrrolLesson }'>
 										<c:if test="${enrrol_lesson.numberOfStar > 0}">
 											<c:set var="totalStars"
@@ -849,7 +849,7 @@
 										chứng nhận</li>
 									<li class="list-group-item bg-transparent"><i
 										class="fe fe-calendar align-middle me-2 text-info"></i>
-										${course.lessons.size()} bài học</li>
+										${listLesson.size()} bài học</li>
 									<li class="list-group-item bg-transparent"><i
 										class="fe fe-video align-middle me-2 text-secondary"></i> Học
 										trực tuyến</li>
@@ -1087,10 +1087,7 @@
     </svg>
 	</div>
 	<script>
-		let number = $
-		{
-			course.cost
-		};
+		let number = ${course.cost};
 		let formattedNumber = number.toLocaleString('en-US');
 		const cost = document.querySelector(".price-container span");
 		cost.textContent = formattedNumber;

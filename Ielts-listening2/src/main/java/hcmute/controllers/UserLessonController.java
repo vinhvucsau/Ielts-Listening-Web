@@ -93,9 +93,9 @@ public class UserLessonController extends HttpServlet {
 			req.setAttribute("listEnroll", listEnroll);
 			EnrrolLesson enrollLesson = enrService.findByUserIdAndLessonId(user.getUserId(), lessID);
 			if (enrollLesson != null && enrollLesson.getNumberOfStar() != null)
-				req.setAttribute("star", enrollLesson.getNumberOfStar());
+				req.setAttribute("starUser", enrollLesson.getNumberOfStar());
 			else
-				req.setAttribute("star", 0);
+				req.setAttribute("starUser", 0);
 			//thêm danh sách câu hỏi
 			req.setAttribute("enrollLesson", enrollLesson);
 			List<AnswerLesson> listAnswerLesson = ansService.findByLessonId(lessID);
