@@ -128,6 +128,63 @@
               
             </div>
           </div>
+          <c:if test="${listBlog.size() > 0}">
+				<div class="position-relative w-100 border-top">
+					<div class="d-flex flex-row justify-content-center mx-auto"
+						style="width: 500px">
+						<button
+							class="btn__page--previous d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold  border-0 rounded-3 align-items-center"
+							style="width: 220px; padding: 0 30px 0 30px;"
+							${ param.page == null || param.page == "1" ? "disabled":""}>
+							<svg xmlns="http://www.w3.org/2000/svg" height="24"
+								style="margin-top: 3px;" fill="currentColor"
+								class="bi bi-arrow-left" viewBox="0 0 16 16">
+		  						<path fill-rule="evenodd"
+									d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+							</svg>
+							Trang Trước
+						</button>
+						<button
+							class="btn__page--next d-flex flex-row justify-content-between mt-4 mx-auto py-2 fs-5 fw-bold border-0 rounded-3 align-items-center"
+							style="width: 220px; padding: 0 30px 0 30px;"
+							${ param.page == pageNum || (param.page == null && pageNum == "1") ? "disabled":""}>
+							Trang Sau
+							<svg xmlns="http://www.w3.org/2000/svg" height="24"
+								style="margin-top: 3px;" fill="currentColor"
+								class="bi bi-arrow-right" viewBox="0 0 16 16">
+		  						<path fill-rule="evenodd"
+									d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+							</svg>
+						</button>
+					</div>
+					<div class="position-absolute top-0 end-0 mt-4 fs-5">
+						<input type="number"
+							class="input__pageNum bg-white py-2 px-2 me-2 rounded-3 text-center border-0"
+							max="10" min="1" value='${param.page == null ? 1 : param.page}'
+							style="width: 50px; height: 50px;" /> của ${pageNum}
+						<button class="btn__page--min btn--2 px-2 ms-4 rounded-3 border-0"
+							style="width: 50px; height: 50px;">
+							<span> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+									height="24" fill="currentColor"
+									class="bi bi-arrow-bar-left mb-1" viewBox="0 0 16 16">
+		  							<path fill-rule="evenodd"
+										d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z" />
+								</svg>
+							</span>
+						</button>
+						<button class="btn__page--max btn--2 px-2 ms-2 rounded-3 border-0"
+							style="width: 50px; height: 50px;">
+							<span> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+									height="24" fill="currentColor"
+									class="bi bi-arrow-bar-right mb-1" viewBox="0 0 16 16">
+		 							 <path fill-rule="evenodd"
+										d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z" />
+								</svg>
+							</span>
+						</button>
+					</div>
+				</div>
+			</c:if>
         </section>
       </main>
  	 
@@ -155,6 +212,91 @@
       overflow: hidden;
     }
   </style>
+  <script>
+  const params = new URLSearchParams(document.location.search);
+  let page = params.get("page") ? params.get("page"):'1';
+  const prePageBtn = document.querySelector(".btn__page--previous");
+	const nextPageBtn = document.querySelector(".btn__page--next");
+	if (prePageBtn) {
+		if (prePageBtn.disabled === false) {
+			prePageBtn.classList.add("bg-color-blue--primary");
+			prePageBtn.classList.add("color-white");
+		}
+		prePageBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			page = Number(page) - 1;
+			if (page == 1){
+				params.delete("page"); 
+				const isQuestionMark = params.toString() === "" ? "" : "?";
+				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
+			}
+			else {
+				params.set("page", page);
+				const isQuestionMark = params.toString() === "" ? "" : "?";
+				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
+			}
+			
+		})
+	}
+	
+	if (nextPageBtn) {
+		if (nextPageBtn.disabled === false) {
+			nextPageBtn.classList.add("bg-color-blue--primary");
+			nextPageBtn.classList.add("color-white");
+		}
+		nextPageBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			page = Number(page) + 1;
+			params.set("page", page);
+			const isQuestionMark = params.toString() === "" ? "" : "?";
+			window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
+		}) 
+	} 
+	
+	const inputPageNum = document.querySelector(".input__pageNum");
+	if (inputPageNum) {
+		inputPageNum.addEventListener("change", (e) => {
+			e.preventDefault();
+			page = e.target.value;
+			if (Number(page) < 1) {
+				page = 1;
+			}
+			if (Number(page) > Number('${pageNum}')) {
+				page = '${pageNum}';
+			}
+			
+			params.set("page", page);
+			const isQuestionMark = params.toString() === "" ? "" : "?";
+			window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
+		})
+	}
+	const minPageBtn = document.querySelector(".btn__page--min");
+	const maxPageBtn = document.querySelector(".btn__page--max");
+	if (minPageBtn) {
+		if (page === "1") {
+			minPageBtn.disabled = true;
+		}
+		else minPageBtn.disabled = false;
+		minPageBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			params.delete("page"); 
+			const isQuestionMark = params.toString() === "" ? "" : "?";
+			window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
+		})
+	}
+	if (maxPageBtn) {
+		if (page === '${pageNum}') {
+			maxPageBtn.disabled = true;
+		}
+		else maxPageBtn.disabled = false;
+		maxPageBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			params.set("page", ${pageNum});
+			const isQuestionMark = params.toString() === "" ? "" : "?";
+			window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
+		})
+	}
+  </script>
 
 	<!-- Libs JS -->
 	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>

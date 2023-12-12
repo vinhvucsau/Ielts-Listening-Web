@@ -43,5 +43,11 @@ public class BlogServiceImpl implements IBlogService {
 	public List<Blog> Find3blog(String id) {
 		return blogDao.Find3blog(id);
 	}
+
+	@Override
+	public List<Blog> findAll(boolean all, int firstResult, int maxResult) {
+		// TODO Auto-generated method stub
+		return blogDao.findAll(all, firstResult, maxResult);
+	}
 	
 }

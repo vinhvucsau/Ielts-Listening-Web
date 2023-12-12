@@ -11,4 +11,5 @@ public interface IBlogService {
 	void update(Blog blog);
 	void delete(String id) throws Exception;
 	List<Blog> Find3blog(String id);
+	List<Blog> findAll(boolean all, int firstResult, int maxResult);
 }
