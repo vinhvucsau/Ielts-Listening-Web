@@ -119,7 +119,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 								<ul class="list-unstyled">
 									<li><a class="dropdown-item"
 										href="/Ielts-listening2/user/capnhattaikhoan?userId=${user.userId}">
-											<i class="fe fe-user me-2"></i> Thông tin
+											<i class="fe fe-user me-2"></i> Tài khoản
 									</a></li>
 									<li><a class="dropdown-item"
 										href="/Ielts-listening2/user/mycart?userId=${user.userId}">
@@ -131,7 +131,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 									</a></li>
 									<li><a class="dropdown-item"
 										href="capnhatmatkhau?userId=${user.userId}"> <i
-											class="fe fe-settings me-2"></i> Cài đặt
+											class="fe fe-settings me-2"></i> Bảo mật
 									</a></li>
 								</ul>
 								<div class="dropdown-divider"></div>

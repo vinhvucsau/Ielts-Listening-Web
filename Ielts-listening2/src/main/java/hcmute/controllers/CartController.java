@@ -22,6 +22,7 @@ import hcmute.services.ICartService;
 import hcmute.services.ICourseService;
 import hcmute.services.IUserCourseService;
 import hcmute.services.UserCourseServiceImpl;
+import hcmute.utils.Constants;
 
 @WebServlet(urlPatterns = { "/user/addToCart", "/user/mycart", "/user/deleteToCart" })
 public class CartController extends HttpServlet {
@@ -63,6 +64,7 @@ public class CartController extends HttpServlet {
 				countAddToCartByUser = finalCarts.size();
 
 				session.setAttribute("cart", finalCarts);
+				req.setAttribute("folder", Constants.FOLDER_COURSE);
 				req.setAttribute("course", finalCarts);
 				req.setAttribute("countAddToCartByUser", countAddToCartByUser);
 				req.setAttribute("user", user);

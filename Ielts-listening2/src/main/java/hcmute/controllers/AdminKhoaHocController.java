@@ -92,7 +92,7 @@ public class AdminKhoaHocController extends HttpServlet {
 				if (req.getPart("image").getSize() != 0) {
 					// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
-					model.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\courseIMG\\", fileName));
+					model.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\"+Constants.FOLDER_COURSE+"\\", fileName));
 				}
 				if (req.getPart("trailer").getSize() != 0) {
 					// tạo tên file mới để khỏi bị trùng
