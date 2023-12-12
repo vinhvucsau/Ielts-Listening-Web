@@ -37,17 +37,19 @@ public class CartController extends HttpServlet {
 		 */
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
+			int countAddToCartByUser = 0;
+
+			List<Cart> finalCarts = new ArrayList<Cart>();
 			User user = (User) session.getAttribute("user");
+			int networth = user.getNetworth() == null ? 0 : user.getNetworth();
 			if (url.contains("mycart")) {
 
-				int countAddToCartByUser = 0;
-
-				List<Cart> finalCarts = new ArrayList<Cart>();
+				
 
 				// String userId = req.getParameter("userId") == null ? "" :
 				// req.getParameter("userId");
 
-				int networth = user.getNetworth() == null ? 0 : user.getNetworth();
+				
 
 				List<Cart> carts = cartService.findByUserId(user.getUserId());
 //				PrintWriter out = resp.getWriter();
@@ -72,7 +74,7 @@ public class CartController extends HttpServlet {
 				req.getRequestDispatcher("/views/user/cart.jsp").forward(req, resp);
 			}
 
-<<<<<<< Updated upstream
+
 			session.setAttribute("cart", finalCarts);
 			req.setAttribute("course", finalCarts);
 			req.setAttribute("countAddToCartByUser", countAddToCartByUser);
@@ -83,11 +85,11 @@ public class CartController extends HttpServlet {
 			 */
 
 			req.getRequestDispatcher("/views/user/cart.jsp").forward(req, resp);
-=======
+
 		} else {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 			rd.forward(req, resp);
->>>>>>> Stashed changes
+
 		}
 
 	}

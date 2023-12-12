@@ -24,10 +24,7 @@ import hcmute.services.UserServiceImpl;
 @WebServlet(urlPatterns = { "/user/home" })
 public class UserController extends HttpServlet {
 
-	/**
-	 * 
-	 */
-	IAdminKhoaHocService courseService = new AdminKhoaHocServiceImpl();
+
 	private static final long serialVersionUID = 1L;
 	IAccountServices accountService = new AccountServiceImpl();
 	IUserService userService = new UserServiceImpl();
@@ -44,21 +41,6 @@ public class UserController extends HttpServlet {
 		}
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		resp.setContentType("text/html");
-		String url = req.getRequestURI().toString();
-	}
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-	private void FindIncreaseRate(HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			List<Course> list = courseService.FindCourseIncreaseRate();
-			
-			req.setAttribute("course", list);
 
 	private void FindIncreaseRate(HttpServletRequest req, HttpServletResponse resp) {
 		try {
@@ -72,18 +54,6 @@ public class UserController extends HttpServlet {
 		}
 
 	}
-
-	private void FindIncreaseRate(HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			List<Course> list = courseService.FindCourseIncreaseRate();
-
-			req.setAttribute("course", list);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			req.setAttribute("error", "Eror: " + e.getMessage());
-		}
-
-	}
+	
 
 }

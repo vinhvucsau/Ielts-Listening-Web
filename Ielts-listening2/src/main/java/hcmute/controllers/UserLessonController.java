@@ -91,9 +91,9 @@ public class UserLessonController extends HttpServlet {
 			req.setAttribute("listEnroll", listEnroll);
 			EnrrolLesson enrollLesson = enrService.findByUserIdAndLessonId(user.getUserId(), lessID);
 			if (enrollLesson != null && enrollLesson.getNumberOfStar() != null)
-				req.setAttribute("star", enrollLesson.getNumberOfStar());
+				req.setAttribute("starUser", enrollLesson.getNumberOfStar());
 			else
-				req.setAttribute("star", 0);
+				req.setAttribute("starUser", 0);
 			// thêm danh sách câu hỏi
 			List<AnswerLesson> listAnswer = ansService.findAll();
 			req.setAttribute("enrollLesson", enrollLesson);
@@ -116,7 +116,7 @@ public class UserLessonController extends HttpServlet {
 			}
 			if (people > 0) {
 				for (int i = 0; i < 5; i++) {
-					System.out.println(((percentCountOfStars[i] * 100) / (float) people));
+					System.out.println(((percentCountOfStars[i] * 100) / (float) people)+"%%%");
 					percentCountOfStars[i] = ((((percentCountOfStars[i] * 100) / (float) people)
 							- (int) ((percentCountOfStars[i] * 100) / (float) people)) >= 0.5)
 									? (int) ((percentCountOfStars[i] * 100) / (float) people) + 1

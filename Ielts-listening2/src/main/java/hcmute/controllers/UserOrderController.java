@@ -76,14 +76,11 @@ public class UserOrderController extends HttpServlet {
 			}
 
 		} else {
-<<<<<<< Updated upstream
 			PrintWriter out = resp.getWriter();
 			out.println("Chưa login");
-=======
 			req.setAttribute("e", "Chưa đăng nhập");
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
 			rd.forward(req, resp);
->>>>>>> Stashed changes
 		}
 	}
 
