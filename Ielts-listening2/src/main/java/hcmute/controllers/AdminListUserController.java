@@ -95,6 +95,7 @@ public class AdminListUserController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
 		if(url.contains("admin/capnhattaikhoan")) {
+			System.out.println("lamm post");
 			UpdateInfo(req, resp);
 			/* resp.sendRedirect(req.getContextPath() + "/admin/listUser"); */
 
@@ -112,10 +113,10 @@ public class AdminListUserController extends HttpServlet {
 
 			String address = req.getParameter("inputAddress").trim();
 			String dateOfBirth = req.getParameter("datePicker").trim();
-			String networth = req.getParameter("inputNetworth").trim();
+			
 
 			Integer currentNetworth = 0;
-			boolean check = networth.equals("");
+			
 
 			if (req.getPart("inputImage").getSize() == 0) {
 				user.setImage(user.getImage());
@@ -133,17 +134,7 @@ public class AdminListUserController extends HttpServlet {
 				dateOfBirth = null;
 			}
 
-			if (user.getNetworth() != null) {
-				if (check == false) {
-					currentNetworth = user.getNetworth() + Integer.parseInt(networth);
-				} else {
-					currentNetworth = user.getNetworth();
-				}
-			} else {
-				if (check == false) {
-					currentNetworth = Integer.parseInt(networth);
-				}
-			}
+		
 			if (phoneNumber.length() == 10 && phoneNumber.matches("[0-9]+")) {
 				if (userService.findDuplicatePhone(phoneNumber, user.getUserId()) == false) {
 					req.setAttribute("messError", "Số điện thoại đã được sử dụng!");
@@ -163,7 +154,8 @@ public class AdminListUserController extends HttpServlet {
 			
 			req.setAttribute("currentUser", user);
 			req.setAttribute("message", "Cập nhật thành công!");
-			resp.sendRedirect(req.getContextPath() + "/admin/capnhattaikhoan?userId=" + user.getUserId() );
+			System.out.println("lamm" + user.getName());
+			resp.sendRedirect(req.getContextPath() + "/admin/capnhattaikhoan?userId=" + user.getUserId());
 
 		} catch (Exception e) {
 			e.printStackTrace();
