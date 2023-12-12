@@ -126,7 +126,7 @@
 	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
 
 	<!-- Theme JS -->
-	<script src="../../assets/js/theme.min.js"></script>
+	<script src="../assets/js/theme.min.js"></script>
 
 	<script src="../assets/js/vendors/jquery.min.js"></script>
 	<script src="../assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>

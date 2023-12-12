@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +23,7 @@ import hcmute.services.ICourseService;
 import hcmute.services.IUserCourseService;
 import hcmute.services.UserCourseServiceImpl;
 
-@WebServlet(urlPatterns = { "/user/cart", "/user/addToCart", "/user/mycart", "/user/deleteToCart" })
+@WebServlet(urlPatterns = { "/user/addToCart", "/user/mycart", "/user/deleteToCart" })
 public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,28 +36,43 @@ public class CartController extends HttpServlet {
 		 * userCourseService = new UserCourseServiceImpl();
 		 */
 		HttpSession session = req.getSession(false);
-		if (url.contains("mycart")) {
-			int countAddToCartByUser = 0;
-
+		if (session != null && session.getAttribute("user") != null) {
 			User user = (User) session.getAttribute("user");
-			List<Cart> finalCarts = new ArrayList<Cart>();
+			if (url.contains("mycart")) {
 
-			// String userId = req.getParameter("userId") == null ? "" :
-			// req.getParameter("userId");
+				int countAddToCartByUser = 0;
 
-			int networth = user.getNetworth() == null ? 0 : user.getNetworth();
+				List<Cart> finalCarts = new ArrayList<Cart>();
 
-			List<Cart> carts = cartService.findByUserId(user.getUserId());
-//			PrintWriter out = resp.getWriter();
-//			for (Cart cart : carts)
-//				out.println(cart.getCartId());
-			for (Cart cart2 : carts) {
-				cartService.update(cart2);
-				if (cart2.isBuy() == false)
-					finalCarts.add(cart2);
+				// String userId = req.getParameter("userId") == null ? "" :
+				// req.getParameter("userId");
+
+				int networth = user.getNetworth() == null ? 0 : user.getNetworth();
+
+				List<Cart> carts = cartService.findByUserId(user.getUserId());
+//				PrintWriter out = resp.getWriter();
+//				for (Cart cart : carts)
+//					out.println(cart.getCartId());
+				for (Cart cart2 : carts) {
+					cartService.update(cart2);
+					if (cart2.isBuy() == false)
+						finalCarts.add(cart2);
+				}
+				countAddToCartByUser = finalCarts.size();
+
+				session.setAttribute("cart", finalCarts);
+				req.setAttribute("course", finalCarts);
+				req.setAttribute("countAddToCartByUser", countAddToCartByUser);
+				req.setAttribute("user", user);
+				req.setAttribute("networth", networth);
+				/*
+				 * PrintWriter out = resp.getWriter(); out.print("err"+ finalCarts);
+				 */
+
+				req.getRequestDispatcher("/views/user/cart.jsp").forward(req, resp);
 			}
-			countAddToCartByUser = finalCarts.size();
 
+<<<<<<< Updated upstream
 			session.setAttribute("cart", finalCarts);
 			req.setAttribute("course", finalCarts);
 			req.setAttribute("countAddToCartByUser", countAddToCartByUser);
@@ -67,7 +83,13 @@ public class CartController extends HttpServlet {
 			 */
 
 			req.getRequestDispatcher("/views/user/cart.jsp").forward(req, resp);
+=======
+		} else {
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
+			rd.forward(req, resp);
+>>>>>>> Stashed changes
 		}
+
 	}
 
 	@Override

@@ -50,6 +50,10 @@ public class UserController extends HttpServlet {
 		resp.setContentType("text/html");
 		String url = req.getRequestURI().toString();
 	}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	private void FindIncreaseRate(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			List<Course> list = courseService.FindCourseIncreaseRate();
