@@ -38,12 +38,24 @@
 </head>
 
 <body>
-	<h1>404 ERROR</h1>
-	<h1>${user.userId }</h1>
-	<h1>${text }</h1>
-	<h1>${cmt.commentId }</h1>
-	<h1>${u.userId}</h1>
-	<h1>${e}</h1>
+	    <!-- Page Content -->
+        <main>
+            <section class="container d-flex flex-column vh-100">
+              <div class="row align-items-center justify-content-center g-0 h-lg-100 py-10">
+                <!-- Docs -->
+                <div class="offset-xl-1 col-xl-4 col-lg-6 col-md-12 col-12 text-center text-lg-start">
+                  <h1 class="display-1 mb-3">404</h1>
+                  <p class="mb-5 lead px-4 px-md-0">${e}
+                  </p>
+                  <a href="<c:url value='/authentication-login' />" class="btn btn-primary me-2">Đăng nhập</a>
+                </div>
+                <!-- img -->
+                <div class="offset-xl-1 col-xl-6 col-lg-6 col-md-12 col-12 mt-8 mt-lg-0">
+                  <img src="../assets/images/error/404-error-img.svg" alt="error" class="w-100" />
+                </div>
+              </div>
+            </section>
+        </main>
 </body>
 
 

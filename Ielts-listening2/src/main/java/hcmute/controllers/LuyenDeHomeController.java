@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import hcmute.services.IMockTestService;
+import hcmute.entity.Blog;
 import hcmute.entity.EnrrolTest;
 import hcmute.entity.MockTest;
 import hcmute.entity.TopicTest;
@@ -25,6 +26,7 @@ import hcmute.services.IUserService;
 import hcmute.services.MockTestServiceImpl;
 import hcmute.services.TopicTestServiceImpl;
 import hcmute.services.UserServiceImpl;
+import hcmute.utils.Constants;
 
 /**
  * Servlet implementation class LuyenDeHomeController
@@ -79,37 +81,46 @@ public class LuyenDeHomeController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
+		
+
+		
 		HttpSession session = req.getSession(false);
+		if (session != null && session.getAttribute("user") != null) {
+			User user = (User) session.getAttribute("user");
+			
+			String testId = req.getParameter("testId");
+			EnrrolTest enrrolTest = new EnrrolTest();
+			enrrolTest.setEnrrolId("");
+			enrrolTest.setScore(-1.0);
 
-		// Set cứng ID để test chức năng
+			enrrolTest.setUsers(user);
+			MockTest mockTest = mockTestService.findById(testId);
+			enrrolTest.setMockTests(mockTest);
+			
+			if (enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId) != null
+					&& enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId).getScore() < 0) {
+				EnrrolTest checkEnTest = enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId);
 
-		User user = (User) session.getAttribute("user");
-		String testId = req.getParameter("testId");
+				resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
 
-		EnrrolTest enrrolTest = new EnrrolTest();
-		enrrolTest.setEnrrolId("");
-		enrrolTest.setScore(-1.0);
+			} else {
+				LocalDateTime date = LocalDateTime.now();
+				LocalDateTime dateNow = date.truncatedTo(ChronoUnit.SECONDS);
+				enrrolTest.setEnrrollmentDate(dateNow);
+				enrollTestService.insert(enrrolTest);
 
-		enrrolTest.setUsers(user);
-		MockTest mockTest = mockTestService.findById(testId);
-		enrrolTest.setMockTests(mockTest);
-		if (enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId) != null
-				&& enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId).getScore() < 0) {
-			EnrrolTest checkEnTest = enrollTestService.findByUserIdAndMockTestIdSoon(user.getUserId(), testId);
+				EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(user.getUserId(), testId,
+						dateNow);
 
-			resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + checkEnTest.getEnrrolId());
-
+				resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
+			}
+			
 		} else {
-			LocalDateTime date = LocalDateTime.now();
-			LocalDateTime dateNow = date.truncatedTo(ChronoUnit.SECONDS);
-			enrrolTest.setEnrrollmentDate(dateNow);
-			enrollTestService.insert(enrrolTest);
-
-			EnrrolTest enrrolTestGet = enrollTestService.findByUserIdAndMockTestIdAndDate(user.getUserId(), testId,
-					dateNow);
-
-			resp.sendRedirect(req.getContextPath() + "/test/luyende_test?enrollTestId=" + enrrolTestGet.getEnrrolId());
+			req.setAttribute("e", "Chưa đăng nhập !");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
+			rd.forward(req, resp);
 		}
-
 	}
 }
