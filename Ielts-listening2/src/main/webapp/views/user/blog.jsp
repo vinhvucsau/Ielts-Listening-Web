@@ -186,18 +186,7 @@
 																		class="blog-status badge-dot bg-success me-1 d-inline-block align-middle"></span>
 																		Đã đăng</td>
 
-																	<td class="blog-setup" value="${blog.status}"><span
-																		class="dropdown dropstart"> <a
-																			class="blog-setup__btn btn-icon btn btn-ghost btn-sm rounded-circle"
-																			href="#" role="button" id="courseDropdown1"
-																			data-bs-toggle="dropdown" data-bs-offset="-20,20"
-																			aria-expanded="false" value="${blog.status}"> <i
-																				class="fe fe-more-vertical" value="${blog.status}"></i>
-																		</a> <span class="dropdown-menu"
-																			aria-labelledby="courseDropdown1"> <span
-																				class="dropdown-header">Thiết lập</span>
-																		</span>
-																	</span></td>
+																	<td class="blog-setup" value="${blog.status}"></td>
 																</c:when>
 
 																<c:when test="${blog.status == 2}">
@@ -307,18 +296,7 @@
                                                                 class="blog-status badge-dot bg-success me-1 d-inline-block align-middle"></span>
                                                                 Đã đăng</td>
 
-                                                            <td class="blog-setup" value="${blog.status}"><span
-                                                                class="dropdown dropstart"> <a
-                                                                    class="blog-setup__btn btn-icon btn btn-ghost btn-sm rounded-circle"
-                                                                    href="#" role="button" id="courseDropdown1"
-                                                                    data-bs-toggle="dropdown" data-bs-offset="-20,20"
-                                                                    aria-expanded="false" value="${blog.status}"> <i
-                                                                        class="fe fe-more-vertical" value="${blog.status}"></i>
-                                                                </a> <span class="dropdown-menu"
-                                                                    aria-labelledby="courseDropdown1"> <span
-                                                                        class="dropdown-header">Thiết lập</span>
-                                                                </span>
-                                                            </span></td>
+                                                            <td class="blog-setup" value="${blog.status}"></td>
 
 														</tr>
 													</c:when>
