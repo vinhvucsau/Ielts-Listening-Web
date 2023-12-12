@@ -110,7 +110,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					style="width: 500px">
 					<li class="nav-item  ">
 						<div
-							class="div__tab div__tab--1 nav-link rounded-3 text-black ${param.tab == null || param.tab == '1' ? 'active' : ''}">Tất
+							class="div`__tab div__tab--1 nav-link rounded-3 text-black ${param.tab == null || param.tab == '1' ? 'active' : ''}">Tất
 							cả bộ đề</div>
 					</li>
 					<li class="nav-item ">

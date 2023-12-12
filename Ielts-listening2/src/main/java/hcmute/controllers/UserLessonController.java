@@ -43,7 +43,7 @@ import hcmute.utils.HttpUtil;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
 		* 50)
 @WebServlet(urlPatterns = { "/user/lesson", "/user/reply", "/user/comment", "/user/rate", "/api-AnswerLessonUser",
-		"/user/resetEnrollLesson", "/user/completeEnrollLesson"})
+		"/user/resetEnrollLesson", "/user/completeEnrollLesson" })
 public class UserLessonController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -67,12 +67,6 @@ public class UserLessonController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		String url = req.getRequestURI().toString();
 
-		List<CommentLesson> listCmt = cmtService.findAll();
-		List<RepComment> listRep = repService.findAll();
-		List<User> listUser = userService.findAll();
-		List<EnrrolLesson> listEnroll = enrService.findAll();
-		List<AnswerLesson> listAnswer = ansService.findAll();
-
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			user = (User) session.getAttribute("user");
@@ -84,6 +78,10 @@ public class UserLessonController extends HttpServlet {
 		if (url.contains("lesson")) {
 			String lessID = req.getParameter("id");
 			curLesson = lessonService.findOneById(lessID);
+			List<RepComment> listRep = repService.findAll();
+			List<CommentLesson> listCmt = cmtService.findAll();
+			List<User> listUser = userService.findAll();
+			List<EnrrolLesson> listEnroll = enrService.findAll();
 
 			req.setAttribute("lesson", curLesson);
 			req.setAttribute("listCmt", listCmt);
@@ -96,36 +94,36 @@ public class UserLessonController extends HttpServlet {
 				req.setAttribute("starUser", enrollLesson.getNumberOfStar());
 			else
 				req.setAttribute("starUser", 0);
-			//thêm danh sách câu hỏi
+			// thêm danh sách câu hỏi
+			List<AnswerLesson> listAnswer = ansService.findAll();
 			req.setAttribute("enrollLesson", enrollLesson);
 			List<AnswerLesson> listAnswerLesson = ansService.findByLessonId(lessID);
-			listAnswerLesson.sort((a,b) -> a.getNumber() - b.getNumber());
+			listAnswerLesson.sort((a, b) -> a.getNumber() - b.getNumber());
 			req.setAttribute("listAnswerLesson", listAnswerLesson);
 			req.setAttribute("listAnswer", listAnswer);
-			
-			
-			 List<EnrrolLesson> enrollLessonList = enrService.findByLesson(lessID);
-			 req.setAttribute("enrollLessonList", enrollLessonList);
-			 
-			 int[] percentCountOfStars = new int[] { 0, 0, 0, 0, 0 };
-			 int people = 0;
-			 for (EnrrolLesson enrrolLesson : enrollLessonList) {
+
+			List<EnrrolLesson> enrollLessonList = enrService.findByLesson(lessID);
+			req.setAttribute("enrollLessonList", enrollLessonList);
+
+			int[] percentCountOfStars = new int[] { 0, 0, 0, 0, 0 };
+			int people = 0;
+			for (EnrrolLesson enrrolLesson : enrollLessonList) {
 				int star = enrrolLesson.getNumberOfStar() == null ? 0 : enrrolLesson.getNumberOfStar();
 				if (star > 0) {
 					percentCountOfStars[star - 1] += 1;
 					people += 1;
 				}
-			 }
-			 if (people > 0) {
+			}
+			if (people > 0) {
 				for (int i = 0; i < 5; i++) {
-					System.out.println(((percentCountOfStars[i] * 100) / (float) people));
+					System.out.println(((percentCountOfStars[i] * 100) / (float) people)+"%%%");
 					percentCountOfStars[i] = ((((percentCountOfStars[i] * 100) / (float) people)
 							- (int) ((percentCountOfStars[i] * 100) / (float) people)) >= 0.5)
 									? (int) ((percentCountOfStars[i] * 100) / (float) people) + 1
 									: (int) ((percentCountOfStars[i] * 100) / (float) people);
 				}
-			 }
-			 req.setAttribute("percentCountOfStars", percentCountOfStars);
+			}
+			req.setAttribute("percentCountOfStars", percentCountOfStars);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/Lesson-content.jsp");
 			rd.forward(req, resp);
 		} else if (url.contains("reply")) {
@@ -216,10 +214,10 @@ public class UserLessonController extends HttpServlet {
 		} else if (url.contains("/api-AnswerLessonUser")) {
 			try {
 				HttpUtil httpUtil = HttpUtil.of(req.getReader());
-				AnswerLessonUser answerLessonUser= httpUtil.toModel(AnswerLessonUser.class);
+				AnswerLessonUser answerLessonUser = httpUtil.toModel(AnswerLessonUser.class);
 				EnrrolLesson enrollLesson = enrService.findOneById(answerLessonUser.getEnrrolLesson().getEnrrolId());
 				AnswerLesson ansLesson = ansService.findOneById(answerLessonUser.getAnswerLesson().getAnswerId());
-				if(enrollLesson != null && ansLesson != null) {
+				if (enrollLesson != null && ansLesson != null) {
 					answerLessonUser.setEnrrolLesson(enrollLesson);
 					answerLessonUser.setAnswerLesson(ansLesson);
 					answerLessonUserService.saveOrUpdate(answerLessonUser);
