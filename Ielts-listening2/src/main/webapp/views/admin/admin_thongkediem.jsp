@@ -69,7 +69,7 @@
 				</div>
 
 				<div class="row mt-0 mt-md-4">
-
+					<!-- Left sidebar -->
 					<div class="col-lg-3 col-md-4 col-12">
 						<!-- Side navbar -->
 						<nav
@@ -88,53 +88,24 @@
 							<!-- Collapse navbar -->
 							<div class="collapse navbar-collapse" id="sidenav">
 								<div class="navbar-nav flex-column">
-									<span class="navbar-header">Subscription</span>
 									<!-- List -->
 									<ul class="list-unstyled ms-n2 mb-4">
 										<!-- Nav item -->
 										<li class="nav-item"><a class="nav-link"
-											href="khoahoccuatoi?userId=${user.userId}"> <i
-												class="fe fe-calendar nav-icon"></i> My Course
+											href="khoahoccuatoi?userId=${currentUser.userId}"> <i
+												class="fe fe-calendar nav-icon"></i> Khóa học
 										</a></li>
 										<!-- Nav item -->
 										<li class="nav-item active"><a class="nav-link"
-											href="thongkediem?userId=${user.userId}"> <i
-												class="fe fe-calendar nav-icon"></i> My Score
+											href="thongkediem?userId=${currentUser.userId}"> <i
+												class="fe fe-calendar nav-icon"></i> Điểm số
 										</a></li>
 
-										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
-											href="invoice.html"> <i class="fe fe-clipboard nav-icon"></i>
-												Invoice
+										<li class="nav-item "><a class="nav-link"
+											href="capnhattaikhoan?userId=${currentUser.userId}"> <i
+												class="fe fe-settings nav-icon"></i> Thông tin cá nhân
 										</a></li>
-
-									</ul>
-									<span class="navbar-header">Account Settings</span>
-									<!-- List -->
-									<ul class="list-unstyled ms-n2 mb-0">
-										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
-											href="capnhattaikhoan?userId=${user.userId}"> <i
-												class="fe fe-settings nav-icon"></i> Edit Profile
-										</a></li>
-										<!-- Nav item -->
-										
-										<%-- <li class="nav-item"><a class="nav-link"
-											href="capnhatmatkhau?userId=${user.userId}"> <i
-												class="fe fe-user nav-icon"></i> Security
-										</a></li> --%>
-
-										<li class="nav-item"><a class="nav-link"
-											href="#"> <i class="fe fe-bell nav-icon"></i>
-												Notifications
-										</a></li>
-
-										<!-- Nav item -->
-										<!-- <li class="nav-item"><a class="nav-link"
-											href="../index.html"> <i class="fe fe-power nav-icon"></i>
-												Sign Out
-										</a></li> -->
-									</ul>
+									
 								</div>
 							</div>
 						</nav>
@@ -142,12 +113,12 @@
 
 					<div class="col-lg-9 col-md-8 col-12">
 						<!-- Card -->
-
+				
 						<div class="card">
 							<!-- Card header -->
 							<div class="card-header">
-								<h3 class="mb-0">My Score</h3>
-								<p class="mb-0">Tracking your study progress here.</p>
+								<h3 class="mb-0">Điểm số</h3>
+								<p class="mb-0">Theo dõi quá trình học tập tại đây.</p>
 							</div>
 							<!-- Card body -->
 							<form action="capnhatmatkhau?userId=${user.userId}" method="post">

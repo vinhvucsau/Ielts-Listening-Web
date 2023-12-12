@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import hcmute.entity.User;
+import hcmute.entity.UserCourse;
 import hcmute.services.AccountServiceImpl;
 import hcmute.services.AdminListUserServiceImpl;
 import hcmute.services.IAccountServices;
@@ -23,7 +24,7 @@ import hcmute.utils.Constants;
 import hcmute.utils.DeleteImage;
 import hcmute.utils.UploadUtils;
 
-@WebServlet(urlPatterns = { "/admin/listUser", "/admin/capnhattaikhoan" })
+@WebServlet(urlPatterns = { "/admin/listUser", "/admin/capnhattaikhoan", "/admin/khoahoccuatoi" })
 @MultipartConfig (fileSizeThreshold = 1024*1024*10, maxFileSize = 1024*1024*50, maxRequestSize = 1024*1024*50)
 public class AdminListUserController extends HttpServlet {
 	IAccountServices accountService = new AccountServiceImpl();
@@ -43,6 +44,18 @@ public class AdminListUserController extends HttpServlet {
 		}else if(url.contains("admin/capnhattaikhoan")) {
 			FindById(req, resp);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_capnhattaikhoan.jsp");
+			rd.forward(req, resp);
+		} else if (url.contains("khoahoccuatoi")) {
+			String userId = req.getParameter("userId");
+			
+			Long count = userService.countCourseByUserId(userId);
+			User userCurrent = userService.findUserByID(userId);
+			List<UserCourse> listUserCourse = userService.findAllUserCourseByUserId(userId);
+			req.setAttribute("userCourse", listUserCourse);
+			req.setAttribute("userId", userId);
+			req.setAttribute("currentUser", userCurrent);
+			req.setAttribute("count", count);
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_khoahoc_user.jsp");
 			rd.forward(req, resp);
 		}
 	}
@@ -83,7 +96,7 @@ public class AdminListUserController extends HttpServlet {
 		String url = req.getRequestURI().toString();
 		if(url.contains("admin/capnhattaikhoan")) {
 			UpdateInfo(req, resp);
-			resp.sendRedirect(req.getContextPath() + "/admin/listUser");
+			/* resp.sendRedirect(req.getContextPath() + "/admin/listUser"); */
 
 		}
 	}
@@ -150,8 +163,7 @@ public class AdminListUserController extends HttpServlet {
 			
 			req.setAttribute("currentUser", user);
 			req.setAttribute("message", "Cập nhật thành công!");
-			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/user_capnhattaikhoan.jsp");
-			rd.forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/admin/capnhattaikhoan?userId=" + user.getUserId() );
 
 		} catch (Exception e) {
 			e.printStackTrace();
