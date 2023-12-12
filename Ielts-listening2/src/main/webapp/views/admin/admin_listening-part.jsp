@@ -118,7 +118,7 @@
 							<div class="card-body">
 								<div class="mb-3">
 									<label for="courseTitle" class="form-label">Number of
-										Part</label><input id="partNumber" name="partNumber"
+										Part</label><input type="number" id="partNumber" name="partNumber"
 										class="form-control" type="text" placeholder="No.Part"
 										required> <small>Write a 60 character course
 										title.</small>

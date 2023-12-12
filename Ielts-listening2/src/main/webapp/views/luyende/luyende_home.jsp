@@ -378,16 +378,18 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 							</c:forEach>
 						</div>
 					</div>
-					<button
+
+					<a href="luyende-testset?topicId=${topicTest.topicId }"
 						class="btn btn-primary d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold  align-items-center">
-						Xem thêm ${topicTest.mockTests.size() - i} đề
-						<svg xmlns="http://www.w3.org/2000/svg" height="24"
+						Xem thêm ${topicTest.mockTests.size() - i} đề <svg
+							xmlns="http://www.w3.org/2000/svg" height="24"
 							style="margin-top: 3px;" fill="currentColor"
 							class="bi bi-arrow-right ms-3" viewBox="0 0 16 16">
 	  						<path fill-rule="evenodd"
 								d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
 						</svg>
-					</button>
+					</a>
+
 				</div>
 			</c:forEach>
 
