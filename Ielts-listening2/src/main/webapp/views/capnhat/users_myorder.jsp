@@ -4,18 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <body>
+
 	<main>
 		<section class="pt-5 pb-5">
 			<div class="container">
 				<!-- User info -->
 				<div class="row align-items-center">
 					<div class="col-xl-12 col-lg-12 col-md-12 col-12">
-						<!-- Bg -->
 						<div class="rounded-top"
 							style="background: url(../assets/images/background/profile-bg.jpg) no-repeat; background-size: cover; height: 100px"></div>
 						<div
 							class="card px-4 pt-2 pb-4 shadow-sm rounded-top-0 rounded-bottom-0 rounded-bottom-md-2">
-							<div class="d-flex align-items-end justify-content-between">
+							<div class="d-flex align-items-e nd justify-content-between">
 								<div class="d-flex align-items-center">
 									<div
 										class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
@@ -44,26 +44,26 @@
 												data-placement="top" title="Beginner"> <svg width="16"
 													height="16" viewBox="0 0 16 16" fill="none"
 													xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3"
+														<rect x="3"
 														y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7"
+														<rect x="7"
 														y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                        <rect x="11"
+														<rect x="11"
 														y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
+													</svg>
 											</a>
 										</h2>
 										<p class="mb-0 d-block">${user.email }</p>
 									</div>
 								</div>
-
+			
 							</div>
 						</div>
 					</div>
 				</div>
-
+	
 				<div class="row mt-0 mt-md-4">
-
+					<!-- Left sidebar -->
 					<div class="col-lg-3 col-md-4 col-12">
 						<!-- Side navbar -->
 						<nav
@@ -82,52 +82,51 @@
 							<!-- Collapse navbar -->
 							<div class="collapse navbar-collapse" id="sidenav">
 								<div class="navbar-nav flex-column">
-									<span class="navbar-header">Subscription</span>
+									<span class="navbar-header">CÁ NHÂN</span>
 									<!-- List -->
 									<ul class="list-unstyled ms-n2 mb-4">
 										<!-- Nav item -->
 										<li class="nav-item"><a class="nav-link"
 											href="khoahoccuatoi?userId=${user.userId}"> <i
-												class="fe fe-calendar nav-icon"></i> My Course
+												class="fe fe-calendar nav-icon"></i> Khóa học
 										</a></li>
 										<!-- Nav item -->
 										<li class="nav-item"><a class="nav-link"
 											href="thongkediem?userId=${user.userId}"> <i
-												class="fe fe-calendar nav-icon"></i> My Score
+												class="fe fe-calendar nav-icon"></i> Điểm số
 										</a></li>
 
 										<!-- Nav item -->
-
-										<li class="nav-item"><a class="nav-link"
+										
+										<li class="nav-item active"><a class="nav-link"
 											href="myorder?userId=${user.userId}"> <i
-												class="fe fe-calendar nav-icon"></i> Invoice
+												class="fe fe-calendar nav-icon"></i> Hóa đơn
 										</a></li>
 
 									</ul>
-									<span class="navbar-header">Account Settings</span>
+									<span class="navbar-header">TÀI  KHOẢN</span>
 									<!-- List -->
 									<ul class="list-unstyled ms-n2 mb-0">
 										<!-- Nav item -->
-										<li class="nav-item active"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link"
 											href="capnhattaikhoan?userId=${user.userId}"> <i
-												class="fe fe-settings nav-icon"></i> Edit Profile
+												class="fe fe-settings nav-icon"></i> Thông tin cá nhân
 										</a></li>
 										<!-- Nav item -->
 										<li class="nav-item"><a class="nav-link"
 											href="capnhatmatkhau?userId=${user.userId}"> <i
-												class="fe fe-user nav-icon"></i> Security
-										</a></li>
-
-										<li class="nav-item"><a class="nav-link"
-											href="notifications.html"> <i class="fe fe-bell nav-icon"></i>
-												Notifications
+												class="fe fe-user nav-icon"></i> Bảo mật
 										</a></li>
 
 										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
-											href="../index.html"> <i class="fe fe-power nav-icon"></i>
-												Sign Out
-										</a></li>
+										<form action=logout method="post">
+											<li class="nav-item">
+												<button class="nav-link" style="width: 100%;"> 
+													<i class="fe fe-power nav-icon"></i>
+													Đăng xuất
+												</button>
+											</li>
+										</form>
 									</ul>
 								</div>
 							</div>
@@ -142,30 +141,29 @@
 									<!-- Page header -->
 									<div class="border-bottom pb-3 mb-3">
 										<div>
-											<h1 class="mb-1 h2 fw-bold">Order</h1>
+											<h1 class="mb-1 h2 fw-bold">Hóa đơn</h1>
 											<!-- Breadcrumb -->
 											<nav aria-label="breadcrumb">
 												<ol class="breadcrumb">
 													<li class="breadcrumb-item"><a
-														href="admin-dashboard.html">Dashboard</a></li>
-
-													<li class="breadcrumb-item active" aria-current="page">Order</li>
+														href="/Ielts-listening2/user/home">Trang chủ</a></li>
+				
+													<li class="breadcrumb-item active" aria-current="page">Hóa đơn</li>
 												</ol>
 											</nav>
 										</div>
 									</div>
 								</div>
 							</div>
-
+				
 							<div class="row">
 								<!-- basic table -->
 								<div class="col-md-12 col-12 mb-5">
 									<div class="card">
 										<!-- card header  -->
 										<div class="card-header">
-											<h4 class="mb-1">Order</h4>
-											<p class="mb-0">Explore Convenience - Place Your Order
-												Easily and Quickly Today!</p>
+											<h4 class="mb-1">Hóa đơn</h4>
+											<p class="mb-0">Tìm kiếm lịch sử mua hàng tại đây.</p>
 										</div>
 										<!-- table  -->
 										<div class="card-body">
@@ -174,35 +172,33 @@
 													style="width: 100%">
 													<thead class="table-light">
 														<tr>
-															<th>Order</th>
-															<th>Customer</th>
-															<th>Items</th>
-															<th>Payment</th>
-															<th>Date</th>
-															<th>Total</th>
+															<th>Hóa đơn</th>
+															<th>Số lượng</th>
+															<th>Tình trạng</th>
+															<th>Ngày mua</th>
+															<th>Tổng tiền</th>
 														</tr>
-
+				
 													</thead>
 													<tbody>
 														<c:forEach var="i" items="${list}">
 															<tr>
 																<c:set var="count" value="0"></c:set>
 																<c:forEach var="detail" items="${i.payDetail}">
-
+				
 																	<c:set var="count" value="${count + 1 }"></c:set>
 																</c:forEach>
-
+				
 																<td><a href="myoddetail?id=${i.paymentId}">${i.paymentId}</a></td>
-
-																<td>${i.users.account.userName }</td>
-																<td>${count}khóa</td>
+				
+																<td>${count}</td>
 																<td><span
-																	class="badge text-success bg-light-success">Paid</span></td>
+																	class="badge text-success bg-light-success">Đã thanh toán</span></td>
 																<td>${i.dateBuy}</td>
-																<td>${i.cost}</td>
-
+																<td>${i.cost} VNĐ</td>
+				
 															</tr>
-
+				
 														</c:forEach>
 													</tbody>
 												</table>
@@ -216,7 +212,7 @@
 								<div class="col-md-12 col-12 mb-5">
 									<div class="card">
 										<!-- card header  -->
-
+				
 									</div>
 								</div>
 							</div>
@@ -230,4 +226,6 @@
 			</div>
 		</section>
 	</main>
+	
+
 </body>

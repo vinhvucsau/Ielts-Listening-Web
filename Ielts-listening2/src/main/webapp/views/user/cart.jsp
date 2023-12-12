@@ -77,7 +77,7 @@ int networth = (int) request.getAttribute("networth");
 				<!-- Page header -->
 				<div class="border-bottom pb-3 mb-3">
 					<div class="mb-2 mb-lg-0">
-						<h1 class="mb-0 h2 fw-bold">Shopping Cart</h1>
+						<h1 class="mb-0 h2 fw-bold">Giỏ hàng</h1>
 
 					</div>
 				</div>
@@ -89,7 +89,7 @@ int networth = (int) request.getAttribute("networth");
 				<!-- alert -->
 				<div class="alert alert-warning alert-dismissible fade show"
 					role="alert">
-					Use coupon code <strong>(GKDIS15%)</strong> and get 10% discount !
+					Nhập mã <strong>(GKDIS15%)</strong> để được giảm 10% !
 				</div>
 			</div>
 			<div class="col-lg-8">
@@ -100,7 +100,7 @@ int networth = (int) request.getAttribute("networth");
 						<div class="d-flex">
 							<!-- heading -->
 							<h4 class="mb-0">
-								Shopping Cart <span>(<%=countAddToCart%> Items)
+								Giỏ hàng <span>(<%=countAddToCart%> khóa học)
 								</span>
 							</h4>
 						</div>
@@ -112,9 +112,9 @@ int networth = (int) request.getAttribute("networth");
 								<!-- Table Head -->
 								<thead class="table-light">
 									<tr>
-										<th>Product</th>
-										<th>Price</th>
-										<th>Action</th>
+										<th>Khóa học</th>
+										<th>Giá</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -125,36 +125,16 @@ int networth = (int) request.getAttribute("networth");
 											value="${i.course.courseId}">
 										<tr>
 											<td>
-												<div class="d-flex">
+												<div class="d-flex align-items-center">
 													<div>
 														<img
-															src="../assets/images/course.course/course.course-node.jpg"
-															alt="..." class="img-fluid d-lg-none invisible">
+															onerror="setDefaultImage(this)"
+															src="<c:url value='/image?fname=${folder}/${i.course.image}'/>"
+															alt="sss" class="img-fluid item-img">
 													</div>
 													<div class="ms-4 mt-2 mt-lg-0">
 														<h4 class="mb-1 text-primary-hover">${i.course.courseName }</h4>
 														<ul class="list-inline">
-															<li class="list-inline-item"><span> <svg
-																		xmlns="http://www.w3.org/2000/svg" width="12"
-																		height="12" fill="currentColor"
-																		class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                        <path
-																			d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                                                        <path
-																			d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                                    </svg>
-															</span> <span>1h 30m</span></li>
-															<li class="list-inline-item"><svg class="me-1 mt-n1"
-																	width="16" height="16" viewBox="0 0 16 16" fill="none"
-																	xmlns="http://www.w3.org/2000/svg">
-                                                                <rect
-																		x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                                <rect
-																		x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                                <rect
-																		x="11" y="2" width="2" height="12" rx="1"
-																		fill="#DBD8E9"></rect>
-                                                            </svg> Beginner</li>
 															<li class=" list-inline-item align-text-top">
 																<div class="d-flex gap-5">
 																	<c:forEach var="lesson" items="${i.course.lessons}">
@@ -185,29 +165,21 @@ int networth = (int) request.getAttribute("networth");
 																	</c:forEach>
 																	<div class="stars rating-star"
 																		data-rating="${roundedAverage}"></div>
-																	<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
 																</div>
 															</li>
 														</ul>
 
-
-
-														<div class="mt-4">
-															<a href="#" class="text-body">Edit</a> <a href="#"
-																class="text-body ms-3">Move to Wishlist</a>
-														</div>
 													</div>
 												</div>
 											</td>
 
-											<td>
-
+											<td style="vertical-align: middle;">
 												<h4 class="mb-0">
 													<fmt:formatNumber value="${i.course.cost}"
 														pattern="###,### VNĐ" />
 												</h4>
 											</td>
-											<td>
+											<td style="vertical-align: middle;">
 
 												<div class="col-auto">
 													<c:choose>
@@ -217,7 +189,7 @@ int networth = (int) request.getAttribute("networth");
 																<input type="hidden" name="cartId" value="${i.cartId }">
 																<button type="submit"
 																	style="border: none; background: none;">
-																	<i class="fe fe-trash-2 fs-4"></i>
+																	<i class="fe fe-trash-2 fs-4" style="color: red;"></i>
 																</button>
 															</form>
 														</c:when>
@@ -242,11 +214,11 @@ int networth = (int) request.getAttribute("networth");
 									<tr>
 
 										<td class="align-middle border-top-0 border-bottom-0">
-											<h4 class="mb-0">Total</h4>
+											<h4 class="mb-0">Tổng tiền:</h4>
 										</td>
 										<td
 											class="align-middle border-top-0 border-bottom-0 text-center">
-											<span class="fs-4"><%=countAddToCart%> (items)</span>
+											<span class="fs-4">Số lượng: <%=countAddToCart%></span>
 										</td>
 										<td>
 											<h4 class="mb-0">
@@ -261,13 +233,12 @@ int networth = (int) request.getAttribute("networth");
 					</div>
 				</div>
 				<div class="mt-4 d-flex justify-content-between">
-					<a href="product-grid.html" class="btn btn-outline-primary">Continue
-						Shopping</a>
+					<a href="product-grid.html" class="btn btn-outline-primary">Khóa học khác</a>
 
 					<form action="order" method=get>
 						<input name="listCourseId" value="" id="listCourseId"
 							class="d-none">
-						<button class="btn btn-primary">Checkout</button>
+						<button class="btn btn-primary">Thanh toán</button>
 					</form>
 				</div>
 			</div>
@@ -279,7 +250,7 @@ int networth = (int) request.getAttribute("networth");
 						<li
 							class="list-group-item px-0 d-flex justify-content-between fs-5 text-dark fw-medium">
 							<h4>
-								NetWorth Total: </span> <span><fmt:formatNumber
+								Số dư: </span> <span><fmt:formatNumber
 										value="<%=networth%>" pattern="###,### VNĐ" />
 							</h4>
 						</li>
@@ -287,7 +258,7 @@ int networth = (int) request.getAttribute("networth");
 
 					<!-- card body -->
 					<div class="card-body">
-						<h4 class="mb-3">Have a promo code ?</h4>
+						<h4 class="mb-3">Mã khuyến mãi của bạn ?</h4>
 						<!-- row -->
 						<div class="row g-3">
 							<!-- col -->
@@ -296,7 +267,7 @@ int networth = (int) request.getAttribute("networth");
 							</div>
 							<!-- col -->
 							<div class="col-auto">
-								<a href="#" class="btn btn-dark">Apply</a>
+								<a href="#" class="btn btn-dark">Áp dụng</a>
 							</div>
 						</div>
 					</div>
@@ -306,33 +277,24 @@ int networth = (int) request.getAttribute("networth");
 					<!-- card body -->
 					<div class="card-body">
 						<!-- text -->
-						<h4 class="mb-3">Order Summary</h4>
+						<h4 class="mb-3">Tổng hóa đơn</h4>
 						<!-- list group -->
 						<ul class="list-group list-group-flush">
 							<!-- list group item -->
 							<li
 								class="list-group-item px-0 d-flex justify-content-between fs-5 text-dark fw-medium">
-								<span>Sub Total :</span> <span><fmt:formatNumber
+								<span>Giá gốc :</span> <span><fmt:formatNumber
 										value="${totalCost}" pattern="###,### VNĐ" /></span>
 							</li>
 							<!-- list group item -->
 							<li
 								class="list-group-item px-0 d-flex justify-content-between fs-5 text-dark fw-medium">
-								<span> Discount <span>(GKDIS15%)</span> <c:set
+								<span> Khuyến mãi <span>(GKDIS15%)</span> <c:set
 										var="discount" value="0" />
 							</span> <span><fmt:formatNumber value="${discount}"
 										pattern="###,### VNĐ" /></span>
 							</li>
-							<!-- list group item -->
-							<li
-								class="list-group-item px-0 d-flex justify-content-between fs-5 text-dark fw-medium">
-								<span>Shipping Charge :</span> <span>0 VNĐ</span>
-							</li>
-							<!-- list group item -->
-							<li
-								class="list-group-item px-0 d-flex justify-content-between fs-5 text-dark fw-medium pb-0">
-								<span>Tax Vat 19% (included) :</span> <span>0 VNĐ</span>
-							</li>
+							
 						</ul>
 					</div>
 					<!-- card footer -->
@@ -340,7 +302,7 @@ int networth = (int) request.getAttribute("networth");
 					<div class="card-footer">
 						<div
 							class="px-0 d-flex justify-content-between fs-5 text-dark fw-semibold">
-							<span>Total (USD)</span> <span><fmt:formatNumber
+							<span>Tổng cộng (VNĐ)</span> <span><fmt:formatNumber
 									value="${total}" pattern="###,### VNĐ" /></span>
 						</div>
 					</div>
@@ -348,7 +310,15 @@ int networth = (int) request.getAttribute("networth");
 			</div>
 		</div>
 	</section>
-
+	<style>
+		.item-img{
+			width: 150px;
+			height: 100px;
+			object-fit: cover;
+			object-position: center;
+			border-radius: 3px;
+		}
+	</style>
 	<script>
 		var courseHtml = document.querySelector("#listCourseId");
 		let listId="";
@@ -428,6 +398,11 @@ int networth = (int) request.getAttribute("networth");
 
 	    	  return formattedAmount;
 	    	}
+
+		function setDefaultImage(img) {
+			img.onerror = null; // Ngăn chặn việc gọi lặp lại
+			img.src = "https://images.unsplash.com/photo-1588702547919-26089e690ecc?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+		}
 	</script>
 </body>
 </html>

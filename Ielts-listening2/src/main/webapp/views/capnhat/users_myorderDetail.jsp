@@ -10,12 +10,11 @@
 				<!-- User info -->
 				<div class="row align-items-center">
 					<div class="col-xl-12 col-lg-12 col-md-12 col-12">
-						<!-- Bg -->
 						<div class="rounded-top"
 							style="background: url(../assets/images/background/profile-bg.jpg) no-repeat; background-size: cover; height: 100px"></div>
 						<div
 							class="card px-4 pt-2 pb-4 shadow-sm rounded-top-0 rounded-bottom-0 rounded-bottom-md-2">
-							<div class="d-flex align-items-end justify-content-between">
+							<div class="d-flex align-items-e nd justify-content-between">
 								<div class="d-flex align-items-center">
 									<div
 										class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
@@ -44,26 +43,26 @@
 												data-placement="top" title="Beginner"> <svg width="16"
 													height="16" viewBox="0 0 16 16" fill="none"
 													xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="3"
+														<rect x="3"
 														y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                        <rect x="7"
+														<rect x="7"
 														y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                        <rect x="11"
+														<rect x="11"
 														y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                    </svg>
+													</svg>
 											</a>
 										</h2>
 										<p class="mb-0 d-block">${user.email }</p>
 									</div>
 								</div>
-
+			
 							</div>
 						</div>
 					</div>
 				</div>
-
+	
 				<div class="row mt-0 mt-md-4">
-
+					<!-- Left sidebar -->
 					<div class="col-lg-3 col-md-4 col-12">
 						<!-- Side navbar -->
 						<nav
@@ -82,52 +81,51 @@
 							<!-- Collapse navbar -->
 							<div class="collapse navbar-collapse" id="sidenav">
 								<div class="navbar-nav flex-column">
-									<span class="navbar-header">Subscription</span>
+									<span class="navbar-header">CÁ NHÂN</span>
 									<!-- List -->
 									<ul class="list-unstyled ms-n2 mb-4">
 										<!-- Nav item -->
 										<li class="nav-item"><a class="nav-link"
 											href="khoahoccuatoi?userId=${user.userId}"> <i
-												class="fe fe-calendar nav-icon"></i> My Course
+												class="fe fe-calendar nav-icon"></i> Khóa học
 										</a></li>
 										<!-- Nav item -->
 										<li class="nav-item"><a class="nav-link"
 											href="thongkediem?userId=${user.userId}"> <i
-												class="fe fe-calendar nav-icon"></i> My Score
+												class="fe fe-calendar nav-icon"></i> Điểm số
 										</a></li>
 
 										<!-- Nav item -->
-
-										<li class="nav-item"><a class="nav-link"
+										
+										<li class="nav-item active"><a class="nav-link"
 											href="myorder?userId=${user.userId}"> <i
-												class="fe fe-calendar nav-icon"></i> Invoice
+												class="fe fe-calendar nav-icon"></i> Hóa đơn
 										</a></li>
 
 									</ul>
-									<span class="navbar-header">Account Settings</span>
+									<span class="navbar-header">TÀI  KHOẢN</span>
 									<!-- List -->
 									<ul class="list-unstyled ms-n2 mb-0">
 										<!-- Nav item -->
-										<li class="nav-item active"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link"
 											href="capnhattaikhoan?userId=${user.userId}"> <i
-												class="fe fe-settings nav-icon"></i> Edit Profile
+												class="fe fe-settings nav-icon"></i> Thông tin cá nhân
 										</a></li>
 										<!-- Nav item -->
 										<li class="nav-item"><a class="nav-link"
 											href="capnhatmatkhau?userId=${user.userId}"> <i
-												class="fe fe-user nav-icon"></i> Security
-										</a></li>
-
-										<li class="nav-item"><a class="nav-link"
-											href="notifications.html"> <i class="fe fe-bell nav-icon"></i>
-												Notifications
+												class="fe fe-user nav-icon"></i> Bảo mật
 										</a></li>
 
 										<!-- Nav item -->
-										<li class="nav-item"><a class="nav-link"
-											href="../index.html"> <i class="fe fe-power nav-icon"></i>
-												Sign Out
-										</a></li>
+										<form action=logout method="post">
+											<li class="nav-item">
+												<button class="nav-link" style="width: 100%;"> 
+													<i class="fe fe-power nav-icon"></i>
+													Đăng xuất
+												</button>
+											</li>
+										</form>
 									</ul>
 								</div>
 							</div>
@@ -141,7 +139,7 @@
 									<!-- Page header -->
 									<div class="border-bottom pb-3 mb-3">
 										<div class="mb-2 mb-lg-0">
-											<h1 class="mb-0 h2 fw-bold">Order Detail</h1>
+											<h1 class="mb-0 h2 fw-bold">Chi tiết hóa đơn</h1>
 										</div>
 									</div>
 								</div>
@@ -155,30 +153,28 @@
 										<div class="card-body">
 											<div class="mb-6">
 												<!-- heading -->
-												<h2 class="mb-0">Thank you for your order</h2>
-												<p class="mb-0">We appreciate your order, were currently
-													processing it. So hard tight and we will send you
-													confirmation very soon!</p>
+												<h2 class="mb-0">Cảm ơn bạn đã mua khóa học !</h2>
+												<p class="mb-0">Đơn hàng của bạn hiện đang được xử lí. Chúng tôi sẽ sớm gửi thông tin xác nhận cho bạn!</p>
 											</div>
 											<div>
 												<div class="border-bottom mb-3 pb-3">
 													<!-- text -->
 													<c:forEach var="idpayment" items="${list}">
-
+				
 														<div class="d-flex align-items-center">
-															<h4 class="mb-0">Order tracking number</h4>
+															<h4 class="mb-0">Mã đơn hàng</h4>
 															<a href="#" class="ms-2 fw-semibold"">${idpayment.paymentId}</a>
-
+				
 														</div>
 														<div class="mb-0 d-flex align-items-center ">
-															<a href="#" class=" fw-semibold">Date time:
+															<a href="#" class=" fw-semibold">Thời gian:
 																${idpayment.dateBuy} </a>
 														</div>
 													</c:forEach>
 												</div>
 												<c:set var="totalCount" value="0" />
 												<!-- Tăng giá trị của biến bên ngoài mỗi lần lặp -->
-
+				
 												<c:forEach var="course" items="${list_oddetail}">
 													<c:set var="totalCount"
 														value="${totalCount + course.payment.cost}" />
@@ -193,7 +189,7 @@
 																		alt="" class="img-4by3-xl rounded" />
 																</div>
 																<!-- text -->
-
+				
 																<h5 class="mb-1">${course.userCourse.courses.courseName}</h5>
 															</div>
 														</div>
@@ -208,27 +204,27 @@
 												</c:forEach>
 												<hr class="my-3" />
 												<ul class="list-unstyled mb-0">
-
+				
 													<li class="d-flex justify-content-between mb-2 mt-3"><span>Giảm
 															giá</span> <span class="text-dark fw-medium">0 VNĐ</span></li>
 													<li class="d-flex justify-content-between mb-2"><span>Thành
 															tiền</span> <span class="text-success fw-medium"> <fmt:formatNumber
 																value="${totalCount}" pattern="###,### VNĐ" />
 													</span></li>
-
+				
 													<li class="d-flex justify-content-between mb-2"><span>Phương
 															thức thanh toán </span> <span class="text-secondary fw-medium">
 															Chuyển khoản ngân hàng </span></li>
 												</ul>
 												<hr class="my-3" />
-
+				
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</section>
-
+				
 						<script>
 							function redirectToCoursePage() {
 								window.location.href = '/Ielts-listening2/user/course';
@@ -240,7 +236,8 @@
 
 			</div>
 
-
+			</div>
 		</section>
 	</main>
+	
 </body>
