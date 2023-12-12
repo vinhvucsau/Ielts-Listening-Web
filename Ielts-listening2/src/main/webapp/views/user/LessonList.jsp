@@ -799,7 +799,7 @@
 									class="trailer d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
 									style="background-image: url('${image}'); height: 210px">
 									<a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-										href="http://localhost:8080/Ielts-listening2/Video?file=${course.trailer }">
+										href="http://localhost:8080/Ielts-listening2/video?fname=videoLesson/${course.trailer }">
 										<i class="fe fe-play"></i>
 									</a>
 								</div>
