@@ -45,9 +45,16 @@ public class BlogServiceImpl implements IBlogService {
 	}
 
 	@Override
-	public List<Blog> findAll(boolean all, int firstResult, int maxResult) {
+	public List<Blog> findAll(String searchStr) {
 		// TODO Auto-generated method stub
-		return blogDao.findAll(all, firstResult, maxResult);
+		return blogDao.findAll(searchStr);
 	}
+
+	@Override
+	public List<Blog> findAll(int page, int pagesize, String searchStr) {
+		// TODO Auto-generated method stub
+		return blogDao.findAll(page, pagesize, searchStr);
+	}
+
 	
 }

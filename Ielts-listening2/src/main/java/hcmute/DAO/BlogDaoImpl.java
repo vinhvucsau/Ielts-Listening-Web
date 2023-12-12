@@ -32,5 +32,42 @@ public class BlogDaoImpl extends AbstractDao<Blog> implements IBlogDao {
 			}
 		}
 	}
+	
+	public List<Blog> findAll(String searchStr) {
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT B FROM Blog B WHERE ((LOCATE(:searchStr, B.title) > 0) OR (LOCATE(:searchStr, B.content) > 0))";
+			TypedQuery<Blog> query = entityManager.createQuery(jpql, Blog.class);
+			query.setParameter("searchStr", searchStr);
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+	}
+
+	public List<Blog> findAll(int page, int pagesize, String searchStr) {
+		EntityManager entityManager = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT B FROM Blog B WHERE ((LOCATE(:searchStr, B.title) > 0) OR (LOCATE(:searchStr, B.content) > 0))";
+			TypedQuery<Blog> query = entityManager.createQuery(jpql, Blog.class);
+			query.setParameter("searchStr", searchStr);
+			query.setFirstResult(page * pagesize);
+			query.setMaxResults(pagesize);
+			return query.getResultList();
+		} catch (Exception e) {
+			// Handle your exception (log, rethrow, etc.)
+			e.printStackTrace(); // replace with proper logging
+			return null; // or throw a custom exception, return an empty list, etc.
+		} finally {
+			if (entityManager != null && entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+	}
 
 }

@@ -59,6 +59,23 @@
         </section>
         <!-- Content -->
         <section class="pb-8">
+        	<div style=" display: flex;justify-content: flex-end;">
+	          <div class="input-group" style="width: 400px; margin-bottom: 50px; margin-right: 60px;">
+				<span class="input-group-text px-3 boDescription for topic 1rder-0"
+					id="basic-addon1"
+					style="background-color: white; color: rgb(107, 114, 128);">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+						fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+	  					<path
+							d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+					</svg>
+				</span> <input type="text"
+					class="btn__search form-control py-2 fs-5 border"
+					placeholder="Tìm kiếm" aria-label="Search"
+					aria-describedby="basic-addon1"
+					value='${param.search == null ? "" : param.search }'>
+			  </div>
+	      </div>
           <div class="container">
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-12">
@@ -97,7 +114,7 @@
                   </div>
                 </div>
               </div>
-
+			
             <c:forEach var="blog" items="${listBlog}">
                 <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                     <div class="card mb-4 shadow-lg card-lift">
@@ -294,6 +311,20 @@
 			params.set("page", ${pageNum});
 			const isQuestionMark = params.toString() === "" ? "" : "?";
 			window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
+		})
+	}
+	const searchBtn = document.querySelector(".btn__search");
+	if (searchBtn) {
+		searchBtn.addEventListener("keypress", (e) => {
+			if (e.key ==="Enter") {
+				e.preventDefault();
+				params.delete("page"); 
+				if (e.target.value !== "")
+					params.set("search", e.target.value);
+				else params.delete("search");
+				const isQuestionMark = params.toString() === "" ? "" : "?";
+				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
+			}
 		})
 	}
   </script>
