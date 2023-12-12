@@ -45,47 +45,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="../assets/css/theme.min.css" />
-<!-- lam them
- -->    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-     
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
-    <script>
-		$(document).ready(function() {
-		
-			// Cấu hình các nhãn phân trang
-			$('.table-pag').dataTable( {	
-				"language": {
-				"sProcessing":   "Đang xử lý...",
-				"sLengthMenu":   "Xem _MENU_ mục",
-				"sZeroRecords":  "Không tìm thấy dòng nào phù hợp",
-				"sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-				"sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
-				"sInfoFiltered": "(được lọc từ _MAX_ mục)",
-				"sInfoPostFix":  "",
-				"sSearch":       "Tìm:",
-				"sUrl":          "",
-				"oPaginate": {
-					"sFirst":    "Đầu",
-					"sPrevious": "Trước",
-					"sNext":     "Tiếp",
-					"sLast":     "Cuối"
-					}
-				},
-				"processing": true, // tiền xử lý trước
-				"aLengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]], // danh sách số trang trên 1 lần hiển thị bảng
-				"order": [[ 1, 'desc' ]], //sắp xếp giảm dần theo cột thứ 1
-				stateSave: true
-			} );
-				
-		} ); 
-
-  </script><!--  
-  lâm them
- --><title></title>
+<title>Dashboard | Geeks - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 
 <body>
@@ -103,7 +63,7 @@
 		</main>
 	</div>
 
-	
+
 	<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
 	<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
@@ -121,8 +81,7 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
-		
-		<script src="../../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
 	<script src="../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="../../assets/libs/simplebar/dist/simplebar.min.js"></script>
 

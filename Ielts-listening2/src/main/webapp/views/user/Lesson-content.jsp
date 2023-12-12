@@ -318,7 +318,7 @@
 										
 										<c:choose>
 											<c:when test="${people > 0 }">
-												<c:set var="star" value="${totalStars/people }"></c:set>
+												<c:set var="star" value="${totalStars/people}"></c:set>
 											</c:when>
 											<c:otherwise>
 												<c:set var="star" value="0"></c:set>
@@ -582,7 +582,7 @@
 															<!-- get result value here ! -->
 
 															<input type="text" name="result-rating"
-																id="result-rating" value="${star}" class="d-none">
+																id="result-rating" value="${starUser}" class="d-none">
 
 														</div>
 														<button type="submit" class="btn btn-primary mt-2">Đánh
@@ -1185,7 +1185,7 @@ details.comment:not([open]) .comment-heading::after {
     }
     
 
-    var star = "${star}"
+    var star = "${starUser}"
     var starsHtml = document.querySelectorAll(".radio-label");
     	  console.log(star);
          function showOldRating(num = 4){
