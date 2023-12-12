@@ -46,7 +46,11 @@
 </head>
 
 <body>
-
+	<style>
+img {
+	object-fit: cover;
+}
+</style>
 	<script>
 		var arrTopic = [];
 		var arrMock = [];
@@ -194,106 +198,120 @@
 												<div class="col-xl-4 col-lg-12 col-md-12 col-12">
 													<div class="card" id="courseAccordion">
 														<div>
-														
+
 															<c:set var="isCompleted" value="${false }"></c:set>
 															<c:if test="${enrollLesson.score >= 0 }">
 																<c:set var="isCompleted" value="${true}"></c:set>
 															</c:if>
-															<div class="mx-3 mt-1 d-flex align-items-center justify-content-between">
-											                    <h3>Đáp án</h3>
-											                    <c:if test="${isCompleted}">
-																	<h3 class="py-1 px-2 rounded border border-primary text-primary">
-																		${enrollLesson.score}
-																	</h3>
-											                    </c:if>
-												            </div>
+															<div
+																class="mx-3 mt-1 d-flex align-items-center justify-content-between">
+																<h3>Đáp án</h3>
+																<c:if test="${isCompleted}">
+																	<h3
+																		class="py-1 px-2 rounded border border-primary text-primary">
+																		${enrollLesson.score}</h3>
+																</c:if>
+															</div>
 															<!-- List group -->
 															<div class="form-answer">
 																<ul class="list-answer list-group list-group-flush">
 																	<!-- List group item -->
-																	
-																	
-																	<c:forEach items="${listAnswerLesson}" var="answerLesson">
+
+
+																	<c:forEach items="${listAnswerLesson}"
+																		var="answerLesson">
 																		<c:set var="answer" value=""></c:set>
 																		<c:set var="isCorrect" value="${false }"></c:set>
-																		<c:forEach items="${enrollLesson.answerLessonUser}" var="answerLessUser">
-																			<c:if test="${answerLesson.answerId.equals(answerLessUser.answerLesson.answerId)}">
-																				<c:set var="answer" value="${answerLessUser.answerUser}"></c:set>
-																				<c:set var="isCorrect" value="${answerLessUser.answerLesson.answerKey.equals(answerLessUser.answerUser)}"></c:set>
+																		<c:forEach items="${enrollLesson.answerLessonUser}"
+																			var="answerLessUser">
+																			<c:if
+																				test="${answerLesson.answerId.equals(answerLessUser.answerLesson.answerId)}">
+																				<c:set var="answer"
+																					value="${answerLessUser.answerUser}"></c:set>
+																				<c:set var="isCorrect"
+																					value="${answerLessUser.answerLesson.answerKey.equals(answerLessUser.answerUser)}"></c:set>
 																			</c:if>
 																		</c:forEach>
-																		
+
 																		<li class="answer-item list-group-item border-0">
 																			<div
 																				class="mb-3 col-12 col-md-12 d-flex justify-content-between align-items-center">
-																				<h4 class="form-label me-3 m-0"
-																					style="width: 80px;">Câu ${answerLesson.number}:</h4>
-																					
+																				<h4 class="form-label me-3 m-0" style="width: 80px;">Câu
+																					${answerLesson.number}:</h4>
+
 																				<c:choose>
-																				
+
 																					<c:when test="${!isCompleted}">
-																						<input type="text" enrollLessonId = "${enrollLesson.enrrolId}" 
+																						<input type="text"
+																							enrollLessonId="${enrollLesson.enrrolId}"
 																							answerLessonId="${answerLesson.answerId}"
 																							class="answer-item__text form-control"
 																							placeholder="Nhập đáp án" required=""
-																							onblur="postApiAnswer(event)"
-																							value="${answer}">
+																							onblur="postApiAnswer(event)" value="${answer}">
 																					</c:when>
-																					
+
 																					<c:when test="${isCompleted and isCorrect}">
 																						<div class="input-group">
-																							<input type="text" enrollLessonId = "${enrollLesson.enrrolId}" 
+																							<input type="text"
+																								enrollLessonId="${enrollLesson.enrrolId}"
 																								answerLessonId="${answerLesson.answerId}"
 																								class="answer-item__text form-control border border-success"
 																								placeholder="Nhập đáp án" required="" readonly
-																								value="${answer}">
-																							<span class="input-group-text bg-success border border-success">
-																								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="20px" height="20px">
-																									<path fill="#fff" d="M 22.566406 4.730469 L 20.773438 3.511719 C 20.277344 3.175781 
+																								value="${answer}"> <span
+																								class="input-group-text bg-success border border-success">
+																								<svg xmlns="http://www.w3.org/2000/svg"
+																									viewBox="0 0 26 26" width="20px" height="20px">
+																									<path fill="#fff"
+																										d="M 22.566406 4.730469 L 20.773438 3.511719 C 20.277344 3.175781 
 																									19.597656 3.304688 19.265625 3.796875 L 10.476563 16.757813 L 6.4375 12.71875 C 
 																									6.015625 12.296875 5.328125 12.296875 4.90625 12.71875 L 3.371094 14.253906 C 
 																									2.949219 14.675781 2.949219 15.363281 3.371094 15.789063 L 9.582031 22 C 9.929688 
 																									22.347656 10.476563 22.613281 10.96875 22.613281 C 11.460938 22.613281 11.957031 
 																									22.304688 12.277344 21.839844 L 22.855469 6.234375 C 23.191406 5.742188 23.0625 
-																									5.066406 22.566406 4.730469 Z"/>
+																									5.066406 22.566406 4.730469 Z" />
 																								</svg>
 																							</span>
 																						</div>
 																					</c:when>
-																					
+
 																					<c:otherwise>
 																						<div class="input-group">
-																							<input type="text" enrollLessonId = "${enrollLesson.enrrolId}" 
+																							<input type="text"
+																								enrollLessonId="${enrollLesson.enrrolId}"
 																								answerLessonId="${answerLesson.answerId}"
 																								class="answer-item__text form-control border border-danger"
 																								placeholder="Nhập đáp án" required="" readonly
-																								value="${answer}">
-																							<span class="input-group-text bg-danger border border-danger">
-																								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-																									<path fill="#fff" d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81
-																									 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+																								value="${answer}"> <span
+																								class="input-group-text bg-danger border border-danger">
+																								<svg xmlns="http://www.w3.org/2000/svg"
+																									width="20" height="20" viewBox="0 0 24 24">
+																									<path fill="#fff"
+																										d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81
+																									 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z" />
 																								</svg>
 																							</span>
 																						</div>
 																					</c:otherwise>
 																				</c:choose>
-																				
+
 																			</div>
 																		</li>
-																		
+
 																	</c:forEach>
-																	
+
 																	<!-- submit -->
 																	<c:choose>
 																		<c:when test="${isCompleted }">
-																			<a href='<c:url value="/user/resetEnrollLesson?enrollLessonId=${enrollLesson.enrrolId }
-																			&lessonId=${enrollLesson.lessons.lessonId}"></c:url>' 
-																			class="btn btn-primary">Làm lại</a>
+																			<a
+																				href='<c:url value="/user/resetEnrollLesson?enrollLessonId=${enrollLesson.enrrolId }
+																			&lessonId=${enrollLesson.lessons.lessonId}"></c:url>'
+																				class="btn btn-primary">Làm lại</a>
 																		</c:when>
 																		<c:otherwise>
-																			<a href='<c:url value="/user/completeEnrollLesson?enrollLessonId=${enrollLesson.enrrolId }
+																			<a
+																				href='<c:url value="/user/completeEnrollLesson?enrollLessonId=${enrollLesson.enrrolId }
 																			&lessonId=${enrollLesson.lessons.lessonId}"></c:url>'
-																			 class="btn btn-primary">Nộp bài</a>
+																				class="btn btn-primary">Nộp bài</a>
 																		</c:otherwise>
 																	</c:choose>
 																</ul>
@@ -308,14 +326,15 @@
 										</div>
 										<c:set var="people" value="0"></c:set>
 										<c:set var="totalStars" value="0"></c:set>
-										
+
 										<c:forEach var="enrrol_les" items='${enrollLessonList}'>
 											<c:if test="${enrrol_les.numberOfStar > 0}">
-												<c:set var="totalStars" value="${totalStars + enrrol_les.numberOfStar }"></c:set>
+												<c:set var="totalStars"
+													value="${totalStars + enrrol_les.numberOfStar }"></c:set>
 												<c:set var="people" value="${people + 1 }"></c:set>
-											</c:if>	
+											</c:if>
 										</c:forEach>
-										
+
 										<c:choose>
 											<c:when test="${people > 0 }">
 												<c:set var="star" value="${totalStars/people}"></c:set>
@@ -324,8 +343,10 @@
 												<c:set var="star" value="0"></c:set>
 											</c:otherwise>
 										</c:choose>
-										<fmt:formatNumber type="number" maxFractionDigits="1" value="${star}" var="starRounded"/>
-										<fmt:formatNumber type="number" maxFractionDigits="0" value="${star}" var="starInteger"/>
+										<fmt:formatNumber type="number" maxFractionDigits="1"
+											value="${star}" var="starRounded" />
+										<fmt:formatNumber type="number" maxFractionDigits="0"
+											value="${star}" var="starInteger" />
 										<!-- review -->
 										<div class="tab-pane fade" id="review" role="tabpanel"
 											aria-labelledby="review-tab">
@@ -334,23 +355,22 @@
 												<div class="row align-items-center">
 													<div class="col-auto text-center">
 														<h3 class="display-2 fw-bold">${starRounded }${(starRounded - starInteger) == 0 ? '.0' : '' }</h3>
-														<span class="fs-6"> 
-															<c:forEach var="i" begin="1" end="${starInteger }">
-																<svg
-																	xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-																	fill="currentColor" class="bi bi-star-fill text-warning"
+														<span class="fs-6"> <c:forEach var="i" begin="1"
+																end="${starInteger }">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-warning"
 																	viewBox="0 0 16 16">
 						                                            <path
 																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
 						                                            </path>
-					                                        	</svg> 
-															</c:forEach>
-															<c:forEach var="i" begin="1" end="${5 - starInteger }">
-																<svg 
-																	xmlns="http://www.w3.org/2000/svg" width="12" height="12" 
-																	fill="currentColor" class="bi bi-star-fill text-light" 
-																	viewBox="0 0 16 16">
-					                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+					                                        	</svg>
+															</c:forEach> <c:forEach var="i" begin="1" end="${5 - starInteger }">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
+					                                                <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
 					                                                            </path>
 					                                            </svg>
 															</c:forEach>
@@ -358,11 +378,13 @@
 														<p class="mb-0 fs-6">(Dựa trên ${people} đánh giá)</p>
 													</div>
 													<!-- Progress Bar -->
-													<div class="col order-3 order-md-2" style="padding-top: 20px;">
+													<div class="col order-3 order-md-2"
+														style="padding-top: 20px;">
 														<c:forEach var="i" begin="0" end="4" step="1">
 															<div class="progress mb-3" style="height: 6px">
 																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: ${percentCountOfStars[4 - i]}%" aria-valuenow="90" aria-valuemin="0"
+																	style="width: ${percentCountOfStars[4 - i]}%"
+																	aria-valuenow="90" aria-valuemin="0"
 																	aria-valuemax="100"></div>
 															</div>
 														</c:forEach>
@@ -621,25 +643,27 @@
 																<div id="summary" class="">
 																	<div class="comment-heading">
 
-																		<div class="comment-info">
+																		<div class="">
 																			<div class="rating-item d-flex align-items-start">
 																				<c:if test="${cmt.users.image == null }">
-																					<c:set var="image" value="https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"></c:set>
+																					<c:set var="image"
+																						value="https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"></c:set>
 																				</c:if>
 																				<c:if test="${cmt.users.image != null}">
-																					<c:set var="image" value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${cmt.users.image }"></c:set>
+																					<c:set var="image"
+																						value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${cmt.users.image }"></c:set>
 																				</c:if>
-																				<img src="${image }"
-																					alt="" class="rounded-circle avatar-lg">
+																				<img src="${image }" alt=""
+																					class="rounded-circle avatar-lg">
 																				<div class="ms-3">
 																					<c:forEach var="uCmt" items="${listUser}">
 																						<c:choose>
 																							<c:when
 																								test="${cmt.users.userId == uCmt.userId }">
-																								<h4
-																									class="rating-name mb-1 d-flex justify-content-start align-items-center">
-																									<div class="rating-name me-3">
-																										${uCmt.name}</div>
+																								<div
+																									class="rating-name d-flex justify-content-start align-items-center">
+																									<div style="font-weight: bold;"
+																										class="rating-name me-3">${uCmt.name}</div>
 																									<div class="rating-day"
 																										value="${cmt.createTime}">
 																										<span
@@ -649,7 +673,7 @@
 																											class="rating-date ms-1 fs-6 color-dimgrey"
 																											value="${cmt.createTime}">${cmt.createTime}</span>
 																									</div>
-																								</h4>
+																								</div>
 
 																								<!-- rating star -->
 																								<c:forEach var="e" items="${listEnroll}">
@@ -705,7 +729,9 @@
 
 
 
-																					<p class="rating-content ">${cmt.comment}</p>
+
+																					<p  class="text-break rating-content ">${cmt.comment}</p>
+
 
 																				</div>
 
@@ -758,23 +784,34 @@
 																					test="${rep.commentLesson.commentId == cmt.commentId }">
 																					<div id="summary">
 																						<div class="mb-4 ms-5">
-																							<div class="comment-info">
+																							<div class="">
 																								<div
 																									class="rating-item d-flex align-items-start ">
-																									<img src="../assets/images/avatar/avatar-2.jpg"
-																										alt="" class="rounded-circle avatar-lg">
+																									<c:if test="${rep.users.image == null }">
+																										<c:set var="image"
+																											value="https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"></c:set>
+																									</c:if>
+																									<c:if test="${rep.users.image != null}">
+																										<c:set var="image"
+																											value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${rep.users.image }"></c:set>
+																									</c:if>
+																									<img src="${image }" alt=""
+																										class="rounded-circle avatar-lg">
 																									<div class="ms-3">
-																										<h4
+																										<div
 																											class="rating-name mb-1 d-flex justify-content-start align-items-center">
 																											<c:forEach var="uRep" items="${listUser}">
 																												<c:choose>
 																													<c:when
 																														test="${rep.users.userId == uRep.userId }">
-																														<div class="rating-name me-2">
+																														<div style="font-weight: bold"
+																															class="rating-name me-2">
 																															${uRep.name}</div>
 																													</c:when>
 																												</c:choose>
 																											</c:forEach>
+
+
 
 																											<div class="rating-day"
 																												value="${cmt.createTime}">
@@ -785,10 +822,12 @@
 																													class="rating-date ms-1 fs-6 color-dimgrey"
 																													value="${rep.createTime}">${rep.createTime}</span>
 																											</div>
-																										</h4>
+																										</div>
 
 
-																										<p class="rep-comment__text">${rep.replyComment}</p>
+																										<div style=""background-color:#e9e0e029; padding: 10px; border-radius:5px">
+																											<p class="rep-comment__text">${rep.replyComment}</p>
+																										</div>
 																									</div>
 																								</div>
 
@@ -902,7 +941,6 @@ button:hover, button:focus, button:active {
 	width: 100%;
 	max-width: 100%;
 	margin: auto;
-	background-color: #fff;
 	border: 1px solid transparent; /* Removes margin collapse */
 }
 
@@ -1098,7 +1136,7 @@ details.comment:not([open]) .comment-heading::after {
 	.radio-input:checked 
 	 ~ .radio-label:hover ~ .radio-label, .radio-label:hover ~ .radio-input:checked 
 	 ~ .radio-label {
-	color: darkgoldenrod  !important;
+	color: darkgoldenrod !important;
 }
 
 .average-rating {
@@ -1209,8 +1247,9 @@ details.comment:not([open]) .comment-heading::after {
      }
      
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
 	function postApiAnswer(event) {
 	    const input = event.target;
 	    const enrollLessonId = input.getAttribute('enrollLessonId');

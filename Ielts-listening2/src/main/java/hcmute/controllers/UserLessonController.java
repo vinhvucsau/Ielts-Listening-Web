@@ -116,7 +116,7 @@ public class UserLessonController extends HttpServlet {
 			}
 			if (people > 0) {
 				for (int i = 0; i < 5; i++) {
-					System.out.println(((percentCountOfStars[i] * 100) / (float) people)+"%%%");
+					System.out.println(((percentCountOfStars[i] * 100) / (float) people) + "%%%");
 					percentCountOfStars[i] = ((((percentCountOfStars[i] * 100) / (float) people)
 							- (int) ((percentCountOfStars[i] * 100) / (float) people)) >= 0.5)
 									? (int) ((percentCountOfStars[i] * 100) / (float) people) + 1
@@ -158,7 +158,6 @@ public class UserLessonController extends HttpServlet {
 			rep.setReplyComment(req.getParameter("reply-content"));
 			rep.setCommentLesson(c);
 			rep.setCreateTime(curDate);
-			repService.insert(rep);
 			try {
 				repService.insert(rep);
 //				req.setAttribute("u", user);

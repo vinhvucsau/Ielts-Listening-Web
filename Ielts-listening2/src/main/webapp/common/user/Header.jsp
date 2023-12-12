@@ -24,19 +24,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 			<a class="navbar-brand" href="/Ielts-listening2/user/home"><img
 				src="https://prep.vn/imgs/logo-n.svg" alt="Geeks" /></a>
 			<div class="d-flex align-items-center order-lg-3 gap-3">
-<<<<<<< Updated upstream
-				<button
-					class="btn btn-light btn-icon rounded-circle d-flex align-items-center position-relative"
-					type="button" aria-expanded="false" data-bs-toggle="dropdown"
-					aria-label="Toggle theme (auto)">
-					<i class="fe fe-shopping-cart"></i> <span
-						style="z-index: 2; background-color: white; top: -4px; right: -8px; width: 24px; height: 24px; padding; 2; border-radius: 100%;"
-						class="position-absolute text-primary border ">${cartSize}</span>
 
-				</button>
-=======
-
->>>>>>> Stashed changes
 				<div class="d-flex align-items-center">
 					<div class="dropdown me-2">
 						<button
@@ -129,10 +117,6 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 								</div>
 								<div class="dropdown-divider"></div>
 								<ul class="list-unstyled">
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 									<li><a class="dropdown-item"
 										href="/Ielts-listening2/user/capnhattaikhoan?userId=${user.userId}">
 											<i class="fe fe-user me-2"></i> Thông tin
@@ -211,9 +195,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 		</div>
 	</nav>
 
-<<<<<<< Updated upstream
 
-=======
 	<style>
 .header-fixed {
 	position: fixed;
@@ -223,7 +205,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 	z-index: 2;
 }
 </style>
->>>>>>> Stashed changes
+
 
 </body>
 </html>
