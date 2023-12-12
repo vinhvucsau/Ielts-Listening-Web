@@ -142,14 +142,14 @@
 									<!-- Page header -->
 									<div class="border-bottom pb-3 mb-3">
 										<div>
-											<h1 class="mb-1 h2 fw-bold">Order</h1>
+											<h1 class="mb-1 h2 fw-bold">Hóa đơn</h1>
 											<!-- Breadcrumb -->
 											<nav aria-label="breadcrumb">
 												<ol class="breadcrumb">
 													<li class="breadcrumb-item"><a
 														href="admin-dashboard.html">Dashboard</a></li>
 
-													<li class="breadcrumb-item active" aria-current="page">Order</li>
+													<li class="breadcrumb-item active" aria-current="page">Hóa đơn</li>
 												</ol>
 											</nav>
 										</div>
@@ -163,9 +163,8 @@
 									<div class="card">
 										<!-- card header  -->
 										<div class="card-header">
-											<h4 class="mb-1">Order</h4>
-											<p class="mb-0">Explore Convenience - Place Your Order
-												Easily and Quickly Today!</p>
+											<h4 class="mb-1">Danh sách hóa đơn</h4>
+											<p class="mb-0">Khám phá sự tiện lợi - đặt hàng dễ dàng và nhanh chóng ngay hôm nay!</p>
 										</div>
 										<!-- table  -->
 										<div class="card-body">
@@ -184,21 +183,23 @@
 
 													</thead>
 													<tbody>
+													
 														<c:forEach var="i" items="${list}">
 															<tr>
 																<c:set var="count" value="0"></c:set>
+																
 																<c:forEach var="detail" items="${i.payDetail}">
-
 																	<c:set var="count" value="${count + 1 }"></c:set>
 																</c:forEach>
-
+																
 																<td><a href="myoddetail?id=${i.paymentId}">${i.paymentId}</a></td>
-
 																<td>${i.users.account.userName }</td>
-																<td>${count}khóa</td>
+																<td>${count} khóa</td>
+																
 																<td><span
 																	class="badge text-success bg-light-success">Paid</span></td>
 																<td>${i.dateBuy}</td>
+																
 																<td>${i.cost}</td>
 
 															</tr>
@@ -216,7 +217,6 @@
 								<div class="col-md-12 col-12 mb-5">
 									<div class="card">
 										<!-- card header  -->
-
 									</div>
 								</div>
 							</div>
@@ -224,9 +224,6 @@
 					</div>
 
 				</div>
-
-			</div>
-
 			</div>
 		</section>
 	</main>

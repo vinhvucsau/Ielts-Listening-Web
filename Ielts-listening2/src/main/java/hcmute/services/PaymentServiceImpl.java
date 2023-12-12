@@ -6,7 +6,6 @@ import java.util.List;
 
 import hcmute.DAO.IPaymentDAO;
 import hcmute.DAO.PaymentDAOImpl;
-import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
 
 public class PaymentServiceImpl implements IPaymentService {

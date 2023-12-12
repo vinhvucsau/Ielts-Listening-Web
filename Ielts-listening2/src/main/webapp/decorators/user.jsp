@@ -123,7 +123,51 @@
 	<script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
 	<script src="../assets/js/vendors/flatpickr.js"></script>
 
+<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
 
+	<!-- Theme JS -->
+	<script src="../assets/js/theme.min.js"></script>
+
+	<script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script src="../assets/js/vendors/chart.js"></script>
+	<script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+	<script src="../assets/js/vendors/flatpickr.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+		
+		<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+	<!-- Theme JS -->
+	<script src="../../assets/js/theme.min.js"></script>
+
+	<script src="../assets/js/vendors/jquery.min.js"></script>
+	<script src="../assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script
+		src="../assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+	<script
+		src="../assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+	<script
+		src="../assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+	<script
+		src="../assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+	<script
+		src="../assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+	<script
+		src="../assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+	<script
+		src="../assets/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
+	<script
+		src="../assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+	<script src="../assets/libs/pdfmake/build/pdfmake.min.js"></script>
+	<script src="../assets/js/vendors/datatables.js"></script>
 
 </body>
 </html>

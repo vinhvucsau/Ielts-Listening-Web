@@ -84,8 +84,9 @@ public class CapNhatThongTinController extends HttpServlet {
 		} else if(url.contains("myoddetail")) {
 			String id = req.getParameter("id");
 			String idpay = req.getParameter("id");
-			List<Payment> list_orderdetail = paymentService.findcoursesByIDPayment(id);
+			Payment list_orderdetail = paymentService.findById(id);
 			List<PayDetail> lisl = paydetail.findPayDetailByIDPayment(idpay);
+			req.setAttribute("folder", Constants.FOLDER_BLOG);
 			req.setAttribute("list_oddetail", lisl);
 			req.setAttribute("list", list_orderdetail);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/capnhat/users_myorderDetail.jsp");
