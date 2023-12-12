@@ -69,4 +69,17 @@ public class UserController extends HttpServlet {
 
 	}
 
+	private void FindIncreaseRate(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			List<Course> list = courseService.FindCourseIncreaseRate();
+
+			req.setAttribute("course", list);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("error", "Eror: " + e.getMessage());
+		}
+
+	}
+
 }
