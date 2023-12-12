@@ -23,7 +23,7 @@ public class AuthorizationFilter implements Filter{
 		resp.setCharacterEncoding("UTF-8");
 		
 		String role = (String) req.getSession().getAttribute("role");
-		if (role.equals("admin")) {
+		if (role != null && role.equals("admin")) {
 			chain.doFilter(request, response);
 		} else {
 			resp.sendRedirect(req.getContextPath() + "/authentication-login");
