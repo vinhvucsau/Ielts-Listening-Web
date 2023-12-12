@@ -42,11 +42,17 @@ public class UserBlogController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 
 		if (url.contains("blogs-page")) {
-			List<Blog> listBlog = blogService.findAll();
+			int page = Integer.parseInt(req.getParameter("page") == null ? "1" : req.getParameter("page"));
+			String searchStr = req.getParameter("search") == null ? "" : req.getParameter("search");
+			List<Blog> listBlog = blogService.findAll(searchStr);
 			List<User> listUser = uService.findAll();
+			int pagesize = 9 * 3;
+			List<Blog> listBlogPage = blogService.findAll(page - 1, pagesize, searchStr);
+			int pageNum = (int) (listBlog.size() / pagesize) + (listBlog.size() % pagesize == 0 ? 0 : 1);
+			req.setAttribute("pageNum", pageNum);
 			req.setAttribute("topicIMG", Constants.FOLDER_BLOG);
 			req.setAttribute("avatarIMG", Constants.FOLDER_AVATAR);
-			req.setAttribute("listBlog", listBlog);
+			req.setAttribute("listBlog", listBlogPage);
 			req.setAttribute("listUser", listUser);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/blogs_page.jsp");
 			rd.forward(req, resp);
