@@ -150,10 +150,21 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 
 		try {
 			String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0) ";
+			if (tab == 1) {
+				jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0)";
+			}
 			if (tab == 2) {
-				jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END)";
+				jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson el"
+						+ "        WHERE (LOCATE(:searchStr, c.courseName) > 0) " + "        GROUP BY c "
+						+ "        ORDER BY CASE WHEN SUM(CASE WHEN el.numberOfStar IS NOT NULL AND el.numberOfStar <> 0 THEN 1 ELSE 0 END) > 0"
+						+ "        THEN AVG(CASE WHEN el.numberOfStar IS NOT NULL AND el.numberOfStar <> 0 THEN el.numberOfStar ELSE NULL END) "
+						+ "        ELSE COALESCE(AVG(el.numberOfStar), 0) END";
 			} else if (tab == 3) {
-				jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
+				jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson el"
+						+ "        WHERE (LOCATE(:searchStr, c.courseName) > 0) " + "        GROUP BY c "
+						+ "        ORDER BY CASE WHEN SUM(CASE WHEN el.numberOfStar IS NOT NULL AND el.numberOfStar <> 0 THEN 1 ELSE 0 END) > 0"
+						+ "        THEN AVG(CASE WHEN el.numberOfStar IS NOT NULL AND el.numberOfStar <> 0 THEN el.numberOfStar ELSE NULL END) "
+						+ "        ELSE COALESCE(AVG(el.numberOfStar), 0) END DESC";
 			} else if (tab == 4) {
 				jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
 			} else if (tab == 5) {
@@ -171,6 +182,7 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 			if (enma != null && enma.isOpen()) {
 				enma.close();
 			}
+
 		}
 	}
 
@@ -181,10 +193,21 @@ public class AdminKhoaHocDAOImpl extends AbstractDao<Course> implements IAdminKh
 
 		try {
 			String jpql = "select c from Course c  WHERE (LOCATE(:searchStr, c.courseName) > 0)";
+			if (tab == 1) {
+				jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0)";
+			}
 			if (tab == 2) {
-				jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END)";
+				jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson el"
+						+ "        WHERE (LOCATE(:searchStr, c.courseName) > 0) " + "        GROUP BY c "
+						+ "        ORDER BY CASE WHEN SUM(CASE WHEN el.numberOfStar IS NOT NULL AND el.numberOfStar <> 0 THEN 1 ELSE 0 END) > 0"
+						+ "        THEN AVG(CASE WHEN el.numberOfStar IS NOT NULL AND el.numberOfStar <> 0 THEN el.numberOfStar ELSE NULL END) "
+						+ "        ELSE COALESCE(AVG(el.numberOfStar), 0) END";
 			} else if (tab == 3) {
-				jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson e WHERE (LOCATE(:searchStr, c.courseName) > 0) GROUP BY c ORDER BY AVG(CASE WHEN e.numberOfStar IS NULL THEN 0 ELSE e.numberOfStar END) DESC";
+				jpql = "SELECT c FROM Course c LEFT JOIN c.lessons l LEFT JOIN l.enrrolLesson el"
+						+ "        WHERE (LOCATE(:searchStr, c.courseName) > 0) " + "        GROUP BY c "
+						+ "        ORDER BY CASE WHEN SUM(CASE WHEN el.numberOfStar IS NOT NULL AND el.numberOfStar <> 0 THEN 1 ELSE 0 END) > 0"
+						+ "        THEN AVG(CASE WHEN el.numberOfStar IS NOT NULL AND el.numberOfStar <> 0 THEN el.numberOfStar ELSE NULL END) "
+						+ "        ELSE COALESCE(AVG(el.numberOfStar), 0) END DESC";
 			} else if (tab == 4) {
 				jpql = "select c from Course c WHERE (LOCATE(:searchStr, c.courseName) > 0) order by c.cost";
 			} else if (tab == 5) {

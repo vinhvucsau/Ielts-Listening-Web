@@ -5,20 +5,14 @@
 Long count = (Long) request.getAttribute("countCourse");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-
 <%@ page import="javax.servlet.jsp.PageContext"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 </head>
 <body>
-
 	<style>
 .dropdown-item:hover {
 	background-color: #0071f9 !important;
@@ -52,8 +46,6 @@ Long count = (Long) request.getAttribute("countCourse");
 	color: red;
 }
 </style>
-
-
 	<div class="adminkhoahoc container-fluid p-0 m-0 row pt-8 pb-4">
 		<div class="d-flex justify-content-between">
 			<div class="input-group" style="width: 400px;">
@@ -79,7 +71,6 @@ Long count = (Long) request.getAttribute("countCourse");
 				</button>
 			</div>
 		</div>
-
 	</div>
 	<c:if test="${course.size() == 0}">
 		<div class="w-100 d-flex flex-row justify-content-center my-5">
@@ -127,7 +118,6 @@ Long count = (Long) request.getAttribute("countCourse");
 										id="" name="cost" class="form-control cost" type="text"
 										placeholder="Học phí" required>
 								</div>
-
 								<div style="min-width: 350px" class="mb-3">
 									<label class="form-label" for="startdate">Ngày bắt đầu</label>
 									<input class="form-control flatpickr enrrollmentDate"
@@ -135,15 +125,12 @@ Long count = (Long) request.getAttribute("countCourse");
 										name="enrrollmentDate" data-mdb-toggle="datepicker" />
 								</div>
 							</div>
-
 							<div class="mb-3">
 								<label class="form-label">Thêm ảnh bìa</label> <input
 									type="file" class="form-control image" name="image" id=""
 									accept="image/jpeg, image/png" require>
 							</div>
-
 							<div>
-
 								<div class="mb-3">
 									<label class="form-label">Thêm video xem trước</label> <input
 										type="file" class="form-control trailer" name="trailer" id=""
@@ -151,7 +138,6 @@ Long count = (Long) request.getAttribute("countCourse");
 									<div id="audio"></div>
 								</div>
 							</div>
-
 						</div>
 						<!-- Button -->
 						<button class="btn btn-primary m-4" type="submit" onclick="show()">Xác
@@ -198,7 +184,6 @@ Long count = (Long) request.getAttribute("countCourse");
 										id="cost" name="Cost" class="form-control cost" type="text"
 										placeholder="Học phí" required>
 								</div>
-
 								<div style="min-width: 350px" class="mb-3">
 									<label class="form-label" for="startdate">Ngày bắt đầu</label>
 									<input class="form-control flatpickr enrrollmentDate"
@@ -206,15 +191,12 @@ Long count = (Long) request.getAttribute("countCourse");
 										name="EnrrollmentDate" data-mdb-toggle="datepicker" required />
 								</div>
 							</div>
-
 							<div class="mb-3">
 								<label class="form-label">Ảnh bìa</label> <input type="file"
 									class="form-control image" name="Image" id="image"
 									accept="image/jpeg, image/png" require>
 							</div>
-
 							<div>
-
 								<div class="mb-3">
 									<label class="form-label">Video xem trước</label> <input
 										type="file" class="form-control trailer" name="Trailer" id=""
@@ -222,7 +204,6 @@ Long count = (Long) request.getAttribute("countCourse");
 									<div id="audio"></div>
 								</div>
 							</div>
-
 						</div>
 						<!-- Button -->
 						<button class="btn btn-primary m-4" type="submit" onclick="show()">Cập
@@ -237,11 +218,7 @@ Long count = (Long) request.getAttribute("countCourse");
 		style="opacity: 0.5; display: none; z-index: 2"
 		onclick="hideShadow(),hideShadow1()"></div>
 	<div>
-
 		<div class="d-flex flex-row justify-content-between mb-4">
-
-
-
 			<section class="py-6">
 				<div class="">
 					<div class="row">
@@ -277,7 +254,7 @@ Long count = (Long) request.getAttribute("countCourse");
 												type="button" data-bs-toggle="dropdown"
 												aria-expanded="false" style="width: 160px">
 												<!-- 								<span class="me-3">Mặc định</span>
- -->
+-->
 												<c:choose>
 													<c:when test="${param.rate == 'thapdencao'}">
 														<span class="me-3">Thấp đến cao</span>
@@ -320,8 +297,6 @@ Long count = (Long) request.getAttribute("countCourse");
 														<span class="me-3">Mặc định</span>
 													</c:otherwise>
 												</c:choose>
-
-
 											</button>
 											<ul class="dropdown-menu bg-color-grey"
 												aria-labelledby="navbarLanding">
@@ -364,7 +339,8 @@ Long count = (Long) request.getAttribute("countCourse");
 													<!-- Card Body -->
 													<div class="card-body">
 														<h4 class="mb-2 text-truncate-line-2">
-															<a href="listLesson?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
+															<a href="listLesson?courseId=${i.courseId }"
+																class="text-inherit">${i.courseName}</a>
 														</h4>
 														<!-- List inline -->
 														<div class="d-flex align-items-center gap-3">
@@ -374,16 +350,10 @@ Long count = (Long) request.getAttribute("countCourse");
 															<p class="card-text fw-bold fs-5"
 																style="color: rgb(113, 113, 113)"></p>
 															</p>
-
-
-
 														</div>
 														<div class="lh-1">
-
 															<span class="align-text-top"> <span class="fs-6">
 																	<div class="d-flex gap-5">
-
-
 																		<c:set var="totalStars" value="0" />
 																		<c:set var="count" value="0" />
 																		<c:forEach var="lesson" items="${i.lessons}">
@@ -391,15 +361,12 @@ Long count = (Long) request.getAttribute("countCourse");
 																				items="${lesson.enrrolLesson}">
 																				<c:set var="totalStars"
 																					value="${totalStars + enrrol_lesson.numberOfStar}" />
-
 																				<c:choose>
-																					<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																					<c:when
+																						test="${enrrol_lesson.numberOfStar != 0 && enrrol_lesson.numberOfStar != null}">
 																						<c:set var="count" value="${count + 1}" />
 																					</c:when>
-																					
 																				</c:choose>
-
-																				
 																			</c:forEach>
 																		</c:forEach>
 																		<c:choose>
@@ -419,11 +386,10 @@ Long count = (Long) request.getAttribute("countCourse");
 																				</c:set>
 																			</c:when>
 																		</c:choose>
-
-
 																		<div class="stars rating-star"
 																			data-rating="${roundedAverage}"></div>
 																		<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
+
 																	</div>
 															</span>
 														</div>
@@ -431,11 +397,8 @@ Long count = (Long) request.getAttribute("countCourse");
 													<!-- Card footer -->
 													<div class="card-footer">
 														<div class="row align-items-center g-0">
-															<div class="col-auto">
-																
-															</div>
-															<div class="col ms-2">
-															</div>
+															<div class="col-auto"></div>
+															<div class="col ms-2"></div>
 															<div class="col-auto">
 																<c:choose>
 																	<c:when test="${user ne null}">
@@ -447,7 +410,6 @@ Long count = (Long) request.getAttribute("countCourse");
 																		style="border: none; background: none;">
 																		<i class="fe fe-shopping-cart fs-4"></i>
 																	</button> -->
-
 																			<a
 																				href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
 																					class="btn btn-sm rounded-0 button-delete-course"
@@ -461,8 +423,6 @@ Long count = (Long) request.getAttribute("countCourse");
 																					title="Update">
 																					<i class="fa fa-edit"></i>
 																				</button></a>
-
-
 																		</form>
 																	</c:when>
 																	<c:otherwise>
@@ -471,8 +431,6 @@ Long count = (Long) request.getAttribute("countCourse");
 																		type="button" onclick="showLoginPopup()">
 																		<i class="fe fe-shopping-cart fs-4"></i>
 																	</button> -->
-
-
 																		<a
 																			href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
 																				class="btn btn-sm rounded-0 button-delete-course"
@@ -490,7 +448,6 @@ Long count = (Long) request.getAttribute("countCourse");
 																			</button></a>
 																	</c:otherwise>
 																</c:choose>
-
 															</div>
 														</div>
 													</div>
@@ -506,7 +463,6 @@ Long count = (Long) request.getAttribute("countCourse");
 									<c:forEach var="i" items="${course}">
 										<div class="card mb-4 card-hover">
 											<div class="row g-0">
-
 												<c:if test="${i.image != null}">
 													<a
 														class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
@@ -527,7 +483,8 @@ Long count = (Long) request.getAttribute("countCourse");
 													<!-- Card body -->
 													<div class="card-body">
 														<h3 class="mb-2 text-truncate-line-2">
-															<a href="listLesson?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
+															<a href="listLesson?courseId=${i.courseId }"
+																class="text-inherit">${i.courseName}</a>
 														</h3>
 														<!-- list inline -->
 														<ul class="list-inline">
@@ -539,17 +496,14 @@ Long count = (Long) request.getAttribute("countCourse");
 																		<c:forEach var="lesson" items="${i.lessons}">
 																			<c:forEach var="enrrol_lesson"
 																				items="${lesson.enrrolLesson}">
-																				<c:set var="totalStars"
-																					value="${totalStars + enrrol_lesson.numberOfStar}" />
-
-																				<c:choose>
-																					<c:when test="${enrrol_lesson.numberOfStar != 0}">
-																						<c:set var="count" value="${count + 1}" />
-																					</c:when>
-																					
-																				</c:choose>
-
-																				
+																				<c:if test="${enrrol_lesson.numberOfStar != null}">
+																					<c:set var="totalStars"
+																						value="${totalStars + enrrol_lesson.numberOfStar}" />
+																				</c:if>
+																				<c:if
+																					test="${enrrol_lesson.numberOfStar != 0 && enrrol_lesson.numberOfStar != null}">
+																					<c:set var="count" value="${count + 1}" />
+																				</c:if>
 																			</c:forEach>
 																		</c:forEach>
 																		<c:choose>
@@ -569,26 +523,21 @@ Long count = (Long) request.getAttribute("countCourse");
 																				</c:set>
 																			</c:when>
 																		</c:choose>
-
 																		<div class="stars rating-star"
 																			data-rating="${roundedAverage}"></div>
-
 																		<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
 																	</div></li>
 														</ul>
 														<div class="d-flex align-items-center gap-3">
-													<p class="card-text color-blue--primary fw-bold fs-5">
-														<fmt:formatNumber value="${i.cost}" pattern="###,### VNĐ" />
-													<p class="card-text fw-bold fs-5"
-														style="color: rgb(113, 113, 113)"></p>
-
-												</div>
+															<p class="card-text color-blue--primary fw-bold fs-5">
+																<fmt:formatNumber value="${i.cost}"
+																	pattern="###,### VNĐ" />
+															<p class="card-text fw-bold fs-5"
+																style="color: rgb(113, 113, 113)"></p>
+														</div>
 														<div class="row align-items-center g-0">
-															<div class="col-auto">
-																
-															</div>
-															<div class="col ms-2">
-															</div>
+															<div class="col-auto"></div>
+															<div class="col ms-2"></div>
 															<div class="col-auto">
 																<c:choose>
 																	<c:when test="${user ne null}">
@@ -608,11 +557,9 @@ Long count = (Long) request.getAttribute("countCourse");
 																					title="Update">
 																					<i class="fa fa-edit"></i>
 																				</button></a>
-
 																		</form>
 																	</c:when>
 																	<c:otherwise>
-
 																		<a
 																			href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
 																				class="btn btn-sm rounded-0 button-delete-course"
@@ -628,14 +575,11 @@ Long count = (Long) request.getAttribute("countCourse");
 																				title="Update">
 																				<i class="fa fa-edit"></i>
 																			</button></a>
-
 																	</c:otherwise>
 																</c:choose>
-
 															</div>
 														</div>
 													</div>
-
 												</div>
 											</div>
 										</div>
@@ -677,8 +621,6 @@ Long count = (Long) request.getAttribute("countCourse");
 					</div>
 				</div>
 			</section>
-
-
 		</div>
 		<script>
 	    document.querySelectorAll('.stars').forEach(starContainer => {
@@ -690,9 +632,9 @@ Long count = (Long) request.getAttribute("countCourse");
 	        let stars = '';
 	        for (let i = 0; i < 5; i++) {
 	            if (i < rating) {
-	                stars += '⭐'; 
+	                stars += '⭐';
 	            } else {
-	                stars += '★'; 
+	                stars += '★';
 	            }
 	        }
 	        return stars;
@@ -727,11 +669,9 @@ Long count = (Long) request.getAttribute("countCourse");
 		    document.getElementById('description').value = selectedCourse.description;
 		    document.getElementById('cost').value = selectedCourse.cost;
 		    // Populate other fields as needed
-
 		    // Display the modal
 		    showModel1()
 		  }
-
 		  // Event listener for button clicks
 		 /*  document.addEventListener('DOMContentLoaded', function() { */
 		    var buttons = document.querySelectorAll('.button-add-course');
@@ -742,9 +682,7 @@ Long count = (Long) request.getAttribute("countCourse");
 		        showCourseInfo(courseId);
 		      });
 		    });
-
 	</script>
-
 		<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
 		<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
@@ -774,7 +712,7 @@ Long count = (Long) request.getAttribute("countCourse");
 					currLi.classList.remove("active");
 					currLi = li;
 					currLi.classList.add("active");
-					params.delete("page"); 
+					params.delete("page");
 					if (i === 0) {
 						params.delete("tab");
 					}
@@ -795,7 +733,7 @@ Long count = (Long) request.getAttribute("countCourse");
 				e.preventDefault();
 				page = Number(page) - 1;
 				if (page == 1){
-					params.delete("page"); 
+					params.delete("page");
 					const isQuestionMark = params.toString() === "" ? "" : "?";
 					window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 				}
@@ -819,8 +757,8 @@ Long count = (Long) request.getAttribute("countCourse");
 				params.set("page", page);
 				const isQuestionMark = params.toString() === "" ? "" : "?";
 				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
-			}) 
-		} 
+			})
+		}
 		
 		const inputPageNum = document.querySelector(".input__pageNum");
 		if (inputPageNum) {
@@ -848,7 +786,7 @@ Long count = (Long) request.getAttribute("countCourse");
 			else minPageBtn.disabled = false;
 			minPageBtn.addEventListener("click", (e) => {
 				e.preventDefault();
-				params.delete("page"); 
+				params.delete("page");
 				const isQuestionMark = params.toString() === "" ? "" : "?";
 				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 			})
@@ -870,7 +808,7 @@ Long count = (Long) request.getAttribute("countCourse");
 			searchBtn.addEventListener("keypress", (e) => {
 				if (e.key ==="Enter") {
 					e.preventDefault();
-					params.delete("page"); 
+					params.delete("page");
 					if (e.target.value !== "")
 						params.set("search", e.target.value);
 					else params.delete("search");
@@ -880,7 +818,6 @@ Long count = (Long) request.getAttribute("countCourse");
 			})
 		}
 	</script>
-
 		<script>
 		function showModel() {
 			// Show the shadow
@@ -892,7 +829,6 @@ Long count = (Long) request.getAttribute("countCourse");
 			document.getElementById("shadow").style.display = "block";
 			document.getElementById("model1").style.display = "block";
 		}
-
 		function hideShadow() {
 			// Hide the shadow
 			document.getElementById("shadow").style.display = "none";
@@ -949,10 +885,8 @@ Long count = (Long) request.getAttribute("countCourse");
 		        // Xóa lớp 'active' khỏi tất cả các nút
 		        gridButton.classList.remove('active');
 		        listButton.classList.remove('active');
-
 		        // Thêm lớp 'active' cho nút được bấm
 		        document.getElementById(buttonId).classList.add('active');
-
 		        // Lưu ID của nút active vào Local Storage
 		        localStorage.setItem('activeButtonId', buttonId);
 		    }
@@ -966,8 +900,6 @@ Long count = (Long) request.getAttribute("countCourse");
 		        });
 		    });
 		</script>
-		<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<script
 			src="../assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
 		<script
@@ -980,3 +912,4 @@ Long count = (Long) request.getAttribute("countCourse");
 			src="../assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
 </body>
 </html>
+

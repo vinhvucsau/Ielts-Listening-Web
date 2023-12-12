@@ -9,20 +9,14 @@ Long count = (Long) request.getAttribute("countCourse");
 User user = (User) session.getAttribute("user");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-
 <%@ page import="javax.servlet.jsp.PageContext"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 </head>
 <body>
-
 	<style>
 .dropdown-item:hover {
 	background-color: #0071f9 !important;
@@ -56,8 +50,6 @@ User user = (User) session.getAttribute("user");
 	color: red;
 }
 </style>
-
-
 	<section class="py-6">
 		<div class="">
 			<div class="row">
@@ -69,26 +61,22 @@ User user = (User) session.getAttribute("user");
 								Khóa Học
 							</h4>
 							<div class="input-group ms-5" style="width: 400px;">
-									<span class="input-group-text"
-										id="basic-addon1"
-										style="background-color: white; color: rgb(107, 114, 128);">
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-											fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								<span class="input-group-text" id="basic-addon1"
+									style="background-color: white; color: rgb(107, 114, 128);">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 							  					<path
-												d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
 											</svg>
-									</span> <input type="text"
-										class="btn__search form-control py-2 fs-5 border"
-										placeholder="Tìm kiếm" aria-label="Search"
-										aria-describedby="basic-addon1"
-										value='${param.search == null ? "" : param.search }'>
-								</div>	
+								</span> <input type="text"
+									class="btn__search form-control py-2 fs-5 border"
+									placeholder="Tìm kiếm" aria-label="Search"
+									aria-describedby="basic-addon1"
+									value='${param.search == null ? "" : param.search }'>
 							</div>
-						
+						</div>
 						<div class="d-inline-flex col-md-6 col-lg-4 col-xl-5">
-						
 							<div class="me-2">
-							
 								<!-- Nav -->
 								<div class="nav btn-group flex-nowrap" role="tablist">
 									<button id="gridButton" class="btn btn-outline-secondary"
@@ -111,7 +99,7 @@ User user = (User) session.getAttribute("user");
 										type="button" data-bs-toggle="dropdown" aria-expanded="false"
 										style="width: 160px">
 										<!-- 								<span class="me-3">Mặc định</span>
- -->
+-->
 										<c:choose>
 											<c:when test="${param.rate == 'thapdencao'}">
 												<span class="me-3">Thấp đến cao</span>
@@ -151,8 +139,6 @@ User user = (User) session.getAttribute("user");
 												<span class="me-3">Mặc định</span>
 											</c:otherwise>
 										</c:choose>
-
-
 									</button>
 									<ul class="dropdown-menu bg-color-grey"
 										aria-labelledby="navbarLanding">
@@ -205,12 +191,8 @@ User user = (User) session.getAttribute("user");
 													<p class="card-text fw-bold fs-5"
 														style="color: rgb(113, 113, 113)"></p>
 													</p>
-
-
-
 												</div>
 												<div class="lh-1">
-
 													<span class="align-text-top"> <span class="fs-6">
 															<div class="d-flex gap-5">
 																<c:set var="totalStars" value="0" />
@@ -220,15 +202,12 @@ User user = (User) session.getAttribute("user");
 																		items="${lesson.enrrolLesson}">
 																		<c:set var="totalStars"
 																			value="${totalStars + enrrol_lesson.numberOfStar}" />
-
 																		<c:choose>
-																			<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																			<c:when
+																				test="${enrrol_lesson.numberOfStar != 0 && enrrol_lesson.numberOfStar != null}">
 																				<c:set var="count" value="${count + 1}" />
 																			</c:when>
-
 																		</c:choose>
-
-
 																	</c:forEach>
 																</c:forEach>
 																<c:choose>
@@ -281,16 +260,12 @@ User user = (User) session.getAttribute("user");
 																</button>
 															</c:otherwise>
 														</c:choose>
-
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</c:forEach>
-
-
-
 							</div>
 						</div>
 						<!-- Tab pane -->
@@ -320,7 +295,8 @@ User user = (User) session.getAttribute("user");
 											<!-- Card body -->
 											<div class="card-body">
 												<h3 class="mb-2 text-truncate-line-2">
-													<a href="course-detail?courseId=${i.courseId }" class="text-inherit">${i.courseName}</a>
+													<a href="course-detail?courseId=${i.courseId }"
+														class="text-inherit">${i.courseName}</a>
 												</h3>
 												<!-- list inline -->
 												<ul class="list-inline">
@@ -334,15 +310,12 @@ User user = (User) session.getAttribute("user");
 																		items="${lesson.enrrolLesson}">
 																		<c:set var="totalStars"
 																			value="${totalStars + enrrol_lesson.numberOfStar}" />
-
 																		<c:choose>
-																			<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																			<c:when
+																				test="${enrrol_lesson.numberOfStar != 0 && enrrol_lesson.numberOfStar != null}">
 																				<c:set var="count" value="${count + 1}" />
 																			</c:when>
-
 																		</c:choose>
-
-
 																	</c:forEach>
 																</c:forEach>
 																<c:choose>
@@ -373,9 +346,6 @@ User user = (User) session.getAttribute("user");
 													<p class="card-text fw-bold fs-5"
 														style="color: rgb(113, 113, 113)"></p>
 													</p>
-
-
-
 												</div>
 												<div class="row align-items-center g-0">
 													<div class="col-auto"></div>
@@ -401,7 +371,6 @@ User user = (User) session.getAttribute("user");
 																</button>
 															</c:otherwise>
 														</c:choose>
-
 													</div>
 												</div>
 												<div></div>
@@ -457,9 +426,9 @@ User user = (User) session.getAttribute("user");
 	        let stars = '';
 	        for (let i = 0; i < 5; i++) {
 	            if (i < rating) {
-	                stars += '⭐'; 
+	                stars += '⭐';
 	            } else {
-	                stars += '★'; 
+	                stars += '★';
 	            }
 	        }
 	        return stars;
@@ -468,7 +437,7 @@ User user = (User) session.getAttribute("user");
 	        // Add your logic to show a login popup or redirect to the login page
 	        showToast("Please log in to add to cart!");
 	    }
-	    
+	   
 	    function showToast(message) {
 	        // Tạo một toast message
 	        const toast = document.createElement("div");
@@ -477,46 +446,37 @@ User user = (User) session.getAttribute("user");
 	        toast.setAttribute("aria-live", "assertive");
 	        toast.setAttribute("aria-atomic", "true");
 	        toast.setAttribute("style", "border-left:4px solid red; z-index:3");
-
 	        // Tạo nội dung toast
 	        const toastBody = document.createElement("div");
 	        toastBody.classList.add("toast-body");
 	        toastBody.innerText = message;
-
 	        // Thêm nội dung vào toast và toast vào trang
 	        toast.appendChild(toastBody);
 	        document.body.appendChild(toast);
-
 	        // Hiển thị toast
 	        const bootstrapToast = new bootstrap.Toast(toast);
 	        bootstrapToast.show();
-
 	        // Ẩn toast sau 5 giây
 	        setTimeout(function () {
 	            bootstrapToast.hide();
 	        }, 5000);
-
 	        // Thêm event listener để ẩn toast khi người dùng click vào nó
 	        toast.addEventListener("click", function () {
 	            bootstrapToast.hide();
 	        });
 	    }
-	    
+	   
 	    function formatMoneyVND(amount) {
 	    	  // Check if the input is a valid number
 	    	  if (isNaN(amount)) {
 	    	    return 'Invalid input';
 	    	  }
-
 	    	  // Convert the number to a string and split it into integer and decimal parts
 	    	  const [integerPart, decimalPart] = amount.toFixed(0).toString().split('.');
-
 	    	  // Add commas to the integer part for thousand separators
 	    	  const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
 	    	  // Combine the formatted integer part with the decimal part and add the VND symbol
 	    	  const formattedAmount = formattedIntegerPart + (decimalPart ? '.' + decimalPart : '') + ' VND';
-
 	    	  return formattedAmount;
 	    	}
 	</script>
@@ -532,7 +492,7 @@ User user = (User) session.getAttribute("user");
 					currLi.classList.remove("active");
 					currLi = li;
 					currLi.classList.add("active");
-					params.delete("page"); 
+					params.delete("page");
 					if (i === 0) {
 						params.delete("tab");
 					}
@@ -553,7 +513,7 @@ User user = (User) session.getAttribute("user");
 				e.preventDefault();
 				page = Number(page) - 1;
 				if (page == 1){
-					params.delete("page"); 
+					params.delete("page");
 					const isQuestionMark = params.toString() === "" ? "" : "?";
 					window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 				}
@@ -577,8 +537,8 @@ User user = (User) session.getAttribute("user");
 				params.set("page", page);
 				const isQuestionMark = params.toString() === "" ? "" : "?";
 				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
-			}) 
-		} 
+			})
+		}
 		
 		const inputPageNum = document.querySelector(".input__pageNum");
 		if (inputPageNum) {
@@ -606,7 +566,7 @@ User user = (User) session.getAttribute("user");
 			else minPageBtn.disabled = false;
 			minPageBtn.addEventListener("click", (e) => {
 				e.preventDefault();
-				params.delete("page"); 
+				params.delete("page");
 				const isQuestionMark = params.toString() === "" ? "" : "?";
 				window.location.replace(location.protocol + '//' + location.host + location.pathname + isQuestionMark + params.toString());
 			})
@@ -628,7 +588,7 @@ User user = (User) session.getAttribute("user");
 			searchBtn.addEventListener("keypress", (e) => {
 				if (e.key ==="Enter") {
 					e.preventDefault();
-					params.delete("page"); 
+					params.delete("page");
 					if (e.target.value !== "")
 						params.set("search", e.target.value);
 					else params.delete("search");
@@ -683,15 +643,13 @@ User user = (User) session.getAttribute("user");
 		        // Xóa lớp 'active' khỏi tất cả các nút
 		        gridButton.classList.remove('active');
 		        listButton.classList.remove('active');
-
 		        // Thêm lớp 'active' cho nút được bấm
 		        document.getElementById(buttonId).classList.add('active');
-
 		        // Lưu ID của nút active vào Local Storage
 		        localStorage.setItem('activeButtonId', buttonId);
 		    }
 		});
 		</script>
-
 </body>
 </html>
+

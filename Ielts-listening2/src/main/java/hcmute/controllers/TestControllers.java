@@ -81,11 +81,12 @@ public class TestControllers extends HttpServlet {
 			resp.getWriter().print(errorMsg);
 			return;
 		}
-
-		enrollTest.getMockTests().getListeningParts().sort((a, b) -> a.getNumber() - b.getNumber());
-		enrollTest.getMockTests().getListeningParts().forEach(part -> {
-			part.getAnswerTests().sort((a, b) -> a.getNumber() - b.getNumber());
-		});
+		if (enrollTest.getMockTests().getListeningParts() != null) {
+			enrollTest.getMockTests().getListeningParts().sort((a, b) -> a.getNumber() - b.getNumber());
+			enrollTest.getMockTests().getListeningParts().forEach(part -> {
+				part.getAnswerTests().sort((a, b) -> a.getNumber() - b.getNumber());
+			});
+		}
 
 		String currentPartId;
 		if (req.getParameter("currentPartId") == null) {
@@ -120,6 +121,7 @@ public class TestControllers extends HttpServlet {
 			String userId = enrollTest.getUsers().getUserId();
 			String mockTestId = enrollTest.getMockTests().getTestId();
 			List<EnrrolTest> listHistoryTest = enrollTestService.findByUserIdAndMockTestId(userId, mockTestId);
+			listHistoryTest.sort((a,b) -> b.getEnrrollmentDate().compareTo(a.getEnrrollmentDate()));
 			req.setAttribute("listHistoryTest", listHistoryTest);
 		} else if (currentDate.after(enrollmentDate) && currentDate.before(endingEnrollmentDate)) {
 			// thời gian làm test nằm trong thời gian hiệu lực
@@ -143,16 +145,18 @@ public class TestControllers extends HttpServlet {
 		List<ListeningPart> parts = enrollTest.getMockTests().getListeningParts();
 		String prevPart = null;
 		String nextPart = null;
-		for (ListeningPart part : parts) {
-			if (part.getPartId().equals(currentPartId)) {
-				int index = parts.indexOf(part);
-				if (index != (parts.size() - 1)) {
-					nextPart = parts.get(index + 1).getPartId();
+		if(parts != null) {
+			for (ListeningPart part : parts) {
+				if (part.getPartId().equals(currentPartId)) {
+					int index = parts.indexOf(part);
+					if (index != (parts.size() - 1)) {
+						nextPart = parts.get(index + 1).getPartId();
+					}
+					if (index != 0) {
+						prevPart = parts.get(index - 1).getPartId();
+					}
+					break;
 				}
-				if (index != 0) {
-					prevPart = parts.get(index - 1).getPartId();
-				}
-				break;
 			}
 		}
 		req.setAttribute("prevPart", prevPart);
