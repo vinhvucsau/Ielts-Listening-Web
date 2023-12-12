@@ -11,15 +11,13 @@
 .luyende-testset-info-de {
 	background: var(--color-light-grey, #F3F3F3);
 	display: flex;
-	height: 300px;
+	height: 200px;
+	justify-content: center;
+	align-items: center;
 }
 
 .luyende-testset-link-paper {
 	height: 64px;
-}
-
-.luyende-testset-cong-cu {
-	height: 144px;
 }
 
 .luyende-testset-info-de-content-tile {
@@ -37,39 +35,65 @@
 	align-items: center;
 }
 </style>
-
+<c:set var="countDone" value="0" />
+<c:forEach var="i" items="${listMocktest}">
+<c:forEach var="en" items="${listEnrolltest}" >
+	<c:if test="${i.testId == en.mockTests.testId && en.score >= 0 }">
+	<c:set var="countDone" value="${countDone + 1}" />
+	</c:if>
+</c:forEach>
+</c:forEach>
 	<div class="luyende-testset">
-		<div class="luyende-testset-link-paper container-xxl"></div>
-		<div class="luyende-testset-info-de w-100 container-fluid py-5">
-
-			<div class="col"></div>
-			<div class="luyende-testset-info-de-content col-8 ">
-				<div
-					class="row d-flex flex-column justify-content-center align-items-center">
-
-
-					<h1 class="text-center  mt-4 mb-3">${topic_test.topicName}</h1>
-					<p class="text-center">${topic_test.description}</p>
-
+		<section class="pt-8">
+			<div class="container mx-4">
+				<div class="row">
+					<div class="col-12">
+						<a href="luyen-de-home" class="link-primary fw-semibold">
+							<div class="d-flex align-items-center">
+								<i class="fe fe-arrow-left"></i> Trở về
+							</div>
+						</a>
+						<!-- caption-->
+						<div
+							class="d-flex my-4 align-items-center justify-content-between">
+							<h1 class="fw-bold mb-0 display-4 lh-1 text-dark">${topic_test.topicName}</h1>
+							<c:if test="${countDone < topic_test.mockTests.size()}">
+							<div
+								class="px-3 py-2 rounded-3 d-flex flex-column justify-content-center text-center bg-dark text-light"
+								style="height: 40px; width: 80px">
+								<p class="fw-semibold h-25" style="font-size: 15px;">${countDone} /${topic_test.mockTests.size()}
+									đề</p>
+							</div>
+							</c:if>
+							<c:if test="${countDone == topic_test.mockTests.size()}">
+							<div
+								class="px-3 py-2 rounded-3 d-flex flex-column justify-content-center text-center bg-success text-light"
+								style="height: 40px; width: 80px">
+								<p class="fw-semibold h-25" style="font-size: 15px;">${countDone} /${topic_test.mockTests.size()}
+									đề</p>
+							</div>
+							</c:if>
+						</div>
+						<div class="col-md-8 col-12">
+							<p style="font-size: 15px;">${topic_test.description}</p>
+						</div>
+					</div>
 				</div>
-
 			</div>
-			<div class="col"></div>
-
-
-		</div>
-		<div class="container-xxl">
-			<div class="luyende-testset-cong-cu " style="padding: 50px 0;">
-				<div class="row  d-flex" style="display: flex; align-items: center;">
+		</section>
+		<div class="container m-4 p-4 bg-white rounded-3">
+			<div class="luyende-testset-cong-cu ">
+				<div class="row  d-flex pb-4"
+					style="display: flex; align-items: center;">
 					<div class="col-5  text--h3">
 						<h2>
 							<b>Danh sách đề</b>
 						</h2>
 					</div>
 
-					<div class="col-7 luyende-testset-cong-cu-loc">
+					<div class="col-7 luyende-testset-cong-cu-loc justify-content-end">
 
-						<div style="font-size: 20px;" class="col-2">Lọc theo</div>
+						<div style="font-size: 15px;" class="ps-5 col-2">Lọc theo</div>
 
 						<select id="selectOption" class="form-select"
 							aria-label="Default select example" style="width: 50%;">
@@ -79,22 +103,6 @@
 							<option value="daLam">Đã làm bài</option>
 
 						</select>
-						<div class="search-bar">
-							<form class="d-flex mx-2">
-								<div class="input-group">
-									<span class="input-group-text bg-white"> <svg
-											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-											fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-	  					<path
-												d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-					</svg>
-									</span> <input class="form-control" type="search"
-										placeholder="Tìm kiếm" aria-label="Search" name="textSearch">
-								</div>
-
-							</form>
-						</div>
-
 					</div>
 				</div>
 			</div>
@@ -127,7 +135,7 @@
 										test="${i.testId == en.mockTests.testId && en.score >= 0 }">
 										<div class="luyende-testset-list-de col-6 luyende-da-lam">
 
-											<div class="card" style="border: 0;">
+											<div class="card" style="box-shadow: none;">
 												<div class="card-body">
 													<div class="card-title text--h3 ">${i.testName}</div>
 													<div
@@ -164,35 +172,35 @@
 									<c:when
 										test="${i.testId == en.mockTests.testId && en.score < 0 }">
 										<div class="luyende-testset-list-de col-6 luyende-dang-lam">
-											
 
-												<div class="card" style="border: 0;">
-													<div class="card-body">
-														<div class="card-title text--h3 ">${i.testName}</div>
-														<div
-															class="p-3 border bg-white d-flex justify-content-between flex-row rounded-3"
-															style="border-color: bg-color-green--medium">
-															<div class="d-flex gap-3 align-items-center">
-																<div
-																	class="rounded-3 d-flex justify-content-center align-items-center fw-bold "
-																	style="background-color: #fef5d2; width: 50px; height: 50px;">
 
-																</div>
-																<p
-																	class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
+											<div class="card" style="box-shadow: none;">
+												<div class="card-body">
+													<div class="card-title text--h3 ">${i.testName}</div>
+													<div
+														class="p-3 border bg-white d-flex justify-content-between flex-row rounded-3"
+														style="border-color: bg-color-green--medium">
+														<div class="d-flex gap-3 align-items-center">
+															<div
+																class="rounded-3 d-flex justify-content-center align-items-center fw-bold "
+																style="background-color: #fef5d2; width: 50px; height: 50px;">
+
 															</div>
-															<form action="luyende-testset" method="post">
-																<a
-																	href='<c:url value="/test/luyende_test?enrollTestId=${enrTestId}"></c:url>'
-																	class="btn"
-																	style="background-color: rgb(245, 158, 11); color: #fff;">Làm
-																	tiếp</a>
-															</form>
+															<p
+																class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
 														</div>
+														<form action="luyende-testset" method="post">
+															<a
+																href='<c:url value="/test/luyende_test?enrollTestId=${enrTestId}"></c:url>'
+																class="btn"
+																style="background-color: rgb(245, 158, 11); color: #fff;">Làm
+																tiếp</a>
+														</form>
 													</div>
 												</div>
+											</div>
 
-											
+
 										</div>
 										<c:set var="found" value="true" />
 									</c:when>
@@ -202,15 +210,16 @@
 						</c:forEach>
 						<c:if test="${!found}">
 							<div class="luyende-testset-list-de col-6 luyende-chua-lam">
-								<form action="luyende-testset " method="post">
-									<input type="hidden" name="testId" value="${i.testId }" />
 
 
-									<div class="card" style="border: 0;">
-										<div class="card-body">
-											<div class="card-title text--h3 ">${i.testName}</div>
-											<div class="p-3 border bg-white d-flex flex-row rounded-3"
-												style="border-color: bg-color-green--medium">
+
+								<div class="card" style="box-shadow: none;">
+									<div class="card-body">
+										<div class="card-title text--h3 ">${i.testName}</div>
+										<div
+											class="p-3 border bg-white d-flex align-items-center justify-content-between flex-row rounded-3"
+											style="border-color: bg-color-green--medium">
+											<div class="d-flex gap-3 align-items-center">
 												<div
 													class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
 													style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
@@ -223,22 +232,23 @@
 												</div>
 												<p
 													class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
-												<form action="luyen-testset" method="post">
-													<input type="hidden" name="userId"
-														value="${currentUser.userId }" /> <input type="hidden"
-														name="testId" value="${i.testId }" /> <input
-														type="submit" class="btn btn-primary" value="Làm ngay" />
-												</form>
 											</div>
+											<form action="luyende-testset" method="post">
+												<input type="hidden" name="userId"
+													value="${currentUser.userId }" /> <input type="hidden"
+													name="testId" value="${i.testId }" /> <input type="submit"
+													class="btn btn-primary" value="Làm ngay" />
+											</form>
 										</div>
 									</div>
+								</div>
 
-								</form>
+
 							</div>
 						</c:if>
 
 
-						
+
 
 
 
@@ -248,7 +258,7 @@
 					<c:if test="${ empty currentUser}">
 
 						<div class="luyende-testset-list-de col-6 ">
-							<div class="card" style="border: 0;">
+							<div class="card" style="box-shadow: none;">
 								<div class="card-body">
 									<div class="card-title text--h3 ">${i.testName}</div>
 									<div class="p-3 border bg-white d-flex flex-row rounded-3"
@@ -328,3 +338,5 @@
 	</script>
 </body>
 </html>
+
+
