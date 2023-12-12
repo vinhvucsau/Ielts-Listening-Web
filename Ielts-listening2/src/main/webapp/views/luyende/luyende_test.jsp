@@ -23,7 +23,7 @@
 							<i class="ti-alarm-clock me-2"></i>
 							<h6 class="timer" valuenow="${currentTime}" valuemax="${endingTime}" enrollTestId="${enrollTest.enrrolId}">00 : 00 : 00</h6>
 						</div>
-						<h3 class="d-flex align-items-center">CAM 18 - TEST 2</h3>
+						<h3 class="d-flex align-items-center" style="text-transform:uppercase">${enrollTest.mockTests.testName}</h3>
 					</div>
 					<div class="col-3 d-flex justify-content-end">
 						<a href="#" class="px-3 d-flex text-center align-items-center"><i
@@ -92,7 +92,7 @@
 						<c:choose>
 							<c:when test="${currentPart.audio.substring(0,4)!='http'}">
 								<audio class="audio">
-									<source src='<c:url value="/image?fname=topicAudio/${currentPart.audio}"></c:url>' type="audio/mpeg">
+									<source src='<c:url value="/audio?fname=topicAudio/${currentPart.audio}"></c:url>' type="audio/mpeg">
 								</audio>
 							</c:when>
 							<c:otherwise>
@@ -205,13 +205,22 @@
 									</div>
 								</div>
 							</div>
-							<a href="#"
+							<a href='<c:url value="/user/luyen-de-home"></c:url>'
 								class="a-btn mt-3 d-flex justify-content-center align-items-center">
 								<h6>Quay về trang luyện đề</h6>
-							</a> <a href="#"
-								class="a-btn mt-3 d-flex justify-content-center align-items-center">
-								<h6>Làm lại</h6>
-							</a>
+							</a> 
+							<form action='<c:url value="/user/luyen-de-home"></c:url>' method="post">
+								<input type="hidden" name="userId"
+									value="${enrollTest.users.userId }" />
+								<input type="hidden" name="testId"
+									value="${enrollTest.mockTests.testId }" /> 
+								<button type="submit"
+									class="a-btn mt-3 w-100 d-flex justify-content-center align-items-center" 
+									style="border:0px;"
+									value="Làm lại">
+									<h6>Làm lại</h6>
+								</button>
+							</form>
 						</div>
 					</c:if>
 				</div>

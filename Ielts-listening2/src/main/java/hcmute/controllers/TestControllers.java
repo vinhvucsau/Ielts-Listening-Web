@@ -120,6 +120,7 @@ public class TestControllers extends HttpServlet {
 			String userId = enrollTest.getUsers().getUserId();
 			String mockTestId = enrollTest.getMockTests().getTestId();
 			List<EnrrolTest> listHistoryTest = enrollTestService.findByUserIdAndMockTestId(userId, mockTestId);
+			listHistoryTest.sort((a,b) -> b.getEnrrollmentDate().compareTo(a.getEnrrollmentDate()));
 			req.setAttribute("listHistoryTest", listHistoryTest);
 		} else if (currentDate.after(enrollmentDate) && currentDate.before(endingEnrollmentDate)) {
 			// thời gian làm test nằm trong thời gian hiệu lực

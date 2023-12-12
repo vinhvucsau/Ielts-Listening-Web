@@ -63,7 +63,7 @@ public class EnrollLessonServiceImpl implements IEnrollLessonService {
 					.count();
 			try {
 				double score = ((double)numberCorrectAnswers / numberQuestions)*10;
-				enrollLesson.setScore(score);
+				enrollLesson.setScore((double)Math.round(score * 10) / 10);
 				Date currentDate = new Date(System.currentTimeMillis());
 				enrollLesson.setEnrrollmentDate(currentDate);
 				enDao.update(enrollLesson);

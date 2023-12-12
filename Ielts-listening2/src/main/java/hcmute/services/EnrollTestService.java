@@ -52,7 +52,7 @@ public class EnrollTestService{
 				long numberOfCorrectAnswer = calcNumberOfCorrectAnswers(enrrolTestId);
 				long numberOfQuestion = calcNumberOfQuestTion(enrrolTestId);
 				double score = 10*((double)numberOfCorrectAnswer / numberOfQuestion);
-				newEnrrolTest.setScore(score);
+				newEnrrolTest.setScore((double)Math.round(score * 10) / 10);
 				enrollTestDao.update(newEnrrolTest);
 				return score;
 			} catch (Exception e) {
