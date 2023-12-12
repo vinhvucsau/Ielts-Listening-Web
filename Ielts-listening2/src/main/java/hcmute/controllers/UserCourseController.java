@@ -104,6 +104,8 @@ public class UserCourseController extends HttpServlet {
 			}
 			req.setAttribute("percentCountOfStars", percentCountOfStars);
 			req.setAttribute("listLessonCourse", listLesson);
+			
+			req.setAttribute("courses", courseService.findAll());
 			RequestDispatcher rd = req.getRequestDispatcher("/views/user/LessonList.jsp");
 			rd.forward(req, resp);
 

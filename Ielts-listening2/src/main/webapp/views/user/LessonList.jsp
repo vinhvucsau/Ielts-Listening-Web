@@ -1091,6 +1091,23 @@
 		let formattedNumber = number.toLocaleString('en-US');
 		const cost = document.querySelector(".price-container span");
 		cost.textContent = formattedNumber;
+		
+		document.querySelectorAll('.stars').forEach(starContainer => {
+	        const rating = parseInt(starContainer.getAttribute('data-rating'));
+	        starContainer.innerHTML = getStarRating(rating);
+	    });
+	
+	    function getStarRating(rating) {
+	        let stars = '';
+	        for (let i = 0; i < 5; i++) {
+	            if (i < rating) {
+	                stars += '⭐'; 
+	            } else {
+	                stars += '★'; 
+	            }
+	        }
+	        return stars;
+	    }
 	</script>
 	<!-- Scripts -->
 	<!-- Libs JS -->
