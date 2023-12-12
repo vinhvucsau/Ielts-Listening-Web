@@ -420,7 +420,7 @@ Long count = (Long) request.getAttribute("countCourse");
 																			</c:when>
 																		</c:choose>
 
-
+																		
 																		<div class="stars rating-star"
 																			data-rating="${roundedAverage}"></div>
 																		<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
@@ -428,6 +428,7 @@ Long count = (Long) request.getAttribute("countCourse");
 															</span>
 														</div>
 													</div>
+						
 													<!-- Card footer -->
 													<div class="card-footer">
 														<div class="row align-items-center g-0">
