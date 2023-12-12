@@ -3,14 +3,12 @@ package hcmute.controllers;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +26,6 @@ import hcmute.services.TopicTestServiceImpl;
 import hcmute.services.UserServiceImpl;
 import hcmute.utils.Constants;
 
-/**
- * Servlet implementation class LuyenDeHomeController
- */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
 		* 50)
 @WebServlet(urlPatterns = { "/user/luyen-de-home" })

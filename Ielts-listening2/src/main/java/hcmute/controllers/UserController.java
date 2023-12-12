@@ -6,11 +6,14 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hcmute.entity.Account;
 import hcmute.entity.Course;
+import hcmute.entity.User;
 import hcmute.services.AccountServiceImpl;
 import hcmute.services.AdminKhoaHocServiceImpl;
 import hcmute.services.IAccountServices;
@@ -24,6 +27,7 @@ public class UserController extends HttpServlet {
 	/**
 	 * 
 	 */
+	IAdminKhoaHocService courseService = new AdminKhoaHocServiceImpl();
 	private static final long serialVersionUID = 1L;
 	IAccountServices accountService = new AccountServiceImpl();
 	IUserService userService = new UserServiceImpl();
@@ -52,11 +56,17 @@ public class UserController extends HttpServlet {
 			
 			req.setAttribute("course", list);
 
+	private void FindIncreaseRate(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			List<Course> list = courseService.FindCourseIncreaseRate();
+
+			req.setAttribute("course", list);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("error", "Eror: " + e.getMessage());
 		}
 
 	}
+
 }
-          

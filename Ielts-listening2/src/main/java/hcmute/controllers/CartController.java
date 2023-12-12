@@ -1,12 +1,8 @@
 package hcmute.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,20 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import hcmute.entity.Cart;
-import hcmute.entity.CombineCart;
 import hcmute.entity.Course;
 import hcmute.entity.User;
 import hcmute.entity.UserCourse;
-import hcmute.services.AdminKhoaHocServiceImpl;
 import hcmute.services.CartServiceImpl;
 import hcmute.services.CourseServiceImpl;
-import hcmute.services.IAdminKhoaHocService;
 import hcmute.services.ICartService;
 import hcmute.services.ICourseService;
 import hcmute.services.IUserCourseService;
-import hcmute.services.IUserService;
 import hcmute.services.UserCourseServiceImpl;
-import hcmute.services.UserServiceImpl;
 
 @WebServlet(urlPatterns = { "/user/cart", "/user/addToCart", "/user/mycart", "/user/deleteToCart" })
 public class CartController extends HttpServlet {
@@ -74,7 +65,7 @@ public class CartController extends HttpServlet {
 			/*
 			 * PrintWriter out = resp.getWriter(); out.print("err"+ finalCarts);
 			 */
-			
+
 			req.getRequestDispatcher("/views/user/cart.jsp").forward(req, resp);
 		}
 	}
@@ -96,6 +87,7 @@ public class CartController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/user/" + lastPrevUrl);
 			} else {
 				String courseId = req.getParameter("courseId");
+//				@SuppressWarnings("unchecked")
 				List<Cart> carts = (List<Cart>) session.getAttribute("cart");
 				int flag = 0;
 				for (Cart cart : carts) {
