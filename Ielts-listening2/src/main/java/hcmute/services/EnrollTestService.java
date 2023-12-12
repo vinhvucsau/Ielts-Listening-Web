@@ -50,9 +50,19 @@ public class EnrollTestService{
 		if (newEnrrolTest != null) {
 			try {
 				long numberOfCorrectAnswer = calcNumberOfCorrectAnswers(enrrolTestId);
-				long numberOfQuestion = calcNumberOfQuestTion(enrrolTestId);
-				double score = 10*((double)numberOfCorrectAnswer / numberOfQuestion);
-				newEnrrolTest.setScore((double)Math.round(score * 10) / 10);
+				// Bảng điểm IELTS theo barem cụ thể
+		        double[] scoreTable = {0, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0};
+		        // Bảng câu đúng tương ứng với từng mức điểm
+		        int[] correctAnswersTable = {0, 3, 5, 7, 10, 13, 16, 20, 23, 27, 30, 33, 35, 37, 39};
+		        double score = 0;
+		        // Tìm mức điểm tương ứng với số câu đúng
+		        for (int i = scoreTable.length - 1; i >= 0; i--) {
+		            if (numberOfCorrectAnswer >= correctAnswersTable[i]) {
+		                score = scoreTable[i];
+		                break;
+		            }
+		        }
+				newEnrrolTest.setScore(score);
 				enrollTestDao.update(newEnrrolTest);
 				return score;
 			} catch (Exception e) {
