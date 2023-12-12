@@ -46,7 +46,7 @@ public class UserBlogController extends HttpServlet {
 			String searchStr = req.getParameter("search") == null ? "" : req.getParameter("search");
 			List<Blog> listBlog = blogService.findAll(searchStr);
 			List<User> listUser = uService.findAll();
-			int pagesize = 9 * 3;
+			int pagesize = 3 * 3;
 			List<Blog> listBlogPage = blogService.findAll(page - 1, pagesize, searchStr);
 			int pageNum = (int) (listBlog.size() / pagesize) + (listBlog.size() % pagesize == 0 ? 0 : 1);
 			req.setAttribute("pageNum", pageNum);
