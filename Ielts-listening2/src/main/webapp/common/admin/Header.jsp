@@ -11,8 +11,7 @@
 		<!-- navbar -->
 		<nav class="navbar-default navbar navbar-expand-lg">
 			<a id="nav-toggle" href="#"> <i class="fe fe-menu"></i>
-			</a>
-
+			</a> <span style="margin-left: 10px">Hello, Admin !</span>
 			<!--Navbar nav -->
 			<div class="ms-auto d-flex gap-4 align-items-center">
 				<div class="dropdown">
@@ -49,7 +48,9 @@
 						</li>
 					</ul>
 				</div>
-				<span>Hello, Admin !</span>
+				<form action=logout method="post">
+					<button class="btn btn-light">Đăng Xuất</button>
+				</form>
 			</div>
 		</nav>
 	</div>

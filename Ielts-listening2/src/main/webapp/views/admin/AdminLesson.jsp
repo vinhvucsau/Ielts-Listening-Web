@@ -227,8 +227,14 @@
 
 								</div>
 								<div id="answerTest" class="d-flex flex-column gap-3"></div>
-								<div onclick="addQuestion()" style="margin: 10px"
-									class="btn btn-light">Add Answer Test</div>
+								<div style="margin: 10px"  class="d-flex justify-content-between">
+									<div onclick="addQuestion()" class="btn btn-light">Add
+										Answer Test</div>
+									<div style="margin: 10px" onclick="deleteQuestion()"
+										class="btn btn-danger">
+										<i class="fe fe-trash"></i> Delete
+									</div>
+								</div>
 							</div>
 
 						</div>
@@ -272,36 +278,54 @@
 	</script>
 
 	<script>
-	    /* let questionCount = ${listAnsLesson[-1].number}; */
-	    let questionCount = 0 
-	    function addQuestion() {
-	        // Increment the question count
-	        questionCount++;
-	
-	        // Create new components
-	        const newLabel = document.createElement('label');
-	        newLabel.textContent = 'Question ' + questionCount;
-			newLabel.setAttribute('name', 'question'+ questionCount);
-			newLabel.setAttribute('value', 'question'+ questionCount);
-	        
-	        const newInput = document.createElement('input');
-	        newInput.setAttribute('type', 'text');
-	        newInput.setAttribute('placeholder', 'Enter your answer...');
-	        newInput.classList.add('form-control'); // Add form-control class
-	
-	        newInput.setAttribute('name', 'answer'+ questionCount);
-	        
-	        // Create a container div for the new components
-	        const newQuestionContainer = document.createElement('div');
-	        newQuestionContainer.classList.add('d-flex', 'flex-column', 'gap-3'); // Add gap-3 class
-	        newQuestionContainer.appendChild(newLabel);
-	        newQuestionContainer.appendChild(newInput);
-	
-	        // Get the answerTest div and append the new container
-	        const answerTestDiv = document.getElementById('answerTest');
-	        answerTestDiv.appendChild(newQuestionContainer);
-	    }
-	</script>
+    let questionCount = 0;
+    let newQuestionContainer;
+    let answerTestDiv;
+	if (questionCount === 0 ){
+		
+	}
+    
+    function addQuestion() {
+        // Increment the question count
+        questionCount++;
+
+        // Create new components
+        const newLabel = document.createElement('label');
+        newLabel.textContent = 'Question ' + questionCount;
+        newLabel.setAttribute('name', 'question' + questionCount);
+        newLabel.setAttribute('value', 'question' + questionCount);
+
+        const newInput = document.createElement('input');
+        newInput.setAttribute('type', 'text');
+        newInput.setAttribute('placeholder', 'Enter your answer...');
+        newInput.classList.add('form-control'); // Add form-control class
+
+        newInput.setAttribute('name', 'answer' + questionCount);
+
+        // Create a container div for the new components
+        newQuestionContainer = document.createElement('div');
+        newQuestionContainer.classList.add('d-flex', 'flex-column', 'gap-3', 'newQuestionContainer'); // Add gap-3 class
+        newQuestionContainer.appendChild(newLabel);
+        newQuestionContainer.appendChild(newInput);
+
+        // Get the answerTest div and append the new container
+        answerTestDiv = document.getElementById('answerTest');
+        answerTestDiv.appendChild(newQuestionContainer);
+    }
+
+    function deleteQuestion() {
+        if (questionCount === 0) return;
+
+        // Select the last added newQuestionContainer
+        let questionContainers = document.querySelectorAll('.newQuestionContainer');
+        let lastQuestionContainer = questionContainers[questionContainers.length - 1];
+
+        // Remove the last added newQuestionContainer
+        answerTestDiv.removeChild(lastQuestionContainer);
+        questionCount--;
+    }
+
+</script>
 	<script>
 		function showFile(fileInputs){
 			document.querySelectorAll("h5").forEach(h5 => h5.remove());
