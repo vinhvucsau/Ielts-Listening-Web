@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import hcmute.DAO.IPayDetailDAO;
-import hcmute.DAO.PayDetailDAOImpl;
 import hcmute.entity.Account;
 import hcmute.entity.PayDetail;
 import hcmute.entity.Payment;
@@ -70,6 +68,8 @@ public class CapNhatThongTinController extends HttpServlet {
 			Long count = userService.countCourseByUserId(userId);
 			User userCurrent = userService.findUserByID(userId);
 			List<UserCourse> listUserCourse = userService.findAllUserCourseByUserId(userId);
+			
+			req.setAttribute("folder", Constants.FOLDER_COURSE);
 			req.setAttribute("userCourse", listUserCourse);
 			req.setAttribute("userId", userId);
 			req.setAttribute("currentUser", userCurrent);

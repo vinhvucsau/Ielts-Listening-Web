@@ -101,11 +101,16 @@ img {
 						<div
 							class="rounded-3 position-relative w-100 d-block overflow-hidden p-0"
 							style="height: 600px">
-							<iframe
+							<!-- <iframe
 								class="position-absolute top-0 end-0 start-0 end-0 bottom-0 h-100 w-100"
 								width="560" height="315"
 								src="https://www.youtube.com/embed/Nfzi7034Kbg?si=C2_CU7iIZJA5VWcS"
-								title="Geeks - Academy and LMS Template" frameborder="0"></iframe>
+								title="Geeks - Academy and LMS Template" frameborder="0"></iframe> -->
+								<video class="position-absolute top-0 end-0 start-0 end-0 bottom-0 h-100 w-100"
+								width="560" height="315" controls>
+									<source src="<c:url value='/image?fname=${folder}/${lesson.video}'/>" type="video/mp4">
+									
+								</video>
 						</div>
 					</div>
 				</div>
