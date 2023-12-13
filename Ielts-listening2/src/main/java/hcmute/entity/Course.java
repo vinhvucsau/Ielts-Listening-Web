@@ -1,16 +1,13 @@
 package hcmute.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,41 +15,37 @@ import hcmute.utils.Constants;
 
 @Entity
 @Table(name = Constants.COURSE_RELATION)
-public class Course implements Serializable{
+public class Course implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String courseId;
-	
-	@Column(columnDefinition = "varchar(1000)")
-	private String courseName;
-	
-	@Column(columnDefinition = "varchar(10000)")
-	private String description;
-	
-	@Column(columnDefinition = "varchar(255)")
-	private String image;
-	
-	@Column(columnDefinition = "int")
-	private int cost;
-	
-	@Column(columnDefinition = "date")
-	private String enrrolmentDate;
-	
-	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-	private List<EnrrolCourse> enrrolCourses;
-	
-	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-	private List<Lesson> lessons;
-	
-	@ManyToOne
-	@JoinColumn(name = "creatorId")
-	private User users;
 
-	public Course(String courseId, String courseName, String description, String image, int cost, String enrrolmentDate,
-			List<EnrrolCourse> enrrolCourses, List<Lesson> lessons, User users) {
+	@Column(name = "courseName")
+	private String courseName;
+
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "image")
+	private String image;
+
+	@Column(name = "cost")
+	private Integer cost;
+
+	@Column(name = "enrrollmentDate")
+	private Date enrrolmentDate;
+
+	@Column(name = "trailer")
+	private String trailer;
+
+	public String getTrailer() {
+		return trailer;
+	}
+
+	public Course(String courseId, String courseName, String description, String image, Integer cost,
+			Date enrrolmentDate, String trailer, List<UserCourse> userCourse, List<Lesson> lessons) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
@@ -60,13 +53,34 @@ public class Course implements Serializable{
 		this.image = image;
 		this.cost = cost;
 		this.enrrolmentDate = enrrolmentDate;
-		this.enrrolCourses = enrrolCourses;
+		this.trailer = trailer;
+		this.userCourse = userCourse;
 		this.lessons = lessons;
-		this.users = users;
 	}
-	
+
+	public void setTrailer(String trailer) {
+		this.trailer = trailer;
+	}
+
+	@OneToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+	private List<UserCourse> userCourse;
+
+	@OneToMany(mappedBy = "courses", fetch = FetchType.EAGER)
+	private List<Lesson> lessons;
+
 	public Course() {
 		super();
+	}
+
+	public Course(String courseName, String description, String image, Integer cost, Date enrrolmentDate,
+			List<UserCourse> userCourse, List<Lesson> lessons) {
+		this.courseName = courseName;
+		this.description = description;
+		this.image = image;
+		this.cost = cost;
+		this.enrrolmentDate = enrrolmentDate;
+		this.userCourse = userCourse;
+		this.lessons = lessons;
 	}
 
 	public String getCourseId() {
@@ -101,28 +115,28 @@ public class Course implements Serializable{
 		this.image = image;
 	}
 
-	public int getCost() {
+	public Integer getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	public void setCost(Integer cost) {
 		this.cost = cost;
 	}
 
-	public String getEnrrolmentDate() {
+	public Date getEnrrolmentDate() {
 		return enrrolmentDate;
 	}
 
-	public void setEnrrolmentDate(String enrrolmentDate) {
+	public void setEnrrolmentDate(Date enrrolmentDate) {
 		this.enrrolmentDate = enrrolmentDate;
 	}
 
-	public List<EnrrolCourse> getEnrrolCourses() {
-		return enrrolCourses;
+	public List<UserCourse> getUserCourse() {
+		return userCourse;
 	}
 
-	public void setEnrrolCourses(List<EnrrolCourse> enrrolCourses) {
-		this.enrrolCourses = enrrolCourses;
+	public void setUserCourse(List<UserCourse> userCourse) {
+		this.userCourse = userCourse;
 	}
 
 	public List<Lesson> getLessons() {
@@ -133,13 +147,4 @@ public class Course implements Serializable{
 		this.lessons = lessons;
 	}
 
-	public User getUsers() {
-		return users;
-	}
-
-	public void setUsers(User users) {
-		this.users = users;
-	}
-	
-	
 }

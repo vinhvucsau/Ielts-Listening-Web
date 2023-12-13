@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,20 +16,18 @@ public class Notify implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String notifyId;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name = "title")
 	private String title;
 	
-	@Column(columnDefinition = "varchar(10000)")
+	@Column(name = "description")
 	private String description;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name = "image")
 	private String image;
 
 	public Notify(String notifyId, String title, String description, String image) {
-		super();
 		this.notifyId = notifyId;
 		this.title = title;
 		this.description = description;

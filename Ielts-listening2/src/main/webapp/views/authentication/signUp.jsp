@@ -23,7 +23,16 @@
 				<div class="text-center">
 					<p class="fw-bold fs-5">Đăng Ký</p>
 				</div>
-				<form class="p-4" action="signup" method="post">
+				<form class="p-4" action="authentication-signup" method="post">
+					<div class="mb-4">
+						<label for="email" class="form-label mb-2 text-secondary">
+							Email <span class="text-danger">*</span>
+						</label>
+						<div class="input-group">
+							<input id="email" name="email" class="form-control" type="text"
+								placeholder="Nhập email">
+						</div>
+					</div>
 					<div class="mb-4">
 						<label for="username" class="form-label mb-2 text-secondary">
 							Username <span class="text-danger">*</span>
@@ -73,7 +82,7 @@
 						</form>
 					</div>
 					<span class="text-primary"> Đã có tài khoản? <a
-						class="text-decoration-underline" href="login"><strong>Đăng
+						class="text-decoration-underline" href="authentication-login"><strong>Đăng
 								nhập</strong></a></span>
 				</form>
 			</div>

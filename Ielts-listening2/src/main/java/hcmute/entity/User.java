@@ -1,101 +1,91 @@
 package hcmute.entity;
+
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import hcmute.utils.Constants;
- 
 
 @Entity
 @Table(name = Constants.USER_RELATION)
-public class User implements Serializable{
-	
-	
+public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String userId;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "sex")
 	private String sex;
-	
+
 	@Column(columnDefinition = "date")
 	private String dateOfBirth;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "phoneNumber")
 	private String phoneNumber;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "address")
 	private String address;
-	
-	@Column(columnDefinition = "varchar(255)")
+
+	@Column(name = "image")
 	private String image;
+
 	
-	@Column(columnDefinition = "varchar(255)")
-	private String networth;
+	@Column(name = "networth")
+	private Integer networth;
+	
 	
 	@Column(name = "contributeScore")
 	private Integer contributeScore;
-	
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<Score> scores;
-	
+	private List<EnrrolLesson> enrrolLesson;
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<EnrrolCourse> enrrolCourses;
-	
-	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<Course> courses;
-	
-	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<Quiz> quizs;
-	
-	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<QuizRepComment> quizRepComments;
-	
-	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<QuizComment> quizComments;
-	
+	private List<UserCourse> userCourse;
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<EnrrolTest> enrrolTests;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<Blog> blogs;
-	
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<QAndA> qAndAs;
-	
+	private List<Cart> cart;
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<QAndAComment> qAndAComments;
-	
+	private List<RepComment> repComment;
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<QAndARepComment> qAndARepComments;
-	
+	private List<CommentLesson> commentLesson;
+
 	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<ReadNotify> readNotifys;
-	
+
 	@OneToOne
-    @JoinColumn(name = "userName")
-    private Account account;
+	@JoinColumn(name = "userName")
+	private Account account;
+	
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+	private List<Payment> payment;
+
+	public User() {
+		super();
+	}
 
 	public String getUserId() {
 		return userId;
@@ -161,68 +151,36 @@ public class User implements Serializable{
 		this.image = image;
 	}
 
-	public String getNetworth() {
+	public Integer getNetworth() {
 		return networth;
 	}
 
-	public void setNetworth(String networth) {
+	public void setNetworth(Integer networth) {
 		this.networth = networth;
 	}
 
-	public int getContributeScore() {
+	public Integer getContributeScore() {
 		return contributeScore;
 	}
 
-	public void setContributeScore(int contributeScore) {
+	public void setContributeScore(Integer contributeScore) {
 		this.contributeScore = contributeScore;
 	}
 
-	public List<Score> getScores() {
-		return scores;
+	public List<EnrrolLesson> getEnrrolLesson() {
+		return enrrolLesson;
 	}
 
-	public void setScores(List<Score> scores) {
-		this.scores = scores;
+	public void setEnrrolLesson(List<EnrrolLesson> enrrolLesson) {
+		this.enrrolLesson = enrrolLesson;
 	}
 
-	public List<EnrrolCourse> getEnrrolCourses() {
-		return enrrolCourses;
+	public List<UserCourse> getUserCourse() {
+		return userCourse;
 	}
 
-	public void setEnrrolCourses(List<EnrrolCourse> enrrolCourses) {
-		this.enrrolCourses = enrrolCourses;
-	}
-
-	public List<Course> getCourses() {
-		return courses;
-	}
-
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
-	}
-
-	public List<Quiz> getQuizs() {
-		return quizs;
-	}
-
-	public void setQuizs(List<Quiz> quizs) {
-		this.quizs = quizs;
-	}
-
-	public List<QuizRepComment> getQuizRepComments() {
-		return quizRepComments;
-	}
-
-	public void setQuizRepComments(List<QuizRepComment> quizRepComments) {
-		this.quizRepComments = quizRepComments;
-	}
-
-	public List<QuizComment> getQuizComments() {
-		return quizComments;
-	}
-
-	public void setQuizComments(List<QuizComment> quizComments) {
-		this.quizComments = quizComments;
+	public void setUserCourse(List<UserCourse> userCourse) {
+		this.userCourse = userCourse;
 	}
 
 	public List<EnrrolTest> getEnrrolTests() {
@@ -241,28 +199,28 @@ public class User implements Serializable{
 		this.blogs = blogs;
 	}
 
-	public List<QAndA> getqAndAs() {
-		return qAndAs;
+	public List<Cart> getCart() {
+		return cart;
 	}
 
-	public void setqAndAs(List<QAndA> qAndAs) {
-		this.qAndAs = qAndAs;
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
 	}
 
-	public List<QAndAComment> getqAndAComments() {
-		return qAndAComments;
+	public List<RepComment> getRepComment() {
+		return repComment;
 	}
 
-	public void setqAndAComments(List<QAndAComment> qAndAComments) {
-		this.qAndAComments = qAndAComments;
+	public void setRepComment(List<RepComment> repComment) {
+		this.repComment = repComment;
 	}
 
-	public List<QAndARepComment> getqAndARepComments() {
-		return qAndARepComments;
+	public List<CommentLesson> getCommentLesson() {
+		return commentLesson;
 	}
 
-	public void setqAndARepComments(List<QAndARepComment> qAndARepComments) {
-		this.qAndARepComments = qAndARepComments;
+	public void setCommentLesson(List<CommentLesson> commentLesson) {
+		this.commentLesson = commentLesson;
 	}
 
 	public List<ReadNotify> getReadNotifys() {
@@ -281,12 +239,19 @@ public class User implements Serializable{
 		this.account = account;
 	}
 
+	public List<Payment> getPayment() {
+		return payment;
+	}
+
+	public void setPayment(List<Payment> payment) {
+		this.payment = payment;
+	}
+
 	public User(String userId, String name, String sex, String dateOfBirth, String email, String phoneNumber,
-			String address, String image, String networth, int contributeScore, List<Score> scores,
-			List<EnrrolCourse> enrrolCourses, List<Course> courses, List<Quiz> quizs,
-			List<QuizRepComment> quizRepComments, List<QuizComment> quizComments, List<EnrrolTest> enrrolTests,
-			List<Blog> blogs, List<QAndA> qAndAs, List<QAndAComment> qAndAComments,
-			List<QAndARepComment> qAndARepComments, List<ReadNotify> readNotifys, Account account) {
+			String address, String image, Integer networth, Integer contributeScore, List<EnrrolLesson> enrrolLesson,
+			List<UserCourse> userCourse, List<EnrrolTest> enrrolTests, List<Blog> blogs, List<Cart> cart,
+			List<RepComment> repComment, List<CommentLesson> commentLesson, List<ReadNotify> readNotifys,
+			Account account, List<Payment> payment) {
 		this.userId = userId;
 		this.name = name;
 		this.sex = sex;
@@ -297,27 +262,17 @@ public class User implements Serializable{
 		this.image = image;
 		this.networth = networth;
 		this.contributeScore = contributeScore;
-		this.scores = scores;
-		this.enrrolCourses = enrrolCourses;
-		this.courses = courses;
-		this.quizs = quizs;
-		this.quizRepComments = quizRepComments;
-		this.quizComments = quizComments;
+		this.enrrolLesson = enrrolLesson;
+		this.userCourse = userCourse;
 		this.enrrolTests = enrrolTests;
 		this.blogs = blogs;
-		this.qAndAs = qAndAs;
-		this.qAndAComments = qAndAComments;
-		this.qAndARepComments = qAndARepComments;
+		this.cart = cart;
+		this.repComment = repComment;
+		this.commentLesson = commentLesson;
 		this.readNotifys = readNotifys;
 		this.account = account;
+		this.payment = payment;
 	}
 
-	public User() {
-		super();
-	}
 	
-	
-	
-	
-
 }

@@ -3,9 +3,9 @@ package hcmute.utils;
 public class Constants {
 	public static final String USER_RELATION = "USER";
 	public static final String ACCOUNT_RELATION = "ACCOUNT";
-	public static final String ENRROL_COURSE_RELATION = "ENRROL_COURSE";
+	public static final String ENRROL_COURSE_RELATION = "enrrol_lesson";
 	public static final String COURSE_RELATION = "COURSE";
-	public static final String LESSON_RELATION = "COURSE";
+	public static final String LESSON_RELATION = "LESSON";
 	public static final String ANSWER_LESSON_RELATION = "ANSWER_LESSON";
 	public static final String SCORE_RELATION = "SCORE";
 	public static final String Q_AND_A_RELATION = "Q_AND_A";
@@ -24,5 +24,12 @@ public class Constants {
 	public static final String ENRROL_TEST_RELATION = "ENRROL_TEST";
 	public static final String NOTIFY_RELATION = "NOTIFY";
 	public static final String READ_NOTIFY_RELATION = "READ_NOTIFY";
-
+	
+	public static final String DIR  = "C:\\ImagesWeb"; 
+	public static final String FOLDER_TOPIC  = "topicIMG"; 
+	public static final String FOLDER_COURSE  = "courseIMG"; 
+	public static final String FOLDER_BLOG  = "blogIMG"; 
+	public static final String FOLDER_AVATAR  = "userAvatar";
+	public static final String ANSWER_USER_RELATION = "ANSWER_USER";
+	public static final String FOLDER_VIDEO  = "videoLesson"; 
 }

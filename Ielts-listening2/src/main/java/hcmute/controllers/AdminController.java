@@ -22,7 +22,8 @@ public class AdminController extends HttpServlet {
 
 		String url = req.getRequestURI().toString();
 		if (url.contains("dashboard")) {
-			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/dashboard.jsp");
+//			resp.sendRedirect(req.getContextPath() + "/admin/analytics");
+			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/analytics.jsp");
 			rd.forward(req, resp);
 		}
 	}

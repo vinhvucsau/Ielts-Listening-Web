@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -13,26 +11,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import hcmute.utils.Constants;
-import hcmute.utils.compositeId.CompositeReadNotifyId;
+import hcmute.utils.compositeId.CompositeReadNotify;
 
 @Entity
-//@IdClass(CompositeReadNotifyId.class) 
+@IdClass(CompositeReadNotify.class) 
 @Table(name = Constants.READ_NOTIFY_RELATION)
 public class ReadNotify implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	/*
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private String userId;
-	 * 
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private String notifyId;
-	 */
-	
-	@Column(columnDefinition = "TINYINT")
+	@Column(name = "seen")
 	private boolean seen;
 	
 	@Id
@@ -40,19 +28,20 @@ public class ReadNotify implements Serializable{
 	@JoinColumn(name = "userId")
 	private User users;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "notifyId")
-	private Notify notifys;
-
-	public ReadNotify(boolean seen, User users, Notify notifys) {
-		super();
-		this.seen = seen;
-		this.users = users;
-		this.notifys = notifys;
-	}
+	private Notify notify;
 	
 	public ReadNotify() {
 		super();
+	}
+
+	public ReadNotify(boolean seen, User users, Notify notify) {
+		super();
+		this.seen = seen;
+		this.users = users;
+		this.notify = notify;
 	}
 
 	public boolean isSeen() {
@@ -71,14 +60,13 @@ public class ReadNotify implements Serializable{
 		this.users = users;
 	}
 
-	public Notify getNotifys() {
-		return notifys;
+	public Notify getNotify() {
+		return notify;
 	}
 
-	public void setNotifys(Notify notifys) {
-		this.notifys = notifys;
+	public void setNotify(Notify notify) {
+		this.notify = notify;
 	}
 	
 	
-
 }

@@ -23,16 +23,15 @@ public class MockTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String testId;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name =  "testName")
 	private String testName;
 	
-	@Column(columnDefinition = "varchar(10000)")
+	@Column(name = "description")
 	private String description;
 	
-	@Column(columnDefinition = "int")
+	@Column(name = "cost")
 	private int cost;
 	
 	@ManyToOne

@@ -3,6 +3,7 @@ package hcmute.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,42 +15,40 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import hcmute.utils.Constants;
+
 @Entity
 @Table(name = Constants.LISTENING_PART_RELATION)
-public class ListeningPart implements Serializable{
+public class ListeningPart implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String partId;
-	
+
 	@Column(columnDefinition = "varchar(255)")
 	private String image;
-	
+
 	@Column(columnDefinition = "int")
-	private String number;
-	
+	private Integer number;
+
 	@Column(columnDefinition = "varchar(255)")
 	private String audio;
-	
+
 	@Column(columnDefinition = "varchar(10000)")
 	private String answerSheet;
-	
-	
-	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.EAGER)
 	private List<AnswerTest> answerTests;
-	
-	@OneToMany(mappedBy = "listeningParts", fetch = FetchType.LAZY)
-	private List<HistoryTest> historyTests;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "testId")
 	private MockTest mockTests;
 
-	public ListeningPart(String partId, String image, String number, String audio, String answerSheet,
-			List<AnswerTest> answerTests, List<HistoryTest> historyTests, MockTest mockTests) {
+	public ListeningPart(String partId, String image, Integer number, String audio, String answerSheet,
+			List<AnswerTest> answerTests, MockTest mockTests) {
 		super();
 		this.partId = partId;
 		this.image = image;
@@ -57,12 +56,7 @@ public class ListeningPart implements Serializable{
 		this.audio = audio;
 		this.answerSheet = answerSheet;
 		this.answerTests = answerTests;
-		this.historyTests = historyTests;
 		this.mockTests = mockTests;
-	}
-	
-	public ListeningPart() {
-		super();
 	}
 
 	public String getPartId() {
@@ -81,11 +75,11 @@ public class ListeningPart implements Serializable{
 		this.image = image;
 	}
 
-	public String getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
@@ -113,14 +107,6 @@ public class ListeningPart implements Serializable{
 		this.answerTests = answerTests;
 	}
 
-	public List<HistoryTest> getHistoryTests() {
-		return historyTests;
-	}
-
-	public void setHistoryTests(List<HistoryTest> historyTests) {
-		this.historyTests = historyTests;
-	}
-
 	public MockTest getMockTests() {
 		return mockTests;
 	}
@@ -128,5 +114,9 @@ public class ListeningPart implements Serializable{
 	public void setMockTests(MockTest mockTests) {
 		this.mockTests = mockTests;
 	}
-	
+
+	public ListeningPart() {
+		super();
+	}
+
 }

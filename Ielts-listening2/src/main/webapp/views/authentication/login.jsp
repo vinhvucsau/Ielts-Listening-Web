@@ -38,14 +38,14 @@
 							<p class="fw-bold fs-5 mb-4">Đăng Nhập</p>
 						</div>
 						<div class="username-pwd-form">
-							<form action="login">
+							<form action="authentication-login" method="post">
 								<div class="mb-4">
 									<label for="username" class="form-label mb-2 text-secondary">
 										Username <span class="text-danger">*</span>
 									</label>
 									<div class="input-group">
-										<input id="username" class="form-control" type="text"
-											placeholder="Nhập username">
+										<input id="username" name="userName" class="form-control"
+											type="text" placeholder="Nhập username">
 									</div>
 								</div>
 								<div class="mb-4">
@@ -53,8 +53,8 @@
 										Mật khẩu <span class="text-danger">*</span>
 									</label>
 									<div class="input-group">
-										<input id="pwd" class="form-control" type="password"
-											placeholder="Nhập mật khẩu">
+										<input id="pwd" class="form-control" name="passWord"
+											type="password" placeholder="Nhập mật khẩu">
 										<button onclick="handleToggleShowPassword()"
 											class="bg-white border" type="button">
 											<div style="width: 35px">
@@ -72,10 +72,10 @@
 							</form>
 						</div>
 						<div class="d-flex justify-content-between align-items-center">
-							<a href="signup"
+							<a href="authentication-forgotpassword"
 								class=" text-primaryfw-bold text-decoration-underline"> Quên
 								mật khẩu ? </a> <span class="text-primary">Chưa có tài khoản?
-								<a href="signup" class="fw-bold text-decoration-underline">Đăng
+								<a href="authentication-signup" class="fw-bold text-decoration-underline">Đăng
 									ký</a>
 							</span>
 						</div>
@@ -90,6 +90,12 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
 	<script>
+		const message = "${message}";
+		if (message && message.trim() !== "") {
+			// If the message is not empty, show it as a toast
+			showToast(message);
+		}
+
 		function handleToggleShowPassword() {
 			const passwordInput = document.getElementById("pwd");
 			const showBtn = document.getElementById("icon__show");
@@ -104,6 +110,29 @@
 				showBtn.style.display = "block"; // Show the show button
 				hideBtn.style.display = "none"; // Hide the hide button
 			}
+		}
+		function showToast(message) {
+			// Tạo một toast message
+			const toast = document.createElement("div");
+			toast.classList.add("show", "toast", "position-fixed", "top-0",
+					"end-0", "end-0");
+			toast.setAttribute("role", "alert");
+			toast.setAttribute("aria-live", "assertive");
+			toast.setAttribute("aria-atomic", "true");
+			toast.setAttribute("style", "border-left:4px solid red")
+
+			// Tạo nội dung toast
+			const toastBody = document.createElement("div");
+			toastBody.classList.add("toast-body");
+			toastBody.innerText = message;
+
+			// Thêm nội dung vào toast và toast vào trang
+			toast.appendChild(toastBody);
+			document.body.appendChild(toast);
+
+			// Hiển thị toast
+			const bootstrapToast = new bootstrap.Toast(toast);
+			bootstrapToast.show();
 		}
 	</script>
 </body>

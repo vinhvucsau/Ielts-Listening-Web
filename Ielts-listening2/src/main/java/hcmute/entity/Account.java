@@ -2,18 +2,12 @@ package hcmute.entity;
 import hcmute.utils.Constants;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,22 +19,21 @@ public class Account implements Serializable{
 	@Id
 	private String userName;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name = "passWord")
 	private String passWord;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(name = "role")
 	private String role;
+	
 	
 	/*
 	 * @OneToMany(mappedBy = "accounts", fetch = FetchType.EAGER) private List<User>
 	 * users;
 	 */
 	
-	
 	 @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	    private User users;
 	 
-	
 
 	public Account(String userName, String passWord, String role, User users) {
 		this.userName = userName;
@@ -48,7 +41,6 @@ public class Account implements Serializable{
 		this.role = role;
 		this.users = users;
 	}
-
 	public Account() {
 		super();
 	}
@@ -83,6 +75,5 @@ public class Account implements Serializable{
 
 	public void setUsers(User users) {
 		this.users = users;
-	}
-	
+	}	
 }
