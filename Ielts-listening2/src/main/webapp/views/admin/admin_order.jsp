@@ -9,22 +9,7 @@
 	<!-- Container fluid -->
 	<section class="container-fluid p-4">
 		<div class="row">
-			<div class="col-lg-12 col-md-12 col-12">
-				<!-- Page header -->
-				<div class="border-bottom pb-3 mb-3">
-					<div>
-						<h1 class="mb-1 h2 fw-bold">Order</h1>
-						<!-- Breadcrumb -->
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="admin-dashboard.html">Dashboard</a></li>
-
-								<li class="breadcrumb-item active" aria-current="page">Order</li>
-							</ol>
-						</nav>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 
 		<div class="row">
@@ -33,9 +18,8 @@
 				<div class="card">
 					<!-- card header  -->
 					<div class="card-header">
-						<h4 class="mb-1">Order</h4>
-						<p class="mb-0">Explore Convenience - Place Your Order Easily
-							and Quickly Today!</p>
+						<h4 class="mb-1">Hóa đơn</h4>
+						<p class="mb-0">Quản lý các hóa dơn một cách hiệu qủa !</p>
 					</div>
 					<!-- table  -->
 					<div class="card-body">
@@ -44,13 +28,13 @@
 								style="width: 100%">
 								<thead class="table-light">
 									<tr>
-										<th>Order</th>
-										<th>Customer</th>
-										<th>Items</th>
-										<th>Payment</th>
-										<th>Date</th>
-										<th>Total</th>
-										<th>Action</th>
+										<th>ID hóa đơn</th>
+										<th>Người mua</th>
+										<th>số lượng</th>
+										<th>trạng thái</th>
+										<th>Ngày</th>
+										<th>Tổng</th>
+										<th>Hành động</th>
 									</tr>
 
 								</thead>

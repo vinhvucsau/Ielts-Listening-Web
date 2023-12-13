@@ -53,22 +53,6 @@
 	<section class="container-fluid p-4">
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-12">
-				<!-- Page header -->
-				<div class="border-bottom pb-3 mb-3">
-					<div>
-						<h1 class="mb-1 h2 fw-bold">Data Tables</h1>
-						<!-- Breadcrumb -->
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="admin-dashboard.html">Dashboard</a>
-								</li>
-
-								<li class="breadcrumb-item active" aria-current="page">Data
-									Tables</li>
-							</ol>
-						</nav>
-					</div>
-				</div>
 			</div>
 		</div>
 
@@ -84,11 +68,8 @@
 					<div class="card">
 						<!-- card header  -->
 						<div class="card-header">
-							<h4 class="mb-1">Data Table Basic</h4>
-							<p class="mb-0">DataTables is a plug-in for the jQuery
-								Javascript library. It is a highly flexible tool, built upon the
-								foundations of progressive enhancement, that adds all of these
-								advanced features to any HTML table.</p>
+							<h4 class="mb-1">Danh sách người dùng</h4>
+							<p class="mb-0">dưới đây là toàn bộ danh sách người dùng của trang web chúng tôi</p>
 						</div>
 						<!-- table  -->
 						<div class="card-body">
