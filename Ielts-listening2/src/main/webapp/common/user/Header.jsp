@@ -22,7 +22,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 	<nav class="navbar navbar-expand-lg shadow-lg header-fixed">
 		<div class="container px-0">
 			<a class="navbar-brand" href="/Ielts-listening2/user/home"><img
-				src="https://prep.vn/imgs/logo-n.svg" alt="Geeks" /></a>
+				src="../assets/final.png" alt="Geeks" style=" width: 100%; height: 26px;object-fit: cover; object-position: center;" /></a>
 			<div class="d-flex align-items-center order-lg-3 gap-3">
 
 				<div class="d-flex align-items-center">
