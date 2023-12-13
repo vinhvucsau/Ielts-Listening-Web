@@ -36,23 +36,14 @@
 		<div class="vh-100 simplebar-scrollable-y" data-simplebar="init">
 			<!-- Brand logo -->
 			<a class="navbar-brand" href="../index.html"> <img
-				src="../assets/images/brand/logo/logo-inverse.svg" alt="Geeks" />
+				src="../assets/final.png" alt="Geeks" style=" width: 100%; height: 26px;object-fit: contain; object-position: left;" alt="LOGO" />
 			</a>
 			<!-- Navbar nav -->
 			<ul class="navbar-nav flex-column" id="sideNavbar">
-				<li class="nav-item"><a class="nav-link" href="#"
-					data-bs-toggle="collapse" data-bs-target="#navDashboard"
-					aria-expanded="false" aria-controls="navDashboard"> <i
+				<li class="nav-item"><a class="nav-link" href="analytics"> <i
 						class="nav-icon fe fe-home me-2"></i> Trang chủ
 				</a>
-					<div id="navDashboard" class="collapse show"
-						data-bs-parent="#sideNavbar">
-						<ul class="nav flex-column">
-
-							<li class="nav-item"><a class="nav-link" href="analytics">Thống
-									kê</a></li>
-						</ul>
-					</div></li>
+					</li>
 				<li class="nav-item"><a class="nav-link collapsed"
 					href="khoahoc"> <i class="nav-icon fe fe-book me-2"></i> Khóa
 						học
@@ -72,29 +63,11 @@
 					href="listTopic"> <i class="nav-icon fe fe-layout me-2"></i>
 						Luyện đề
 				</a></li>
-				<!-- Nav item -->
-				<li class="nav-item">
-					<div class="nav-divider"></div>
-				</li>
-				<!-- Nav item -->
-				<li class="nav-item">
-					<div class="navbar-heading">Apps</div>
-				</li>
 
-				<li class="nav-item"><a class="nav-link collapsed" href="#"
-					data-bs-toggle="collapse" data-bs-target="#navCMS"
-					aria-expanded="false" aria-controls="navCMS"> <i
-						class="nav-icon fe fe-book-open me-2"></i> Blog
+				<li class="nav-item"><a class="nav-link collapsed" href="blogs">
+					 <i class="nav-icon fe fe-book-open me-2"></i> Blog
 				</a>
-					<div id="navCMS" class="collapse" data-bs-parent="#sideNavbar">
-						<ul class="nav flex-column">
-							<li class="nav-item"><a class="nav-link active"
-								href="admin-cms-overview.html">Overview</a></li>
-							<li class="nav-item"><a class="nav-link" href="blogs">All
-									Post</a></li>
-
-						</ul>
-					</div></li>
+					</li>
 				<!-- Nav item -->
 
 				<li class="nav-item">

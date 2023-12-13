@@ -56,7 +56,7 @@ public class AuthenticationControllers extends HttpServlet {
 				List<Cart> carts = (List<Cart>) session.getAttribute("cart");
 				if (role.equals("admin")) {
 					req.setAttribute("user", user);
-					resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+					resp.sendRedirect(req.getContextPath() + "/admin/analytics");
 				} else {
 					req.setAttribute("cart", carts);
 					req.setAttribute("user", user);
