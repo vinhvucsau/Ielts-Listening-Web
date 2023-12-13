@@ -38,6 +38,7 @@ import hcmute.services.IUserService;
 import hcmute.services.LessonServiceImpl;
 import hcmute.services.RepCommentServiceImpl;
 import hcmute.services.UserServiceImpl;
+import hcmute.utils.Constants;
 import hcmute.utils.HttpUtil;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024
@@ -83,6 +84,7 @@ public class UserLessonController extends HttpServlet {
 			List<User> listUser = userService.findAll();
 			List<EnrrolLesson> listEnroll = enrService.findAll();
 
+			req.setAttribute("folder", Constants.FOLDER_VIDEO);
 			req.setAttribute("lesson", curLesson);
 			req.setAttribute("listCmt", listCmt);
 			req.setAttribute("listRep", listRep);
@@ -94,6 +96,8 @@ public class UserLessonController extends HttpServlet {
 				req.setAttribute("starUser", enrollLesson.getNumberOfStar());
 			else
 				req.setAttribute("starUser", 0);
+			
+			
 			// thêm danh sách câu hỏi
 			List<AnswerLesson> listAnswer = ansService.findAll();
 			req.setAttribute("enrollLesson", enrollLesson);

@@ -45,8 +45,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="../assets/css/theme.min.css" />
-<!-- lam them
- -->
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
@@ -96,9 +95,12 @@
 
 					});
 </script>
-<!--  
-  lâm them
- -->
+<script type="text/javascript">
+		function setDefaultImage(img) {
+			img.onerror = null; // Ngăn chặn việc gọi lặp lại
+			img.src = "https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain";
+		}
+	</script>
 <title></title>
 </head>
 
@@ -163,5 +165,7 @@
 		src="../assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
 	<script src="../assets/libs/pdfmake/build/pdfmake.min.js"></script>
 	<script src="../assets/js/vendors/datatables.js"></script>
+	
+	
 </body>
 </html>

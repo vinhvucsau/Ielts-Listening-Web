@@ -122,12 +122,16 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 											<i class="fe fe-user me-2"></i> Tài khoản
 									</a></li>
 									<li><a class="dropdown-item"
+										href="khoahoccuatoi?userId=${user.userId}"> 
+										<i class="fe fe-book me-2"></i> Khóa học của tôi
+									</a></li>
+									<li><a class="dropdown-item"
 										href="/Ielts-listening2/user/mycart?userId=${user.userId}">
 											<i class="fe fe-shopping-cart me-2"></i> Giỏ hàng
 									</a></li>
 									<li><a class="dropdown-item"
 										href="/Ielts-listening2/user/blogs?userId=${user.userId}">
-											<i class="fe fe-book me-2"></i> Blogs
+											<i class="fe fe-book me-2"></i> Blogs cá nhân
 									</a></li>
 									<li><a class="dropdown-item"
 										href="capnhatmatkhau?userId=${user.userId}"> <i

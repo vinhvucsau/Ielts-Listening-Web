@@ -166,18 +166,12 @@ User user = (User) session.getAttribute("user");
 										data-bs-trigger="hover focus" title="${i.courseName}"
 										data-bs-content="${i.description}">
 										<div class="card mb-4 card-hover">
-											<c:if test="${i.image != null}">
-												<a href="course-detail?courseId=${i.courseId}"><img
+												<a href="course-detail?courseId=${i.courseId}">
+												<img onerror="setDefaultImage(this)"
 													style="height: 200px; object-fit: cover;"
 													src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
 													alt="course" class="card-img-top img-fluid"></a>
-											</c:if>
-											<c:if test="${i.image == null}">
-												<a href="course-detail?courseId=${i.courseId}"><img
-													style="height: 200px; object-fit: cover;"
-													src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
-													alt="course" class="card-img-top img-fluid"></a>
-											</c:if>
+											
 											<!-- Card Body -->
 											<div class="card-body">
 												<h4 class="mb-2 text-truncate-line-2">
