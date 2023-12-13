@@ -86,11 +86,7 @@ int networth = (int) request.getAttribute("networth");
 		<!-- row -->
 		<div class="row">
 			<div class="col-12 mb-2">
-				<!-- alert -->
-				<div class="alert alert-warning alert-dismissible fade show"
-					role="alert">
-					Nhập mã <strong>(GKDIS15%)</strong> để được giảm 10% !
-				</div>
+				
 			</div>
 			<div class="col-lg-8">
 				<!-- card -->
@@ -233,7 +229,7 @@ int networth = (int) request.getAttribute("networth");
 					</div>
 				</div>
 				<div class="mt-4 d-flex justify-content-between">
-					<a href="product-grid.html" class="btn btn-outline-primary">Khóa học khác</a>
+					<a href="course" class="btn btn-outline-primary">Khóa học khác</a>
 
 					<form action="order" method=get>
 						<input name="listCourseId" value="" id="listCourseId"
@@ -256,21 +252,7 @@ int networth = (int) request.getAttribute("networth");
 						</li>
 					</div>
 
-					<!-- card body -->
-					<div class="card-body">
-						<h4 class="mb-3">Mã khuyến mãi của bạn ?</h4>
-						<!-- row -->
-						<div class="row g-3">
-							<!-- col -->
-							<div class="col">
-								<input type="text" class="form-control" placeholder="GKDIS15%">
-							</div>
-							<!-- col -->
-							<div class="col-auto">
-								<a href="#" class="btn btn-dark">Áp dụng</a>
-							</div>
-						</div>
-					</div>
+
 				</div>
 				<!-- card -->
 				<div class="card mb-4">
@@ -399,10 +381,7 @@ int networth = (int) request.getAttribute("networth");
 	    	  return formattedAmount;
 	    	}
 
-		function setDefaultImage(img) {
-			img.onerror = null; // Ngăn chặn việc gọi lặp lại
-			img.src = "https://images.unsplash.com/photo-1588702547919-26089e690ecc?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-		}
+
 	</script>
 </body>
 </html>

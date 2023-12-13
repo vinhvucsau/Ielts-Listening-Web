@@ -168,9 +168,9 @@ Long count = (Long) request.getAttribute("count");
 											<div class="col-xl-3 col-md-6 col-12">
 												<div class="card mb-4 card-hover border">
 													<a href="course-detail?courseId=${i.courses.courseId }">
-														<img
-														src="https://files.fullstack.edu.vn/f8-prod/courses/27/64e184ee5d7a2.png"
-														alt="health" class="img-fluid w-100 rounded-top-3">
+														<img onerror="setDefaultImage(this)"
+														src="<c:url value='/image?fname=${folder}/${i.courses.image}'/>"
+														alt="health" class="w-100 rounded-top-3" style="width: 100%;height: 180px;object-fit: cover;object-position: center;">
 													</a>
 													<div class="card-body">
 														<h4 class="mb-3">
@@ -211,8 +211,9 @@ Long count = (Long) request.getAttribute("count");
 																style="width: ${percen}%" aria-valuenow="50"
 																aria-valuemin="0" aria-valuemax="100"></div>
 														</div>
-														<a href="course-detail?courseId=${i.courses.courseId }">
-															Tiếp tục <span> <svg
+														<a class="btn btn-primary col-12" href="course-detail?courseId=${i.courses.courseId }" >
+															Tiếp tục <span> 
+															<svg
 																	xmlns="http://www.w3.org/2000/svg" width="20"
 																	height="20" fill="currentColor"
 																	class="bi bi-arrow-right-short" viewBox="0 0 16 16">

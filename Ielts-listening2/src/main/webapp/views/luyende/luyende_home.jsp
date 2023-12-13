@@ -158,13 +158,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 				<div class="w-100 bg-white px-4 py-4 my-5 rounded-4 shadow-lg">
 					<div class="position-relative intro d-flex flex-row">
 
-						<img style="cursor: pointer"
+						<img style="cursor: pointer;height: 80px;width: 100px;object-fit: cover;object-position: center;"
+							onerror="setDefaultImage(this)"
 							src='<c:url value="/image?fname=topicIMG/${topicTest.image}"/>'
 							width="150px" />
-						<div class="w-75">
+						<div class="w-75 ms-5">
 							<p class="fs-4 fw-bold mb-0" style="cursor: pointer">${topicTest.topicName}</p>
 							<p
-								style="color: rgb(123, 137, 155); font-size: 18px; cursor: pointer">${topicTest.description}</p>
+								style="color: rgb(123, 137, 155); font-size: 16px; cursor: pointer">${topicTest.description}</p>
 						</div>
 						<c:set var="count" value="0"></c:set>
 						<c:forEach var="mockTest" items='${topicTest.mockTests}'>
@@ -380,7 +381,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					</div>
 
 					<a href="luyende-testset?topicId=${topicTest.topicId }"
-						class="btn btn-primary d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold  align-items-center">
+						class="col-2 btn btn-primary d-flex flex-row justify-content-center h-25 mt-4 mx-auto py-2 px-3 fs-5 fw-bold  align-items-center">
 						Xem thêm ${topicTest.mockTests.size() - i} đề <svg
 							xmlns="http://www.w3.org/2000/svg" height="24"
 							style="margin-top: 3px;" fill="currentColor"

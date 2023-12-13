@@ -98,6 +98,12 @@
 
 					});
 </script>
+	<script type="text/javascript">
+		function setDefaultImage(img) {
+			img.onerror = null; // Ngăn chặn việc gọi lặp lại
+			img.src = "https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain";
+		}
+	</script>
 </head>
 <body>
 	<%@ include file="/common/user/Header.jsp"%>

@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="../../assets/css/theme.min.css">
 
 <link rel="canonical" href="admin-cms-post.html">
-<title>Bài viết</title>
+<title>Blogs</title>
 
 
 
@@ -50,7 +50,7 @@
             <div class="row">
               <div class="offset-xl-2 col-xl-8 offset-lg-1 col-lg-10 col-md-12 col-12">
                 <div class="text-center mb-5">
-                  <h1 class="display-2 fw-bold">Bài viết</h1>
+                  <h1 class="display-2 fw-bold">Blogs</h1>
                 </div>
                 
               </div>
@@ -92,7 +92,7 @@
                     <div class="col-lg-4 col-md-12 col-12">
                       <!-- Card body -->
                       <div class="card-body">
-                        <p class="fs-5 mb-3 fw-semibold d-block">Bài viết</p>
+                        <p class="fs-5 mb-3 fw-semibold d-block">Blogs</p>
                         <h1 class="mb-2 mb-lg-4"><a href="blog-single.html" class="text-inherit">Luyện nghe cùng PREP</a></h1>
                         <p>Our features, journey, tips and us being us. Lorem ipsum dolor sit amet, accumsan in, tempor dictum neque.</p>
                         <!-- Media content -->
@@ -119,10 +119,10 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                     <div class="card mb-4 shadow-lg card-lift">
                         <a href="<c:url value='/user/blog-content?id=${blog.blogId}'/>">
-                        <img src="<c:url value='/image?fname=${topicIMG}/${blog.image}'/>" class="card-img-top" alt="blogpost " />
+                        <img onerror="setDefaultImage(this)" src="<c:url value='/image?fname=${topicIMG}/${blog.image}'/>" class="card-img-top" alt="blogpost " />
                         </a>
                         <div class="card-body">
-                        <p class="fs-5 mb-2 fw-semibold d-block text-success">Bài viết</p>
+                        <p class="fs-5 mb-2 fw-semibold d-block text-success">Blogs</p>
                         <h3><a href="<c:url value='/user/blog-content?id=${blog.blogId}'/>" class="blog-title__text text-primary text-inherit">${blog.title}</a></h3>
                         <div class="blog-content__text">${blog.content}</div>
                         <div class="row align-items-center g-0 mt-4">

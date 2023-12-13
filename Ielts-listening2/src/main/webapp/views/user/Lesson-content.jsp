@@ -66,11 +66,28 @@ img {
 			if("${lesson.lessonId}" ==t.lessons ){
 				console.log(t.lessons);
 			}
-			console.log("fail");
 		}
 		
+		<c:forEach var="item" items="${listCmt}">
+			var item = {
+					lessons : "${item.lessons.lessonId}"
+			};
+			arrTopic.push(item);
+		</c:forEach>
 		
-		console.log(id);
+		var starTotal = 0;
+		var peopleTotal = 0;
+		var arrStar = [];
+		<c:forEach var="enrrol_les" items='${enrollLessonList}'>
+			var enrrol_les = {
+					star : "${enrrol_les.numberOfStar}"
+			};
+			arrStar.push(enrrol_les);
+		</c:forEach>
+		
+
+		
+	console.log(arrStar);
 	</script>
 
 
@@ -84,11 +101,16 @@ img {
 						<div
 							class="rounded-3 position-relative w-100 d-block overflow-hidden p-0"
 							style="height: 600px">
-							<iframe
+							<!-- <iframe
 								class="position-absolute top-0 end-0 start-0 end-0 bottom-0 h-100 w-100"
 								width="560" height="315"
 								src="https://www.youtube.com/embed/Nfzi7034Kbg?si=C2_CU7iIZJA5VWcS"
-								title="Geeks - Academy and LMS Template" frameborder="0"></iframe>
+								title="Geeks - Academy and LMS Template" frameborder="0"></iframe> -->
+								<video class="position-absolute top-0 end-0 start-0 end-0 bottom-0 h-100 w-100"
+								width="560" height="315" controls>
+									<source src="<c:url value='/image?fname=${folder}/${lesson.video}'/>" type="video/mp4">
+									
+								</video>
 						</div>
 					</div>
 				</div>
@@ -324,29 +346,7 @@ img {
 											</div>
 
 										</div>
-										<c:set var="people" value="0"></c:set>
-										<c:set var="totalStars" value="0"></c:set>
-
-										<c:forEach var="enrrol_les" items='${enrollLessonList}'>
-											<c:if test="${enrrol_les.numberOfStar > 0}">
-												<c:set var="totalStars"
-													value="${totalStars + enrrol_les.numberOfStar }"></c:set>
-												<c:set var="people" value="${people + 1 }"></c:set>
-											</c:if>
-										</c:forEach>
-
-										<c:choose>
-											<c:when test="${people > 0 }">
-												<c:set var="star" value="${totalStars/people}"></c:set>
-											</c:when>
-											<c:otherwise>
-												<c:set var="star" value="0"></c:set>
-											</c:otherwise>
-										</c:choose>
-										<fmt:formatNumber type="number" maxFractionDigits="1"
-											value="${star}" var="starRounded" />
-										<fmt:formatNumber type="number" maxFractionDigits="0"
-											value="${star}" var="starInteger" />
+										
 										<!-- review -->
 										<div class="tab-pane fade" id="review" role="tabpanel"
 											aria-labelledby="review-tab">
@@ -354,26 +354,50 @@ img {
 												<h3 class="mb-4">Đánh giá của học viên</h3>
 												<div class="row align-items-center">
 													<div class="col-auto text-center">
-														<h3 class="display-2 fw-bold">${starRounded }${(starRounded - starInteger) == 0 ? '.0' : '' }</h3>
-														<span class="fs-6"> <c:forEach var="i" begin="1"
-																end="${starInteger }">
-																<svg xmlns="http://www.w3.org/2000/svg" width="12"
+														<h3 class="display-2 fw-bold" id="avg-star-result">1</h3>
+ 														<span class="fs-6"> 
+ 														
+															<svg xmlns="http://www.w3.org/2000/svg" width="12"
 																	height="12" fill="currentColor"
-																	class="bi bi-star-fill text-warning"
+																	class="bi bi-star-fill text-light star-avg-rate"
 																	viewBox="0 0 16 16">
 						                                            <path
 																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
 						                                            </path>
 					                                        	</svg>
-															</c:forEach> <c:forEach var="i" begin="1" end="${5 - starInteger }">
-																<svg xmlns="http://www.w3.org/2000/svg" width="12"
+					                                        	<svg xmlns="http://www.w3.org/2000/svg" width="12"
 																	height="12" fill="currentColor"
-																	class="bi bi-star-fill text-light" viewBox="0 0 16 16">
-					                                                <path
+																	class="bi bi-star-fill text-light star-avg-rate"
+																	viewBox="0 0 16 16">
+						                                            <path
 																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-					                                                            </path>
-					                                            </svg>
-															</c:forEach>
+						                                            </path>
+					                                        	</svg>
+					                                        	<svg xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light star-avg-rate"
+																	viewBox="0 0 16 16">
+						                                            <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+						                                            </path>
+					                                        	</svg>
+					                                        	<svg xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light star-avg-rate"
+																	viewBox="0 0 16 16">
+						                                            <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+						                                            </path>
+					                                        	</svg>
+					                                        	<svg xmlns="http://www.w3.org/2000/svg" width="12"
+																	height="12" fill="currentColor"
+																	class="bi bi-star-fill text-light star-avg-rate"
+																	viewBox="0 0 16 16">
+						                                            <path
+																		d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+						                                            </path>
+					                                        	</svg>
+					                                        	
 														</span>
 														<p class="mb-0 fs-6">(Dựa trên ${people} đánh giá)</p>
 													</div>
@@ -1162,10 +1186,30 @@ details.comment:not([open]) .comment-heading::after {
 	-webkit-text-fill-color: transparent;
 }
 </style>
+<script type="text/javascript">
 
-	<!-- Scripts -->
+	function avgStar(){
+		for(var t of arrStar){
+			if(+t.star > 0){
+				starTotal += +t.star;
+				peopleTotal +=1;
+			}
+		}
+		var res = Math.round((starTotal/peopleTotal) * 10) / 10;;
+		return res;
+	}
+	document.getElementById("avg-star-result").innerHTML = 	avgStar();
+	
+	var integerStar = Math.round(avgStar());
+
+	var s = $(".star-avg-rate");
+	for (var i = 0; i < integerStar; i++) {
+		$(s[i]).removeClass("text-light");
+		$(s[i]).addClass("text-warning");
+	}
+</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
+<script>
 
     // hide/show form repcomment
     document.addEventListener(
@@ -1247,6 +1291,7 @@ details.comment:not([open]) .comment-heading::after {
      }
      
 </script>
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script type="text/javascript">
