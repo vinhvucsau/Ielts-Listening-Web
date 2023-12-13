@@ -55,6 +55,11 @@ public class BlogServiceImpl implements IBlogService {
 		// TODO Auto-generated method stub
 		return blogDao.findAll(page, pagesize, searchStr);
 	}
+	@Override
+	public List<Blog> findAllBlogDesTime() {
+		
+		return blogDao.findAllBlogDesTime();
+	}
 
 	
 }

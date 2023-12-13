@@ -683,9 +683,9 @@ Long count = (Long) request.getAttribute("countCourse");
 		      });
 		    });
 	</script>
-		<script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+		<!-- <script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
 		<script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+		<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script> -->
 		<script>
 	function showFile(fileInputs){
 		document.querySelectorAll("h5").forEach(h5 => h5.remove());
@@ -900,7 +900,7 @@ Long count = (Long) request.getAttribute("countCourse");
 		        });
 		    });
 		</script>
-		<script
+		<!-- <script
 			src="../assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
 		<script
 			src="../assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
@@ -909,7 +909,7 @@ Long count = (Long) request.getAttribute("countCourse");
 		<script
 			src="../assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 		<script
-			src="../assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+			src="../assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script> -->
 </body>
 </html>
 

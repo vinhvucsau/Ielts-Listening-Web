@@ -21,7 +21,7 @@ public class AnswerLessonUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(cascade =  CascadeType.MERGE)
 	@JoinColumn(name = "enrrolId")
 	private EnrrolLesson enrrolLesson;
 	

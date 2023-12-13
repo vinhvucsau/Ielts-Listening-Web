@@ -17,29 +17,7 @@
 <body>
 
 	<script>
-		var arrTopic = [];
-		var arrMock = [];
-		// Duyệt danh sách Java và thêm dữ liệu vào biến JavaScript
-		<c:forEach var="item" items="${topicList}">
-			var item = {
-				topicId : "${item.topicId}",
-				topicName : "${item.topicName}",
-				image : "${item.image}",
-				description: "${item.description}"
-			};
-			arrTopic.push(item);
-		</c:forEach>
 		
-		<c:forEach var="item" items="${listMocktest}">
-			var itemMock = {
-				testId : "${item.testId}",
-				testName : "${item.testName}",
-				topic : "${item.topicTests.topicId}",
-				cost: "${item.cost}",
-				description: "${item.description}"
-			};
-			arrMock.push(itemMock);
-		</c:forEach>
 	</script>
 	<!-- Page content (new) -->
 
@@ -49,7 +27,7 @@
 			<div
 				class="border-bottom pb-3 mb-3 d-md-flex align-items-center justify-content-between">
 				<div class="mb-3 mb-md-0">
-					<h1 class="mb-1 h2 fw-bold">Danh Sách bộ đề</h1>
+					<h1 class="mb-1 h2 fw-bold">Courses Category</h1>
 					<!-- Breadcrumb -->
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
@@ -346,6 +324,30 @@
 	<!-- Demonstration Script -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
+	var arrTopic = [];
+	var arrMock = [];
+	// Duyệt danh sách Java và thêm dữ liệu vào biến JavaScript
+	<c:forEach var="item" items="${topicList}">
+		var item = {
+			topicId : "${item.topicId}",
+			topicName : "${item.topicName}",
+			image : "${item.image}",
+			description: "${item.description}"
+		};
+		arrTopic.push(item);
+	</c:forEach>
+	
+	<c:forEach var="item" items="${listMocktest}">
+		var itemMock = {
+			testId : "${item.testId}",
+			testName : "${item.testName}",
+			topic : "${item.topicTests.topicId}",
+			cost: "${item.cost}",
+			description: "${item.description}"
+		};
+		arrMock.push(itemMock);
+	</c:forEach>
+	
 		//accordion:
 		var acc = document.getElementsByClassName("accordion");
 		var i;
@@ -521,22 +523,6 @@
 		}
 	}
 	</script>
-
-	<script>
-	 ClassicEditor
-     .create(document.querySelector('#editor'))
-     .then(editor => {
-         console.log(editor);
-
-         // Update hidden input with CKEditor content
-         editor.model.document.on('change:data', () => {
-             document.getElementById('answerSheetInput').value = editor.getData();
-         });
-     })
-     .catch(error => {
-         console.error(error);
-     });
-    </script>
 
 	
 	</body>

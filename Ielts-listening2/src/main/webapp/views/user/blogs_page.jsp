@@ -93,7 +93,7 @@
                       <!-- Card body -->
                       <div class="card-body">
                         <p class="fs-5 mb-3 fw-semibold d-block">Blogs</p>
-                        <h1 class="mb-2 mb-lg-4"><a href="blog-single.html" class="text-inherit">Luyện nghe cùng PREP</a></h1>
+                        <h1 class="mb-2 mb-lg-4"><a href="blog-single.html" class="text-inherit">Luyện nghe cùng ELIS</a></h1>
                         <p>Our features, journey, tips and us being us. Lorem ipsum dolor sit amet, accumsan in, tempor dictum neque.</p>
                         <!-- Media content -->
                         <div class="row align-items-center g-0 mt-lg-7 mt-4">
@@ -102,11 +102,8 @@
                             <img src="../assets/images/avatar/avatar-6.jpg" alt="avatar" class="rounded-circle avatar-sm me-2" />
                           </div>
                           <div class="col lh-1">
-                            <h5 class="mb-1">Dustin Warren</h5>
+                            <h5 class="mb-1">ELIS</h5>
                             <p class="fs-6 mb-0">September 13, 2020</p>
-                          </div>
-                          <div class="col-auto">
-                            <p class="fs-6 mb-0">6 Min Read</p>
                           </div>
                         </div>
                       </div>
@@ -123,11 +120,11 @@
                         </a>
                         <div class="card-body">
                         <p class="fs-5 mb-2 fw-semibold d-block text-success">Blogs</p>
-                        <h3><a href="<c:url value='/user/blog-content?id=${blog.blogId}'/>" class="blog-title__text text-primary text-inherit">${blog.title}</a></h3>
+                        <h3><a href="<c:url value='/user/blog-content?id=${blog.blogId}'/>" class="blog-content__text blog-title__text text-primary text-inherit">${blog.title}</a></h3>
                         <div class="blog-content__text">${blog.content}</div>
                         <div class="row align-items-center g-0 mt-4">
                             <div class="col-auto">
-                            <img src="<c:url value='/image?fname=${avatarIMG}/${blog.users.image}'/>" alt="avatar" 
+                            <img onerror="setDefaultImage(this)" src="<c:url value='/image?fname=${avatarIMG}/${blog.users.image}'/>" alt="avatar" 
                               class="rounded-circle avatar-sm me-2" onerror="this.onerror=null; this.src=''"/>
                             </div>
                             <div class="col lh-1">

@@ -72,7 +72,7 @@
 
 								<c:set var="people" value="0"></c:set>
 								<c:set var="totalStars" value="0"></c:set>
-								
+
 								<c:forEach var="lesson" items='${course.lessons }'>
 									<c:forEach var="enrrol_lesson" items='${lesson.enrrolLesson }'>
 										<c:if test="${enrrol_lesson.numberOfStar > 0}">
@@ -203,8 +203,8 @@
 																	<c:if test="${isBuy ==0 }">
 																		<c:forEach var="lesson" items="${listLesson }">
 																			<li class="list-group-item list-group-item-action">
-																				<a href="lesson?id=${lesson.lessonId }"
-																				class="d-flex justify-content-between align-items-center text-inherit">
+																				<div
+																					class="d-flex justify-content-between align-items-center text-inherit">
 																					<div class="text-truncate">
 																						<span
 																							class="icon-shape bg-light text-primary icon-sm rounded-circle me-2">
@@ -214,7 +214,7 @@
 																					<div class="text-truncate">
 																						<span class="main-lesson__time">1m 7s</span>
 																					</div>
-																			</a>
+																				</div>
 																			</li>
 																		</c:forEach>
 																	</c:if>
@@ -626,17 +626,21 @@
 											</div>
 											<!-- rating item-->
 											<c:if test="${commentLessonsList.size() == 0 }">
-												<img class="mx-auto d-block my-3" src='<c:url value="/assets/images/bee-find.svg"/>' width="150px"/>
+												<img class="mx-auto d-block my-3"
+													src='<c:url value="/assets/images/bee-find.svg"/>'
+													width="150px" />
 												<h3 class="text-center">Chưa có bình luận</h3>
 											</c:if>
 											<c:forEach var="c" items='${commentLessonsList}'>
 												<div
 													class="rating-item d-flex align-items-start border-bottom pb-4 mb-4">
 													<c:if test="${c.users.image == null }">
-														<c:set var="image" value="https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"></c:set>
+														<c:set var="image"
+															value="https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"></c:set>
 													</c:if>
 													<c:if test="${c.users.image != null}">
-														<c:set var="image" value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${c.users.image }"></c:set>
+														<c:set var="image"
+															value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${c.users.image }"></c:set>
 													</c:if>
 													<img src="${image }" alt=""
 														class="rounded-circle avatar-md">
@@ -649,10 +653,11 @@
 															</div>
 															<div class="rating-day">
 																<span class="rating-time ms-1 fs-6 color-dimgrey">${c.createTime.getHours()}:${c.createTime.getMinutes() }</span>
-																<span class="rating-date ms-1 fs-6 color-dimgrey">${c.createTime.getDate()}/${c.createTime.getMonth() + 1}/${c.createTime.getYear() + 1900} </span>
+																<span class="rating-date ms-1 fs-6 color-dimgrey">${c.createTime.getDate()}/${c.createTime.getMonth() + 1}/${c.createTime.getYear() + 1900}
+																</span>
 															</div>
 														</h4>
-														<p class="rating-content" style="width:725px">${c.comment}</p>
+														<p class="rating-content" style="width: 725px">${c.comment}</p>
 														<!-- <div class="rating-question d-lg-flex">
 															<p class="mb-0">Bình luận này có bổ ích với bạn không?</p>
 															<a href="#" class="btn btn-xs btn-primary ms-lg-3">Có</a>
@@ -791,15 +796,17 @@
 						<!-- Card -->
 						<div class="card mb-3 mb-4">
 							<div class="p-1">
-								<c:set var="image" value="http://localhost:8080/Ielts-listening2/video?fname=courseIMG/${course.image}"></c:set>
+								<c:set var="image"
+									value="http://localhost:8080/Ielts-listening2/video?fname=courseIMG/${course.image}"></c:set>
 								<c:if test="${course.image == null }">
-									<c:set var="image" value="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"></c:set>
+									<c:set var="image"
+										value="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"></c:set>
 								</c:if>
 								<div
 									class="trailer d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
 									style="background-image: url('${image}'); height: 210px">
 									<a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-										href="http://localhost:8080/Ielts-listening2/Video?file=${course.trailer }">
+										href="<c:url value='/image?fname=videoLesson/${course.trailer }'/>">
 										<i class="fe fe-play"></i>
 									</a>
 								</div>
@@ -813,13 +820,20 @@
 										<span class="fw-bold fs-3 color-blue--primary"></span>
 										<!-- <del class="fs-4">1.000.000</del> -->
 									</div>
-									<div class="price-vnd">VNĐ</div>
+
 								</div>
 								<div class="d-grid card-button">
 									<c:if test="${isBuy ==0 }">
 										<form action="order" method=get>
+
 											<input name="listCourseId" value="${course.courseId}"
 												id="listCourseId" class="d-none">
+											<h3 class="text-primary text-center">
+
+												<fmt:formatNumber value="${course.cost}"
+													pattern="###,### VNĐ" />
+
+											</h3>
 											<button
 												class="w-100 btn btn-primary bg-color-blue--primary mb-2 card-button__reg">Đăng
 												ký</button>
@@ -827,7 +841,7 @@
 									</c:if>
 
 
-									<a href="pricing.html"
+									<a href="helpcenter"
 										class="btn btn-outline-primary card-button__chat">Tư vấn</a>
 								</div>
 							</div>
@@ -930,118 +944,117 @@
 						<c:set var="countCourse" value="0"></c:set>
 						<c:forEach var="i" items='${courses}'>
 							<c:if test="${i.courseId != course.courseId && countCourse < 4}">
-							<div class="col-lg-3 col-md-6 col-12 " data-bs-toggle="popover"
-										data-bs-trigger="hover focus" title="${i.courseName}"
-										data-bs-content="${i.description}">
-										<div class="card mb-4 card-hover">
-											<c:if test="${i.image != null}">
-												<a href="course-detail?courseId=${i.courseId}"><img
-													style="height: 200px; object-fit: cover;"
-													src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
-													alt="course" class="card-img-top img-fluid"></a>
-											</c:if>
-											<c:if test="${i.image == null}">
-												<a href="course-detail?courseId=${i.courseId}"><img
-													style="height: 200px; object-fit: cover;"
-													src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
-													alt="course" class="card-img-top img-fluid"></a>
-											</c:if>
-											<!-- Card Body -->
-											<div class="card-body">
-												<h4 class="mb-2 text-truncate-line-2">
-													<a href="course-detail?courseId=${i.courseId }"
-														class="text-inherit">${i.courseName}</a>
-												</h4>
-												<!-- List inline -->
-												<div class="d-flex align-items-center gap-3">
-													<p class="card-text color-blue--primary fw-bold fs-5">
-														<fmt:formatNumber value="${i.cost}" pattern="###,### VNĐ" />
-													<p class="card-text fw-bold fs-5"
-														style="color: rgb(113, 113, 113)"></p>
-													</p>
+								<div class="col-lg-3 col-md-6 col-12 " data-bs-toggle="popover"
+									data-bs-trigger="hover focus" title="${i.courseName}"
+									data-bs-content="${i.description}">
+									<div class="card mb-4 card-hover">
+										<c:if test="${i.image != null}">
+											<a href="course-detail?courseId=${i.courseId}"><img
+												style="height: 200px; object-fit: cover;"
+												src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
+												alt="course" class="card-img-top img-fluid"></a>
+										</c:if>
+										<c:if test="${i.image == null}">
+											<a href="course-detail?courseId=${i.courseId}"><img
+												style="height: 200px; object-fit: cover;"
+												src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
+												alt="course" class="card-img-top img-fluid"></a>
+										</c:if>
+										<!-- Card Body -->
+										<div class="card-body">
+											<h4 class="mb-2 text-truncate-line-2">
+												<a href="course-detail?courseId=${i.courseId }"
+													class="text-inherit">${i.courseName}</a>
+											</h4>
+											<!-- List inline -->
+											<div class="d-flex align-items-center gap-3">
+												<p class="card-text color-blue--primary fw-bold fs-5">
+													<fmt:formatNumber value="${i.cost}" pattern="###,### VNĐ" />
+												<p class="card-text fw-bold fs-5"
+													style="color: rgb(113, 113, 113)"></p>
+												</p>
 
 
 
-												</div>
-												<div class="lh-1">
-
-													<span class="align-text-top"> <span class="fs-6">
-															<div class="d-flex gap-5">
-																<c:set var="totalStars" value="0" />
-																<c:set var="count" value="0" />
-																<c:forEach var="lesson" items="${i.lessons}">
-																	<c:forEach var="enrrol_lesson"
-																		items="${lesson.enrrolLesson}">
-																		<c:set var="totalStars"
-																			value="${totalStars + enrrol_lesson.numberOfStar}" />
-
-																		<c:choose>
-																			<c:when test="${enrrol_lesson.numberOfStar != 0}">
-																				<c:set var="count" value="${count + 1}" />
-																			</c:when>
-
-																		</c:choose>
-
-
-																	</c:forEach>
-																</c:forEach>
-																<c:choose>
-																	<c:when test="${count == 0}">
-																		<c:set var="averageStars" value="0" />
-																		<c:set var="roundedAverage">
-																			<c:out
-																				value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																		</c:set>
-																	</c:when>
-																	<c:when test="${count > 0}">
-																		<c:set var="averageStars"
-																			value="${totalStars / count}" />
-																		<c:set var="roundedAverage">
-																			<c:out
-																				value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
-																		</c:set>
-																	</c:when>
-																</c:choose>
-																<div class="stars rating-star"
-																	data-rating="${roundedAverage}"></div>
-																<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
-															</div>
-													</span>
-												</div>
 											</div>
-											<!-- Card footer -->
-											<div class="card-footer">
-												<div class="row align-items-center g-0">
-													<div class="col-auto"></div>
-													<div class="col ms-2"></div>
-													<div class="col-auto">
-														<c:choose>
-															<c:when test="${user ne null}">
-																<!-- User is logged in, submit the form -->
-																<form action="addToCart" method="post">
-																	<input type="hidden" name="courseId"
-																		value="${i.courseId }">
-																	<button type="submit"
-																		style="border: none; background: none;">
-																		<i class="fe fe-shopping-cart fs-4"></i>
-																	</button>
-																</form>
-															</c:when>
-															<c:otherwise>
-																<!-- User is not logged in, show a login popup or perform any other action -->
-																<button style="border: none; background: none;"
-																	type="button" onclick="showLoginPopup()">
+											<div class="lh-1">
+
+												<span class="align-text-top"> <span class="fs-6">
+														<div class="d-flex gap-5">
+															<c:set var="totalStars" value="0" />
+															<c:set var="count" value="0" />
+															<c:forEach var="lesson" items="${i.lessons}">
+																<c:forEach var="enrrol_lesson"
+																	items="${lesson.enrrolLesson}">
+																	<c:set var="totalStars"
+																		value="${totalStars + enrrol_lesson.numberOfStar}" />
+
+																	<c:choose>
+																		<c:when test="${enrrol_lesson.numberOfStar != 0}">
+																			<c:set var="count" value="${count + 1}" />
+																		</c:when>
+
+																	</c:choose>
+
+
+																</c:forEach>
+															</c:forEach>
+															<c:choose>
+																<c:when test="${count == 0}">
+																	<c:set var="averageStars" value="0" />
+																	<c:set var="roundedAverage">
+																		<c:out
+																			value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																	</c:set>
+																</c:when>
+																<c:when test="${count > 0}">
+																	<c:set var="averageStars" value="${totalStars / count}" />
+																	<c:set var="roundedAverage">
+																		<c:out
+																			value="${(averageStars - (averageStars mod 1)) + (averageStars mod 1 > 0 ? 1 : 0)}" />
+																	</c:set>
+																</c:when>
+															</c:choose>
+															<div class="stars rating-star"
+																data-rating="${roundedAverage}"></div>
+															<div class="rating-avg pe-3 text-warning">${roundedAverage}</div>
+														</div>
+												</span>
+											</div>
+										</div>
+										<!-- Card footer -->
+										<div class="card-footer">
+											<div class="row align-items-center g-0">
+												<div class="col-auto"></div>
+												<div class="col ms-2"></div>
+												<div class="col-auto">
+													<c:choose>
+														<c:when test="${user ne null}">
+															<!-- User is logged in, submit the form -->
+															<form action="addToCart" method="post">
+																<input type="hidden" name="courseId"
+																	value="${i.courseId }">
+																<button type="submit"
+																	style="border: none; background: none;">
 																	<i class="fe fe-shopping-cart fs-4"></i>
 																</button>
-															</c:otherwise>
-														</c:choose>
+															</form>
+														</c:when>
+														<c:otherwise>
+															<!-- User is not logged in, show a login popup or perform any other action -->
+															<button style="border: none; background: none;"
+																type="button" onclick="showLoginPopup()">
+																<i class="fe fe-shopping-cart fs-4"></i>
+															</button>
+														</c:otherwise>
+													</c:choose>
 
-													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-							<c:set var="countCourse" value="${countCourse + 1 }"></c:set>
+								</div>
+								<c:set var="countCourse" value="${countCourse + 1 }"></c:set>
 							</c:if>
 						</c:forEach>
 					</div>

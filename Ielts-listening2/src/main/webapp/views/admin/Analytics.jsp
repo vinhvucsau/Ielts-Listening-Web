@@ -245,8 +245,6 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 											</div></li>
 									</a>
 								</c:forEach>
-
-
 							</ul>
 						</div>
 					</div>
@@ -276,20 +274,20 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 														<c:if test="${i.image != null}">
 															<a
 																href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }"><img
-																style="height: 50px; object-fit: cover;"
+																style="height: 50px; "
 																src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
 																alt="course" class=" img-fluid"></a>
 														</c:if> <c:if test="${i.image == null}">
 															<a
 																href="/Ielts-listening2/admin/listLesson?courseId=${imageCourse[loop.index] }"><img
-																style="height: 50px; object-fit: cover;"
-																src="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"
+																style="height: 50px; "
+																src=https://blog.faceseo.vn/wp-content/uploads/2021/01/gia-su-ielts-hinh-nen-2-min.jpg
 																alt="course" class=" img-fluid"></a>
 														</c:if>
 													</a>
 												</div>
 												<div class="col-md-8 col-10">
-													
+
 
 													<a
 														href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }">
@@ -315,78 +313,66 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 						<!-- Card header -->
 						<div
 							class="card-header card-header-height d-flex align-items-center">
-							<h4 class="mb-0">Thông báo mới nhất</h4>
+							<h4 class="mb-0">Bài viết mới nhất</h4>
 						</div>
 						<!-- Card body -->
 						<div class="card-body">
 							<!-- List group -->
 							<ul class="list-group list-group-flush list-timeline-activity">
-								<li class="list-group-item px-0 pt-0 border-0 mb-2">
-									<div class="row">
-										<div class="col-auto">
-											<div class="avatar avatar-md avatar-indicators avatar-online">
-												<img alt="avatar" src="../assets/images/avatar/avatar-6.jpg"
-													class="rounded-circle">
+
+								<c:if test="${blogJsp.size() > 0}">
+								<c:forEach var="index" begin="0" end="${blogJsp.size() - 1}"
+									step="1" varStatus="loop">
+
+									<li class="list-group-item px-0 pt-0 border-0 mb-2">
+										<div class="row ">
+											<div class="col-2">
+												<div
+													class="avatar avatar-md avatar-indicators avatar-online">
+
+													<c:if test="${image[loop.index] != null}">
+														<img class="rounded-circle"
+															style="width: 40px; height: 40px;"
+															src='<c:url value='/image?fname=userAvatar/${ image[loop.index]}'/>'
+															alt="avatar">
+													</c:if>
+													<c:if test="${image[loop.index] == null}">
+														<img class="rounded-circle"
+															style="width: 40px; height: 40px;"
+															src='<c:url value = "https://res.cloudinary.com/dh6bfx865/image/upload/v1698335051/cuahangdientu/default_avatar.png"/>'
+															alt="anh dai dien">
+													</c:if>
+
+
+												</div>
+											</div>
+											<div class="col-10 ms-n2">
+												<h4 class="mb-0 h5">${blogJsp[loop.index].title }</h4>
+												<div class="mb-1 " style="display: none;display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;overflow: hidden;">${blogJsp[loop.index].content }</div>
+												<c:if
+													test="${differentHour[loop.index] == 0 && differentMinute[loop.index] < 60}">
+													<p class="fs-6">${differentMinute[loop.index]}minute
+														ago</p>
+												</c:if>
+
+												<c:if test="${differentHour[loop.index] != 0}">
+													<p class="fs-6">${differentHour[loop.index]}hour ago</p>
+												</c:if>
+
+												<c:if
+													test="${differentMinute[loop.index] == 0 && differentSecond[loop.index] < 60}">
+													<p class="fs-6">${differentSecond[loop.index]}second
+														ago</p>
+												</c:if>
+
+
 											</div>
 										</div>
-										<div class="col ms-n2">
-											<h4 class="mb-0 h5">Dianna Smiley</h4>
-											<p class="mb-1">Just buy the courses”Build React
-												Application Tutorial”</p>
-											<span class="fs-6">2m ago</span>
-										</div>
-									</div>
-								</li>
-								<!-- List group -->
-								<li class="list-group-item px-0 pt-0 border-0 mb-2">
-									<div class="row">
-										<div class="col-auto">
-											<div
-												class="avatar avatar-md avatar-indicators avatar-offline">
-												<img alt="avatar" src="../assets/images/avatar/avatar-7.jpg"
-													class="rounded-circle">
-											</div>
-										</div>
-										<div class="col ms-n2">
-											<h4 class="mb-0 h5">Irene Hargrove</h4>
-											<p class="mb-1">Comment on “Bootstrap Tutorial” Says
-												“Hi,I m irene...</p>
-											<span class="fs-6">1 hour ago</span>
-										</div>
-									</div>
-								</li>
-								<!-- List group -->
-								<li class="list-group-item px-0 pt-0 border-0 mb-2">
-									<div class="row">
-										<div class="col-auto">
-											<div class="avatar avatar-md avatar-indicators avatar-busy">
-												<img alt="avatar" src="../assets/images/avatar/avatar-4.jpg"
-													class="rounded-circle">
-											</div>
-										</div>
-										<div class="col ms-n2">
-											<h4 class="mb-0 h5">Trevor Bradle</h4>
-											<p class="mb-1">Just share your article on Social Media..</p>
-											<span class="fs-6">2 month ago</span>
-										</div>
-									</div>
-								</li>
-								<li class="list-group-item px-0 pt-0 border-0">
-									<div class="row">
-										<div class="col-auto">
-											<div class="avatar avatar-md avatar-indicators avatar-away">
-												<img alt="avatar" src="../assets/images/avatar/avatar-1.jpg"
-													class="rounded-circle">
-											</div>
-										</div>
-										<div class="col ms-n2">
-											<h4 class="mb-0 h5">John Deo</h4>
-											<p class="mb-1">Just buy the courses”Build React
-												Application Tutorial”</p>
-											<span class="fs-6">2m ago</span>
-										</div>
-									</div>
-								</li>
+									</li>
+
+
+								</c:forEach>
+								</c:if>
 							</ul>
 						</div>
 					</div>
@@ -601,3 +587,4 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 	</script>
 </body>
 </html>
+

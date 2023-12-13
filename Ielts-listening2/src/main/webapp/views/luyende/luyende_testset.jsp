@@ -144,11 +144,11 @@
 														<div class="d-flex gap-3 align-items-center">
 															<div
 																class="rounded-3 d-flex justify-content-center align-items-center fw-bold bg-color-green--medium color-white"
-																style="width: 50px; height: 50px;">${en.score}</div>
+																style="width: 50px; height: 50px; flex:none">${en.score}</div>
 															<p
-																class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
+																class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0"></p>
 														</div>
-														<div class="d-flex gap-3 align-items-center">
+														<div class="d-flex gap-3 align-items-center" style="flex:none">
 															<a
 																href='<c:url value="/test/luyende_test?enrollTestId=${doneEnrollTestId}"></c:url>'
 																class="btn me-1"
@@ -183,13 +183,13 @@
 														<div class="d-flex gap-3 align-items-center">
 															<div
 																class="rounded-3 d-flex justify-content-center align-items-center fw-bold "
-																style="background-color: #fef5d2; width: 50px; height: 50px;">
+																style="background-color: #fef5d2; width: 50px; height: 50px; flex:none">
 
 															</div>
 															<p
-																class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
+																class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0"></p>
 														</div>
-														<form action="luyende-testset" method="post">
+														<form action="luyende-testset" method="post" style="flex:none">
 															<a
 																href='<c:url value="/test/luyende_test?enrollTestId=${enrTestId}"></c:url>'
 																class="btn"
@@ -222,7 +222,7 @@
 											<div class="d-flex gap-3 align-items-center">
 												<div
 													class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-													style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
+													style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px; flex:none">
 													<svg xmlns="http://www.w3.org/2000/svg" width="32"
 														height="32" fill="currentColor"
 														class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
@@ -231,9 +231,9 @@
 							</svg>
 												</div>
 												<p
-													class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
+													class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0"></p>
 											</div>
-											<form action="luyende-testset" method="post">
+											<form action="luyende-testset" method="post" style="flex:none">
 												<input type="hidden" name="userId"
 													value="${currentUser.userId }" /> <input type="hidden"
 													name="testId" value="${i.testId }" /> <input type="submit"
@@ -265,7 +265,7 @@
 										style="border-color: bg-color-green--medium">
 										<div
 											class="rounded-3 d-flex justify-content-center align-items-center fw-bold"
-											style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px;">
+											style="background-color: rgb(240, 247, 255); color: rgb(0, 74, 185); width: 50px; height: 50px; style="flex:none">
 											<svg xmlns="http://www.w3.org/2000/svg" width="32"
 												height="32" fill="currentColor"
 												class="bi bi-headphones fw-bold" viewBox="0 0 16 16">
@@ -274,7 +274,7 @@
 							</svg>
 										</div>
 										<p
-											class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0">${i.description}</p>
+											class="fs-5 fw-bold d-flex flex-column justify-content-center ms-3 mb-0"></p>
 									</div>
 								</div>
 							</div>

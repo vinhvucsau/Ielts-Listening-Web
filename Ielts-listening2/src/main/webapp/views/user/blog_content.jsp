@@ -62,14 +62,14 @@
 					<div class="col-xl-10 col-lg-10 col-md-12 col-12 mb-6">
 						<img src="<c:url value='/image?fname=${folder}/${blog.image }'/>"
 							alt="blogpost" class="img-fluid rounded-3 w-100 ">
-                        <h3 class="mt-4 lead text-dark">${blog.content}</h3>
+						<h3 class="mt-4 lead text-dark">${blog.content}</h3>
 					</div>
-                    <hr class="mt-lg-8 mb-lg-6 my-md-6 ">
-                   
+					<hr class="mt-lg-8 mb-lg-6 my-md-6 ">
+
 				</div>
 				<div class="row justify-content-center">
 					<div class="col-xl-12 col-lg-8 col-md-12 col-12 mb-2">
-						
+
 						<!-- Container -->
 						<div class="container">
 							<div class="row">
@@ -82,16 +82,14 @@
 									<div class="col-xl-4 col-lg-4 col-md-6 col-12">
 										<!-- Card -->
 										<div class="card mb-4 shadow-lg card-lift">
-											<a href="blog-single.html"><img
+											<a href="blog-content?id=${list.blogId }"><img
 												src="<c:url value='/image?fname=${folder}/${list.image }'/>"
 												class="card-img-top" alt="blogpost "></a>
 											<!-- Card body -->
 											<div class="card-body">
-												<a href="#"
+												<a href="blog-content?id=${list.blogId }"
 													class="fs-5 fw-semibold d-block mb-3 text-primary">${list.title }</a>
-												<div class="blog-content__text">
-													${list.content }
-												</div>
+												<div class="blog-content__text">${list.content }</div>
 												<p></p>
 												<!-- Media content -->
 												<div class="row align-items-center g-0 mt-4">
@@ -109,7 +107,8 @@
 									</div>
 								</c:forEach>
 							</div>
-						</div></section>
+						</div>
+		</section>
 	</main>
 
 	<!-- Scroll top -->
@@ -122,19 +121,20 @@
 
 	</div>
 	<style>
-    .card-img-top {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        object-position: center;
-    }
-    .blog-content__text{
-      display: none;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
+.card-img-top {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.blog-content__text {
+	display: none;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
 </style>
 </body>
 

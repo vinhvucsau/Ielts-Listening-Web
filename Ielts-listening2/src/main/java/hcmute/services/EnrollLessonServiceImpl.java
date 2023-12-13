@@ -56,11 +56,14 @@ public class EnrollLessonServiceImpl implements IEnrollLessonService {
 	@Override
 	public void completeTest(String enrollLessonId) {
 		EnrrolLesson enrollLesson = enDao.findOneByIdContainAnsTestAndAnsUser(enrollLessonId);
+		System.out.println("keyid = " + enrollLessonId +enrollLesson);
 		if (enrollLesson != null) {
 			int numberQuestions = enrollLesson.getLessons().getAnswerLesson().size();
 			long numberCorrectAnswers = enrollLesson.getAnswerLessonUser().stream() 
 					.filter(ansUser -> ansUser.getAnswerLesson().getAnswerKey().equals(ansUser.getAnswerUser()))
 					.count();
+			System.out.println("key = " + enrollLessonId);
+			
 			try {
 				double score = ((double)numberCorrectAnswers / numberQuestions)*10;
 				enrollLesson.setScore(score);

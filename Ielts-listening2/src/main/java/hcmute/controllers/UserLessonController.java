@@ -134,6 +134,10 @@ public class UserLessonController extends HttpServlet {
 
 		} else if (url.contains("completeEnrollLesson")) {
 			String enrollLessonId = req.getParameter("enrollLessonId");
+			
+			req.setAttribute("e", enrollLessonId);
+			//RequestDispatcher rd = req.getRequestDispatcher("/views/user/error404.jsp");
+			//rd.forward(req, resp);
 			enrService.completeTest(enrollLessonId);
 			String lessonId = req.getParameter("lessonId");
 			resp.sendRedirect(req.getContextPath() + "/user/lesson?id=" + lessonId);
@@ -220,6 +224,7 @@ public class UserLessonController extends HttpServlet {
 				AnswerLessonUser answerLessonUser = httpUtil.toModel(AnswerLessonUser.class);
 				EnrrolLesson enrollLesson = enrService.findOneById(answerLessonUser.getEnrrolLesson().getEnrrolId());
 				AnswerLesson ansLesson = ansService.findOneById(answerLessonUser.getAnswerLesson().getAnswerId());
+				
 				if (enrollLesson != null && ansLesson != null) {
 					answerLessonUser.setEnrrolLesson(enrollLesson);
 					answerLessonUser.setAnswerLesson(ansLesson);
@@ -228,7 +233,8 @@ public class UserLessonController extends HttpServlet {
 				ObjectMapper mapper = new ObjectMapper();
 				mapper.writeValue(resp.getOutputStream(), answerLessonUser);
 			} catch (Exception e) {
-				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				e.printStackTrace();
+				//resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			}
 		}
 	}

@@ -16,7 +16,7 @@
 					<div class="col-3 d-flex justify-content-start">
 						<a href='<c:url value="/user/luyen-de-home"></c:url>' class="btn-exit"> <i class="ti-angle-left me-1"></i>
 							<h6>Trở về</h6>
-						</a> <img src="https://prep.vn/imgs/logo.png" alt="logo" class="logo">
+						</a> 
 					</div>
 					<div class="col-6 d-flex justify-content-center">
 						<div class="test-time">

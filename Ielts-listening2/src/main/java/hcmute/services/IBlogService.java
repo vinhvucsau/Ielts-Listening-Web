@@ -13,4 +13,5 @@ public interface IBlogService {
 	List<Blog> Find3blog(String id);
 	List<Blog> findAll(String searchStr);
 	List<Blog> findAll(int page, int pagesize, String searchStr);
+	List<Blog> findAllBlogDesTime();
 }

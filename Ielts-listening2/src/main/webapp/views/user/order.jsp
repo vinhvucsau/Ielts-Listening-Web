@@ -50,15 +50,14 @@
 										<div class="d-md-flex">
 											<!-- img -->
 											<div>
-												<img src="../assets/images/ecommerce/ecommerce-img-1.jpg"
+												<img onerror="setDefaultImage(this)"
+													src="<c:url value='/image?fname=${folder}/${course.image}'/>"
 													alt="" class="img-4by3-xl rounded" />
 											</div>
 											<!-- text -->
 											<div class="ms-md-4 mt-2">
 												<h5 class="mb-1">${course.courseName}</h5>
-												<span> Color: <span class="text-dark">Orange</span> ,
-													Size: <span class="text-dark">10</span>
-												</span>
+												
 											</div>
 										</div>
 									</div>

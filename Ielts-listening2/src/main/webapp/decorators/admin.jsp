@@ -95,7 +95,7 @@
 
 					});
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 		function setDefaultImage(img) {
 			img.onerror = null; // Ngăn chặn việc gọi lặp lại
 			img.src = "https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain";
@@ -165,7 +165,5 @@
 		src="../assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
 	<script src="../assets/libs/pdfmake/build/pdfmake.min.js"></script>
 	<script src="../assets/js/vendors/datatables.js"></script>
-	
-	
 </body>
 </html>

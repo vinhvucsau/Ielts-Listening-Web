@@ -38,6 +38,7 @@ import hcmute.services.PayDetailServiceImpl;
 import hcmute.services.PaymentServiceImpl;
 import hcmute.services.UserCourseServiceImpl;
 import hcmute.services.UserServiceImpl;
+import hcmute.utils.Constants;
 
 @WebServlet(urlPatterns = { "/user/order", "/user/updateNetworth", "/user/confirmCheckout" })
 public class UserOrderController extends HttpServlet {
@@ -68,6 +69,7 @@ public class UserOrderController extends HttpServlet {
 							courseList.add(course);
 						}
 					}
+					req.setAttribute("folder", Constants.FOLDER_COURSE);
 					req.setAttribute("networth", user.getNetworth());
 					req.setAttribute("courseList", courseList);
 					RequestDispatcher rd = req.getRequestDispatcher("/views/user/order.jsp");

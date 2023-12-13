@@ -172,7 +172,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 							<c:set var="countEnrrol" value="0"></c:set>
 							<c:forEach var="enrrolTest" items="${mockTest.enrrolTests }">
 								<c:if
-									test="${enrrolTest.users.userId == currentUser.userId && enrrolTest.score > 0}">
+									test="${enrrolTest.users.userId == currentUser.userId && enrrolTest.score >=0}">
 									<c:set var="countEnrrol" value="${countEnrrol + 1 }"></c:set>
 								</c:if>
 							</c:forEach>
