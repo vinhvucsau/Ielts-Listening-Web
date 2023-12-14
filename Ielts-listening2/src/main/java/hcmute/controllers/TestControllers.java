@@ -58,112 +58,121 @@ public class TestControllers extends HttpServlet {
 
 	protected void getLuyenDeTest(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String enrollTestId = req.getParameter("enrollTestId");
-		if (enrollTestId == null) {
-			resp.setContentType("text/html");
-			String errorMsg = "<p>Không có bài kiểm tra</p>";
-			resp.getWriter().print(errorMsg);
-			return;
-		}
-		// Kiểm tra có phải là user sở hữu enrollTest truy cập không
-		EnrrolTest enrollTest = enrollTestService.findByIdContainAnsTestAndAnswerUser(enrollTestId);
-		if (enrollTest == null) {
-			resp.setContentType("text/html");
-			String errorMsg = "<p>Không tìm thấy bài kiểm tra</p>";
-			resp.getWriter().print(errorMsg);
-			return;
-		}
-		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("user");
-		if (user == null || !(user.getUserId().equals(enrollTest.getUsers().getUserId()))) {
-			resp.setContentType("text/html");
-			String errorMsg = "<p>Không có quyền truy cập vào bài kiểm tra này</p>";
-			resp.getWriter().print(errorMsg);
-			return;
-		}
-		if (enrollTest.getMockTests().getListeningParts() != null) {
-			enrollTest.getMockTests().getListeningParts().sort((a, b) -> a.getNumber() - b.getNumber());
-			enrollTest.getMockTests().getListeningParts().forEach(part -> {
-				part.getAnswerTests().sort((a, b) -> a.getNumber() - b.getNumber());
-			});
-		}
-
-		String currentPartId;
-		if (req.getParameter("currentPartId") == null) {
-			currentPartId = enrollTest.getMockTests().getListeningParts().get(0).getPartId();
-		} else {
-			currentPartId = req.getParameter("currentPartId");
-		}
-
-		// set thời gian
-		Date currentDate = new Date(System.currentTimeMillis());
-		int timeTest = 40 * 60; // thời gian làm test mặc định 40p
-
-		Date enrollmentDate = enrollTest.getEnrrollmentDate();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(enrollmentDate);
-		calendar.add(Calendar.SECOND, timeTest);
-		Date endingEnrollmentDate = calendar.getTime();
-
-		if (currentDate.after(endingEnrollmentDate) || enrollTest.getScore() >= 0) {
-			// đăng nhập sau khi test đã hoàn thành
-			if (enrollTest.getScore() < 0) {
-				double score = enrollTestService.completeTest(enrollTest.getEnrrolId());
-				enrollTest.setScore(score);
+		try {
+			String enrollTestId = req.getParameter("enrollTestId");
+			if (enrollTestId == null) {
+				resp.setContentType("text/html");
+				String errorMsg = "<p>Không có bài kiểm tra</p>";
+				resp.getWriter().print(errorMsg);
+				return;
 			}
-			req.setAttribute("currentTime", 0);
-			req.setAttribute("endingTime", 0);
-			req.setAttribute("isCompleted", "True");
-			long numberOfCorrectAnswers = enrollTestService.calcNumberOfCorrectAnswers(enrollTestId);
-			long numberOfQuestTion = enrollTestService.calcNumberOfQuestTion(enrollTestId);
-			req.setAttribute("numberOfCorrectAnswers", numberOfCorrectAnswers);
-			req.setAttribute("numberOfQuestTion", numberOfQuestTion);
-			String userId = enrollTest.getUsers().getUserId();
-			String mockTestId = enrollTest.getMockTests().getTestId();
-			List<EnrrolTest> listHistoryTest = enrollTestService.findByUserIdAndMockTestId(userId, mockTestId);
-			listHistoryTest.sort((a,b) -> b.getEnrrollmentDate().compareTo(a.getEnrrollmentDate()));
-			req.setAttribute("listHistoryTest", listHistoryTest);
-		} else if (currentDate.after(enrollmentDate) && currentDate.before(endingEnrollmentDate)) {
-			// thời gian làm test nằm trong thời gian hiệu lực
-			req.setAttribute("currentTime", (currentDate.getTime() - enrollmentDate.getTime()) / 1000);
-			req.setAttribute("endingTime", timeTest);
-		} else if (currentDate.before(enrollmentDate)) {
-			// đăng nhập sớm hơn thời gian làm bài
-			// req.setAttribute("errorMessage", "Chưa đến giờ làm bài, hãy quay lại vào lúc:
-			// " + endingEnrollmentDate);
-			resp.setContentType("text/html");
-			resp.getWriter().println("<p>" + "Chưa đến giờ làm bài, hãy quay lại vào lúc: " + enrollmentDate + "</p>");
-			// Tạm thời xuất thông báo, sau này sẽ chuyển hướng quay ngược lại trang
-			// test_home và set 1 đoạn tin nhắn đỏ
-			// Thông báo rằng chưa đến giờ làm test
-			return;
-		}
-
-		// set next part
-		ListeningPart currentPart = listeningPartService.findById(currentPartId);
-
-		List<ListeningPart> parts = enrollTest.getMockTests().getListeningParts();
-		String prevPart = null;
-		String nextPart = null;
-		if(parts != null) {
-			for (ListeningPart part : parts) {
-				if (part.getPartId().equals(currentPartId)) {
-					int index = parts.indexOf(part);
-					if (index != (parts.size() - 1)) {
-						nextPart = parts.get(index + 1).getPartId();
+			// Kiểm tra có phải là user sở hữu enrollTest truy cập không
+			EnrrolTest enrollTest = enrollTestService.findByIdContainAnsTestAndAnswerUser(enrollTestId);
+			if (enrollTest == null) {
+				resp.setContentType("text/html");
+				String errorMsg = "<p>Không tìm thấy bài kiểm tra</p>";
+				resp.getWriter().print(errorMsg);
+				return;
+			}
+			HttpSession session = req.getSession();
+			User user = (User) session.getAttribute("user");
+			if (user == null || !(user.getUserId().equals(enrollTest.getUsers().getUserId()))) {
+				resp.setContentType("text/html");
+				String errorMsg = "<p>Không có quyền truy cập vào bài kiểm tra này</p>";
+				resp.getWriter().print(errorMsg);
+				return;
+			}
+			if (enrollTest.getMockTests().getListeningParts() != null) {
+				enrollTest.getMockTests().getListeningParts().sort((a, b) -> a.getNumber() - b.getNumber());
+				enrollTest.getMockTests().getListeningParts().forEach(part -> {
+					part.getAnswerTests().sort((a, b) -> a.getNumber() - b.getNumber());
+				});
+			}
+			
+			String currentPartId = null;
+			if(enrollTest.getMockTests().getListeningParts() != null) {
+				if (req.getParameter("currentPartId") == null) {
+					currentPartId = enrollTest.getMockTests().getListeningParts().get(0).getPartId();
+				} else {
+					currentPartId = req.getParameter("currentPartId");
+				}
+				
+			}
+			
+			// set thời gian
+			Date currentDate = new Date(System.currentTimeMillis());
+			int timeTest = 40 * 60; // thời gian làm test mặc định 40p
+			
+			Date enrollmentDate = enrollTest.getEnrrollmentDate();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(enrollmentDate);
+			calendar.add(Calendar.SECOND, timeTest);
+			Date endingEnrollmentDate = calendar.getTime();
+			
+			if (currentDate.after(endingEnrollmentDate) || enrollTest.getScore() >= 0) {
+				// đăng nhập sau khi test đã hoàn thành
+				if (enrollTest.getScore() < 0) {
+					double score = enrollTestService.completeTest(enrollTest.getEnrrolId());
+					enrollTest.setScore(score);
+				}
+				req.setAttribute("currentTime", 0);
+				req.setAttribute("endingTime", 0);
+				req.setAttribute("isCompleted", "True");
+				long numberOfCorrectAnswers = enrollTestService.calcNumberOfCorrectAnswers(enrollTestId);
+				long numberOfQuestTion = enrollTestService.calcNumberOfQuestTion(enrollTestId);
+				req.setAttribute("numberOfCorrectAnswers", numberOfCorrectAnswers);
+				req.setAttribute("numberOfQuestTion", numberOfQuestTion);
+				String userId = enrollTest.getUsers().getUserId();
+				String mockTestId = enrollTest.getMockTests().getTestId();
+				List<EnrrolTest> listHistoryTest = enrollTestService.findByUserIdAndMockTestId(userId, mockTestId);
+				listHistoryTest.sort((a,b) -> b.getEnrrollmentDate().compareTo(a.getEnrrollmentDate()));
+				req.setAttribute("listHistoryTest", listHistoryTest);
+			} else if (currentDate.after(enrollmentDate) && currentDate.before(endingEnrollmentDate)) {
+				// thời gian làm test nằm trong thời gian hiệu lực
+				req.setAttribute("currentTime", (currentDate.getTime() - enrollmentDate.getTime()) / 1000);
+				req.setAttribute("endingTime", timeTest);
+			} else if (currentDate.before(enrollmentDate)) {
+				// đăng nhập sớm hơn thời gian làm bài
+				// req.setAttribute("errorMessage", "Chưa đến giờ làm bài, hãy quay lại vào lúc:
+				// " + endingEnrollmentDate);
+				resp.setContentType("text/html");
+				resp.getWriter().println("<p>" + "Chưa đến giờ làm bài, hãy quay lại vào lúc: " + enrollmentDate + "</p>");
+				// Tạm thời xuất thông báo, sau này sẽ chuyển hướng quay ngược lại trang
+				// test_home và set 1 đoạn tin nhắn đỏ
+				// Thông báo rằng chưa đến giờ làm test
+				return;
+			}
+			
+			// set next part
+			ListeningPart currentPart = listeningPartService.findById(currentPartId);
+			
+			List<ListeningPart> parts = enrollTest.getMockTests().getListeningParts();
+			String prevPart = null;
+			String nextPart = null;
+			if(parts != null) {
+				for (ListeningPart part : parts) {
+					if (part.getPartId().equals(currentPartId)) {
+						int index = parts.indexOf(part);
+						if (index != (parts.size() - 1)) {
+							nextPart = parts.get(index + 1).getPartId();
+						}
+						if (index != 0) {
+							prevPart = parts.get(index - 1).getPartId();
+						}
+						break;
 					}
-					if (index != 0) {
-						prevPart = parts.get(index - 1).getPartId();
-					}
-					break;
 				}
 			}
+			req.setAttribute("prevPart", prevPart);
+			req.setAttribute("nextPart", nextPart);
+			req.setAttribute("enrollTest", enrollTest);
+			req.setAttribute("currentPart", currentPart);
+			req.getRequestDispatcher("/views/luyende/luyende_test.jsp").forward(req, resp);
+			
+		} catch (Exception e) {
+			req.setAttribute("e", e.getMessage());
+			req.getRequestDispatcher("/views/user/error404.jsp").forward(req, resp);
 		}
-		req.setAttribute("prevPart", prevPart);
-		req.setAttribute("nextPart", nextPart);
-		req.setAttribute("enrollTest", enrollTest);
-		req.setAttribute("currentPart", currentPart);
-		req.getRequestDispatcher("/views/luyende/luyende_test.jsp").forward(req, resp);
 	}
 
 	protected void getCompleteTest(HttpServletRequest req, HttpServletResponse resp)

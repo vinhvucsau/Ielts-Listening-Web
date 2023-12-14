@@ -104,7 +104,7 @@
 <title></title>
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
 
 	<div id="db-wrapper">
 		<div>

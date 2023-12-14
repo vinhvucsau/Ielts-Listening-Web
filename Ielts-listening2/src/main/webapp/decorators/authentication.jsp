@@ -13,7 +13,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
 	rel="stylesheet">
 </head>
-<body>
+<body style="overflow-x: hidden;">
 	<div class="container h-100  max-w-xxl py-5">
 		<div
 			class=" w-100 h-100 d-flex justify-content-center  align-items-center">

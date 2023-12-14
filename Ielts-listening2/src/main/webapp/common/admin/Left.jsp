@@ -35,7 +35,7 @@
 	<nav class="navbar-vertical navbar">
 		<div class="vh-100 simplebar-scrollable-y" data-simplebar="init">
 			<!-- Brand logo -->
-			<a class="navbar-brand" href="../index.html"> <img
+			<a class="navbar-brand" href="analytics"> <img
 				src="../assets/final.png" alt="Geeks" style=" width: 100%; height: 26px;object-fit: contain; object-position: left;" alt="LOGO" />
 			</a>
 			<!-- Navbar nav -->

@@ -16,6 +16,7 @@ import hcmute.services.IPayDetailService;
 import hcmute.services.IPaymentService;
 import hcmute.services.PayDetailServiceImpl;
 import hcmute.services.PaymentServiceImpl;
+import hcmute.utils.Constants;
 
 @WebServlet(urlPatterns = { "/admin/order", "/admin/od-detail" })
 public class AdminOrderController extends HttpServlet {
@@ -37,6 +38,8 @@ public class AdminOrderController extends HttpServlet {
 			Payment order = service.findById(id);
 			String idpay = req.getParameter("id");
 			List<PayDetail> lisl = detailservice.findPayDetailByIDPayment(idpay);
+			
+			req.setAttribute("folder", Constants.FOLDER_COURSE);
 			req.setAttribute("list_oddetail", lisl);
 			req.setAttribute("order", order);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/admin/admin_orderDetail.jsp");

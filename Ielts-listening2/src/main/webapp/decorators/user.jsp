@@ -105,7 +105,7 @@
 		}
 	</script>
 </head>
-<body>
+<body style="overflow-x: hidden;">
 	<%@ include file="/common/user/Header.jsp"%>
 	<div class="d-flex flex-column container-fluid"
 		style="max-width: 1440px; margin-top: 60px;">
