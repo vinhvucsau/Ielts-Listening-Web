@@ -13,16 +13,12 @@
 				<div class="text-left space-y-2">
 					<h5 class="text-black fw-700 text-16 leading-6 uppercase fw-bolder">
 						Trung tâm Đào tạo Ngoại ngữ Elis</h5>
-					<div class="text-gray-700 fw-bolder text-14">Nguyễn Quang Vinh 21110727 Nhóm trưởng</div>
-					<div class="text-gray-700 fw-bolder text-14">Trần Dương Thiệu 21110658 Nhóm phó</div>
-						<div class="text-gray-700 fw-bolder text-14">Nguyễn Tấn Lâm 21110895 Nhóm phó</div>
-						<div class="text-gray-700 fw-bolder text-14">Lê Phúc Hậu 21110879 </div>
+					<div class="text-gray-700 fw-bolder text-14">Nguyễn Quang Vinh 21110727</div>
+						<div class="text-gray-700 fw-bolder text-14">Nguyễn Tấn Lâm 21110895</div>
 						<div class="text-gray-700 fw-bolder text-14">Trần Hữu Quốc Huy 21110888</div>
 						<div class="text-gray-700 fw-bolder text-14">Bùi Đức Long 21110530</div>
 						<div class="text-gray-700 fw-bolder text-14">Vũ Đức Lộc 21110535</div>
-						<div class="text-gray-700 fw-bolder text-14">Bùi Thị Xuân Lương 21142316</div>
 						<div class="text-gray-700 fw-bolder text-14">Trần Công Minh 21110902</div>
-						<div class="text-gray-700 fw-bolder text-14">Trịnh Ngọc Thương 21110673</div>
 					
 					
 				</div>

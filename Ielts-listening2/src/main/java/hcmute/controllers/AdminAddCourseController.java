@@ -175,7 +175,7 @@ public class AdminAddCourseController extends HttpServlet {
 					}
 					//update anh moi
 					String fileName = "" + System.currentTimeMillis();
-					topic.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\"+ Constants.FOLDER_TOPIC +"\\", fileName));
+					topic.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "/"+ Constants.FOLDER_TOPIC +"/", fileName));
 				}
 
 				topicService.updateTopic(topic);

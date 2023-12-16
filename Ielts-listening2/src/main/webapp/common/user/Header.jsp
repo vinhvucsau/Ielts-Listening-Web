@@ -118,7 +118,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 								<div class="dropdown-divider"></div>
 								<ul class="list-unstyled">
 									<li><a class="dropdown-item"
-										href="/Ielts-listening2/user/capnhattaikhoan?userId=${user.userId}">
+										href="capnhattaikhoan?userId=${user.userId}">
 											<i class="fe fe-user me-2"></i> Tài khoản
 									</a></li>
 									<li><a class="dropdown-item"
@@ -126,11 +126,11 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 										<i class="fe fe-book me-2"></i> Khóa học của tôi
 									</a></li>
 									<li><a class="dropdown-item"
-										href="/Ielts-listening2/user/mycart?userId=${user.userId}">
+										href="mycart?userId=${user.userId}">
 											<i class="fe fe-shopping-cart me-2"></i> Giỏ hàng
 									</a></li>
 									<li><a class="dropdown-item"
-										href="/Ielts-listening2/user/blogs?userId=${user.userId}">
+										href="blogs?userId=${user.userId}">
 											<i class="fe fe-book me-2"></i> Blogs cá nhân
 									</a></li>
 									<li><a class="dropdown-item"
@@ -183,11 +183,11 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 								<h4 class="dropdown-header">Luyện đề</h4>
 							</li>
 
-							<li><a href="/Ielts-listening2/user/luyen-de-home"
+							<li><a href="luyen-de-home"
 								class="dropdown-item justify-content-between">Tất cả bộ đề</a></li>
-							<li><a href="/Ielts-listening2/user/luyen-de-home?tab=2"
+							<li><a href="luyen-de-home?tab=2"
 								class="dropdown-item justify-content-between">Bộ đề mới nhất</a></li>
-							<li><a href="/Ielts-listening2/user/luyen-de-home?tab=3"
+							<li><a href="luyen-de-home?tab=3"
 								class="dropdown-item">Bộ đề HOT</a></li>
 
 						</ul></li>
