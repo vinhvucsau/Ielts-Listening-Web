@@ -443,7 +443,7 @@
                 }
                 else {
                 	const completeTestUrl = window.location.protocol + '//' + window.location.host + 
-                	'/Ielts-listening2/test/complete_test?enrollTestId=' + enrollTestId;
+                	'/test/complete_test?enrollTestId=' + enrollTestId;
                 	//window.location.href = completeTestUrl;
                 	window.location.replace(completeTestUrl);
                 }
@@ -516,7 +516,7 @@
                 		},
                 		answer: answerInput.value
                 }
-                $.ajax({url: "/Ielts-listening2/api-luyende_test",
+                $.ajax({url: "/api-luyende_test",
         			type: 'POST',
         			contentType: "application/json",
         			data:JSON.stringify(data),
@@ -547,7 +547,7 @@
         		spinner.classList.remove('d-none');
         		const modalBody = document.querySelector('#myModal .modal-body ul');
         		modalBody.innerHTML = '';
-            	$.ajax({url: "/Ielts-listening2/api-comfirm-answers",
+            	$.ajax({url: "/api-comfirm-answers",
         			type: 'POST',
         			contentType: "application/json",
         			data:JSON.stringify({ enrrolId: enrollTestId}),

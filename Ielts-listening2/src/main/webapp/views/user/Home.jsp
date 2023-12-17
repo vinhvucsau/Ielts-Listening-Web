@@ -59,8 +59,8 @@
                        		<span> Thông Minh</span>
                        </h1>
                         <!-- para -->
-                       <p class="pe-lg-10 mb-5">PREP - sản phẩm công nghệ giúp bạn giải quyết gốc rễ của mọi rào cản học thi tiếng Anh và IELTS.
-                       							Chương trình học trên Prep đã giúp 620+ học viên đạt IELTS 7.0 trở lên
+                       <p class="pe-lg-10 mb-5">ELIS - sản phẩm công nghệ giúp bạn giải quyết gốc rễ của mọi rào cản học thi tiếng Anh và IELTS.
+                       							Chương trình học trên ELIS đã giúp 620+ học viên đạt IELTS 7.0 trở lên
 												và 90+ học viên đạt 8.0 - 8.5.</p>
                           <!-- btn -> Register -->
                        <c:if test="${user == null}">
@@ -98,7 +98,7 @@
 			<div class="row mb-8 justify-content-center">
 				<div class="col-lg-8 col-md-12 col-12 text-center">
 					<!-- caption -->
-					<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-xl">Tại sao nên chọn PREP</span>
+					<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-xl">Tại sao nên chọn ELIS</span>
 					<h2 class="mb-2 display-4 fw-bold text-dark">
 						<span>Cải thiệt kỹ năng</span>
 						<span class="text-primary"> Listening </span>
@@ -292,7 +292,7 @@
 					<div class="mb-8 text-center">
 						<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-xl">Đội ngũ chất lượng</span>
 						<h2 class="mb-2 display-4 fw-bold text-dark">
-							<span>100% Đội ngũ trên Prep đạt</span><br>
+							<span>100% Đội ngũ trên ELIS đạt</span><br>
 							<span class="text-primary">IELTS 8.0-8.5</span>
 						</h2>
 						<p class="lead mb-0">Cựu du học sinh hoặc tốt nghiệp từ ĐH danh tiếng.</p>
@@ -382,7 +382,7 @@
 							<span>
 								<h1 class="display-3 fw-bold text-dark">
 									<span>Về đội với </span>
-									<span class="text-primary"> PREP </span>
+									<span class="text-primary"> ELIS </span>
 									<span>ngay hôm nay</span>
 								</h1>
 								<svg preserveAspectRatio="none" viewBox="0 0 546.714 178.143"><path d="M546.214 89.072c0 48.917-122.162 88.571-272.857 88.571C122.662 177.643.5 137.988.5 89.072.5 40.155 122.662.5 273.357.5c150.695 0 272.857 39.655 272.857 88.572z"/></svg>
@@ -390,7 +390,7 @@
 						</div>
 						<div class="offset-lg-1 col-lg-6 col-md-7 col-12 mb-6">
 							<!-- para -->
-							<p class="lead mb-0">Prep - nền tảng học luyện thông minh, kết hợp giáo dục và công nghệ với sứ mệnh giúp mọi học sinh dù ở bất cứ đâu đều nhận được chất lượng giáo dục tốt nhất.</p>
+							<p class="lead mb-0">ELIS - nền tảng học luyện thông minh, kết hợp giáo dục và công nghệ với sứ mệnh giúp mọi học sinh dù ở bất cứ đâu đều nhận được chất lượng giáo dục tốt nhất.</p>
 						</div>
 					</div>
 					<!-- row -->
@@ -436,7 +436,7 @@
 					<span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-xl">Câu chuyện của học viên</span>
 					<h2 class="mb-2 display-4 fw-bold text-dark">
 						<span class="text-primary">Học viên nói gì </span>
-						<span>về PREP</span>
+						<span>về ELIS</span>
 					</h2>
 				</div>
 				<div class="row align-items-center">
@@ -444,9 +444,9 @@
                         <div class="mb-8 mb-lg-0 me-lg-4">
                           <!-- text -->
 
-                          <p class="display-6 mb-4 ">"Theo em, học Prep tiện hơn về mặt thời gian giúp em tự chủ được việc học của em. 
-                          							 Em cũng là người thích tự học nên việc học Prep giúp em tự mình khai quật kiến thức, nó rất vui ạ. 
-                          							 Ngoài ra Prep chữa bài kĩ bài bản với giá cả hợp lí nên em khá yên tâm."</p>
+                          <p class="display-6 mb-4 ">"Theo em, học ELIS tiện hơn về mặt thời gian giúp em tự chủ được việc học của em. 
+                          							 Em cũng là người thích tự học nên việc học ELIS giúp em tự mình khai quật kiến thức, nó rất vui ạ. 
+                          							 Ngoài ra ELIS chữa bài kĩ bài bản với giá cả hợp lí nên em khá yên tâm."</p>
                           <!-- text -->
 
                           <p class="mb-0 ">Nguyễn Tú Linh</p>
@@ -486,7 +486,7 @@
 						<span class="text-primary">tìm kiếm khoá học </span>
 						<span>dễ dàng</span>
 					</h2>
-					<p class="lead px-lg-8 mb-6">Các khoá học của Prep được biên soạn và trình bày một cách khoa học nhất.</p>
+					<p class="lead px-lg-8 mb-6">Các khoá học của ELIS được biên soạn và trình bày một cách khoa học nhất.</p>
 					<!-- button -->
 					<div class="d-grid d-md-block">
 						<a href="course" class="btn btn-primary mb-2 mb-md-0">Xem các khóa học</a>

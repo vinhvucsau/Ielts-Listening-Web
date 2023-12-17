@@ -227,7 +227,7 @@
 				
 						<script>
 							function redirectToCoursePage() {
-								window.location.href = '/Ielts-listening2/user/course';
+								window.location.href = 'course';
 							}
 						</script>
 					</div>

@@ -640,7 +640,7 @@
 													</c:if>
 													<c:if test="${c.users.image != null}">
 														<c:set var="image"
-															value="http://localhost:8080/Ielts-listening2/image?fname=/userAvatar/${c.users.image }"></c:set>
+															value="image?fname=/userAvatar/${c.users.image }"></c:set>
 													</c:if>
 													<img src="${image }" alt=""
 														class="rounded-circle avatar-md">
@@ -797,7 +797,7 @@
 						<div class="card mb-3 mb-4">
 							<div class="p-1">
 								<c:set var="image"
-									value="http://localhost:8080/Ielts-listening2/video?fname=courseIMG/${course.image}"></c:set>
+									value="video?fname=courseIMG/${course.image}"></c:set>
 								<c:if test="${course.image == null }">
 									<c:set var="image"
 										value="https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?rs=1&pid=ImgDetMain"></c:set>

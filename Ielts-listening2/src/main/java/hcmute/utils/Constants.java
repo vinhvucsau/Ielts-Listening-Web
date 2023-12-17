@@ -25,7 +25,7 @@ public class Constants {
 	public static final String NOTIFY_RELATION = "NOTIFY";
 	public static final String READ_NOTIFY_RELATION = "READ_NOTIFY";
 	
-	public static final String DIR  = "/ImagesWeb"; 
+	public static final String DIR  = "ImagesWeb"; 
 	public static final String FOLDER_TOPIC  = "topicIMG"; 
 	public static final String FOLDER_COURSE  = "courseIMG"; 
 	public static final String FOLDER_BLOG  = "blogIMG"; 

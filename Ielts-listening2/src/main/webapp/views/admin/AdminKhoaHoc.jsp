@@ -269,13 +269,13 @@ Long count = (Long) request.getAttribute("countCourse");
 											</button>
 											<ul class="dropdown-menu bg-color-grey">
 												<li><a class="dropdown-item"
-													href="/Ielts-listening2/admin/khoahoc?rate=caodenthap">Cao
+													href="khoahoc?rate=caodenthap">Cao
 														đến thấp</a></li>
 												<li><a class="dropdown-item"
-													href="/Ielts-listening2/admin/khoahoc?rate=thapdencao">Thấp
+													href="khoahoc?rate=thapdencao">Thấp
 														đến cao</a></li>
 												<li><a class="dropdown-item"
-													href="/Ielts-listening2/admin/khoahoc">Mặc định</a></li>
+													href="khoahoc">Mặc định</a></li>
 											</ul>
 										</div>
 									</div>
@@ -411,7 +411,7 @@ Long count = (Long) request.getAttribute("countCourse");
 																		<i class="fe fe-shopping-cart fs-4"></i>
 																	</button> -->
 																			<a
-																				href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
+																				href="deletecourse?courseId=${i.courseId}"><button
 																					class="btn btn-sm rounded-0 button-delete-course"
 																					type="button" data-toggle="tooltip"
 																					data-placement="top" title="Delete">
@@ -434,7 +434,7 @@ Long count = (Long) request.getAttribute("countCourse");
 																		<i class="fe fe-shopping-cart fs-4"></i>
 																	</button> -->
 																		<a
-																			href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
+																			href="deletecourse?courseId=${i.courseId}"><button
 																				class="btn btn-sm rounded-0 button-delete-course"
 																				type="button" data-toggle="tooltip"
 																				data-placement="top" title="Delete"
@@ -547,7 +547,7 @@ Long count = (Long) request.getAttribute("countCourse");
 																		<form action="addToCart" method="post">
 																			<input type="hidden" name="courseId"
 																				value="${i.courseId }"> <a
-																				href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
+																				href="deletecourse?courseId=${i.courseId}"><button
 																					class="btn btn-sm rounded-0 button-delete-course"
 																					type="button" data-toggle="tooltip"
 																					data-placement="top" title="Delete">
@@ -563,7 +563,7 @@ Long count = (Long) request.getAttribute("countCourse");
 																	</c:when>
 																	<c:otherwise>
 																		<a
-																			href="/Ielts-listening2/admin/deletecourse?courseId=${i.courseId}"><button
+																			href="deletecourse?courseId=${i.courseId}"><button
 																				class="btn btn-sm rounded-0 button-delete-course"
 																				type="button" data-toggle="tooltip"
 																				data-placement="top" title="Delete"

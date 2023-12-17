@@ -14,7 +14,6 @@
 					<h5 class="text-black fw-700 text-16 leading-6 uppercase fw-bolder">
 						Trung tâm Đào tạo Ngoại ngữ Elis</h5>
 					<div class="text-gray-700 fw-bolder text-14">Nguyễn Quang Vinh 21110727</div>
-						<div class="text-gray-700 fw-bolder text-14">Nguyễn Tấn Lâm 21110895</div>
 						<div class="text-gray-700 fw-bolder text-14">Trần Hữu Quốc Huy 21110888</div>
 						<div class="text-gray-700 fw-bolder text-14">Bùi Đức Long 21110530</div>
 						<div class="text-gray-700 fw-bolder text-14">Vũ Đức Lộc 21110535</div>

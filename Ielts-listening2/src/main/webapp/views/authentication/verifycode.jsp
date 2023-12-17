@@ -58,7 +58,7 @@
 						<div id="turn" class="text-center text-danger" > số lần còn lại bạn được nhập  </div>
 						<div class="text-center">
 							Bạn chưa nhận được mã? <a style="text-decoration:none"
-								href="http://localhost:8080/Ielts-listening2/authentication-resent">Gửi
+								href="authentication-resent">Gửi
 								mã</a>
 						</div>
 					</form>

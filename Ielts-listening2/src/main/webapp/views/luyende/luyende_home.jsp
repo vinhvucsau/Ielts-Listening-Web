@@ -90,7 +90,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					<p class="fs-5 fw-bold mb-0" style="color: rgb(113, 113, 113)">${enTestProcess.mockTests.testName}</p>
 					<p class="fs-5 fw-bold mb-0" style="color: rgb(113, 113, 113)">${enTestProcess.enrrollmentDate}</p>
 					<a
-						href="http://localhost:8080/Ielts-listening2/test/luyende_test?enrollTestId=${enTestProcess.enrrolId}">
+						href="luyende_test?enrollTestId=${enTestProcess.enrrolId}">
 						<button
 							class="btn btn-primary d-flex flex-row justify-content-center w-100 h-25 mt-4 py-2 fs-5 fw-bold text-light align-items-center">
 							Tiếp tục làm bài

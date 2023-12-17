@@ -21,7 +21,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 <body>
 	<nav class="navbar navbar-expand-lg shadow-lg header-fixed">
 		<div class="container px-0">
-			<a class="navbar-brand" href="/Ielts-listening2/user/home"><img
+			<a class="navbar-brand" href="home"><img
 				src="../assets/final.png" alt="Geeks" style=" width: 100%; height: 26px;object-fit: cover; object-position: center;" /></a>
 			<div class="d-flex align-items-center order-lg-3 gap-3">
 
@@ -62,7 +62,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 					</c:if>
 					<c:if test="${user != null}">
 						<a style="margin-right: 8px"
-							href="/Ielts-listening2/user/mycart?userId=${user.userId}"
+							href="mycart?userId=${user.userId}"
 							class="btn btn-light btn-icon rounded-circle d-flex align-items-center position-relative">
 							<i class="fe fe-shopping-cart"></i> <span
 							style="z-index: 2; background-color: white; top: -4px; right: -8px; width: 24px; height: 24px; padding; 2; border-radius: 100%;"
@@ -170,7 +170,7 @@ pageContext.setAttribute("cartSize", carts != null ? carts.size() : 0);
 			<div class="collapse navbar-collapse" id="navbar-default">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item"><a class="nav-link "
-						href="/Ielts-listening2/user/home">Trang chủ</a></li>
+						href="home">Trang chủ</a></li>
 
 					<li class="nav-item "><a class="nav-link " href="course">Khóa
 							học</a></li>

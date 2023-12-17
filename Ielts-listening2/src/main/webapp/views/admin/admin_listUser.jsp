@@ -89,7 +89,7 @@
 									<tbody>
 										<c:forEach var="i" items="${currentUser}">
 											<tr
-												onclick="location.href='/Ielts-listening2/admin/capnhattaikhoan?userId=${i.userId}'">
+												onclick="location.href='capnhattaikhoan?userId=${i.userId}'">
 												<td>${i.name}</td>
 												<td>${i.account.userName}</td>
 												<td>${i.dateOfBirth}</td>

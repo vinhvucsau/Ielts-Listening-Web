@@ -163,41 +163,41 @@
 												<c:when test="${pageNum <= 5 }">
 													<c:forEach var="i" begin="1" end="${pageNum }" step="1">
 														<li class="page-item"><a class="page-link ${param.page==i || (i == 1 && param.page == null) ?'bg-primary color-white':''}"
-															href="http://localhost:8080/Ielts-listening2/admin/listTopic?page=${i}">${i}</a></li>
+															href="listTopic?page=${i}">${i}</a></li>
 													</c:forEach>
 												</c:when>
 												<c:otherwise>
 													<li class="page-item"><a class="page-link ${param.page==1 || param.page==null?'bg-primary color-white':''}"
-															href="http://localhost:8080/Ielts-listening2/admin/listTopic?page=1">1</a></li>
+															href="listTopic?page=1">1</a></li>
 													<c:choose>
 															<c:when test="${(param.page - 3) - 1 >= 2 }">
 																<li class="page-item"><a class="page-link"
-																	href="http://localhost:8080/Ielts-listening2/admin/listTopic?page=${param.page  - 5}">...</a></li>
+																	href="listTopic?page=${param.page  - 5}">...</a></li>
 															</c:when>
 															<c:when test="${(param.page - 3) - 1  > 0 }">
 																<li class="page-item"><a class="page-link"
-																	href="http://localhost:8080/Ielts-listening2/admin/listTopic?page=${(param.page - 3)}">${(param.page - 3)}</a></li>
+																	href="listTopic?page=${(param.page - 3)}">${(param.page - 3)}</a></li>
 															</c:when>
 													</c:choose>
 													<c:forEach var="i" begin="0" end="4" step="1">
 														<c:if
 															test="${param.page + i - 2 > 1 && param.page + i - 2 < pageNum }">
 															<li class="page-item"><a class="page-link ${param.page==(param.page + i - 2)?'bg-primary color-white':''}"
-																href="http://localhost:8080/Ielts-listening2/admin/listTopic?page=${param.page + i - 2}">${param.page + i - 2 }</a></li>
+																href="listTopic?page=${param.page + i - 2}">${param.page + i - 2 }</a></li>
 														</c:if>
 													</c:forEach>
 													<c:choose>
 														<c:when test="${pageNum - (param.page + 3) >= 2 }">
 															<li class="page-item"><a class="page-link"
-																href="http://localhost:8080/Ielts-listening2/admin/listTopic?page=${param.page + 5}">...</a></li>
+																href="listTopic?page=${param.page + 5}">...</a></li>
 														</c:when>
 														<c:when test="${pageNum - (param.page + 3) > 0 }">
 															<li class="page-item"><a class="page-link"
-																href="http://localhost:8080/Ielts-listening2/admin/listTopic?page=${pageNum - (pageNum - (param.page + 3))}">${pageNum - (pageNum - (param.page + 3))}</a></li>
+																href="listTopic?page=${pageNum - (pageNum - (param.page + 3))}">${pageNum - (pageNum - (param.page + 3))}</a></li>
 														</c:when>
 													</c:choose>
 													<li class="page-item"><a class="page-link"
-															href="http://localhost:8080/Ielts-listening2/admin/listTopic?page=${pageNum}">${pageNum}</a></li>
+															href="listTopic?page=${pageNum}">${pageNum}</a></li>
 												</c:otherwise>	
 											</c:choose>
 											<li class="page-item"><a class="page-link" ${param.page == pageNum || (param.page == null && pageNum == "1") ? "":"href=http://localhost:8080/Ielts-listening2/admin/listTopic?page="}${param.page == pageNum || (param.page == null && pageNum == "1") ? "": (param.page + 1)}

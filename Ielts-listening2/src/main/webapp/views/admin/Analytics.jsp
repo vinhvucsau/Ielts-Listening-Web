@@ -195,7 +195,7 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 						<div
 							class="card-header d-flex align-items-center justify-content-between card-header-height">
 							<h4 class="mb-0">Học viên có đóng góp nhiều</h4>
-							<a href="/Ielts-listening2/admin/listUser"
+							<a href="listUser"
 								class="btn btn-outline-secondary btn-sm">View all</a>
 						</div>
 						<!-- Card body -->
@@ -208,7 +208,7 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 								<c:forEach var="index" begin="0" end="${userId.size() - 1}"
 									step="1" varStatus="loop">
 									<li class="list-group-item px-0"><a
-										href="/Ielts-listening2/admin/capnhattaikhoan?userId=${userId[loop.index]}">
+										href="capnhattaikhoan?userId=${userId[loop.index]}">
 
 											<div class="row">
 												<div class="col-auto">
@@ -256,7 +256,7 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 						<div
 							class="card-header d-flex align-items-center justify-content-between card-header-height">
 							<h4 class="mb-0">Các khóa học mới nhất</h4>
-							<a href="/Ielts-listening2/admin/khoahoc"
+							<a href="khoahoc"
 								class="btn btn-outline-secondary btn-sm">View all</a>
 						</div>
 						<!-- Card body -->
@@ -266,20 +266,20 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 
 								<c:forEach var="i" items="${listCourseJsp}">
 									<li class="list-group-item px-0"><a
-										href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }">
+										href="listLesson?courseId=${i.courseId }">
 											<div class="row">
 												<div class="col-md-3 col-12 mb-3 mb-md-0">
 													<a
-														href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }">
+														href="listLesson?courseId=${i.courseId }">
 														<c:if test="${i.image != null}">
 															<a
-																href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }"><img
+																href="listLesson?courseId=${i.courseId }"><img
 																style="height: 50px; "
 																src="<c:url value='/image?fname=courseIMG/${ i.image}'/>"
 																alt="course" class=" img-fluid"></a>
 														</c:if> <c:if test="${i.image == null}">
 															<a
-																href="/Ielts-listening2/admin/listLesson?courseId=${imageCourse[loop.index] }"><img
+																href="listLesson?courseId=${imageCourse[loop.index] }"><img
 																style="height: 50px; "
 																src=https://blog.faceseo.vn/wp-content/uploads/2021/01/gia-su-ielts-hinh-nen-2-min.jpg
 																alt="course" class=" img-fluid"></a>
@@ -290,7 +290,7 @@ Long sumRevenue = (Long) request.getAttribute("sumRevenue");
 
 
 													<a
-														href="/Ielts-listening2/admin/listLesson?courseId=${i.courseId }">
+														href="listLesson?courseId=${i.courseId }">
 														<h5 class="text-primary-hover">${i.courseName }</h5>
 													</a>
 													<div class="d-flex align-items-center">
