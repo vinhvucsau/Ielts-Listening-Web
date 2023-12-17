@@ -112,7 +112,7 @@ public class AdminLessonControler extends HttpServlet {
 			if (req.getPart("video").getSize() != 0) {
 				// tạo tên file mới để khỏi bị trùng
 				String fileName = "" + System.currentTimeMillis();
-				lesson.setVideo(UploadUtils.processUpload("video", req, Constants.DIR + "\\"+Constants.FOLDER_VIDEO+"\\", fileName));
+				lesson.setVideo(UploadUtils.processUpload("video", req, Constants.DIR + "/"+Constants.FOLDER_VIDEO+"/", fileName));
 			}
 			lessonService.insert(lesson);
 		
@@ -151,7 +151,7 @@ public class AdminLessonControler extends HttpServlet {
 			if (req.getPart("video").getSize() != 0) {
 				// tạo tên file mới để khỏi bị trùng
 				String fileName = "" + System.currentTimeMillis();
-				lesson.setVideo(UploadUtils.processUpload("video", req, Constants.DIR + "\\videoLesson\\", fileName));
+				lesson.setVideo(UploadUtils.processUpload("video", req, Constants.DIR + "/videoLesson/", fileName));
 			} else
 				lesson.setVideo(req.getParameter("preVideo"));
 			

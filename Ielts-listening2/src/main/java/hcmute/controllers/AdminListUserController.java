@@ -127,7 +127,7 @@ public class AdminListUserController extends HttpServlet {
 				} // update anh moi
 				String fileName = "" + System.currentTimeMillis();
 				user.setImage(UploadUtils.processUpload("inputImage", req,
-						Constants.DIR + "\\" + Constants.FOLDER_AVATAR + "\\", fileName));
+						Constants.DIR + "/" + Constants.FOLDER_AVATAR + "/", fileName));
 			}
 
 			if (dateOfBirth == "") {

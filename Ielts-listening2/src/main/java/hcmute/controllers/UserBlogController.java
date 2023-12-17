@@ -126,7 +126,7 @@ public class UserBlogController extends HttpServlet {
 				newBlog.setCreatedDate(date);
 				String fileName = "" + System.currentTimeMillis();
 				newBlog.setImage((UploadUtils.processUpload("image", req,
-						Constants.DIR + "\\" + Constants.FOLDER_BLOG + "\\", fileName)));
+						Constants.DIR + "/" + Constants.FOLDER_BLOG + "/", fileName)));
 
 				String title = req.getParameter("title");
 				String content = req.getParameter("content");
@@ -171,7 +171,7 @@ public class UserBlogController extends HttpServlet {
 					} // update anh moi
 					String fileName = "" + System.currentTimeMillis();
 					newBlog.setImage((UploadUtils.processUpload("image", req,
-							Constants.DIR + "\\" + Constants.FOLDER_BLOG + "\\", fileName)));
+							Constants.DIR + "/" + Constants.FOLDER_BLOG + "/", fileName)));
 				}
 
 				blogService.update(newBlog);

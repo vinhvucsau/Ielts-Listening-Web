@@ -92,13 +92,13 @@ public class AdminKhoaHocController extends HttpServlet {
 				if (req.getPart("image").getSize() != 0) {
 					// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
-					model.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\"+Constants.FOLDER_COURSE+"\\", fileName));
+					model.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "/"+Constants.FOLDER_COURSE+"/", fileName));
 				}
 				if (req.getPart("trailer").getSize() != 0) {
 					// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
 					model.setTrailer(UploadUtils.processUpload("trailer", req,
-							Constants.DIR + "\\" + Constants.FOLDER_VIDEO + "\\", fileName));
+							Constants.DIR + "/" + Constants.FOLDER_VIDEO + "/", fileName));
 				}
 				Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("enrrollmentDate"));
 				model.setEnrrolmentDate(date1);
@@ -123,7 +123,7 @@ public class AdminKhoaHocController extends HttpServlet {
 				if (req.getPart("Image").getSize() != 0) {
 					// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
-					model.setImage(UploadUtils.processUpload("Image", req, Constants.DIR + "\\courseIMG\\", fileName));
+					model.setImage(UploadUtils.processUpload("Image", req, Constants.DIR + "/courseIMG/", fileName));
 				} else {
 					model.setImage(course.getImage());
 				}
@@ -131,7 +131,7 @@ public class AdminKhoaHocController extends HttpServlet {
 					// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
 					model.setTrailer(UploadUtils.processUpload("Trailer", req,
-							Constants.DIR + "\\" + Constants.FOLDER_VIDEO + "\\", fileName));
+							Constants.DIR + "/" + Constants.FOLDER_VIDEO + "/", fileName));
 				} else {
 					model.setTrailer(course.getTrailer());
 				}

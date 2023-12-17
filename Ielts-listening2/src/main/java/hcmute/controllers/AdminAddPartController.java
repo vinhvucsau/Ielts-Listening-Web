@@ -96,7 +96,7 @@ public class AdminAddPartController extends HttpServlet {
 				// tạo tên file mới để khỏi bị trùng
 				String fileName = "" + System.currentTimeMillis();
 				listeningPart.setAudio(
-						UploadUtils.processUpload("audioFile", req, Constants.DIR + "\\topicAudio\\", fileName));
+						UploadUtils.processUpload("audioFile", req, Constants.DIR + "/topicAudio/", fileName));
 			}
 
 			listeningPartService.insert(listeningPart);

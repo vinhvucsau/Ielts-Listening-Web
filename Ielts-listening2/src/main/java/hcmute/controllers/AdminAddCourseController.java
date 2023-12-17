@@ -108,7 +108,7 @@ public class AdminAddCourseController extends HttpServlet {
 				if (req.getPart("image").getSize() != 0) {
 					// tạo tên file mới để khỏi bị trùng
 					String fileName = "" + System.currentTimeMillis();
-					topic.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "\\topicIMG\\", fileName));
+					topic.setImage(UploadUtils.processUpload("image", req, Constants.DIR + "/topicIMG/", fileName));
 				}
 				// prod.setCategory(cateService.findOne(prod.getProductID()));
 				topicService.addTopic(topic);

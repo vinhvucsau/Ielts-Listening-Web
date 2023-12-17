@@ -156,7 +156,7 @@ public class AdminBlogController extends HttpServlet {
 					} // update anh moi
 					String fileName = "" + System.currentTimeMillis();
 					newBlog.setImage((UploadUtils.processUpload("image", req,
-							Constants.DIR + "\\" + Constants.FOLDER_BLOG + "\\", fileName)));
+							Constants.DIR + "/" + Constants.FOLDER_BLOG + "/", fileName)));
 				}
 
 				blogService.update(newBlog);
