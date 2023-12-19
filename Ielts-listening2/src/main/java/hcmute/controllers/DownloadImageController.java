@@ -19,7 +19,7 @@ import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 public class DownloadImageController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final String BUCKET_NAME = "imageweblisten"; // Thay thế bằng tên bucket của bạn
+    private static final String BUCKET_NAME = "ieltslisten"; // Thay thế bằng tên bucket của bạn
     private static final Region REGION = Region.US_EAST_2; // Thay thế bằng region tương ứng với bucket của bạn
 
     @Override

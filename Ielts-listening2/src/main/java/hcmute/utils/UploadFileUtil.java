@@ -19,9 +19,9 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 public class UploadFileUtil {
-    private static final String BUCKET_NAME = "imageweblisten"; // Replace with your bucket name
-    private static final String AWS_ACCESS_KEY = "AKIA2CDQUSHZ3OO2D57M"; // Replace with your access key
-    private static final String AWS_SECRET_KEY = "S4/5frr3JE3JCdQ9iyt224RUTa8rzpR2v29F3W6+"; // Replace with your secret key
+    private static final String BUCKET_NAME = "ieltslisten"; // Replace with your bucket name
+    private static final String AWS_ACCESS_KEY = "AKIA5XBAISCOSVICUXMA"; // Replace with your access key
+    private static final String AWS_SECRET_KEY = "F7sf8XJKLCXe6LJx6nPoRna8LURmKshqyaJPTZXq"; // Replace with your secret key
 
     public static String processUpload(String fileName, HttpServletRequest req, String storeFolder,
             String storeFileName) throws ServletException, IOException {
